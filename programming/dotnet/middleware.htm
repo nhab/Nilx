@@ -1,0 +1,139 @@
+<h2>Middleware</h2>
+<div>
+is a component assembled in the app pipeline to handle requests and responses.
+ they are chained one after the other so each one will choose to pass the request to the next component or not.
+
+
+
+- Each component Chooses whether to pass the request to the next component in the pipeline.
+- Each component Can perform work before and after the next component in the pipeline.
+- Configuration of every HTTP processing:Essentially, the middleware performs some specific function on the HTTP request or response at a specific stage in the HTTP pipeline before or after the user defined controller.
+</div>
+<h2>Sample</h2>
+<div>
+<pre><code>
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    // middlewear 1
+    app.Use(async (c, next) => {
+        Console.WriteLine("Order 1");
+        await c.Response.WriteAsync("I am the first middlewear");
+
+        // this is responsible for calling middlewear 2 
+        await next();
+
+        // once middlewear 2 has completed we return to continue the execution
+        // of the first middlewear
+        Console.WriteLine("Order 2");
+    });
+
+    // middlewear 3
+    app.Run(async c => await c.Response.WriteAsync("\nI am the third middlewear"));
+
+    // middlewear 2
+    app.Use(async (c, next) => {
+        Console.WriteLine("Order 1a");
+        await c.Response.WriteAsync("\nI am the second middlewear");
+
+        // this is responsible for calling middlewear 2 
+        await next();
+
+        // once middlewear 2 has completed we return to continue the execution
+        // of the first middlewear
+        Console.WriteLine("Order 2a");
+    }); 
+}
+</pre></code>
+</div>
+<h2>Built-in middleware</h2>
+<div>
+    Some of the main middlewares that comes with Asp.Net
+
+    Authentication
+    Authorisation
+    CORS
+    MVC
+    Rooting
+    HTTPS 
+</div>
+<h2>Building our own middleware</h2>
+<div>
+The next step is to move the code from the startup to its own class so we can keep the startup class as clean and simple as possible. 
+The first thing we need to do is create a folder in our root directory called Extensions and inside the extensions folder will create a new class called AppCultureMiddleware.cs
+Now let us build our first middleware with extension methods    
+<pre><code>
+    public class AppCultureMiddleware //: IMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public AppCultureMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+        public async Task InvokeAsync(HttpContext context)
+        {
+           var cultureQuery = context.Request.Query["culture"];
+            if (!string.IsNullOrWhiteSpace(cultureQuery))
+            {
+                var culture = new CultureInfo(cultureQuery);
+
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+            }
+
+            // Call the next delegate/middleware in the pipeline
+             await _next(context);
+        }
+    }    
+</code></pre>
+Will start by utilising the extention method, in the same folder Extentions let us create a new class called AppCultureMiddlewareExtensions and update it with the following
+<pre><code>
+    // Static class
+    public static class AppCultureMiddlewareExtensions
+    {
+            // ASP.NET core builder
+        public static IApplicationBuilder UseAppCulture(
+            this IApplicationBuilder builder)
+        {
+                    // initialise the middleware
+            return builder.UseMiddleware<AppCultureMiddleware>();
+        }
+    }    
+</code></pre>
+Now let us update the startup class, inside the ConfigureServices metho with the following
+<cl>app.UseAppCulture();</cl>
+Now we can use it :
+<cl> https://localhost:5001/?culture=no</cl>
+
+</div>
+<h2>Another way to create middleware</h2>
+<div>
+<pre><code>
+    public class AppSampleLogsMiddleware : IMiddleware // implementing the interface
+    {
+        // Required methods to implement the interface correctly
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+        {
+            Console.WriteLine("Order 1a");
+            await context.Response.WriteAsync("\nI am the second middlewear");
+    
+            // this is responsible for calling middlewear 2 
+            await next(context);
+    
+            // once middlewear 2 has completed we return to continue the execution
+            // of the first middlewear
+            Console.WriteLine("Order 2a");
+        }
+    }    
+</code></pre>
+Now that our middleware is ready we need to update the startup class so our application will recognise it
+<pre><code>
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // we are going to register the middleware into our services collection
+        services.AddTransient<AppSampleLogsMiddleware>();
+    }    
+</code></pre>
+Now let us update the Configure method in the startup class to use the middleware by adding the following code
+<cl>app.UseMiddleware<AppSampleLogsMiddleware>();</cl>
+</div>

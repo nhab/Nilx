@@ -1,0 +1,113 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />References</h2>
+<div>
+    <a href="https://dev.to/williamragstad/how-to-use-ajax-3b5e">How to use $.ajax</a>
+</div>
+<h2>Examples</h2>
+<div>
+    <pre><code>
+        example 1:
+        <script>
+        $(document).ready(function(){
+          $("button").click(function(){
+            $.ajax({url: "demo_test.txt", success: function(result){
+              $("#div1").html(result);
+            }});
+          });
+        });
+        </script>
+        
+        Example 2:
+        $.ajax({
+        
+            url : 'http://voicebunny.comeze.com/index.php',
+            type : 'GET',
+            data : {
+                'numberOfWords' : 10
+            },
+            dataType:'json',
+            success : function(data) {              
+                alert('Data: '+data);
+            },
+            error : function(request,error)
+            {
+                alert("Request: "+JSON.stringify(request));
+            }
+        });
+        example 3(post):
+          $.ajax({
+                url:"/add.php ",
+                method:"POST", //First change type to method here
+        
+                data:{
+                  item_id: id,
+                },
+                success:function(response) {
+                 document.getElementById("disp").innerHTML =response;
+               },
+               error:function(){
+                alert("error");
+               }
+        
+              });
+        
+        Example 4:
+         $.ajax({
+                 url: '/en/myController/GetDataForInvoiceNumber',
+                 type: 'POST',
+                 data: JSON.stringify(requestData),
+                 dataType: 'json',
+                 contentType: 'application/json; charset=utf-8',
+                 error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                 },
+                 success: function (result) {
+                    CheckIfInvoiceFound(result);
+                 },
+                 async: true,
+                 processData: false
+              });
+        
+        Example 5:
+        $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@(Url.Action("JsonFullName", "Home"))",
+                    data: "{ \"fname\" : \"Mahmoud\" , \"lastname\" : \"Sayed\" }",
+                    dataType: "json",
+                    success: function (data) {
+                        var res = $.parseJSON(data);
+                        $("#myform").html("<h3>Json data: <h3>" + res.fname + ", " + res.lastname)
+                    }, 
+                    error: function (xhr, err) {
+                        alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        alert("responseText: " + xhr.responseText);
+                    } 
+                })
+        
+        Example 6:  url: '@Url.Action("Insert", "Operation")',
+        
+         $.ajax({
+                 url: '@Url.Action("Insert", "Operation")',
+                 data: formData ,
+                 type: 'POST',
+                 processData: false,
+                 contentType: false,
+                 success: function (result) { alert (result); }
+           });
+    </code></pre>
+</div>

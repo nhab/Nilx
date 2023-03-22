@@ -1,0 +1,459 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex">
+<input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Resources</h2>
+<p>
+<a href="https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx">Ef core Tutorial</a>
+<a href='https://www.youtube.com/watch?v=22BJVr1D2-A'>Ef 6 code first</a>
+<a href="https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli">Migrations</a>
+<a href='C:\root\projs\BookstoreAngular-fresh\BookstoreAngular\angular\'>dbcontext example</a>
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Introduction</h2>
+<p>
+Entity Framework is Microsoft’s ORM (Object-Relational Mapping) framework for data access. 
+Entity Framework initially supported Model First and Database First approach where domain object models are defined in a XML based edmx files.
+In code first aproach, designing the domain model classes first and then creating database based on the domain model is called Domain Driven Design.
+This methodology allows developers to focus and think through in terms of business domain objects rather than creating domain model classes to match the database design in Database First approach.
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Defining domain classes</h2>
+<p>
+For easy understanding, let’s build a simple model with Employee and Department to under how Code First works.
+<pre><code>
+public class Employee
+{
+    public int EmployeeId { get; set; }
+    public int DepartmentId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Address1 { get; set; }
+    public string Address2 { get; set; }
+    public string City { get; set; }
+    public string State { get; set; }
+    public string Country { get; set; }
+    public string PostalCode { get; set; }
+}
+
+public class Department
+{
+    public int DepartmentId { get; set; }
+    public string DepartmentName { get; set; }
+}                
+</code></pre>
+</p>  
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Managing Domain Objects with Code First</h2>
+<p>
+Entity Framework expose a class called <b>DbContext</b> for doing this. 
+We just need to define a class that inherits System.Data.Entity.DbContext class and expose these domain objects as property member of this class through System.Data.Entity.DbSet<T> object. 
+The DbSet object represents the collection of our entity that are persisted in the database by the DbContext object.
+It also gives the querying capabilities to the entity collection or the underlying table.
+<pre><code>
+    public class DBModel : DbContext
+    {
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+    }    
+</code></pre>
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Querying Using DBModel and Entity </h2>
+<pre><code>
+DBModel db = new DBModel();
+if (db.Departments.Count() <= 0)
+{
+    Department department = new Department();
+    department.DepartmentName = "IT";
+    db.Departments.Add(department);
+    department = new Department();
+    department.DepartmentName = "CSE";
+    db.Departments.Add(department);
+}
+if (db.Employees.Count() <= 0)
+{
+    Employee emp = new Employee();
+    emp.FirstName = "Tom";
+    emp.LastName = "Hanks";
+    emp.Address1 = "1St Street";
+    emp.Address2 = "Columbia Ave";
+    emp.City = "Los Angeles";
+    emp.State = "CA";
+    emp.Country = "US";
+    emp.PostalCode = "123456";
+    emp.DepartmentId = 1;
+    db.Employees.Add(emp);
+
+    emp = new Employee();
+    emp.FirstName = "Bruce";
+    emp.LastName = "Willis";
+    emp.Address1 = "2nd Street";
+    emp.Address2 = "Farmers Ave";
+    emp.City = "Seattle";
+    emp.State = "WA";
+    emp.Country = "US";
+    emp.PostalCode = "756446";
+    emp.DepartmentId = 2;
+    db.Employees.Add(emp);
+
+    emp = new Employee();
+    emp.FirstName = "Johnny";
+    emp.LastName = "Depp";
+    emp.Address1 = "5Th Street";
+    emp.Address2 = "Shuttle Ave";
+    emp.City = "San Antonio";
+    emp.State = "TX";
+    emp.Country = "US";
+    emp.PostalCode = "123456";
+    emp.DepartmentId = 2;
+    db.Employees.Add(emp);
+}
+db.SaveChanges();   
+//Code First by default will create it in local SQL Server Express database.         
+</code></pre>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />IUsing DbContext</h2>
+<pre><code>
+var dbContext = this;
+Console.WriteLine (dbContext.Customers.Count());
+
+// Insert a new customer
+Customer cust = new Customer()
+{
+    ID = 10,
+    Name = "Sara Wells"
+};
+
+dbContext.Customers.Add (cust);
+dbContext.SaveChanges();    // Writes changes back to database
+
+// Query the database for the customer that was just inserted:
+using (var anotherContext = new TypedDataContext (this.Database.GetDbConnection().ConnectionString))
+anotherContext.Customers
+    .Single (c => c.Name == "Sara Wells")
+    .Dump ("Retrieved from database");
+
+// Update the customer's name, and save the changes to the database:
+cust.Name = "Dr. Sara Wells";
+dbContext.SaveChanges();
+
+// Delete the customer
+Customers.Remove (cust);
+dbContext.SaveChanges();
+</code></pre>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" /> Specifying Explicit Connection String</h2>
+<p>
+Let’s override the default behavior and specify the connection string ourselves to point to a database in another location. 
+To use a local SqlExpress database under App_Data in our web project, it is just enough if we specify the connection string with key that matches our DbContext class name.
+<pre><code>
+< connectionStrings>
+< add name="DBModel" connectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|Database.mdf;Integrated Security=True;User Instance=True;multipleactiveresultsets=True;application name=EntityFramework" providerName="System.Data.SqlClient" />
+< /connectionStrings>
+</code></pre>
+Alternatively, you can also specify the connection string explicitly by calling DbContext constructor similar to below.
+ <pre><code>
+    public class DBModel : DbContext
+    {
+        public DBModel()
+            : base("name=DefaultConnection")
+        {
+        }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+    }
+</code></pre>
+The above configuration requires a connection string in Web.Config with key DefaultConnection.  
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Configuring constraints on model </h2>
+<p>
+There are primarily 2 ways to use the configurations and dictate terms to Code First.
+ They are:
+    - By using Data Annotations
+    - By using Fluent API           
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Using Data Annotations</h2>
+<p>
+To make FirstName and LastName as not null columns (or mandatory in domain) we just need to decorate those property using [Required] attribute from System.ComponentModel.DataAnnotations namespace.
+<pre><code>
+public class Employee
+{
+    public int EmployeeId { get; set; }
+    public int DepartmentId { get; set; }
+    [Required]
+    public string FirstName { get; set; }
+    [Required]
+    public string LastName { get; set; }
+    public string Address1 { get; set; }
+    public string Address2 { get; set; }
+    public string City { get; set; }
+    public string State { get; set; }
+    public string Country { get; set; }
+    public string PostalCode { get; set; }
+}                
+</code></pre>
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Fluent API </h2>
+<p>
+Instead of using Data Annotations and mixing Entity Framework constructs in domain model we can specify the configurations using Fluent API inside DbContext OnModelCreating event. This will help to keep the domain model class free from any configuration settings. The below code will help us to add the above not null configuration by using Fluent API.
+<pre><code>
+public class DBModel : DbContext
+{
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<Employee> Employees { get; set; }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Employee>().Property(p => p.FirstName).IsRequired();
+        modelBuilder.Entity<Employee>().Property(p => p.LastName).IsRequired();
+    }
+}
+</code>  </pre>        
+Note - There are few configurations that are available only through Fluent API and which cannot be done by Data Annotations. 
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />ICompiled Queries </h2>
+<p>
+        EF Core lets you precompile queries so that you pay the cost of translating
+        the query from LINQ into SQL only once. In LINQPad the typed DataContext is
+        called TypeDataContext, so we proceed as follows:
+    <pre><code>
+        var cc = EF.CompileQuery ((TypedDataContext dc, decimal minPrice) =>    
+        from c in Customers
+        where c.Purchases.Any (p => p.Price > minPrice)
+        select c
+        );
+        
+        cc (this, 100).Dump ("Customers who spend more than $100");
+        cc (this, 1000).Dump ("Customers who spend more than $1000");
+    </code> </pre>            
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Database Initializers and Code First Migrations  </h2>  
+<p>
+Though the above approaches creates database automatically, we can also set Database Initializers to manage database creation process.
+
+<pre><code>Database.SetInitializer(new DropCreateDatabaseIfModelChanges< DBModel>());
+</code></pre>
+Calling the above statement before using the DbContext(or DBModel) will re-create database fully if there is a change detected in the model object after it has last created.
+
+There are other initializers like,
+
+CreateDatabaseIfNotExists – To create DB if not exists and a default option.
+
+DropCreateDatabaseAlways – To recreate DB always.
+
+These Database Initializers are very basic and cannot be used in real time as our production applications are incrementally built and so the database too. Entity Framework 4.3 has introduced a strategic tool called Code First Migrations for this advanced tasks. The additional table you see dbo.__MigrationHistory in the database created by Code First is used by this framework for detecting changes and managing the migrations.            
+</p>      
+<h2>Building Query Expressions</h2>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />ICompiling Expression Trees</h2>
+<pre><code>
+Products.RemoveRange (Products.Where (p => p.ID == 999));
+Products.Add (new Product { ID = 999, Description = "Test", LastSale = DateTime.Now } );
+SaveChanges();
+
+Product[] localProducts = Products.ToArray();
+
+Expression<Func<Product, bool>> isSelling = 
+p => !p.Discontinued && p.LastSale > DateTime.Now.AddDays (-30);
+
+IQueryable<Product> sqlQuery = Products.Where (isSelling);
+IEnumerable<Product> localQuery = localProducts.Where (isSelling.Compile());
+</code></pre>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />IAsQueryable</h2> 
+<pre><code>
+void Main()
+{
+    FilterSortProducts (Products).Dump ("This query executes on SQL Server");
+    
+    Product[] localProducts =
+    {
+        new Product { ID = 1, Description = "Local Product Test", LastSale = new DateTime (2007, 2, 3) }
+    };
+    
+    FilterSortProducts (localProducts.AsQueryable()).Dump ("The same query - executing locally");
+}
+
+IQueryable<Product> FilterSortProducts (IQueryable<Product> input)
+{
+    return 
+    from p in input
+    where !p.Discontinued && p.LastSale < DateTime.Now.AddDays (-7)
+    orderby p.Description
+    select p;
+}
+</code></pre>
+
+<h2>other things</h2>
+Building an Expression Tree
+<pre><code>
+ParameterExpression p = Expression.Parameter (typeof (string), "s");
+
+MemberExpression stringLength = Expression.Property (p, "Length");
+ConstantExpression five = Expression.Constant (5);
+
+BinaryExpression comparison = Expression.LessThan (stringLength, five);
+
+Expression<Func<string, bool>> lambda = Expression.Lambda<Func<string, bool>> (comparison, p);
+
+Func<string, bool> runnable = lambda.Compile();
+
+runnable ("kangaroo")  .Dump ("kangaroo is less than 5 characters");
+runnable ("dog")       .Dump ("dog is less than 5 characters");
+Extra - Using PredicateBuilder
+
+// Refer to http://www.albahari.com/expressions/ for info on PredicateBuilder.
+//
+// Note: PredicateBuilder is built into LINQPad. 
+//       To enable, press F4 (for query properties) and go to the 'Advanced' tab.
+
+string[] keywords = { "Widget", "Foo", "Bar" };
+
+var predicate = PredicateBuilder.False<Product>();
+
+foreach (string keyword in keywords)
+{
+string temp = keyword;
+predicate = predicate.Or (p => p.Description.Contains (temp));
+}
+
+var compiledPredicate = predicate.Compile();
+
+Products.Where (compiledPredicate).Dump ("Notice the multiple OR clauses in the SQL pane");
+Extra - Dynamic Ordering Sample
+
+// Thanks to Matt Warren, of the Microsoft LINQ to SQL team, for illustrating how this is done.
+//
+// Suppose you want order a query based on string that you receive at runtime. The string
+// indicates a property or field name, such as "Price" or "Description" or "Date".
+
+// For this, you need to dynamically contruct an "OrderBy" MethodCallExpression. This, in turn,
+// requires a dynamically constructed LambdaExpression that references the property or field
+// upon which to sort. Here's the complete solution:
+
+IQueryable query =            // The original unordered query
+from p in Purchases
+where p.Price > 100
+select p;
+
+string propToOrderBy = "Price";     // Try changing this to "Description" or "Date"
+
+ParameterExpression purchaseParam = Expression.Parameter (typeof (Purchase), "p");
+MemberExpression member = Expression.PropertyOrField (purchaseParam, propToOrderBy);
+LambdaExpression lambda = Expression.Lambda (member, purchaseParam);
+
+Type[] exprArgTypes = { query.ElementType, lambda.Body.Type };
+
+MethodCallExpression methodCall =
+Expression.Call (typeof (Queryable), "OrderBy", exprArgTypes, query.Expression, lambda);
+
+IQueryable orderedQuery = query.Provider.CreateQuery (methodCall);
+orderedQuery.Dump();
+Extra - Dynamic Ordering - How it Works
+
+// Let's break down the last example. We started with a simple unordered query (remember
+// that the query does not evaluate at this point, thanks to deferred execution):
+
+IQueryable<Purchase> query =            // The original unordered query
+from p in Purchases
+where p.Price > 100
+select p;
+
+// Here's the property or field name upon which we want to order:
+
+string propToOrderBy = "Price";     // Try changing this to "Description" or "Date"
+
+// The aim is to dynamically constuct the following:
+// var orderedQuery = query.OrderBy (p => p.Price);
+
+// Starting from the inside out, we start by creating the lambda expression, p => p.Price.
+// To dynamically build a LambaExpression, we first create the parameter, in this case, p.
+// Our parameter is of type Purchase, and is called "p":
+
+ParameterExpression purchaseParam = Expression.Parameter (typeof (Purchase), "p");
+purchaseParam.Dump ("purchaseParam");
+
+// Next, we need to create "p.Price". The static method Expression.PropertyOrField returns
+// a MemberExpression that finds a property or field with the given name:
+
+MemberExpression member = Expression.PropertyOrField (purchaseParam, propToOrderBy);
+member.Dump ("member");
+
+// With these two things, we build the LambdaExpression:
+
+LambdaExpression lambda = Expression.Lambda (member, purchaseParam);
+lambda.Dump ("lambda");
+lambda.ToString().Dump ("lambda.ToString");
+
+// We now need to wrap the lambda expression in a MethodCallExpression that
+// references the Queryable.OrderBy method. For this, we call the static Expresion.Call
+// method, which is overloaded especially to simplify the task of invoking methods
+// that accept lambda expressions:
+
+Type[] exprArgTypes = { query.ElementType, lambda.Body.Type };
+
+MethodCallExpression methodCall =
+Expression.Call (
+    typeof (Queryable),   // Type defining method we want to call
+    "OrderBy",            // Name of method to call
+    exprArgTypes,         // Generic argument types
+    query.Expression,     // First argument (the query expression body) 
+    lambda);              // Second argument (the lambda expression)
+
+methodCall.Dump ("methodCall (notice all the work that Expression.Call does for us)");
+
+// The final step is to create the new query, which calls the expression we've just
+// created. For this, we use the Provider property exposed by the IQueryable interface,
+// which returns an object upon which we call CreateQuery:
+
+IQueryable orderedQuery = query.Provider.CreateQuery (methodCall);
+
+// (Exactly the same thing happens when you ordinarily call Queryable.OrderBy;
+// you can see this by decompiling with ILSpy). 
+
+// Here's the final result: 
+
+orderedQuery.Expression.ToString().Dump ("The final result");
+</code></pre>
+</div>
+</body>
+</html>

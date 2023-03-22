@@ -1,0 +1,1126 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+
+<h2>Refrences</h2>
+<div>
+<a href="https://klausnji.wordpress.com/2015/01/31/getting-started-with-rabbitmq-in-15-minutes">In 15 minutes</a>
+<a href="https://www.tutlane.com/tutorial/rabbitmq/">Continue reading here</a>
+</div>
+<h2> RabbitMQ:</h2>
+<div>
+- is a "message-queueing" software, also known as a "message broker" or "queue manager.  
+- it accepts and forwards messages. 
+
+<h3>why:</h3> 
+- Remove some heavy work from our web applications such as :
+sending a reports in Excel sheet or Pdf format’s or sending an email,SMS or another task such as trigger some other applications to start processing.
+
+- Makes your data temporarily persistent,  reducing the risk of errors that may occur when different parts of the system are offline.
+    If one part of the system is unreachable, the other part continues to interact with the queue. 
+
+- Message queuing allows web servers to respond to requests in their own time instead of being forced to perform resource-heavy procedures immediately. 
+- Message queuing is also useful for distributing a message to multiple recipients for consumption or balancing the load between workers.
+
+-Message :A message can include any kind of information. 
+ It could, for example, have information about a process or task that should start on another application (which could even be on another server), 
+ or it could be just a simple text message. 
+<h3>How:</h3> 
+-The queue-manager software stores the messages until a receiving application(endpoint) connects and takes a message off the queue. 
+-The receiving application then processes the message.
+-The software interacting with the broker can be both a producer or a consumer.
+1- Client applications(called producers) create messages and deliver them to the broker. 
+2- Other applications(called consumers), connect to the broker, subscribe to messages from the broker, and process
+them.
+-Messages placed in the broker are stored until the consumer retrieves them even if many requests are coming in simultaneously.
+<h3>RABBITMQ AND SERVER CONCEPTS</h3>
+<b>Message</b>    : Information that is sent from the producer to a consumer through RabbitMQ.
+<b>Connection</b> : A TCP connection between your application and the RabbitMQ.
+<b>Channel</b>    : A virtual connection inside a connection.
+<b>Producer</b>   : Application that sends the messages.
+<b>Consumer</b>   : Application that receives the messages.
+<b>Exchange</b>  : Receives messages from producers and pushes them to queues based on rules of the exchange type. 
+ To receive messages, a queue needs to be bound to at least one exchange.
+<b>Queue</b>      : Buffer that stores messages.
+	<b>Binding</b>    : A binding is a link between a queue and an exchange.
+	<b>Routing key</b>: It is like an address for the message,used by exchange.
+	<b>AMQP</b>  : Advanced Message Queuing Protocol is the protocol used by RabbitMQ for messaging.
+	<b>Users</b>  : It is possible to connect to RabbitMQ with a given username and password with specified permissions.
+	<b>Vhost, virtual host:</b> Provides a way to segregate applications using the same RabbitMQ instance. 
+		  Different users can have different permissions to different vhost and queues and exchanges can be created, so they only exist in one vhost.
+	<b>Erlang:</b>The RabbitMQ is built on Erlang programming language. it is also used by WhatsApp for messaging.
+</div>
+<h2>Installation on Windows</h2>
+<div>
+- Install Erlang: The RabbitMQ is built on Erlang runtime environment so before we install RabbitMQ, 
+from: 
+<prr><code>http://www.erlang.org/downloads</code></pre>
+- Add bin folder of Erlang to the system path
+- Set <b>ERLANG_HOME</b> to where you actually put your Erlang installation,
+- set <b> HOMEDRIVE=[location of ".erlang.cookie"]</b>
+
+- goto RabbitMQ download website: 
+<b>https://www.rabbitmq.com/download.html</b>
+and install with default config:<b> rabbitmq-server-3.8.9.exe</b>
+- cd C:\Program Files\RabbitMQ Server\rabbitmq_server-3.10.7\sbin
+- rabbitmq-plugins.bat enable rabbitmq_management
+- rabbitmq-plugins enable rabbitmq_shovel rabbitmq_shovel_management
+- Edit C:\Windows\System32\drivers\etc\hosts file. Add to it the following line:
+127.0.0.1 rabbitmq
+
+- Open : http://rabbitmq:15672/ for opening the rabbitmq management.
+
+
+<b>Starting RabbitMQ Server</b>
+After completion of installing the RabbitMQ server,we will check the status of RabbitMQ server 
+ for that search for RabbitMQ Command Prompt and open it with admin privilege 
+ After opening the command prompt, enter command “rabbitmqctl status” and click enter to check the status of RabbitMQ server.
+
+<b>RabbitMQ Authentication Failed Error</b> 
+Following are the steps to fix an error like “Authentication failed (rejected by the remote node), 
+check the Erlang cookie”.
+
+In file explorer navigate to your user directory by pasting %userprofile% in your address bar.
+In case if already .erlang.cookie file available in that location, 
+just delete it otherwise go to the next step.
+In a second File Explorer, navigate to C:\Windows\System32\config\systemprofile.
+Find the file .erlang.cookie and copy it to your user directory.
+Now your rabbitmqctl should be able to authenticate.
+After completion of above steps, then again run “rabbitmqctl status” command in rabbitmq command prompt as an administrator, 
+then it will shows the screen .
+
+<b>Enable Web Management Plugin</b>
+To enable a rabbitmq web management plugin on windows, we need to start RabbitMQ Command Prompt with administrator privilege, 
+enter the command “rabbitmq-plugins enable rabbitmq_management” and execute it.
+After executing the above web management command, the web management plugins will be enabled 
+and it will show the plugins list which are enabled.
+
+Now you can open web management plugin in the browser for that enter the following URL in browser and click enter.
+
+http://localhost:15672
+
+After opening the localhost URL in browser, it will ask you for credentials to access web management plugin.
+
+To access rabbitmq web management dashboard, 
+the default Username and password of  is “guest” (Username: “guest” | Password: “guest”).
+
+</div> 
+<h2>Exchanges</h2>
+<div>
+Iwhen producer creates a message that will not directly sent to a queue,
+first the message will be send to exchanges, 
+then a routing agent reads and sends it to the appropriate queue
+with help of header attributes, bindings, and routing keys.
+<h3> Exchange Types :</h3>
+	 <b>Direct</b> : The message is routed to the queues whose binding key exactly matches with the routing key of the message.
+	 <b>Fanout</b> : Exchange will route messages to all of the queues that are bound to it.
+	 <b>Topic</b>  : Exchange will perform a wildcard match between the routing key and the routing pattern specified in the binding to publish a messages to queue.
+	 <b>Headers</b>: will use the message header attributes for routing.
+<h3>Create Exchange</h3>
+first open rabbtimq web management portal, 
+enter a default credentials to login and then choose Exchanges tab.
+you will see <b>“Add a new exchange panel” </b>
+just click on that panel to expand and that will contain a different properties to create a new exchange 
+</div>
+
+<h2>Queue</h2>
+<div>
+<h3>Creating a Queue:</h3>
+open web management portal and enter a default credentials to login and then choose Queues tab.
+Clic on  <b>“Add a new queue” </b>.
+<h3>Dead Letter Exchange Argument</h3>
+By using dead letter exchange argument, we can set an optional name for exchange to which messages will be republished if they are rejected or expire.
+</div>
+<h2>Bindings (Bind Queue to Exchange)</h2>
+<div>
+Binding is a connection which is used to configure a relation between a queue and an exchange. 
+in rabbitmq, exchange will route the request to particular queue on the basis of routing key.
+
+<h3>Binding Queue to Exchange:</h3>
+1- Go to Queues tab and then click on the queue (demoqueue) which is created .
+2- After click on queue (demoqueue) name, the Bindings panel will expand and next it will ask for the exchange name,
+enter exchange name which we have created “demoexchange” and routing key “demokey” and click on Bind button.
+3- After click on Bind button, the defined exchange (demoexchange) will be bind to our queue (demoqueue) and that will be .
+4- After binding, in case if you want to unbind it then you can click on unbind button to remove binding
+</div>
+<h2>Users</h2>
+<div>
+<h3>Add User:</h3>
+1.login into rabbitmq web management plugin using default credentials (guest) 
+2.After logging into the application, 
+to create a new user we need to navigate to Admin tab for that click on Admin tab
+3.After navigate to Admin tab, we can see the default user (“guest”) details who is having “administrator” privileges
+ and below that we have Add a user panel to add new user.
+4.RabbitMQ Click on Add a New User Panel to Create New User
+5.After we click on “Add a user” panel, it will show the panel with different parameters to create a new user .
+6.we have a section called Tags. 
+Here, Tags are the rights or privileges which we assigned while creating a user and we can set single or multiple privileges to a user based on our requirements
+. In case, if we want to multiple privileges, then set privileges as a comma (,) separated like administrator, management, etc. based on our requirements.
+
+Following are the different type of privileges or rights which supported in management plugin while creating a new user in rabbitmq.
+<table border="1">
+<tr><td>Tag</td><td>Description</td></tr>    
+<tr><td>management</td><td>If we set this tag, the user can access management plugin.</td></tr>    
+<tr><td>policymaker</td><td>If we set this tag, the user can access management plugin and manage policies and parameters for the vhosts they have access to.</td></tr>    
+<tr><td>monitoring</td><td>If we set this tag, the user can access management plugin and see all the connections and channels as well as node-related information.</td></tr>    
+<tr><td>administrator</td><td>If we set this tag, the user can do everything in management like manage users, vhosts, permissions, close other user's connections, and manage policies and parameters for all vhosts.</td></tr>    
+</table>
+Now, we will create a new user (demouser) by entering all the required details 
+like password as “123456”, privilege as “administrator” and click on Add user button to a create new user .
+
+7.After adding a user, you can see all the users in All users panel for that just expand it .
+
+8.After expanding, you can see the new user “demouser” but in the grid, you can see “can access virtual hosts” columns 
+where it has the value “No access” which means we do not have the privilege to virtual hosts.
+
+9.To set a permission to access virtual hosts, just click on the username which we have created “demouser” and go to Permissions panel which is just below to overview panel and click on Set permission button to set permissions .
+10.Once we are done with permission settings, then we can see the user permissions under “Current permissions” .
+11.Now we will use newly created user (“demouser”) details to login into rabbitmq web management plugin .
+</div>
+<h2>Virtual Hosts</h2>
+<div>
+In rabbitmq, virtual hosts are like a virtual box which contains a logical grouping of connections, exchanges, queues, bindings, user permissions, policies and many more things.
+In rabbitmq, we can create different virtual hosts and each virtual host will have users based on requirements.
+
+To create a virtual host in rabbitmq, we need to login into rabbitmq web management portal with default credentials (guest).
+
+Once login into web management portal, then choose admin tab. In admin section you will see vertical menus in the right part of the page, in that choose “Virtual Hosts” .
+(RabbitMQ Select Virtual Hosts from Admin Section)
+After choosing “Virtual Hosts”, you will see the default “Virtual Hosts” which is already present or created. To create a new virtual host we have a panel called “Add a new virtual host”, just click on it to expand .
+
+RabbitMQ Click on Add a New Virtual Host Panel
+After expanding the panel, you can see Name parameter here we are entering the name as “demohost”, next click on Add virtual host button to create “demohost” virtual host .
+(RabbitMQ Enter Details to Create New Virtual Host)
+After adding a virtual host, we can see the newly added virtual host in All virtual hosts panel .
+(RabbitMQ Available Virtual Hosts)
+(RabbitMQ Assign Virtual Hosts to Users)
+We are done with creation of virtual host but if we want to assign users to newly created virtual host, then we need to create users with required privileges and assign virtual host for that user. To know how to create users in rabbitmq check this, rabbitmq users.
+Here, we are going to create a new user “virtualuser” by setting a password as “123456” and privilege as “administrator” (just click on Admin link, it will set “administrator” in tags field) .
+(RabbitMQ Create User to Assign Virtual Host)
+After creating the user, we can see the newly created user details in All users panel . If you observe new user (“virtualuser”) details in grid, the “Can access virtual hosts” column has a value of “No access” which means the user doesn’t have the privilege to access any virtual hosts.
+(Users List in RabbitMQ Management Portal)
+RabbitMQ Set Privilege to Access Virtual Hosts
+To set a permission for users to access virtual hosts, just click on the username which we have created “virtualuser” and go to Permissions panel which is just below the Overview panel and select required virtual host from dropdownlist and click on Set permission button .
+(RabbitMQ Add Virtual Host to New User)
+Here, the default value “.*” is used to allow user to access all exchanges and queues in the virtual host. Once the permission is set, you’ll see the “Current permission” .
+(RabbitMQ User with Virtual Hosts)
+Now, the newly created user (“virtualuser”) has a permission to login into rabbitmq web management. Let’s login into rabbitmq web management plugin with new user “virtualuser” .
+(RabbitMQ Login with Virtual Hosts User)
+Following is the snapshot after logging into rabbitmq web management plugin with new user “virtualuser”.
+(RabbitMQ Virtual Hosts in Admin Section)
+This is how we can create virtual hosts in rabbitmq and assign it to users based on our requirements.
+</div>
+<h2>Connections</h2>
+<div>
+In rabbitmq, connection is a TCP connection between our application and the rabbitmq broker.
+In rabbitmq web management portal, we can see all the live connections between rabbitmq broker and applications under Connections tab.
+
+In rabbitmq web management portal, the Connections tab will show all the live connections of both producer and consumer messages along with that it will also show usernames of each connection with the state of connection.
+ In case, if you are using SSL/TLS, then it will indicate with a dark dot “.” in the connection and it will also show which protocol is used and from client & to client network utilization details.
+(RabbitMQ Connection Details)
+In case, if you want to see the details of particular connection in rabbitmq, then click on respective connection name .
+
+(RabbitMQ Particular Connection Details.)
+
+ RabbitMQ Connection Overview
+After clicking on particular connection name,
+ it will show all details of that connection along with data rates, channels, client properties, 
+runtime metrics, and finally close connection .
+
+In case, if you want to close the connection, then you can open “close this connection” tab type the reason and click on Force Close button .
+</div>
+<h2>Channels</h2>
+<div>
+channel is a virtual connection inside a connection and publishing or consuming a message from queue will happen over a channel.
+In rabbitmq web management portal, the Channels tab will show all the live channels of both producer and consumer messages 
+along with that it will also show username, mode, state of channel, unconfirmed, prefetch, etc..	
+
+<b>columns in channels section:</b>
+<table border="1">
+	<tr><td>Column</td><td>Description</td></tr>
+	<tr><td>Mode</td><td>The Mode column can be either C (confirm) or T (transactional). If channel is transactional, then mode is T in case channel streaming publish confirmations then mode C</td></tr>
+	<tr><td>State</td><td>It is used to show the state of channel.</td></tr>
+	<tr><td>Unconfirmed</td><td>It is used to show the number of published messages not yet confirmed.</td></tr>
+	<tr><td>Prefetch</td><td>It is used to show the details of per channel limit. In rabbitmq, each channel can have two prefetch counts one is per-consumer count, which will limit each new consumer created on the channel, and a global count, which is shared between all consumers on the channel</td></tr>
+	<tr><td>Unacked</td><td>It is used to show details of consumer that has promised to process them but has not acknowledged that they are processed .</td></tr>
+	<tr><td>publish</td><td>It is used to show the message rates for publishing.</td></tr>
+	<tr><td>confirm</td><td>It is used to show the message rates for confirming.</td></tr>
+	<tr><td>deliver / get</td><td>It is used to show the delivered details.</td></tr>
+	<tr><td>ack</td><td>It is used to show the acknowledge details.</td></tr>
+</table>
+In case, if you want to see details of particular channel, then click on particular channel name for example if we click on “[::1]:57086 (1)” channel then it will show all the details related to that channelIn case, if you want to see details of particular channel, then click on particular channel name for example if we click on “[::1]:57086 (1)” channel then it will show all the details related to that channel
+</div>
+<h2>Publish Messages to Queue</h2>
+<div>
+-In rabbitmq, we can directly publish messages to queue using web management portal for that we need to login into rabbitmq web management portal using default (guest) credentials like as shown below.
+-After logging into rabbitmq web management portal, navigate to Queues tab and click on the queue (demoqueue) which you want to publish messages like as shown below.
+-After clicking on particular queue (demoqueue), multiple panels will be shown from that click on Publish message panel like as shown below to publish messages directly to queue.
+-After opening Publish message panel, just enter a message in Payload textarea and click on Publish message button like as shown below.
+-After publishing message successfully to queue, we will get the success message like Message published like as shown below.
+</div>
+<h2>Read Messages from Queue</h2>
+<div>
+-In rabbitmq, we can read or consume a published messages from queue using web management portal for that we need to login into rabbitmq web management portal using default (guest) credentials like as shown below.
+-After logging into rabbitmq web management portal, navigate to Queues tab and click on the queue (demoqueue) which you want to publish messages like as shown below.
+-After clicking on particular queue (demoqueue), multiple panels will be shown from that click on Get messages panel like as shown below to read or get a messages from queue.
+-After opening Get messages panel, here in Messages textbox you can enter the count of messages to read from the queue and click on Get Message(s) button to read messages from queue.
+</div>
+<h2>Delete Messages from Queue</h2>
+<div>
+-In rabbitmq, we can delete a messages from queue or delete queue using web management portal for that we need to login into rabbitmq web management portal using default (guest) credentials like as shown below.
+-After logging into rabbitmq web management portal, navigate to Queues tab and click on the queue (demoqueue) which you want to delete a messages like as shown below.
+-After clicking on particular queue (demoqueue), multiple panels will be shown from that click on Delete panel like as shown below to delete messages from queue.
+-After opening Delete panel, you will see Delete Queue button like as shown below. Now click on Delete Queue button to delete a messages from queue or delete queue in rabbitmq.
+-After clicking on Delete Queue button, it will show the confirmation to delete a complete queue along with messages like as shown below.
+-If we click on OK button, then the queue will be completely deleted from rabbitmq server.
+</div>
+<h2>C# Publish Message to RabbitMQ Queue</h2>
+<div>
+In c#, we can publish or consume messages from rabbitmq by using RabbitMQ.Client nuget package. 
+<h3>C# Create RequestRabbitMQ Application</h3>	
+ create a simple console application with Name “RequestRabbitMQ”
+<h3>add “RabbitMQ.Client” nuget package </h3>
+<h3>Create Exchange in RabbitMQ</h3>
+Generally, when we publish a message to rabbitmq that will not directly send to queue, 
+instead first the message will be send to exchanges, 
+then after that a routing agent reads and sends it to the appropriate queue with help of header attributes, bindings and routing keys.
+So, before we proceed first we need to create exchange, queue and need to bind queue to exchange. We can create exchanges,
+ queues and bindings either directly from rabbitmq web management portal or from c# applications using RabbitMQ.Client nuget package service.
+<pre><code>
+using RabbitMQ.Client;
+using System;
+
+namespace RequestRabbitMQ
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			string UserName = "guest";
+			string Password = "guest";
+			string HostName = "localhost";
+
+			//Main entry point to the RabbitMQ .NET AMQP client
+			var connectionFactory = new RabbitMQ.Client.ConnectionFactory()
+			{
+				UserName = UserName,
+				Password = Password,
+				HostName = HostName
+			};
+			var connection = connectionFactory.CreateConnection();
+			var model = connection.CreateModel();
+			Console.WriteLine("Creating Exchange");
+			// Create Exchange
+			model.ExchangeDeclare("demoExchange", ExchangeType.Direct);
+			Console.ReadLine();
+		}
+	}	
+}
+</code></pre>
+If you observe above example, to establish a connection with rabbitmq server we are passing a required credentials along with HostName to ConnectionFactory() method. After that, we created a connection by calling “CreateConnection” method and creating an exchange by calling “ExchangeDeclare” method by passing a parameters such as “exchange name” and “exchange type”
+After executing above program, the new exchange (demoExchange) will be created in rabbitmq server. You can check the newly created exchange (demoExchange) details in rabbitmq web management portal under Exchanges tab like as shown below.
+<h3> Create Queue in RabbitMQ</h3>
+In c#, we can create a queue in rabbitmq by using “QueueDeclare” method of RabbitMQ.Client service.
+To create a queue in c#, we need to call “QueueDeclare” method by passing required parameters.
+If you observe QueueDeclare method, it accepting multiple parameters like queue name, durable, exclusive, autodelete, arguments properties.
+Following is the sample way of calling QueueDeclare method to create a queue in rabbitmq using c# programming language.
+<cl>
+// Create Queue
+model.QueueDeclare("demoqueue", true, false, false, null);	
+</cl>
+<pre><code>
+	using RabbitMQ.Client;
+	using System;
+	namespace RequestRabbitMQ
+	{
+		class Program
+		{
+			static void Main(string[] args)
+			{
+				string UserName = "guest";
+				string Password = "guest";
+				string HostName = "localhost";
+				//Main entry point to the RabbitMQ .NET AMQP client
+				var connectionFactory = new RabbitMQ.Client.ConnectionFactory()
+				{
+					UserName = UserName,
+					Password = Password,
+					HostName = HostName
+				};
+				var connection = connectionFactory.CreateConnection();
+				var model = connection.CreateModel();
+				// Create Queue
+				model.QueueDeclare("demoqueue", true, false, false, null);
+				Console.WriteLine("Creating Queue");
+				Console.ReadLine();	
+			}	
+		}
+	}	
+</code></pre>
+<h3>Bind RabbitMQ Queue with Exchange</h3>
+In c#, by using QueueBind method we can bind a rabbitmq queue with exchange by passing the name of exchange, queue along with routing key name.
+To bind a queue with exchange in c#, we need to call “QueueBind” method by passing required parameters. Following is the definition of rabbitmq QueueBind method in c#.
+If you observe QueueBind method, it accepting multiple parameters like model, queue name, exchange name and routing key.
+Following is the sample way of calling QueueBind method to bind a rabbitmq queue with exchange in c# programming language.
+<pre><code>
+// Bind Queue to Exchange
+model.QueueBind("demoqueue", "demoExchange", "directexchange_key");	
+</code></pre>		 
+<h3>Bind RabbitMQ Queue with Exchange Example</h3>
+<pre><code>
+	using RabbitMQ.Client;
+	using System;
+	namespace RequestRabbitMQ
+	{
+		class Program
+		{
+			static void Main(string[] args)
+			{
+				string UserName = "guest";
+				string Password = "guest";
+				string HostName = "localhost";
+				//Main entry point to the RabbitMQ .NET AMQP client
+				var connectionFactory = new RabbitMQ.Client.ConnectionFactory()
+				{
+					UserName = UserName,
+					Password = Password,
+					HostName = HostName
+				};
+				var connection = connectionFactory.CreateConnection();
+				var model = connection.CreateModel();
+				// Create Exchange
+				//model.ExchangeDeclare("demoExchange", ExchangeType.Direct);
+				//Console.WriteLine("Creating Exchange");
+				// Create Queue
+				//model.QueueDeclare("demoqueue", true, false, false, null);
+				//Console.WriteLine("Creating Queue");
+				// Bind Queue to Exchange
+				model.QueueBind("demoqueue", "demoExchange", "directexchange_key");
+				Console.WriteLine("Creating Binding");
+				Console.ReadLine();
+			}
+		}
+	}	
+</code></pre>
+<h3>Publish Message to RabbitMQ Queue</h3>
+In c#, by using BasicPublish method of RabbitMQ.Client service we can publish a messages to particular queue based on our requirements.
+If you observe BasicPublish method, it accepting multiple parameters like model, exchange, routing key, properties and required message to publish in rabbitmq queue.
+Following is the sample way of calling BasicPublish method to publish a message to rabbitmq queue in c# programming language.
+<cl>
+// Publish message to Queue
+model.BasicPublish("demoExchange", "directexchange_key", properties, messagebuffer);	
+</cl>
+ <h3>Publish Message to RabbitMQ Queue Example</h3>
+ <pre><code>
+	using RabbitMQ.Client;
+	using System;
+	using System.Text;
+	namespace RequestRabbitMQ
+	{
+		class Program
+		{
+			static void Main(string[] args)
+			{
+				string UserName = "guest";
+				string Password = "guest";
+				string HostName = "localhost";
+				//Main entry point to the RabbitMQ .NET AMQP client
+				var connectionFactory = new RabbitMQ.Client.ConnectionFactory()
+				{
+					UserName = UserName,
+					Password = Password,
+					HostName = HostName
+				};
+				var connection = connectionFactory.CreateConnection();
+				var model = connection.CreateModel();
+				var properties = model.CreateBasicProperties();
+				properties.Persistent = false;
+				byte[] messagebuffer = Encoding.Default.GetBytes("Direct Message");
+				model.BasicPublish("demoExchange", "directexchange_key", properties, messagebuffer);
+				Console.WriteLine("Message Sent");
+				Console.ReadLine();
+			}
+		}
+	}	
+ </code></pre>
+
+</div>
+<h2>C# Read (Consume) Messages from RabbitMQ Queue</h2>
+<div>
+In c#, we can read or consume a messages from rabbitmq by using RabbitMQ.Client nuget package. 
+<h3>C# Create RabbitMQConsumer Application</h3>
+create simple console application with Name “RabbitMQConsumer”
+<h3>Add RabbitMQ.Client NuGet Package</h3>
+<h3>add a class with name “MessageReceiver.cs” </h3>
+<pre><code>
+	using System;
+	using System.Text;
+	using RabbitMQ.Client;
+	namespace RabbitMQConsumer
+	{
+		public class MessageReceiver : DefaultBasicConsumer
+		{
+			private readonly IModel _channel;
+			public MessageReceiver(IModel channel)
+			{
+				_channel = channel;
+			}
+			 public override void HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, byte[] body)
+			{
+				Console.WriteLine($"Consuming Message");
+				Console.WriteLine(string.Concat("Message received from the exchange ", exchange));
+				Console.WriteLine(string.Concat("Consumer tag: ", consumerTag));
+				Console.WriteLine(string.Concat("Delivery tag: ", deliveryTag));
+				Console.WriteLine(string.Concat("Routing tag: ", routingKey));
+				Console.WriteLine(string.Concat("Message: ", Encoding.UTF8.GetString(body)));
+				_channel.BasicAck(deliveryTag, false);
+			}
+		}
+	}	
+</code></pre>
+If you observe above code, we created a MessageReceiver class and it’s inheriting from DefaultBasicConsumer class of RabbitMQ.Client service and we implemented a HandleBasicDeliver method by overriding it to receive a message body.
+<h3>Program.cs</h3>
+ <pre><code>
+	using System;
+	using RabbitMQ.Client;
+	namespace RabbitMQConsumer
+	{
+		class Program
+		{
+			private const string UserName = "guest";	
+			private const string Password = "guest";
+			private const string HostName = "localhost";
+			static void Main(string[] args)
+			{
+				ConnectionFactory connectionFactory = new ConnectionFactory
+				{
+					HostName = HostName,
+					UserName = UserName,
+					Password = Password,
+				};
+				var connection = connectionFactory.CreateConnection();
+				var channel = connection.CreateModel();
+				// accept only one unack-ed message at a time
+				// uint prefetchSize, ushort prefetchCount, bool global
+				channel.BasicQos(0, 1, false);
+				MessageReceiver messageReceiver = new MessageReceiver(channel);
+				channel.BasicConsume("demoqueue", false, messageReceiver);
+				Console.ReadLine();
+			}
+		}
+	}	
+ </code></pre>
+ If you observe above example, to establish a connection with rabbitmq server we are passing a required credentials along with HostName to ConnectionFactory() method. After that, we created a connection and channel by calling “CreateConnection” and “CreateModel” methods and we set a prefetchCount to 1, 
+ so that it tells RabbitMQ not to give more than one message at a time to worker.
+ Next, we have created an instance of MessageReceiver class and passed IModel (channel) to it, in final step we have called “BasicConsume” method and passed queue name to it “demoqueue” along with we have set autoAck to false and passed the messageReceiver instance to it.
+ Here, prefetchCount is used to tell RabbitMQ not to give more than one message at a time to worker. Or, in other words, don't dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch to the next worker that is not still busy. 
+</div>
+<h2>Direct Exchange in C# to Publish or Consume Messages</h2>
+<div>
+In rabbitmq, Direct Exchange will deliver a messages to the queues based on the message routing key. 
+In direct exchange, the message is routed to the queues whose binding key exactly matches with the routing key of the message.
+Generally, in rabbitmq when producer creates a message that will not directly send to queue, 
+instead first the message will be send to exchanges, 
+then after that a routing agent reads and sends it to the appropriate queue with help of header attributes, bindings and routing keys.
+<h3>Create a consolole RequestRabbitMQ Application</h3>	
+<h3>Add RabbitMQ.Client NuGet Package</h3>
+After completion of binding a queue to exchange, now we will publish a messages from c# application to rabbitmq queue using RabbitMQ.Client service.
+In c#, by using BasicPublish method of RabbitMQ.Client service we can publish a messages to particular queue based on our requirements.
+If you observe BasicPublish method, it accepting multiple parameters like model, exchange, routing key, properties and required message to publish in rabbitmq queue.
+Following is the sample way of calling BasicPublish method to publish a message to rabbitmq queue in c# programming language.
+<pre><code>// Publish message to Queue
+model.BasicPublish("demoExchange", "directexchange_key", properties, messagebuffer);
+</code></pre>
+<h3>Publish Messages to RabbitMQ</h3>
+publish a messages to rabbitmq queue, add a class with name “Directmessages.cs” in your application l
+<pre><code>
+	using RabbitMQ.Client;
+	using System;
+	using System.Text;
+	namespace RequestRabbitMQ
+	{
+		public class Directmessages
+		{
+			private const string UName = "guest";
+			private const string PWD = "guest";
+			private const string HName = "localhost";
+			public void SendMessage()
+			{
+				//Main entry point to the RabbitMQ .NET AMQP client
+				var connectionFactory = new ConnectionFactory()
+				{
+					UserName = UName,
+					Password = PWD,
+					HostName = HName
+				};
+				var connection = connectionFactory.CreateConnection();
+				var model = connection.CreateModel();
+				var properties = model.CreateBasicProperties();
+				properties.Persistent = false;     
+				byte[] messagebuffer = Encoding.Default.GetBytes("Direct Message");
+				model.BasicPublish("request.exchange", "directexchange_key", properties, messagebuffer);
+				Console.WriteLine("Message Sent");
+			}
+		}
+	}	
+</code></pre>
+If you observe above code, to establish a connection with rabbitmq server we are passing a required credentials along with HostName to ConnectionFactory() method. After that, we are publishing a message (Direct Message)
+ to queue by passing required parameters like exchange, routing key, properties and message to BasicPublish method.
+<h3>Program.cs</h3> 
+<pre><code>
+	using System;
+	namespace RequestRabbitMQ
+	{
+		class Program
+		{
+			static void Main(string[] args)
+			{
+				Directmessages directmessages = new Directmessages();
+				directmessages.SendMessage();
+				Console.ReadLine();
+			}
+		}
+	}	
+</code></pre>
+After publishing a message to queue, now will learn how to consume or get a messages from rabbitmq using RabbitMQ.Client service in c# 
+<h3>Create a console  RabbitMQConsumer Application</h3>
+<h3>Consume Messages from RabbitMQ</h3>
+After installing RabbitMQ.Client, next add a class with name “MessageReceiver.cs” in your application like as shown below to read or get a messages from queues in rabbitmq.
+MessageReceiver.cs: 
+<pre><code>
+	using System;
+	using System.Text;
+	using RabbitMQ.Client;
+		
+	namespace RabbitMQConsumer
+	{
+		public class MessageReceiver : DefaultBasicConsumer
+		{
+			private readonly IModel _channel;
+			public MessageReceiver(IModel channel)
+			{
+				_channel = channel;
+			} 
+			public override void HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, byte[] body)
+			{
+				Console.WriteLine($"Consuming Message");
+				Console.WriteLine(string.Concat("Message received from the exchange ", exchange));
+				Console.WriteLine(string.Concat("Consumer tag: ", consumerTag));
+				Console.WriteLine(string.Concat("Delivery tag: ", deliveryTag));
+				Console.WriteLine(string.Concat("Routing tag: ", routingKey));
+				Console.WriteLine(string.Concat("Message: ", Encoding.UTF8.GetString(body)));
+				_channel.BasicAck(deliveryTag, false);
+			}
+		}
+	}	
+</code></pre>
+If you observe above code, we created a MessageReceiver class and it’s inheriting from DefaultBasicConsumer class 
+of RabbitMQ.Client service and we implemented a HandleBasicDeliver method by overriding it to receive a message body.
+<h3>Program.cs</h3>
+Now open Program.cs class file and write a code in Main method to call MessageReceiver.cs class to get a messages from rabbitmq.
+<pre><code>
+	using System;
+	using RabbitMQ.Client;
+	namespace RabbitMQConsumer
+	{
+		class Program
+		{
+			private const string UName = "guest";
+			private const string Pwd = "guest";
+			private const string HName = "localhost";
+			static void Main(string[] args)
+			{
+				ConnectionFactory connectionFactory = new ConnectionFactory
+				{
+					HostName = HName,
+					UserName = UName,
+					Password = Pwd,
+				};
+				var connection = connectionFactory.CreateConnection();
+				var channel = connection.CreateModel();
+				// accept only one unack-ed message at a time
+				// uint prefetchSize, ushort prefetchCount, bool global
+				channel.BasicQos(0, 1, false);
+				MessageReceiver messageReceiver = new MessageReceiver(channel);
+				channel.BasicConsume("request.queue", false, messageReceiver);
+				Console.ReadLine();
+			}
+		}
+	}	
+</code></pre>
+If you observe above example, to establish a connection with rabbitmq server we are passing a required credentials along with HostName to ConnectionFactory() method. After that, 
+we created a connection and channel by calling “CreateConnection” and “CreateModel” methods and we set a prefetchCount to 1,
+ so that it tells RabbitMQ not to give more than one message at a time to worker.
+Next, we have created an instance of MessageReceiver class and passed IModel (channel) to it, 
+in final step we have called “BasicConsume” method and passed queue name to it “request.queue” along with we have set autoAck to false and passed the messageReceiver instance to it. 
+Here, prefetchCount is used to tell RabbitMQ not to give more than one message at a time to worker. 
+Or, in other words, don't dispatch a new message to a worker until it has processed and acknowledged the previous one.
+ Instead, it will dispatch to the next worker that is not still busy. 
+</div>
+<h2>Topic Exchange in C# to Publish or Consume Messages</h2>
+<div>
+In rabbitmq, Topic Exchange will perform a wildcard match between the routing key and the routing pattern specified in the binding to publish a messages to queue.
+Generally, in rabbitmq when producer creates a message that will not directly send to queue, instead first the message will be send to exchanges, then after that a routing agent reads and sends it to the appropriate queue with help of header attributes, bindings, and routing keys.
+In Topic Exchange, the routing key must be defined with a dot(.) delimiter like “*.bombay.*” or “#.bombay” or “Bombay.#” then only the message will be added to the queue otherwise the messages will not be stored in queue.
+For example, I have 2 queues one is Bombay and other one is Delhi then the user must send a routing key which will match the pattern of routing key which we defined while binding the queue to exchange then only the message will be added to the queue, else message will lost.
+Here, while defining a routing key pattern if we use a * (star) then that can be a substitute for exactly one word and # (hash) can be a substitute for zero or more words.
+<h3>Create a console RequestRabbitMQ Application</h3>
+<h3>Add RabbitMQ.Client NuGet Package</h3>
+<h3>RabbitMQ Create Topic Exchange</h3>
+<h3>RabbitMQ Create a Queue</h3>
+<h3>RabbitMQ Bind Queue to Exchange</h3>
+<h3>C# Publish Messages to RabbitMQ</h3>
+add a class with name “Topicmessages.cs” :
+<pre><code>
+	using RabbitMQ.Client;
+	using System;
+	using System.Text;
+	
+	public class Topicmessages
+	{
+		private const string UName = "guest";
+		private const string PWD = "guest";
+	
+		private const string HName = "localhost";
+		public void SendMessage()
+		{
+			//Main entry point to the RabbitMQ .NET AMQP client
+			var connectionFactory = new ConnectionFactory()
+			{
+				UserName = UName,
+				Password = PWD,
+				HostName = HName
+			};
+			var connection = connectionFactory.CreateConnection();
+			var model = connection.CreateModel();
+			var properties = model.CreateBasicProperties();
+			properties.Persistent = false;     
+			byte[] messagebuffer = Encoding.Default.GetBytes("Message from Topic Exchange 'Bombay' ");
+			model.BasicPublish("topic.exchange", "Message.Bombay.Email", properties, messagebuffer);
+			Console.WriteLine("Message Sent From: topic.exchange ");
+			Console.WriteLine("Routing Key: Message.Bombay.Email");
+			Console.WriteLine("Message Sent");
+		}
+	}
+</code></pre>
+If you observe above code, to establish a connection with rabbitmq server we are passing a required credentials along with HostName to ConnectionFactory() method. After that, we are publishing a message (Message from Topic Exchange 'Bombay') to queue by passing required parameters like exchange, routing key, properties and message to BasicPublish method.
+Here, we are sending a routing key as “Message.Bombay.Email” and it will match with the routing pattern (*.Bombay.*) and publish a data to respective queue (topic.bombay.queue).
+<h3>Program.cs</h3>
+<pre><code>
+	using System;
+	namespace RequestRabbitMQ	
+	{
+		class Program
+		{
+			static void Main(string[] args)
+			{
+				Topicmessages topicmessages = new Topicmessages();
+				topicmessages.SendMessage();
+				Console.ReadLine();
+			}
+		}
+	}	
+</code></pre>
+After publishing a message to queue, now will learn how to consume or get a messages from rabbitmq using RabbitMQ.Client service in c# or .net application with examples
+<h3>C#: Create a console RabbitMQConsumer Application</h3>
+<h3>add “RabbitMQ.Client” nuget package reference</h3>
+<h3>add a class with name “MessageReceiver.cs” in your application </h3>
+<pre><code>
+	using System;
+	using System.Text;
+	using RabbitMQ.Client;
+	
+	namespace RabbitMQConsumer
+	{
+		public class MessageReceiver : DefaultBasicConsumer
+		{
+			private readonly IModel _channel;
+			public MessageReceiver(IModel channel)
+			{
+				_channel = channel;
+			} 
+
+			public override void HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, byte[] body)
+			{
+				Console.WriteLine($"Consuming Topic Message");
+				Console.WriteLine(string.Concat("Message received from the exchange ", exchange));
+				Console.WriteLine(string.Concat("Consumer tag: ", consumerTag));
+				Console.WriteLine(string.Concat("Delivery tag: ", deliveryTag));
+				Console.WriteLine(string.Concat("Routing tag: ", routingKey));
+				Console.WriteLine(string.Concat("Message: ", Encoding.UTF8.GetString(body)));
+				_channel.BasicAck(deliveryTag, false);
+			}
+		}
+	}	
+</code></pre>
+<h3>Program.cs</h3>
+<pre><code>
+	using System;
+	using RabbitMQ.Client;
+	
+	namespace RabbitMQConsumer
+	{
+		class Program
+		{
+			private const string UName = "guest";
+			private const string Pwd = "guest";
+			private const string HName = "localhost";
+
+			static void Main(string[] args)
+			{
+				ConnectionFactory connectionFactory = new ConnectionFactory
+				{
+					HostName = HName,
+					UserName = UName,
+					Password = Pwd,
+				};
+	
+				var connection = connectionFactory.CreateConnection();
+				var channel = connection.CreateModel();
+
+				// accept only one unack-ed message at a time
+				// uint prefetchSize, ushort prefetchCount, bool global
+				channel.BasicQos(0, 1, false);
+				MessageReceiver messageReceiver = new MessageReceiver(channel);
+				channel.BasicConsume("topic.bombay.queue", false, messageReceiver);
+				Console.ReadLine();
+			}
+		}
+	}	
+</code></pre>
+If you observe above example, to establish a connection with rabbitmq server we are passing a required credentials along with HostName to ConnectionFactory() method. After that, we created a connection and channel by calling “CreateConnection” and “CreateModel” methods and we set a prefetchCount to 1, so that it tells RabbitMQ not to give more than one message at a time to worker.
+Next, we have created an instance of MessageReceiver class and passed IModel (channel) to it, in final step we have called “BasicConsume” method and passed queue name to it “topic.bombay.queue” along with we have set autoAck to false and passed the messageReceiver instance to it. 
+Here, prefetchCount is used to tell RabbitMQ not to give more than one message at a time to worker. Or, in other words, don't dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch to the next worker that is not still busy. 
+When we execute our application, we will get a messages from queue (topic.bombay.queue) l
+</div>
+<h2>Fanout Exchange in C# to Publish or Consume Messages</h2>
+<div>
+<h3>C# Create a console RequestRabbitMQ Application</h3>
+<h3>Add RabbitMQ.Client NuGet Package</h3>
+<h3>RabbitMQ Create Fanout Exchange</h3>
+<h3>RabbitMQ Create a Queue</h3>
+<h3>RabbitMQ Bind Queue to Exchange</h3>
+<h3>C# Publish Messages to RabbitMQ</h3>
+add a class with name “Fanoutmessages.cs” in your application 
+<pre><code>
+	using System;
+	using RabbitMQ.Client;
+	using System.Text;
+	
+	namespace RequestRabbitMQ
+	{
+		public class Fanoutmessages
+		{
+			private const string UName = "guest";
+			private const string PWD = "guest";
+			private const string HName = "localhost";
+	
+			public void SendMessage()
+			{
+				//Main entry point to the RabbitMQ .NET AMQP client
+				var connectionFactory = new ConnectionFactory()
+				{
+					UserName = UName,
+					Password = PWD,
+					HostName = HName
+				};
+				var connection = connectionFactory.CreateConnection();
+				var model = connection.CreateModel();
+				var properties = model.CreateBasicProperties();
+				properties.Persistent = false;
+				byte[] messagebuffer = Encoding.Default.GetBytes("Message is of fanout Exchange type");
+				model.BasicPublish("fanout.exchange", "", properties, messagebuffer);
+				Console.WriteLine("Message Sent From : fanout.exchange");
+				Console.WriteLine("Routing Key :  Routing key is not required for fanout exchange");
+				Console.WriteLine("Message Sent");
+			}
+		}
+	}	
+</code></pre>
+<h3>Program.cs</h3>
+<pre><code>
+	using System;
+
+	namespace RequestRabbitMQ
+	{
+		class Program
+		{
+			static void Main(string[] args)
+			{
+				Fanoutmessages fanoutmessages = new Fanoutmessages();
+				fanoutmessages.SendMessage();
+				Console.ReadLine();
+			}
+		}
+	}	
+</code></pre>
+<h3>C# Consume Messages from RabbitMQ</h3>
+add a class with name “MessageReceiver.cs” 
+<pre><code>
+	using System;
+	using System.Text;
+	using RabbitMQ.Client;
+	
+	namespace RabbitMQConsumer
+	{
+		public class MessageReceiver : DefaultBasicConsumer
+		{
+			private readonly IModel _channel;
+			public MessageReceiver(IModel channel)
+			{
+				_channel = channel;
+			} 
+	
+			public override void HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, byte[] body)
+			{
+				Console.WriteLine($"Consuming fanout Message");
+				Console.WriteLine(string.Concat("Message received from the exchange ", exchange));
+				Console.WriteLine(string.Concat("Consumer tag: ", consumerTag));
+				Console.WriteLine(string.Concat("Delivery tag: ", deliveryTag));
+				Console.WriteLine(string.Concat("Routing tag: ", routingKey));
+				Console.WriteLine(string.Concat("Message: ", Encoding.UTF8.GetString(body)));
+				_channel.BasicAck(deliveryTag, false);
+			}
+		}
+	}	
+</code></pre>
+<h3>Program.cs</h3>
+<pre><code>
+	using System;
+
+	using RabbitMQ.Client;
+	
+	namespace RabbitMQConsumer
+	{
+		class Program
+		{
+			private const string UName = "guest";
+			private const string Pwd = "guest";
+			private const string HName = "localhost";
+	
+			static void Main(string[] args)
+			{
+				ConnectionFactory connectionFactory = new ConnectionFactory
+				{
+					HostName = HName,
+					UserName = UName,
+					Password = Pwd,
+				};
+	
+				var connection = connectionFactory.CreateConnection();
+	
+				var channel = connection.CreateModel();
+	
+				// accept only one unack-ed message at a time
+	
+				// uint prefetchSize, ushort prefetchCount, bool global
+	
+				channel.BasicQos(0, 1, false);
+	
+				MessageReceiver messageReceiver = new MessageReceiver(channel);
+	
+				channel.BasicConsume("Mumbai", false, messageReceiver);
+	
+				Console.ReadLine();
+			}
+		}
+	}	
+</code></pre>
+If you observe above example, to establish a connection with rabbitmq server we are passing a required credentials along with HostName to ConnectionFactory() method. After that, we created a connection and channel by calling “CreateConnection” and “CreateModel” methods and we set a prefetchCount to 1, so that it tells RabbitMQ not to give more than one message at a time to worker.
+
+Next, we have created an instance of MessageReceiver class and passed IModel (channel) to it, in final step we have called “BasicConsume” method and passed queue name to it “Mumbai” along with we have set autoAck to false and passed the messageReceiver instance to it. 
+
+Here, prefetchCount is used to tell RabbitMQ not to give more than one message at a time to worker. Or, in other words, don't dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch to the next worker that is not still busy. 
+</div>
+<h2>Headers Exchange in C# to Publish or Consume Messages</h2>
+<div>
+<h3>Create a console RequestRabbitMQ Application</h3>
+<h3>add “RabbitMQ.Client” nuget package</h3>
+<h3>RabbitMQ: Create Headers Exchange</h3>
+named headers.exchange
+<h3>RabbitMQ Create a Queue</h3>
+named ReportPDF
+<h3>RabbitMQ: Bind Queue to Exchange</h3>
+To bind a queue with exchange, click on queue (ReportPDF) name, then the Bindings panel will expand and enter a details like exchange name as “headers.exchange”, Argument details and click on Bind button.
+If you observe above diagram, we entered a required arguments (format, x-match) to route a messages based on header values instead of routing keys.
+Here, for x-match attribute we can set two values either all or any based on our requirements but all is the default value for headers binding.
+After binding a queue (ReportPDF) to exchange (headers.exchange)
+Same way we will bind a ReportExcel queue to headers.exchange like as shown below by entering exchange name and argument values based on our requirements.
+After binding a queue (ReportExcel) to exchange (headers.exchange), the binding will be like as shown below.
+After completion of binding a queues to exchange, now we will publish a messages from c# application to rabbitmq queue using RabbitMQ.Client service.
+<h3>C# Publish Messages to RabbitMQ</h3>
+add a class with name “Headersmessages.cs”
+<pre><code>
+	using RabbitMQ.Client;
+	using System;
+	using System.Collections.Generic;
+	using System.Text;
+	
+	namespace RequestRabbitMQ
+	{
+		public class Headersmessages
+		{
+			private const string UName = "guest";
+			private const string PWD = "guest";
+			private const string HName = "localhost";
+			public void SendMessage()
+			{
+				//Main entry point to the RabbitMQ .NET AMQP client
+				var connectionFactory = new ConnectionFactory()
+				{
+					UserName = UName,
+					Password = PWD,
+					HostName = HName
+				};
+	
+				var connection = connectionFactory.CreateConnection();
+	
+				var model = connection.CreateModel();
+	
+				var properties = model.CreateBasicProperties();
+	
+				properties.Persistent = false;
+	
+				Dictionary<string, object> dictionary = new Dictionary<string, object>();
+	
+				dictionary.Add("format", "pdf");
+	
+				properties.Headers = dictionary;
+	
+				byte[] messagebuffer = Encoding.Default.GetBytes("Message to Headers Exchange 'format=pdf' ");
+	
+				model.BasicPublish("headers.exchange", "", properties, messagebuffer);
+	
+				Console.WriteLine("Message Sent From : headers.exchange ");
+	
+				Console.WriteLine("Routing Key : Does not need routing key");
+	
+				Console.WriteLine("Message Sent");
+	
+			}
+		}
+	
+	}	
+</code></pre>
+<h3>Program.cs</h3>
+<pre><code>
+	using System;
+	namespace RequestRabbitMQ
+	{
+		class Program
+		{
+			static void Main(string[] args)
+			{
+				Headersmessages headersmessages = new Headersmessages();
+				headersmessages.SendMessage();
+				Console.ReadLine();
+			}
+		}
+	}	
+</code></pre>
+<h3>C# Create a console RabbitMQConsumer Application</h3>
+
+<h3>C# Consume Messages from RabbitMQ</h3>
+<pre><code>
+	using System;
+	using System.Text;
+	using RabbitMQ.Client;
+	
+	namespace RabbitMQConsumer
+	{
+		public class MessageReceiver : DefaultBasicConsumer
+		{
+			private readonly IModel _channel;
+	
+			public MessageReceiver(IModel channel)
+			{
+				_channel = channel;
+	
+			} 
+	
+			public override void HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, byte[] body)
+			{
+				Console.WriteLine($"Consuming Headers Message");
+	
+				Console.WriteLine(string.Concat("Message received from the exchange ", exchange));
+	
+				Console.WriteLine(string.Concat("Consumer tag: ", consumerTag));
+	
+				Console.WriteLine(string.Concat("Delivery tag: ", deliveryTag));
+	
+				Console.WriteLine(string.Concat("Routing tag: ", routingKey));
+	
+				Console.WriteLine(string.Concat("Message: ", Encoding.UTF8.GetString(body)));
+	
+				_channel.BasicAck(deliveryTag, false);
+	
+			}
+	
+		}
+	
+	}	
+</code></pre>
+<h3>Program.cs</h3>
+<pre><code>
+	using System;
+
+	using RabbitMQ.Client;
+	
+	namespace RabbitMQConsumer
+	{
+		class Program
+		{
+			private const string UName = "guest";
+			private const string Pwd = "guest";
+	
+			private const string HName = "localhost";
+	
+			static void Main(string[] args)
+			{
+				ConnectionFactory connectionFactory = new ConnectionFactory
+				{
+					HostName = HName,
+	
+					UserName = UName,
+	
+					Password = Pwd,
+	
+				};
+	
+				var connection = connectionFactory.CreateConnection();
+	
+				var channel = connection.CreateModel();
+	
+				// accept only one unack-ed message at a time
+	
+				// uint prefetchSize, ushort prefetchCount, bool global
+	
+				channel.BasicQos(0, 1, false);
+	
+				MessageReceiver messageReceiver = new MessageReceiver(channel);
+	
+				channel.BasicConsume("ReportPDF", false, messageReceiver);
+	
+				Console.ReadLine();
+	
+			}
+	
+		}
+	
+	}	
+</code></pre>
+If you observe above example, to establish a connection with rabbitmq server we are passing a required credentials along with HostName to ConnectionFactory() method. After that, we created a connection and channel by calling “CreateConnection” and “CreateModel” methods and we set a prefetchCount to 1, so that it tells RabbitMQ not to give more than one message at a time to worker.
+Next, we have created an instance of MessageReceiver class and passed IModel (channel) to it, in final step we have called “BasicConsume” method and passed queue name to it “ReportPDF” along with we have set autoAck to false and passed the messageReceiver instance to it. 
+Here, prefetchCount is used to tell RabbitMQ not to give more than one message at a time to worker. Or, in other words, don't dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch to the next worker that is not still busy. 
+
+When we execute our application, we will get a messages from queue (ReportPDF) 
+</div>

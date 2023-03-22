@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../../assets/css/blocks.css">	
+	<script src='../../assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+    <script src="../../libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+	<script>
+	
+	</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+<h2>Minimal API</h2>
+<div>
+- They create HTTP APIs with minimal dependencies. 
+- They are ideal for microservices and apps that want to include only the minimum files, features, and dependencies in ASP.NET Core.
+- They are not  based on controllers. 
+</div>
+<h2>Example</h2>
+<div>
+1- Create a new project > e ASP.NET Core Web API template > Name the project TodoApi 
+2- In the Additional information dialog:
+    . Select .NET 6.0 (Long-term support)
+    . Remove Use controllers (uncheck to use minimal APIs)
+    . Select Create    
+3- Program.cs :    
+<pre><code>
+    var builder = WebApplication.CreateBuilder(args);
+
+    // Add services to the container.
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+    
+    var app = builder.Build();
+    
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+    
+    app.UseHttpsRedirection();
+    
+    var summaries = new[]
+    {
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
+    
+    app.MapGet("/weatherforecast", () =>
+    {
+        var forecast = Enumerable.Range(1, 5).Select(index =>
+           new WeatherForecast
+           (
+               DateTime.Now.AddDays(index),
+               Random.Shared.Next(-20, 55),
+               summaries[Random.Shared.Next(summaries.Length)]
+           ))
+            .ToArray();
+        return forecast;
+    })
+    .WithName("GetWeatherForecast");
+    
+    app.Run();
+    
+    internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
+    {
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }    
+</code></pre>
+- adds support for Swagger:
+<pre><code>
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}    
+</code></pre>
+-run the project 
+- in the browser: https://localhost:<port>/WeatherForecast
+<h3>Update the generated code</h3>
+in Program.cs
+<pre><code>
+    var builder = WebApplication.CreateBuilder(args);
+    var app = builder.Build();
+    
+    app.MapGet("/", () => "Hello World!");
+    
+    app.Run();    
+</code></pre>
+Remove the two "launchUrl": "swagger", lines from the Properties/launchSettings.json file.
+When the launchUrl isn't specified, the web browser requests the / endpoint.
+
+Run the app. Hello World! is displayed.
+- Add these NuGet packages
+<cl>Microsoft.EntityFrameworkCore.InMemory
+    Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 
+</cl>
+Program.cs :
+<pre><code>
+    using Microsoft.EntityFrameworkCore;
+
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
+    builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+    var app = builder.Build();
+    
+    app.MapGet("/", () => "Hello World!");
+    
+    app.MapGet("/todoitems", async (TodoDb db) =>
+        await db.Todos.ToListAsync());
+    
+    app.MapGet("/todoitems/complete", async (TodoDb db) =>
+        await db.Todos.Where(t => t.IsComplete).ToListAsync());
+    
+    app.MapGet("/todoitems/{id}", async (int id, TodoDb db) =>
+        await db.Todos.FindAsync(id)
+            is Todo todo
+                ? Results.Ok(todo)
+                : Results.NotFound());
+    
+    app.MapPost("/todoitems", async (Todo todo, TodoDb db) =>
+    {
+        db.Todos.Add(todo);
+        await db.SaveChangesAsync();
+    
+        return Results.Created($"/todoitems/{todo.Id}", todo);
+    });
+    
+    app.MapPut("/todoitems/{id}", async (int id, Todo inputTodo, TodoDb db) =>
+    {
+        var todo = await db.Todos.FindAsync(id);
+    
+        if (todo is null) return Results.NotFound();
+    
+        todo.Name = inputTodo.Name;
+        todo.IsComplete = inputTodo.IsComplete;
+    
+        await db.SaveChangesAsync();
+    
+        return Results.NoContent();
+    });
+    
+    app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
+    {
+        if (await db.Todos.FindAsync(id) is Todo todo)
+        {
+            db.Todos.Remove(todo);
+            await db.SaveChangesAsync();
+            return Results.Ok(todo);
+        }
+    
+        return Results.NotFound();
+    });
+    
+    app.Run();
+    
+    class Todo
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public bool IsComplete { get; set; }
+    }
+    
+    class TodoDb : DbContext
+    {
+        public TodoDb(DbContextOptions<TodoDb> options)
+            : base(options) { }
+    
+        public DbSet<Todo> Todos => Set<Todo>();
+    }    
+</code></pre>
+The sample app contains the following model:
+<cl>
+    class Todo
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public bool IsComplete { get; set; }
+    }    
+</cl>
+context class:
+<cl>
+    class TodoDb : DbContext
+    {
+        public TodoDb(DbContextOptions<TodoDb> options)
+            : base(options) { }
+    
+        public DbSet<Todo> Todos => Set<Todo>();
+    }    
+</cl>
+- adds the database context to the dependency injection (DI) container and enables displaying database-related exceptions:
+<pre><code>
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
+    builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+    var app = builder.Build();    
+</code></pre>
+- The DI container provides access to the database context and other services.
+The following code creates an HTTP POST endpoint /todoitems to add data to the in-memory database:
+<pre><code>
+    app.MapPost("/todoitems", async (Todo todo, TodoDb db) =>
+    {
+        db.Todos.Add(todo);
+        await db.SaveChangesAsync();
+    
+        return Results.Created($"/todoitems/{todo.Id}", todo);
+    });    
+</code></pre>
+<h3>Examine the GET endpoints</h3>
+<div >
+<table aria-label="Examine the GET endpoints" >
+    <thead>
+    <tr>
+    <th>API</th>
+    <th>Description</th>
+    <th>Request body</th>
+    <th>Response body</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>GET /</code></td>
+    <td>Browser test, "Hello World"</td>
+    <td>None</td>
+    <td><code>Hello World!</code></td>
+    </tr>
+    <tr>
+    <td><code>GET /todoitems</code></td>
+    <td>Get all to-do items</td>
+    <td>None</td>
+    <td>Array of to-do items</td>
+    </tr>
+    <tr>
+    <td><code>GET /todoitems/complete</code></td>
+    <td>Get all completed to-do items</td>
+    <td>None</td>
+    <td>Array of to-do items</td>
+    </tr>
+    <tr>
+    <td><code>GET /todoitems/{id}</code></td>
+    <td>Get an item by ID</td>
+    <td>None</td>
+    <td>To-do item</td>
+    </tr>
+    </tbody>
+    </table>
+</div>
+<h3>Examine the PUT endpoint</h3>
+<pre><code>
+    app.MapPut("/todoitems/{id}", async (int id, Todo inputTodo, TodoDb db) =>
+    {
+        var todo = await db.Todos.FindAsync(id);
+    
+        if (todo is null) return Results.NotFound();
+    
+        todo.Name = inputTodo.Name;
+        todo.IsComplete = inputTodo.IsComplete;
+    
+        await db.SaveChangesAsync();
+    
+        return Results.NoContent();
+    });    
+</code></pre>
+<h3>Examine the DELETE endpoint</h3>
+<pre><code>
+    app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
+    {
+        if (await db.Todos.FindAsync(id) is Todo todo)
+        {
+            db.Todos.Remove(todo);
+            await db.SaveChangesAsync();
+            return Results.Ok(todo);
+        }
+    
+        return Results.NotFound();
+    });    
+</code></pre>
+To demonstrate the DTO approach, update the Todo class to include a secret field:
+<pre><code>
+public class Todo
+{
+    public int Id { get; set; }
+    public string? Name { get; set; }
+    public bool IsComplete { get; set; }
+    public string? Secret { get; set; }
+}        
+
+public class TodoItemDTO
+{
+    public int Id { get; set; }
+    public string? Name { get; set; }
+    public bool IsComplete { get; set; }
+
+    public TodoItemDTO() { }
+    public TodoItemDTO(Todo todoItem) =>
+    (Id, Name, IsComplete) = (todoItem.Id, todoItem.Name, todoItem.IsComplete);
+}
+</code></pre>
+- Update the code to use TodoItemDTO:
+<pre><code>
+    using Microsoft.EntityFrameworkCore;
+
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+    builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
+    var app = builder.Build();
+    
+    app.MapGet("/todoitems", async (TodoDb db) =>
+        await db.Todos.Select(x => new TodoItemDTO(x)).ToListAsync());
+    
+    app.MapGet("/todoitems/{id}", async (int id, TodoDb db) =>
+        await db.Todos.FindAsync(id)
+            is Todo todo
+                ? Results.Ok(new TodoItemDTO(todo))
+                : Results.NotFound());
+    
+    app.MapPost("/todoitems", async (TodoItemDTO todoItemDTO, TodoDb db) =>
+    {
+        var todoItem = new Todo
+        {
+            IsComplete = todoItemDTO.IsComplete,
+            Name = todoItemDTO.Name
+        };
+    
+        db.Todos.Add(todoItem);
+        await db.SaveChangesAsync();
+    
+        return Results.Created($"/todoitems/{todoItem.Id}", new TodoItemDTO(todoItem));
+    });
+    
+    app.MapPut("/todoitems/{id}", async (int id, TodoItemDTO todoItemDTO, TodoDb db) =>
+    {
+        var todo = await db.Todos.FindAsync(id);
+    
+        if (todo is null) return Results.NotFound();
+    
+        todo.Name = todoItemDTO.Name;
+        todo.IsComplete = todoItemDTO.IsComplete;
+    
+        await db.SaveChangesAsync();
+    
+        return Results.NoContent();
+    });
+    
+    app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
+    {
+        if (await db.Todos.FindAsync(id) is Todo todo)
+        {
+            db.Todos.Remove(todo);
+            await db.SaveChangesAsync();
+            return Results.Ok(new TodoItemDTO(todo));
+        }
+    
+        return Results.NotFound();
+    });
+    
+    app.Run();
+    
+    public class Todo
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public bool IsComplete { get; set; }
+        public string? Secret { get; set; }
+    }
+    
+    public class TodoItemDTO
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public bool IsComplete { get; set; }
+    
+        public TodoItemDTO() { }
+        public TodoItemDTO(Todo todoItem) =>
+        (Id, Name, IsComplete) = (todoItem.Id, todoItem.Name, todoItem.IsComplete);
+    }
+    
+    
+    class TodoDb : DbContext
+    {
+        public TodoDb(DbContextOptions<TodoDb> options)
+            : base(options) { }
+    
+        public DbSet<Todo> Todos => Set<Todo>();
+    }    
+</code></pre>
+<h3>Use JsonOptions</h3>
+<pre><code>
+using Microsoft.AspNetCore.Http.Json;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure JSON options
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.IncludeFields = true;
+});
+
+var app = builder.Build();
+
+app.MapGet("/", () => new Todo { Name = "Walk dog", IsComplete = false });
+
+app.Run();
+
+class Todo
+{
+    // These are public fields instead of properties.
+    public string? Name;
+    public bool IsComplete;
+} 
+</code></pre>
+The following code uses JsonSerializerOptions:
+<pre><code>
+using System.Text.Json;
+
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+
+app.MapGet("/", () => Results.Json(new Todo {
+                        Name = "Walk dog", IsComplete = false }, options));
+
+app.Run();
+
+class Todo
+{
+    public string? Name { get; set; }
+    public bool IsComplete { get; set; }
+}    
+</code></pre>
+</div>
+<h2>Differences between minimal APIs and APIs with controllers</h2>
+<div>
+    No support for filters: For example, no support for IAsyncAuthorizationFilter, IAsyncActionFilter, IAsyncExceptionFilter, IAsyncResultFilter, and IAsyncResourceFilter.
+    No support for model binding, i.e. IModelBinderProvider, IModelBinder. Support can be added with a custom binding shim.
+    No support for binding from forms. This includes binding IFormFile. We plan to add support for IFormFile in the future.
+    No built-in support for validation, i.e. IModelValidator
+    No support for application parts or the application model. There's no way to apply or build your own conventions.
+    No built-in view rendering support. We recommend using Razor Pages for rendering views.
+    No support for JsonPatch
+    No support for OData
+    No support for ApiVersioning. See this issue for more details.    
+</div>

@@ -1,0 +1,44 @@
+<style>
+    img{border:1px solid black;}
+</style>
+
+<div id="root"></div>
+
+<script type="text/javascript">
+    function  onLoad() {
+        AddImages()
+    }
+    window.onload = onLoad;
+
+    function AddImageAndText(imgpath,text)
+    {
+        var container = document.createElement("div");
+
+        container.style = "display:inline-block;";
+        var img = document.createElement('img');
+        img.src = imgpath;
+
+        l = text.length;
+        text = text.substr(0,l-4);
+        let p = text.indexOf(".");
+        text = text.substr(p+1); 
+        var txt = document.createElement("div"); 
+        txt.style.cssText = "font-weight:bold;text-align:center";
+        txt.innerText = text;
+
+        container.appendChild(img);
+        container.appendChild(txt);
+
+        var element = document.getElementById("root");
+        element.appendChild(container);
+    }
+
+    function AddImages() {
+        var s=["1.comments.png","2.paragraphs - Leave a blank line to denote a separate paragraph.png"
+        ,"3.emphesize.png","4.headers.png" ,"5.unordered list.png" ,"6.sublist (just indent).png","7.Ordered list.png","8.checklist.png" ,
+        "9.Code block-indent is 4 spaces|3 backticks.png","10-inline codes - between backticks.png" ,
+        "11-links.png" ,"12-image.png" ,"13-blockquete.png" ,"14-diff.png"];
+        for(i=0;i<s.length;i++)
+            AddImageAndText(s[i],s[i]);
+    }
+</script>

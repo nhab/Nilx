@@ -1,0 +1,229 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2>
+	<input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />References</h2>
+<div>
+	<a href="https://www.youtube.com/playlist?list=PL6tu16kXT9Po4w7VVPh6VGU7G7nm3fxZb">specflow 2021 youtube</a> 
+	<a href="https://www.youtube.com/playlist?list=PL6tu16kXT9Pp3wrsaYyNRnK1QkvVv6qdI" >BDD and Specflow</a>
+	<a href='https://www.google.com/search?q=specflow+hook+before+a+scenario+selenium'>
+specflow hook before a scenario selenium</a>
+<a href="https://www.google.com/search?q=youtube+specflow+selenium+c%2523+.net+core">youtube specflow selenium c# .net core</a>
+</div>
+<h2>spec flow installatiion</h2>
+<div>
+- install visual studio extention ( vs > extentions > manage extentions > Search for SpecFlow for visual studio )
+- create new visual studio project using specFlow Template
+- Add selenium.WebDriver nuget
+- Add DpecFlow.Assist nuget
+-if you dont see any tests in test explorer window,you should toggle a button in the test explorer tool bar.
+</div>
+
+<h2>The default project</h2>
+<div>
+
+- SpecFlow generates a default feature file when a reference project added to specFlow Project .
+  The purpose of this feature file is to document the expected behavior of the calculator in a way that it is both human-readable and suitable for test automation.
+
+- SpecFlow uses the Gherkin language where you can phrase the scenarios using Given/When/Then steps.
+-SpecFlow generates
+-Example of genertaed default Gherkin :
+	<pre><code>
+    Scenario: Add two numbers
+        Given the first number is 50
+        And the second number is 70
+        When the two numbers are added
+        Then the result should be 120
+	</code></pre>    
+- Right-click the first Given step “Given the first number is 50” and select either the “Go To Definition” or the “Go To Step Definition” command.
+  Visual Studio locates the step definition (binding) that belongs to this step.  
+- the "given" section in the feature file has coressponding function in StepDefenition File whith a parameter.
+  it has an integer parameter for each number in the grekin and a string parameter for eaching expression in the ""
+- when the gherkin code is showmn white color,it means that it maps to stepsDefenitions.cs file ,but purple means it does not.
+</div>
+
+<h2>Feature</h2>
+<div>
+- Features of the test scenarios are written in gharkin language in the files in Features folder of the project.
+- To Add a feature file ,right click the features folder > Add new item..>in sapecFlow tab >specFlow Feature file
+- Feature file consists of one or more scenaroios
+- Each scenario has 4 main parts:
+	. "scenario", which is the decriptive name of the scenario.
+	. "Given", is the parameter given to the scenario as input
+	. "when", is the action the system performs
+	. "Then", is the expected state after running the "when" section
+- each section can be repeated for different statements by using "And" clause
+-there could also be other sections in the feature file:
+	. "Feature", is the description of what tests are covered in the file.
+	. "BackGround", is execute before each scenario is executed.
+	. "scenario outlines", which descibes the scenario plus "examples".
+	in "exmples" section we have tabular data to be used to test the scenario
+	-An example for a scario Outline :
+	<pre><code>
+	Scenario outline: Register user and check if the user logged in
+		Given  I have opened the developement site
+		Then   I click the register link
+		And    I Enter <UserName>,<Password> and <ConformPassword>
+		Then   I Should see the logoff link
+		When   I click the logoff link
+		Then   I see the homepage loaded
+	Samples:
+		| UserName |Password | ConformPassword |
+		| jonson   | john123 | john123	      |
+		| Abrahams | abraham123 | abraham123 |
+
+	-The table of "sample" section can be written under given section.for example:
+			Given I input following numbers in calculator
+			|Number|
+			|20    |
+			|50    |
+	</code></pre>
+	this will be mapped to a Table type parameter in the stepsDefenitions file.
+</div>
+
+<h2>Mapping gherkin into C# Steps</h2>
+<div>
+- it happens in sTeps folder > stepDefinition file
+- Mapping the "feature" section: the Steps file should have annotation @Binding above the class definition.
+-Mapping "Given","When","Then" sections: 
+	- create the steps by right click the feature file and select "geenrate steps" and copy it to the ..steps.cs file
+	- generated function for each section,shuold have annotation using this syntax:(for the "given" section,for example)
+		[Given(@"I have entered (.*) into the username")]
+	  the (.*) is a regular expression used to enter the UserName.
+</div>
+
+<h2>Hooks</h2>
+<div>
+	Hook(event bindings) used to perform additional tasks before or after a specific event.
+	for example driver need to be initialized in a hook.
+	<h3>Example</h3>
+	- create a "Hooks" folder in your project 
+	- right click on hooks folder and select Add new item
+	- select specflow hook from templates
+	- now in the generated file Add following code:
+	<pre><code>
+		[beforTestRun]
+		public static void BeforeTest()
+		{
+			console.writeline("Before Any scenario executed.");
+		}
+	</code></pre>
+	-run All tests in test explorer and the message should be shown.
+	-Tags are used to refer to specific sections in the gherkin code. a section can have more than one tag.
+</div>
+<h2>ScenarioContext</h2>
+- is a datastructure to store and move data between steps.Example:
+<pre><code>ScenarioContext.Current["InformationOfStep2"]</code></pre>
+(current means current step)
+- you can add complex data types to it
+<h2>Sample Hook</h2>
+<pre><code>
+	[Binding]
+    public sealed class BeforeRunTestsHook
+    {
+        // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
+        
+        [BeforeScenario("@tag1")]
+        public void BeforeScenarioWithTag()
+        {
+            Console.WriteLine("Before scenario ");
+            ChromDriver.driver = new ChromeDriver(@"C:\Users\n\Downloads\chromedriver_win32\");
+            var bpmsUrl = 
+            "http://localhost:53006/Account/Login?ReturnUrl=%2fCartbot%2fCreateDiagram";
+          
+            ChromDriver.driver.Navigate().GoToUrl(bpmsUrl);
+            ChromDriver.driver.Manage().Window.Maximize();
+
+
+        }
+	}
+</code></pre>
+<h2>StepDefenitio Sample</h2>
+<pre><code>
+	[Binding]
+    public class BPMSUserEmailStepDefinitions
+    {
+        ChromeDriver driver = (ChromeDriver)ChromDriver.driver;
+
+        [Given(@"the ""([^""]*)"" as username in the login page")]
+        public void GivenTheAsUsernameInTheLoginPage(string p0)
+        {
+			IWebElement txtUser = driver.FindElement(By.Id("Username"));
+            txtUser.SendKeys(p0);
+        }
+
+        [Given(@"the ""([^""]*)"" as password in the login page")]
+        public void GivenTheAsPasswordInTheLoginPage(string p0)
+        {
+            IWebElement txtPass = driver.FindElement(By.Id("Password"));
+            txtPass.SendKeys(p0);
+        }
+
+        [When(@"I login to the BPMS")]
+        public void WhenILoginToTheBPMS()
+        {
+            IWebElement btn = driver.FindElement(By.Id("login"));
+            Assert.IsNotNull(btn);
+            btn.Click();
+        }
+
+        [When(@"click on my picture")]
+        public void WhenClickOnMyPicture()
+        {
+             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            Assert.IsNotNull(js);
+            js.ExecuteScript("$(\"a[data_test='c376a273-2386-4716-8450-7ee258f680fd']\").click()");
+            Thread.Sleep(3000);
+        }
+
+        [When(@"select my profile page from the opened dropdown")]
+        public void WhenSelectMyProfilePageFromTheOpenedDropdown()
+        {
+             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            Assert.IsNotNull(js);
+            js.ExecuteScript("$('#userProfileInfo')[0].click()");
+        }
+
+        [Given(@"the ""([^""]*)"" in the profile page")]
+        public void GivenTheInTheProfilePage(string p0)
+        {
+            IWebElement txtEmail = driver.FindElement(By.Id("EmailField"));
+            Assert.IsNotNull(txtEmail);
+            txtEmail.Clear();
+            txtEmail.SendKeys(p0);
+        }
+
+        [When(@"I save the profile page changes")]
+        public void WhenISaveTheProfilePageChanges()
+        {
+            IWebElement btnSave = driver.FindElement(By.Id("btnSave"));
+            Assert.IsNotNull(btnSave);
+            btnSave.Click();
+        }
+
+        [Then(@"an alert will pop up with the success message")]
+        public void ThenAnAlertWillPopUpWithTheSuccessMessage()
+        {
+            //var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            Thread.Sleep(3000);
+            IWebElement txt= driver.FindElement(By.Id("swal2-title"));
+            
+            Assert.AreEqual(txt.Text, "بسیار عالی!");                
+        }
+    }
+</code></pre>
+
+</body>
+</html>

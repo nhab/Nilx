@@ -1,0 +1,58 @@
+<head>
+    <!--link rel="stylesheet"  type="text/css" href="..\..\assets\css\main.css" /-->
+    	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src="/nilx/assets/js/blocks.js"> </script>
+</head>
+<body>
+  <h2>Github basic workflow</h2>
+  <div>
+    1. Go to <a href='https://github.com'>Github.com</a> and sign up
+    2. Install <a href='https://git-scm.com/'>Git </a> in your local system
+    3. Create a New Repository on Github : ( github > Repositories > New )
+
+    4. clone  a repository using Command Line :
+    <code>git clone https://github.com/yogeshdarji99/Abc.git </code>
+            <br>( // copy/paste the link from the page of your repository :
+                    Code tab (default tab) > "Clone or download" dropdown button )
+    5. Add a folder to your respository
+    6. Get status: <code>git status     </code>
+    7. Add the folder to the stage <code>git add --a    </code>
+    (stage is a place in the local machine) 
+    8.introduce yourself to git:
+     <code>git config --global user.email yourname@yahoo.com  </code>
+      <br>( // see your github profile for your email address)  
+    9. Commit the change you made,to the local repository (from stage) 
+      <code>git commit -m "Update the folder" </code>
+    10 to push commits made on your local branch to a remote repository:
+     <code>git push  </code>  
+  </div> 
+  <h2>Creating a personal access token</h2>
+  <div>
+    a personal access token can be used in place of a password (with the command line or with the API).
+    (Personal access tokens (PATs) are an alternative to using passwords for authentication to GitHub 
+    when using the GitHub API or the command line.)
+
+    <b>Creating a token:</b>
+      1.Verify your email address, if it hasn't been verified yet.
+
+      2.In the upper-right corner of any page, click your profile photo, then click Settings.
+      
+      3.In the left sidebar, click  Developer settings.
+
+      4.In the left sidebar, click Personal access tokens.
+
+      5.Click Generate token.
+
+      <b>Using a token on the command line</b>
+          
+    Once you have a token, you can enter it instead of your password when performing Git operations over HTTPS.
+
+    For example, on the command line you would enter the following:
+
+    $ git clone https://github.com/username/repo.git
+    Username: your_username
+    Password: your_token
+  </div>
+</body>

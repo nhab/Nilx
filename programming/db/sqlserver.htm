@@ -1,0 +1,73 @@
+<head>
+    <meta charset="UTF-8">
+      
+  <link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">  
+    <link rel="stylesheet" href="../../assets/css/block.css">  
+    <script src="../../assets/js/block.js"></script>
+    <script src="../../libs/jquery-3.3.1.slim.min.js" ></script>
+    <script src="../../libs/highlight/highlight.pack.js"></script>   
+    <script type="text/javascript" src="sqlserver.json"></script>  
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Resources</h2>
+<div>
+<style>
+a{color:#000077}
+</style>
+<a href="https://docs.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver16">What is change data capture (CDC)?</a>
+<a href="https://www.sqlshack.com/permissions-comparison-between-on-premises-sql-server-and-azure-sql-database/">permissions</a>
+<a href="https://blog.devart.com/create-login-user-and-grant-permission-sql-server.html">create-login-user-and-grant-permission</a>
+<a href='https://blog.sqlauthority.com/2012/08/30/sql-server-beginning-sql-server-architecture-terminology/'>sql server architecture terms</a>
+sql server performance tuning
+</div>
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />SQL Server authentication components</h2>
+<div>
+The main component of the authentication in SQL Server is as below.
+
+<b>Securables     : </b>The securable resources in the Server, Database and Schema categories for which SQL Server grants access
+<b>Server category: </b>Server roles, logins, databases, endpoints, availability groups and server roles etc
+<b>Database       : </b>Database user, role, schema, application roles, schema, certificate, full-text catalog etc
+<b>Schema         : </b>Table, procedure, function, view, synonym
+<b>Permissions    : </b>The permissions control actions we assign or deny for accessing the securable
+<b>Principals     : </b>The principals are the entities, such as logins, database users to which we assign the permissions
+</div>
+  
+      <script>
+          $('code').each(function() {
+          var that = $(this);
+          // cache the content of 'code'
+          var html = that.html().trim();
+          that.empty();
+          // escape the content
+          that.text(html);
+        });
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+  
+  <script>
+
+  var options= JSON.parse(JSON.stringify(options));
+  debugger;
+  options= BlockFrame.RenderGrouped(options);
+  
+</script>
+<style>
+  a:visited {
+  color: lightgray;
+}
+</style>
+
+</body>

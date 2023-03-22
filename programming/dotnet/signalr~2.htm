@@ -1,0 +1,485 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2>Getting started</h2>
+<div>
+To develop SignalR Application, we need 2 things in our Application. 
+<p>
+   - HUB Class  ( Server side )
+   - SignalR Clients ( Client side )    
+</p>
+
+
+For .NET,  we have 2 clients that is (jQuery client and  have ASP.NET client).
+So from here we will check how we can work with signalR.
+
+1 - Open vs and Create a new Web Project in Console Application.
+2 - go to the Tool and install SignalR from NuGet Package.
+    You will find references and a Hub class also in the project.
+3 - Now, we can call the SignalR Hub methods from .NET client. 
+    we can create a method in the hub and consume this method in the .NET client.
+<pre><code>
+    using System;  
+    using System.Collections.Generic;  
+    using System.Linq;  
+    using System.Text;  
+    using System.Threading.Tasks;  
+    using Microsoft.AspNet.SignalR;  
+    using Microsoft.AspNet.SignalR.Hubs;  
+      
+    namespace SignalRHost  
+    {  
+        [HubName("MyHub")]  
+        public class MyHub:Hub  
+        {  
+      
+            public string getdetails( string s)  
+            {  
+                return "Hi" + s;  
+                 
+            }  
+             
+        }  
+    }  
+</code></pre>
+4 - we need to host the signalR Hub. 
+    It will add a startup.cs class or you can add a startup class and configure the SignalR hub
+5 - To enable SignalR in your Application, create a class called Startup with the code given below.
+<pre><code>
+   using System;  
+    using System.Threading.Tasks;  
+    using Microsoft.Owin;  
+    using Owin;  
+      
+    [assembly: OwinStartup(typeof(SignalRHost.Startup))]  
+      
+    namespace SignalRHost  
+    {  
+        public class Startup  
+        {  
+            public void Configuration(IAppBuilder app)  
+            {  
+                  
+                app.MapSignalR();  
+      
+                // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888  
+            }  
+        }  
+    }      
+</code></pre>
+ 
+
+Now, open the main method of the console Application and write the code given below to host the Hub.
+<pre><code>
+using System;  
+    using System.Collections.Generic;  
+    using System.Linq;  
+    using System.Text;  
+    using System.Threading.Tasks;  
+    using Microsoft.AspNet.SignalR;  
+    using Microsoft.AspNet.SignalR.Hubs;  
+    using Microsoft.AspNet.SignalR.Client;  
+    using Microsoft.Owin.Hosting;  
+      
+    namespace SignalRHost  
+    {  
+        class Program  
+        {  
+            static void Main(string[] args)  
+            {  
+      
+                string url = "http://localhost:8077";  
+                using (WebApp.Start(url))  
+                {  
+                    Console.WriteLine("Server running on {0}", url);  
+                    Console.ReadLine();  
+                }  
+      
+                System.Console.Read();  
+            }  
+        }  
+    }      
+</code></pre>
+    
+
+Here, we are hosting the the Hub on "http://localhost:8077" URL.
+
+5 - In this way, we can host our Application, using self Hosting. Now, SignalR Service is available in "http://localhost:8077".
+
+Now, let's create another Web client Application and try to consume the Hub Method. Create another application and add signalR .NET client, as shown below.
+6 - Now, there are simple 5 steps to consume the method hosted in the hub.
+
+    Establish a connection with the URL, where the Hub is hosted.
+    Create a proxy of the Hub.
+    Open the connection.
+    Using the proxy object, call the method, which you want to invoke.
+    Save the result and display in the client Application.
+<pre><code>
+ using Microsoft.AspNet.SignalR.Client;  
+        using System;  
+        using System.Collections.Generic;  
+        using System.Linq;  
+        using System.Web;  
+        using System.Web.UI;  
+        using System.Web.UI.WebControls;  
+          
+        namespace SignalRChat  
+        {  
+            public partial class chat : System.Web.UI.Page  
+            {  
+             public  HubConnection hubConnection = null;  
+              public  IHubProxy HubProxy=null;  
+                protected void Page_Load(object sender, EventArgs e)  
+                {  
+          
+                }  
+          
+                protected void Button_Click(object sender, EventArgs e)  
+                {  
+                    hubConnection = new HubConnection("http://localhost:8077/");  
+                     
+                    HubProxy = hubConnection.CreateHubProxy("MyHub");  
+                    hubConnection.Start();  
+                   Execute();  
+          
+                    var p = HubProxy.Invoke<string>("getdetails", "Debendra").Result;  
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + p + "');", true);  
+          
+          
+          
+                }  
+          
+          
+                private void Execute()  
+                {  
+                     
+                    hubConnection.Start().ContinueWith(task =>  
+                    {  
+                        if (task.IsFaulted)  
+                        {  
+                            Console.WriteLine("There was an error opening the connection:{0}",  
+                                              task.Exception.GetBaseException());  
+          
+                            return;  
+                        }  
+                        else  
+                        {  
+                            Console.WriteLine("Connected to Server.The ConnectionID is:" + hubConnection.ConnectionId);  
+                           
+                        }  
+          
+                    }).Wait();  
+                }  
+            }  
+        }  
+   
+</code></pre>
+        
+</div>
+<h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />What is SignalR</h2>
+<div>
+SignalR is an open-source project that enables real-time,
+ bi-directional web communication from server to clients.
+
+  Using SignalR, you can write server-side code that can communicate with the clients instantly.
+
+  It can change the content of a web page without needing to referesh the page.
+  ------------------------
+  SignalR provides an API for creating server-to-client remote procedure calls (RPC) 
+  that call JavaScript code in the client browsers (and other client platforms) from server-side .NET code. 
+  
+  SignalR also includes an API for connection management (for instance, connect and disconnect events), and grouping connections.
+
+  SignalR can be used to add any sort of "real-time" web functionality to your ASP.NET application. 
+      
+</div>
+
+  <h2><h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />SignalR Uses Various Technologies:</h2>
+<div>
+    - WebSockets
+    - Server-Sent Events
+    - Long Polling    
+</div>
+<h2><h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Applications of SignalR</h2>
+<div>
+ Although a chat is the common example used for SignalR, you can do a whole lot more. Here are some excellent applications of SignalR.
+    
+        User notifications
+    
+        Sending high-frequency updates to clients
+    
+        Dashboards containing real-time charts and graphs
+    
+        Collaborative applications, such as chat and messaging services
+    
+        Games and entertainment applications
+    
+        Alerting mechanisms    
+</div>
+ <h2><h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />SignalR Hub</h2>
+<div>
+        SignalR uses hubs to communicate between clients & servers. 
+        Hub is a component that is hosted in your ASP.NET Core Application. 
+        Hub sends messages to & receives messages from the client using a remote procedure call using underlying transport. 
+        Essentially SignalR Hub is a central point in the ASP.NET Core and 
+        this hub is responsible for routing all the communication messages in the ASP.NET Core C# application
+        
+        A combination of hub & remote procedure calls enables real-time web applications using SignalR in ASP.NET Core.
+        Hub in ASP.NET Core application is a class derived from the hub base class.    
+</div>
+
+    
+<h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" /><b> Implement SignalR (<a href='https://github.com/procodeguide/SignalR.Sample'>source code </a> )  </b></h2>
+
+<h2>Create ASP.NET Core MVC project</h2>
+ <div>
+    Create a new project of the type ASP.NET Core Web App MVC      
+ </div>      
+ <h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />  Install required packages for SignalR</h2>
+<div>
+    Run visual studio
+    In Solution Explorer right-click on project & select Add->Client-Side Library..
+    On the Add Client-Side Library screen shown below select provider ‘unpkg‘ & enter ‘@microsoft/signalr@latest‘ for library
+    Choose specific files to be added i.e. File/dist/browser/signalr.js & File/dist/browser/signalr.min.js as per screenshot shown below)
+    set target location & click on install
+
+    The above steps will add SignalR JavaScript Library to the project under folder wwwroot/lib/microsoft/signalr/dist/browser . 
+        
+</div>
+
+   <h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" /> Create a SignalR Hub</h2>
+<div>
+  Create a hub class named MessageHub that derives from the base class Hub as shown in the below code:
+    <codee>
+    public class MessageHub : Hub
+    {
+        public async Task SendMessage(string user, string message)
+        {
+            if (string.IsNullOrEmpty(user))
+                await Clients.All.SendAsync("ReceiveMessageHandler", message);
+            else
+                await Clients.User(user).SendAsync("ReceiveMessageHandler", message);
+        }
+    }
+    </codee>    
+</div>
+  
+<h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Configure SignalR in ASP.NET Core Application</h2>
+<div>
+    Add this code to program.cs :
+    <code>
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(connectionString));
+        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+        builder.Services.AddControllersWithViews();
+
+        builder.Services.AddSignalR();
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseMigrationsEndPoint();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+        app.MapRazorPages();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapHub<MessageHub>("/messagehub");
+        });
+
+        app.Run();
+    </code>    
+</div>
+
+  <h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />  Add JavaScript code to connect to Hub & Method to Receive Message</h2>
+<div>
+    We will add a JavaScript file named ConnectSignalR.js on the path wwwroot/js/ that will connect 
+    the client to MessageHub & also implements the client function ‘ReceiveMessageHandler’ to receive messages from the hub.
+    Below code is added to the wwwroot/js/ConnectSignalR.js file :
+<pre><code>
+    "use strict";
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build();
+
+    connection.start();
+
+    connection.on("ReceiveMessageHandler", function (message) {
+        var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        alert(msg);
+    });     
+</code></pre>
+   
+</div>
+
+<h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" /> load this JavaScript in _Layout.cshtml file </h2>
+<div>
+  <code>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+            <script src="~/js/ConnectSignalR.js"></script>
+        }For
+    </code>
+
+    To use SignInManager in the cshtml file we will have to import the below namespaces in the cshtml file i.e. in _Layout.cshtml file:
+    <code>
+        @using Microsoft.AspNetCore.Identity
+        @inject SignInManager<IdentityUser> SignInManager
+    </code>
+</div>
+  
+ <h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />   Add SendMessage action to the Home controller</h2>
+<div>
+    Add the below action method for the SendMessage action in Controllers/HomeController.cs
+    <code>
+        [Authorize]
+        public IActionResult SendMessage()
+        {
+            return View();
+        }
+    </code>    
+</div>
+
+   <h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Add View for SendMessage action</h2>
+<div>
+    Following view is added under Views/Home/SendMessage.cshtml
+    <code>
+        @page
+
+        <div class="container">
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-2">To User</div>
+                <div class="col-4"><input type="text" id="userInput" /></div>
+            </div>
+            <div class="row">
+                <div class="col-2">Message</div>
+                <div class="col-4"><input type="text" id="messageInput" /></div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-6">
+                    <input type="button" id="sendButton" value="Send Message" />
+                </div>
+            </div>
+        </div>
+        <script src="~/js/SendMessage.js"></script>
+    </code>    
+</div>
+
+ <h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />   SendMessage.js </h2>
+<div>
+  Below is the code that will be added to the JavaScript file named SendMessage.js 
+    on the path wwwroot/js/ to call the method in the hub on the server using a remote procedure call. 
+    <code>
+        "use strict";
+
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            var user = document.getElementById("userInput").value;
+            var message = document.getElementById("messageInput").value;
+            connection.invoke("SendMessage", user, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+        });
+    </code>    
+</div>
+  
+ <h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />   Finally</h2>
+<div>
+    add a menu to call it:
+    <code>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SendMessage">Send Message</a>
+        </li>
+    }
+    </code>    
+</div>
+
+<h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />   Before run</h2>
+<div>
+    Before you run the code don’t forget to execute the below-mentioned commands in the package manager console to automate the migrations & create the database.
+
+    add-migration InitialMigration
+    update-database    
+</div>
+
+<h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />   To test</h2>
+<div>
+    After running the code to test the messaging feature of SignalR in ASP.NET Core C# register at least 3 users in the application
+    and log in with all 3 users from different browsers to test send message functions for all & specific users. Below are the home screens
+     for all the 3 users after login. Since these are the screens after successful login the menu Send Message is available for all the 3 users.    
+</div>
+
+</pre>
+</body>

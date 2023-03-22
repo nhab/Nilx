@@ -1,0 +1,218 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex">
+    <input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Redux References</h2>
+<p>
+	<a href='https://redux.js.org/introduction/getting-started'>Other Examples and continue learning</a>
+	<a href="https://github.com/markerikson/redux-ecosystem-links">redux terms</a>
+</p>
+<h2 style="display:flex">
+<input type="button" value="-"
+		class="toggleButton"  onclick="toggle(this)" />Redux</h2>
+<p>
+	Redux is a predictable state container for javascript apps:
+		-predictable means that you always know from where the state comes from(from the store), 
+		who will be able to update it(Actions) and applications behave consistently in different environments
+		-state container means it holds all the states.
+</p>
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Principles of Redux </h2>
+<p>
+	<b>Single source of truth </b>
+	   the state of an application is stored in an object tree within a single store
+	<b>State is read-only </b>
+	   the only way to change the state is to emit an action, an object describing what happened
+	<b>Changes are made with pure functions </b>
+	   to specify how the state tree is transformed by actions, you write pure reducers.
+</p>
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Action Type</h2>
+<p>
+	An action type is a string that simply describes the type of an action. 
+	They're commonly stored as constants or collected in enumerations to help reduce typos 
+	and because programmers love organization.
+ 	to structure our action types :
+<code>
+	export const Actions = {
+		GET_USER_DETAILS_REQUEST: 'GET_USER_DETAILS_REQUEST',
+		GET_USER_DETAILS_SUCCESS: 'GET_USER_DETAILS_SUCCESS',
+		GET_USER_DETAILS_FAILURE: 'GET_USER_DETAILS_FAILURE',
+		UPDATE_USER_DETAILS_REQUEST: 'UPDATE_USER_DETAILS_REQUEST',
+		UPDATE_USER_DETAILS_SUCCESS: 'UPDATE_USER_DETAILS_SUCCESS',
+		UPDATE_USER_DETAILS_FAILURE: 'UPDATE_USER_DETAILS_FAILURE',
+		// more...
+  };
+
+</code>
+</p>	
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Payload </h2>
+<p>
+	Payload is a non-official, community accepted (de facto) naming convention for the property
+	 that holds the actual data in a Redux action object.
+</p>
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Action</h2>
+<p>
+	An action is like a message that we send (i.e. dispatch) to our central Redux store. 
+	It can literally be anything. But ideally we want to stick to an agreed-upon pattern. 
+	And the standard pattern is as follows (this is a TypeScript type declaration):
+<code>
+	type Action = {
+		type: string;    // Actions MUST have a type
+		payload?: any;   // Actions MAY have a payload
+		meta?: any;      // Actions MAY have meta information
+		error?: boolean; // Actions MAY have an error field
+				 // when true, payload SHOULD contain an Error
+	};
+</code>
+	
+	(The question marks mean the property is optional.
+	 So you only need the type property at a minimum).
+
+	An action to fetch the user named Dan might look something like this
+<code>
+	{
+		type: 'GET_USER_DETAILS_REQUEST',
+		payload: 'Dan'
+	}
+</code>
+	
+	But you don't typically hardcode an action like this. You'd use an action creator.
+</p>
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Action Creator</h2>
+<p>
+	As you might expect, an action creator usually is a function that creates and returns an action:
+<code>
+	// in ES5 (also valid in ES6)
+	export function getUserDetailsRequest(id) {
+  		return {
+    		type: Actions.GET_USER_DETAILS_REQUEST,
+    		payload: id,
+  		};
+	}
+	// in ES6
+	export const getUserDetailsRequest = id => ({
+  		type: Actions.GET_USER_DETAILS_REQUEST,
+  		payload: id,
+	});
+
+</code>
+</p>	
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Calling Action Creator</h2>
+<p>
+	When writing basic Redux, an action creator simply returns an action. 
+	You would typically dispatch the action to your store immediately:
+<code>store.dispatch(getUserDetailsRequest('Dan'));</code>
+	
+
+	Although, realistically, you'll be doing this via dispatch properties 
+	that are passed into a React component like this:
+<code>
+	// ES5
+	export function mapDispatchToProps(dispatch) {
+    	return {
+        	onClick: function() { dispatch(getUserDetailsRequest('Dan')); }
+    	};
+	}
+	// ES6
+	export const mapDispatchToProps = dispatch => ({
+  	onClick: () => dispatch(getUserDetailsRequest('Dan'))
+	});
+
+</code>
+</p>	
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Reducers</h2>
+<p>
+	Reducers are pure functions taking 2 parameters: the current state and an action  and return a new state.
+	Reducers specify how the application's state changes in response to actions sent to the store.
+	 Remember that actions only describe what happened,
+	 but don't describe how the application's state changes.
+</p>
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />STORE</h2>
+<p>
+	A store is an object that brings them together. A store has the following responsibilities:
+
+		Holds application state;
+		Allows access to state via getState();
+		Allows state to be updated via dispatch(action);
+		Registers listeners via subscribe(listener);
+		It handles unregistering of listeners via the function returned by subscribe(listener)
+</p>
+<h2 style="display:flex">
+	<input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />Basic Example</h2>
+<p>
+The whole state of your app is stored in an object tree inside a single store.
+The only way to change the state tree is to emit an action, an object describing what happened.
+To specify how the actions transform the state tree, you write pure reducers.
+
+That's it!
+<code>
+import { createStore } from 'redux'
+
+/**
+ * This is a reducer, a pure function with (state, action) => state signature.
+ * It describes how an action transforms the state into the next state.
+ *
+ * The shape of the state is up to you: it can be a primitive, an array, an object,
+ * or even an Immutable.js data structure. The only important part is that you should
+ * not mutate the state object, but return a new object if the state changes.
+ *
+ * In this example, we use a `switch` statement and strings, but you can use a helper that
+ * follows a different convention (such as function maps) if it makes sense for your
+ * project.
+ */
+function counter(state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1
+    case 'DECREMENT':
+      return state - 1
+    default:
+      return state
+  }
+}
+
+// Create a Redux store holding the state of your app.
+// Its API is { subscribe, dispatch, getState }.
+let store = createStore(counter)
+
+// You can use subscribe() to update the UI in response to state changes.
+// Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
+// However it can also be handy to persist the current state in the localStorage.
+
+store.subscribe(() => console.log(store.getState()))
+
+// The only way to mutate the internal state is to dispatch an action.
+// The actions can be serialized, logged or stored and later replayed.
+store.dispatch({ type: 'INCREMENT' })
+// 1
+store.dispatch({ type: 'INCREMENT' })
+// 2
+store.dispatch({ type: 'DECREMENT' })
+// 1
+</code>
+
+</p>
+</body>

@@ -1,0 +1,1495 @@
+<head>
+  <meta charset="UTF-8">  
+    <link rel="stylesheet" href="../../assets/css/block.css">
+    <script src="../../assets/js/block.js"></script>
+    <link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+    <script src="../../libs/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<h1>Excel Tutorial </h1>
+<script>
+var objConcepts=BlockGroup("Basic definitions");
+// Block(options)
+// title,body,code,codetype,widt,hei,imageSrc=null,padding="5",imagWidth="100%",parent=document,imagesOnRight=false,codeOnRight=false)
+var options=[];
+var  i=0;
+options[i++]={
+  title:"Ribbons",
+  body:`Are kind of tabbed visual menu which are placed at top of excel just below the menu bar,
+  and contains shortcuts for different tasks in excel.
+  Excel selects the ribbon's Home tab when you open it.
+  
+  Tabs
+    The default tabs on the ribbon are: 
+      File, Home, Insert, Page layout, Formulas, Data, Review, View and Help.
+
+  Groups
+    Each tab contains groups of related commands. 
+    For example, the Page Layout tab contains the Themes group, the Page Setup group, etc.
+    
+  -You can collapse the ribbon to get extra space on the screen. 
+   Right click anywhere on the ribbon, and then click Collapse the Ribbon (or press CTRL + F1)
+
+    `,
+  code:``,
+  codetype:"javascript",
+  parent:objConcepts
+};
+options[i++]={
+  title:"Workbook",
+  body:`: A workbook is another word for your Excel file.
+   When you start Excel, click Blank workbook to create an Excel workbook from scratch.`,
+   parent:objConcepts
+}
+options[i++]={
+  title:"Worksheets",
+  body:`A worksheet is a collection of cells where you keep and manipulate the data. 
+  Each Excel workbook can contain multiple worksheets.`
+  ,parent:objConcepts
+}
+options[i++]={
+title:"Cells,columns,row",
+body:` To select cell C3, click on the box at the intersection of column C and row 3 .
+To select column C, click on the column C header.
+To select row 3, click on the row 3 header.
+To select the range B2:C4, click on cell B2 and drag it to cell C4
+
+To select a range of individual cells, hold down CTRL and click on each cell 
+  that you want to include in the range.
+  `
+  ,parent:objConcepts
+}
+options[i++]={
+  title:"Range",
+  body:`: A range in Excel is a collection of two or more cells.
+   
+  To Fill a Range (to copy first cell to other cells):
+    1-Enter the value 2 into cell B2
+    2-Select cell B2, click on the lower right corner of cell B2 and drag it down to cell B8
+    3-all cell B2 to B8 will be filled with the value of 2.
+
+    if  the B2 has the value 2 and b3 has the value of 4 ,if you drag the lower corner if the last cell
+    into following cells,they wil be filled with the values 6,8,10,..
+    (excell understand the pattern of first two cells)
+    -two first cells can have date value
+
+  To Move a Range
+    1. Select a range and click on the border of the range.
+    2. Drag the range to its new location.
+
+  <b>Named range </b>
+  Select the range, type the name in the Name box(for example prices) and press Enter.
+  now youcan use it : =SUM(Pricess)
+   `
+   ,parent:objConcepts
+}
+options[i++]={
+  title:"Format Cells",
+  body:`By formatting we can show the data differently without changing its value.
+  When we format cells in Excel, we change the appearance of a number 
+  without changing the number itself.
+  
+  Formatting Cells
+    1. Enter the value 0.8 into cell B2
+     By default, Excel uses the General format (no specific number format) for numbers.
+    2. Select cell B2.
+    3. Right click, and then click Format Cells (or press CTRL + 1).
+    The 'Format Cells' dialog box appears.
+    4. For example, select Currency and click ok.
+
+    Cell B2 still contains the number 0.8. 
+    We only changed the appearance of this number. 
+    The most frequently used formatting commands are available on the Home tab.
+
+    Percentage Format:
+      On the Home tab, in the Number group, click the percentage symbol to apply a Percentage format.
+    
+    
+    Center Alignment:
+      On the Home tab, in the Alignment group, center the number.
+
+    Border:
+      On the Home tab, in the Font group, add outside borders and change the font color to blue.
+  `
+  ,parent:objConcepts
+}
+options[i++]={
+  title:"Find & select",
+  body:`On the Home tab, in the Editing group, click Find & Select.
+  By pressing ctrl+F you search for an expression.By ctrl+h you can replace it.  
+  Go To Special
+    You can use Excel's Go To Special feature to quickly select all cells 
+    with formulas, comments, conditional formatting, constants, data validation, etc.` 
+    ,parent:objConcepts
+  }
+options[i++]={
+  title:"Tables",
+  body:`
+  Insert a Table
+    assume we have a data set in cells of a worksheet:
+    1. Click any single cell inside the data set.
+    2. On the Insert tab, in the Tables group, click Table.
+    3. Excel automatically selects the data for you. 
+    Check 'My table has headers' checkbox and click on OK.
+    Result. Excel creates a nicely formatted table for you. 
+    This may still seem like a normal data range to you but
+     many powerful features are now just a click of a button away.
+
+  Sort Table example
+    To sort by Last Name first and Sales second, execute the following steps.
+    1. Click the arrow next to Sales column header and click Sort Smallest to Largest.
+    2. Click the arrow next to Last Name and click Sort A to Z.
+
+  Filter Table example
+    1. Click the arrow next to Country and only check USA.
+
+  Total Row
+    To display a total row at the end of the table, execute the following steps.
+
+    1. First, select a cell inside the table.
+    Next, on the Design tab, in the Table Style Options group, check Total Row.
+
+    2. Click any cell in the last row to calculate the Total 
+       (Average, Count, Max, Min, Sum etc.) of a column.
+     For example, calculate the sum of the Sales column.
+  `
+  ,parent:objConcepts
+}
+options[i++]={
+  title:"Templates",
+  body:`: Instead of creating an Excel workbook from scratch,
+   you can create a workbook based on a template.
+   
+  Creating workbook based on a template :
+    1. On the File tab, click New.
+
+    2. Use the search box to search for online templates or
+     click a template from one of the Office templates.
+
+    3. Click Create to download the template.
+
+    Excel creates the workbook Home inventory1.xlsx based on this template.
+
+  Creating a Template :
+    
+    1. Create a workbook.
+    2. On the File tab, click Save As.
+    3. Click Browse.
+    4. Enter a file name.
+    5. Select Excel Template (*.xltx) from the drop-down list of 'save as type'.
+
+   `
+   ,parent:objConcepts
+  }
+options[i++]={
+  title:"Data Validation",
+  body:`: Use data validation in Excel to make sure that users enter certain values into a cell.
+  
+  Create Data Validation Rule
+    1. Select cell C2.
+    2. On the Data tab, in the Data Tools group, click Data Validation.
+    3. On the Settings tab of opend dialog box:
+    In the Allow list, click Whole number.
+    4. In the Data list, click between.
+    5. Enter the Minimum and Maximum values.
+
+  Creating Input Message
+    Input messages appear when the user selects the cell and tell the user what to enter.
+
+    On the Input Message tab:
+    1. Check 'Show input message when cell is selected'.
+    2. Enter a title.
+    3. Enter an input message.
+
+  Error Alert
+    If users ignore the input message and enter a number that is not valid, 
+    you can show them an error alert.
+
+    On the Error Alert tab:
+    1. Check 'Show error alert after invalid data is entered'.
+    2. Enter a title.
+    3. Enter an error message.
+  `
+  ,parent:objConcepts
+}
+options[i++]={
+  title:"Keyboard Shortcuts",
+  body:`
+  : Keyboard shortcuts allow you to do things with your keyboard instead
+   of your mouse to increase your speed.
+
+  - To select the entire range, press CTRL + a 
+   (if you press CTRL + a one more time Excel selects the entire sheet).
+  - To copy the range, press CTRL + c (to cut a range, press CTRL + x).
+     Select cell A6 and press CTRL + v to paste this range.
+  - To undo this operation, press CTRL + z
+  - To quickly move to the bottom of the range, hold down CTRL and press ↓
+  - To quickly move to the right of the range, hold down CTRL and press →
+  - To quickly insert the SUM function, press ATL + =, and press Enter.
+  - Select cell F2, hold down SHIFT and press ↓ two times.
+  - To fill a formula down, press CTRL + d (down)
+  Note: in a similar way, you can fill a formula right by pressing CTRL + r (right).
+  `
+  ,parent:objConcepts
+}
+options[i++]={
+  title:"Print",
+  body:`
+   To Print a Worksheet
+    1. On the File tab, click Print.
+    2. To preview the other pages that will be printed,
+    click 'Next Page' or 'Previous Page' at the bottom of the window.
+    3. To print the worksheet, click the big Print button.
+
+  What to Print
+    Instead of printing the entire worksheet, you can also print the current selection.
+    1. First, select the range of cells you want to print.
+    2. Next, under Settings, select Print Selection.
+    3. To print the selection, click the big Print button.
+
+    Note: you can also print the active sheets 
+    (first select the sheets by holding down CTRL and clicking the sheet tabs) 
+    or print the entire workbook. Use the boxes next to Pages 
+    (see first screenshot) to only print a few pages of your document. 
+    For example, 2 to 2 only prints the second page.
+
+  Multiple Copies
+  To print multiple copies, execute the following steps.
+
+  1. Use the arrows next to the Copies box.
+
+  2. If one copy contains multiple pages, you can switch between Collated and Uncollated. 
+  For example, if you print 6 copies, Collated prints the entire first copy,
+   then the entire second copy, etc. Uncollated prints 6 copies of page 1, 6 copies of page 2, etc
+
+    `
+    ,parent:objConcepts
+  }
+options[i++]={
+  title:"Share",
+  body:`
+  Paste Link
+    You can also link the source data in Excel with the destination data in Word. 
+    If you change the data in Excel, the data in Word is updated automatically.
+
+    1. Repeat steps 1 to 3 above.
+    2. In Word, on the Home tab, in the Clipboard group, click Paste.
+    In Word, click Paste
+    3. Click Paste Special.
+  `
+  ,parent:objConcepts
+}
+options[i++]={
+  title:"Protect",
+  body:`Encrypt an Excel file with a password so that it requires a password to open it.
+  Protect
+ 
+ Encrypt an Excel file with a password so that it requires a password to open it. To password protect an Excel file, execute the following steps.
+ 
+ 1. Open an Excel file.
+ 
+ 2. On the File tab, click Save As.
+ 
+ 3. Click Browse.
+ 
+ Click Browse
+ 
+ 
+  
+ 4. Click on the Tools button and click General Options.
+ 
+ Tools, General Options
+ 
+ 5. In the Password to open box, enter a password and click OK.
+ 
+ Enter a Password
+ 
+ 6. Reenter the password and click OK.
+ 
+ Reenter the Password
+ 
+ Note: this feature also encrypts your Excel file. If you lose or forget the password, it cannot be recovered.
+ 
+ 7. Enter a file name and click Save.
+ 
+ Click Save
+ 
+ It requires a password to open this Excel file now. The password for the downloadable Excel file is "easy".  
+  
+  `
+  ,parent:objConcepts
+}
+options[i++]={
+  title:"Formulas and Functions",
+  body:`A formula is an expression which calculates the value of a cell.
+   Functions are predefined formulas and are already available in Excel.
+   
+   Enter a Formula
+     
+      1. Select a cell.
+      2. To let Excel know that you want to enter a formula, type an equal sign (=).
+      3. For example, type the formula A1+A2.
+      Tip: instead of typing A1 and A2, simply select cell A1 and cell A2.
+      4. Change the value of cell A1 to 3.
+
+      Excel automatically recalculates the value of cell A3.
+       This is one of Excel's most powerful features!
+
+    Edit a Formula
+      When you select a cell, Excel shows the value or formula of the cell in the formula bar.
+    
+      1. To edit a formula, click in the formula bar and change the formula.
+     
+      2. Press Enter.
+  
+    Operator Precedence
+      Excel uses a default order in which calculations occur.
+      If a part of the formula is in parentheses, that part will be calculated first. 
+      It then performs multiplication or division calculations. 
+      Once this is complete, Excel will add and subtract the remainder of your formula. 
+      See the example below.
+
+      First, Excel performs multiplication (A1 * A2). 
+      Next, Excel adds the value of cell A3 to this result.
+      
+      Another example:
+      First, Excel calculates the part in parentheses (A2+A3). 
+      Next, it multiplies this result by the value of cell A1.
+
+    Copy/Paste a Formula
+      When you copy a formula, Excel automatically adjusts the cell references for each new cell 
+      the formula is copied to. 
+      To understand this, execute the following steps.
+
+      1. Enter the formula shown below into cell A4.
+
+      2a. Select cell A4, right click, and then click Copy (or press CTRL + c)...
+
+      ...next, select cell B4, right click, and then click Paste under 'Paste Options:'
+       (or press CTRL + v).
+
+      2b. You can also drag the formula to cell B4. 
+      Select cell A4, click on the lower right corner of cell A4 and drag it across to cell B4. 
+      This is much easier and gives the exact same result!
+
+      Result. The formula in cell B4 references the values in column B.
+
+
+    Insert Function
+      Every function has the same structure. For example, SUM(A1:A4). 
+      The name of this function is SUM. The part between the brackets (arguments)
+       means we give Excel the range A1:A4 as input.
+      This function adds the values in cells A1, A2, A3 and A4.
+      It's not easy to remember which function and which arguments to use for each task. 
+      Fortunately, the Insert Function feature in Excel helps you with this.
+
+      To insert a function, execute the following steps:
+
+      1. Select a cell.
+
+      2. Click the Insert Function button.
+
+      The 'Insert Function' dialog box appears.
+
+      3. Search for a function or select a function from a category. 
+      For example, choose COUNTIF from the Statistical category.
+      4. Click OK.
+
+      The 'Function Arguments' dialog box appears.
+
+      5. Click in the Range box and select the range A1:C2.
+
+      6. Click in the Criteria box and type >5.
+
+      7. Click OK.
+
+      Result. The COUNTIF function counts the number of cells that are greater than 5.
+
+      Note: instead of using the Insert Function feature, simply type =COUNTIF(A1:C2,">5"). 
+      When you arrive at: =COUNTIF( instead of typing A1:C2, simply select the range A1:C2.
+
+   `
+   ,parent:objConcepts
+}
+
+options[i++]={
+  title:"External tutorial resources",
+  body:`https://developerpublish.com/microsoft-excel-tutorials/
+
+   `
+   ,parent:objConcepts
+}
+
+
+ options=RenderBlocks(options);
+ 
+ var objPredefinedFunctions=BlockGroup("Predefined functions");
+i=0;
+var options2=[];
+options2[i++]={
+  title:"Date & Time",
+  body:`
+  - To enter a date in Excel, use the "/" or "-" characters. 
+    To enter a time, use the ":" (colon).
+    You can also enter a date and a time in one cell using space betwin them.
+
+  -you can add 5 days to a date : 
+  <pre><code>  =A1+5 </code></pre>
+
+  -YEAR(),MONTH and DAY functions:
+    To get the year of a date, use :
+      <pre><code> YEAR(A1)</code></pre>
+
+  -DATE():
+    To add a number of years, months and/or days, use the DATE functio:
+    (    if A1 is 6/23/2016 the result will be 9/1/2020)
+    <pre><code>
+    =DATE( YEAR(A1)+4, MONTH(A1)+2,DAY(A1)+9s)
+    </code></pre>
+
+  -NOW():
+    Current Date & Time
+
+  -return hour,minute or secon of a date:
+  <pre><code> Hour(A1), Minute(A1), Second(A1)
+   </code></pre>
+
+  -TIME() :
+    to add a number of hourse,minutes and second
+
+    `,
+    codetype:"javascript"
+  ,parent:objPredefinedFunctions
+ };
+
+options2[i++]={
+  title:"Text ",
+  body:`
+  Join Strings
+    To join strings, use the & operator.
+    <pre><code>
+    =A1 & "" & B1
+    or
+    =CONCATENATE (A1 ,B1)
+    </code></pre>
+
+    Left
+      To extract the leftmost characters from a string 
+      <code><pre>
+        =LEFT(A1,4)
+      </pre></code>
+      
+    Right
+      To extract the rightmost characters from a string, use the RIGHT function.
+      <code><pre>
+        =RIGHT(A1,4)
+      </pre></code>
+
+    Mid
+      To extract a substring, starting in the middle of a string, use the MID function.
+      <code><pre>
+      =MID(A1,5,3)s
+      </pre></code>  
+
+    Len
+      To get the length of a string, use the LEN function.
+      <code><pre>
+      =LEN(A1)
+      </pre></code>
+    
+    Find
+      To find the position of a substring in a string, use the FIND function.
+      <code><pre>
+       =FIND("am",A1)
+      </pre></code> 
+
+    Substitute
+      To replace existing text with new text in a string, use the SUBSTITUTE function.
+      <code><pre>
+          =SUBSTITUTE(A1,"Tim","John")
+      </pre></code>     
+      `
+    ,codetype:"javascript"
+    ,parent:objPredefinedFunctions
+  };
+
+
+  
+
+options2[i++]={
+  title:"Lookup & Reference",
+  body:`
+  Vlookup
+    The VLOOKUP (Vertical lookup) function looks for a value(i.e  104)
+    in the leftmost column of a table(i.e Id column), and then returns a value in the same row
+      from another column you specify(i.e column 3).
+    
+    <code><pre>
+        =VLOOKUP(A2,$E$4:$G$7,3,FALSE)
+    </pre></code>
+    Explanation:
+    the VLOOKUP function looks for the ID (104) in the leftmost column of the range $E$4:$G$7 
+    and returns the value in the same row from the third column (third argument is set to 3).
+    The fourth argument is set to FALSE to return an exact match or a #N/A error if not found.
+
+   Hlookup
+    In a similar way, you can use the HLOOKUP (Horizontal lookup) function.
+    <code><pre>
+      =HLOOKUP(A2,$E$4:$H$6,3,FALSE)
+    </pre></code>
+
+    Match
+      The MATCH function returns the position of a value in a given range.
+      <pre><code>
+      =MATCH(A2,E4:E7,0)
+      </code></pre>
+      argument to 0 to return the position of the value that is 
+      exactly equal to lookup_value (A2) or a #N/A error if not found.
+
+    Index
+      Returns a the value at given coordination in a two-dimensional range.
+      <pre><code>
+          =Index(E4:F7,A2,B2)
+        </code></pre>
+      it returns the intersection of row 3 and column 2 in the range E4:F7.
+
+      Choose
+        Returns a value from a list of values, based on a position number.
+        <pre><code>
+          =CHOOSE(3,"car","Boat","plane")
+        </code></pre>
+        returns plane
+   `   ,
+code:``
+    ,parent:objPredefinedFunctions
+  };
+  
+options2[i++]={
+  title:"Financial",
+  body:`
+  FV 
+    calculates the future value of an investment based on a constant interest rate. 
+    You can use FV with either periodic, constant payments, or a single lump sum payment.
+    <pre><code>
+      =FV(interest_rate,totper,payment,[present_value],[type])
+    </code></pre>
+    arguments:
+
+Rate    Required. The interest rate per period.
+
+Nper    Required. The total number of payment periods in an annuity.
+
+Pmt    Required. The payment made each period; it cannot change over the life of the annuity.
+      Typically, pmt contains principal and interest but no other fees or taxes. 
+      If pmt is omitted, you must include the pv argument.
+
+Pv    Optional. The present value, or the lump-sum amount that a series of future payments
+     is worth right now. If pv is omitted, it is assumed to be 0 (zero), 
+     and you must include the pmt argument.
+
+Type    Optional. The number 0 or 1 and indicates when payments are due. 
+      If type is omitted, it is assumed to be 0.
+      0 is At the end of the period
+      1 At the beginning of the period
+
+    Excel formula coach is an online tool dedicated to it:
+    https://support.content.office.net/en-us/coach/excelcoach_FV_PartI.html
+
+To illustrate Excel's most popular financial functions, we consider
+  a loan with monthly payments,
+  an annual interest rate of 6%, 
+  a 20-year duration, 
+  a present value of $150,000 (amount borrowed)
+  and a future value of 0 (that's what you hope to achieve when you pay off a loan).
+
+  We make monthly payments, so we use 6%/12 = 0.5% for Rate 
+  and 20*12 = 240 for Nper (total number of periods). 
+  If we make annual payments on the same loan, we use 6% for Rate and 20 for Nper.
+
+PMT
+  calculates the payment for a loan based on constant payments and a constant interest rate.
+  PMT(rate, nper, pv, [fv], [type])
+ 
+  Note: the last two arguments are optional. 
+  For loans, Fv can be omitted (the future value of a loan equals 0, however, 
+  it's included here for clarification). If Type is omitted, 
+  it is assumed that payments are due at the end of the period.
+
+  Result. The monthly payment equals $1,074.65.
+
+  Tip: when working with financial functions in Excel, always ask yourself the question,
+  am I making a payment (negative) or am I receiving money (positive)?
+    We pay off a loan of $150,000 (positive, we received that amount)
+    and we make monthly payments of $1,074.65 (negative, we pay).
+      Visit our page about the PMT function for many more examples.
+
+RATE
+  Returns the interest rate per period of an annuity.
+  RATE is calculated by iteration and can have zero or more solutions. 
+  If the successive results of RATE do not converge to within 0.0000001 after 20 iterations,
+  RATE returns the #NUM! error value.
+
+NPER
+  Or the NPER function. If we make monthly payments of $1,074.65 on a 20-year loan,
+  with an annual interest rate of 6%, it takes 240 months to pay off this loan.
+
+  We already knew this, but we can change the monthly payment now to see how this affects 
+  the total number of periods.
+
+  Conclusion: if we make monthly payments of $2,074.65, it takes less than 90 months 
+  to pay off this loan.
+
+PV
+  Or the PV (Present Value) function. If we make monthly payments of $1,074.65 on a 20-year loan,
+  with an annual interest rate of 6%, how much can we borrow? You already know the answer.
+
+FV
+  And we finish this chapter with the FV (Future Value) function.
+  If we make monthly payments of $1,074.65 on a 20-year loan,
+  with an annual interest rate of 6%, do we pay off this loan? Yes.
+
+  But, if we make monthly payments of only $1,000.00, we still have debt after 20 years.
+
+
+  
+`   ,codetype:"javascript"
+    ,parent:objPredefinedFunctions
+  };
+  
+options2[i++]={
+  title:"Statistical ",
+  body:`
+  Average
+    To calculate the average of a group of numbers, use the AVERAGE function.
+    <pre><code>
+      =AVERAGE(A1:O1)
+    </code></pre>
+
+  Averageif
+    To average cells based on one criteria, use the AVERAGEIF function. 
+    For example, to calculate the average excluding zeros.
+    <pre><code>
+      =averageif(a1:o1,"<>0")
+    </code></pre>
+
+  Median
+    To find the median (or middle number), use the MEDIAN function.
+
+  Mode
+    To find the most frequently occurring number, use the MODE function.
+    
+  Standard Deviation
+    To calculate the standard deviation Of a Range, use the STEDV function.
+  
+  Min
+    To find the minimum value, use the MIN function.
+    
+  Max
+    To find the maximum value, use the MAX function.
+
+  Large
+    To find the third largest number, use the following LARGE function :
+    <pre><code>
+      =LARGE(A1:O1,3)
+    </code></pre>
+
+    Small
+      To find the second smallest number, use the following SMALL function
+    
+    
+      `   ,codetype:"javascript"
+    ,parent:objPredefinedFunctions
+  };
+  
+options2[i++]={
+  title:"Round ",
+  body:`
+  Round
+      The ROUND function in Excel rounds a number to a specified number of digits.
+      The ROUND function rounds up or down. 1, 2, 3 and 4 get rounded down.
+      5, 6, 7, 8 and 9 get rounded up.
+
+       For example, round a number to three decimal places.
+      =ROUND(114.7261,3) is 114.72 
+
+  RoundUp
+    The ROUNDUP function in Excel always rounds a number up (away from zero).
+     1, 2, 3, 4, 5, 6, 7, 8 and 9 get rounded up
+
+  RoundDown
+    The ROUNDDOWN function in Excel always rounds a number down (toward zero).
+     1, 2, 3, 4, 5, 6, 7, 8 and 9 get rounded down.
+
+
+     `   ,codetype:"javascript"
+    ,parent:objPredefinedFunctions
+  };
+
+    
+  options2[i++]={
+      title:"Formula Errors",
+      body:`
+      ##### error
+        When your cell contains this error code, the column isn't wide enough to display the value.
+
+      #NAME? error
+        The #NAME? error occurs when Excel does not recognize text in a formula.
+
+      #VALUE! error
+        Excel displays the #VALUE! error when a formula has the wrong type of argument.
+
+      #DIV/0! error
+        Excel displays the #DIV/0! error when a formula tries to divide a number
+         by 0 or an empty cell.
+
+      #REF! error
+        Excel displays the #REF! error when a formula refers to a cell that is not valid.
+        `   ,
+    codetype:"javascript"
+        ,parent:objPredefinedFunctions
+  };
+
+
+    
+  options2[i++]={
+  title:"Conditional Formatting",
+  body:`
+  Conditional formatting in Excel enables you to highlight cells 
+  with a certain color, depending on the cell's value.
+
+<b>Highlight Cells :</b>
+    To highlight cells that are greater than a value, execute the following steps.
+
+    1. Select the range A1:A10.
+    2. On the Home tab, in the Styles group, click Conditional Formatting.
+    3. Click Highlight Cells Rules, Greater Than.
+    4. Enter the value <strong>80</strong> and select a formatting style.
+    5. Click OK.
+
+    Result. Excel highlights the cells that are greater than 80.
+
+    <img src='https://www.excel-easy.com/data-analysis/images/conditional-formatting/greater-than-result.png' />
+
+    6. Change the value of cell A1 to 81.
+
+    Result. Excel changes the format of cell A1 automatically.
+    <img src='https://www.excel-easy.com/data-analysis/images/conditional-formatting/conditional-formatting-result.png' />
+
+
+    Note: you can also use this category (see step 3) to highlight cells that are 
+          less than a value,
+          between two values,
+          equal to a value, 
+          cells that contain specific text, dates (today, last week, next month, etc.),
+          duplicates or unique values.
+
+<b>Clear Rules</b>
+    To clear a conditional formatting rule, execute the following steps.
+
+    1. Select the range A1:A10.
+    2. On the Home tab, in the Styles group, click Conditional Formatting.
+    3. Click Clear Rules, Clear Rules from Selected Cells.
+
+
+
+<b>Top/Bottom Rules</b>
+    To highlight cells that are above average, execute the following steps.
+
+    1. Select the range A1:A10.
+    2. On the Home tab, in the Styles group, click Conditional Formatting.
+    3. Click Top/Bottom Rules, Above Average.
+    4. Select a formatting style.
+    5. Click OK.
+
+    Result. Excel calculates the average (42.5) 
+    and formats the cells that are above this average.
+
+    <img src='https://www.excel-easy.com/data-analysis/images/conditional-formatting/above-average-result.png' />
+
+    Note: you can also use this category (see step 3) to highlight 
+      the top n items, 
+      the top n percent,
+      the bottom n items, 
+      the bottom n percent or 
+      cells that are below average.
+
+<b>Conditional Formatting with Formulas</b>
+    Formulas that apply conditional formatting must evaluate to TRUE or FALSE.
+
+    1. Select the range A1:E5.
+    2. On the Home tab, in the Styles group, click Conditional Formatting.
+    3. Click New Rule.
+    4. Select 'Use a formula to determine which cells to format'.
+    5. Enter the formula =ISODD(A1)
+       always write the formula for the upper-left cell in the selected range.
+       Excel automatically copies the formula to the other cells.
+       Thus, cell A2 contains the formula =ISODD(A2), cell A3 contains the formula =ISODD(A3), etc.
+    6. Select a formatting style and click OK.
+    <img src='https://www.excel-easy.com/data-analysis/images/conditional-formatting/use-a-formula-to-determine-which-cells-to-format.png' />
+    <img src='https://www.excel-easy.com/data-analysis/images/conditional-formatting/odd-numbers.png' />
+
+`   ,
+codetype:"javascript"
+    ,parent:objPredefinedFunctions
+  };
+
+options2[i++]={
+  title:"Charts",
+  body:`
+  A simple chart in Excel can say more than a sheet full of numbers. 
+
+<b>Create a Chart :</b>
+
+  1. Select the range A1:D7.
+  2. On the Insert tab, in the Charts group, click the Line symbol.
+  3. Click 'Line with Markers'.
+  Note: enter a title by clicking on Chart Title. For example, Wildlife Population.
+
+  <img src='https://www.excel-easy.com/data-analysis/images/charts/line-chart.png' />
+
+<b>Change Chart Type:</b>
+
+  1. Select the chart.
+  2. On the Design tab, in the Type group, click Change Chart Type.
+  3. On the left side, click Column and ok.
+  result:
+  <img src='https://www.excel-easy.com/data-analysis/images/charts/column-chart.png' />
+<b>Switch Row/Column</b>
+  If you want to display the animals (instead of the months) on the horizontal axis:
+
+  1. Select the chart.
+  2. On the Design tab, in the Data group, click Switch Row/Column.
+  <img src='https://www.excel-easy.com/data-analysis/images/charts/switched-column-chart.png' />
+
+<b>Legend Position:</b>
+  
+  1. Select the chart.
+  2. Click the + button on the right side of the chart, 
+  <img src='https://www.excel-easy.com/data-analysis/images/charts/change-legend-position.png' />
+  result:
+  <img src='https://www.excel-easy.com/data-analysis/images/charts/legend-right.png' />
+<b>Data Labels:</b>
+  
+  1. Select the chart.
+  2. Click a green bar to select the Jun data series.
+  3. Hold down CTRL and 
+     use your arrow keys to select the population of Dolphins in June (tiny green bar).
+  4. Click the + button on the right side of the chart 
+     and click the check box next to Data Labels.
+     
+`   ,
+codetype:"javascript"
+    ,parent:objPredefinedFunctions
+  };
+
+
+  options2[i++]={
+  title:"Pivot Tables",
+  body:`
+what is a pivot table?
+  You can think of a pivot table as an interactive reprot.
+  With very little effort (and no formulas) you can look at the same data
+  from many different perspectives 
+  by dragging fields from one axes to the other. 
+
+  You can group data into categories,
+  break down data into years and months, 
+  filter data to include or exclude categories, and even build charts.
+ <img src='https://www.exceltip.com/wp-content/uploads/2019/08/25.gif' />
+<b>Insert a Pivot Table:</b>
+  assume Our data set consists of 213 records and 6 fields. 
+  Order ID, Product, Category, Amount, Date and Country:
+
+  <img src='https://www.excel-easy.com/data-analysis/images/pivot-tables/pivot-table-data.png'/>
+
+  1. Click any single cell inside the data set.
+  2. On the Insert tab, in the Tables group, click PivotTable  and ok
+    Excel automatically selects the data for you.
+    The default location for a new pivot table is New Worksheet.
+
+<b>Drag fields:</b>
+
+  The PivotTable Fields pane appears. 
+  To get the total amount exported of each product, 
+  drag the following fields to the different areas in the dialog box:
+
+<img  src='https://www.excel-easy.com/data-analysis/images/pivot-tables/drag-fields-areas.png' />
+  
+  1. Product field to the Rows area.
+  2. Amount field to the Values area.
+  3. Country field to the Filters area.
+
+  Below you can find the resulting pivot table. 
+  Bananas are our main export product. 
+
+  <img src='https://www.excel-easy.com/data-analysis/images/pivot-tables/pivot-table.png' />
+
+<b>Sort</b>
+  To get Banana at the top of the list, sort the pivot table.
+  1. Click any cell inside the Sum of Amount column.
+  2. Right click and click on Sort, Sort Largest to Smallest.
+ 
+<b>Filter</b>
+  Because we added the Country field to the Filters area,
+  we can filter this pivot table by Country.
+  For example, which products do we export the most to France?
+
+  1. Click the filter drop-down and select France.
+
+  Note: you can use the standard filter (triangle next to Row Labels)
+   to only show the amounts of specific products.
+
+<b>Change Summary Calculation</b>
+  By default, Excel summarizes your data by either summing or counting the items.
+  To change the type of calculation that you want to use, execute the following steps.
+
+  1. Click any cell inside the Sum of Amount column.
+  2. Right click and click on Value Field Settings.
+  3. Choose the type of calculation you want to use. For example, click Count and then ok.
+  Result. 16 out of the 28 orders to France were 'Apple' orders.
+
+
+<b>Two-dimensional Pivot Table</b>
+  If you drag a field to the Rows area and Columns area, 
+  you can create a two-dimensional pivot table. 
+  First, insert a pivot table. 
+  Next, to get the total amount exported to each country,
+  of each product, drag the following fields to the different areas.
+
+  1. Country field to the Rows area.
+  2. Product field to the Columns area.
+  3. Amount field to the Values area.
+  4. Category field to the Filters area.
+<img src='https://www.excel-easy.com/data-analysis/images/pivot-tables/two-dimensional-pivot-table.png' />
+
+  `};
+
+  options2[i++]={
+  title:" Tables",
+  body:`
+  Tables allow you to analyze your data in Excel quickly and easily.
+   Learn how to insert, sort and filter a table, 
+   and how to display a total row at the end of a table.
+
+  Insert a Table:
+    1. Click any single cell inside the data set.
+    2. On the Insert tab, in the Tables group, click Table.
+    3. Excel automatically selects the data for you. Check 'My table has headers' and click on OK.
+    4.Result. Excel creates a nicely formatted table for you.
+     This may still seem like a normal data range to you 
+     but many powerful features like filter,sort and total are now just a click of a button away.
+
+
+  `};
+
+  
+  options2[i++]={
+  title:"What-If Analysis",
+  body:`
+    allows you to try out different values (scenarios) for formulas. 
+    
+    Assume you own a book store 
+    you have 100 books. 
+      
+    If you sell 60% for the highest price of $50 , 
+    and a remaining 40% for the lower price of $20.
+    cell D10 calculates a total profit of 60 * $50 + 40 * $20 = $3800.
+    
+    <img src='https://www.excel-easy.com/data-analysis/images/what-if-analysis/what-if-analysis-example.png' />
+
+  <b>Create Different Scenarios</b>
+    But what if you sell 70% for the highest price?
+    And what if you sell 80% for the highest price?
+    Each different percentage is a different scenario. 
+    You can use the Scenario Manager to create these scenarios.
+    You can simply type in a different percentage into cell C4 to see the corresponding result
+    of a scenario in cell D10.
+    However, what-if analysis <strong>enables you to easily compare</strong> the results of different scenarios. 
+    
+    1. On the Data tab, in the Forecast group, click What-If Analysis.
+    2. Click Scenario Manager.
+        The Scenario Manager dialog box appears.
+    3. Add a scenario by clicking on Add.
+    4. Type a name, select cell C4 (% sold for the highest price) for the Changing cells
+     and click on OK.
+
+    5. Enter the corresponding value 0.6 and click on OK again.
+    6. Next, add 4 other scenarios (70%, 80%, 90% and 100%).
+    <img src='https://www.excel-easy.com/data-analysis/images/what-if-analysis/all-scenarios.png' />
+    Note: to see the result of a scenario, select the scenario and click on the Show button. 
+    Excel will change the value of cell C4 accordingly for you 
+    to see the corresponding result on the sheet.
+
+    result:
+    <img src='https://www.excel-easy.com/data-analysis/images/what-if-analysis/scenario-summary.png' />
+
+<b>Goal Seek</b>
+    What if you want to know
+     how many books you need to sell for the highest price,
+     to obtain a total profit of exactly $4700? 
+     You can use Excel's Goal Seek feature to find the answer.
+
+    1. On the Data tab, in the Forecast group, click What-If Analysis.
+    The Goal Seek dialog box appears.
+    2.click goal seek.
+    3. Select cell D10.
+    4. Click in the 'To value' box and type 4700.
+    5. Click in the 'By changing cell' box and select cell C4.
+    6. Click OK.
+
+    Result. You need to sell 90% of the books for the highest price 
+    to obtain a total profit of exactly $4700.
+    <img src='https://www.excel-easy.com/data-analysis/images/what-if-analysis/goal-seek-result.png' />
+    `};
+
+  options2[i++]={
+  title:"Solver",
+  body:`
+  <b>Solver</b>
+
+    Finds optimal solutions for all kind of decision problems.
+  
+  <b>Load the Solver Add-in</b>
+
+    To load the solver add-in, execute the following steps.
+
+    1. On the File tab, click Options.
+    2. Under Add-ins, select Solver Add-in and click on the Go button.
+    3. Check Solver Add-in and click OK.
+    4. You can find the Solver on the Data tab, in the Analyze group
+
+  <b>Formulate the Model</b>
+
+    The model we are going to solve looks as follows in Excel.
+    <img src='https://www.excel-easy.com/data-analysis/images/solver/formulate-model.png' />
+
+    1. To formulate this linear programming model, answer the following three questions.
+
+    a. What are the decisions to be made?
+       For this problem, we need Excel to find out how much to order of each product 
+       (bicycles, mopeds and child seats).
+    
+    b. What are the constraints on these decisions? 
+        The constrains here are that the amount of capital and storage used by the products 
+        cannot exceed the limited amount of capital and storage (resources) available. 
+        For example, each bicycle uses 300 units of capital and 0.5 unit of storage.
+    
+    c. What is the overall measure of performance for these decisions? 
+      The overall measure of performance is the total profit of the three products, 
+      so the objective is to maximize this quantity.
+
+    2. To make the model easier to understand, create the following named ranges.
+    Range Name	         Cells
+    UnitProfit	        C4:E4
+    OrderSize	          C12:E12
+    ResourcesUsed	      G7:G8
+    ResourcesAvailable	I7:I8
+    TotalProfit	        I12
+
+    3. Insert the following three SUMPRODUCT functions.
+      =DumProduct(c7:E7,OrderSize)
+      =DumProduct(c8:E8,OrderSize)
+      <img src='https://www.excel-easy.com/data-analysis/images/solver/sumproduct-functions.png' />
+    
+      Explanation: 
+      The amount of capital used equals the sumproduct of the range C7:E7 and OrderSize. 
+       The amount of storage used equals the sumproduct of the range C8:E8 and OrderSize.
+      Total Profit equals the sumproduct of UnitProfit and OrderSize.
+  Trial and Error
+    With this formulation, it becomes easy to analyze any trial solution.
+    For example, if we order 20 bicycles, 40 mopeds and 100 child seats, 
+    the total amount of resources used does not exceed the amount of resources available. 
+    This solution has a total profit of 19000.
+
+    It is not necessary to use trial and error. We shall describe next how the Excel Solver can be used to quickly find the optimal solution.
+
+Solve the Model
+    To find the optimal solution, execute the following steps.
+    1. On the Data tab, in the Analyze group, click Solver.
+    Enter the solver parameters (read on). The result should be consistent with the picture below.
+    <img src='https://www.excel-easy.com/data-analysis/images/solver/solver-parameters.png' />
+
+    You have the choice of typing the range names or clicking on the cells in the spreadsheet.
+
+    2. Enter TotalProfit for the Objective.
+
+    3. Click Max.
+
+    4. Enter OrderSize for the Changing Variable Cells.
+
+    5. Click Add to enter the following constraint.
+
+    6. Check 'Make Unconstrained Variables Non-Negative' and select 'Simplex LP'.
+
+    7. Finally, click Solve.
+
+    Result:
+      <img src='https://www.excel-easy.com/data-analysis/images/solver/solver-results.png' />
+
+      The optimal solution:
+
+      <img src='https://www.excel-easy.com/data-analysis/images/solver/optimal-solution.png' />
+
+     Conclusion:
+      it is optimal to order 94 bicycles and 54 mopeds.
+      This solution gives the maximum profit of 25600. 
+      This solution uses all the resources available.
+      `};
+
+  options2[i++]={
+  title:"Analysis ToolPak",
+  body:`
+  The Analysis ToolPak is an Excel add-in program that provides data analysis tools
+   for financial, statistical and engineering data analysis.
+
+  To load the Analysis ToolPak add-in, execute the following steps.
+
+  1. On the File tab, click Options.
+  2. Under Add-ins, select Analysis ToolPak and click on the Go button.
+  3. Check Analysis ToolPak and click on OK.
+  4. On the Data tab, in the Analysis group, you can now click on Data Analysis.
+  5. For example, select Histogram and click OK to create a Histogram in Excel.
+
+  `};
+
+  options2[i++]={
+  title:"VBA",
+  body:`
+  <b>Create a Macro</b>
+      With Excel VBA you can automate tasks in Excel by writing so called macros
+  
+  <b>Developer Tab</b>
+      To turn on the Developer tab, execute the following steps.
+
+      1. Right click anywhere on the ribbon, and then click Customize the Ribbon.
+      2. Under Customize the Ribbon, on the right side of the dialog box, select Main tabs (if necessary).
+      3. Check the Developer check box.
+  
+      <b>Command Button</b>
+  
+      To place a command button on your worksheet, execute the following steps.
+
+      1. On the Developer tab, click Insert.
+      2. In the ActiveX Controls group, click Command Button.
+      3. Drag a command button on your worksheet.
+  
+  <b>Assign a Macro</b>
+      To assign a macro (one or more code lines) to the command button,
+       execute the following steps.
+
+      1. Right click CommandButton1 (make sure Design Mode is selected).
+      2. Click View Code.
+      The Visual Basic Editor appears.
+      3. Place your cursor between Private Sub CommandButton1_Click() and End Sub.
+      4. Add the code line shown below.
+      <img src='https://www.excel-easy.com/vba/images/create-a-macro/add-code-line.png' />
+        Note: the window on the left with the names Sheet1 (Sheet1) 
+        and ThisWorkbook is called the Project Explorer.
+        If the Project Explorer is not visible, click View, Project Explorer.
+        If the Code window for Sheet1 is not visible, click Sheet1 (Sheet1).
+        You can ignore the Option Explicit statement for now.
+      5. Close the Visual Basic Editor.
+      6. Click the command button on the sheet (make sure Design Mode is deselected).
+
+      <b>MsgBox</b>
+      <pre><code>MsgBox  "Entered value is " & Range("A1").Value  & vbNewLine & "Line 2"</code></pre> 
+      
+      <h2>Workbook and Worksheet Object</h2>
+      <b>Object Hierarchy</b>
+        In Excel VBA, an object can contain another object, 
+        and that object can contain another object, etc. 
+        
+        In other words, Excel VBA programming involves working with an object hierarchy. 
+        
+        The mother of all objects is Excel itself. 
+        We call it the Application object. 
+        The application object contains other objects. 
+        For example, the Workbook object (Excel file). 
+        This can be any workbook you have created. 
+        The Workbook object contains other objects, such as the Worksheet object. 
+        The Worksheet object contains other objects, such as the Range object.
+
+        We used the following code line:
+        <pre><code>
+          Range("A1").Value = "Hello"
+        </code></pre> 
+
+        but what we really meant was:
+        <pre><code> 
+        Application.Workbooks("create-a-macro").Worksheets(1).Range("A1").Value = "Hello"
+      </code></pre>
+      Note: the objects are connected with a dot. 
+      Fortunately, we do not have to add a code line this way.
+       That is because we placed our command button in create-a-macro.xlsm, on the first worksheet. 
+       Be aware that if you want to change things on different worksheets, 
+       you have to include the Worksheet object. Read on.
+
+    <b>Cells</b>
+       <pre><code>
+        Cells(3, 2).Value = 2
+        Range(Cells(1, 1), Cells(4, 1)).Value = 5
+     </code></pre> 
+
+<b>Collections</b>
+      You may have noticed that Workbooks and Worksheets are both plural. 
+      That is because they are collections. 
+      The Workbooks collection contains all the Workbook objects that are currently open. 
+      The Worksheets collection contains all the Worksheet objects in a workbook.
+
+      You can refer to a member of the collection, 
+      (for example, a single Worksheet object)
+       in 3 ways:
+
+          1. Using the worksheet name.
+            <pre><code>
+              Worksheets("Sales").Range("A1").Value = "Hello"</code></pre> 
+
+          2. Using the index number (1 is the first worksheet starting from the left).
+
+            <pre><code>
+              Worksheets(1).Range("A1").Value = "Hello"</code></pre>
+          
+
+          3. Using the CodeName.
+            <pre><code>
+              Sheet1.Range("A1").Value = "Hello"</code></pre>
+
+            To see the CodeName of a worksheet, open the Visual Basic Editor. 
+            In the Project Explorer, the first name is the CodeName. 
+            The second name is the worksheet name (Sales).
+            the CodeName remains the same if you change the worksheet name
+             or the order of your worksheets so this is the safest way to reference a worksheet.
+            Click View, Properties Window to change the CodeName of a worksheet.
+            There is one disadvantage, you cannot use the CodeName
+             if you reference a worksheet in a different workbook.
+
+      -The Add method of the Workbooks collection creates a new workbook:
+          <pre><code>
+            Workbooks.Add
+            MsgBox Worksheets.Count
+        </code></pre> 
+
+  <b>Range Object</b>
+      The Range object, is the representation of  cell(s) on your worksheet.
+      Properties are something which an object has
+      while methods do something .
+
+      Setting a cell value:
+      <pre><code>    
+        Range("B3").Value = 2
+      </code></pre>
+      Setting value to a range:
+      <pre><code>
+        Range("A1:A4").Value = 5
+      </pre></code>
+      Setting value to 2 ranges:
+     
+      <pre><code>
+      Range("A1:A2,B3:C4").Value = 10
+      </code></pre>
+      <img src='https://www.excel-easy.com/vba/images/range-object/range-example-3.png' />
+
+      named range:
+      ange("Prices").Value = 15
+
+      Declaring a Range object:
+        <pre><code>
+          Dim example As Range
+          Set example = Range("A1:C4")
+
+          example.Value = 8
+        </code></pre> 
+   <b>Select</b>
+   
+    The Select method of a range,simply selects the range.
+ 
+    Code:
+   <pre><code>
+      Dim example As Range
+      Set example = Range("A1:C4")
+
+      example.Select
+    </code></pre>   
+
+    Note: to select cells on a different worksheet, you have to activate this sheet first. 
+    For example, the following code lines select cell B7 on the third worksheet from the left
+  <pre><code>
+    Worksheets(3).Activate
+    Worksheets(3).Range("B7").Select
+    </code></pre> 
+
+    <b>Rows and columns</b>
+    <pre><code>
+      Dim example As Range
+      Set example = Range("A1:C4")
+      example.Rows(3).Select  
+
+      Dim example2 As Range
+      Set example2 = Range("A1:C4")
+
+      example2.Columns(2).Select
+    </code></pre> 
+
+    <b>Copy/Paste</b>
+       The Copy and Paste method are used to copy a range and to paste it somewhere else 
+      on the worksheet: 
+    <pre><code>
+  
+
+      Range("A1:A2").Select
+      Selection.Copy
+
+      Range("C3").Select
+      ActiveSheet.Paste
+
+      The easy way to do the same thing:
+      Range("C3:C4").Value = Range("A1:A2").Value
+    </code></pre>
+
+    <b>Clear</b>
+      To clear the content of an Excel range, you can use the ClearContents method.
+    <pre><code>
+      Range("A1").ClearContents
+      or simply use:
+
+      Range("A1").Value = ""
+      </code></pre> 
+  <b>Count</b>
+  With the Count property, you can count the number of cells, rows and columns of a range.
+    <pre><code>
+      Dim example As Range
+      Set example = Range("A1:C4")
+
+      MsgBox example.Count  
+      
+      MsgBox example.Rows.Count
+    </code></pre> 
+
+<b>Loops</b>
+    <pre><code>
+      Dim i As Integer
+      i = 1
+
+      Do While Cells(i, 1).Value <> ""
+          Cells(i, 2).Value = Cells(i, 1).Value + 10
+          i = i + 1
+      Loop
+    </pre></code>
+
+<b>Date and Time</b>
+<pre><code>
+    Dim exampleDate As Date
+
+    exampleDate = DateValue("Jan 19, 2020")
+    MsgBox Year(exampleDate)
+
+    Dim firstDate As Date, secondDate As Date
+
+    firstDate = DateValue("Jan 19, 2020")
+    'dateAdd
+    secondDate = DateAdd("d", 3, firstDate)
+
+    MsgBox Hour(Now)
+    MsgBox TimeValue("9:20:01 am")
+  </code></pre>
+
+  <b>Array</b>
+  <pre><code>
+    Dim Films(1 To 5, 1 To 2) As String
+    Dim i As Integer, j As Integer
+
+    For i = 1 To 5
+        For j = 1 To 2
+            Films(i, j) = Cells(i, j).Value
+        Next j
+    Next i
+
+    MsgBox Films(4, 2)
+  </code></pre>
+    <b>Functions and subs definition</b>
+    <pre><code>
+      Function Area(x As Double, y As Double) As Double
+        Area = x * ys
+      End Function
+
+      MsgBox  Area(3, 5) + 2
+
+      Sub Area(x As Double, y As Double)
+      MsgBox x * y
+      End Sub
+      Area 3, 5
+      </code></pre>
+
+   <b>Application Object</b>
+   The mother of all objects is Excel itself. We call it the Application object. 
+   The application object gives access to a lot of Excel related options.
+   <pre><code>
+    Range("A3").Value = Application.WorksheetFunction.Average(Range("A1:A2"))
+  </code></pre>
+  <b>ScreenUpdating</b>
+    Sometimes you may find it useful to disable screen updating (to avoid flickering)
+     while executing code. 
+    As a result, your code will run faster.
+    For example, place a command button on your worksheet and add the following code lines:
+      <pre><code>
+      Dim i As Integer
+
+      For i = 1 To 10000
+          Range("A1").Value = i
+      Next i
+      </code></pre>
+
+      To speed up the process, update the code as follows.
+      <pre><code>
+        Dim i As Integer
+
+        Application.ScreenUpdating = False
+
+        For i = 1 To 10000
+            Range("A1").Value = i
+        Next i
+
+        Application.ScreenUpdating = True
+      </code></pre> 
+
+      <b>DisplayAlerts</b>
+        You can instruct Excel VBA not to display alerts while executing code.
+        for example,
+        . To instruct Excel VBA not to display save alert while executing code:
+        <pre><code>
+        Application.DisplayAlerts = False
+
+        ActiveWorkbook.Close
+
+        Application.DisplayAlerts = True
+        </code></pre> 
+        (changes will lost)
+
+        By default,  calculation is set to automatic.
+       As a result, Excel recalculates the workbook automatically each time a value 
+       affecting a formula changes.
+        If your workbook contains many complex formulas, 
+        you can speed up your macro by setting calculation to manual.
+        
+        Application.Calculation = xlCalculationManual
+
+        you will set calculation to automatic again at the end of your code:
+        Application.Calculation = xlCalculationAutomatic
+
+      <b>ActiveX Controls</b>
+      On the Developer tab, click Insert.
+
+      2. For example, in the ActiveX Controls group,
+      click Command Button to insert a command button control.
+      
+      you can add code to its events and manupulate its properties.
+
+      `};
+
+RenderBlocks(options2);
+ 
+  </script>
+ <br>
+
+ </body>

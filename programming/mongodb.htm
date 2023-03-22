@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+
+<h2>Resources</h2>
+<div>
+    <a href="https://www.tutorialsteacher.com/mongodb">tutorialsteacher</a>
+</div>
+<h2>Installation</h2>
+<div>
+    download it and run setup
+<cl>    https://www.mongodb.com/download-center?initial=true#community</cl>
+</div>
+<h2>MongoDB equivalents Of SQL verbs</h2>
+<div>
+    <table style="border-collapse: collapse;">
+        <tbody><tr bgcolor="#DDEEEE" style="font-weight:bolder"><td>SQL</td><td>MongoDB</td> </tr>
+        <tr><td>database</td><td>database</td> </tr>
+        <tr><td>table</td><td>collection</td> </tr>
+        <tr><td>row</td><td>document</td> </tr>
+        <tr><td>column</td><td>field</td> </tr>
+        <tr><td>table joins</td><td>$lookups , embedded documents</td> </tr>
+        <tr><td>aggregation</td><td>aggregation pipelines</td></tr>
+        <tr><td>SELECT * FROM people</td><td>db.people.find()</td></tr>
+        <tr><td>SELECT user_id, status FROM people</td><td>db.people.find(
+          { },
+          { user_id: 1, status: 1, _id: 0 }
+      )</td></tr>
+      <tr><td>SELECT * FROM people WHERE status = "A"</td><td>SELECT * FROM people WHERE status = "A"</td></tr>
+      <tr><td>SELECT * FROM people WHERE status != "A"</td><td>db.people.find(   { status: { $ne: "A" } })</td></tr>
+      <tr><td>SELECT * FROM people WHERE status = "A" AND age = 50</td><td>db.people.find({ status: "A", age: 50 })</td></tr>
+      <tr><td>SELECT * FROM people WHERE status = "A" OR age = 50</td><td>db.people.find({ $or: [ { status: "A" } , { age: 50 } ] })</td></tr>
+      <tr><td>SELECT * FROM people WHERE age &gt; 25</td><td>db.people.find({ age: { $gt: 25 } })</td></tr>
+      <tr><td>SELECT * FROM people WHERE user_id like "%bc%"</td><td>db.people.find( { user_id: { $regex: /bc/ } } )</td></tr>
+      <tr><td>SELECT * FROM people WHERE status = "A" ORDER BY user_id ASC</td><td>db.people.find( { status: "A" } ).sort( { user_id: 1 } )</td></tr>
+      <tr><td>SELECT COUNT(*) FROM people</td><td>db.people.count()</td></tr>
+      <tr><td>SELECT DISTINCT(status) FROM people</td><td>db.people.aggregate( [ { $group : { _id : "$status" } } ] )</td></tr>
+      <tr><td>UPDATE people SET age = age + 3 WHERE status = "A"</td><td>db.people.updateMany( { status: "A" } , { $inc: { age: 3 } })</td></tr>
+      
+      
+      </tbody>
+    </table>
+</div>
+<h2>using mangodb</h2>
+<div>
+<pre><code>
+//Creating Databasse and adding Document
+// creates a new testDB database and selects it as current.
+> use testDB
+  switched to db testDB
+
+//inserts a new document containing one field, with the value, ā€my first documentā€¯, into a new collection, testCollection, in our database  
+> db.testCollection.insert ({name : "my first document"})
+  WriteResult({ "nInserted" : 1 })
+
+//check all the databases
+  >show dbs
+
+//To delete a database
+db.dropDatabase()
+
+//MongoDB Collections
+// A collection in MongoDB is similar to a table in RDBMS
+// To create a collection:
+db.createCollection()
+
+// to list all the collections in a database.
+show collections 
+
+//To delete a collection
+db.<collection-name>.drop()
+
+//Mongodb documents
+//Each MongoDB collection can have multiple documents. A document is equilant to row in a table in RDBMS.
+//Example:
+{
+
+    "_id": ObjectId("32521df3f4948bd2f54218"),
+    "firstName": "John",
+    "lastName": "King",
+    "email": "john.king@abc.com",
+    "salary": "33000",
+    "DoB": new Date('Mar 24, 2011'),
+    "skills": [ "Angular", "React", "MongoDB" ],
+    "address": { 
+                "street":"Upper Street",
+                "house":"No 1",
+                "city":"New York",
+                "country":"USA"
+            }
+}
+
+//Embedded Documents:
+A document in MongoDB can have fields that hold another document. It is also called nested documents.
+{
+    _id: ObjectId("32521df3f4948bd2f54218"),
+    firstName: "John",
+    lastName: "King",
+    department: { 
+                _id: ObjectId("55214df3f4948bd2f8753"), 
+                name:"Finance"
+            },
+    address: {
+        phone: { type: "Home", number: "111-000-000" }
+    }
+}
+
+// Array
+// A field in a document can hold array. 
+//Example: MongoDB Document with an Array
+{
+    _id: ObjectId("32521df3f4948bd2f54218"),
+    firstName: "John",
+    lastName: "King",
+    email: "john.king@abc.com",
+    skills: [ "Angular", "React", "MongoDB" ],
+}
+
+
+
+//Querying Data 
+// find one document:
+db.users.findOne ( { name : "admin" } )
+{ "_id" : ObjectId("53708c240e04f45cb80aeded"), "name" : "admin", "password": "123" }
+
+// find multiple documents:
+db.employees.find({salary: 7000})
+//output:[{_id:4,firstName:"Steve",lastName:"J",email:"steve.j@abc.com",salary: 7000},{_id:6,firstName: "Amitabh",lastName: "B",email: "amitabh.b@abc.com",salary: 7000}]
+
+Example: find() with Query Operator gt(greater than)
+db.employees.find({salary: {$gt: 7000}})
+
+//list all data of a collection
+db.employees.find().pretty()
+
+
+//Insert  Document in a Collection 
+// insertOne() - Inserts a single document into a collection.
+// insert() - Inserts one or more documents into a collection.
+// insertMany() - Insert multiple documents into a collection.
+
+//Example: insertOne()
+db.employees.insertOne({ 
+    firstName: "John",
+    lastName: "King",
+    email: "john.king@abc.com"
+})
+//output: { acknowledged: true, insertedId: ObjectId("616d44bea861820797edd9b0")  }
+
+// Example: insert() 
+db.employees.insert({ 
+    firstName: "John",
+    lastName: "King",
+    email: "john.king@abc.com"
+})
+//output :{    acknowledged: true,    insertedIds: { '0': ObjectId("616d62d9a861820797edd9b2") }  }
+
+// inserts multiple documents
+db.employees.insert(
+    [
+        { 
+            firstName: "John",
+            lastName: "King",
+            email: "john.king@abc.com"
+        },
+        { 
+                firstName: "Sachin",
+                lastName: "T",
+                email: "sachin.t@abc.com"
+        }
+    ])
+// output : db.employees.insert( [{firstName:"John",lastName:"King",email:"john.king@abc.com"},{firstName:"Sachin",lastName: "T",email:"sachin.t@abc.com"}])    
+
+//You can specify a different _id field value into one or more document
+db.employees.insert(
+    [
+        { 
+            firstName: "John",
+            lastName: "King",
+            email: "john.king@abc.com"
+        },
+        { 
+                _id:1,
+                firstName: "Sachin",
+                lastName: "T",
+                email: "sachin.t@abc.com"
+        },
+    ])
+//output: { acknowledged: true, insertedIds: { '0': ObjectId("616d63eda861820797edd9b3"), '1': 1    }  }
+
+//insertMany()
+db.employees.insertMany(
+    [
+        { 
+            firstName: "John",
+            lastName: "King",
+            email: "john.king@abc.com"
+        },
+        { 
+                firstName: "Sachin",
+                lastName: "T",
+                email: "sachin.t@abc.com"
+        },
+        { 
+                firstName: "James",
+                lastName: "Bond",
+                email: "jamesb@abc.com"
+        },
+    ])
+//output :{
+    acknowledged: true,
+    insertedIds:{'0':ObjectId("616d63eda861820797edd9b3"),'1': ObjectId("616d63eda861820797edd9b4"),'2': ObjectId("616d63eda861820797edd9b5")}
+  }
+
+//Aggregation in MongoDB
+//Aggregation is the process of selecting data from a collection in MongoDB
+//Aggregation operations can be performed in two ways:
+//1.Using Aggregation Pipeline.an array of one or more stages passed in the db.aggregate() or db.collection.aggregate() method.
+//2.Using single purpose aggregation methods: db.collection.estimatedDocumentCount(), db.collection.count() and db.collection.distinct().
+
+// $match Stage
+db.employees.aggregate([ {$match:{ gender: 'female'}} ])
+//$group Stage
+db.employees.aggregate([ 
+    { $group:{ _id:'$department.name'} }
+])
+//output : [ { _id: 'Marketing' }, { _id: 'HR' }, { _id: 'Finance' } ]
+
+// Get Accumulated Values
+db.employees.aggregate([ 
+    { $group:{ _id:'$department.name', totalEmployees: { $sum:1 } } 
+}])
+//output :[{ _id: 'Marketing', totalEmployees: 2 },{ _id: 'HR', totalEmployees: 2 },{ _id: 'Finance', totalEmployees: 2 }]
+
+//2 stage aggregate: $match and $group
+db.employees.aggregate([ 
+    { $match:{ gender:'male'}}, 
+    { $group:{ _id:'$department.name', totalEmployees: { $sum:1 } } 
+}])
+//[{ _id: 'Marketing', totalEmployees: 2 },{ _id: 'HR', totalEmployees: 1 },{ _id: 'Finance', totalEmployees: 2 }]
+
+// Get Sum of Fields
+db.employees.aggregate([ 
+    { $match:{ gender:'male'}}, 
+    { $group:{ _id:{ deptName:'$department.name'}, totalSalaries: { $sum:'$salary'} } 
+}])
+//otput : [{ _id: 'Finance', totalSalaries: 12500 },{ _id: 'HR', totalSalaries: 10000 },{ _id: 'Marketing', totalSalaries: 14500 }]
+
+// Sort document
+db.employees.aggregate([
+{ $match:{ gender:'male'}}, 
+{ $sort:{ firstName:1}}
+])
+</code></pre>
+</div>
+<h2>MongoDB C#</h2>
+<div>
+	<h3>C# MongoDB</h3>
+-MongoDB.Driver is the fficial .NET driver for MongoDB.
+
+<h3>MongoDB create database</h3>
+The mongo tool is an interactive JavaScript shell interface to MongoDB
+<cl>
+$ mongo testdb
+MongoDB shell version v4.0.7
+connecting to: mongodb://127.0.0.1:27017/testdb?gssapiServiceName=mongodb
+...
+> db
+testdb
+> db.cars.insert({name: "Audi", price: 52642})
+> db.cars.insert({name: "Mercedes", price: 57127})
+> db.cars.insert({name: "Skoda", price: 9000})
+> db.cars.insert({name: "Volvo", price: 29000})
+> db.cars.insert({name: "Bentley", price: 350000})
+> db.cars.insert({name: "Citroen", price: 21000})
+> db.cars.insert({name: "Hummer", price: 41400})
+> db.cars.insert({name: "Volkswagen", price: 21600})
+</cl>
+<h3>List databases</h3>
+<pre><code>
+using MongoDB.Driver;
+using MongoDB.Bson;
+
+namespace SimpleEx
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+            var dbList = dbClient.ListDatabases().ToList();
+
+            Console.WriteLine("The list of databases are:");
+
+            foreach (var item in dbList)
+            {
+                Console.WriteLine(item);
+            }
+        }
+    }
+}    
+/* Result:
+
+The list of databases are:
+{ "name" : "admin", "sizeOnDisk" : 32768.0, "empty" : false }
+{ "name" : "config", "sizeOnDisk" : 86016.0, "empty" : false }
+{ "name" : "local", "sizeOnDisk" : 81920.0, "empty" : false }
+{ "name" : "test", "sizeOnDisk" : 212992.0, "empty" : false }
+{ "name" : "testdb", "sizeOnDisk" : 155648.0, "empty" : false }    
+*/
+</code></pre>
+
+<cl>
+
+</cl>
+<h3>RunCommand</h3>
+<pre><code>
+using MongoDB.Driver;
+using MongoDB.Bson;
+
+namespace MongoCommand
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+
+            IMongoDatabase db = dbClient.GetDatabase("testdb");
+
+            var command = new BsonDocument { { "dbstats", 1 } };
+            var result = db.RunCommand<BsonDocument>(command);
+            Console.WriteLine(result.ToJson());
+        }
+    }
+}    
+/* Result:
+ { "db" : "testdb", "collections" : 3, "views" : 0, "objects" : 15, "avgObjSize" : 57.0,
+ "dataSize" : 855.0, "storageSize" : 77824.0, "numExtents" : 0, "indexes" : 3,
+ "indexSize" : 77824.0, "fsUsedSize" : 160688828416.0, "fsTotalSize" : 254721126400.0, "ok" : 1.0 }   
+*/
+</code></pre>
+
+<h3>find document</h3>
+<pre><code>
+using MongoDB.Driver;
+using MongoDB.Bson;
+
+namespace FindDocument
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+
+            IMongoDatabase db = dbClient.GetDatabase("testdb");
+            var cars = db.GetCollection<BsonDocument>("cars");
+
+            var filter = Builders<BsonDocument>.Filter.Eq("price", 29000);
+
+            var doc = cars.Find(filter).FirstOrDefault();
+            Console.WriteLine(doc.ToString());
+        }
+    }
+}    
+/*
+result:
+{ "_id" : ObjectId("5d4d1408463315268eb7376e"), "name" : "Volvo", "price" : 29000.0 }    
+*/
+</code></pre>
+
+<h3>Find all documents</h3>
+<pre><code>
+    using MongoDB.Driver;
+    using MongoDB.Bson;
+    
+    namespace FindAll
+    {
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+                IMongoDatabase db = dbClient.GetDatabase("testdb");
+    
+                var cars = db.GetCollection<BsonDocument>("cars");
+                var documents = cars.Find(new BsonDocument()).ToList();
+    
+                foreach (BsonDocument doc in documents)
+                {
+                    Console.WriteLine(doc.ToString());
+                }
+            }
+        }
+    }
+/*
+{ "_id" : ObjectId("5d4d13d6463315268eb7376b"), "name" : "Audi", "price" : 52000 }
+{ "_id" : ObjectId("5d4d13f5463315268eb7376c"), "name" : "Mercedes", "price" : 57127.0 }
+{ "_id" : ObjectId("5d4d1408463315268eb7376e"), "name" : "Volvo", "price" : 29000.0 }
+{ "_id" : ObjectId("5d4d140d463315268eb7376f"), "name" : "Bentley", "price" : 350000.0 }
+{ "_id" : ObjectId("5d4d1411463315268eb73770"), "name" : "Citroen", "price" : 21000.0 }
+{ "_id" : ObjectId("5d4d1415463315268eb73771"), "name" : "Hummer", "price" : 41400.0 }
+{ "_id" : ObjectId("5d4d1419463315268eb73772"), "name" : "Volkswagen", "price" : 21600.0 }
+*/        
+</code></pre>
+<h3>query</h3>
+<pre><code>
+    using MongoDB.Driver;
+    using MongoDB.Bson;
+    
+    namespace MongoQuery
+    {
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+    
+                IMongoDatabase db = dbClient.GetDatabase("testdb");
+                var cars = db.GetCollection<BsonDocument>("cars");
+    
+                var builder = Builders<BsonDocument>.Filter;
+                var filter = builder.Gt("price", 30000) & builder.Lt("price", 55000);
+    
+                var docs = cars.Find(filter).ToList();
+    
+                docs.ForEach(doc => {
+                    Console.WriteLine(doc);
+                });
+            }
+        }
+    }
+/*
+{ "_id" : ObjectId("5d4d13d6463315268eb7376b"), "name" : "Audi", "price" : 52000 }
+{ "_id" : ObjectId("5d4d1415463315268eb73771"), "name" : "Hummer", "price" : 41400.0 }
+*/        
+</code></pre>
+<h3> insert document</h3>
+<pre><code>
+using MongoDB.Driver;
+using MongoDB.Bson;
+
+namespace InsertDocument
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+
+            IMongoDatabase db = dbClient.GetDatabase("testdb");
+
+            var cars = db.GetCollection<BsonDocument>("cars");
+
+            var doc = new BsonDocument
+            {
+                {"name", "BMW"},
+                {"price", 34621}
+            };
+
+            cars.InsertOne(doc);
+        }
+    }
+}    
+</code></pre>
+<h3> skip and limit</h3>
+<pre><code>
+using MongoDB.Driver;
+using MongoDB.Bson;
+
+namespace LimitSkip
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+
+            IMongoDatabase db = dbClient.GetDatabase("testdb");
+
+            var cars = db.GetCollection<BsonDocument>("cars");
+            var docs = cars.Find(new BsonDocument()).Skip(3).Limit(3).ToList();
+
+            docs.ForEach(doc =>
+            {
+                Console.WriteLine(doc);
+            });
+        }
+    }
+}   
+/*
+{ "_id" : ObjectId("5d4d140d463315268eb7376f"), "name" : "Bentley", "price" : 350000.0 }
+{ "_id" : ObjectId("5d4d1411463315268eb73770"), "name" : "Citroen", "price" : 21000.0 }
+{ "_id" : ObjectId("5d4d1415463315268eb73771"), "name" : "Hummer", "price" : 41400.0 }
+*/
+</code></pre>
+<h3>projections</h3>
+<pre><code>
+using MongoDB.Driver;
+using MongoDB.Bson;
+
+namespace Projections
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+
+            IMongoDatabase db = dbClient.GetDatabase("testdb");
+
+            var cars = db.GetCollection<BsonDocument>("cars");
+            var docs = cars.Find(new BsonDocument()).Project("{_id: 0}").ToList();
+
+            docs.ForEach(doc =>
+            {
+                Console.WriteLine(doc);
+            });
+        }
+    }
+}    
+/*
+{ "name" : "Audi", "price" : 52000 }
+{ "name" : "Mercedes", "price" : 57127.0 }
+{ "name" : "Volvo", "price" : 29000.0 }
+{ "name" : "Bentley", "price" : 350000.0 }
+{ "name" : "Citroen", "price" : 21000.0 }
+{ "name" : "Hummer", "price" : 41400.0 }
+{ "name" : "Volkswagen", "price" : 21600.0 }
+*/
+</code></pre>
+<h3> delete document</h3>
+<pre><code>
+using MongoDB.Driver;
+using MongoDB.Bson;
+
+namespace DeleteDocument
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+
+            IMongoDatabase db = dbClient.GetDatabase("testdb");
+
+            var cars = db.GetCollection<BsonDocument>("cars");
+            var filter = Builders<BsonDocument>.Filter.Eq("name", "BMW");
+
+            cars.DeleteOne(filter);
+        }
+    }
+}    
+</code></pre>
+<h3>update document</h3>
+<pre><code>
+using MongoDB.Driver;
+using MongoDB.Bson;
+
+namespace UpdateDocument
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+
+            IMongoDatabase db = dbClient.GetDatabase("testdb");
+
+            var cars = db.GetCollection<BsonDocument>("cars");
+
+            var filter = Builders<BsonDocument>.Filter.Eq("name", "Audi");
+            var update = Builders<BsonDocument>.Update.Set("price", 52000);
+
+            cars.UpdateOne(filter, update);
+        }
+    }
+}    
+</code></pre>
+<h3>Reading with a Filter</h3>
+<pre><code>
+var filter = Builders<BsonDocument>.Filter.Eq("student_id", 10000);
+var studentDocument = collection.Find(filter).FirstOrDefault();
+Console.WriteLine(studentDocument.ToString());
+/* result:
+{ "_id" : ObjectId("5d88f88cec6103751b8a0d7f"),
+"student_id" : 10000,
+"scores" : [
+{ "type" : "exam", "score" : 88.123341932870233 },
+{ "type" : "quiz", "score" : 74.923810293428346 },
+{ "type" : "homework", "score" : 89.979293842903246 },
+{ "type" : "homework", "score" : 82.129310305132179 }
+],
+"class_id" : 480 }
+*/
+</code></pre>
+<h3>Update Filter</h3>
+<pre><code>
+var filter = Builders<BsonDocument>.Filter.Eq("student_id", 10000)
+var update = Builders<BsonDocument>.Update.Set("class_id", 483);
+collection.UpdateOne(filter, update);
+</code></pre>
+<h3>Multiple Deletes</h3>
+<pre><code>
+var deleteLowExamFilter = Builders<BsonDocument>.Filter.ElemMatch<BsonValue>("scores",
+     new BsonDocument { { "type", "exam" }, {"score", new BsonDocument { { "$lt", 60 }}}
+});
+collection.DeleteMany(deleteLowExamFilter);
+</code></pre>
+
+</div>

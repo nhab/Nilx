@@ -1,0 +1,232 @@
+
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src="/nilx/assets/js/blocks.js"></script>	
+    <link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+</head>
+<body>
+    <script>hljs.highlightAll();</script>
+    <button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-" class="toggleButton"  
+        onclick="toggle(this)" />Resources</h2>
+<p>
+<a href='https://www.ezzylearning.net/tutorial/a-step-by-step-guide-of-using-automapper-in-asp-net-core'>ezzylearning</a>
+
+</p>
+<h2>What is automapper</h2>
+<p>
+AutoMapper is a library that helps to transform one object type to another.
+</p>
+<h2>Configure AutoMapper in ASP.NET Core application</h2>
+<p>
+1. NuGet: To use AutoMapper, you need to install below NuGet packages.
+
+PM> Install-Package AutoMapper
+PM> Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+</p>
+<h2>2. Configuration:</h2>
+<p>
+ It should only happen once per AppDomain. 
+ That means the best place to put the configuration code is in application startup.
+ConfigureServices method is called by .NET Core at application startup time to register additional services.
+You define the configuration using profiles.
+And then you let AutoMapper know in what assemblies are those profiles defined by calling the IServiceCollection extension method AddAutoMapper at startup:
+<code>
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // Way-1: Register Profiles and/or Mapping manually.
+        services.AddAutoMapper(cfg =>
+        {
+            cfg.AddProfile<CustomerAutoMapperProfile>();
+            //cfg.CreateMap<AddressModel, Address>();
+        });
+
+        // Way-2: Register using Assembly. Scan an assembly for components.
+        //services.AddAutoMapper(typeof(Startup));
+        //services.AddAutoMapper(profileAssembly1, profileAssembly2 /*, ...*/);
+    }
+
+    // Other code is removed for clarity
+}
+</code>    
+</p>
+<h2>AutoMapper Profile</h2>
+<p>
+
+
+A good way to organize your mapping configurations is with profiles. It allow us to group common configuration and organize mappings by usage. This lets us put mapping configuration closer to where it is used, instead of a single file of configuration that becomes difficult to maintain.
+
+Create classes that inherit from Profile and put the configuration in the constructor.
+
+<code>
+    public class CustomerAutoMapperProfile : Profile
+    {
+        public CustomerAutoMapperProfile()
+        {
+            CreateMap<CustomerModel, Customer>()
+                .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.PhoneNumber));
+    
+            CreateMap<Customer, CustomerModel>()
+                .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.IsAdult, opt => opt.MapFrom(src => src.Age > 18));
+    
+            CreateMap<AddressModel, Address>().ReverseMap();
+        }
+    }    
+</code>
+Profiles can be added to the main mapper configuration in a number of ways, either directly.
+AutoMapper will scan the designated assemblies for classes inheriting from Profile and add them to the configuration.
+<code>
+    // Domain entity
+public class Customer
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Phone { get; set; }
+    public Address Address { get; set; }
+}
+
+// DTO model
+public class CustomerModel
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string PhoneNumber { get; set; }
+    public bool IsAdult { get; set; }
+
+    public AddressModel Address { get; set; }
+}
+</code>
+</p>
+<h2>3. Usage:</h2>
+<p>
+ You are done with AutoMapper configuration. Most applications can use dependency injection to inject the created IMapper instance.
+<code>
+    [ApiController]
+[Route("[controller]")]
+public class CustomerController : ControllerBase
+{
+    private readonly IMapper _mapper;
+
+    public CustomerController(IMapper mapper)
+    {
+        _mapper = mapper;
+    }
+
+    [HttpGet]
+    public IActionResult Get()
+    {
+        //TODO: Get it from in database
+        var entity = new Customer()
+        {
+            Name = "Ashish Patel",
+            Age = 30,
+            Phone = "1234567890",
+            Address = new Address { Country = "USA", State = "New York" }
+        };
+
+        var model = _mapper.Map<CustomerModel>(entity);
+
+        return Ok(model);
+    }
+
+    [HttpPost]
+    public IActionResult Add(CustomerModel model)
+    {
+        var entity = _mapper.Map<Customer>(model);
+
+        //TODO: Save in database
+
+        return Ok();
+    }
+}
+</code>
+</p>
+<h2>Example</h2>
+<p>
+    <code>
+        public class PersonModel
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Address { get; set; }
+
+            public override string ToString()
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+    </code>
+ 
+    <code>
+        public class PersonDTO
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
+    </code>
+    <code>
+        public class MappingProfile : Profile
+        {
+            public MappingProfile()
+            {
+                CreateMap<PersonModel, PersonDTO>().ReverseMap();
+            }
+        }
+    </code>
+    Observe the inheritance from Profile (from AutoMapper) and the ReverseMap which allows us to map in both directions automatically.
+    <code>
+        using AutoMapper;
+        using AutoMapper.Configuration;
+        using AutoMapperDemo;
+        
+        IMapper Mapper;
+        
+        var cfg = new MapperConfigurationExpression();
+        cfg.AddProfile<MappingProfile>();
+        var mapperConfig = new MapperConfiguration(cfg);
+        Mapper = new Mapper(mapperConfig);
+        
+        var person = new PersonModel
+        {
+            FirstName = "Elon",
+            LastName = "Musk"
+        };
+        
+        Console.WriteLine(person);
+        
+        PersonDTO mappedPerson = Mapper.Map<PersonDTO>(person);
+        
+        Console.WriteLine(mappedPerson);
+        Console.WriteLine(mappedPerson.FirstName);        
+    </code>
+
+</p>
+<h2>Other Features</h2>
+<p>
+    
+AutoMapper uses a programming concept called Reflection to retrieve the type metadata of objects.
+    <ul class="">
+        <li id="cfcc" class="tg th jd kc b kd mf kh mg kl tu kp tv kt tw kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Projection.html" rel="noopener ugc nofollow" target="_blank">Projection</a>
+        </li>
+        <li id="a8f2" class="tg th jd kc b kd tp kh tq kl tr kp ts kt tt kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Nested-mappings.html" rel="noopener ugc nofollow" target="_blank">Nested Mappings</a>
+        </li>
+        <li id="5d62" class="tg th jd kc b kd tp kh tq kl tr kp ts kt tt kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Conditional-mapping.html" rel="noopener ugc nofollow" target="_blank">Conditional Mappings</a>
+        </li>
+        <li id="3f99" class="tg th jd kc b kd tp kh tq kl tr kp ts kt tt kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Flattening.html" rel="noopener ugc nofollow" target="_blank">Flattening</a>
+        </li>
+        <li id="4758" class="tg th jd kc b kd tp kh tq kl tr kp ts kt tt kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Reverse-Mapping-and-Unflattening.html" rel="noopener ugc nofollow" target="_blank">Reverse Mapping and Unflattening</a>
+        </li>
+    </ul>
+</p>

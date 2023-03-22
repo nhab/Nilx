@@ -1,0 +1,2074 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../../assets/css/blocks.css">	
+	<script src='../../assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+    <script src="../../libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+	<script>
+	
+	</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+<h2>Setup the solution</h2>
+<div>
+<h3>List containers:</h3>
+ <pre><code>docker ps</code></pre> 
+<h3>creating network :</h3>
+<pre><code>docker network create --attachable -d bridge mydockernetwork</code></code>
+<h3>Checking docker networks</h3>
+<pre><code> docker network ls</code></pre>
+<h3>Install docker compose from:  </h3>
+<pre><code>https://docs.docker.com/compose/install</code></pre> (docker desktop has already installed it)
+<h3>docker compose version</h3>
+<pre><code>docker-compose --version</code></pre>
+<h3>Running kafka container :</h3>
+  copy this docker-compose.yml into docker folder and run the command there :
+  <pre><code>docker-compose up -d</code></pre>
+<h3>list containers</h3>
+   <pre><code>docker ps</code></pre>
+<h3>Running mangodb container:</h3>
+<pre><code>docker run -it -d --name mongo-container -p 27017:27017 --network mydockernetwork --restart always -v mongodb_data_container:/data/db mongo:latest</code></pre>
+<h3>Download mongo Client Tools – Robo 3T:</h3>
+<pre><code>https://robomongo.org/download</code></pre>
+<h3>Install robo 3t and add a new configured connection (localhost)</h3>
+<h3>install ms sql server in container by running:</h3>
+<pre><code>docker run -d --name sql-container --network mydockernetwork --restart always -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=$tr0ngS@P@ssw0rd02' -e 'MSSQL_PID=Express' -p 1433:1433 mcr.microsoft.com/mssql/server:2017-latest-ubuntu </code></pre>
+<h3>Creating solution in visual studio 2022:</h3>
+<pre><code>
+	Post.Cmd  Folder>
+		Post.Cmd.Api               webapi   csproj	
+			Dependenies Projects:
+				CQRS.Core
+				Post.cmd.Domain
+				Post.Common
+			nuget packages :
+		Post.Cmd.Domain            classlib csproj
+			Dependenies Projects:
+				CQRS.Core
+				Post.Common
+			nuget packages :
+
+		Post.Cmd.Infrastructure    classlib csproj
+			Dependenies Projects:
+				CQRS.Core
+				Post.Cmd.Domain
+			nuget packages :
+				Confluent.Kafka
+				Microsoft.Extensions.Options
+				MongoDB.Driver
+	Post.Query folder>
+		Post.Query.Api		   webapi   csproj
+			Dependenies Projects:
+				CQRS.Core
+				Post.Cmd.Domain
+				Post.Cmd.Infrastructure
+				Post.Common
+			nuget packages :
+
+		Post.Query.Domain	   classlib csproj
+			Dependenies Projects:
+				CQRS.Core
+				Post.Common
+			nuget packages :
+		post.Query.Infrastructure  classlib csproj
+			Dependenies Projects:
+				Post.Cmd.Domain
+			nuget packages :
+				Microsoft.entityframeworkcore.sqlserver
+				Micfosoft.Extention.hosting
+				Confluent.Kafka
+
+	Post.common folder>
+		Post.common classlib   csproj
+			Dependenies Projects:
+				CQRS.Core
+			nuget packages :
+				
+	CQRS.Core classlib csproj
+		nuget packages :
+			mongodb.driver
+</code></pre>
+</div>
+<h2>Commands</h2>
+<div>
+<h3> In CQRS-ES > CQRS.Core project: </h3>
+	<pre><code>
+	md Commands 
+	md Messsages		
+	</code></pre> 
+
+<h3>In Messages class create message class</h3>
+<pre><code>
+	namespace CQRS.Core.Messages
+	{
+		public abstract class Message
+		{
+			public Guid Id { get; set; }
+		}
+	}
+</code></pre>
+<h3>In Commands folder create BaseCommand class:</h3>
+<pre><code>
+	using CQRS.Core.Messages;
+
+	namespace CQRS.Core.Commands
+	{
+		public abstract class BaseCommand : Message
+		{
+
+		}
+	}
+</code></pre>
+
+<h3>In SM-Post>Post.cmd>post.comd.Api:</h3>
+<pre><code>md Commands</code></pre>
+<h3>Add NewPostCommand to it </h3>
+<pre><code>
+	using CQRS.Core.Commands;
+
+	namespace Post.Cmd.Api.Commands
+	{
+		public class NewPostCommand : BaseCommand
+		{
+			public string Author { get; set; }
+			public string Message { get; set; }
+		}
+	}
+</code></pre>
+<h3>Add EditMesageCommand :</h3>
+<pre><code>
+	using CQRS.Core.Commands;
+
+	namespace Post.Cmd.Api.Commands
+	{
+		public class EditMessageCommand : BaseCommand
+		{
+			public string Message { get; set; }
+		}
+	}
+</code></pre>
+<h3>Add LikePostCommand :</h3>
+<pre><code>
+	using CQRS.Core.Commands;
+
+	namespace Post.Cmd.Api.Commands
+	{
+		public class LikePostCommand : BaseCommand
+		{
+	
+		}
+	}
+</code></pre>
+<h3>Add Comment command:</h3>
+<pre><code>
+using CQRS.Core.Commands;
+
+namespace Post.Cmd.Api.Commands
+{
+    public class AddCommentCommand : BaseCommand
+    {
+        public string Comment { get; set; }
+        public string Username { get; set; }
+    }
+}
+</code></pre>
+<h3>EditCommentCommand</h3>
+<pre><code>
+	using CQRS.Core.Commands;
+
+	namespace Post.Cmd.Api.Commands
+	{
+		public class EditCommentCommand : BaseCommand
+		{
+			public Guid CommentId { get; set; }
+			public string Comment { get; set; }
+			public string Username { get; set; }
+		}
+	}	
+</code></pre>
+<h3>RemoveCommentCommand</h3>
+<pre><code>
+	using CQRS.Core.Commands;
+
+	namespace Post.Cmd.Api.Commands
+	{
+		public class RemoveCommentCommand : BaseCommand
+		{
+			public Guid CommentId { get; set; }
+			public string Username { get; set; }
+		}
+	}
+</code></pre>
+<h3>DeletePostCommand</h3>
+<pre><code>
+	using CQRS.Core.Commands;
+
+namespace Post.Cmd.Api.Commands
+{
+    public class DeletePostCommand : BaseCommand
+    {
+        public string Username { get; set; }
+    }
+}
+</code></pre>
+</div>
+<h2>Events</h2>
+<div>
+	For Each command object we have an event object. 
+<h3>In CQRS-ES >CQRS.Core</h3>
+<pre><code>md Events</code></pre>
+<h3>Create BaseEvent class:</h3>
+<pre><code>
+	using CQRS.Core.Messages;
+
+	namespace CQRS.Core.Events
+	{
+		public class BaseEvent : Message
+		{
+			protected BaseEvent(string type)
+			{
+				this.Type = type;
+			}
+	
+			public int Version { get; set; }
+			public string Type { get; set; }
+		}
+	}	
+</code></pre>
+<h3>In SM-Post\Post.Common\ :</h3>
+<h3>Create PostCreatedEvent class</h3>
+<pre><code>
+	using CQRS.Core.Events;
+
+	namespace Post.Common.Events
+	{
+		public class PostCreatedEvent : BaseEvent
+		{
+			public PostCreatedEvent() : base(nameof(PostCreatedEvent))
+			{
+			}
+	
+			public string Author { get; set; }
+			public string Message { get; set; }
+			public DateTime DatePosted { get; set; }
+		}
+	}	
+</code></pre>
+<h3>Create MessageUpdatedEvent class</h3>
+<pre><code>
+	using CQRS.Core.Events;
+
+	namespace Post.Common.Events
+	{
+		public class MessageUpdatedEvent : BaseEvent
+		{
+			public MessageUpdatedEvent() : base(nameof(MessageUpdatedEvent))
+			{
+			}
+	
+			public string Message { get; set; }
+		}
+	}
+</code></pre>
+<h3>PostLikedEvent</h3>
+<pre><code>
+	using CQRS.Core.Events;
+
+	namespace Post.Common.Events
+	{
+		public class PostLikedEvent : BaseEvent
+		{
+			public PostLikedEvent() : base(nameof(PostLikedEvent))
+			{
+			}
+		}
+	}
+</code></pre>
+<h3>CommentAddedEvent</h3>
+<pre><code>
+	using CQRS.Core.Events;
+
+	namespace Post.Common.Events
+	{
+		public class CommentAddedEvent : BaseEvent
+		{
+			public CommentAddedEvent() : base(nameof(CommentAddedEvent))
+			{
+			}
+	
+			public Guid CommentId { get; set; }
+			public string Comment { get; set; }
+			public string Username { get; set; }
+			public DateTime CommentDate { get; set; }
+		}
+	}	
+</code></pre>
+<h3>CommentUpdatedEvent</h3>
+<pre><code>
+	using CQRS.Core.Events;
+
+	namespace Post.Common.Events
+	{
+		public class CommentUpdatedEvent : BaseEvent
+		{
+			public CommentUpdatedEvent() : base(nameof(CommentUpdatedEvent))
+			{
+			}
+	
+			public Guid CommentId { get; set; }
+			public string Comment { get; set; }
+			public string Username { get; set; }
+			public DateTime EditDate { get; set; }
+		}
+	}
+</code></pre>
+<h3>CommentRemovedEvent</h3>
+<pre><code>
+	using CQRS.Core.Events;
+
+	namespace Post.Common.Events
+	{
+		public class CommentRemovedEvent : BaseEvent
+		{
+			public CommentRemovedEvent() : base(nameof(CommentRemovedEvent))
+			{
+			}
+	
+			public Guid CommentId { get; set; }
+		}
+	}	
+</code></pre>
+<h3>PostRemovedEvent</h3>
+<pre><code>
+	using CQRS.Core.Events;
+
+	namespace Post.Common.Events
+	{
+		public class PostRemovedEvent : BaseEvent
+		{
+			public PostRemovedEvent() : base(nameof(PostRemovedEvent))
+			{
+			}
+		}
+	}	
+</code></pre>
+</div>
+<h2>Command Dispatching</h2>
+<div>
+<h3>The Mediator Pattern</h3>
+<div>
+- We  use the mediator pattern to facilitate the command dispatching in our security architecture.
+- The mediator pattern is a behavioral design pattern.
+- It promotes loose coupling by preventing objects from referring to each other explicitly.
+- It is used to simplify communication between objects in an application by introducing a single object
+known as the mediator that manages the distribution of messages ( commands in this project).
+</div>
+<h3>At CQRS.Core project</h3>
+<pre><code>md Infrastructure</code></pre>
+<h3>create ICommandDispatcher interface:</h3>
+<pre><code>
+using CQRS.Core.Commands;
+
+namespace CQRS.Core.Infrastructure
+{
+	public interface ICommandDispatcher
+	{
+		void RegisterHandler<T>(Func<T, Task> handler) where T : BaseCommand;
+		Task SendAsync(BaseCommand command);
+	}
+}
+</code></pre>
+<h3>AT Post.cmd >Post.cmd.Infrastucture></h3>
+<pre><code>md dispatchers	</code></pre>
+<h3>create CommandDispatcher class</h3>
+<pre><code>
+using CQRS.Core.Commands;
+using CQRS.Core.Infrastructure;
+
+namespace Post.Cmd.Infrastructure.Dispatchers
+{
+	public class CommandDispatcher : ICommandDispatcher
+	{
+		private readonly Dictionary<Type, Func<BaseCommand, Task>> _handlers = new();
+
+		public void RegisterHandler<T>(Func<T, Task> handler) where T : BaseCommand
+		{
+			if (_handlers.ContainsKey(typeof(T)))
+			{
+				throw new IndexOutOfRangeException("Can`t register the same command handler twice!");
+			}
+
+			_handlers.Add(typeof(T), x => handler((T)x));
+		}
+
+		public async Task SendAsync(BaseCommand command)
+		{
+			if (_handlers.TryGetValue(command.GetType(), out Func<BaseCommand, Task> handler))
+			{
+				await handler(command);
+			}
+			else
+			{
+				throw new ArgumentNullException(nameof(handler), "No command handler was registered!");
+			}
+		}
+	}
+}
+</code></pre>
+
+</div>
+
+<h2>Aggregate</h2>
+<div>
+The aggregate is the domain entity on the command side of a CQRS in event sourcing based application or service, 
+similar to the domain entity that you find on the read or query side.
+
+<h3>AggregateRoot class</h3>
+At CQRS.Core/domain, Create AggregateRoot class 
+<pre><code>
+using CQRS.Core.Events;
+
+namespace CQRS.Core.Domain
+{
+    public abstract class AggregateRoot
+    {
+        protected Guid _id;
+        private readonly List<BaseEvent> _changes = new();
+
+        public Guid Id
+        {
+            get { return _id; }
+        }
+
+        public int Version { get; set; } = -1;
+
+        public IEnumerable<BaseEvent> GetUncommittedChanges()
+        {
+            return _changes;
+        }
+
+        public void MarkChangesAsCommitted()
+        {
+            _changes.Clear();
+        }
+
+        private void ApplyChange(BaseEvent @event, bool isNew)
+        {
+            var method = this.GetType().GetMethod("Apply", new Type[] { @event.GetType() });
+
+            if (method == null)
+            {
+                throw new ArgumentNullException(nameof(method), $"The Apply method was not found in the aggregate for {@event.GetType().Name}!");
+            }
+
+            method.Invoke(this, new object[] { @event });
+
+            if (isNew)
+            {
+                _changes.Add(@event);
+            }
+        }
+
+        protected void RaiseEvent(BaseEvent @event)
+        {
+            ApplyChange(@event, true);
+        }
+
+        public void ReplayEvents(IEnumerable<BaseEvent> events)
+        {
+            foreach (var @event in events)
+            {
+                ApplyChange(@event, false);
+            }
+        }
+    }
+}       
+</code></pre>
+<h3>PostAggregte Class</h3>
+At Post.Cmd > Post.Cmd.Domain > aggregates create PostAggregte Class
+<pre><code>
+    using CQRS.Core.Domain;
+    using Post.Common.Events;
+    
+    namespace Post.Cmd.Domain.Aggregates
+    {
+        public class PostAggregate : AggregateRoot
+        {
+            private bool _active;
+            private string _author;
+            private readonly Dictionary<Guid, Tuple<string, string>> _comments = new();
+    
+            public bool Active
+            {
+                get => _active; set => _active = value;
+            }
+    
+            public PostAggregate()
+            {
+    
+            }
+    
+            public PostAggregate(Guid id, string author, string message)
+            {
+                RaiseEvent(new PostCreatedEvent
+                {
+                    Id = id,
+                    Author = author,
+                    Message = message,
+                    DatePosted = DateTime.Now
+                });
+            }
+    
+            public void Apply(PostCreatedEvent @event)
+            {
+                _id = @event.Id;
+                _active = true;
+                _author = @event.Author;
+            }
+    
+            public void EditMessage(string message)
+            {
+                if (!_active)
+                {
+                    throw new InvalidOperationException("You cannot edit the message of an inactive post!");
+                }
+    
+                if (string.IsNullOrWhiteSpace(message))
+                {
+                    throw new InvalidOperationException($"The value of {nameof(message)} cannot be null or empty. Please provide a valid {nameof(message)}!");
+                }
+    
+                RaiseEvent(new MessageUpdatedEvent
+                {
+                    Id = _id,
+                    Message = message
+                });
+            }
+    
+            public void Apply(MessageUpdatedEvent @event)
+            {
+                _id = @event.Id;
+            }
+    
+            public void LikePost()
+            {
+                if (!_active)
+                {
+                    throw new InvalidOperationException("You cannot like an inactive post!");
+                }
+    
+                RaiseEvent(new PostLikedEvent
+                {
+                    Id = _id
+                });
+            }
+    
+            public void Apply(PostLikedEvent @event)
+            {
+                _id = @event.Id;
+            }
+    
+            public void AddComment(string comment, string username)
+            {
+                if (!_active)
+                {
+                    throw new InvalidOperationException("You cannot add a comment to an inactive post!");
+                }
+    
+                if (string.IsNullOrWhiteSpace(comment))
+                {
+                    throw new InvalidOperationException($"The value of {nameof(comment)} cannot be null or empty. Please provide a valid {nameof(comment)}!");
+                }
+    
+                RaiseEvent(new CommentAddedEvent
+                {
+                    Id = _id,
+                    CommentId = Guid.NewGuid(),
+                    Comment = comment,
+                    Username = username,
+                    CommentDate = DateTime.Now
+                });
+            }
+    
+            public void Apply(CommentAddedEvent @event)
+            {
+                _id = @event.Id;
+                _comments.Add(@event.CommentId, new Tuple<string, string>(@event.Comment, @event.Username));
+            }
+    
+            public void EditComment(Guid commentId, string comment, string username)
+            {
+                if (!_active)
+                {
+                    throw new InvalidOperationException("You cannot edit a comment of an inactive post!");
+                }
+    
+                if (!_comments[commentId].Item2.Equals(username, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    throw new InvalidOperationException("You are not allowed to edit a comment that was made by another user!");
+                }
+    
+                RaiseEvent(new CommentUpdatedEvent
+                {
+                    Id = _id,
+                    CommentId = commentId,
+                    Comment = comment,
+                    Username = username,
+                    EditDate = DateTime.Now
+                });
+            }
+    
+            public void Apply(CommentUpdatedEvent @event)
+            {
+                _id = @event.Id;
+                _comments[@event.CommentId] = new Tuple<string, string>(@event.Comment, @event.Username);
+            }
+    
+            public void RemoveComment(Guid commentId, string username)
+            {
+                if (!_active)
+                {
+                    throw new InvalidOperationException("You cannot remove a comment of an inactive post!");
+                }
+    
+                if (!_comments[commentId].Item2.Equals(username, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    throw new InvalidOperationException("You are not allowed to remove a comment that was made by another user!");
+                }
+    
+                RaiseEvent(new CommentRemovedEvent
+                {
+                    Id = _id,
+                    CommentId = commentId
+                });
+            }
+    
+            public void Apply(CommentRemovedEvent @event)
+            {
+                _id = @event.Id;
+                _comments.Remove(@event.CommentId);
+            }
+    
+            public void DeletePost(string username)
+            {
+                if (!_active)
+                {
+                    throw new InvalidOperationException("The post has already been removed!");
+                }
+    
+                if (!_author.Equals(username, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    throw new InvalidOperationException("You are not allowed to delete a post that was made by someone else!");
+                }
+    
+                RaiseEvent(new PostRemovedEvent
+                {
+                    Id = _id
+                });
+            }
+    
+            public void Apply(PostRemovedEvent @event)
+            {
+                _id = @event.Id;
+                _active = false;
+            }
+        }
+    }     
+</code></pre>
+<h3>Event Store (right database)</h3>
+<div>
+An event store must be an event only store, no update or delete.
+
+- Each event that is saved should represent the version or state of an aggregate at any given point in time.
+- Event should be stored in chronological order and new events should be appended to the previous event.
+- The state of the aggregate should be recreated table by replaying the event store and finally it should implement optimistic concurrency control.
+
+- We use MongoDB for our event store.
+- each instance of our event model , repressents a document in our event store collection.
+- each document represents an event that is versioned that can alter the state of aggregate.
+</div>
+<h3>EventModel class</h3>
+At CQRS-ES/CQRS.Core/Events , create EventModel class
+<pre><code>
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace CQRS.Core.Events
+{
+    public class EventModel
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public Guid AggregateIdentifier { get; set; }
+        public string AggregateType { get; set; }
+        public int Version { get; set; }
+        public string EventType { get; set; }
+        public BaseEvent EventData { get; set; }
+    }
+}
+</code></pre>
+<h3>IEventStoreRepository Interface</h3>
+At CQRS-ES/CQRS.Core/Domain, crerate IEventStoreRepository Interface
+<pre><code>
+using CQRS.Core.Events;
+
+namespace CQRS.Core.Domain
+{
+    public interface IEventStoreRepository
+    {
+        Task SaveAsync(EventModel @event);
+        Task<List<EventModel>> FindByAggregateId(Guid aggregateId);
+    }
+}        
+</code></pre>
+<h3>Event store Repository</h3>
+At SM-Post/Post.Cmd/Post.Cmd.Infrastructure/Repositories , create EventStoreRepository 
+<pre><code>
+using CQRS.Core.Domain;
+using CQRS.Core.Events;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using Post.Cmd.Infrastructure.Config;
+
+namespace Post.Cmd.Infrastructure.Repositories
+{
+    public class EventStoreRepository : IEventStoreRepository
+    {
+        private readonly IMongoCollection<EventModel> _eventStoreCollection;
+
+        public EventStoreRepository(IOptions<MongoDbConfig> config)
+        {
+            var mongoClient = new MongoClient(config.Value.ConnectionString);
+            var mongoDatabase = mongoClient.GetDatabase(config.Value.Database);
+
+            _eventStoreCollection = mongoDatabase.GetCollection<EventModel>(config.Value.Collection);
+        }
+
+        public async Task<List<EventModel>> FindByAggregateId(Guid aggregateId)
+        {
+            return await _eventStoreCollection.Find(x => x.AggregateIdentifier == aggregateId).ToListAsync().ConfigureAwait(false);
+        }
+
+        public async Task SaveAsync(EventModel @event)
+        {
+            await _eventStoreCollection.InsertOneAsync(@event).ConfigureAwait(false);
+        }
+    }
+}    
+</code></pre>
+<h3>Event store interface: </h3>
+At CQRS.Core/Infrastructure folder, create IEventStore interface:
+<pre><code>using CQRS.Core.Events;
+
+namespace CQRS.Core.Infrastructure
+{
+    public interface IEventStore
+    {
+        Task SaveEventsAsync(Guid aggregateId, IEnumerable<BaseEvent> events, int expectedVersion);
+        Task<List<BaseEvent>> GetEventsAsync(Guid aggregateId);
+    }
+}</code></pre>
+<h3>EventStore class</h3>
+At Post.Cmd.Ifrastructures/Stores, create EventStore class:
+<pre><code>using CQRS.Core.Domain;
+using CQRS.Core.Events;
+using CQRS.Core.Exceptions;
+using CQRS.Core.Infrastructure;
+using Post.Cmd.Domain.Aggregates;
+
+namespace Post.Cmd.Infrastructure.Stores
+{
+    public class EventStore : IEventStore
+    {
+        private readonly IEventStoreRepository _eventStoreRepository;
+
+        public EventStore(IEventStoreRepository eventStoreRepository)
+        {
+            _eventStoreRepository = eventStoreRepository;
+        }
+
+        public async Task<List<BaseEvent>> GetEventsAsync(Guid aggregateId)
+        {
+            var eventStream = await _eventStoreRepository.FindByAggregateId(aggregateId);
+
+            if (eventStream == null || !eventStream.Any())
+                throw new AggregateNotFoundException("Incorrect post ID provided!");
+
+            return eventStream.OrderBy(x => x.Version).Select(x => x.EventData).ToList();
+        }
+
+        public async Task SaveEventsAsync(Guid aggregateId, IEnumerable<BaseEvent> events, int expectedVersion)
+        {
+            var eventStream = await _eventStoreRepository.FindByAggregateId(aggregateId);
+
+            if (expectedVersion != -1 && eventStream[^1].Version != expectedVersion)
+                throw new ConcurrencyException();
+
+            var version = expectedVersion;l
+
+            foreach (var @event in events)
+            {
+                version++;
+                @event.Version = version;
+                var eventType = @event.GetType().Name;
+                var eventModel = new EventModel
+                {
+                    TimeStamp = DateTime.Now,
+                    AggregateIdentifier = aggregateId,
+                    AggregateType = nameof(PostAggregate),
+                    Version = version,
+                    EventType = eventType,
+                    EventData = @event
+                };
+
+                await _eventStoreRepository.SaveAsync(eventModel);
+            }
+        }
+    }
+}</code></pre>
+<h3>IEventSourcingHandler Interface</h3>
+At CQRS-ES/CQRS.Core/Handlers,create IEventSourcingHandler Interface
+<pre><core>using CQRS.Core.Domain;
+
+namespace CQRS.Core.Handlers
+{
+    public interface IEventSourcingHandler<T>
+    {
+        Task SaveAsync(AggregateRoot aggregate);
+        Task<T> GetByIdAsync(Guid id);
+    }
+}
+</core></pre>
+<h3>Event Sourcing Handler Class</h3>
+at Post.Cmd.Infrastructure/Handlers , create EventSourcingHandler class
+<pre><code>using CQRS.Core.Domain;
+using CQRS.Core.Handlers;
+using CQRS.Core.Infrastructure;
+using Post.Cmd.Domain.Aggregates;
+
+namespace Post.Cmd.Infrastructure.Handlers
+{
+    public class EventSourcingHandler : IEventSourcingHandler<PostAggregate>
+    {
+        private readonly IEventStore _eventStore;
+
+        public EventSourcingHandler(IEventStore eventStore)
+        {
+            _eventStore = eventStore;
+        }
+
+        public async Task<PostAggregate> GetByIdAsync(Guid aggregateId)
+        {
+            var aggregate = new PostAggregate();
+            var events = await _eventStore.GetEventsAsync(aggregateId);
+
+            if (events == null || !events.Any()) return aggregate;
+
+            aggregate.ReplayEvents(events);
+            aggregate.Version = events.Select(x => x.Version).Max();
+
+            return aggregate;
+        }
+
+        public async Task SaveAsync(AggregateRoot aggregate)
+        {
+            await _eventStore.SaveEventsAsync(aggregate.Id, aggregate.GetUncommittedChanges(), aggregate.Version);
+            aggregate.MarkChangesAsCommitted();
+        }
+    }
+}</code></pre>
+</div>
+<h2>Command Handling</h2>
+<div>
+<h3>ICommandHandler Interface (The Abstract Colleague)</h3>
+at SM-Post\Post.Cmd\Post.Cmd.Api\Commands\, create ICommandHandler interface:
+<pre><code>namespace Post.Cmd.Api.Commands
+{
+    public interface ICommandHandler
+    {
+        Task HandleAsync(NewPostCommand command);
+        Task HandleAsync(EditMessageCommand command);
+        Task HandleAsync(LikePostCommand command);
+        Task HandleAsync(AddCommentCommand command);
+        Task HandleAsync(EditCommentCommand command);
+        Task HandleAsync(RemoveCommentCommand command);
+        Task HandleAsync(DeletePostCommand command);
+    }
+}
+</code></pre>
+<h3>CommandHandler (The Concrete Colleague)</h3>
+At Post.Cmd.Api /Commands, create a 
+<pre><code>using CQRS.Core.Handlers;
+using Post.Cmd.Domain.Aggregates;
+
+namespace Post.Cmd.Api.Commands
+{
+    public class CommandHandler : ICommandHandler
+    {
+        private readonly IEventSourcingHandler<PostAggregate> _eventSourcingHandler;
+
+        public CommandHandler(IEventSourcingHandler<PostAggregate> eventSourcingHandler)
+        {
+            _eventSourcingHandler = eventSourcingHandler;
+        }
+
+        public async Task HandleAsync(NewPostCommand command)
+        {
+            var aggregate = new PostAggregate(command.Id, command.Author, command.Message);
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(EditMessageCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.EditMessage(command.Message);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(LikePostCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.LikePost();
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(AddCommentCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.AddComment(command.Comment, command.Username);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(EditCommentCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.EditComment(command.CommentId, command.Comment, command.Username);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(RemoveCommentCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.RemoveComment(command.CommentId, command.Username);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(DeletePostCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.DeletePost(command.Username);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+    }
+}</code></pre>
+<h3>Registering Command handlers</h3>
+At Post.Cmd.Api\Program.cs 
+<pre><code>using CQRS.Core.Handlers;
+using Post.Cmd.Domain.Aggregates;
+
+namespace Post.Cmd.Api.Commands
+{
+    public class CommandHandler : ICommandHandler
+    {
+        private readonly IEventSourcingHandler<PostAggregate> _eventSourcingHandler;
+
+        public CommandHandler(IEventSourcingHandler<PostAggregate> eventSourcingHandler)
+        {
+            _eventSourcingHandler = eventSourcingHandler;
+        }
+
+        public async Task HandleAsync(NewPostCommand command)
+        {
+            var aggregate = new PostAggregate(command.Id, command.Author, command.Message);
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(EditMessageCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.EditMessage(command.Message);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(LikePostCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.LikePost();
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(AddCommentCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.AddComment(command.Comment, command.Username);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(EditCommentCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.EditComment(command.CommentId, command.Comment, command.Username);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(RemoveCommentCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.RemoveComment(command.CommentId, command.Username);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+
+        public async Task HandleAsync(DeletePostCommand command)
+        {
+            var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
+            aggregate.DeletePost(command.Username);
+
+            await _eventSourcingHandler.SaveAsync(aggregate);
+        }
+    }
+}</code></pre>
+</div>
+<h2>Event Producer</h2>
+<div>
+- Kafka <b>producer</b> sends messages to kafka topics inside kafka clusters.
+- kafka <b>broker</b> is a server running in a kafka cluster,usualy containers.
+- apache <b>zookeeper</b> manages  the cluster.
+- <b>consumers</b> read the message from the topics they are subscribed to.
+
+<h3>IEventProducer</h3>
+at CQRS.Core/Producers create IEventProducer interface:
+<pre><code>using CQRS.Core.Events;
+namespace CQRS.Core.Producers
+{
+    public interface IEventProducer
+    {
+        Task ProduceAsync<T>(string topic, T @event) where T : BaseEvent;
+    }
+}</code></pre>
+<h3>Event Producer class</h3>
+At Post.Cmd.Infrastructure /producers ,create EventProducer class  
+<pre><code>using System.Text.Json;
+using Confluent.Kafka;
+using CQRS.Core.Events;
+using CQRS.Core.Producers;
+using Microsoft.Extensions.Options;
+
+namespace Post.Cmd.Infrastructure.Producers
+{
+    public class EventProducer : IEventProducer
+    {
+        private readonly ProducerConfig _config;
+
+        public EventProducer(IOptions<ProducerConfig> config)
+        {
+            _config = config.Value;
+        }
+
+        public async Task ProduceAsync<T>(string topic, T @event) where T : BaseEvent
+        {
+            using var producer = new ProducerBuilder<string, string>(_config)
+                .SetKeySerializer(Serializers.Utf8)
+                .SetValueSerializer(Serializers.Utf8)
+                .Build();
+
+            var eventMessage = new Message<string, string>
+            {
+                Key = Guid.NewGuid().ToString(),
+                Value = JsonSerializer.Serialize(@event, @event.GetType())
+            };
+
+            var deliveryResult = await producer.ProduceAsync(topic, eventMessage);
+
+            if (deliveryResult.Status == PersistenceStatus.NotPersisted)
+            {
+                throw new Exception($"Could not produce {@event.GetType().Name} message to topic - {topic} due to the following reason: {deliveryResult.Message}.");
+            }
+        }
+    }
+}</code></pre>
+<h3>EventStor class</h3>
+at post.Cmd.Infrastructure >Stores>EventStore.cs :
+<pre><code>using CQRS.Core.Domain;
+using CQRS.Core.Events;
+using CQRS.Core.Exceptions;
+using CQRS.Core.Infrastructure;
+using CQRS.Core.Producers;
+using Post.Cmd.Domain.Aggregates;
+
+namespace Post.Cmd.Infrastructure.Stores
+{
+    public class EventStore : IEventStore
+    {
+        private readonly IEventStoreRepository _eventStoreRepository;
+        private readonly IEventProducer _eventProducer;
+
+        public EventStore(IEventStoreRepository eventStoreRepository, IEventProducer eventProducer)
+        {
+            _eventStoreRepository = eventStoreRepository;
+            _eventProducer = eventProducer;
+        }
+
+        public async Task<List<BaseEvent>> GetEventsAsync(Guid aggregateId)
+        {
+            var eventStream = await _eventStoreRepository.FindByAggregateId(aggregateId);
+
+            if (eventStream == null || !eventStream.Any())
+                throw new AggregateNotFoundException("Incorrect post ID provided!");
+
+            return eventStream.OrderBy(x => x.Version).Select(x => x.EventData).ToList();
+        }
+
+        public async Task SaveEventsAsync(Guid aggregateId, IEnumerable<BaseEvent> events, int expectedVersion)
+        {
+            var eventStream = await _eventStoreRepository.FindByAggregateId(aggregateId);
+
+            if (expectedVersion != -1 && eventStream[^1].Version != expectedVersion)
+                throw new ConcurrencyException();
+
+            var version = expectedVersion;
+
+            foreach (var @event in events)
+            {
+                version++;
+                @event.Version = version;
+                var eventType = @event.GetType().Name;
+                var eventModel = new EventModel
+                {
+                    TimeStamp = DateTime.Now,
+                    AggregateIdentifier = aggregateId,
+                    AggregateType = nameof(PostAggregate),
+                    Version = version,
+                    EventType = eventType,
+                    EventData = @event
+                };
+
+                await _eventStoreRepository.SaveAsync(eventModel);
+
+                var topic = Environment.GetEnvironmentVariable("KAFKA_TOPIC");
+                await _eventProducer.ProduceAsync(topic, @event);
+            }
+        }
+    }
+}</code></pre>
+</div>
+<h2>Domain Layer</h2>
+<div>
+What is domain driven design?
+The term domain driven design was coined by Erik Evans in 2003.
+It is an approach to structure and model software in a way that it matches the business domain.
+It places the primary focus of a software project on the core area of the business, also known as the
+core domain.
+It refers to problems as domains and aims to establish a common language to talk about these problems.
+And finally, it describes independent problem areas as bounded contexts.
+What is a bounded context?
+It is an independent problem area.
+It describes a logical boundary within which a particular model is defined and applicable.
+Each bounded context correlates to a microservice.
+<h3>Domain Entites</h3>
+At  Sm-Post/Post.Query/Post.Query.Domain/Entities create PostEntity class :
+<pre><code>using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Post.Query.Domain.Entities
+{
+    [Table("Post")]
+    public class PostEntity
+    {
+        [Key]
+        public Guid PostId { get; set; }
+        public string Author { get; set; }
+        public DateTime DatePosted { get; set; }
+        public string Message { get; set; }
+        public int Likes { get; set; }
+        public virtual ICollection<CommentEntity> Comments { get; set; }
+    }
+}</code></pre>
+and create CommentEntity class:
+<pre><code>using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Post.Query.Domain.Entities
+{
+    [Table("Comment")]
+    public class CommentEntity
+    {
+        [Key]
+        public Guid CommentId { get; set; }
+        public string Username { get; set; }
+        public DateTime CommentDate { get; set; }
+        public string Comment { get; set; }
+        public bool Edited { get; set; }
+        public Guid PostId { get; set; }
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        public virtual PostEntity Post { get; set; }
+    }
+}</code></pre>
+<h3>IPostRepository</h3>
+At PostQuery.Domain /Repositories
+<pre><code>using Post.Query.Domain.Entities;
+
+namespace Post.Query.Domain.Repositories
+{
+    public interface IPostRepository
+    {
+        Task CreateAsync(PostEntity post);
+        Task UpdateAsync(PostEntity post);
+        Task DeleteAsync(Guid postId);
+        Task<PostEntity> GetByIdAsync(Guid postId);
+        Task<List<PostEntity>> ListAllAsync();
+        Task<List<PostEntity>> ListByAuthorAsync(string author);
+        Task<List<PostEntity>> ListWithLikesAsync(int numberOfLikes);
+        Task<List<PostEntity>> ListWithCommentsAsync();
+    }
+}</code></pre>
+<h3>ICommentRepository</h3>
+At Post.Query.Domain/Repositories, create ICommandRepository class:
+<pre><code>using Post.Query.Domain.Entities;
+
+namespace Post.Query.Domain.Repositories
+{
+    public interface ICommentRepository
+    {
+        Task CreateAsync(CommentEntity comment);
+        Task UpdateAsync(CommentEntity comment);
+        Task<CommentEntity> GetByIdAsync(Guid commentId);
+        Task DeleteAsync(Guid commentId);
+    }
+}</code></pre>
+
+</div>
+<h2>Read Database</h2>
+<div>
+<h3>Database Context</h3>   
+At Post.Query.Infrastructure/DataAccess , create DatabaseContext class :
+<pre><code>using Microsoft.EntityFrameworkCore;
+using Post.Query.Domain.Entities;
+
+namespace Post.Query.Infrastructure.DataAccess
+{
+    public class DatabaseContext : DbContext
+    {
+        public DatabaseContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        public DbSet<PostEntity> Posts { get; set; }
+        public DbSet<CommentEntity> Comments { get; set; }
+    }
+}</code></pre>
+<h3>DatabaseContextFactory class</h3>
+At Post.Query.Infrastructure/DataAccess , create DatabaseContext class :
+<pre><code>using Microsoft.EntityFrameworkCore;
+
+namespace Post.Query.Infrastructure.DataAccess
+{
+    public class DatabaseContextFactory
+    {
+        private readonly Action<DbContextOptionsBuilder> _configureDbContext;
+
+        public DatabaseContextFactory(Action<DbContextOptionsBuilder> configureDbContext)
+        {
+            _configureDbContext = configureDbContext;
+        }
+
+        public DatabaseContext CreateDbContext()
+        {
+            DbContextOptionsBuilder<DatabaseContext> optionsBuilder = new();
+            _configureDbContext(optionsBuilder);
+
+            return new DatabaseContext(optionsBuilder.Options);
+        }
+    }
+}</code></pre>
+<h3>Programmatically Create DB & Tables on Startup</h3>
+At Post.Query.Api /Program.cs :
+<pre><code>
+using Microsoft.EntityFrameworkCore;
+using Post.Query.Infrastructure.DataAccess;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+Action<DbContextOptionsBuilder> configureDbContext = o => o.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+builder.Services.AddDbContext<DatabaseContext>(configureDbContext);
+builder.Services.AddSingleton<DatabaseContextFactory>(new DatabaseContextFactory(configureDbContext));
+
+// Create database and tables from code
+var dataContext = builder.Services.BuildServiceProvider().GetRequiredService<DatabaseContext>();
+dataContext.Database.EnsureCreated();
+
+builder.Services.AddControllers();
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+</code></pre>
+<h3>PostRepository class</h3>
+At Post.Query.Infrastructure /Repositories/ , create PostRepository class :
+<pre><code>using Microsoft.EntityFrameworkCore;
+using Post.Query.Domain.Entities;
+using Post.Query.Domain.Repositories;
+using Post.Query.Infrastructure.DataAccess;
+
+namespace Post.Query.Infrastructure.Repositories
+{
+    public class PostRepository : IPostRepository
+    {
+        private readonly DatabaseContextFactory _contextFactory;
+
+        public PostRepository(DatabaseContextFactory contextFactory)
+        {
+            _contextFactory = contextFactory;
+        }
+
+        public async Task CreateAsync(PostEntity post)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            context.Posts.Add(post);
+
+            _ = await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Guid postId)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            var post = await GetByIdAsync(postId);
+
+            if (post == null) return;
+
+            context.Posts.Remove(post);
+            _ = await context.SaveChangesAsync();
+        }
+
+        public async Task<PostEntity> GetByIdAsync(Guid postId)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            return await context.Posts
+                    .Include(p => p.Comments)
+                    .FirstOrDefaultAsync(x => x.PostId == postId);
+        }
+
+        public async Task<List<PostEntity>> ListAllAsync()
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            return await context.Posts.AsNoTracking()
+                    .Include(p => p.Comments).AsNoTracking()
+                    .ToListAsync();
+        }
+
+        public async Task<List<PostEntity>> ListByAuthorAsync(string author)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            return await context.Posts.AsNoTracking()
+                    .Include(p => p.Comments).AsNoTracking()
+                    .Where(x => x.Author.Contains(author))
+                    .ToListAsync();
+        }
+
+        public async Task<List<PostEntity>> ListWithCommentsAsync()
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            return await context.Posts.AsNoTracking()
+                    .Include(p => p.Comments).AsNoTracking()
+                    .Where(x => x.Comments != null && x.Comments.Any())
+                    .ToListAsync();
+        }
+
+        public async Task<List<PostEntity>> ListWithLikesAsync(int numberOfLikes)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            return await context.Posts.AsNoTracking()
+                    .Include(p => p.Comments).AsNoTracking()
+                    .Where(x => x.Likes >= numberOfLikes)
+                    .ToListAsync();
+        }
+
+        public async Task UpdateAsync(PostEntity post)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            context.Posts.Update(post);
+
+            _ = await context.SaveChangesAsync();
+        }
+    }
+}</code></pre>
+<h3>CommentRepository</h3>
+At Post.Query.Infrastructure / Repositories 
+<pre><code>using Microsoft.EntityFrameworkCore;
+using Post.Query.Domain.Entities;
+using Post.Query.Domain.Repositories;
+using Post.Query.Infrastructure.DataAccess;
+
+namespace Post.Query.Infrastructure.Repositories
+{
+    public class CommentRepository : ICommentRepository
+    {
+        private readonly DatabaseContextFactory _contextFactory;
+
+        public CommentRepository(DatabaseContextFactory contextFactory)
+        {
+            _contextFactory = contextFactory;
+        }
+
+        public async Task CreateAsync(CommentEntity comment)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            context.Comments.Add(comment);
+
+            _ = await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Guid commentId)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            var comment = await GetByIdAsync(commentId);
+
+            if (comment == null) return;
+
+            context.Comments.Remove(comment);
+            _ = await context.SaveChangesAsync();
+        }
+
+        public async Task<CommentEntity> GetByIdAsync(Guid commentId)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            return await context.Comments.FirstOrDefaultAsync(x => x.CommentId == commentId);
+        }
+
+        public async Task UpdateAsync(CommentEntity comment)
+        {
+            using DatabaseContext context = _contextFactory.CreateDbContext();
+            context.Comments.Update(comment);
+
+            _ = await context.SaveChangesAsync();
+        }
+    }
+}</code></pre>
+</div>
+<h2>Event handling</h2>
+<div>
+<h3>IEventHandler</h3>
+at Post.Query.Infrastructure / Handlers, create IEventHandler interface :
+<pre><code>using Post.Common.Events;
+
+namespace Post.Query.Infrastructure.Handlers
+{
+    public interface IEventHandler
+    {
+        Task On(PostCreatedEvent @event);
+        Task On(MessageUpdatedEvent @event);
+        Task On(PostLikedEvent @event);
+        Task On(CommentAddedEvent @event);
+        Task On(CommentUpdatedEvent @event);
+        Task On(CommentRemovedEvent @event);
+        Task On(PostRemovedEvent @event);
+    }
+}</code></pre>
+<h3>Event Handler</h3>
+ At SM-Post\Post.Query\Post.Query.Infrastructure\Handlers\ , create EventHandler
+<pre><code>using Post.Common.Events;
+using Post.Query.Domain.Entities;
+using Post.Query.Domain.Repositories;
+
+namespace Post.Query.Infrastructure.Handlers
+{
+    public class EventHandler : IEventHandler
+    {
+        private readonly IPostRepository _postRepository;
+        private readonly ICommentRepository _commentRepository;
+
+        public EventHandler(IPostRepository postRepository, ICommentRepository commentRepository)
+        {
+            _postRepository = postRepository;
+            _commentRepository = commentRepository;
+        }
+
+        public async Task On(PostCreatedEvent @event)
+        {
+            var post = new PostEntity
+            {
+                PostId = @event.Id,
+                Author = @event.Author,
+                DatePosted = @event.DatePosted,
+                Message = @event.Message
+            };
+
+            await _postRepository.CreateAsync(post);
+        }
+
+        public async Task On(MessageUpdatedEvent @event)
+        {
+            var post = await _postRepository.GetByIdAsync(@event.Id);
+
+            if (post == null) return;
+
+            post.Message = @event.Message;
+            await _postRepository.UpdateAsync(post);
+        }
+
+        public async Task On(PostLikedEvent @event)
+        {
+            var post = await _postRepository.GetByIdAsync(@event.Id);
+
+            if (post == null) return;
+
+            post.Likes++;
+            await _postRepository.UpdateAsync(post);
+        }
+
+        public async Task On(CommentAddedEvent @event)
+        {
+            var comment = new CommentEntity
+            {
+                PostId = @event.Id,
+                CommentId = @event.CommentId,
+                CommentDate = @event.CommentDate,
+                Comment = @event.Comment,
+                Username = @event.Username,
+                Edited = false
+            };
+
+            await _commentRepository.CreateAsync(comment);
+        }
+
+        public async Task On(CommentUpdatedEvent @event)
+        {
+            var comment = await _commentRepository.GetByIdAsync(@event.CommentId);
+
+            if (comment == null) return;
+
+            comment.Comment = @event.Comment;
+            comment.Edited = true;
+            comment.CommentDate = @event.EditDate;
+
+            await _commentRepository.UpdateAsync(comment);
+        }
+
+        public async Task On(CommentRemovedEvent @event)
+        {
+            await _commentRepository.DeleteAsync(@event.CommentId);
+        }
+
+        public async Task On(PostRemovedEvent @event)
+        {
+            await _postRepository.DeleteAsync(@event.Id);
+        }
+    }
+}</code></pre>
+</div>
+<h2>Event Consumer</h2>
+<div>
+<h3>IEventConsumer Interface</h3>
+At CQRS.Core /Consumers ,create IEventConsumer interface:
+<pre><code>namespace CQRS.Core.Consumers
+{
+    public interface IEventConsumer
+    {
+        void Consume(string topic);
+    }
+}</code></pre>
+<h3>EventJsonConverter</h3>
+At Post.Query.Infrastructure /Converter , create EventJsonConverter class 
+<pre><code>using System.Text.Json;
+using System.Text.Json.Serialization;
+using CQRS.Core.Events;
+using Post.Common.Events;
+
+namespace Post.Query.Infrastructure.Converters
+{
+    public class EventJsonConverter : JsonConverter<BaseEvent>
+    {
+        public override bool CanConvert(Type typeToConvert)
+        {
+            return typeToConvert.IsAssignableFrom(typeof(BaseEvent));
+        }
+
+        public override BaseEvent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (!JsonDocument.TryParseValue(ref reader, out var doc))
+            {
+                throw new JsonException($"Failed to parse {nameof(JsonDocument)}!");
+            }
+
+            if (!doc.RootElement.TryGetProperty("Type", out var type))
+            {
+                throw new JsonException("Could not detect the Type discriminator property!");
+            }
+
+            var typeDiscriminator = type.GetString();
+            var json = doc.RootElement.GetRawText();
+
+            return typeDiscriminator switch
+            {
+                nameof(PostCreatedEvent) => JsonSerializer.Deserialize<PostCreatedEvent>(json, options),
+                nameof(MessageUpdatedEvent) => JsonSerializer.Deserialize<MessageUpdatedEvent>(json, options),
+                nameof(PostLikedEvent) => JsonSerializer.Deserialize<PostLikedEvent>(json, options),
+                nameof(CommentAddedEvent) => JsonSerializer.Deserialize<CommentAddedEvent>(json, options),
+                nameof(CommentUpdatedEvent) => JsonSerializer.Deserialize<CommentUpdatedEvent>(json, options),
+                nameof(CommentRemovedEvent) => JsonSerializer.Deserialize<CommentRemovedEvent>(json, options),
+                nameof(PostRemovedEvent) => JsonSerializer.Deserialize<PostRemovedEvent>(json, options),
+                _ => throw new JsonException($"{typeDiscriminator} is not supported yet!")
+            };
+        }
+
+        public override void Write(Utf8JsonWriter writer, BaseEvent value, JsonSerializerOptions options)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}</code></pre>
+<h3></h3>
+At Post.Query.Infrastructure /Consumer 
+<pre><code>
+using System.Text.Json;
+using Confluent.Kafka;
+using CQRS.Core.Consumers;
+using CQRS.Core.Events;
+using Microsoft.Extensions.Options;
+using Post.Query.Infrastructure.Converters;
+using Post.Query.Infrastructure.Handlers;
+
+namespace Post.Query.Infrastructure.Consumers
+{
+    public class EventConsumer : IEventConsumer
+    {
+        private readonly ConsumerConfig _config;
+        private readonly IEventHandler _eventHandler;
+
+        public EventConsumer(IOptions<ConsumerConfig> config, IEventHandler eventHandler)
+        {
+            _config = config.Value;
+            _eventHandler = eventHandler;
+        }
+
+        public void Consume(string topic)
+        {
+            using var consumer = new ConsumerBuilder<string, string>(_config)
+                        .SetKeyDeserializer(Deserializers.Utf8)
+                        .SetValueDeserializer(Deserializers.Utf8)
+                        .Build();
+
+            consumer.Subscribe(topic);
+
+            while (true)
+            {
+                var consumeResult = consumer.Consume();
+
+                if (consumeResult?.Message == null) continue;
+
+                var options = new JsonSerializerOptions { Converters = { new EventJsonConverter() } };
+                var @event = JsonSerializer.Deserialize<BaseEvent>(consumeResult.Message.Value, options);
+                var handlerMethod = _eventHandler.GetType().GetMethod("On", new Type[] { @event.GetType() });
+
+                if (handlerMethod == null)
+                {
+                    throw new ArgumentNullException(nameof(handlerMethod), "Could not find event handler method!");
+                }
+
+                handlerMethod.Invoke(_eventHandler, new object[] { @event });
+                consumer.Commit(consumeResult);
+            }
+        }
+    }
+}    
+</code></pre>
+<h3>ConsumerHostedService</h3>
+ At Post.Query.Infrastructure /Consumer , create ConsumerHostedService class 
+ <pre><code>using CQRS.Core.Consumers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
+namespace Post.Query.Infrastructure.Consumers
+{
+    public class ConsumerHostedService : IHostedService
+    {
+        private readonly ILogger<ConsumerHostedService> _logger;
+        private readonly IServiceProvider _serviceProvider;
+
+        public ConsumerHostedService(ILogger<ConsumerHostedService> logger, IServiceProvider serviceProvider)
+        {
+            _logger = logger;
+            _serviceProvider = serviceProvider;
+        }
+
+        public Task StartAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Event consumer service running.");
+
+            using (IServiceScope scope = _serviceProvider.CreateScope())
+            {
+                var eventConsumer = scope.ServiceProvider.GetRequiredService<IEventConsumer>();
+                var topic = Environment.GetEnvironmentVariable("KAFKA_TOPIC");
+
+                Task.Run(() => eventConsumer.Consume(topic), cancellationToken);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Event consumer service stopped.");
+
+            return Task.CompletedTask;
+        }
+    }
+}</code></pre>
+</div>
+<h2>Command Controllers</h2>
+<div>
+<h3>DTOs</h3>
+AT Post.Common/DTos/ , create BaseResponse class:
+<pre><code>namespace Post.Common.DTOs
+{
+    public class BaseResponse
+    {
+        public string Message { get; set; }
+    }
+}</code></pre>
+AT Post.Cmd.Api/DTos/ , create NewPoatResponse class 
+<pre><code>using Post.Common.DTOs;
+
+namespace Post.Cmd.Api.DTOs
+{
+    public class NewPostResponse : BaseResponse
+    {
+        public Guid Id { get; set; }
+    }
+}</code></pre>
+
+<h3>NewPostController</h3>
+At SM-Post\Post.Cmd\Post.Cmd.Api\Controllers , create class NewPostController:
+<pre><code>using CQRS.Core.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
+using Post.Cmd.Api.Commands;
+using Post.Cmd.Api.DTOs;
+using Post.Common.DTOs;
+
+namespace Post.Cmd.Api.Controllers
+{
+    [ApiController]
+    [Route("api/v1/[controller]")]
+    public class NewPostController : ControllerBase
+    {
+        private readonly ILogger<NewPostController> _logger;
+        private readonly ICommandDispatcher _commandDispatcher;
+
+        public NewPostController(ILogger<NewPostController> logger, ICommandDispatcher commandDispatcher)
+        {
+            _logger = logger;
+            _commandDispatcher = commandDispatcher;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> NewPostAsync(NewPostCommand command)
+        {
+            var id = Guid.NewGuid();
+            try
+            {
+                command.Id = id;
+                await _commandDispatcher.SendAsync(command);
+
+                return StatusCode(StatusCodes.Status201Created, new NewPostResponse
+                {
+                    Message = "New post creation request completed successfully!"
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.Log(LogLevel.Warning, ex, "Client made a bad request!");
+                return BadRequest(new BaseResponse
+                {
+                    Message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                const string SAFE_ERROR_MESSAGE = "Error while processing request to create a new post!";
+                _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new NewPostResponse
+                {
+                    Id = id,
+                    Message = SAFE_ERROR_MESSAGE
+                });
+            }
+        }
+    }
+}</code></pre>
+<h3>Debugging breactpoint at NewPostController/newPost </h3>
+At postman create this  Post request:
+<cl>
+http://localhost:5010/api/v1/newPost
+Body/raw/Json: 
+{
+    "Author":"John Doe",
+    "message":"CQRS Event sourcing microservices"
+}
+</cl>
+- you can step into break pointed code and trace it.
+- after trace complete, you can check mongodb for inserted row.
+- at the consumer side put breakpoit at EventConsumer/Consumer.consume().
+- after trace complete, you can check sqlserver for inserted row.
+- the id of row at read database(sqlserver) is equal to AggreagateIdentifier at corresponding row at write database (mongodb)
+
+<h3>EditMessageController</h3>
+At <cli>sm-post / Post.Cmd /Post.Cmd.Api/Controllers/</cli> create EditMessageController class:
+<cl>
+    using CQRS.Core.Exceptions;
+    using CQRS.Core.Infrastructure;
+    using Microsoft.AspNetCore.Mvc;
+    using Post.Cmd.Api.Commands;
+    using Post.Common.DTOs;
+    
+    namespace Post.Cmd.Api.Controllers
+    {
+        [ApiController]
+        [Route("api/v1/[controller]")]
+        public class EditMessageController : ControllerBase
+        {
+            private readonly ILogger< EditMessageController> _logger;
+            private readonly ICommandDispatcher _commandDispatcher;
+    
+            public EditMessageController(ILogger< EditMessageController> logger, ICommandDispatcher commandDispatcher)
+            {
+                _logger = logger;
+                _commandDispatcher = commandDispatcher;
+            }
+    
+            [HttpPut("{id}")]
+            public async Task< ActionResult> EditMessageAsync(Guid id, EditMessageCommand command)
+            {
+                try
+                {
+                    command.Id = id;
+                    await _commandDispatcher.SendAsync(command);
+    
+                    return Ok(new BaseResponse
+                    {
+                        Message = "Edit message request completed successfully!"
+                    });
+                }
+                catch (InvalidOperationException ex)
+                {
+                    _logger.Log(LogLevel.Warning, ex, "Client made a bad request!");
+                    return BadRequest(new BaseResponse
+                    {
+                        Message = ex.Message
+                    });
+                }
+                catch (AggregateNotFoundException ex)
+                {
+                    _logger.Log(LogLevel.Warning, ex, "Could not retrieve aggregate, client passed an incorrect post ID targetting the aggregate!");
+                    return BadRequest(new BaseResponse
+                    {
+                        Message = ex.Message
+                    });
+                }
+                catch (Exception ex)
+                {
+                    const string SAFE_ERROR_MESSAGE = "Error while processing request to edit the message of a post!";
+                    _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
+    
+                    return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse
+                    {
+                        Message = SAFE_ERROR_MESSAGE
+                    });
+                }
+            }
+        }
+    }    
+</cl>
+<h3>LikePostController</h3>
+At <cli>sm-post / Post.Cmd /Post.Cmd.Api/Controllers/</cli> create LikePostController class:
+<cl>
+    using CQRS.Core.Exceptions;
+    using CQRS.Core.Infrastructure;
+    using Microsoft.AspNetCore.Mvc;
+    using Post.Cmd.Api.Commands;
+    using Post.Common.DTOs;
+    
+    namespace Post.Cmd.Api.Controllers
+    {
+        [ApiController]
+        [Route("api/v1/[controller]")]
+        public class LikePostController : ControllerBase
+        {
+            private readonly ILogger<LikePostController> _logger;
+            private readonly ICommandDispatcher _commandDispatcher;
+    
+            public LikePostController(ILogger<LikePostController> logger, ICommandDispatcher commandDispatcher)
+            {
+                _logger = logger;
+                _commandDispatcher = commandDispatcher;
+            }
+    
+            [HttpPut("{id}")]
+            public async Task<ActionResult> LikePostAsync(Guid id)
+            {
+                try
+                {
+                    await _commandDispatcher.SendAsync(new LikePostCommand { Id = id });
+    
+                    return Ok(new BaseResponse
+                    {
+                        Message = "Like post request completed successfully!"
+                    });
+                }
+                catch (InvalidOperationException ex)
+                {
+                    _logger.Log(LogLevel.Warning, ex, "Client made a bad request!");
+                    return BadRequest(new BaseResponse
+                    {
+                        Message = ex.Message
+                    });
+                }
+                catch (AggregateNotFoundException ex)
+                {
+                    _logger.Log(LogLevel.Warning, ex, "Could not retrieve aggregate, client passed an incorrect post ID targetting the aggregate!");
+                    return BadRequest(new BaseResponse
+                    {
+                        Message = ex.Message
+                    });
+                }
+                catch (Exception ex)
+                {
+                    const string SAFE_ERROR_MESSAGE = "Error while processing request to like a post!";
+                    _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
+    
+                    return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse
+                    {
+                        Message = SAFE_ERROR_MESSAGE
+                    });
+                }
+            }
+        }
+    }
+</cl>
+<h3>Debugging breakpoint the LikePostController</h3>
+- put a breakpoint at the method LikePostAsync at Post.Cmd.Api.Controllers/LikePostController
+- Like post request goes to the social media post of http.
+We need to add a breakpoint in :
+The command dispatcher In the command handler.
+The event sourcing handler.
+The post aggregate.
+The aggregate root.
+The event store.
+The event store repository.
+The event publisher.
+The event, consumer event handler and the post repository.
+<h3>AddCommentController</h3>
+At <cli>sm-post / Post.Cmd /Post.Cmd.Api/Controllers/</cli> create AddCommentController class:
+<cl>
+    using CQRS.Core.Exceptions;
+    using CQRS.Core.Infrastructure;
+    using Microsoft.AspNetCore.Mvc;
+    using Post.Cmd.Api.Commands;
+    using Post.Common.DTOs;
+    
+    namespace Post.Cmd.Api.Controllers
+    {
+        [ApiController]
+        [Route("api/v1/[controller]")]
+        public class AddCommentController : ControllerBase
+        {
+            private readonly ILogger<AddCommentController> _logger;
+            private readonly ICommandDispatcher _commandDispatcher;
+    
+            public AddCommentController(ILogger<AddCommentController> logger, ICommandDispatcher commandDispatcher)
+            {
+                _logger = logger;
+                _commandDispatcher = commandDispatcher;
+            }
+    
+            [HttpPut("{id}")]
+            public async Task<ActionResult> AddCommentAsync(Guid id, AddCommentCommand command)
+            {
+                try
+                {
+                    command.Id = id;
+                    await _commandDispatcher.SendAsync(command);
+    
+                    return Ok(new BaseResponse
+                    {
+                        Message = "Add comment request completed successfully!"
+                    });
+                }
+                catch (InvalidOperationException ex)
+                {
+                    _logger.Log(LogLevel.Warning, ex, "Client made a bad request!");
+                    return BadRequest(new BaseResponse
+                    {
+                        Message = ex.Message
+                    });
+                }
+                catch (AggregateNotFoundException ex)
+                {
+                    _logger.Log(LogLevel.Warning, ex, "Could not retrieve aggregate, client passed an incorrect post ID targetting the aggregate!");
+                    return BadRequest(new BaseResponse
+                    {
+                        Message = ex.Message
+                    });
+                }
+                catch (Exception ex)
+                {
+                    const string SAFE_ERROR_MESSAGE = "Error while processing request to add a comment to a post!";
+                    _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
+    
+                    return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse
+                    {
+                        Message = SAFE_ERROR_MESSAGE
+                    });
+                }
+            }
+        }
+    }    
+</cl>
+<h3>Test Adding a post and tracing its code by breakpoint</h3>
+</div>
+<h2>14. Queries & Query Dispatching</h2>
+<div>°</div>
+<h2>15. Query Handling</h2>
+<div>°</div>
+<h2>16. Query Controller</h2>
+<div>°</div>
+<h2>17. A Powerful Ending</h2>
+<div>°</div>
+</body>

@@ -1,0 +1,155 @@
+<head>
+  <meta charset="UTF-8">  
+    <link rel="stylesheet" href="../assets/css/block.css">
+    <script src="../assets/js/block.js"></script>
+    <link rel="stylesheet" href="../libs/highlight/androidstudio2.css">
+    <script src="../libs/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<h1>Pinescript Tutorial </h1>
+<script>
+var objConcepts=BlockGroup("Basic definitions");
+// Block(options)
+// title,body,code,codetype,widt,hei,imageSrc=null,padding="5",imagWidth="100%",parent=document,imagesOnRight=false,codeOnRight=false)
+var options=[];
+var  i=0;
+options[i++]={
+  title:"Sample code",
+  body:`
+  implementation of the MACD indicator in Pine
+    `,
+  code:`
+  //@version=4
+study("MACD")
+fast = 12, slow = 26
+fastMA = ema(close, fast)
+slowMA = ema(close, slow)
+macd = fastMA - slowMA
+signal = sma(macd, 9)
+plot(macd, color=color.blue)
+plot(signal, color=color.orange)
+
+  `,
+
+  parent:objConcepts
+};
+
+options[i++]={
+  title:"“study” vs “strategy”",
+  body:`
+   <b>Strategies</b> are used to run backtests.
+   In addition to normal script calculations, they also contain strategy.
+   *() calls to send buy and sell orders to the broker emulator, which can then simulate their execution.
+
+  <b>studies</b>, as the one in the previous example, also contain calculations, but cannot be used in backtesting.
+ Because they do not make use of the broker emulator, they use less resources and will run faster.
+
+ Both strategies and studies can run in either overlay or pane mode, and plot information in that space. 
+ Both can also generate alert events.
+  `,
+  code:``,
+  codetype:"javascript",
+   parent:objConcepts
+}
+
+
+options[i++]={
+  title:"Execution model of Pine scripts",
+  body:`
+  
+A Pine script is not like many normal programs that execute once and then stop.
+ In the Pine runtime environment, a script runs in the equivalent of an invisible loop
+  where it is executed once on each historical bar. 
+  
+  When execution reaches the last, real-time bar, 
+  the script executes once every time a price or volume change is detected, 
+  then one final time when the real-time bar closes and becomes a historical bar.
+
+By default, Pine strategies only execute once at the close of real-time bars,
+ but they can also be instructed to execute on each price change, as studies do.
+
+
+  `,
+  code:``,
+  codetype:"javascript",
+   parent:objConcepts
+}
+
+options[i++]={
+  title:"Series",
+  body:`
+The main data type used in Pine scripts is called a series.
+ It is a continuous list of values that stretches back in time from the current bar 
+ and where one value exists for each bar. 
+ While this structure may remind many of an array, 
+ a Pine series is totally different and thinking in terms of arrays will be detrimental to understanding this key Pine concept.
+ You can read about series here and get more information on how to use them here. `,
+  code:``,
+  codetype:"javascript",
+   parent:objConcepts
+}
+
+options[i++]={
+  title:"working with Pine Editor",
+  body:` The Pine Editor is where you will be working on your scripts.
+   To open it, click on the Pine Editor tab at the bottom of your TradingView chart. 
+   This will open up the editor’s window. We will create our first working Pine script. 
+   Start by bringing up the “New” dropdown menu at the top right of the editor and choose Blank indicator script. 
+   Then copy the previous example script, select all code already in the editor and replace it with the example script. 
+   Click Save, choose a name and then click Add to Chart. The MACD indicator will appear in a separate Pane under the chart.
+
+  From here, you can change the script’s code. 
+  For example, change the last line’s color.orange for color.fuchsia. When you save the script, 
+  the change will be reflected in the indicator’s pane. `,
+  code:``,
+  codetype:"javascript",
+   parent:objConcepts
+}
+
+
+
+options[i++]={
+  title:"Using all ‘alert()’ calls",
+  body:` Let’s look at an example where we detect crosses of the RSI centerline:`,
+  code:`//@version=4
+study("All 'alert()' calls")
+r = rsi(close, 20)
+
+// Detect crosses.
+xUp = crossover( r, 50)
+xDn = crossunder(r, 50)
+// Trigger an alert on crosses.
+if xUp
+    alert("Go long (RSI is " + tostring(r, "#.00)"))
+else if xDn
+    alert("Go short (RSI is " + tostring(r, "#.00)"))
+
+plotchar(xUp, "Go Long",  "▲", location.bottom, color.lime, size = size.tiny)
+plotchar(xDn, "Go Short", "▼", location.top,    color.red,  size = size.tiny)
+hline(50)
+plot(r)`,
+  codetype:"javascript",
+   parent:objConcepts
+}
+
+options[i++]={
+  title:"continue...",
+  body:`https://www.tradingview.com/pine-script-docs/en/v4/essential/Arrays.html `,
+  code:``,
+  codetype:"javascript",
+   parent:objConcepts
+}
+options[i++]={
+  title:"",
+  body:` `,
+  code:``,
+  codetype:"javascript",
+   parent:objConcepts
+}
+RenderBlocks(options);
+ 
+  </script>
+ <br>
+
+ </body>

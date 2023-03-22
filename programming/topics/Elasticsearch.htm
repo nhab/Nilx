@@ -1,0 +1,741 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />refrences</h2>
+<div>
+  <a href='https://social.technet.microsoft.com/wiki/contents/articles/34476.searching-data-in-elasticsearch-using-c.aspx'>elastic c#</a>
+</div>      
+      <h2>What is Elasticsearch(ES)?</h2>
+<div>-  is a distributed,RESTful  search and analytics engine for all types of data, including 
+textual, numerical, geospatial, structured, and unstructured. 
+- is a NoSQL database. 
+- You send data and other requests to Elasticsearch using REST APIs.
+- is used together with the other components in the ELK Stack, 
+Logstash and Kibana, and plays the role of data indexing and storage.
+</div>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Installing </h2>
+<div>- install Oracle JDK version 1.8.0_131
+- set JAVA_HOME environment variable in win windows
+<pre><code>java -version</code></pre>
+- in file explorer bar,test : %JAVA_HOME%
+- <a href="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.0.1.msi">download</a> and install
+- to Start Elasticsearch,Run:
+ <pre><code>bin\elasticsearch.bat</code></pre> on Windows to start Elasticsearch with security enabled.
+ - Elastic is started by default in port 9200
+ - In the <a href='https://www.postman.com/downloads/'>postman:</a><pre><code>GET localhost:9200</code></pre> 
+</div>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Basic examples</h2>
+<div><h3>to list indexes</h3><cl>curl http://localhost:9200/_aliases?pretty=true</cl>
+<h3>creating a document and adding to it:</h3>
+<div><pre><code>POST localhost:9200/accounts/person/1 
+    {
+        "name" : "John",
+        "lastname" : "Doe",
+        "job_description" : "Systems administrator and Linux specialit"
+    }
+</code></pre>
+Elasticsearch will automatically add id 1.
+</div>
+<h3>Retrieving data</h3>
+<pre><code>
+    GET localhost:9200/accounts/person/1 
+</code></pre>
+<h3>Updating the document</h3>
+<pre><code>
+POST localhost:9200/accounts/person/1/_update
+{
+      "doc":{
+          "job_description" : "Systems administrator and Linux specialist"
+       }
+}
+</code></pre>
+<h3>Deleting a document</h3>
+<pre><code>
+    DELETE localhost:9200/accounts/person/1
+</code></pre>
+  
+<h3>Searching the collection</h3>
+<div>
+To prepare for the next operations, let’s add an additional document with id 2:
+<pre><code>POST localhost:9200/accounts/person/2
+{
+    "name" : "John",
+    "lastname" : "Smith",
+    "job_description" : "Systems administrator"
+}
+</code></pre>
+ search examples :
+<pre><code>
+//finds anywhere:
+GET localhost:9200/_search?q=john  
+
+//finds in job_description
+GET localhost:9200/_search?q=job_description:john
+</code></pre>
+<h3>Match Query</h3>
+is used for  full-text query.
+Let us search for the word “heuristic” contained in the field called “phrase” in the documents we ingested earlier.
+<pre><code>
+POST employees/_search
+{
+    "query": {
+    "match": {
+        "phrase": {
+        "query" : "heuristic"
+        }
+    }
+    }
+}
+</code></pre>
+<h3>Match Phrase</h3>
+If we needed to search for the phrase “roots heuristic coherent” in the “phrase” field in the employee index, we can use the “match_phrase” query:
+<pre><code>
+    GET employees/_search
+    {
+      "query": {
+        "match_phrase": {
+          "phrase": {
+            "query": "roots heuristic coherent"
+          }
+        }
+      }
+    }  
+</code></pre>
+<h3>Slop Parameter</h3>
+Suppose we searched for “roots coherent” with the match_phrase query. 
+We wouldn’t receive any documents returned from the employee index. 
+This is because for match_phrase to match, the terms need to be in the exact order.
+<pre><code>
+    GET employees/_search
+    {
+      "query": {
+        "match_phrase": {
+          "phrase": {
+            "query": "roots coherent",
+            "slop": 1
+          }
+        }
+      }
+    }
+</code></pre>
+<h3>Match Phrase Prefix</h3>
+The match_phrase_prefix query is similar to the match_phrase query, 
+but here the last term of the search keyword is considered as a prefix and is used to match any term starting with that prefix term.
+
+<pre><code>
+    PUT employees/_doc/5
+    {
+      "id": 4,
+      "name": "Jennifer Lawrence",
+      "email": "jlaw@example.com",
+      "gender": "female",
+      "ip_address": "100.37.110.59",
+      "date_of_birth": "17/05/1995",
+      "company": "Monsnto",
+      "position": "Resources Manager",
+      "experience": 10,
+      "country": "Germany",
+      "phrase": "Emulation of roots heuristic complete systems",
+      "salary": 300000
+    }
+</code></pre>
+Now let’s apply the match_phrase_prefix:
+<pre><code>
+    GET employees/_search
+    {
+    "_source": [ "phrase" ],
+      "query": {
+        "match_phrase_prefix": {
+          "phrase": {
+            "query": "roots heuristic co"
+          }
+        }
+      }
+    }  
+</code></pre>
+<h3>Term Level Queries</h3>
+Term level queries are used to query structured data, which would usually be the exact values.
+<pre><code>
+    POST employees/_search
+    {
+      "query": {
+        "terms": {
+          "gender": [
+            "female",
+            "male"
+          ]
+        }
+      }
+    }
+</code></pre>
+<h3>Exists Queries</h3>
+Sometimes it happens that there is no indexed value for a field, or the field does not exist in the document.
+ In such cases, it helps in identifying such documents and analyzing the impact.
+For example, let us index a document like below to the “employees” index
+<pre><code>
+    PUT employees/_doc/5
+    {
+      "id": 5,
+      "name": "Michael Bordon",
+      "email": "mbordon@example.com",
+      "gender": "male",
+      "ip_address": "10.47.210.65",
+      "date_of_birth": "12/12/1995",
+      "position": "Resources Manager",
+      "experience": 12,
+      "country": null,
+      "phrase": "Emulation of roots heuristic coherent systems",
+      "salary": 300000
+    }
+</code></pre>
+<h3>Range Queries</h3>
+Another most commonly used query in the Elasticsearch world is the range query. 
+The range query allows us to get the documents that contain the terms within the specified range.
+Range query is a term level query (means using to query structured data) and can be used against numerical fields, date fields, etc.
+
+For example, in the data set, we have created, if we need to filter out the people who have experience level between 5 to 10 years:
+<pre><code>
+    POST employees/_search
+    {
+        "query": {
+            "range" : {
+                "experience" : {
+                    "gte" : 5,
+                    "lte" : 10
+                }
+            }
+        }
+    }
+</code></pre>
+<h3>Wildcard Queries</h3>
+<pre><code>
+    GET employees/_search
+    {
+        "query": {
+            "wildcard": {
+                "country": {
+                    "value": "c*a"
+                }
+            }
+        }
+    }
+</code></pre>
+<h3>Regexp</h3>
+<pre><code>
+    GET employees/_search
+    {
+      "query": {
+        "regexp": {
+          "position": "res[a-z]*"
+        }
+      }
+    }
+</code></pre>
+<h3>Fuzzy</h3>The Fuzzy query can be used to return documents containing terms similar to that of the search term.
+ This is especially good when dealing with spelling mistakes.
+We can get results even if we search for “Chnia” instead of “China”, using the fuzzy query.
+<pre><code>
+    GET employees/_search
+    {
+      "query": {
+        "fuzzy": {
+          "country": {
+            "value": "Chnia",
+            "fuzziness": "2"
+          }
+        }
+      }
+    }
+</code></pre>
+<h3>Boosting</h3>
+While querying, it is often helpful to get the more favored results first.
+ The simplest way of doing this is called boosting in Elasticsearch. And this comes in handy when we query multiple fields.
+ <pre><code>
+    POST employees/_search
+    {
+        "query": {
+            "multi_match" : {
+                "query" : "versatile Engineer",
+                "fields": ["position^3", "phrase"]
+            }
+        }
+    }
+</code></pre>
+<h3>other things</h3>
+
+
+<pre><code>
+//sorting:
+
+GET employees/_search
+{
+   "_source": ["name","experience","salary"], 
+  "sort": [
+    {
+      "experience": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+// find all employees who have 12 years’ experience or more AND are also having “manager” word in the “position” field
+POST employees/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "position": "manager"
+          }
+        },
+        {
+          "range": {
+            "experience": {
+              "gte": 12
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+//This “should” condition is to match documents that contain the text “versatile” in the “phrase” fields of the documents. :
+POST employees/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "position": "manager"
+          }
+        },
+        {
+          "range": {
+            "experience": {
+              "gte": 12
+            }
+          }
+        }
+      ],
+    "should": [
+      {
+        "match": {
+          "phrase": "versatile"
+        }
+      }
+    ]
+    }
+  }
+}
+
+//(company = Yamaha OR company = Yozio ) AND (position = manager OR position = associate ) AND (salary>=100000) :
+POST employees/_search
+{
+    "query": {
+        "bool": {
+            "must": [
+              {
+                "bool": {
+                    "should": [{
+                        "match": {
+                            "company": "Talane"
+                        }
+                    }, {
+                        "match": {
+                            "company": "Yamaha"
+                        }
+                    }]
+                }
+            }, 
+            {
+                "bool": {
+                    "should": [
+                      {
+                        "match": {
+                            "position": "manager"
+                        }
+                    }, {
+                        "match": {
+                            "position": "Associate"
+                        }
+                    }
+                    ]
+                }
+            }, {
+                "bool": {
+                    "must": [
+                      {
+                        "range": {
+                          "salary": {
+                            "gte": 100000
+                          }
+                        }
+                      }
+                      ]
+                }
+            }]
+        }
+    }
+}
+
+//Boosting Queries: all the employees from China and then demote the employees from the company “Telane” in search results
+POST  employees/_search
+{
+    "query": {
+        "boosting" : {
+            "positive" : {
+                "match": {
+                  "country": "china"
+                }
+            },
+            "negative" : {
+                 "match": {
+                  "company": "Talane"
+                }
+            },
+            "negative_boost" : 0.5
+        }
+    }
+}
+
+//Function Score Queries. Let us include two filters in the “functions” part of the query. The first one would search for the term “coherent” in the “phrase” field of the document and if found will boost the score by a weight of 2. The second clause would search for the term “emulation” in the field “phrase” and will boost by a factor of 10, for such documents
+GET employees/_search
+{
+"_source": ["position","phrase"], 
+  "query": {
+    "function_score": {
+      "query": {
+        "match": {
+          "position": "manager"
+        }
+      },
+      "functions": [
+        {
+          "filter": {
+            "match": {
+              "phrase": "coherent"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "filter": {
+            "match": {
+              "phrase": "emulation"
+            }
+          },
+          "weight": 10
+        }
+      ],
+      "score_mode": "multiply", 
+      "boost": "5",
+      "boost_mode": "multiply"
+    }
+  }
+}
+
+// function_score: script_score
+GET employees/_search
+{
+  "_source": [
+    "name",
+    "experience",
+    "salary"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "match_all": {}
+      },
+      "functions": [
+        {
+          "script_score": {
+            "script": {
+              "source": "(doc['salary'].value/doc['experience'].value)/1000"
+            }
+          }
+        }
+      ],
+      "boost_mode": "replace"
+    }
+  }
+}
+
+//function_score: field_value_factor
+GET employees/_search
+{
+  "_source": ["name","experience"], 
+    "query": {
+        "function_score": {
+            "field_value_factor": {
+                "field": "experience",      
+                 "factor": 0.5,
+                "modifier": "square",
+                "missing": 1
+            }
+        }
+    }
+}
+
+//function_score: Decay Functions :the score will start to decay from the point of interest.
+// We need to score the employees based on their salaries. The ones near to 200000 and between the ranges 170000 to 230000 should get higher scoring, and the ones below and above the range should have the scores significantly lower.
+GET employees/_search
+{
+  "_source": [
+    "name",
+    "salary"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "match_all": {}
+      },
+      "functions": [
+       {
+         "gauss": {
+           "salary": {
+             "origin": 200000,
+             "scale": 30000
+           }
+         }
+       }
+      ],
+      "boost_mode": "replace"
+    }
+  }
+}
+
+// Parent-Child Query:
+PUT post-comments
+{
+  "mappings": {
+    "properties": {
+      "document_type": { 
+        "type": "join",
+        "relations": {
+          "post": "comment" 
+        }
+      }
+    }
+  }
+}
+
+// The has_child Query
+GET post-comments/_search
+{
+  "query": {
+    "has_child": {
+      "type": "comment",
+      "query": {
+        "match": {
+          "comment_description": "music"
+        }
+      }
+    }
+  }
+}
+
+//The has_parent Query
+GET post-comments/_search
+{
+  "query": {
+    "has_parent": {
+      "parent_type": "post",
+      "query": {
+        "match": {
+          "post_title": "Beauty"
+        }
+      }
+    }
+  }
+}
+
+// The query_string Query
+POST employees/_search
+{
+  "query": {
+    "query_string": {
+      "query": "(roots heuristic systems) OR (enigneer~) OR (salary:(>=10000 AND <=52000)) ",
+      "fields": [
+        "position",
+        "phrase^3"
+      ]
+    }
+  }
+}
+
+//The simple_query_string query
+POST employees/_search
+{
+  "query": {
+    "simple_query_string": {
+      "query": "(roots) | (resources manager) + (male) ",
+      "fields": [
+        "gender",
+        "position",
+        "phrase^3"
+      ]
+    }
+  }
+}
+
+
+</code></pre>
+</div>
+</div>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Using elasticsearch in c#</h2>
+<div>
+- create a .Net 6 WebAPI project 
+- add Nest nuget package to your project: 
+<pre><code>dotnet add package NEST --version 7.17.0</code></pre>
+- Create the Model :
+<pre><code>
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int Quantity { get; set; }
+    }
+</code></pre>
+-update the configuration, inside the appsettings.json: 
+<pre><code>
+    {
+        "Serilog": {
+          "MinimumLevel": {
+            "Default": "Information",
+            "Override": {
+              "Microsoft": "Information",
+              "System": "Warning"
+            }
+          }
+        },
+        "ELKConfiguration": {
+          "Uri": "http://localhost:9200",
+          "index": "products",
+        },
+        "AllowedHosts": "*"
+      }
+</code></pre>
+
+- create a new folder called extensions.
+ Then create a class called ElasticSearchExtensions 
+ which is our ELS extension method which will be used to initialise ELS when our application starts :
+<pre><code>
+    public static class ElasticSearchExtensions
+    {
+        public static void AddElasticsearch(
+            this IServiceCollection services, IConfiguration configuration)
+        {
+            var url = configuration["ELKConfiguration:url"];
+            var defaultIndex = configuration["ELKConfiguration:index"];
+
+            var settings = new ConnectionSettings(new Uri(url)).BasicAuthentication(userName, pass)
+                .PrettyJson()
+                .DefaultIndex(defaultIndex);
+
+            AddDefaultMappings(settings);
+
+            var client = new ElasticClient(settings);
+
+            services.AddSingleton<IElasticClient>(client);
+
+            CreateIndex(client, defaultIndex);
+        }
+
+        private static void AddDefaultMappings(ConnectionSettings settings)
+        {
+            settings
+                .DefaultMappingFor<Product>(m => m
+                    .Ignore(p => p.Price)
+                    .Ignore(p => p.Measurement)
+                );
+        }
+
+        private static void CreateIndex(IElasticClient client, string indexName)
+        {
+            var createIndexResponse = client.Indices.Create(indexName,
+                index => index.Map<Product>(x => x.AutoMap())
+            );
+        }
+    }
+</code></pre>
+- add the extention method to the program.cs so it will be injected into our application startup:
+<pre><code>builder.Services.AddElasticsearch(builder.Configuration);</code></pre>
+
+-create the controller ProductsController :
+<pre><code>
+    public class ProductsController : ControllerBase
+    {
+        private readonly IElasticClient _elasticClient;
+        private readonly ILogger<ProductsController> _logger;
+    
+        public ProductsController(
+                            IElasticClient elasticClient,
+                            ILogger<ProductsController> logger)
+        {
+            _logger = logger;
+            _elasticClient = elasticClient;
+        }
+    
+        [HttpGet(Name = "GetAllProducts")]
+        public async Task<IActionResult> Get(string keyword)
+        {
+           var result = await _elasticClient.SearchAsync<Product>(
+                            s => s.Query(
+                                q => q.QueryString(
+                                    d => d.Query('*' + keyword + '*')
+                                )).Size(5000));
+    
+            _logger.LogInformation("ProductsController Get - ", DateTime.UtcNow);
+           return Ok(result.Documents.ToList());
+        }
+    
+        [HttpPost(Name = "AddProduct")]
+        public async Task<IActionResult> Post(Product product)
+        {
+            // Add product to ELS index
+            var product1 = new Product 
+            {
+                Description = "Product 1",
+                Id = 1,
+                Price = 200,
+                Measurement = "2",
+                Quantity = 90,
+                ShowPrice = true,
+                Title = "Nike Shoes",
+                Unit = "10"
+            };
+    
+            // Index product dto
+            await _elasticClient.IndexDocumentAsync(product);
+    
+            _logger.LogInformation("ProductsController Get - ", DateTime.UtcNow);
+           return Ok();
+        }
+    }
+</code></pre>
+
+</div>

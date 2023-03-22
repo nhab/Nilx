@@ -1,0 +1,890 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+	<h2>
+		<input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />Resources</h2>
+<p>
+    <a href='https://www.tutorialspoint.com/design_pattern/design_pattern_overview.htm'>tutorialspoint`s design patterns</a>    
+   <a href=' https://www.javatpoint.com/chain-of-responsibility-pattern'>chain of responsibility</a>
+   <a href="https://www.dotnettricks.com/learn/designpatterns/">dotnettricks</a>
+</p>
+
+<h2>
+<input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />What are Design Patterns?</h2>
+<p>
+Design patterns are optimized, reusable solutions to the common programming problems.
+</p>
+<h2 style="background-color:#9944bb">Classical gof 23 design patterns:</h2>
+<h2><input type="button" value="-" class="toggleButton" onclick="toggle(this)" /> Types</h2>
+<div>
+    <b>Structural patterns </b> deal with structure of classes and objects.they are 7:
+        Adapter ,    Bridge ,    Composite ,    Decorator ,    Facade ,    Flyweight ,  proxy 
+
+    <b>Creational patterns </b>provide instantiation mechanisms instead of using constructors.They are 6:
+    Factory Method ,  Abstract Factory ,   Singleton Pattern,    Prototype ,  Builder ,  Object Pool 
+
+    <b>Behavioral patterns</b> :
+    Chain of Responsibility Pattern,Command ,Interpreter ,Iterator ,Mediator ,Memento ,Observer ,State ,Strategy ,Template ,Visitor ,Null Object
+</div>
+    
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Factory Method (Virtual Constructor)(Inversion of control)</h2>
+<div>
+it says that just define an interface or abstract class for creating an object but let the subclasses decide which class to instantiate.
+
+It inverts control of creating the instance into subclass.
+
+<a href="https://www.javatpoint.com/factory-method-design-pattern">Example and more..</a>
+
+example:
+The best time to use the factory method pattern is when you have multiple different variations of a single entity.
+Let's say you have a button class; this class has different variations, such as ImageButton, InputButton and FlashButton. 
+Depending on the place, you may need to create different buttons—this is where you can use a factory to create the buttons for you!
+<pre>
+<code>
+
+    abstract class Button {
+        protected $_html;
+        
+        public function getHtml()
+        {
+            return $this->_html;
+        }
+    }
+    
+    class ImageButton extends Button {
+        protected $_html = "..."; //This should be whatever HTML you want for your image-based button
+    }
+    
+    class InputButton extends Button {
+        protected $_html = "..."; //This should be whatever HTML you want for your normal button (< input type="button"... / >);
+    }
+    
+    class FlashButton extends Button {
+        protected $_html = "..."; //This should be whatever HTML you want for your flash-based button
+    }
+
+    class ButtonFactory
+    {
+        public static function createButton($type)
+        {
+            $baseClass = 'Button';
+            $targetClass = ucfirst($type).$baseClass;
+    
+            if (class_exists($targetClass) && is_subclass_of($targetClass, $baseClass)) {
+                return new $targetClass;
+            } else {
+                throw new Exception("The button type '$type' is not recognized.");
+            }
+        }
+</code>
+</pre>
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Abstract Factory</h2>
+<p>
+says that just define an interface or abstract class for creating families of related (or dependent) objects 
+but without specifying their concrete sub-classes.
+<a href="https://www.javatpoint.com/abstract-factory-pattern">more</a>
+</p>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Singleton</h2>
+<div>
+says that just"define a class that has only one instance and provides a global point of access to it".
+There are two forms of singleton design pattern
+
+Early Instantiation: creation of instance at load time.
+Lazy Instantiation: creation of instance when required.
+
+<a href="https://www.javatpoint.com/singleton-design-pattern-in-java">More..</a>
+
+Lazy initializtion example:
+<pre><code>
+    public class Logger {
+
+        private static Logger logger;
+        private Logger() {}
+    
+        public static Logger getInstance() {
+            if (logger == null) {
+                logger = new Logger();
+            }
+            return logger;
+        }
+    
+    }
+</code></pre>
+
+
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Prototype</h2>
+<p>
+cloning of an existing object instead of creating new one and can also be customized as per the requirement.
+<a href="https://www.javatpoint.com/prototype-design-pattern">More..</a>
+</p>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />(Gradual )Builder</h2>
+<p>
+construct a complex object from simple objects using step-by-step approach(build it gradually).
+<a href="https://www.javatpoint.com/builder-design-pattern">More..</a>
+</p>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Object Pool</h2>
+<p>
+    to reuse the object that are expensive to create.
+    Basically, an Object pool is a container which contains a specified amount of objects.
+    When an object is taken from the pool, it is not available in the pool until it is put back.
+    Objects in the pool have a lifecycle: creation, validation and destroy.
+<a href="https://www.javatpoint.com/object-pool-pattern">More..</a>
+</p>
+
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Strategy Pattern</h2>
+<div>
+    The strategy pattern allows grouping related algorithms under an abstraction, 
+    which allows switching out one algorithm or policy for another without modifying the client.
+     Instead of directly implementing a single algorithm,
+     the code receives runtime instructions specifying which of the group of algorithms to run.
+
+allows you to encapsulate two different algorithms inside two classes, and decide at runtime which strategy you want to go with.
+foe example:
+You could have a shopping cart that only lets customers check out with their credit cards,
+ but you will lose customers that want to use other payment methods.
+
+The strategy design pattern lets us decouple the payment methods from the checkout process
+ which means we can add or update strategies without changing any code in the shopping cart or checkout process.
+
+another example:
+Imagine that you're currently developing a class which can either update or create a new user record. 
+It still needs the same inputs (name, address, mobile number, etc.), but, depending on a given situation,
+ it has to use different functions when updating and creating. 
+ Now, you could probably just use an if-else to accomplish this, however, 
+ what if you need to use this class in a different place? In that case,
+  you'll have to rewrite the same if-else statement all over again. 
+<pre><code>
+   class User {
+        
+        public function CreateOrUpdate($name, $address, $mobile, $userid = null)
+        {
+            if( is_null($userid) ) {
+                // it means the user doesn't exist yet, create a new record
+            } else {
+                // it means the user already exists, just update based on the given userid
+            }
+        }
+    }
+    </code></pre>
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Adapter</h2>
+<div>
+    This allows incompatible classes to work together by converting the interface of one class into another. 
+
+        Non-Adapter Approach
+<pre>
+<code>
+
+            $user = new User();
+            $user->CreateOrUpdate( //inputs );
+            
+            $profile = new Profile();
+            $profile->CreateOrUpdate( //inputs );
+
+        Adapter Approach
+            
+            $account_domain = new Account();
+            $account_domain->NewAccount( //inputs );
+
+            //In this situation, we have a wrapper class, which would be our Account domain class:
+
+
+            
+            class Account()
+            {
+                public function NewAccount( //inputs )
+                {
+                    $user = new User();
+                    $user->CreateOrUpdate( //subset of inputs );
+                    
+                    $profile = new Profile();
+                    $profile->CreateOrUpdate( //subset of inputs );
+                }
+            }           
+    </code>
+</pre>   
+
+Adapter pattern works as a bridge between two incompatible interfaces. 
+This type of design pattern comes under structural pattern as this pattern combines the capability of two independent interfaces.
+
+This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces. 
+A real life example could be a case of card reader which acts as an adapter between memory card and a laptop.
+ You plugin the memory card into card reader and card reader into the laptop so that memory card can be read via laptop.
+
+We are demonstrating use of Adapter pattern via following example in which an audio player device can play mp3 files only and 
+wants to use an advanced audio player capable of playing vlc and mp4 files.
+
+Implementation
+We have a MediaPlayer interface and a concrete class AudioPlayer implementing the MediaPlayer interface.
+ AudioPlayer can play mp3 format audio files by default.
+
+We are having another interface AdvancedMediaPlayer and concrete classes implementing the AdvancedMediaPlayer interface. 
+These classes can play vlc and mp4 format files.
+
+We want to make AudioPlayer to play other formats as well. To attain this, we have created an adapter class MediaAdapter which 
+implements the MediaPlayer interface and uses AdvancedMediaPlayer objects to play the required format.
+
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Decorator</h2>
+<div>
+Enables us to add new or additional behavior to an object during runtime, depending on the situation.
+The goal is to make it so that the extended functions can be applied to one specific instance, and, at the same time, still be able to create an original instance that doesn't have the new functions. 
+To implement the decorator pattern, we can follow these steps:
+
+Subclass the original "Component" class into a "Decorator" class
+In the Decorator class, add a Component pointer as a field
+Pass a Component to the Decorator constructor to initialize the Component pointer
+In the Decorator class, redirect all "Component" methods to the "Component" pointer, and
+In the Decorator class, override any Component method(s) whose behavior needs to be modified
+example
+Let's say you have an HTML link element, a logout link, that you want to do slightly different things to based on the current page.
+
+<pre>
+<code>
+  
+    class HtmlLinks {
+        //some methods which is available to all html links
+    }
+    
+    class LogoutLink extends HtmlLinks {
+        protected $_html;
+        
+        public function __construct() {
+            $this->_html = "< a href=\"logout.php\">Logout< /a>";
+        }
+        
+        public function setHtml($html)
+        {
+            $this->_html = $html;
+        }
+        
+        public function render()
+        {
+            echo $this->_html;
+        }
+    }
+    
+    class LogoutLinkH2Decorator extends HtmlLinks {
+        protected $_logout_link;
+        
+        public function __construct( $logout_link )
+        {
+            $this->_logout_link = $logout_link;
+            $this->setHtml("< h2>" . $this->_html . "< /h2>");
+        }
+        
+        public function __call( $name, $args )
+        {
+            $this->_logout_link->$name($args[0]);
+        }
+    }
+    
+    class LogoutLinkUnderlineDecorator extends HtmlLinks {
+        protected $_logout_link;
+        
+        public function __construct( $logout_link )
+        {
+            $this->_logout_link = $logout_link;
+            $this->setHtml("<u>" . $this->_html . "</u>");
+        }
+        
+        public function __call( $name, $args )
+        {
+            $this->_logout_link->$name($args[0]);
+        }
+    }
+    
+    class LogoutLinkStrongDecorator extends HtmlLinks {
+        protected $_logout_link;
+        
+        public function __construct( $logout_link )
+        {
+            $this->_logout_link = $logout_link;
+            $this->setHtml("< strong>" . $this->_html . "< /strong>");
+        }
+        
+        public function __call( $name, $args )
+        {
+            $this->_logout_link->$name($args[0]);
+        }
+    }
+
+    $logout_link = new LogoutLink();
+    
+    if( $is_logged_in ) {
+        $logout_link = new LogoutLinkStrongDecorator($logout_link);
+    }
+    
+    if( $in_home_page ) {
+        $logout_link = new LogoutLinkH2Decorator($logout_link);
+    } else {
+        $logout_link = new LogoutLinkUnderlineDecorator($logout_link);
+    }
+    $logout_link->render();
+</code>
+</pre>
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Bridge</h2>
+<div>
+is used when we need to decouple an abstraction from its implementation so that the two can vary independently.
+
+The bridge pattern can be applied to scenarios where the class and what it does changes often. 
+Think of it as two layers of abstraction. The class itself becomes one layer and what it does 
+i.e. the implementation becomes another layer. 
+This setup allows us to extend the two layers independently of each other.
+
+Elements of Bridge Design Pattern 
+
+Abstraction – core of the bridge design pattern and defines the crux. Contains a reference to the implementer.
+Refined Abstraction – Extends the abstraction takes the finer detail one level below. Hides the finer elements from implemetors.
+Implementer – It defines the interface for implementation classes. This interface does not need to correspond directly to the abstraction interface and can be very different. Abstraction imp provides an implementation in terms of operations provided by the Implementer interface.
+Concrete Implementation – Implements the above implementer by providing the concrete implementation.
+<a href="https://www.geeksforgeeks.org/bridge-design-pattern/">Example:</a>
+<pre><code>
+    // abstraction in bridge pattern
+abstract class Vehicle {
+    protected Workshop workShop1;
+    protected Workshop workShop2;
+ 
+    protected Vehicle(Workshop workShop1, Workshop workShop2)
+    {
+        this.workShop1 = workShop1;
+        this.workShop2 = workShop2;
+    }
+ 
+    abstract public void manufacture();
+}
+ 
+// Refine abstraction 1 in bridge pattern
+class Car extends Vehicle {
+    public Car(Workshop workShop1, Workshop workShop2)
+    {
+        super(workShop1, workShop2);
+    }
+ 
+    @Override
+    public void manufacture()
+    {
+        System.out.print("Car ");
+        workShop1.work();
+        workShop2.work();
+    }
+}
+ 
+// Refine abstraction 2 in bridge pattern
+class Bike extends Vehicle {
+    public Bike(Workshop workShop1, Workshop workShop2)
+    {
+        super(workShop1, workShop2);
+    }
+ 
+    @Override
+    public void manufacture()
+    {
+        System.out.print("Bike ");
+        workShop1.work();
+        workShop2.work();
+    }
+}
+ 
+// Implementor for bridge pattern
+interface Workshop
+{
+    abstract public void work();
+}
+ 
+// Concrete implementation 1 for bridge pattern
+class Produce implements Workshop {
+    @Override
+    public void work()
+    {
+        System.out.print("Produced");
+    }
+}
+ 
+// Concrete implementation 2 for bridge pattern
+class Assemble implements Workshop {
+    @Override
+    public void work()
+    {
+        System.out.print(" And");
+        System.out.println(" Assembled.");
+    }
+}
+ 
+// Demonstration of bridge design pattern
+class BridgePattern {
+    public static void main(String[] args)
+    {
+        Vehicle vehicle1 = new Car(new Produce(), new Assemble());
+        vehicle1.manufacture();
+        Vehicle vehicle2 = new Bike(new Produce(), new Assemble());
+        vehicle2.manufacture();
+    }
+}
+//Output : 
+
+//Car Produced And Assembled.
+//Bike Produced And Assembled.
+</code></pre>
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />State</h2>
+<div>
+    allows an object to alter its behavior when its internal state changes.
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Command</h2>
+<div>
+    is to decouple the requester of an action from the object that executes the action.
+
+    an object is used to encapsulate all information needed to perform an action or trigger an event at a later time. 
+    This information includes the method name, the object that owns the method and values for the method parameters . 
+
+    Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests,
+    and support undoable operations.
+
+    Parts of the command design pattern:
+        The Command declares an interface for the execution of an operation.
+        The ConcreteCommand defines a binding between a Receiver and an action.
+        The Client creates a ConcreteCommand object and sets a Receiver for the command.
+        The Invoker demands the command carry out its request.
+        The Receiver knows how to execute the operations associated with the action of the request.
+    <a href="https://www.dotnettricks.com/learn/designpatterns/command-design-pattern-dotnet">Sample:</a>
+    <pre><code>
+        public class Client
+        {
+         public void RunCommand()
+         {
+         Invoker invoker = new Invoker();
+         Receiver receiver = new Receiver();
+         ConcreteCommand command = new ConcreteCommand(receiver);
+         command.Parameter = "Dot Net Tricks !!";
+         invoker.Command = command;
+         invoker.ExecuteCommand();
+         }
+        }
+        
+        public class Receiver
+        {
+         public void Action(string message)
+         {
+         Console.WriteLine("Action called with message: {0}", message);
+         }
+        }
+        
+        public class Invoker
+        {
+         public ICommand Command { get; set; }
+        
+         public void ExecuteCommand()
+         {
+         Command.Execute();
+         }
+        }
+        
+        public interface ICommand
+        {
+         void Execute();
+        }
+        
+        public class ConcreteCommand : ICommand
+        {
+         protected Receiver _receiver;
+         public string Parameter { get; set; }
+        
+         public ConcreteCommand(Receiver receiver)
+         {
+         _receiver = receiver;
+         }
+        
+         public void Execute()
+         {
+         _receiver.Action(Parameter);
+         }
+        }
+    </code></pre>
+    
+    <a href='https://www.javatpoint.com/command-pattern '>more on command pattern..</a>
+</div>
+
+<h2 style="background-color:#9944bb">Enterprise design patterns:</h2>
+<h2><input type="button" value="-" class="toggleButton" onclick="toggle(this)" />Dependency Injection (DI)</h2>
+<div>
+   is a design pattern used to implement IoC. 
+   It allows the creation of dependent objects outside of a class and provides those objects to a class through different ways. 
+   Using DI, we move the creation and binding of the dependent objects outside of the class that depends on them.
+
+    The Dependency Injection pattern involves 3 types of classes.
+    
+    Client Class: The client class (dependent class) is a class which depends on the service class
+    Service Class: The service class (dependency) is a class that provides service to the client class.
+    Injector Class: The injector class injects the service class object into the client class.
+    
+    Types of Dependency Injection
+        As you have seen above, the injector class injects the service (dependency) to the client (dependent). 
+        The injector class injects dependencies broadly in three ways: through a constructor, through a property, or through a method.
+
+        Constructor Injection: In the constructor injection, the injector supplies the service (dependency) through the client class constructor.
+
+        Property Injection: In the property injection (aka the Setter Injection), the injector supplies the dependency through a public property of the client class.
+
+        Method Injection: In this type of injection, the client class implements an interface which declares the method(s) to supply the dependency and the injector uses this interface to supply the dependency to the client class.
+
+<b>: Constructor Injection Example:</b>
+ <pre><code>
+    public class CustomerBusinessLogic
+{
+    ICustomerDataAccess _dataAccess;
+
+    public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
+    {
+        _dataAccess = custDataAccess;
+    }
+
+    public CustomerBusinessLogic()
+    {
+        _dataAccess = new CustomerDataAccess();
+    }
+
+    public string ProcessCustomerData(int id)
+    {
+        return _dataAccess.GetCustomerName(id);
+    }
+}
+
+public interface ICustomerDataAccess
+{
+    string GetCustomerName(int id);
+}
+
+public class CustomerDataAccess: ICustomerDataAccess
+{
+    public CustomerDataAccess()
+    {
+    }
+
+    public string GetCustomerName(int id) 
+    {
+        //get the customer name from the db in real application        
+        return "Dummy Customer Name"; 
+    }
+}
+
+public class CustomerService
+{
+    CustomerBusinessLogic _customerBL;
+
+    public CustomerService()
+    {
+        _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
+    }
+
+    public string GetCustomerName(int id) {
+        return _customerBL.ProcessCustomerData(id);
+    }
+}
+</code></pre>
+
+<b> Property Injection Example: </b>
+<pre><code>
+    public class CustomerBusinessLogic
+    {
+        public CustomerBusinessLogic()
+        {
+        }
+    
+        public string GetCustomerName(int id)
+        {
+            return DataAccess.GetCustomerName(id);
+        }
+    
+        public ICustomerDataAccess DataAccess { get; set; }
+    }
+    
+    public class CustomerService
+    {
+        CustomerBusinessLogic _customerBL;
+    
+        public CustomerService()
+        {
+            _customerBL = new CustomerBusinessLogic();
+            _customerBL.DataAccess = new CustomerDataAccess();
+        }
+    
+        public string GetCustomerName(int id) {
+            return _customerBL.GetCustomerName(id);
+        }
+    }
+</code></pre>
+
+Interface Injection Example:
+<pre><code>
+    interface IDataAccessDependency
+    {
+        void SetDependency(ICustomerDataAccess customerDataAccess);
+    }
+    
+    public class CustomerBusinessLogic : IDataAccessDependency
+    {
+        ICustomerDataAccess _dataAccess;
+    
+        public CustomerBusinessLogic()
+        {
+        }
+    
+        public string GetCustomerName(int id)
+        {
+            return _dataAccess.GetCustomerName(id);
+        }
+            
+        public void SetDependency(ICustomerDataAccess customerDataAccess)
+        {
+            _dataAccess = customerDataAccess;
+        }
+    }
+    
+    public class CustomerService
+    {
+        CustomerBusinessLogic _customerBL;
+    
+        public CustomerService()
+        {
+            _customerBL = new CustomerBusinessLogic();
+            ((IDataAccessDependency)_customerBL).SetDependency(new CustomerDataAccess());
+        }
+    
+        public string GetCustomerName(int id) {
+            return _customerBL.GetCustomerName(id);
+        }
+    }
+    /*
+    In the above example, the CustomerBusinessLogic class implements the IDataAccessDependency interface,
+     which includes the SetDependency() method. 
+    So, the injector class CustomerService will now use this method to inject the dependent class (CustomerDataAccess) to the client class.
+    */
+</code></pre>
+
+<b>IoC Container (a.k.a. DI Container)</b>
+s a framework for implementing automatic dependency injection.
+ It manages object creation and it's life-time, and also injects dependencies to the class.
+ <b>Ioc Container lifecycle</b>
+    Register: The container must know which dependency to instantiate when it encounters a particular type.
+              This process is called registration. Basically, it must include some way to register type-mapping.
+    Resolve : When using the IoC container, we don't need to create objects manually. 
+              The container does it for us. This is called resolution.
+             The container must include some methods to resolve the specified type; 
+            the container creates an object of the specified type, injects the required dependencies if any and returns the object.
+    Dispose : The container must manage the lifetime of the dependent objects. 
+              Most IoC containers include different lifetimemanagers to manage an object's lifecycle and dispose it.
+
+<b>Asp.net core Built-in IoC Container</b>
+The built-in container is represented by IServiceProvider implementation that supports constructor injection by default. The types (classes) managed by built-in IoC container are called services.
+
+There are basically two types of services in ASP.NET Core:
+
+Framework Services: Services which are a part of ASP.NET Core framework such as IApplicationBuilder, IHostingEnvironment, ILoggerFactory etc.
+Application Services: The services (custom types or classes) which you as a programmer create for your application.
+In order to let the IoC container automatically inject our application services, we first need to register them with IoC container.
+<b>1.Registering Application Service:</b>
+<pre><code>
+public interface ILog
+{
+    void info(string str);
+}
+
+class MyConsoleLogger : ILog
+{
+    public void info(string str)
+    {
+        Console.WriteLine(str);
+    }
+}
+
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.Add(new ServiceDescriptor(typeof(ILog), new MyConsoleLogger()));    
+        // singleton instance of a service throughout the application's lifetime. 
+
+        //  services.Add(new ServiceDescriptor(typeof(ILog), typeof(MyConsoleLogger), ServiceLifetime.Transient)); // Transient
+        //  services.Add(new ServiceDescriptor(typeof(ILog), typeof(MyConsoleLogger), ServiceLifetime.Scoped));    // Scoped(once per request)
+
+    }
+}
+
+</code></pre>
+<b>Using Extension Methods for Registration:</b>
+<pre><code>
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSingleton<ILog, MyConsoleLogger>();
+        services.AddSingleton(typeof(ILog), typeof(MyConsoleLogger));
+    
+        services.AddTransient<ILog, MyConsoleLogger>();
+        services.AddTransient(typeof(ILog), typeof(MyConsoleLogger));
+    
+        services.AddScoped<ILog, MyConsoleLogger>();
+        services.AddScoped(typeof(ILog), typeof(MyConsoleLogger));
+    }   
+</code></pre>
+<b>2-Constructor Injection</b>
+Once we register a service, the IoC container automatically performs constructor injection if a service type is included as a parameter in a constructor.
+<pre><code>
+    public class HomeController : Controller
+    {
+        ILog _log;
+    
+        public HomeController(ILog log)
+        {
+            _log = log;
+        }
+        public IActionResult Index()
+        {
+            _log.info("Executing /home/index");
+    
+            return View();
+        }
+    }  
+</code></pre>
+<b>Action Method Injection:</b>
+<pre><code>
+    using Microsoft.AspNetCore.Mvc;
+
+    public class HomeController : Controller
+    {
+        public HomeController()
+        {
+        }
+    
+        public IActionResult Index([FromServices] ILog log)
+        {
+            log.info("Index method executing");
+    
+            return View();
+        }
+    }   
+</code></pre>
+<b>Using the service:</b>
+<pre><code>
+    public class HomeController : Controller
+    {
+        public HomeController()
+        {
+        }
+        public IActionResult Index()
+        {
+            var services = this.HttpContext.RequestServices;
+            var log = (ILog)services.GetService(typeof(ILog));
+                
+            log.info("Index method executing");
+        
+            return View();
+        }
+    }   
+</code></pre>
+<a href="https://www.tutorialsteacher.com/core/internals-of-builtin-ioc-container-in-aspnet-core">More..</a>
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" /> The Repository Pattern</h2>
+<div>
+A repository is nothing but a class defined for an entity, with all the operations possible on that specific entity. For example, a repository for an entity Customer, will have basic CRUD operations and any other possible operations related to it. A Repository Pattern can be implemented in Following ways:
+One repository per entity (non-generic) : This type of implementation involves the use of one repository class for each entity. For example, if you have two entities Order and Customer, each entity will have its own repository.
+Generic repository: A generic repository is the one that can be used for all the entities, in other words it can be either used for Order or Customer or any other entity.
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" /> 
+Unit of Work in the Repository Pattern</h2>
+<div>
+Unit of Work is referred to as a single transaction that involves multiple operations of insert/update/delete and so on kinds. To say it in simple words, it means that for a specific user action (say registration on a website), all the transactions like insert/update/delete and so on are done in one single transaction, rather then doing multiple database transactions. This means, one unit of work here involves insert/update/delete operations, all in one single transaction.As an example, while adding data for the Order and Customer entities, in a single transaction, both will use the same DbContext instance.
+https://www.c-sharpcorner.com/UploadFile/b1df45/unit-of-work-in-repository-pattern/
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Object-Relational Structural Patterns: </h2>
+<div>
+
+        <a href="https://martinfowler.com/eaaCatalog/identityField.html">Identity Field</a> (216), 
+        <a href="https://martinfowler.com/eaaCatalog/foreignKeyMapping.html">Foreign Key Mapping</a> (236),
+        <a href="https://martinfowler.com/eaaCatalog/associationTableMapping.html">Association Table Mapping</a>  (248),
+        <a href="https://martinfowler.com/eaaCatalog/dependentMapping.html">Dependent Mapping</a> (262),
+        <a href="https://martinfowler.com/eaaCatalog/embeddedValue.html">Embedded Value</a> (268),
+        <a href="https://martinfowler.com/eaaCatalog/serializedLOB.html">Serialized LOB</a> (272), 
+        <a href="https://martinfowler.com/eaaCatalog/singleTableInheritance.html">Single Table Inheritance</a>  (278), 
+        <a href="https://martinfowler.com/eaaCatalog/classTableInheritance.html">Class Table Inheritance</a> (285), 
+        <a href="https://martinfowler.com/eaaCatalog/concreteTableInheritance.html">Concrete Table Inheritance</a>  (293), 
+        <a href="https://martinfowler.com/eaaCatalog/inheritanceMappers.html">Inheritance Mappers</a>  (302).
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" /> Object-Relational Metadata Mapping Patterns: </h2>
+<div>
+    <a href="https://martinfowler.com/eaaCatalog/metadataMapping.html">Metadata Mapping</a> (306), 
+    <a href="https://martinfowler.com/eaaCatalog/queryObject.html">Query Object</a> (316), 
+    <a href="https://martinfowler.com/eaaCatalog/repository.html">Repository</a> (322).</p>
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" /> Web Presentation Patterns:</h2>
+<div>
+        <a href="https://martinfowler.com/eaaCatalog/modelViewController.html">Model View Controller</a> (330), 
+        <a href="https://martinfowler.com/eaaCatalog/pageController.html">Page   Controller</a> (333), 
+        <a href="https://martinfowler.com/eaaCatalog/frontController.html">Front Controller</a> (344), 
+        <a href="https://martinfowler.com/eaaCatalog/templateView.html">Template View</a> (350),
+        <a href="https://martinfowler.com/eaaCatalog/transformView.html">Transform View</a> (361), 
+        <a href="https://martinfowler.com/eaaCatalog/twoStepView.html">Two-Step View</a> (365), 
+        <a href="https://martinfowler.com/eaaCatalog/applicationController.html">Application Controller</a>(379).    
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Distribution Patterns:</h2>
+<div>
+        <a href="https://martinfowler.com/eaaCatalog/remoteFacade.html">Remote Facade</a> (388), 
+        <a href="https://martinfowler.com/eaaCatalog/dataTransferObject.html">Data Transfer Object</a>
+        (401)</p>    
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Concurrency Patterns:</h2>
+<div>
+        <a href="https://martinfowler.com/eaaCatalog/optimisticOfflineLock.html">Optimistic Offline Lock</a> (416),
+        <a href="https://martinfowler.com/eaaCatalog/pessimisticOfflineLock.html">Pessimistic Offline Lock</a>
+        (426), 
+        <a href="https://martinfowler.com/eaaCatalog/coarseGrainedLock.html">Coarse Grained Lock</a> (438), 
+        <a href="https://martinfowler.com/eaaCatalog/implicitLock.html">Implicit Lock</a> (449).</p>
+        
+</div>

@@ -1,0 +1,456 @@
+<style>p{display:flex;padding-left: 40px;padding-right: 30px;}; 
+section{display:inline;padding-left: 40px;padding-right: 30px;} 
+div{display: flex;} hr{margin-left:25px;padding-left:5px;} </style>
+
+<a href="https://regex101.com/">regx101</a>
+<a href="https://www.javatpoint.com/regex">Regx (javapoint)</a>
+<section>
+<h2>General Tokens</h2>
+<div>
+
+A single character of: a, b or c
+<hr>
+[abc]
+<hr><hr>
+A character except: a, b or c
+<hr>
+[^abc]
+<hr><hr>
+A character in the range: a-z
+<hr>
+[a-z]
+<hr><hr>
+A character not in the range: a-z
+<hr>
+[^a-z]
+<hr><hr>
+A character in the range: a-z or A-Z
+<hr>
+[a-zA-Z]
+<hr><hr>
+Any single character
+<hr>
+.
+<hr><hr>
+Alternate - match either a or b
+<hr>
+a|b
+<hr>
+</div>
+<div>
+Any whitespace character
+<hr>
+\s
+<hr><hr>
+Any non-whitespace character
+<hr>
+\S<hr><hr>
+Any digit<hr>
+\d<hr><hr>
+Any non-digit<hr>
+\D<hr><hr>
+Any word character<hr>
+\w<hr><hr>
+Any non-word character<hr>
+\W<hr><hr>
+Match everything enclosed<hr>
+(?:...)<hr><hr>
+Capture everything enclosed<hr>
+(...)<hr>
+</div>
+<div>
+Zero or one of a<hr>
+a?<hr><hr>
+Zero or more of a<hr>
+a*<hr><hr>
+One or more of a<hr>
+a+<hr><hr>
+Exactly 3 of a<hr>
+a{3}<hr><hr>
+3 or more of a<hr>
+a{3,}<hr><hr>
+Between 3 and 6 of a<hr>
+a{3,6}<hr><hr>
+Start of string<hr>
+</div>
+</section>
+<section>
+<h2>Anchors</h2>
+<div>
+    Start of match<hr>
+    \G<hr><hr>
+    Start of string<hr>
+    ^<hr><hr>
+    End of string<hr>
+    $<hr><hr>
+    Start of string<hr>
+    \A<hr><hr>
+    End of string<hr>
+    \Z<hr><hr>
+    Absolute end of string<hr>
+    \z<hr><hr>
+    A word boundary<hr>
+    \b<hr><hr>
+    Non-word boundary<hr>
+    \B<hr><hr>
+</div>
+</section>
+<section>
+<h2>Meta sequences</h2>
+<div>
+    Any single character<hr>
+    .<hr><hr>
+    Alternate - match either a or b<hr>
+    a|b<hr><hr>
+    Any whitespace character<hr>
+    \s<hr><hr>
+    Any non-whitespace character<hr>
+    \S<hr><hr>
+    Any digit<hr>
+    \d<hr><hr>
+    Any non-digit<hr>
+    \D<hr><hr>
+    Any word character<hr>
+    \w<hr><hr>
+    Any non-word character<hr>
+    \W<hr><hr>
+</div>
+<div>
+    Any Unicode sequences, linebreaks included<hr>
+    \X<hr><hr>
+    Match one data unit<hr>
+    \C<hr><hr>
+    Unicode newlines<hr>
+    \R<hr><hr>
+    Match anything but a newline<hr>
+    \N<hr><hr>
+    Vertical whitespace character<hr>
+    \v<hr><hr>
+    Negation of \v<hr>
+    \V<hr><hr>
+    Horizontal whitespace character<hr>
+    \h<hr><hr>
+</div>
+<div>
+    Negation of \h<hr>
+    \H<hr><hr>
+    Reset match<hr>
+    \K<hr><hr>
+    Match subpattern number #<hr>
+    \#<hr><hr>
+    Unicode property X<hr>
+    \pX<hr><hr>
+    Unicode property or script category<hr>
+    \p{...}<hr><hr>
+    Negation of \pX<hr>
+    \PX<hr><hr>
+    Negation of \p<hr>
+    \P{...}<hr><hr>
+</div>
+<div>
+    Quote; treat as literals<hr>
+    \Q...\E<hr><hr>
+    Match subpattern `name`<hr>
+    \k{name}<hr><hr>
+    Match subpattern `name`<hr>
+    \k< name ><hr><hr>
+    Match subpattern `name`<hr>
+    \k'name'<hr><hr>
+    Match nth subpattern<hr>
+    \gn<hr><hr>
+    Match nth subpattern<hr>
+    \g{n}<hr><hr>
+</div>
+<div>
+    Match text the nth relative previous subpattern matched<hr>
+    \g{-n}<hr><hr>
+    Match expression defined in the nth capture group<hr>
+    \g< n ><hr><hr>
+    Match expression defined in the nth relative upcoming capture group.<hr>
+    \g< +n ><hr><hr>
+    Match expression defined in the nth capture group.<hr>
+    \g'n'<hr><hr>
+    Match expression defined in the nth relative upcoming subpattern<hr>
+    \g'+n'<hr><hr>
+    Match previously-named capture group `letter`<hr><hr>
+    \g{letter}<hr><hr>
+</div>
+<div>
+    Match expression defined in the capture group named "letter"<hr>
+    \g< letter ><hr><hr>
+    Match expression defined in the named capture group `letter`<hr>
+    \g'letter'<hr><hr>
+    Hex character YY<hr>
+    \xYY<hr><hr>
+    Hex character YYYY<hr>
+    \x{YYYY}<hr><hr>
+    Octal character ddd<hr>
+    \ddd<hr><hr>
+    Control character Y<hr>
+    \cY<hr><hr>
+    Backspace character<hr>
+    [\b]<hr><hr>
+    Makes any character literal<hr>
+    \<hr><hr>
+</div>
+</section>
+<section>
+<h2>Quantifier</h2>
+<div>
+    Zero or one of a<hr>
+    a?<hr><hr>
+    Zero or more of a<hr>
+    a*<hr><hr>
+    One or more of a<hr>
+    a+<hr><hr>
+    Exactly 3 of a<hr>
+    a{3}<hr><hr>
+    3 or more of a<hr>
+    a{3,}<hr><hr>
+    Between 3 and 6 of a<hr>
+    a{3,6}<hr><hr>
+    Greedy quantifier<hr>
+    a*<hr><hr>
+</div>
+<div>
+    Lazy quantifier<hr>
+    a*?<hr><hr>
+    Possessive quantifier<hr>
+    a*+<hr><hr>
+</div>
+</section>
+<section>
+<h2>Group constructs</h2>
+<div>
+    Match everything enclosed<hr>
+    (?:...)<hr><hr>
+    Capture everything enclosed<hr>
+    (...)<hr><hr>
+    Atomic group (non-capturing)<hr>
+    (?>...)<hr><hr>
+    Duplicate/reset subpattern group number<hr>
+    (?|...)<hr><hr>
+    Comment group<hr>
+    (?#...)<hr><hr>
+    Named Capturing Group<hr>
+    (?'name'...)<hr><hr>
+</div>
+<div>
+    Named Capturing Group<hr>
+    (?< name>...)<hr><hr>
+    Named Capturing Group<hr>
+    (?P< name>...)<hr><hr>
+    Inline modifiers<hr>
+    (?imsxUJnxx)<hr><hr>
+    Localized inline modifiers<hr>
+    (?imsxUJnxx:...)<hr><hr>
+    Conditional statement<hr>
+    (?(1)yes|no)<hr><hr>
+</div>
+<div>
+    Conditional statement<hr>
+    (?(R)yes|no)<hr><hr>
+    Recursive Conditional statement<hr>
+    (?(R#)yes|no)<hr><hr>
+    Conditional statement<hr>
+    (?(R& name)yes|no)<hr><hr>
+    Lookahead conditional<hr>
+    (?(?=...)yes|no)<hr><hr>
+    Lookbehind conditional<hr>
+</div>
+<div>
+    (?(?< =...)yes|no)<hr><hr>
+    Recurse entire pattern<hr>
+    (?R)<hr><hr>
+    Match expression defined in capture group 1<hr>
+    (?1)<hr><hr>
+    Match expression defined in the first relative capture group<hr>
+    (?+1)<hr><hr>
+    Match expression defined in capture group `name`<hr>
+    (?&name)<hr><hr>
+    Match subpattern `name`<hr>
+    (?P=name)<hr>
+    Match expression defined in the capture group "{name}"<hr>
+    (?P>name)<hr><hr>
+</div>
+<div>
+    Pre-define patterns before using them<hr>
+    (?(DEFINE)...)<hr><hr>
+    Positive Lookahead<hr>
+    (?=...)<hr><hr>
+    Negative Lookahead<hr>
+    (?!...)<hr><hr>
+    Positive Lookbehind<hr>
+    (?< =...)<hr><hr>
+    Negative Lookbehind<hr>
+    (?<!...)<hr><hr>
+    Control verb<hr>
+    (*ACCEPT)<hr><hr>
+</div>
+<div>
+    Control verb<hr>
+    (*FAIL)<hr><hr>
+    Control verb<hr>
+    (*MARK:NAME)<hr><hr>
+    Control verb<hr>
+    (*COMMIT)<hr><hr>
+    Control verb<hr>
+    (*PRUNE)<hr><hr>
+    Control verb<hr>
+    (*SKIP)<hr><hr>
+</div>
+<div>
+    Control verb<hr>
+    (*THEN)<hr><hr>
+    Pattern modifier<hr>
+    (*UTF)<hr><hr>
+    Pattern modifier<hr>
+    (*UTF8)<hr><hr>
+    Pattern modifier<hr>
+    (*UTF16)<hr><hr>
+    Pattern modifier<hr>
+    (*UTF32)<hr><hr>
+</div>
+<div>
+    Pattern modifier<hr>
+    (*UCP)<hr><hr>
+    Line break modifier<hr>
+    (*CR)<hr><hr>
+    Line break modifier<hr>
+    (*LF)<hr><hr>
+    Line break modifier<hr>
+    (*CRLF)<hr><hr>
+    Line break modifier<hr>
+    (*ANYCRLF)<hr><hr>
+</div>
+<div>
+    Line break modifier<hr>
+    (*ANY)<hr><hr>
+    Empty match modifier<hr>
+    (*NOTEMPTY)<hr><hr>
+    Empty match modifier<hr>
+    (*NOTEMPTY_ATSTART)<hr><hr>
+    JIT Modifier<hr>
+    (*NO_JIT)<hr><hr>
+    Line break modifier<hr>
+    \R<hr><hr>
+</div>
+<div>
+    Line break modifier<hr>
+    (*BSR_ANYCRLF)<hr><hr>
+    Line break modifier<hr>
+    (*BSR_UNICODE)<hr><hr>
+    Regex engine modifier<hr>
+    (*LIMIT_MATCH=x)<hr><hr>
+    Regex engine modifier<hr>
+    (*LIMIT_RECURSION=d)<hr><hr>
+    Regex engine modifier<hr>
+    (*NO_AUTO_POSSESS)<hr><hr>
+    Regex engine modifier<hr>
+    (*NO_START_OPT)<hr><hr>
+</div>
+</section>
+
+<section>
+<h2>Character classes</h2>
+<div>
+    A single character of: a, b or c<hr>
+    [abc]<hr><hr>
+    A character except: a, b or c<hr>
+    [^abc]<hr><hr>
+    A character in the range: a-z<hr>
+    [a-z]<hr><hr>
+    A character not in the range: a-z<hr>
+    [^a-z]<hr><hr>
+    A character in the range: a-z or A-Z<hr>
+    [a-zA-Z]<hr><hr>
+    Letters and digits<hr>
+    [[:alnum:]]<hr><hr>
+    </div>
+<div>
+    Letters<hr>
+    [[:alpha:]]<hr><hr>
+    ASCII codes 0-127<hr>
+    [[:ascii:]]<hr><hr>
+    Space or tab only<hr>
+    [[:blank:]]<hr><hr>
+    Control characters<hr>
+    [[:cntrl:]]<hr><hr>
+    Decimal digits<hr>
+    [[:digit:]]<hr><hr>
+</div>
+<div>
+    Visible characters (not space)<hr>
+    [[:graph:]]<hr><hr>
+    Lowercase letters<hr>
+    [[:lower:]]<hr><hr>
+    Visible characters<hr>
+    [[:print:]]<hr><hr>
+    Visible punctuation characters<hr>
+    [[:punct:]]<hr><hr>
+    Whitespace<hr>
+    [[:space:]]<hr><hr>
+    Uppercase letters<hr>
+    [[:upper:]]<hr><hr>
+    Word characters<hr>
+    [[:word:]]<hr><hr>
+    Hexadecimal digits<hr>
+    [[:xdigit:]]<hr><hr>
+    Start of word<hr>
+    [[:<:]]<hr><hr>
+    End of word<hr>
+    [[:>:]]<hr><hr>
+</div>
+</section>    
+<section>
+<h2>Flag/modifier</h2>
+<div>
+    Global<hr>
+    g<hr><hr>
+    Multiline<hr>
+    m<hr><hr>
+    Case insensitive<hr>
+    i<hr><hr>
+    Ignore whitespace / verbose<hr>
+    x<hr><hr>
+    Single line<hr>
+    s<hr><hr>
+    Unicode<hr>
+    u<hr><hr>
+    eXtra<hr>
+    X<hr><hr>
+    Ungreedy<hr>
+    U<hr>
+    Anchor<hr>
+    A<hr><hr>
+    Duplicate group names<hr>
+    J
+</div>
+</section>
+<section>
+<h2>substitution</h2>
+<div>
+    Contents in capture group 1<hr>
+    $1<hr><hr>
+    Contents in capture group `foo`<hr>
+    ${foo}<hr><hr>
+    Hexadecimal replacement values<hr>
+    \x20<hr><hr>
+    Hexadecimal replacement values<hr>
+    \x{06fa}<hr><hr>
+    Insert a tab<hr>
+    \t<hr><hr>
+    Insert a carriage return<hr>
+    \r<hr><hr>
+    Insert a newline<hr>
+    \n<hr><hr>
+    Insert a form-feed<hr>
+    \f<hr><hr>
+    Uppercase Transformation<hr>
+    \U<hr><hr>
+    Lowercase Transformation<hr>
+    \L<hr><hr>
+    Terminate any Transformation<hr>
+    \E
+</div>
+</section>

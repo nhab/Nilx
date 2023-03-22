@@ -1,0 +1,724 @@
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <style>
+    .tabs 
+    {
+        display: flex;
+        flex-wrap: wrap;
+        
+        width: 100%;
+    }
+    
+    .tabs label {
+        order: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 1rem;
+        margin-right: 0.2rem;
+        cursor: pointer;
+        background-color: #0000;
+        font-weight: bold;
+        transition: background ease 0.3s;
+    }
+    
+    .tabs .tab {
+    order: 9;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding: 1rem;
+    background: #fff;
+    padding: 20px;
+    box-shadow: -10px 10px 0px 0px black;
+    }
+    
+    .tabs input[type="radio"] {
+    display: none;
+    }
+    
+    .tabs input[type="radio"]:checked + label {
+    background: #fff;
+    }
+    
+    .tabs input[type="radio"]:checked + label + .tab {
+    display: block;
+    }
+    
+    @media (max-width: 200px) {
+    .tabs .tab,
+    .tabs label {
+    order: initial;
+    }
+    
+    .tabs label {
+        width: 100%;
+        margin-left: 50px;
+    }
+    }
+    
+    body {
+    background: #777777;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-top: 1vh;
+    font-weight: 400;
+    line-height: 1.25;
+    
+    margin: 0 auto;
+    font-size: 160%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    </style>   
+</head>
+
+<body>
+
+    <div class="tabs">
+
+        <input type="radio" name="tabs" id="tabone" checked="checked">
+        <label for="tabone">Concepts</label>
+        <div class="tab">
+            <h1>Conceptts</h1>
+<pre>           
+<h2>Distro</h2>
+    diffrent kinds of linux branches with the same linux core,are called distros.like ubuntu,fedora,debian.
+
+<h2>packages</h2>
+    softwares are packaged to easily be installed.
+    debian based packages are in .deb format
+    whereas redhat based are rpm packages.
+
+<h2>Repositories</h2>
+    It is a software packages container.
+    when search via software centre or tools lke apt-get or yum,
+    you are shown a list of the packages within the repositories available to your system.
+    A sofware repository can store its files on one server or across different servers known as mirrors.
+    These are various Linux repo mirrors. They are unlisted, but public to anyone who needs them.
+<h2>PPA</h2>
+
+personal package archives -- PPAs provide access to third-party programs.
+. These offer software not bundled in a default Linux operating system.
+
+How to Add a PPA?
+
+    sudo add-apt-repository [repository name]
+    sudo apt-get update
+    sudo apt-get install [software name]
+
+</pre>
+
+                <h2><a href="https://www.tldp.org/LDP/intro-linux/html/sect_03_01.html">File system</a></h2>
+                /    This directory is called superuser home directory.It is the top of file system structure.All other directory are mounted under it.
+    
+                    /boot      This directory contain the kernal image file.This also contain the files related to booting the system such as bootloader.
+                    <br/>
+                    /etc         It contain the whole system configuration file.
+                    <br/>
+                    /home    This is the all users home directory.
+                    <br/>
+                    /mnt       This is a generic mount point under which you mount your filesystems such as cdrom,floppy.
+                    <br/>
+                    /proc      It is not a real file system, it is a virtual file system.This directory is empty until the proc  file system is mounted.
+                    <br/>
+                    /sys        Modern Linux distributions include a /sys directory as a virtual filesystem (sysfs, comparable to /proc, which is a procfs), which stores and allows modification of the devices connected to the system.
+                    <br/>
+                    /dev       This directory contain the devices nodes through which the operating system can access hardware and software devices on the system.
+                    <br/>
+                    /bin        This directory contain the command used by superuser and normal user.
+                    <br/>
+                    /sbin      This directory contain the command used by superuser only
+                    <br>
+                    /var/www/html/ contain php files for local web host (lamp)
+            </p>
+        </div>
+
+        <input type="radio" name="tabs" id="tabtwo">
+        <label for="tabtwo">How tos</label>
+        <div class="tab">
+            <h1>How tos</h1>
+<pre>
+    <h3> - Check os version in Linux: </h3>$ hostnamectl
+
+    <h3>- Add toggle language feature to the keyboard: </h3>   
+        $ setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll ir,us
+        
+    <h3>- Check os version in Linux: </h3>$ hostnamectl
+
+    <h3>- Backup MBR with dd command</h3>
+        Backing up partition is nothing but actually backing up MBR (master boot record). 
+        The command is as follows for backing up MBR stored on /dev/sdX or /dev/hdX :
+    <br>
+        # dd if=/dev/sdX of=/tmp/sda-mbr.bin bs=512 count=1
+    <br>        ( Replace X with actual device name such as /dev/sda.)
+    <br>
+        To restore partition table to disk, all you need to do is use dd command:
+    <br>       # dd if= sda-mbr.bin of=/dev/sdX bs=1 count=64 skip=446 seek=446
+    <br><a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04">How To Install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 18.04</a>
+    
+</pre>
+        </div>
+        
+        <input type="radio" name="tabs" id="tabthree">
+        <label for="tabthree">Shell commands</label>
+        <div class="tab">
+            <h1>Shell commands</h1>
+           
+<pre>
+Shell commands are part of the shell program. 
+There are several different shells 
+(C shell, bash shell, bourne shell etc) to choose from,
+and each will have a variation of the shell commands built in. 
+The commands vary between shells, 
+but each shell is the same across different linux distros.
+                                            
+<h2>Getting Help :</h2>
+&nbsp <a href=""  title="can answer all of your questions.usage: man grep">'man' command </a>  
+&nbsp &nbsp <a href=""  title=" If you know what you want to do but dont know the command, apropos will give you list of related commands. &#10 usage :apropos make directory">'apropos' command </a>
+&nbsp &nbsp<a href="" title="If you just want a quick idea of what a command does, use the whatis command. &#10 example: whatis grep">whatis</a> 
+&nbsp &nbsp<a href="" title="Many of the utilities included with Linux, especially those created by the GNU Project, have documentation in the form of info pages. Info pages look similar to man pages, but there is a lot more to them. Like the man pages, info documents are intended to act as your online “manual”, your guide to the GNU/Linux system. But info documents are integrated with each other in a hypertext database that can be read like a book (it even has a table of contents) and accessed from your terminal.&#10example :  info grep">info command</a>
+&nbsp &nbsp<a href="" title="Many programs are just too complex to store all their help information in a man page. The /usr/doc directory is where these programs will store their information. Sometimes there will just be a text file, sometimes a program will have an entire subdirectory devoted to it. Also in this folder you may find copies of the Linux How-To’s to help you with common tasks. Take these with a grain of salt. The information in the How-To’s is usually very technical and oriented more toward system administrators than novice users. (Part of the purpose of Control-Escape is to translate some of that knowledge into plain English).
+">/usr/doc/* (or /usr/share/doc/*)</a>
+- By typing the first few characters of a command,
+you can see posibilites by pressing 'tab' key 2 times
+
+Any operation can be found by 'apropos' command 
+and learned by 'man' command described above.
+<a href="http://tldp.org" title="a wealth of knowledge about linux OS">linux documentation project</a>
+<a href="http://www.er.uqam.ca/nobel/r10735/unixcomm.html">reference</a>
+
+<h2>Uninstall/installing packages:</h2>
+&nbsp To remove package called mplayer, enter:
+
+<i> &nbsp $ sudo apt-get remove mplayer</i>
+
+<h3>Uncompressing content of a file  :</h3>
+tar -xvzf Komodo
+<h3>make a program from its source files:</h3>
+sh ./configure
+
+<h2>Directory operations ::</h2>
+<h3>- to <b>list</b> the names of the directories and files in the current directory:</h3>
+ls </b> 
+<h3>- to <b>copy</b> all contents of dir1 to dir2 recurcievly:</h3> cp -r dir1 dir22  .
+<h3>- To <b>remove</b> a file or directory :</h3> rm -f -r {file-name} 
+<br>Where,     -f: Forcefully remove file and     -r: Remove the contents of directories recursively
+<a href="http://www.ahinc.com/linux101/permission.htm">linux permissions</a>
+
+<h2>SYSTEM INFORMATION</h2>
+
+<h3> Display Linux system information</h3>
+uname -a
+
+<h3>Display kernel release information</h3>
+uname -r
+
+<h3>Show which version of redhat installed</h3>
+cat /etc/redhat-release
+
+<h3>Show how long the system has been running + load</h3>
+uptime
+
+<h3>Show system host name</h3>
+hostname
+
+<h3>Display the IP addresses of the host</h3>
+hostname -I
+
+<h3>Show system reboot history</h3>
+last reboot
+
+<h3>Show the current date and time</h3>
+date
+
+<h3>Show this month's calendar</h3>
+cal
+
+<h3>Display who is online</h3>
+w
+
+<h3>Who you are logged in as</h3>
+whoami
+
+<h2> HARDWARE INFORMATION</h2>
+
+<h3>Display messages in kernel ring buffer</h3>
+dmesg
+
+<h3>Display CPU information</h3>
+cat /proc/cpuinfo
+
+<h3>Display memory information</h3>
+cat /proc/meminfo
+
+<h3>Display free and used memory ( -h for human readable, -m for MB, -g for GB.)</h3>
+free -h
+
+<h3>Display PCI devices</h3>
+lspci -tv
+
+<h3>Display USB devices</h3>
+lsusb -tv
+
+<h3>Display DMI/SMBIOS (hardware info) from the BIOS</h3>
+dmidecode
+
+<h3>Show info about disk sda</h3>
+hdparm -i /dev/sda
+
+<h3>Perform a read speed test on disk sda</h3>
+hdparm -tT /dev/sda
+
+<h3>Test for unreadable blocks on disk sda</h3>
+badblocks -s /dev/sda
+
+<h2> PERFORMANCE MONITORING AND STATISTICS</h2>
+
+<h3>Display and manage the top processes</h3>
+top
+
+<h3>Interactive process viewer (top alternative)</h3>
+htop
+
+<h3>Display processor related statistics</h3>
+mpstat 1
+
+<h3>Display virtual memory statistics</h3>
+vmstat 1
+
+<h3>Display I/O statistics</h3>
+iostat 1
+
+<h3>Display the last 100 syslog messages  (Use /var/log/syslog for Debian based systems.)</h3>
+tail 100 /var/log/messages
+
+<h3>Capture and display all packets on interface eth0</h3>
+tcpdump -i eth0
+
+<h3>Monitor all traffic on port 80 ( HTTP )</h3>
+tcpdump -i eth0 'port 80'
+
+<h3>List all open files on the system</h3>
+lsof
+
+<h3>List files opened by user</h3>
+lsof -u user
+
+<h3>Display free and used memory ( -h for human readable, -m for MB, -g for GB.)</h3>
+free -h
+
+<h3>Execute "df -h", showing periodic updates</h3>
+watch df -h
+
+<h2> USER INFORMATION AND MANAGEMENT</h2>
+
+<h3>Display the user and group ids of your current user.</h3>
+id
+
+<h3>Display the last users who have logged onto the system.</h3>
+last
+
+<h3>Show who is logged into the system.</h3>
+who
+
+<h3>Show who is logged in and what they are doing.</h3>
+w
+
+<h3>Create a group named "test".</h3>
+groupadd test
+
+<h3>Create an account named john, with a comment of "John Smith" and
+create the user's home directory.</h3>
+useradd -c "John Smith" -m john
+
+<h3>Delete the john account.</h3>
+userdel john
+
+<h3>Add the john account to the sales group</h3>
+usermod -aG sales john
+
+<h2>5 – FILE AND DIRECTORY COMMANDS</h2>
+
+
+
+
+<h3>List all files in a long listing (detailed) format</h3>
+ls -al
+
+<h3>Display the present working directory</h3>
+pwd
+
+<h3>Create a directory</h3>
+mkdir directory
+
+<h3>Remove (delete) file</h3>
+rm file
+
+<h3>Remove the directory and its contents recursively</h3>
+rm -r directory
+
+<h3>Force removal of file without prompting for confirmation</h3>
+rm -f file
+
+<h3>Forcefully remove directory recursively</h3>
+rm -rf directory
+
+<h3>Copy file1 to file2</h3>
+cp file1 file2
+
+<h3>Copy source_directory recursively to destination. 
+If destination exists, copy source_directory into destination,
+otherwise create destination with the contents of source_directory.</h3>
+cp -r source_directory destination
+
+<h3>Rename or move file1 to file2. If file2 is an existing directory, 
+move file1 into directory file2</h3>
+mv file1 file2
+
+<h3>Create symbolic link to linkname</h3>
+ln -s /path/to/file linkname
+
+<h3>Create an empty file or update the access and modification times of file.</h3>
+touch file
+
+<h3>View the contents of file</h3>
+cat file
+
+<h3>Browse through a text file</h3>
+less file
+
+<h3>Display the first 10 lines of file</h3>
+head file
+
+<h3>Display the last 10 lines of file</h3>
+tail file
+
+<h3>Display the last 10 lines of file and "follow" the file as it grows.</h3>
+tail -f file
+
+<h2>PROCESS MANAGEMENT</h2>
+
+<h3>Display your currently running processes</h3>
+ps
+
+<h3>Display all the currently running processes on the system.</h3>
+ps -ef
+
+<h3>Display process information for processname</h3>
+ps -ef | grep processname
+
+<h3>Display and manage the top processes</h3>
+top
+
+<h3>Interactive process viewer (top alternative)</h3>
+htop
+
+<h3>Kill process with process ID of pid</h3>
+kill pid
+
+<h3>Kill all processes named processname</h3>
+killall processname
+
+<h3>Start program in the background</h3>
+program &
+
+<h3>Display stopped or background jobs</h3>
+bg
+
+<h3>Brings the most recent background job to foreground</h3>
+fg
+
+<h3>Brings job n to the foreground</h3>
+fg n
+
+<h2> FILE PERMISSIONS</h2>
+
+Linux chmod example
+
+    PERMISSION      EXAMPLE
+
+        U   G   W
+    rwx rwx rwx     chmod 777 filename
+    rwx rwx r-x     chmod 775 filename
+    rwx r-x r-x     chmod 755 filename
+    rw- rw- r--     chmod 664 filename
+    rw- r-- r--     chmod 644 filename
+
+<h3>NOTE: Use 777 sparingly!
+
+    LEGEND
+    U = User
+    G = Group
+    W = World
+
+    r = Read
+    w = write
+    x = execute
+    - = no access
+
+<h2> NETWORKING</h2>
+
+<h3>Display all network interfaces and ip address</h3>
+ifconfig -a
+
+<h3>Display eth0 address and details</h3>
+ifconfig eth0
+
+<h3>Query or control network driver and hardware settings</h3>
+ethtool eth0
+
+<h3>Send ICMP echo request to host</h3>
+ping host
+
+<h3>Display whois information for domain</h3>
+whois domain
+
+<h3>Display DNS information for domain</h3>
+dig domain
+
+<h3>Reverse lookup of IP_ADDRESS</h3>
+dig -x IP_ADDRESS
+
+<h3>Display DNS ip address for domain</h3>
+host domain
+
+<h3>Display the network address of the host name.</h3>
+hostname -i
+
+<h3>Display all local ip addresses</h3>
+hostname -I
+
+<h3>Download http://domain.com/file</h3>
+wget http://domain.com/file
+
+<h3>Display listening tcp and udp ports and corresponding programs</h3>
+netstat -nutlp
+
+
+<h2> ARCHIVES (TAR FILES)</h2>
+
+<h3>Create tar named archive.tar containing directory.</h3>
+tar cf archive.tar directory
+
+<h3>Extract the contents from archive.tar.</h3>
+tar xf archive.tar
+
+<h3>Create a gzip compressed tar file name archive.tar.gz.</h3>
+tar czf archive.tar.gz directory
+
+<h3>Extract a gzip compressed tar file.</h3>
+tar xzf archive.tar.gz
+
+<h3>Create a tar file with bzip2 compression</h3>
+tar cjf archive.tar.bz2 directory
+
+<h3>Extract a bzip2 compressed tar file.</h3>
+tar xjf archive.tar.bz2
+
+<h2> INSTALLING PACKAGES</h2>
+
+<h3>Search for a package by keyword.</h3>
+yum search keyword
+
+<h3>Install package.</h3>
+yum install package
+
+<h3>Display description and summary information about package.</h3>
+yum info package
+
+<h3>Install package from local file named package.rpm</h3>
+rpm -i package.rpm
+
+<h3>Remove/uninstall package.</h3>
+yum remove package
+
+<h3>Install software from source code.</h3>
+tar zxvf sourcecode.tar.gz
+cd sourcecode
+./configure
+make
+make install
+
+<h2>SEARCH</h2>
+
+<h3>Search for pattern in file</h3>
+grep pattern file
+
+<h3>Search recursively for pattern in directory</h3>
+grep -r pattern directory
+
+<h3>Find files and directories by name</h3>
+locate name
+
+<h3>Find files in /home/john that start with "prefix".</h3>
+find /home/john -name 'prefix*'
+
+<h3>Find files larger than 100MB in /home</h3>
+find /home -size +100M
+
+<h2> SSH LOGINS</h2>
+
+<h3>Connect to host as your local username.</h3>
+ssh host
+
+<h3>Connect to host as user</h3>
+ssh user@host
+
+<h3>Connect to host using port</h3>
+ssh -p port user@host
+
+<h2>FILE TRANSFERS</h2>
+
+<h3>Secure copy file.txt to the /tmp folder on server</h3>
+scp file.txt server:/tmp
+
+<h3>Copy *.html files from server to the local /tmp folder.</h3>
+scp server:/var/www/*.html /tmp
+
+<h3>Copy all files and directories recursively from server to the 
+current system's /tmp folder.</h3>
+scp -r server:/var/www /tmp
+
+<h3>Synchronize /home to /backups/home</h3>
+rsync -a /home /backups/
+
+<h3>Synchronize files/directories between the local and remote system 
+with compression enabled</h3>
+rsync -avz /home server:/backups/
+
+<h2>DISK USAGE</h2>
+
+<h3>Show free and used space on mounted filesystems</h3>
+df -h
+
+<h3>Show free and used inodes on mounted filesystems</h3>
+df -i
+
+<h3>Display disks partitions sizes and types</h3>
+fdisk -l
+
+<h3>Display disk usage for all files and directories in human readable format</h3>
+du -ah
+
+<h3>Display total disk usage off the current directory</h3>
+du -sh
+
+<h2>DIRECTORY NAVIGATION</h2>
+
+<h3>To go up one level of the directory tree.  (Change into the parent directory.)</h3>
+cd ..
+
+<h3>Go to the $HOME directory</h3>
+cd
+
+<h3>Change to the /etc directory</h3>
+cd /etc
+
+</pre>
+        </div>
+
+        <input type="radio" name="tabs" id="tabfour">
+        <label for="tabfour">Linux Commands</label>
+        <div class="tab">
+            <h1>Linux Commands</h1>
+<pre>
+Linux commands are not part of the shell. <br>
+Each one is a seperate executable program, 
+probably written in the C programming language.
+
+These executables are stored in various directories 
+set up for binary files, such as /bin and /usr/bin. 
+
+The location of these directories can be defined with the $PATH variable 
+so the shells know where to find them. 
+
+These commands vary between different linux distrubutions, 
+and remain the same whichever shell you are using.
+
+<h3>grep</h3>
+
+grep prints the lines from a file or input stream 
+that match an expression. 
+For example, if you want to print the lines in the 
+/etc/passwd file that contain the text root, use this command:
+
+grep root /etc/passwd
+
+The grep command is extraordinarily handy
+when operating on multiple files at once, 
+because it prints the filename in addition to the matching line 
+when in this multiple-file mode. 
+For example, if you want to check on every file in /etc that
+contains root, you could use this command:
+
+grep root /etc/*
+
+<h3>more and less</h3>
+When a command's output is long, it can scroll off the top of the screen, 
+and it's annoying to use a scrollbar to view such output because you have to move your hands around. 
+You sometimes may also want to look at a large text file without starting a text editor. 
+Two standard commands for text navigation are more and less.
+
+To page through a big file like /usr/dict/words, use a command such as more /usr/dict/words.
+    When running more, you will see the contents of the file, one screenful at a time. 
+    You can press the space bar to go forward in the file and the b key to skip back one screenful.
+    To quit more, type q.
+
+The less command performs the same function as more, but it is far more powerful and widely used.
+    Use less --help to get a good summary of its operations.
+
+As you will learn in Section 1.14, you can send the output of nearly any program directly 
+to another program's input, enabling operations such as this (try it to see what it does):
+
+grep ie /usr/dict/words | less
+
+<h3>pwd</h3>
+This program's name stands for "print working directory,"
+    and the command outputs the current working directory. 
+    That's all that pwd does, but it's useful.
+    Some Linux distributions set up accounts with the current working directory in the prompt,
+    but you may wish to change that because the current working directory takes up a lot of space on a line.
+<h3>diff</h3>
+To see the differences between two text files, use diff:
+<h3>diff file1 file2</h3>    
+There are several options that can control the format of the output, such as -c,
+    but the default output format is often the most comprehensible (for human beings, that is).
+<h3>file</h3>
+If you see a file and are unsure of its format, try using file to see if the system can guess,
+    based on a large set of rules:
+
+file file
+
+You may be surprised to see how much this innocent-looking command can do.
+<h3>find</h3>
+It's frustrating when you know that a certain file is in a directory tree somewhere, 
+and you just don't know where. Run find to find file in dir:
+<h3>find dir -name file -print</h3>
+Like most programs in this section, find is capable of some fancy stuff. 
+However, don't try options such as -exec before you know the form shown here by heart,
+    and you know why you need the -name and -print options.
+    The find command accepts wildcard characters, such as *,
+    but you must enclose them in single quotes ('*') to protect the wildcard characters
+    from the shell's own wildcard features 
+    
+<h3>head and tail</h3>
+
+To quickly view a portion of a file or stream, use the head and tail commands. 
+For example, head /etc/inittab shows the first ten lines of this system configuration file,
+    and tail /etc/inittab shows the last ten lines. 
+    You can change the number of lines to print by using the -n option, 
+    where n is the number of lines you want to see. If you want to print lines starting at line n, use tail +n.
+<h3>sort</h3>
+The sort command quickly puts the lines of a text file in alphanumeric order.
+    If the file's lines start with numbers, and you want to sort in numeric order,
+    use the -n option. The -r option reverses the order of the sort.       
+</pre>
+        </div>
+    </div>
+</body>

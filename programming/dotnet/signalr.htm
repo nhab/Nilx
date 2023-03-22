@@ -1,0 +1,250 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />References</h2>
+<div>
+<a href="https://docs.microsoft.com/en-us/aspnet/signalr/">SignalR</a>
+<a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/signalr?view=aspnetcore-6.0&tabs=visual-studio">Get started with ASP.NET Core SignalR</a>
+<a href="https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server">ASP.NET SignalR Hubs API Guide - Server</a>
+<a href="https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-net-client">ASP.NET SignalR Hubs API Guide - .NET Client</a>
+<a href="https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client">ASP.NET SignalR Hubs API Guide - JavaScript Client</a>
+<a href="https://docs.microsoft.com/en-us/learn/modules/aspnet-core-signalr/2-what-is-signalr">What is ASP.NET Core SignalR?</a>
+</div>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />What is SignalR</h2>
+<div>
+- Using SignalR, server-side code, that can change the content of a web page without needing to referesh the page.
+- SignalR provides an API for creating server-to-client remote procedure calls (RPC) 
+that call JavaScript code in the client browsers (and other client platforms) from server-side .NET code. 
+- SignalR also includes an API for connection management (for instance, connect and disconnect events), and grouping connections.
+- SignalR can be used to add any sort of "real-time" web functionality to your ASP.NET application. 
+</div>
+
+<h2><h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />SignalR Hub</h2>
+<div>
+SignalR uses hubs to communicate between clients & servers. 
+Hub is a component that is hosted in your ASP.NET Core Application. 
+Hub sends messages to & receives messages from the client using a remote procedure call using underlying transport. 
+Essentially SignalR Hub is a central point in the ASP.NET Core and 
+this hub is responsible for routing all the communication messages in the ASP.NET Core C# application
+
+A combination of hub & remote procedure calls enables real-time web applications using SignalR in ASP.NET Core.
+Hub in ASP.NET Core application is a class derived from the hub base class.    
+</div>
+
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />Getting started</h2>
+<div>
+To develop SignalR Application, we need 2 things in our Application. 
+<p>
+   - HUB Class  ( Server side )
+   - SignalR Clients ( Client side )    
+</p>
+For .NET,  we have 2 clients that is (jQuery client and  have ASP.NET client).
+
+To work with signalR:
+
+<b>Creating SignalR Server Application:</b>
+1 - Open vs and Create a new Web Project in Console Application.
+2 - go to the Tool and install SignalR from NuGet Package.
+    You will find references and a Hub class also in the project.
+3 - Now, we can call the SignalR Hub methods from .NET client. 
+    we can create a method in the hub and consume this method in the .NET client.
+<pre><code>
+    using System;  
+    using System.Collections.Generic;  
+    using System.Linq;  
+    using System.Text;  
+    using System.Threading.Tasks;  
+    using Microsoft.AspNet.SignalR;  
+    using Microsoft.AspNet.SignalR.Hubs;  
+      
+    namespace SignalRHost  
+    {  
+        [HubName("MyHub")]  
+        public class MyHub:Hub  
+        {  
+            public string getdetails( string s)  
+            {  
+                return "Hi" + s;  
+            }  
+        }  
+    }  
+</code></pre>
+4 - we need to host the signalR Hub. 
+    It will add a startup.cs class or you can add a startup class and configure the SignalR hub.
+5 - To enable SignalR in your Application, create a class called Startup with the code given below.
+<pre><code>
+using System;  
+using System.Threading.Tasks;  
+using Microsoft.Owin;  
+using Owin;  
+    
+[assembly: OwinStartup(typeof(SignalRHost.Startup))]  
+    
+namespace SignalRHost  
+{  
+    public class Startup  
+    {  
+        public void Configuration(IAppBuilder app)  
+        {  
+            app.MapSignalR();  
+            // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888  
+        }  
+    }  
+}      
+</code></pre>
+Now, open the main method of the console Application and write the code given below to host the Hub.
+<pre><code>
+using System;  
+using System.Collections.Generic;  
+using System.Linq;  
+using System.Text;  
+using System.Threading.Tasks;  
+using Microsoft.AspNet.SignalR;  
+using Microsoft.AspNet.SignalR.Hubs;  
+using Microsoft.AspNet.SignalR.Client;  
+using Microsoft.Owin.Hosting;  
+    
+namespace SignalRHost  
+{  
+    class Program  
+    {  
+        static void Main(string[] args)  
+        {  
+            string url = "http://localhost:8077";  
+            using (WebApp.Start(url))  
+            {  
+                Console.WriteLine("Server running on {0}", url);  
+                Console.ReadLine();  
+            }  
+            System.Console.Read();  
+        }  
+    }  
+}      
+</code></pre>
+
+6 - In this way, we can host our Application, using self Hosting. 
+Now, SignalR Service is available in "http://localhost:8077".
+
+<b>Creating consumer client Application:</b>
+Now, let's create another Web client Application and try to consume the Hub Method. 
+Create another application and add signalR .NET client, as shown below.
+
+7 - Now, there are simple 5 steps to consume the method hosted in the Hub:
+    - Establish a connection with the URL, where the Hub is hosted.
+    - Create a proxy of the Hub.
+    - Open the connection.
+    - Using the proxy object, call the method, which you want to invoke.
+    - Save the result and display in the client Application.
+<pre><code>
+using Microsoft.AspNet.SignalR.Client;  
+using System;  
+using System.Collections.Generic;  
+using System.Linq;  
+using System.Web;  
+using System.Web.UI;  
+using System.Web.UI.WebControls;  
+    
+namespace SignalRChat  
+{  
+    public partial class chat : System.Web.UI.Page  
+    {  
+        public  HubConnection hubConnection = null;  
+        public  IHubProxy HubProxy=null;  
+        protected void Page_Load(object sender, EventArgs e)  
+        {  
+        }  
+    
+        protected void Button_Click(object sender, EventArgs e)  
+        {  
+            hubConnection = new HubConnection("http://localhost:8077/");  
+                
+            HubProxy = hubConnection.CreateHubProxy("MyHub");  
+            hubConnection.Start();  
+            Execute();  
+    
+            var p = HubProxy.Invoke<string>("getdetails", "Debendra").Result;  
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + p + "');", true);  
+        }  
+    
+        private void Execute()  
+        {  
+            hubConnection.Start().ContinueWith(task =>  
+            {  
+                if (task.IsFaulted)  
+                {  
+                    Console.WriteLine("There was an error opening the connection:{0}",  task.Exception.GetBaseException());  
+                    return;  
+                }  
+                else  
+                    Console.WriteLine("Connected to Server.The ConnectionID is:" + hubConnection.ConnectionId);  
+            }).Wait();  
+        }  
+    }  
+}  
+</code></pre>
+</div>
+
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />Concepts</h2>
+<div>
+    Transports
+SignalR supports the following techniques, or transports, for handling real-time communication:
+
+WebSockets
+Server-Sent Events
+Long Polling
+The order in which the transports are listed here signifies their graceful fallback order. In other words, WebSockets is preferred over Server-Sent Events, and Server-Sent Events is preferred over Long Polling, though any one of them could be used. SignalR automatically chooses the best transport method that's within the capabilities of the server and client. For more information, see the official specification for SignalR Transport Protocols.
+
+Server
+The server is responsible for exposing a SignalR endpoint. The endpoint maps to a Hub or Hub<T> subclass. The server can exist on-premises, in a cloud provider (such as Azure), or with Azure SignalR Service. The server exposes both the hub methods, which can be called from clients, and the events that clients can subscribe to. These are considered remote procedures.
+
+Hub
+In SignalR, a hub is used to communicate between clients and servers. A hub is a high-level pipeline that allows a client and a server to call methods on each other. To this end, SignalR handles the dispatching across machine boundaries automatically. You can think of a hub as a proxy between all connected clients and the server.
+
+Protocols
+The SignalR Protocol is a protocol for a two-way RPC over any message-based transport. Either party in the connection can invoke procedures on the other party, and procedures can return zero or more results or an error. SignalR provides two built-in hub protocols:
+
+A text protocol that's based on JSON, which is the default.
+A binary protocol that's based on MessagePack, which generally creates smaller messages than JSON does.
+To use the MessagePack protocol, both server and client need to opt in to configuring it, and both server and client have to support it. There's a third hub protocol, called BlazorPack, but it's used exclusively with Blazor-Server applications. It can't be used without the Blazor-Server hosting model. For more information, see the official specification for SignalR Hub Protocol.
+
+Users
+A user in the system acts as an individual, but it can also be part of a group. Messages can be sent to groups, and all group members will be notified. A single user can connect from multiple client applications. For example, the same user can use a mobile device and a web browser and get real-time updates on both at the same time.
+
+Groups
+A group consists of one or more connections. The server can create groups, add connections to a group, and remove connections from a group. A group has a specified name, which acts as its unique identifier. Groups serve as a scoping mechanism to help target messages. That is, real-time functionality can be sent only to users within a named group.
+
+Connections
+A connection to a hub is represented by a unique identifier that's known only to the server and client. A single connection exists per hub type. Each client has a unique connection to the server. That is, a single user can be represented on multiple clients, but each client connection has its own identifier.
+
+Clients
+The client is responsible for establishing a connection to the server's endpoint through a HubConnection object. The hub connection is represented within each target platform:
+
+.NET client: Microsoft.AspNetCore.SignalR.Client.HubConnection
+JavaScript client: @microsoft/signalr.HubConnection
+Java client: com.microsoft.signalr.HubConnection
+For more information, see ASP.NET Core SignalR supported platforms.
+
+When a hub connection instance is started successfully, messages flow freely in both directions. Users are free to both communicate notifications to the server and receive notifications from the server. A client is any connected application, such as, but not limited to, a web browser, a mobile app, or a desktop app.
+
+
+</div>
+</body>

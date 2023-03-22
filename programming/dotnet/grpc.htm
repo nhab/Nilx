@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../../assets/css/blocks.css">	
+	<script src='../../assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+    <script src="../../libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+	<script>
+	
+	</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+<h2>References</h2>
+<div>
+    https://youtu.be/bPdWa3mr7c8
+    https://www.youtube.com/watch?v=4SuFtQV8RCk
+    http://james.newtonking.com/
+    https://www.google.com/search?q=grpc+getting+started+C%23
+</div>
+<h2>GRPC Concepts</h2>
+<div>
+<h3>What is?</h3>
+gRPC is a high-performance Remote Procedure Call (RPC) framework.
+it is an open-source, contract-based, language agnostic, cross-platform communication protocol 
+that simplifies and manages <b>interservice communication </b>by exposing a set of functions to external clients.
+<h3>Why grpc ?</h3>
+- Performs better than JSON and XML 
+- Provides increased API security
+- Unlike JSON, however, protocol buffers are more than a serialized format. 
+  They include 3 other major parts:
+  <pre>
+    . A contract definition language found in .proto files
+    . Generated accessor-function code
+    . Language-specific runtime libraries
+
+- 	                    REST	                            gRPC
+Cross-platform	        Yes	                                Yes
+Message Format	        Custom but generally JSON or XML	Protocol buffers
+Message Payload Size	Medium/Large	                    Small
+Pxityrocessing Comple	Higher (text parsing)	            Lower (well-defined binary structure)
+Browser Support	        Yes (native)	                    Yes (via gRPC-Web)
+</pre>
+-<b> Strengths of gRPC:</b>
+<pre>
+    1.Performance
+        By different evaluations, gRPC offers up to 10x faster performance and API-security
+        than REST+JSON communication as it uses Protobuf and HTTP/2. 
+
+    2.Streaming
+
+    gRPC supports client- or server-side streaming semantics, 
+    which are already incorporated in the service definition.
+    This makes it much simpler to build streaming services or clients. 
+
+    3.Code Generation
+    
+    the native code generation for client/server applications. 
+    gRPC frameworks use protoc compiler to generate code from the .proto file. 
+    Code generation is used in command of the Protobuf format 
+    for defining both message formats and service endpoints. 
+    It can produce server-side skeletons and client-side network stubs, 
+    which saves significant development time in applications with various services.
+
+    4.Interoperability
+      
+    gRPC tools and libraries are designed to work with multiple platforms and programming languages, 
+    Due to the Protobuf binary wire format and efficient code generation for virtually all platforms, 
+    programmers can develop performant applications while still using full cross-platform support.
+        
+    5.Security
+
+    The use of HTTP/2 over the TLS end-to-end encryption connection in gRPC ensures API security. 
+    it can use SSL/TLS to authenticate and encrypts data exchanged between the client and server.
+        
+    6.Usability and Productivity
+    
+    it is an all-in-one RPC solution, it works across various languages and platforms. 
+    it features excellent tooling, with much of the required boilerplate code generated automatically. 
+    This saves considerable time and enables developers to focus more on business logic.
+        
+    7.Built-in Commodity Features
+       
+    it provides built-in support for commodity features, such as metadata exchange, encryption, 
+    authentication, deadline/timeouts and cancellations, interceptors, load balancing, 
+    service discovery, and so much more.
+
+</pre>
+-<b>Weaknesses of gRPC</b> 
+<pre>Limited Browser Support
+    As gRPC heavily uses HTTP/2, it is <b>impossible</b> to call a gRPC service from a web browser directly. 
+    No modern browser provides the control needed over web requests to support a gRPC client. 
+    so, a proxy layer and gRPC-web are required to perform conversions between HTTP/1.1 and HTTP/2
+
+Non-human Readable Format
+    Protobuf compresses gRPC messages into a non-human readable format. 
+    This compiler needs the message’s interface description in the file to deserialize correctly. 
+    So, developers need additional tools like the gRPC command-line tool 
+    to analyze Protobuf payloads on the wire, write manual requests,and perform debugging.
+
+No Edge Caching
+    While HTTP supports mediators for edge caching, gRPC calls use the POST method,
+    which is a threat to API-security. 
+    The responses can’t be cached through intermediaries. 
+    Moreover, the gRPC specification doesn’t make any provisions
+    and even indicates the wish for cache semantics between server and client.
+
+Steeper Learning Curve
+    Many teams find gRPC challenging to learn, get familiar with Protobuf, 
+    and look for tools to deal with HTTP/2 friction. 
+    It is a common reason why users prefer to rely on REST for as long as possible.
+</pre>
+<h3>Protocol Buffers</h3>
+Protocol buffers, or Protobuf, is Google’s serialization/deserialization protocol 
+that enables the easy definition of services and auto-generation of client libraries.
+
+gRPC uses this protocol as their <b>Interface Definition Language</b>(IDL) and serialization toolset.
+
+gRPC services and messages between clients and servers are defined in proto files. 
+
+The Protobuf compiler, protoc, generates client and server code 
+that loads the .proto file into the memory at runtime 
+and uses the in-memory schema to serialize/deserialize the binary message.
+
+After code generation, each message is exchanged between the client and remote service.
+
+Parsing with Protobuf requires fewer CPU resources since data is converted into a binary format, 
+and encoded messages are lighter in size.
+So, messages are exchanged faster, even in machines with a slower CPU, such as mobile devices.
+<h3>Streaming</h3>
+Streaming is another key concept of gRPC, where many processes can take place in a single request. 
+The multiplexing capability (sending multiple responses or receiving multiple requests together
+ over a single TCP connection) of HTTP/2 makes it possible. 
+ 
+ Here are the main types of streaming:
+
+<b>Server-streaming RPCs</b> – The client sends a single request to the server and receives back a stream of data sequences.
+ The sequence is preserved, and server messages continuously stream until there are no messages left.
+
+<b>Client-streaming RPCs</b> – The client sends a stream of data sequences to the server, 
+which then processes and returns a single response to the client. 
+
+Once again, gRPC guarantees message sequencing within an independent RPC call.
+
+<b>Bidirectional-streaming RPCs</b> – It is two-way streaming where 
+both client and server sends a sequence of messages to each other. 
+Both streams operate independently; thus, they can transmit messages in any sequence. 
+The sequence of messages in each stream is preserved.
+<h3>HTTP/2</h3>
+gRPC is developed on HTTP/2, which was published in 2015 to overcome the HTTP/1.1 limitations. 
+While it is compatible with HTTP/1.1, HTTP/2 brings many <b>advanced capabilities, such as :</b>
+
+<b>Binary Framing Layer –</b> Unlike HTTP/1.1, HTTP/2 request/response is divided into small messages 
+and framed in binary format, making message transmission efficient. 
+With binary framing, the HTTP/2 protocol has made request/response multiplexing possible without blocking network resources.
+<b>Streaming – </b>Bidirectional full-duplex streaming in which the client can request and the server can respond simultaneously.
+<b></b>Flow Control – Flow control mechanism is used in HTTP/2, enabling detailed control of memory used to buffer in-flight messages.
+<b>Header Compression – </b>Everything in HTTP/2, including headers, is encoded before sending, significantly improving overall performance. 
+Using the HPACK compression method, HTTP/2 only shares the value different from the previous HTTP header packets.
+<b>Processing – </b>With HTTP/2, gRPC supports both synchronous and asynchronous processing, 
+which can be used to perform different types of interaction and streaming RPCs.
+All these features of HTTP/2 enable gRPC to use fewer resources, resulting in reduced response times between apps and services 
+running in the cloud and longer battery life for a client running mobile devices.
+
+<h3>Channels</h3>
+The HTTP/2 streams allow many simultaneous streams on one connection; 
+channels extend this concept by supporting multiple streams over multiple concurrent connections. 
+They provide a way to connect to the gRPC server on a specified address and port and are used in creating a client stub.
+<h3>gRPC Architecture</h3>
+‍we have the gRPC client and server sides.
+In gRPC, every client service includes a <b>stub </b>(auto-generated files), 
+similar to an interface containing the current remote procedures. 
+
+The gRPC client makes the local procedure call to the stub with parameters to be sent to the server. 
+The client stub then serializes the parameters with the marshaling process using Protobuf 
+and forwards the request to the local client-time library in the local machine.
+
+The OS makes a call to the remote server machine via HTTP/2 protocol. 
+The server’s OS receives the packets and calls the server stub procedure,
+ which decodes the received parameters and executes the respective procedure invocation using Protobuf. 
+ The server stub then sends back the encoded response to the client transport layer. 
+The client stub gets back the result message and unpacks the returned parameters, and the execution returns to the caller.
+</div>
+<h2>C# code</h2>
+<div>
+gRPC uses a contract-first approach to API development. Services and messages are defined in .proto files:
+
+<pre><code>
+syntax = "proto3";
+
+service Greeter {
+    rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloReply {
+    string message = 1;
+}
+</code></pre>
+    .NET types for services, clients, and messages are automatically generated by including .proto files in a project:
+
+    Add a package reference to Grpc.Tools package.
+    Add .proto files to the <Protobuf> item group.
+<pre><code>
+    < ItemGroup>
+        < Protobuf Include="Protos\greet.proto" />
+    < /ItemGroup>
+</code></pre>
+<h3>Add gRPC services to an ASP.NET Core app</h3>
+gRPC requires the Grpc.AspNetCore package. 
+<h3>The gRPC service project template</h3>
+The ASP.NET Core gRPC Service project template provides a starter service:
+<pre><code>
+public class GreeterService : Greeter.GreeterBase
+{
+    private readonly ILogger<GreeterService> _logger;
+
+    public GreeterService(ILogger<GreeterService> logger)
+    {
+        _logger = logger;
+    }
+
+    public override Task<HelloReply> SayHello(HelloRequest request,
+        ServerCallContext context)
+    {
+        _logger.LogInformation("Saying hello to {Name}", request.Name);
+        return Task.FromResult(new HelloReply 
+        {
+            Message = "Hello " + request.Name
+        });
+    }
+}
+</code></pre>
+GreeterService inherits from the GreeterBase type, which is generated from the Greeter service in the .proto file. 
+The service is made accessible to clients in Program.cs:
+<pre><code>
+    app.MapGrpcService<GreeterService>();
+</code></pre>
+<h3>Call gRPC services with a .NET client</h3>
+gRPC clients are concrete client types that are generated from .proto files. 
+The concrete gRPC client has methods that translate to the gRPC service in the .proto file.
+<pre><code>
+var channel = GrpcChannel.ForAddress("https://localhost:5001");
+var client = new Greeter.GreeterClient(channel);
+
+var response = await client.SayHelloAsync(
+    new HelloRequest { Name = "World" });
+
+Console.WriteLine(response.Message);
+</code></pre>
+A gRPC client is created using a channel, which represents a long-lived connection to a gRPC service. 
+A channel can be created using GrpcChannel.ForAddress.
+</div>

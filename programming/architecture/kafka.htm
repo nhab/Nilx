@@ -1,0 +1,76 @@
+
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Refrences</h2>
+<div>
+<a href="https://www.tutorialspoint.com/apache_kafka/apache_kafka_workflow.htm">Kafka work flow</a>
+</div>
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Prerequisites</h2>
+<div>
+<b>What is an Event-Driven Architecture?</b>
+ An event-driven architecture uses events to trigger and communicate between decoupled services 
+ and is common in modern applications built with microservices. 
+An event is a change in state, or an update, like an item being placed in a shopping cart on an e-commerce website.
+Examples of events include the taking of a measurement, the pressing of a button, or the swiping of a credit card.
+<b>what is event streaming? </b>
+Event streaming is just what it says on the box: services publishing events in a continuous stream for other systems to read and process elsewhere.
+Event streaming is what an event driven architecture does .
+<b>use case</b>
+You have applied the Database per Service pattern. Each service has its own database. 
+Some business transactions, however, span multiple service so you need a mechanism to ensure data consistency across.
+one solution is this:Each service publishes an event whenever it update its data.
+ Other service subscribe to events. When an event is received, a service updates its data.
+<b>Example</b>
+An e-commerce application that uses this approach would work as follows:
+
+The Order Service creates an Order in a pending state and publishes an OrderCreated event.
+The Customer Service receives the event and attempts to reserve credit for that Order. It then publishes either a Credit Reserved event or a CreditLimitExceeded event.
+The Order Service receives the event from the Customer Service and changes the state of the order to either approved or cancelled
+</div>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />what is kafka</h2>
+<div>
+provides a framework for storing, reading and analysing distributed streaming data. (to process records as they occur)
+it is used to publish and subscribe to streams of records. 
+Kafka is a durable message broker that enables applications to process, persist, and re-process streamed data. 
+Kafka has a straightforward routing approach that uses a routing key to send messages to a topic.
+
+We can use Kafka as a Message Queue or a Messaging System
+but as a distributed streaming platform Kafka has several other usages for stream processing or storing data.
+</div>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />key concepts</h2>
+<div>
+Topic:
+are the categories used to organize messages. 
+When a Producer sends messages or events into a specific Kafka Topic, the topics will append the messages one after another, thereby creating a Log File. 
+Furthermore, producers can Push Messages into the tail of these newly created logs while consumers Pull Messages off from a specific Kafka Topic. 
+
+Producer:
+ A process that publishes messages to one or more Kafka topics.
+    
+Consumer:
+A process that consumes messages from one or more Kafka topics.
+    
+Broker:   
+  A Kafka server.
+    
+Kafka Cluster:    
+    One or more Kafka Brokers.    
+</div>

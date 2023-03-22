@@ -1,0 +1,92 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Resources</h2>
+<div>
+<a href="https://docs.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver16">What is change data capture (CDC)?</a>
+<a href="https://www.sqlshack.com/permissions-comparison-between-on-premises-sql-server-and-azure-sql-database/">permissions</a>
+<a href="https://blog.devart.com/create-login-user-and-grant-permission-sql-server.html">create-login-user-and-grant-permission</a>
+</div>
+
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Useful Queries</h2>
+<div>
+<pre><code>
+--All tables and fileds of the database:
+
+         select t.name,c.name from sys.tables t 
+             inner join  sys.all_columns c 
+             on(t.object_id = c.object_id) 
+             ORDER BY T.NAME,C.column_id
+                
+--Using Cursor for creating dummy data:
+
+create or alter procedure HCitizenInfo_Dummy_Data as
+  begin
+     DECLARE	@Counter int= 1
+     WHILE @Counter< =1000000
+      BEGIN
+        SET @Counter= @Counter + 1
+        INSERT INTO [dbo].[HCitizenInfo](ci_nationalNumber, ci_FirstName, ci_LastName,[CI_DateReg],CI_Estate,CI_City) VALUES(
+                        (select trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))
+                        + trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))
+                        + trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0))))
+                       ,N'علی'+str(round(rand()*20,0)), N'موسوی'+str(round(rand()*20,0)),'1400/12/15',N'تهران',N'تهران');
+  end
+                
+declare @ciid varchar(50)
+declare @lastName nvarchar(50)
+DECLARE cursor1 CURSOR FOR    select CI_ID,CI_lastName from [dbo].[HCitizenInfo]
+   OPEN cursor1
+       FETCH NEXT FROM cursor1 INTO @ciid,@lastName 
+                
+       WHILE @@FETCH_STATUS = 0  
+        BEGIN  
+           insert into [dbo].[HCitizenInfoRelatives] 
+      (	  [CI_ID],[CIR_FirstName],[CIR_LastName],[CIR_NationalCode],[CIR_Birthdate],[CIR_Relation]	  )
+          values ( @ciid , N'رضا', @lastName ,
+         trim(str(round(RAND()*9,0))) + trim(str(round(RAND()*9,0)))+ 	 trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))+	 trim(str(round(RAND()*9,0)))+ 	trim(str(round(RAND()*9,0)))+ 
+trim(str(round(RAND()*9,0)))+ 	 trim(str(round(RAND()*9,0)))+	 trim(str(round(RAND()*9,0)))+	 trim(str(round(RAND()*9,0))) ,
+                        '1362/12/12' , N'پسر'	 );
+                
+ insert into [dbo].[HCitizenInfoRelatives] 
+ (	  [CI_ID],[CIR_FirstName],[CIR_LastName],[CIR_NationalCode],[CIR_Birthdate],[CIR_Relation]	  )
+ values 
+( @ciid , N'سحر', @lastName ,trim(str(round(RAND()*9,0))) + trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))+ 
+trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))+ 	 trim(str(round(RAND()*9,0)))+ trim(str(round(RAND()*9,0)))+ 	 trim(str(round(RAND()*9,0)))+trim(str(round(RAND()*9,0)))+	 trim(str(round(RAND()*9,0))) ,'1364/12/12' , N'دختر'	 );
+                
+insert into [dbo].[HCitizenInfoInsHistory]
+ ([CI_ID],[CID_ProductID],[CID_ProductName],[CID_DateFrom],[CID_DateTo]) values
+ (@ciid  ,2,N'کارکنان دولت','1385/01/01','1400/12/01')
+ FETCH NEXT FROM cursor1 INTO @ciid,@lastName 
+   end     
+end
+
+/*----------------------------------------------------------*
+SP:pagable and Nulable parameters
+--------------------------------------------------------------------*/
+CREATE or alter PROCEDURE SearchBusinessUnit @title nvarchar(1000)=null, @Code int=null,@fromDate datetime=null,@toDate datetime=null,
+    @pageNumber int=1,@PageSize int=20
+AS
+begin
+SELECT top( @PageSize) *,num FROM
+(SELECT *, ROW_NUMBER() OVER(ORDER BY Id) AS num
+  From [CustomerRegistration].[dbo].[BusinessUnit] ) AS numbered
+ WHERE (@title is null or Title=@title) and   (@Code is null or Code=@Code)  and (@fromDate is null or CreateDateTime>=@fromDate)
+ and (@toDate is null or  CreateDateTime<=@toDate) --and num BETWEEN ((@PageNumber - 1) * @PageSize + 1) AND (@PageNumber * @PageSize)
+
+end
+</code></pre>
+</div>

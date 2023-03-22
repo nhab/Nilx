@@ -1,0 +1,154 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2>Install</h2>
+<div>
+  install Moq nuget package in your project
+</div>
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Test doubles </h2>
+<div>
+  are objects that mimic the behavior of real objects in controlled ways.
+</div>      
+<h2>Mock</h2>
+<div>
+A Mock can be:
+  . Instructed, you can tell a mock that if a certain method is called then it can answer with a certain response
+  . Verified, verification is something you carry out after your production code has been called. 
+    You carry this out to verify that a certain method has been called with specific arguments
+</div>
+<h2>Setup a mock</h2>
+<div>
+To instruct it we use the method Setup() like so:
+  //we say that for the input parameter 114, charge method will return true,for our mock object
+  paymentServiceMock.Setup(p => p.Charge(114)).Returns(true)    
+</div>
+<h2>It.IsAny</h2>
+<div>
+  If you don’t care about the input parameter of the mocked method, you can use It.IsAny.For Example:
+  <pre><code>
+  //it returns the specified list for any string we pass to GetBooksForCategory method
+  bookServiceStub.Setup(x => x.GetBooksForCategory(It.IsAny<string>()))
+    .Callback<string>(s => passedParameter = s)
+    .Returns(new List<string>
+    {
+        "The Art of Unit Testing",
+        "Test-Driven Development",
+        "Working Effectively with Legacy Code"
+    });
+  </code></pre>
+  Setuping Properties of a mock object example:
+  <pre><code>emailSenderMock.Setup(x => x.EmailServer).Returns("Gmail");</code></pre>
+</div>  
+
+<h2>Events</h2>
+<div>
+  Moq support various event’s setup options:
+  <pre><code>
+  // Attach and detach from event (Moq 4.13 or later):
+  mock.SetupAdd(m => m.CustomEvent += It.IsAny<EventHandler>())...;
+  mock.SetupRemove(m => m.CustomEvent -= It.IsAny<EventHandler>())...;
+
+  // How to raise an event on the mock
+  mock.Raise(m => m.CustomEvent += null, new CustomEventArgs(someValue));
+
+  // How to raise an event on the mock that has sender in handler parameters
+  mock.Raise(m => m.CustomEvent += null, this, new CustomEventArgs(someValue));
+  </code></pre>
+</div>
+  <h2>Callbacks</h2>
+  <div>
+   Callback is simply a means to execute any custom code you want when a call is made to one of the mock's methods,
+    for example,to configured methods and properties' getters and setters.
+  Example 1:
+      public interface IFoo
+      {
+          int Bar(bool b);
+      }
+
+      var mock = new Mock<IFoo>();
+
+      mock.Setup(mc => mc.Bar(It.IsAny<bool>()))
+          .Callback<bool>(b => Console.WriteLine("Bar called with: " + b))
+          .Returns(42);
+
+      var ret = mock.Object.Bar(true);
+      Console.WriteLine("Result: " + ret);
+
+      // output:
+      // Bar called with: True
+      // Result: 42
+
+  Example 2:
+    [Fact]
+    public void GetAllBooksForCategory_returns_list_of_available_books_with_callback()
+    {
+        var bookServiceStub = new Mock<IBookService>();
+        string passedParameter = string.Empty;
+
+        bookServiceStub
+        .Setup(x => x.GetBooksForCategory(It.IsAny<string>()))
+        .Callback<string>(s => passedParameter = s)
+        .Returns(new List<string>
+        {
+        "The Art of Unit Testing",
+        "Test-Driven Development",
+        "Working Effectively with Legacy Code"
+        });
+
+        var accountService = new AccountService(bookServiceStub.Object, null);
+
+        IEnumerable<string> result = accountService.GetAllBooksForCategory("UnitTesting");
+
+        Assert.Equal("UnitTesting", passedParameter);
+    }
+    In this example, the passedParameter variable will get the value “UnitTesting”. That’s the value that was passed to the GetBooksForCategory method.
+    
+    - There are two types of Callback in Moq. One happens before the call returns; the other happens after the call returns.
+        var message = "";
+        mock.Setup(foo => foo.Execute(arg1: "ping", arg2: "pong"))
+            .Callback((x, y) =>
+            {
+                message = "Rally on!";
+                Console.WriteLine($"args before returns {x} {y}");
+            })
+            .Returns(message) // Rally on!
+            .Callback((x, y) =>
+            {
+                message = "Rally over!";
+                Console.WriteLine("arg after returns {x} {y}");
+            });
+</div>   
+<h2>Sequential calls</h2>
+<div>
+  There are also times when you will call a single method multiple times during a single test. 
+  In that case, you can choose what value will be returned on every call.
+
+  bookServiceStub
+      .SetupSequence(x => x.GetISBNFor(It.IsAny<string>()))
+      .Returns("0-9020-7656-6") //returned on 1st call
+      .Returns("0-9180-6396-5") //returned on 2nd call
+      .Returns("0-3860-1173-7") //returned on 3rd call
+      .Returns("0-5570-1450-6");//returned on 4th call
+</div>
+<h2>Exceptions</h2>
+<div>
+  One of the most common tasks that were solved with callbacks is throwing an exception when a certain method is invoked with a given set of parameters.
+  Example 1:
+    var mock = new Mock<IService>();
+    mock.Setup(p => p.DoSomething())
+      .Callback(() => throw new Exception());
+  Example 2:
+    mock.Setup(p => p.DoSomething(It.IsAny<int>()))
+    .Throws((int value) => new Exception($"{value} is not valid"));
+  </div>

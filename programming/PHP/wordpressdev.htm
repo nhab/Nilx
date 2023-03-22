@@ -1,0 +1,447 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+    <link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.pack.js"></script>    
+    <script src="/nilx/libs/jquery-3.3.1.slim.min.js" ></script>
+	<script src='/nilx/assets/js/blocks.js'></script>
+</head>
+
+<script>
+        $('code').each(function() {
+        var that = $(this);
+        // cache the content of 'code'
+        var html = that.html().trim();
+        that.empty();
+        // escape the content
+        that.text(html);
+    });
+    
+    hljs.initHighlightingOnLoad();
+</script>
+
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2>
+<input type="button" value="-"
+        class="toggleButton"  onclick="toggle(this)" />
+    Resources
+</h2>
+<div>
+    <a href="https://www.taniarascia.com/developing-a-wordpress-theme-from-scratch/">wordpress Theme text</a> 
+    <a href="https://www.youtube.com/watch?v=-h7gOJbIpmo">wordpress Theme video</a>
+</div>
+
+<h2>
+<input type="button" value="-"
+        class="toggleButton"  onclick="toggle(this)" />
+    A simple wordpress Theme:
+</h2>
+<div>
+    A index.php and a style.css are enough to create a minimal theme and other files are optional.
+    <b>1.Create a folder for the theme:</b> 
+    wp-content >	themes > theme name
+
+    <b>2.Create these files inside the folder:</b>
+    -<b> style.css</b>
+        <pre><code>
+        @charset "UTF-8";
+
+        /*
+        Theme Name: Twenty 91
+        Theme URI: https://wordpress.org/themes/twenty91/
+        Author: me
+        Author URI: https://wordpress.org/
+        Description: Twenty91 is a theme.. */ 
+        body
+        {
+            background:silver;
+            font:16px arial, sans-serif;
+        }
+
+        #container
+        {
+            width:800px;
+            padding:20px;
+            margin:0 auto;
+            background:#ffff;
+            border-radius:14px;
+        }
+        #footer
+        {
+            width:800px;
+            padding:20px;
+            margin:0 auto;
+            background:#000;
+            border-radius:14px;
+        }
+    </code></pre>
+    - <b>header.php</b>
+        <pre><code>
+        &lt;!doctype html>
+        &lt;html>
+        &lt;head>	
+            &lt;meta charset="utf-8" />
+            &lt;title>&lt;?php bloginfo('title') ?>&lt;/title>
+            &lt;link rel="stylesheet" href="&lt;?php bloginfo('stylesheet_url')?>" />
+            &lt;?php wp_head() ?>
+        &lt;/head>
+        &lt;header>	
+            &lt;h1>&lt;a href="&lt;?php home_url('/') ?>">&lt;?php bloginfo('name') ?> &lt;/h1>
+        &lt;/header>
+        &lt;div id="container">
+        </code></pre>
+    -<b>footer.php</b>
+        <pre><code>
+            &lt;/div>
+            &lt;footer> Copyright n  &lt;/footer>
+            &lt;/body>
+            &lt;/html>
+        </code></pre>
+    -<b>page.php</b>
+        
+    <pre><code>
+        &lt;?php get_header()?>
+        &lt;div>
+            &lt;?php  while(have_posts()): ?>
+                &lt;h2>&lt;?php the_title() ?> &lt;/h2>
+                &lt;?php the_content(); ?>
+            &lt;?php endwhile;?>
+            
+        &lt;/div>	
+        </code></pre>
+    -<b>index.php</b>
+        <pre><code>
+        &lt;?php get_header()?>
+        &lt;div>
+            &lt;?php  while(have_posts()): ?>
+                &lt;h2>&lt;?php the_title() ?> &lt;/h2>
+                &lt;?php the_content(); ?>
+            &lt;?php endwhile;?>
+            
+        &lt;/div>	
+        </code>
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Minimal plugin sample
+</h2>
+<div>
+    put the code in index.php in the folder name mini ->inside plugin folders of your wordpress.
+    then you can use shortcode [mini] insode your page or post`,
+    <pre><code>
+    &lt;?php
+        /**
+        * plugin name: minimal
+        * description: [mini]
+        * nimam2001-2@yahoo.com
+        */
+
+		 function mini(){
+   			return    "	< h1 >hello< /h1 >  this is a text  ";
+		}
+ 		add_shortcode('mini','mini');
+    </code></pre>
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Hooks(Actions,Filters)
+</h2>
+<div>
+    Hook exists to add our own code to wordpress.
+    <b>Types of hooks:</b>
+   
+       <b>Actions</b>
+       adds extra functionality at a specific point 
+       in the processing of the page.
+       for example, to add extra widgets or menus, 
+       or add a promotional message to the page.
+   
+       <b>Filters</b>
+       To modify data as it is processed.
+       For example, To insert another CSS class in a WordPress HTML element,
+       or modify some of your pages blocks. 
+    <a href='https://codex.wordpress.org/Plugin_API/Action_Reference'>
+      List of all core Actions + plugins actions</a>
+      
+    <a href='https://codex.wordpress.org/Plugin_API/Filter_Reference'>
+    List of all core filters + plugins filters</a>
+</div>
+
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Sample Action
+</h2>
+<div>
+    <pre><code>
+    // Add some text after the header
+    add_action( '__after_header' , 'add_promotional_text' );
+    function add_promotional_text() 
+    {
+        // If we're not on the home page, do nothing
+        if ( !is_front_page() )
+            return;
+    
+        echo "<div>
+                Special offer! June only: Free chocolate for everyone!
+                </div>";
+        }
+        //Inside the Customized core code,
+        // as the very last action in header.php, Customizr has:
+        // do_action ( '__after_header' )
+        // This is where our add_action() is hooking itself.
+    </code></pre>
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Sample Filter
+</h2>
+<div>
+    <pre><code>
+    // Change url that is linked from logo
+    add_filter( 'tc_logo_link_url', 'change_site_main_link' );
+    function change_site_main_link() {
+        return 'http://example.com';
+    }
+    //Inside the Customized core code, in the function that
+    //displays the logo (in class-header-header_main.php):
+    // apply_filters( ‘tc_logo_link_url’, esc_url( home_url( ‘/’ ) ) )
+    `;    
+    </code></pre>
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Adding admin page to admin menu
+</h2>
+<div>
+    <pre><code>
+    function plugin1_admin_menu_option()
+    {
+        add_menu_page('My Page Title', 'My Menu Title', 'manage_options', 'my-page-slug', 'my_function');
+        
+    }
+    add_action('admin_menu','plugin1_admin_menu_option');
+    function plugin1_function_name()
+    {
+        ?>
+        < h1> admin pagr hello< /h1>
+        < ?php
+    }    
+    </code></pre>
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />working with database
+</h2>
+<div>
+    <b>Connect /select</b>
+    <pre><code>
+    global $wpdb;    	  
+    $posts = $wpdb->get_results(  $wpdb->prepare(
+        "SELECT * FROM $wpdb->posts WHERE   post_status = 'draft' limit 4"));
+        
+        echo "Title:". $posts[0]->post_title;  ."<br/>"   ;
+        
+        foreach( $posts as $post ) {
+        echo $post->post_title;
+        }
+    
+        print_r( $posts );
+        exit;
+    </code></pre>
+
+    <b>Insert</b>
+    <pre><code>
+    $wpdb->insert($wpdb->usermeta, 
+    array("user_id" => 1, 
+            "meta_key" => "awesome_factor", 
+            "meta_value" => 10), array("%d", %s", "%d"));
+     $meta_id = $wpdb->insert_id;//it returns auto inserted id
+    // Equivalent to:
+    // INSERT INTO wp_usermeta (user_id, meta_key, meta_value) VALUES
+    (1, "awesome_factor", 10);
+    
+    //secure Insert
+    $sql = $wpdb->prepare( "INSERT INTO $wpdb->postmeta
+    (post_id, meta_key, meta_value ) VALUES 
+    ( %d, %s, %d )", 3342, 'post_views', 2290 );
+    $wpdb->query($sql);      
+    </code></pre>
+
+    <b>Update</b>
+    <pre><code>
+    $wpdb->update( $wpdb->posts, array(
+        "post_title" => "Modified Post Title"), 
+        array("ID" => 5), array("%s"), array("%d") );        
+    </code></pre>
+
+    <b>Delete</b>
+    <pre><code>
+    $wpdb->query("DELETE FROM wp_usermeta WHERE meta_key = 'first_login' 
+    OR meta_key = 'security_key' ");   
+    </code></pre>
+
+    <b>Error Handling of queries</b>
+    <pre><code>
+    $wpdb->show_errors();
+    $wpdb->query("DELETE FROM wp_posts WHERE post_id = 554 ");
+
+    // When run, because show_errors() is set, 
+    the error message will tell you that the "post_id" field is an unknown
+    field in this table (since the correct field is ID)
+        
+    </code></pre>
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />WordPress Database Tables(ver. 4.4)
+</h2>
+<div>
+    fields details <a href='https://codex.wordpress.org/Database_Description'> are here</a>
+    <b>wp_commentmeta</b>	    : Each comment features information called the meta data and it is stored in the wp_commentmeta.
+    <b>wp_comments</b>	        : Comments within WordPress are stored in the wp_comments table.
+    <b>wp_links</b>	            : holds information related to the links entered into the Links feature of WordPress. (This feature has been deprecated, but can be re-enabled with the Links Manager plugin.)
+    <b>wp_options</b>	        : The Options set under the Administration > Settings panel are stored in the wp_options table. See Option Reference for option_name and default values.
+    <b>wp_postmeta</b>	        : Each post features information called the meta data and it is stored in the wp_postmeta. Some plugins may add their own information to this table.
+    <b>wp_posts</b>		        : The core of the WordPress data is the posts. It is stored in the wp_posts table. Also Pages and navigation menu items are stored in this table.
+    <b>wp_terms</b>	            : The categories for both posts and links and the tags for posts are found within the wp_terms table.
+    <b>wp_termmeta</b>        	: Each term features information called the meta data and it is stored in wp_termmeta.
+    <b>wp_term_relationships</b>: Posts are associated with categories and tags from the wp_terms table and this association is maintained in the wp_term_relationships table.
+                                The association of links to their respective categories are also kept in this table.
+    <b>wp_term_taxonomy</b>	    : Describes the taxonomy (category, link, or tag) for the entries in the wp_terms table.
+    <b>wp_usermeta</b>	        : Each user features information called the meta data and it is stored in wp_usermeta.
+    <b>wp_users</b>		        : The list of users is maintained in table wp_users.
+
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Conflict-Free JavaScript/CSS
+</h2>
+<div>
+    A number of JavaScript frameworks are included in WordPress
+    by default.(<a href='https://codex.wordpress.org/Function_Reference/wp_enqueue_script#Default_scripts_included_with_WordPress'>The list</a>)
+    WordPress includes these libraries so that plugin and theme authors
+    can avoid this problem by using the wp_register_script and
+    wp_enqueue_script PHP functions to include JavaScript in the HTML.
+    
+    To output the file to the HTML, you need to enqueue the file.
+    Once you’ve done this, WordPress will add the required script tag
+    to the header or footer of the outputted page.
+    
+    the theme’s header.php file must include the line <?php wp_head(); ?>
+    just before the </head> tag, 
+    and the footer.php file must include the line <?php wp_footer(); ?>
+    just before the </body> tag.
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />using jQuery
+</h2>
+<div>
+    <pre><code>
+    var $ = jQuery; //enable $ alias within this scope
+    $(function(){
+        $(selector).css('color','red');
+    });;        
+    </code></pre>
+</div>
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Exmple of registering and enquing a script
+</h2>
+<div>
+<pre><code>
+    `//The script must be enququed after being registered
+    function mytheme_register_scripts() { 
+        //base.js – dependent on jQuery 
+        wp_register_script( 
+           'theme-base', //handle 
+           '/wp-content/themes/my-theme/base.js', //source 
+           array('jquery'), //dependencies 
+               '1.0.0', //version 
+               true //run in footer 
+           ); 
+
+        //custom.js – dependent on base.js 
+        wp_register_script( 
+            'theme-custom', 
+            '/wp-content/themes/my-theme/custom.js', 
+            array('theme-base'), 
+            '1.0.0', 
+            true 
+        ); 
+     } 
+     add_action('init', 'mytheme_register_scripts');
+     
+     //Adding JavaScript to the HTML is done in the
+     //wp_print_scripts hook with the following code:
+
+     function mytheme_enqueue_scripts(){ 
+         if (!is_admin()): 
+            wp_enqueue_script('theme-custom'); //custom.js 
+            endif; //!is_admin 
+     } 
+     add_action('wp_print_scripts', 'mytheme_enqueue_scripts');
+</code></pre>
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Registering StyleSheets
+</h2>
+<div>
+    <pre><code>
+        function mytheme_register_styles(){ 
+            //mobile.css for all devices 
+            wp_register_style( 
+               'theme-mobile', //handle 
+               '/wp-content/themes/my-theme/mobile.css', //source 
+               null, //no dependencies 
+               '1.0.0' //version 
+            ); 
+ 
+            //desktop.css for big-screen browsers 
+           wp_register_style( 
+             'theme-desktop', 
+             '/wp-content/themes/my-theme/desktop.css', 
+             array('theme-mobile'), 
+             '1.0.0', 
+             'only screen and (min-width : 960px)' //media type 
+           ); 
+         } 
+         add_action('init', 'mytheme_register_styles');
+         
+         // To enque it :
+         function mytheme_enqueue_styles(){ 
+            if (!is_admin()): 
+               wp_enqueue_style('theme-mobile'); //mobile.css 
+               wp_enqueue_style('theme-desktop'); //desktop.css 
+               wp_enqueue_style('theme-desktop-ie'); //desktop.css lte ie8 
+            endif; //!is_admin 
+         } 
+        add_action('wp_print_styles', 'mytheme_enqueue_styles');
+    </code></pre>
+</div>
+
+<h2>
+	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Initiating Bootstrap in functions.php or somewhere in codes
+</h2>
+<div>
+<pre><code>
+    //If bootstrap is registered in wordpress or theme,
+        //this code makes bootstrap usable
+    function monthem_register_assets(){
+        wp_register_style('bootstrap',
+        'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css');
+        wp_register_script('bootstrap',
+        'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js');
+        wp_enqueue_style('bootstrap');
+        wp_enqueue_script('bootstrap');
+    }
+
+    add_action('wp_enqueue_scripts','monthem_register_assets');
+</code></pre>
+</div>
+
+</body>
+</html>

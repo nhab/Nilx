@@ -1,0 +1,41 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />References</h2>
+<a href="https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29">summary</a>
+<div>
+	
+</div>
+<h2 ><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Clean code manifesto</h2>
+<div>
+-Meaningful names ovr short names
+-Meaningful code over clever code
+-Using small functions or modules over big blocks of code
+-Using a model class as parameter of a function over having long list of parameters for it;
+-Using private fields and methods  over using publics.
+-Using generics over repeating your code
+-Avoid using null and nullable
+-each part of code should be tracable seperately.
+-least needed functionlity for classes over comprehensive classes
+-Single responsibility of functions and classes over multipurpose functions and classes
+-using local variables and parameters over global variables
+-Using constants instead of magic numbers/magic strings
+-Injecting depencies of ready made libraries and components over Inventing the wheel 
+-Least coupling and maximum cohesion of classes.
+-Using Aspect oriented exception handling(annotation driven e.g. @ExceptionTranslation or OnExceptionAspect ) surrounding an entire method vs put the method in a try...catch .
+
+</div>

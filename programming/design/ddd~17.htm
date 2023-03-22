@@ -1,0 +1,435 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src="/nilx/assets/js/blocks.js"></script>	
+    <link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    
+</head>
+<body>
+    <script>hljs.highlightAll();</script>
+    <button onclick="toggleAll(this);" >-</button>
+    <h2><input type="button" value="-" class="toggleButton"  
+        onclick="toggle(this)" />Resources</h2>
+        <p>
+        https://martinfowler.com/tags/domain%20driven%20design.html
+        https://stackoverflow.com/questions/tagged/domain-driven-design        
+        </p>
+        
+    <h2><input type="button" value="-" class="toggleButton"  
+        onclick="toggle(this)" />What is domain driven design( DDD ) ?</h2>
+    <div>
+    . DDD is designing the domain model classes first based on  input from that domain's experts then creating database based on the domain model. 
+
+    . Domain driven methodology(code first aproach) allows developers to focus and think through in terms of business domain objects rather than 
+    creating domain model classes to match the database design in Database First approach.
+
+    . In terms of object-oriented programming it means that the structure and language of software code (class names, class methods, class variables) should match the business domain.
+
+    . For example, if a software processes loan applications, it might have classes like LoanApplication and Customer, and methods such as AcceptOffer and Withdraw.
+
+    . Domain-driven design is predicated on the following goals:
+        <p>
+        - placing the project's primary focus on the core domain and domain logic;
+        - basing complex designs on a model of the domain;
+        - initiating a creative collaboration between technical and domain experts to iteratively refine a conceptual model that addresses particular domain problems.  
+        </p>
+    </div>
+    <h2 style="display:flex"><input type="button" value="-"
+        style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />Ubiquitous language</h2>
+    <p>
+    -  Most of  ambiguities, can be solved with proper naming of classes and methods,
+    making them express what an object is and what a method does in the context of the domain.
+
+    -  The main idea of using a Ubiquitous Language is to align the application with the business. 
+        This is accomplished by adopting a common language, between the business and technology, in the code. 
+
+    -The source for the language is the business side of the company, they have the concepts that need to be implemented, 
+    but the terminology is then negotiated with the technology side of the company 
+    (meaning that the business side doesn’t always choose the best naming either) 
+    with the objective of creating a common terminology that can be used by business, 
+    technology and in the code itself without any ambiguity, a ubiquitous language. 
+
+    -The code, classes, methods, properties and modules naming must align with the ubiquitous language.
+    -It is the practice of using the terms used throughout the business within the codebase, 
+    and working new terms from the modeling back into the business.
+
+    - Language often evolves and the codebase should evolve with the language.
+    - The essence really of DDD is that your code models the processes within the business and if you are not starting with the same language then how descriptive can it really be. 
+    - If a product owner is looking at the application code he should recognise the classes, methods, and variables as models, workflows, and actions that actually occur.
+    </p>   
+    <h2 style="display:flex"><input type="button" value="-" style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Layers</h2>
+    <p>
+    layers in DDD are: 
+        <b>
+        . User interface
+        . Applicatio
+        . Domain
+        . Infrrastructure
+        </b>
+    </p>
+    <h2 style="display:flex"><input type="button" value="-"
+                    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+                    onclick="toggle(this)" />DDD architecture Layers</h2>
+    <div>
+        . Business Logic places into two layers, the Domain layer and the Application Layer, while they contain different kinds of business logic;
+
+        . DDD architecture Layers are:
+        <p>
+            ● <b>Domain Layer</b> implements the core, use-case 
+            independent business logic of the domain/system.
+            
+            ● <b>Application Layer</b>  implements the use cases of the 
+            application based on the domain. A use case can be 
+            thought as a user interaction on the User Interface (UI)
+    
+            ● <b>Presentation Layer </b> contains the UI elements (pages, components) of the application.
+    
+            ● <b>Infrastructure Layer</b>  supports other layer by implementing the abstractions and integrations to 3rd-party library and systems.
+        </p> 
+        . In the Clean Architecture, each layer only depends on the layer directly inside it.
+    </div>
+    
+    <h2 style="display:flex"><input type="button" value="-"
+            style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+            onclick="toggle(this)" />Domain layer building blocks</h2>
+    <p>
+        ●  <b>Entity:</b> An Entity is an object with its own properties 
+                (state, data) and methods that implements the business 
+                logic that is executed on these properties. An entity is 
+                represented by its unique identiﬁer (Id).
+
+                Entities are the classes that model the domain concepts and have identity. 
+                This usually means there is a unique primary key associated with the entity. 
+                Remember that modelling in DDD takes us back to the OOP we learned in the text books... behavior and data together.
+                This is in antithesis to the usual anemic models found in most software.              
+                               
+        ●   <b>Value Object: </b>A Value Object is another kind of domain 
+                object that is identiﬁed by its properties rather than a unique Id. 
+                That means two Value Objects with same properties are considered as the same object. 
+                Value objects are generally implemented as immutable and 
+                mostly are much simpler than the Entities.  
+
+                Value objects are much like entities except they do not have identity.
+                Money is the quintessential example of a model that shows intent, contains rules, but does not have identity. 
+                The important part here is using types to convey meaning as well as place logic along with the data in a very obvious way.   
+    
+        ●   <b>Agregate</b>A DDD aggregate is a cluster of domain objects that can be treated as a single unit. 
+            An example may be an order and its line-items, these will be separate objects, but it's useful to treat the order (together with its line items) as a single aggregate.
+
+            An Aggregate is a hierarchy of objects (Entities and Value objects) that make up a consistency boundary.
+            
+            Why would we want to set a boundary rather than just reference any object needed?
+        
+            Minimising associations helps to prevent a reference web.
+            This can be problematic when fetching and reconstituting a hierarchy of objects into memory. 
+            Lazy loading can quickly get out of hand, alternatively null references about and conntinually need to be checked.
+        
+            Let us turn the question around.
+            What if the relationships of our object model clearly showed us the effects of change? 
+            For example, the aggregate was the scope of the transaction...
+        
+        
+        ●   <b>Agregate root</b>Each AGGREGATE has a root and a boundary. 
+                The boundary defines what is inside the AGGREGATE. The root is a single, specific ENTITY contained in the AGGREGATE.
+                The root is the only member of the AGGREGATE that outside objects are allowed to hold references to.
+                Example: An example is a model containing a Customer entity and an Address entity. 
+                We would never access an Address entity directly from the model as it does not make sense without the context of an associated Customer. 
+                So we could say that Customer and Address together form an aggregate and that Customer is an aggregate root.
+        
+                
+                    The Aggregate Root is an Entity that all other Entities and Value Objects in the hierarchy hang off. 
+                    For example if you have an Order with Order Lines and a Supplier, the OrderRepository will return an Order with all OrderLines and OrderSupplier populated. 
+                    If would not be possible to fetch an OrderLine separately, nor a OrderSupplier. 
+                    If needed though you would provide methods on your OrderRepository to fetch an order by Order Line Id or by Supplier Reference for example.
+                    
+                    Points to keep in mind:
+                  
+                        Technical difficulties implementing an aggregate (like transaction issues persisting it) are usually indicative of a poorly chosen model.
+                        Put more effort refining the model rather than trying to fix a modelling problem with a technical implementation.
+                        
+                        Access to objects from outside the aggregate must occur through the Aggregate Root.
+                        
+                        Aggregates are always constructed in a consistent state.
+                        
+                        The logic is usually within the aggregate to disallow consistent state or at least check its consistency.
+                        
+                        It is better to encapsulate changes to state through method calls rather than directly mutating properties. 
+                        This shows intent as well as adds an extra layer of indirection allowing implemntation changes without changing the API.
+                           
+        ●   <b>Repository (interface):</b> A Repository is a collection-like interface that is used by the Domain and Application Layers to access to the data persistence system (the database). 
+                ● It hides the complexity of the DBMS from the business code. 
+                ● Domain Layer contains the interfaces of the repositories.  
+        
+                ● "Mediates between the domain and data mapping layers using a collection-like interface for accessing domain objects" (Martin Fowler).
+                Repositories, in practice, are used to perform database operations for domain objects. Generally, a separated repository is used for each aggregate root or entity.
+    
+                ● Common Repository principles are;
+                    ●  Deﬁne a repository interface in the Domain Layer 
+                    (because it is used in the Domain and Application Layers),
+                    implement in the Infrastructure Layer
+                    (EntityFrameworkCore project in the startup template). 
+                    ●  Do not include business logic inside the repositories. 
+                    ●  Repository interface should be database provider / ORM
+                    independent. For example, do not return a DbSet from a 
+                    repository method. DbSet is an object provided by the EF 
+                    Core.
+                    ●  Create repositories for aggregate roots, not for all 
+                    entities. Because, sub-collection entities (of an aggregate) 
+                    should be accessed over the aggregate root.
+                ● Repositories will be implemented in intrface layer  
+                
+                Repositories protect us from taking a data-centric view of our code.
+                They allow us to persist and retrieve aggregates without dealing directly with the underlying persistence.
+                It is however important for developers to at least be aware of the underlying implementations so as not to abuse the repository from a performance or scoping way.
+            
+                The abstraction of the repository is contained within the domain. This abstraction knows about the domain models within that context.
+                More specifically it knows about the aggregate that it is returning.
+                A repository returns an Entity (or collection of Entities) and the aggregate for wich that Entity is the Aggregate Root.
+            
+                The implementation of the repository abstraction does not reside in the domain. It is a Infrastructural concern and can change.
+                What is important though is that the repository handles mapping however the data is persisted into a fully hydrated and consistent aggregate.
+            
+                The developer is free to add multiple query methods to the repository but the return results are always in terms of the Aggregate Root.
+                Points to keep in mind :
+            
+                    The repository abstraction is part of the domain
+                    The repository implementation is NOT part of the domain
+                    The repository exposes data in terms of that repository's Aggregate Root
+                    Query methods should use the domain language
+                    If complex queries look to encapsulate in query objects using the Specification pattern
+                    Transaction should be controlled by the client code
+            
+        ●   <b>Domain Service: </b>
+                ● A Domain Service is a stateless service that <b>implements core business rules</b> of the domain. 
+                ●  It is useful to implement domain logic that depends on multiple aggregate (entity) type or some external services.
+    
+                ●  Services come in 3 flavours: Domain Services, Application Services, and Infrastructure Services.
+                    <b>Domain Services :</b> Encapsulates business logic that doesn't naturally fit within a domain object, and are NOT typical CRUD operations – those would belong to a Repository.
+                    <b>Application Services : </b>Used by external consumers to talk to your system (think Web Services). If consumers need access to CRUD operations, they would be exposed here.
+                    <b>Infrastructure Services :</b> Used to abstract technical concerns (e.g. MSMQ, email provider, etc).
+                ●  Keeping Domain Services along with your Domain Objects is sensible( they are all focused on domain logic).
+                And you can inject Repositories into your Services.
+                Depends on services and repositories.
+                ●  Needs to work with multiple aggregates, so the logic doesn't properly ﬁt in any of the aggregates.
+                ●  Domain Services work with Domain Objects. 
+                ●  Their methods can get and return entities, value objects, primitive types... etc. 
+                ●  However, they don't get/return DTOs. DTOs is a part of the Application Layer.
+                
+                ● Points to keep in mind: 
+                    Don't give up too quickly trying to fit an operation into the model (concider a new concept that encapsulates entities and values objects...
+                    maybe this is actual aggregate root?)
+                    The Service is named after an activity (verb not noun)
+                    Services are stateless
+                    Services still use the Ubiquitous Language
+                
+        ●   <b> Speciﬁcation:</b>
+            <div>
+                ● A Speciﬁcation is used to deﬁne named, reusable, combinable and testable ﬁlters for Domain Objects based on the business rules.
+                ● you can think of specifications as of domain classes that categorize other domain classes. 
+                ● A specification answers the question of whether a domain object meets some criteria.
+                ● he main benefit of the Specification pattern is that you can reuse that knowledge (of whether a domain object meets some criteria) in different scenarios 
+                 and therefore adhere to the Don’t Repeat Yourself principle.
+                ● Here are the typical use cases for this pattern:
+                <div>
+                    <b>Data retrieval</b> — Querying objects from the database that meet the criteria
+                    <b>In-memory validation</b> — Checking that an object in the memory meets the criteria
+                    <b>Creation of a new object</b> — Creating a new (arbitrary) object that meets the criteria
+                    <b>Bulk updates</b> — Modifying a bunch of objects that meet the criteria
+                </div>
+                ● Speciﬁcation<T> base class simpliﬁes to create a speciﬁcation class by deﬁning an expression. 
+            </div>
+        ●   <b>Domain Event: </b>A Domain Event is a way of informing other services in a loosely coupled manner, when a domain speciﬁc event occurs.
+
+        ● <b>Factories</b>
+            Since an aggregate should always be in a consistent state it is important that they are constructed in a consistent state to the user.
+            Factories provide a way to ensure that new instances of an aggregate always start in a consistent state.
+    </p>
+   <h2 style="display:flex"><input type="button" value="-"
+            style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+            onclick="toggle(this)" />Application layer building blocks</h2>
+    <p>
+        ●  <b>Application Service:</b> An Application Service is a stateless service that implements use cases of the application. 
+                An application service typically gets and returns DTOs. It is used by the Presentation Layer.
+                It uses and coordinates the domain objects to implement the use cases. A use case is typically considered as a Unit Of Work.
+                
+                The application service is what presents an input for a use-case. 
+                It calls off to the domain for execution, calls any other services (like notifications) and returns.
+                This could be something like a WebApi controller in .NET or you could choose to explicitly create an an application service.
+                
+                Points to keep in mind
+            
+                    A thin layer that receives a request and passes it to the domain to processes
+                    Think use-case
+                    A good place to handle transactions
+                    Can call out to Infrastructure Services
+
+        ●   <b>Data Transfer Object (DTO):</b> A DTO is a simple object without any business logic that is used to transfer state 
+            (data) between the Application and Presentation Layers.
+    
+        ●   <b>Unit of Work (UOW):</b> A Unit of Work is an atomic work that should be done as a transaction unit. 
+                All the operations inside a UOW should be committed on success or rolled back on a failure.
+    
+    </p>
+
+    <h2 style="display:flex"><input type="button" value="-"
+        style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />User Interface layer</h2>
+    <p>
+    Responsible for drawing the screens the users use to interact with the application and translating the user’s inputs into application commands.
+    It is important to note that the “users” can be human but can also be other applications connecting to our API, which corresponds entirely to the Boundary objects in the EBI architecture;
+    </p>
+    <h2 style="display:flex"><input type="button" value="-"
+        style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />Application Layer</h2>
+    <p>
+    Orchestrates Domain objects to perform tasks required by the users: the Use Cases. It does not contain business logic. This relates to the Interactors in the EBI architecture, except that the Interactors were any object that was not related to the UI or an Entity and, in this case, the Application Layer only contains the objects relevant to a Use Case.
+     This layer is where the Application Services belong, as they are the containers where the use case orchestration happens, using repositories, Domain Services, Entities, Value Objects or any other Domain object;
+    </p>
+
+    <h2 style="display:flex"><input type="button" value="-"
+        style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />Infrastructure</h2>
+    <p>The technical capabilities that support the layers above, ie. persistence or messaging.</p>    
+
+    <h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Bounded context</h2>    
+<p>
+    In an enterprise application, the model can grow quite a lot and the size of the team working on the code base as well.
+The usual solution to a big problem is to break it up into smaller pieces, and this is exactly where the “bounded contexts” come into play.
+
+Two subsystems commonly serve very different user communities
+
+Bounded contexts define a context where an isolated part of the model applies. 
+The isolation can be achieved by decoupling technical logic, by code base segregation, by database schema segregation and also in terms of team organisation. 
+The degree to which we isolate the bounded context is, as usual, dependent on the actual situation: the needs and possibilities we have.
+
+Already back then he had quite a few very concrete ideas about this subject:
+
+The system thus consists of a number of subsystems which can contain subsystems of themselves. 
+At the bottom of such a hierarchy are the analysis objects. 
+Subsystems are thus a way of structuring the system for further development and maintenance
+The task of the subsystems is to package the objects so that the complexity is reduced.
+All the objects having to do with a particular part of the functionality will be placed in the same subsystem
+The aim is to have a strong functional coupling within a subsystem and a weak coupling between subsystems (nowadays known as low coupling and high cohesion)
+[One subsystem] should therefore preferably be coupled to only one actor, since changes are usually caused by an actor
+[…] begin by placing the control object in a subsystem, and then place strongly coupled entity objects and interface objects in the same subsystem
+All objects which have a strong mutual functional coupling will be placed in the same subsystem […]
+Will changes in one object lead to changes in the other object? (This is now known as The Common Closure Principle – Classes that change together are packaged together)
+Do they communicate with the same actor?
+Are both of them dependent on a third object, such as an interface object or an entity object?
+Does one object perform several operations on the other? (This is now known as The Common Reuse Principle – Classes that are used together are packaged together)
+Another criterion for the division is that there should be as little communication between different subsystems as possible (low coupling)
+For large projects, there may thus be other criteria for subsystem division, for example:
+Different development groups have different competence or resources, and it may be desirable to distribute the development work accordingly (the groups may also be geographically separated)
+In a distributed environment, a subsystem may be wanted at each logical node (SOA, web services and micro services)
+If an existing product can be used in this system, this may be regarded as a subsystem (libraries our system depends on, i.e. an ORM)
+
+    The Bounded context is the context in which the Ubiquitous language and the corresponding models are valid.
+    As developer it is a common trap to fall into to try reuse code and concepts across contexts. 
+    This is a recipe for disaster since the terms and verbs used to describe a model in one context will likely be similar but not the same.
+    This results in blurring of the model to cater for both. This adds confusion as well as inviting changes with unintended consequences.
+    This is especially true when a model is shared across more than one team (strongly concider whether it really is one context).
+    Example
+
+    Imagine a Product class in the Logistics domain. 
+    For tracking around the warehouse you need a barcode, for shipping you need the packaged dimensions and weight.
+    Now think of a product for display on an e-commerce website.
+    You need photos, description, and other specs like its actual dimensions unpacked.
+</p>    
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Anti-corruption layer (ACL)</h2>
+ <p>  
+    An ACL is at the very least a thin translation layer between two bounded contexts. 
+    Even if both bounded contexts are well defined, and share similar models.
+    The models in one context should not influence the models in another and without a layer in between to translate between the two corruption will creep in. 
+    If the external system a bounded context is talking to is a legacy system with a very poor model it is even more likely it will corrupt unless the ACL acts as a strong buffer.
+    
+    
+    Why would a developer need all of this at one time?
+    Why confuse matters? Why would the clients of the code like a scanner in the warehouse or a customer on the website need both?
+    If all that is shared is maybe a name and a SKU, is the code sharing of 2 properties worth coupling different parts of the system? Different teams together?
+    There are many reasons to want to keep Anti-Corruption Layer
+
+An anti-corruption layer is basically a middleware between two subsystems.
+ It is used to isolate the two subsystems, making them depend on the anti-corruption layer instead of depending directly on each other.
+  This way, if we refactor or completely replace one of the subsystems, we will only have to update the anti-corruption layer leaving the other subsystem untouched.
+
+This is especially useful when we have a new system that we need to integrate with a legacy system.
+ In order to not let the legacy structure dictate how we design the new system, we create an anti-corruption layer that will adapt the API of the legacy subsystem to the needs of the new subsystem.
+
+It has 3 main concerns:
+
+Adapting subsystems APIs to what the client subsystems need;
+Translating data and commands between subsystems;
+Establish communication in one or several directions, as needed
+
+This is a technique that is more logical to be used when we don’t control one or all of the subsystems, but it might also make sense to use it when we control all of the subsystems involved, 
+even if they are well designed but simply have very different models and we want to prevent leakage from one model to another (change one subsystem to match the needs of another subsystem).
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Shared Kernel</h2>
+<p>
+In some situations, despite our desire to have completely isolated and decoupled components, it makes sense for some domain code to be shared by multiple components.
+
+This will allow components to stay decoupled from each other, although coupled to that same shared code, the shared kernel.
+
+That is the case, for example, with events that are triggered by one component and listened to by another one or several components. But it can also be the case with service interfaces and even entities.
+
+Nevertheless, we should keep the shared kernel small, and be very careful when changing it so we don’t inadvertedly break other code using it. 
+It is important that the code in the shared kernel is not changed without consultation with the other development teams using it.
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Generic Subdomain</h2>
+<p>
+A subdomain is a very well isolated part of the domain. A generic subdomain is a subdomain that is not specific to our application, it could be used in any similar application.
+
+So, if we have an application which has part of it that is about finance, maybe we can use an existing finance library in our application. 
+But either way, even if we can’t use an existing library and need to build our own, if it is a generic subdomain it is not our core business and it should be thought of as essential but not crucial.
+ It is not the most important part of our application, so it is not where our best experts should be focused and it should even be clearly outside of the main source code,
+  possibly installed with a dependency management tool.
+these models seperated based on their context and few reasons to combine them.
+    Yet it is a very common occurance in development. Why? Code re-use.
+    Only re-use models if they are indeed the same model.
+ </p>   
+  
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Infrastructure Service</h2>    
+<p>
+    This is a technical implementation for something that performs some task such as notifications (IM, email, etc.),
+     put messages on a bus, or retrieve some data from another system.
+</p>    
+
+    <h2 style="display:flex"><input type="button" value="-"
+        style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" /> Modules</h2>
+    <p>
+        Modules are simply packages or assemblies. Whatever your technology's means is of bundling built code is.   
+    </p>
+    
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Shared Kernel</h2>
+<p>
+    Sometimes a model needs to be shared across multiple Bounded Contexts.
+    If so a Shared Kernel can be created but in a lot of cases the coupling created between the contexts and the teams is not worth it.  
+</p>
+ 
+<h2><input type="button" value="-" class="toggleButton"  
+    onclick="toggle(this)" />Clients</h2>
+<p>
+    This is not really a term from the Blue Book (that I remember) but I find it useful when talking about DDD and Clean Architecture. 
+    Clients are the callers of the application layer.
+    These could be another application automated service or an application been driven by a user. 
+    Regardless the clients execute the use-cases defined in the application layer.    
+</p>
+
+
+</div>

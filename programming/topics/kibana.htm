@@ -1,0 +1,263 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+
+<h2>References</h2>
+<div>
+
+</div>
+<h2>What is </h2>
+<div>
+	is a free and open frontend application that sits on top of the Elastic Stack,
+	providing search and data visualization for data indexed in Elasticsearch. 	
+</div>
+<h2>Kibana Installation</h2>
+<div>
+For Windows :
+    - download it from https://www.elastic.co/products/kibana
+	https://www.elastic.co/guide/en/kibana/current/windows.html
+    - cd kibanaproject/kibana-6.5.4/kibana-6.5.4/bin
+    - kibana
+    - you can open Kibana in browser using http://localhost:5601
+To get Kibana version :
+ it is shown on the help icon at top menu
+</div>
+<h2>list of Indexes</h2>
+<div>
+http://172.16.20.14:5601/ > left menu > Management > Stack Management > Index Management
+</div>
+<h2>Kibana Index Pattern</h2>
+<div>
+Index patterns are how Elasticsearch communicates with Kibana.
+A defined index pattern tells Kibana which data from Elasticsearch to retrieve and use. 
+Add an index pattern by following these steps:
+
+1. The search bar at the top of the page helps locate options in Kibana.
+ Press CTRL+/ or click the search bar to start searching.
+2. Type "Index Patterns",and press Enter to select the search result.
+3. The Index Patterns page opens. Click Create index pattern to create an index pattern.
+4. To define the index pattern, search for the index you want to add by exact name.
+ Use an asterisk (*) for a close match or to match multiple indexes with a similar name.
+ If you're unsure about the index name, available index patterns are listed at the bottom. 
+ We're using the Kibana sample web traffic data for the tutorial. Click Next step to continue.
+
+5. If the data has an index with a timestamp, specify the default time field for filtering the data by time. 
+Select the appropriate option from the dropdown menu.
+Alternatively, select the I don't want to use the time filter option if you do not have time data or merge time fields.
+ Press the Create index pattern button to finish.
+
+6. To explore the data, type Discover in the search bar (CTRL+/) and press Enter.
+7. Select the index pattern from the dropdown menu on the left pane.
+
+The discover page shows the data from the created index pattern.
+</div>
+<h2>Using console to work with data</h2>
+<div>
+To query you can open console from left menu >Dev Tools
+it brings two pane in the screen.
+the left pane is to write the query.
+the right pane shows the result.
+
+To create some data , run the following code to create movies index:
+<cl>
+	PUT /movies/movie/1
+    {
+    "title": "The Godfather",
+    "director": "Francis Ford Coppola",
+    "year": 1972
+    }
+</cl>
+to search for a specific movie id :
+<cl>GET /movies/_doc/1</cl>
+if the data cant be found,it shows ' "found":false '
+</div>
+searching using query_string:
+<cl>
+	POST movies/_doc/_search
+{
+    "query": {
+        "query_string": {
+            "query": "bill"
+			,	  "fields": ["Id","title"]
+        }
+    }
+}
+</cl>
+another search:
+<cl>
+	"query_string" : { "query":"(genres:Drama) AND (year:[* TO 2005] )" }
+</cl>
+<h2>Kibana Search</h2>
+<div>
+Kibana offers various methods to perform queries on the data. 
+Clicking the search field provides suggestion and autocomplete options, which makes the learning curve smoother. 
+Save the code for later use in visualization.
+
+Below are the most common ways to search through the information, along with the best practices.
+
+<h3>KQL and Lucene</h3>
+Version 6.2 and previous versions used Lucene to query data.
+Newer versions added the option to use the Kuery or KQL language to improve searching. 
+The 7.0 and more recent versions use KQL by default and offer the choice to revert to Lucene.
+To change the language to Lucene, click the KQL button in the search bar.
+Change the Kibana Query Language option to Off.
+<h3>Text Search</h3>    
+Use the search box without any fields or local statements to perform a free text search in all the available data fields.
+If no data shows up, try expanding the time field next to the search box to capture a broader range.
+
+Single Word Query
+
+Searching for the word elasticsearch finds all instances in the data in all fields.
+The query in Kibana is not case-sensitive. Use the asterisk sign (*) for a fuzzy string search.
+
+Multiword Query
+
+Hit the space bar to separate words and query multiple individual terms.
+For example, get elasticsearch locates elasticsearch and get as separate words.
+
+String Query
+
+To match an exact string, use quotation marks.
+For example, "get elasticsearch" queries the whole string.
+<h3>Field Search</h3>
+Kibana allows searching individual fields. Check all available fields on the bottom left menu pane under Available fields:
+To perform a search in a specific field, use the following syntax:
+<cl>< field name > : < query > </cl>
+The query syntax depends on the field type.
+Search Field for Exact Phrase
+
+For example, search the response.keyword field for the "404" message response:
+The output shows all matched instances in the specified field. Search multiple values by separating the query terms with a space:
+<cl>response.keyword : 404 200</cl>
+Notice the field type is set as t, indicating the field is text type.
+
+Search Field Range
+
+Numeric and date types often require a range. KQL supports four range operators.
+
+Greater than (>).
+Less than (<).
+Greater than or equal to (>=).
+Less than or equal to (<=).
+For example, search for a date range:
+<cl>@timestamp <= "2021-09-02"</cl>
+The output shows all dates before and including the listed date.
+<h3>Boolean Queries</h3>
+Logical statements analyze two or more queries for truth value. The logical operators are in capital letters for visual reasons and work equally well in lowercase. Boolean queries run for both text queries or when searching through fields.
+
+There are three logical operators in KQL:
+
+1. The AND operator requires both terms to appear in a search result. Use AND to locate all instances where two terms appear:
+<cl>< query > AND < query ></cl>
+For example:
+<cl>elasticsearch AND get</cl>
+Other complex examples:
+ search for all instances where Windows XP had a 400 response:
+<cl>machine.os.keyword : "win xp" AND response.keyword : "404"</cl>
+The output shows all results where both win xp and 404 appear together.
+
+<cl>elasticsearch OR get</cl>
+
+search for all results where the OS is Windows XP, or the response was 400:
+<cl>machine.os.keyword : "win xp" OR response.keyword : "404"</cl>
+
+search for any response keyword except 404:
+<cl>NOT response.keyword : "404"</cl>
+
+<h3>Kibana Filter</h3>
+The Kibana filter helps exclude or include fields in the search queries.
+
+1. Create a filter by clicking the +Add filter link.
+A dialog box appears to create the filter.
+
+2. Select a Field from the dropdown menu or start searching to get autosuggestions.
+
+3. Choose an Operator from the dropdown menu.
+
+4. An additional Value field appears depending on the chosen operator.
+ The exists and does not exist options do not require the Value field while all other operators do. 
+ Choose the filtering value if the operator needs it.
+
+5. As an optional step, create a custom label for the filter.
+ Tick the Create custom label? checkbox and provide a name. 
+ Click Save to finish.
+ The filter appears below the search box and applies to current data and all further searches automatically.
+ Add multiple filters to narrow the dataset search further.
+</div>
+ <h2> Kibana Visualization</h2>
+<div>
+Visualization in Kibana is the crucial feature with many options for visualizing and presenting data.
+<h3>Kibana Visualization Types</h3>
+When creating a visualization, there are five editors to select from:
+
+1. Lens creates visuals in a drag-and-drop interface and allows switching between visualization types quickly. The interface is recommended for most use cases.
+
+2. Maps is an editor used for geographic data and layers information on a map.
+
+3. TSVB is an interface for advanced time series analysis.
+
+4. Custom visualizations uses the Vega syntax to create custom graphs.
+
+5. Aggregation-based visualizations use the standard library to create charts.
+
+Kibana additionally provides two extra tools to enhance presentations:
+
+1. Text and image tool.
+
+2. Controls tool for adding sliders and dropdown menus.
+
+All the tools work together to create dashboards for presenting data.
+<h3>Kibana Aggregations</h3>
+The Kibana aggregation tool provides various visualizations:
+
+1. Area highlights data between an axis and a line.
+
+2. Goal tracks the metric progress to a specified goal.
+
+3. Line displays data as a series of points.
+
+4. Tag cloud shows word frequency.
+5. Data table shows data in rows and columns.
+
+6. Heat map displays data in a cell-matrix with shaded regions.
+
+7. Metric shows a calculation result as a single number.
+
+8. Timelion graphs time series data.
+9. Gauge shows a metric status.
+
+10. Horizontal bar displays data in horizontal bars on an axis.
+
+11. Pie compares data in portions compared to a whole.
+
+12. Vertical bar shows data in a vertical bar on an axis.
+<h2>Creating a Visualization in Kibana</h2>
+To create a visualization in Kibana:
+
+1. Search for Visualize Library in the top search bar (shortcut CTRL+/) and press Enter.
+
+2. Click the Create new visualization button.
+3. Select a visualization type from the list. For example, scroll down and choose Aggregation based.
+4. From the options list, locate and select Pie to create a pie chart.
+5. Search for the index pattern by name and select it to continue. A creation dashboard appears.
+
+6. Select Metrics for the data. The count metric is selected by default.
+
+7. Add a Bucket parameter and select Split Slices.
+
+8. Choose options for the required fields. For example, set the Aggregation to Terms and the Field to machine.os.keyword.
+9. Press the Update button (shortcut CTRL+Enter) to view the pie chart.
+Play with the options, filtering, and timeline to adjust the visualization.
+
+10. When finished, click the Save button in the top right corner. Name the chart and select New to make a new dashboard.
+Click Save and go to Dashboard to see the visualization in the dashboard. Save the dashboard and type in a name for it.
+</div>

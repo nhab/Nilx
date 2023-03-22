@@ -1,0 +1,105 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src="/nilx/assets/js/blocks.js"></script>	
+    <link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    
+</head>
+<body>
+    <script>hljs.highlightAll();</script>
+    <b>Reference</b>:
+    <a href='https://docs.abp.io/en/abp/latest/Getting-Started-Setup-Environment?UI=NG&DB=EF&Tiered=Yes'>prerequisites and getting started</a>
+    <a href='https://docs.abp.io/en/abp/latest/Tutorials/Part-1?UI=MVC&DB=EF'>( Abp step by step )</a>
+    <a href='https://www.abp.io/project-created-success?ui=Mvc&db=EntityFrameworkCore&tiered=no'>( Getting started )</a>
+    <a href='https://community.abp.io/'>( Community tutorials )</a>
+    <br>
+ <b>RootPath :</b> solution > modules > content > src >
+<h7>
+<input type="button" value="-" class="toggleButton"  
+onclick="toggle(this)" />
+<h8>1-</h8><h8 >&#9989;</h8><h8 class="width4" >Domain Layer</h8><h8 >(30 min):</h8><h9> content.Domain></h9>
+</h7>
+
+<p>
+  	1.1.<strong>Making domain classs: </strong>  (Apply invariants,Throw exception if needed)
+		<samp>public class Person : AggregateRoot< Guid > </samp>
+	1.2-<strong>Making IpersonRepository</strong> in the same path:
+		<samp>class IPersonRepository : IRepository< Person, Guid > </samp>
+	1.3-<strong>Making customized Exceptions</strong>
+</p>
+<h7>
+<input type="button" value="-" class="toggleButton"  
+onclick="toggle(this)" />
+	<h8>2-</h8><h8>&#9989;</h8><h8 class="width4">Application Layer </h8><h8 >(40 min)</h8><h9>content>application.contract</h9>
+</h7>
+<p>
+-Implement <strong>Application Service</strong>:
+	2.1.<strong>Make interface</strong> : <samp>interface IPersonAppService</samp> 
+	2.2.<strong>Make DTo</strong>       : <samp>class PersonDto : EntityDto< Guid ></samp>
+		(in fact it is a best pracrice to create seperate classes for get,add,update: CreatePersonDto , UpdatePersonDto and PersonDto)
+		implement the interface
+	2.3.<strong
+	title="[Authorize]
+	public class PersonAppService : ApplicationService, IPersonAppService
+	{
+		private readonly IPersonRepository _iPersonRepository;
+		public PersonAppService(IPersonRepository personRepository) {
+			_iPersonRepository = personRepository;
+		}
+		async Task< List< PersonDtoo > > IPersonAppService.GetPersonsAsync()
+		{
+			var personsList = await _iPersonRepository.GetListAsync();
+			var result = new List<PersonDtoo>();
+			personsList.ForEach(person => result.Add(ObjectMapper.Map<Person, PersonDtoo>(person)));
+			return result;
+		}	
+		...	"> Make  class PersonAppService</strong>: in PersonAppService.cs
+	3.4.<strong title="namespace content.PersonManagement.Exceptions
+	{
+		internal class NotFoundPersonException : BusinessException
+		{
+			public NotFoundPersonException() : base(contentErrorCodes.NotFoundComment)
+			{
+				LogLevel = Microsoft.Extensions.Logging.LogLevel.Error;
+			}
+		}
+	}">Make custom bussiness exceptions </strong>
+     
+</p>
+<h7>
+<input type="button" value="-" class="toggleButton"  
+onclick="toggle(this)" />
+	<h8>3-</h8><h8>&#9989;</h8><h8 class="width4">Infrastructure(EntityFramework) Layer</h8><h8> (40 min)</h8><h9>content.EntityFrameworkCore>EntityFrameworkCore</h9>
+</h7>
+<div>
+- <strong>Mapping:</strong> under content.Application
+	<p>
+	3.1-<strong> Making PersonConfig  </strong>
+	3.2- <strong> Making PersonProfile</strong> under content.Application > Mappers
+	<code>public class PersonProfile : Profile	</code>
+
+	</p>
+-dbcontext and filter
+	<p>
+	3.2. Add persons to  ContentDbContext by Adding this line:<code> DbSet<Person> Persons{get;set;}</code>
+	3.3. <strong>making FilterPersonRequest</strong> and more filters under  content.Domain > PersonManagement > Options
+	3.4. <strong>Implement Repositories (CRUD)</strong> under  content.EntityFrameworkCore > Repositories 
+		Impelemnt The PersonRepository: <code> public class PersonRepository : EfCoreRepository<ContentDbContext, Person, Guid>, IPersonRepository</code>
+	</p>
+
+</div>
+<h7>
+<input type="button" value="-" class="toggleButton"  
+onclick="toggle(this)" />
+	<h8>4-</h8><h8>&#9989;</h8><h8 class="width4">HttpApi  Layer </h8><h8>(40 min) </h8><h9>(soultion> module >content > src > content.HttpApi )</h9>
+</h7>
+<p>
+- Implement controllers
+	<code>
+		[Route("api/personManagement/persons")]
+		public class PersonsController : contentController, IPersonAppService
+	</code>
+</p>
+</body>

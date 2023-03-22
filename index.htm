@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<htmL>
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <script src="assets/js/fdate.js"></script>
+   <script src="assets/js/dateTime.js"></script>
+   <script src="assets/js/btc.js"></script>
+   <script src="assets/js/block.js"></script> 
+   
+   <link rel="stylesheet" type="text/css" href="assets/css/main.css" />    
+   <link rel="stylesheet" href="assets/css/block.css">  
+   <link rel="stylesheet" href="assets/css/bootstrap5.min.css">
+	<style>
+	p{white-space:none}
+	</style>
+	</head>
+<body>
+	<table class="topBand" style="height: 30px;width:100%;position: fixed;">
+		<tr>
+			<td  class="topBand" width="40%"></td>
+			<td class="topBand"><script>getUTCNow()</script></td>
+			<td  class="topBand" ><a href="http://www.time.ir/" target="_blank" style="color:#999999" >
+				<script>document.write(getdateP());</script></a>
+			</td>
+			<td id="div1" class="topBand" ></td>
+		</tr>
+	</table>
+
+    <script>  DatTimeClock();   </script>
+
+    <div class="pageHeader" title='Nilx uses blocks.js to show texts more managed and readable' >Nilx Knowledge hub</div>
+	    <!--div class="pre fullwidth paddings">       
+	    </div-->
+		
+	<div style="display:flex;margin-top:3px;margin-left:3px;" id=”langdropdown” class="row">
+		<label class="col-md-1 col-sm-10 p-2 m-2">What/Why:</label>
+		<select id="selectWhat" style="margin-right:3px" class="col-md-2 col-sm-10 p-2 m-2"></select>
+		<lable class="col-md-1 col-sm-10 p-2 m-2">How</lable>
+		<select id="selectHow" style="margin-right:3px" class="col-md-2 col-sm-10 p-2 m-2"></select>
+		<script>
+			function fill(select1,values)
+			{
+				var len=9;
+				for (var i = 0; i<=len; i++){
+					var opt = document.createElement('option');
+					opt.value = i;
+					opt.innerHTML = "<option>"+values[i]+"</option>";
+					select1.appendChild(opt);
+				}
+		    }
+			var whats=["","what is","glossary","terminology","What is the difference between","use cases of","fundamentals","key concepts","learn","in Minutes","explained","Awesome","cheat sheet","summary","what part","features","structure","understanding","kpi of","patterns","checklist of","why using","simplified","pros of ","kickstart","best practices","interview preparation"];	
+			var hows=["","Getting started","step by step","walk through","Example","practice","hello world","crud","sample code","github","stackoverflow","hotexamples","crash course","How to","real world problem","udemy","by doing","in action","Practical","tutorial"];
+			const selectWhat = document.getElementById("selectWhat");
+			const selectHow = document.getElementById("selectHow");
+			fill(selectWhat,whats);
+			fill(selectHow,hows);
+			
+		</script>
+		<input type="text" id="searchterms" name="searchterms" style="margin-right:3px" class="col-md-3 col-sm-10  p-2 m-2" value='stackoverflow '>
+		<button onclick="search()" style="padding-right:3px;padding-left:3px;" class="col-md-1 col-sm-10  p-2 m-2"> Search </button>
+	</div>
+	<div  id="app" class="blockContainer CenterChildren-H" >
+	</div>
+	<script src="index.js"></script>
+<script>
+
+const obj = JSON.parse(json1).topics;
+s="";
+l1=obj.length;
+for(j=0;j<l1;j++)
+{
+	s+="<div class='LinkBlock bordered' ><div class='header indent' >"+obj[j].title+"</div>" ;
+	s+="<p class='indent vAlign-top'> ";
+	l=+obj[j].topic.length;
+	for(i=0;i<l;i++)
+		s+="<a href='"+obj[j].topic[i].href+"' target='_blank' title='"+obj[j].topic[i].title+"'>"+obj[j].topic[i].caption+"</a>\r\n";
+	s+="</p></div>";
+}
+s+="</div>";
+document.getElementById("app").innerHTML = s;
+
+var selectwhat=document.getElementById('selectWhat');
+		
+var input=document.getElementById('searchterms');
+selectwhat.onchange=function(){
+input.value += " "+selectwhat.options[selectwhat.selectedIndex].text;
+}
+var selecthow=document.getElementById('selectHow');
+selecthow.onchange=function(){
+input.value += " "+selecthow.options[selecthow.selectedIndex].text;
+}
+function search()
+{
+	s ='https://www.google.com/search?q=+'+input.value+'&tbs=qdr:y';
+	window.open(s  , "_blank"); 
+}
+</script>
+
+</body>
+</htmL>

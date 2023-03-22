@@ -1,0 +1,46 @@
+<html>
+<head> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+  <script src='/nilx/assets/js/blocks.js'></script>
+  <link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+  <script src="/nilx/libs/highlight/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+
+<button onclick="toggleAll(this);" >-</button>
+<h2>Resources</h2>
+<div>
+<a href="http://marklets.com/">tones of it </a>
+<a href="http://bookmarklets.com">Steve Kangas of </a>
+Tantek Çelik called these scripts favelets
+</div>
+<h2><input type="button" value="-"
+      style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+      onclick="toggle(this)" />Concept</h2>
+<div>
+Is a bookmark in the web browser that contains JavaScript commands 
+that add new features to the browser. 
+The executing script has access to inspect or change the current page,without reload.
+
+An anonymous function that does not return a value, define a function, etc., 
+can be used to force the script to return an undefined type:
+
+<pre><code class="javascript language-javascript">javascript:(function(){
+        //Statements returning a non-undefined type, e.g. assignments
+    })();
+</code></pre>
+
+<pre><code class="javascript language-javascript">
+//Example: to change font of the current page
+    javascript:(
+      function(){
+      document.getElementsByTagName('body')[0].style.setProperty('font-family',%20'serif',%20'important');
+      }
+    )();
+</code></pre>
+</div>
+</body>
+</html>

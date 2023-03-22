@@ -1,0 +1,266 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+
+<h2>Refrences</h2>
+<div>
+<a href="https://klausnji.wordpress.com/2015/01/31/getting-started-with-rabbitmq-in-15-minutes">In 15 minutes</a>
+
+</div>
+<h2> RabbitMQ:</h2>
+<div>
+- is a message-queueing software, also known as a message broker or queue manager.  
+- it accepts and forwards messages. 
+
+<h3>why:</h3> 
+-  Remove some heavy work from our web applications such as :
+sending a reports in Excel or Pdf format’s or sending an email, SMS or another task such as trigger some other applications to start processing.
+
+- Makes your data temporarily persistent,  reducing the risk of errors that may occur when different parts of the system are offline.
+    If one part of the system is unreachable, the other part continues to interact with the queue. 
+
+- Message queuing allows web servers to respond to requests in their own time instead of being forced to perform resource-heavy procedures immediately. 
+- Message queuing is also useful for distributing a message to multiple recipients for consumption or balancing the load between workers.
+
+-Message :A message can include any kind of information. 
+ It could, for example, have information about a process or task that should start on another application (which could even be on another server), 
+ or it could be just a simple text message. 
+
+<h3>How:</h3> 
+-The queue-manager software stores the messages until a receiving application(endpoint) connects and takes a message off the queue. 
+-The receiving application then processes the message.
+-The software interacting with the broker can be both a producer or a consumer.
+1- Client applications(called producers) create messages and deliver them to the broker. 
+2- Other applications(called consumers), connect to the broker, subscribe to messages from the broker, and process
+them.
+-Messages placed in the broker are stored until the consumer retrieves them even if many requests are coming in simultaneously.
+<h3>RABBITMQ AND SERVER CONCEPTS</h3>
+	<b>Producer</b>   : Application that sends the messages.
+	<b>Consumer</b>   : Application that receives the messages.
+	<b>Queue</b>      : Buffer that stores messages.
+	<b>Message</b>    : Information that is sent from the producer to a consumer through RabbitMQ.
+	<b>Connection</b> : A TCP connection between your application and the RabbitMQ broker.
+	<b>Channel</b>    : A virtual connection inside a connection.
+	<b>Exchange</b>  : Receives messages from producers and pushes them to queues based on rules of the exchange type. 
+		    To receive messages, a queue needs to be bound to at least one exchange.
+	<b>Binding</b>    : A binding is a link between a queue and an exchange.
+	<b>Routing key</b>: It is like an address for the message,used by exchange.
+	<b>AMQP</b>  : Advanced Message Queuing Protocol is the protocol used by RabbitMQ for messaging.
+	<b>Users</b>  : It is possible to connect to RabbitMQ with a given username and password with specified permissions.
+	<b>Vhost, virtual host:</b> Provides a way to segregate applications using the same RabbitMQ instance. 
+		  Different users can have different permissions to different vhost and queues and exchanges can be created, so they only exist in one vhost.
+	<b>Erlang:</b>The RabbitMQ is built on Erlang programming language. it is also used by WhatsApp for messaging.
+</div>
+	<h2>Installation on Windows</h2>
+<div>
+- Install Erlang: The RabbitMQ is built on Erlang runtime environment so before we install RabbitMQ, 
+from: 
+<prr><code>http://www.erlang.org/downloads</code></pre>
+- Add bin folder of Erlang to the system path
+- Set <b>ERLANG_HOME</b> to where you actually put your Erlang installation,
+- set <b> HOMEDRIVE=[location of ".erlang.cookie"]</b>
+
+- goto RabbitMQ download website: 
+<b>https://www.rabbitmq.com/download.html</b>
+and install with default config:<b> rabbitmq-server-3.8.9.exe</b>
+- cd C:\Program Files\RabbitMQ Server\rabbitmq_server-3.10.7\sbin
+- rabbitmq-plugins.bat enable rabbitmq_management
+- rabbitmq-plugins enable rabbitmq_shovel rabbitmq_shovel_management
+- Edit C:\Windows\System32\drivers\etc\hosts file. Add to it the following line:
+127.0.0.1 rabbitmq
+
+- Open : http://rabbitmq:15672/ for opening the rabbitmq management.
+
+
+<b>Starting RabbitMQ Server</b>
+After completion of installing the RabbitMQ server,we will check the status of RabbitMQ server 
+ for that search for RabbitMQ Command Prompt and open it with admin privilege 
+ After opening the command prompt, enter command “rabbitmqctl status” and click enter to check the status of RabbitMQ server.
+
+<b>RabbitMQ Authentication Failed Error</b> 
+Following are the steps to fix an error like “Authentication failed (rejected by the remote node), 
+check the Erlang cookie”.
+
+ 
+In file explorer navigate to your user directory by pasting %userprofile% in your address bar.
+In case if already .erlang.cookie file available in that location, 
+just delete it otherwise go to the next step.
+In a second File Explorer, navigate to C:\Windows\System32\config\systemprofile.
+Find the file .erlang.cookie and copy it to your user directory.
+Now your rabbitmqctl should be able to authenticate.
+After completion of above steps, then again run “rabbitmqctl status” command in rabbitmq command prompt as an administrator, 
+then it will shows the screen like as shown below.
+
+<b>Enable Web Management Plugin</b>
+To enable a rabbitmq web management plugin on windows, we need to start RabbitMQ Command Prompt with administrator privilege, 
+enter the command “rabbitmq-plugins enable rabbitmq_management” and execute it.
+After executing the above web management command, the web management plugins will be enabled 
+and it will show the plugins list which are enabled.
+
+Now you can open web management plugin in the browser for that enter the following URL in browser and click enter.
+
+http://localhost:15672
+
+After opening the localhost URL in browser, it will ask you for credentials to access web management plugin.
+
+To access rabbitmq web management dashboard, 
+the default Username and password of  is “guest” (Username: “guest” | Password: “guest”).
+
+</div> 
+<h2>Exchanges</h2>
+<div>
+	In rabbitmq, when producer creates a message that will not directly sent to a queue, instead first the message will be send to exchanges, then after that a routing agent reads and sends it to the appropriate queue with help of header attributes, bindings, and routing keys.
+
+	<h3> Exchange Types</h3>
+There are 4 type of Exchanges are available to route the message in different ways. :
+	 <b>Direct</b> : The message is routed to the queues whose binding key exactly matches with the routing key of the message.
+	 <b>Fanout </b>: Exchange will route messages to all of the queues that are bound to it.
+	 <b>Topic</b>:  Exchange will perform a wildcard match between the routing key and the routing pattern specified in the binding to publish a messages to queue.
+	 <b>Headers</b>: Which is described below.
+<h3>Headers Exchange</h3>
+In rabbitmq, headers exchanges will use the message header attributes for routing.
+<h3>Create Exchange</h3>
+To create new exchanges, first open rabbtimq web management portal, 
+enter a default credentials to login and then choose Exchanges tab.
+you will see “Add a new exchange panel” just click on that panel to expand and that will contain a different properties to create a new exchange 
+</div>
+<h2>Creating a Queue</h2>
+<div>
+To create a queue in rabbitmq, open web management portal and enter a default credentials to login and then choose Queues tab.
+Clic on  “Add a new queue” 
+<b>Dead Letter Exchange Argument</b>
+By using dead letter exchange argument, we can set an optional name for exchange to which messages will be republished if they are rejected or expire.
+</div>
+<h2> Bindings (Bind Queue to Exchange)</h2>
+<div>
+In rabbitmq, binding is a connection which is used to configure a relation between a queue and an exchange. 
+In simple words we can say, binding is a relationship between an exchange and a queue.
+in rabbitmq, exchange will route the request to particular queue on the basis of routing key.
+
+RabbitMQ Bind Queue to Exchange
+To bind a queue to exchange, Go to Queues tab and then click on the queue (demoqueue) which is created like as shown below.
+
+RabbitMQ Queues List to Bind to Exchange
+After click on queue (demoqueue) name, the Bindings panel will expand and next it will ask for the exchange name, enter exchange name which we have created “demoexchange” and routing key “demokey” and click on Bind button.
+RabbiMQ Enter Details to Bind Queue to Exchange
+After click on Bind button, the defined exchange (demoexchange) will be bind to our queue (demoqueue) and that will be like as shown below.
+RabbitMQ After Binding Queue to Exchange
+After binding, in case if you want to unbind it then you can click on unbind button to remove binding
+</div>
+<h2> Create Users</h2>
+<div>
+<h3>Add User</h3>
+1.To create a new user, we need to :
+login into rabbitmq web management plugin using default credentials (guest) 
+
+2.After logging into the application, 
+to create a new user we need to navigate to Admin tab for that click on Admin tab
+
+3.After navigate to Admin tab, we can see the default user (“guest”) details who is having “administrator” privileges
+ and below that we have Add a user panel to add new user.
+
+4.RabbitMQ Click on Add a New User Panel to Create New User
+
+5.After we click on “Add a user” panel, it will show the panel with different parameters to create a new user like as shown below.
+6.we have a section called Tags. Here, Tags are the rights or privileges which we assigned while creating a user and we can set single or multiple privileges to a user based on our requirements
+. In case, if we want to multiple privileges, then set privileges as a comma (,) separated like administrator, management, etc. based on our requirements.
+
+Following are the different type of privileges or rights which supported in management plugin while creating a new user in rabbitmq.
+
+Tag	Description
+management	If we set this tag, the user can access management plugin.
+policymaker	If we set this tag, the user can access management plugin and manage policies and parameters for the vhosts they have access to.
+monitoring	If we set this tag, the user can access management plugin and see all the connections and channels as well as node-related information.
+administrator	If we set this tag, the user can do everything in management like manage users, vhosts, permissions, close other user's connections, and manage policies and parameters for all vhosts.
+Now, we will create a new user (demouser) by entering all the required details like password as “123456”, privilege as “administrator” and click on Add user button to a create new user like as shown below.
+
+RabbitMQ Enter Details to Create New User
+
+After adding a user, you can see all the users in All users panel for that just expand it like as shown below.
+
+RabbitQ Users in Web Management Portal
+
+After expanding, you can see the new user “demouser” but in the grid, you can see “can access virtual hosts” columns where it has the value “No access” which means we do not have the privilege to virtual hosts.
+
+RabbitMQ Set Privileges to Access Virtual Hosts
+
+To set a permission to access virtual hosts, just click on the username which we have created “demouser” and go to Permissions panel which is just below to overview panel and click on Set permission button to set permissions like as shown below.
+
+Set Permisssions to User in RabbitMQ
+Once we are done with permission settings, then we can see the user permissions under “Current permissions” like as shown below.
+RabbitMQ User with Permissions
+Now we will use newly created user (“demouser”) details to login into rabbitmq web management plugin like as shown below.
+RabbitMQ Logging with New User
+Following is the snapshot of rabbitmq web management plugin after logging with new user “demouser”.
+RabbitMQ Web Management View After Login with Newly Created User
+</div>
+<h2>Virtual Hosts</h2>
+<div>
+In rabbitmq, virtual hosts are like a virtual box which contains a logical grouping of connections, exchanges, queues, bindings, user permissions, policies and many more things.
+Following is the pictorial representation of virtual hosts in rabbitmq.
+(Virtual Hosts in RabbitMQ)
+In rabbitmq, we can create different virtual hosts and each virtual host will have users based on requirements.
+(RabbitMQ Create Virtual host)
+To create a virtual host in rabbitmq, we need to login into rabbitmq web management portal with default credentials (guest) like as shown below.
+(RabbitMQ Web Management Portal Login)
+Once login into web management portal, then choose admin tab. In admin section you will see vertical menus in the right part of the page, in that choose “Virtual Hosts” like as shown below.
+(RabbitMQ Select Virtual Hosts from Admin Section)
+After choosing “Virtual Hosts”, you will see the default “Virtual Hosts” which is already present or created. To create a new virtual host we have a panel called “Add a new virtual host”, just click on it to expand like as shown below.
+
+RabbitMQ Click on Add a New Virtual Host Panel
+After expanding the panel, you can see Name parameter here we are entering the name as “demohost”, next click on Add virtual host button to create “demohost” virtual host like as shown below.
+(RabbitMQ Enter Details to Create New Virtual Host)
+After adding a virtual host, we can see the newly added virtual host in All virtual hosts panel like as shown below.
+(RabbitMQ Available Virtual Hosts)
+(RabbitMQ Assign Virtual Hosts to Users)
+We are done with creation of virtual host but if we want to assign users to newly created virtual host, then we need to create users with required privileges and assign virtual host for that user. To know how to create users in rabbitmq check this, rabbitmq users.
+Here, we are going to create a new user “virtualuser” by setting a password as “123456” and privilege as “administrator” (just click on Admin link, it will set “administrator” in tags field) like as shown below.
+(RabbitMQ Create User to Assign Virtual Host)
+After creating the user, we can see the newly created user details in All users panel like as shown below. If you observe new user (“virtualuser”) details in grid, the “Can access virtual hosts” column has a value of “No access” which means the user doesn’t have the privilege to access any virtual hosts.
+(Users List in RabbitMQ Management Portal)
+RabbitMQ Set Privilege to Access Virtual Hosts
+To set a permission for users to access virtual hosts, just click on the username which we have created “virtualuser” and go to Permissions panel which is just below the Overview panel and select required virtual host from dropdownlist and click on Set permission button like as shown below.
+(RabbitMQ Add Virtual Host to New User)
+Here, the default value “.*” is used to allow user to access all exchanges and queues in the virtual host. Once the permission is set, you’ll see the “Current permission” like as shown below.
+(RabbitMQ User with Virtual Hosts)
+Now, the newly created user (“virtualuser”) has a permission to login into rabbitmq web management. Let’s login into rabbitmq web management plugin with new user “virtualuser” like as shown below.
+(RabbitMQ Login with Virtual Hosts User)
+Following is the snapshot after logging into rabbitmq web management plugin with new user “virtualuser”.
+(RabbitMQ Virtual Hosts in Admin Section)
+This is how we can create virtual hosts in rabbitmq and assign it to users based on our requirements.
+</div>
+<h2>Connections</h2>
+<div>
+	In rabbitmq, connection is a TCP connection between our application and the rabbitmq broker.
+ In rabbitmq web management portal, we can see all the live connections between rabbitmq broker and applications under Connections tab.
+
+In rabbitmq web management portal, the Connections tab will show all the live connections of both producer and consumer messages along with that it will also show usernames of each connection with the state of connection.
+ In case, if you are using SSL/TLS, then it will indicate with a dark dot “.” in the connection and it will also show which protocol is used and from client & to client network utilization details.
+(RabbitMQ Connection Details)
+In case, if you want to see the details of particular connection in rabbitmq, then click on respective connection name .
+
+(RabbitMQ Particular Connection Details.)
+
+ RabbitMQ Connection Overview
+After clicking on particular connection name,
+ it will show all details of that connection along with data rates, channels, client properties, 
+runtime metrics, and finally close connection like as shown below.
+
+RabbitMQ Connections Overview Dashboard
+
+In case, if you want to close the connection, then you can open “close this connection” tab type the reason and click on Force Close button like as shown below.
+
+This is how we can manage the connections in rabbitmq web management portal based on our requirements.
+
+</div>
+
+<h2><a href="https://www.tutlane.com/tutorial/rabbitmq/">Continue reading here</a></h2>

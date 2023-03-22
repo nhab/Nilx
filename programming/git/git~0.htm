@@ -1,0 +1,350 @@
+
+<html>
+ <head> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+  <script src='/nilx/assets/js/blocks.js'></script>
+  <link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+   <script src="/nilx/libs/highlight/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad()</script>
+ </head>
+ <body>
+ <button onclick="toggleAll(this);" >-</button>
+ 
+ <h2><input type="button" value="-" class="toggleButton" 
+    onclick="toggle(this)" />References:</h2>
+<div>
+<a href="https://dev.to/web/list-of-all-git-commands-4m83">Allcommands</a> 
+<a href='https://learnxinyminutes.com/docs/git/'>Learn Git in Y minutes</a>
+<a href='https://www.w3schools.com/git/git_intro.asp?remote=github'>learn by eample</a>
+<a href='https://www.git-scm.com/'>download and install</a> 
+<a href="https://youtu.be/RwvTrSm7zEY">sqush</a>
+<a href="https://www.cognizantsoftvision.com/blog/top-10-daily-git-situations/">10 daily situation</a>
+<a href="https://programmer.ink/think/45-git-classic-operation-scenarios-specializing-in-code.html">45 scenario</a>
+<a href="https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops">Navigate in Visual Studio Team Explorer</a>
+</div>
+ <h2><input type="button" value="-" class="toggleButton" 
+    onclick="toggle(this)" />What is git</h2>
+ <div>
+ A managable repository (database) of snapshots of working directory(ies).   
+ </div>
+
+ <h2><input type="button" value="-" class="toggleButton" 
+    onclick="toggle(this)" />Basic Git workflow to create a repository</h2>
+ <div>
+1- You modify files in <b>working folder</b>.
+2- To add those changes to the <b>staging area</b>:
+<pre><code>$ git add</code> 
+3- To save the files in the staging area into <b>local Git repository</b>: 
+<pre><code>$ git commit -m "Added x() function to a.cs" </code>
+4- To push the changes from local repository to <b>remote repository</b>: 
+<pre><code>git push</code>
+  <style>a{color:#000099}
+  a:visited{color:#990000}
+  </style>
+  <img src='git.png' style="width:60%" />   
+ </div>
+<h2><input type="button" value="-" class="toggleButton" 
+    onclick="toggle(this)" />Glossary</h2>
+<div>
+<b>Repository</b>is a data structure to store files and directories of the project as well as the history of changes made to them. 
+
+<b>Branch</b> is a version of the repository (A Git project can have more than one branch) .
+<b>Index</b>is a staging area between the working directory and repository. 
+<b>HEAD</b>is a symbolic reference pointing to wherever you are in your commit history.it is like current branch. When you switch branches with git checkout, the HEAD revision changes, and points the new branch.
+<b>Master</b>It's a default branch of Git. After cloning a project from a remote server, the resulting local repository contains only the "master" branch. 
+<b>Origin</b>is the remote repository from a project was initially cloned. More precisely, it is used instead of that original repository URL to make referencing much easier.
+<b>Remote</b>(remote repository) is a shared repository that all team members use to exchange their changes.it could be an internal server, GitHub,..
+<b>Git Fork</b>A fork is a rough copy of a repository. Forking a repository allows you to freely test and debug with changes without affecting the original project.
+Great use of using forks to propose changes for bug fixes.
+
+<b>Checkout</b> is used to switch between branches in a repository.
+ <b>Cherry-Picking</b> is to apply some commit from one branch into another branch(In case of commiting to the wrong branch)
+<b>Clone</b>makes a copy of the target repository or clone it as local copy 
+<b>Fetch</b>fetchs branches and tags from one or more other repositories, along with their histories.It updates the remote-tracking branches.
+
+<b>Merge</b> combine another branch into current branch .
+<b>Pull/</b> is used to receive data from  remote server to your working directory. 
+<b>Pull Request</b> announces all the team members that they need to review the code and merge it into the master branch.
+<b>Push</b>is to upload local repository content to a remote repository. Pushing is an act of transfer commits from your local repository to a remote repository. Pushing is capable of overwriting changes; caution should be taken when pushing.
+<b>Rebase</b>is the process of moving or combining a sequence of commits to a new base commit.
+ Rebasing is very beneficial and visualized the process in the environment of a feature branching workflow.
+From a content perception, rebasing is a technique of changing the base of your branch from one commit to another.
+<b>Stashing</b>if you don't want to make a commit of half-done work,The git stash command saves your work in stash are and enables you to switch branch without committing the current branch.
+<b>Tag</b>is used to mark a commit stage as important. We can tag a commit for future reference. Primarily, it is used to mark a projects initial point like v1.1. There are two types of tags.
+1.Light-weighted tag 2.Annotated tag
+<b>Upstream And Downstream</b>
+The term upstream and downstream is a reference of the repository. 
+Generally, upstream is where you cloned the repository from (the origin) and downstream is any project that integrates your work with other works. 
+However, these terms are not restricted to Git repositories.
+<b>Git Revert</b>It is an undo type command,bu not completely. is used to revert some commit.  
+<b>Git Reset</b>stands for undoing changes. The git reset command is used to reset the changes. 
+The git reset command has three core forms of invocation. These forms are as follows: 1.Soft 2.Hard 3.Mixed
+<b>Git Ignore</b>used to specify intentionally untracked files that Git should ignore. It doesn't affect the Files that already tracked by Git.
+<b>Git Diff</b> It is used to show changes between commits, commit, and working tree, etc.
+<b>Git Flow</b> is a branching model for Git, developed by Vincent Driessen. It is very well organized to collaborate and scale the development team. Git flow is a collection of Git commands. It accomplishes many repository operations with just single commands.
+<b>Git Squash</b>is used to squash previous commits into one. Git squash is an excellent technique to group-specific changes before forwarding them to others. You can merge several commits into a single commit with the powerful interactive rebase command.
+<b>Git Rm</b>stands for remove. It is used to remove individual files or a collection of files. 
+The key function of git rm is to remove tracked files from the Git index. 
+Additionally, it can be used to remove files from both the working directory and staging index.
+</div>
+<h2><input type="button" value="-" class="toggleButton" 
+    onclick="toggle(this)" />some basic commands:</h2>
+<div>
+<b>basics:</b>
+<pre><code>
+ $ git --version                                    # show the version of installed git in OS
+ $ git `command_here` -help                         # shows help of the command
+ $ git config --global user.name "w3schools-test"   # configures username
+ $ git config -l     #returns information about git configuration including username and email
+ $ git config --global user.name "Fabio"          # configures user name
+ $ git config --global user.email "signups@fab.com" # setups the  email address used in commits.
+ $ git config --global credential.helper cache #stores login credentials in the cache to remember
+ $ git <b>grep</b> 'variableName' -- '*.java'       # Search for "variableName" in all java files
+ </code></pre>
+ <b>Current directory and staging</b>
+ <pre><code>
+  $ git <b>init</b>                               # mark the current folder as a git repository
+  $ git clone https:/github.com/libgit2/libgit2  # getting an Existing Repository
+  $ git add filename_here                         # will add the file to the staging area.
+  $ git add .                                     # add all files in project to the staging area
+  $ git add fil*                                  # add only certain files to the staging area
+
+  $ git diff                # see changes made before committing them using "diff"
+  $ git diff all_checks.py  # to only see changes on a specific file.
+  $ git diff --staged       # git diff shows only unstaged changes by default.
+  
+  $ git add -p              # opens a prompt and asks if you want to stage changes
+  
+  $ git rm filename     # removes tracked files from the current working tree(commit msg explains why the file is deleted)
+  $ git status          # shows differences between the index file (working copy/repo) and the current HEAD commit
+  $ git status -s       # Short status
+  $ git diff            # Shows differences between a file in the working directory,index and commits
+
+ #Removing,Renaming or moving files:
+  $ git rm file1.js            # Removes from working directory and staging area 
+  $ git rm --cached file1.js   # Removes from staging area only
+  $ git mv file1.js file1.txt  # Renaming or moving files
+
+# Staging files:
+ $ git add file1.js file2.js    # Stages multiple files
+ $ git add .                    # To add all files to the staging area/index
+ 
+# Unstaging files (undoing git add):
+ $ git restore --staged file.js # Copies the last version of file.js from repo to index
+
+ # Discarding local changes
+ $ git restore file.js           # Copies file.js from index to working directory 
+ $ git restore file1.js file2.js # Restores multiple files in working directory
+ $ git restore .                 # Discards all local changes (except untracked files) 
+ $ git clean -fd                 # Removes all untracked files
+ 
+ $ git restore --source=HEAD~2 file.js #Restoring an earlier version of a file
+ 
+#Viewing the staged/unstaged changes
+ $ git diff          # Shows unstaged changes 
+ $ git diff --staged # Shows staged changes
+ $ git diff --cached # Same as the above
+
+
+ $ git mv oldfile newfile  # renames files.it stages the changes, then it expects a commit message.
+
+ # revert unstaged changes:
+ git checkout filename
+ 
+ # revert staged changes:
+ # You can use the -p option flag to specify the changes you want to reset.
+ git reset HEAD filename
+ git reset HEAD -p 
+  
+ # ignore files:
+ # Create a .gitignore file and commit it.
+</code></pre>
+
+ <b>Staging and repository</b>
+ <pre><code class="python">
+# Committing the staged files :
+ $ git commit                               # opens a text editor to write a message,then commit
+ $ git commit                               # Opens the default editor to type a long message
+ $ git commit -m "your commit message here" # commit changes with a message
+ $ git commit -m "Added x() function to a.cs" # Stores the current contents into local repository
+ $ git commit -a -m"your commit message here" # commit changes (and skip the staging area)
+ $ git commit -am “Message”                 # Removes from staging area only
+ $ git show _commit-id_                     # see a specific commit
+
+# Viewing a commit 
+ $ git show 921a2ff      # Shows the given commit 
+ $ git show HEAD         # Shows the last commit
+ $ git show HEAD~2       # Two steps before the last commit
+ $ git show HEAD:file.js # Shows the version of file.js stored in the last commit
+
+# Viewing the history
+ $ git log                                     # Full history (all commits) 
+ $ git log --oneline                          # --oneline will limit commit msg to a single line.
+ $ git log --reverse                           # Lists the commits from the oldest to the newest
+ $ git log --stat                              # Shows the listof modified files
+ $ git log --patch                             # Shows the actual changes (patches)
+ $ git log -3                                  # Shows the last 3 entries 
+ $ git log hash1..hash2                        # Range of commits
+ $ git log --pretty=format:”%an committed %H”  # Formatting the log output
+ $ git log file.txt                            # Shows the commits that touched file.txt
+ $ git log --stat file.txt    # Shows statistics (the number of changes) for file.txt 
+ $ git log --patch file.txt   # Shows the patches (changes) applied to file.tx t  
+ $ git log -p                 # shows the commit's history including all files and their changes
+ $ git log --graph --oneline                   # show the commit log as a graph. 
+ $ git log --graph --oneline --all             # show the commit log as a graph of all branches
+
+# Comparing commits
+ $ git diff HEAD~2 HEAD          # Shows the changes between two commits 
+ $ git diff HEAD~2 HEAD file.txt # Changes to file.txt only
+
+# Checking out a commit 
+ git checkout dad47ed # Checks out the given commit 
+ git checkout master  # Checks out the master branch
+
+# Finding a bad commit
+ git bisect start 
+ git bisect bad          # Marks the current commit as a bad commit
+ git bisect good ca49180 # Marks the given commit as a good commit
+ git bisect reset        # Terminates the bisect session
+
+# Finding contributors 
+ $ git shortlog
+
+# Finding the author of lines
+ $ git blame file.txt # Shows the author of each line in file.txt
+
+# Tagging
+ $ git tag v1.0         # Tags the last commit as v1.0 
+ $ git tag v1.0 5e7a828 # Tags an earlier commit 
+ $ git tag              # Lists all the tags
+ $ git tag -d v1.0      # Deletes the given tag
+
+# Amending the last commit
+
+// Undo a commit and redo (simple scenario, forget to change sth)
+ git commit --amend  #allows to modify and add changes to the most recent commit
+ git commit -m 'initial commit'
+ edit file
+ git commit -a --amend
+
+//!!Note!!: fixing up a local commit with amend is great and you can push it to a shared repository after you have fixed it.
+// But you should avoid amending commits that have already been made public.
+
+ git revert HEAD             # rollback the last commit:.reverts the latest commit by using the head alias .
+ git revert comit_id_here    # rollback an old commit using its commit id (opens the editor to add commit message)
+</code></pre>
+
+<b>Managing branches</b>
+<pre><code>
+ git branch branch_name    # creates a new branch(By default, you have one branch)Git won't switch to it automatically 
+ git checkout branch_name  # switch to a newly created branch.
+ git branch                # list branches:shows a list of all branches and highlight the current branch in green.
+ git checkout -b branch_name # create a branch and switch to it immediately,In a single command.
+ git branch -d branch_name # delete a branch.
+ git merge branch_name     # Merges the branch you are currently in with the branch_name.
+ 
+ git merge --abort   # abort a conflicting merge.If you want to throw a merge away and start over
+ 
+ $ git branch bugfix     # Creates a new branch called bugfix 
+ $ git checkout bugfix   # Switches to the bugfix branch
+ $ git switch bugfix     # Same as the above 
+ $ git switch -C bugfix  # Creates and switches
+ $ git branch -d bugfix  # Deletes the bugfix branch
+# Comparing branches 
+    git log master..bugfix  # Lists the commits in the bugfix branch not in master 
+    git diff master..bugfix # Shows the summary of changes
+# Merging
+    git merge bugfix          # Merges the bugfix branch into the current branch
+    git merge --no-ff bugfix  # Creates a merge commit even if FF is possible
+    git merge --squash bugfix # Performs a squash merge 
+    git merge --abort         # Aborts the merge
+# Viewing the merged branches
+    git branch --merged    # Shows the merged branches
+    git branch --no-merged # Shows the unmerged branches    
+#Rebasing
+    git rebase master        # Changes the base of the current branch   
+#Cherry picking
+    git cherry-pick dad47ed # Applies the given commit on the current branch
+    
+#Stashing
+    git stash push -m “New tax rules” # Creates a new stash 
+    git stash list                    # Lists all the stashes
+    git stash show stash@{1}          # Shows the given stash 
+    git stash show 1                  # shortcut for stash@{1}
+    git stash apply 1                 # Applies the given stash to the working dir  
+    git stash drop 1                  # Deletes the given stash
+    git stash clear                   # Deletes all the stashes
+
+#Undoing commits
+    git reset --soft HEAD^  # Removes the last commit, keeps changed staged 
+    git reset --mixed HEAD^ # Unstages the changes as well 
+    git reset --hard HEAD^  # Discards local changes
+    
+#Reverting commits 
+    git revert 72856ea      # Reverts the given commit
+    git revert HEAD~3..     # Reverts the last three commits
+    git revert --no-commit HEAD~3..
+    
+#Recovering lost commits
+    git reflog              # Shows the history of HEAD
+    git reflog show bugfix  # Shows the history of bugfix pointer
+
+#CHECKOUT
+    git checkout file_name   # Discard uncommitted changes in a specific file 
+    git checkout -- .          # Clear everything not in repo
+
+    git rebase branch_name_here # transfer completed work from one branch to another using git rebase.
+    git rebase -i master    # run rebase interactively.it opens the editor and present a set of commands you can use:
+        # p, pick = use commit
+        # r, reword = use commit, but edit the commit message
+        # e, edit = use commit, but stop for amending
+        # s, squash = use commit, but meld into previous commit
+        # f, fixup = like "squash", but discard this commit's log message
+        # x, exec = run command (the rest of the line) using shell
+        # d, drop = remove commit
+</code></pre>
+
+<b>local repository and Remote</b>
+<pre><code>
+
+#Syncing with remotes
+ $ git fetch origin master # Fetches master from origin
+ $ git fetch origin        # Fetches all objects from origin 
+ $ git fetch # (=“git fetch origin”).downloads the changes from a remote repo but will not perform a merge on local branch as git pull.
+ $ git pull                # (Fetch + merge)retrieve the latest changes made to the remote repository
+ $ git push -u origin branch_name #pushs a new branch to a remote repo.-u to create the branch upstream
+ $ git push    #(=“git push origin master”)update (and merges) repository from local repository
+ $ git push origin master  # Pushes master to origin
+
+#Managing remotes
+ $ git remote                       # Shows remote repos
+ $ git remote add upstream url      # Adds a new remote called upstream 
+ $ git remote rm upstream           # Remotes upstream
+ $ git add remote https://repo_here # adds a remote repository to local repository 
+ $ git remote -v                    # see all remote repositories(urls) for local repository
+ $ git remote show origin           # get more info about a remote repo.Just replace origin with the name of the remote obtained by running the git remote -v command.
+ $ git branch -r                    # shows the name of all remote branches that Git is tracking for the current repository
+ $ git log origin/main    # check the current commits log of a remote repo.Commit after commit, Git builds up a log. You can find out the remote repository log. 
+ $ git merge origin/main  # merge a remote repo with local repo(If the remote repository has changes).
+ $ git remote update      # get the contents of remote branches without automatically merging.
+ $ git push --delete origin branch_name_here      #remove a remote branch.
+ $ git push -f       #force a push request: This is usually fine for pull request branches because nobody else should have cloned them.But this isn't something that you want to do with public repos.
+
+</code></pre>
+ </div>
+ <h2><input type="button" value="-" class="toggleButton" 
+    onclick="toggle(this)" />GIT in visual studio </h2>
+<div>
+git have 2 user interface in visual studio:
+1-Visual Studio Git :new 
+2-Visual Studio Team Explorer:can access to the Work Items hub. 
+
+You can exercise Git features from either interface interchangeably.
+
+In the link below, there is a side-by-side comparison for cloning a repository.   
+    <a href="https://docs.microsoft.com/en-us/azure/devops/repos/git/gitquickstart?view=azure-devops&tabs=visual-studio-2019">"Visual Studio Git" and "Visual Studio Team Explorer" comparision</a>
+</div>
+
+</body>

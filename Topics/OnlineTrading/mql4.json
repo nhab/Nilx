@@ -1,0 +1,1073 @@
+options=
+[
+    {	GrpTitle:"Basics",
+      items:
+      [
+         {
+            title:"References",
+            body:`
+            https://stackoverflow.com/questions/tagged/mql4
+            https://book.mql4.com/
+            `
+         }
+         ,
+        {title:"What is A Tick",
+        body:`A tick is an event that is characterized by a new price of the symbol at a specific time.
+        depending to the current market situation, ticks may be received more or less frequently, 
+         each of them brings a new quote`
+        },
+        {title:"Quote",
+    
+        body:`Is the cost of one currency expressed in terms of another currency.`
+        },
+        {title:"Data types",
+          body:
+  `<b>int</b>
+     int Num  = 21;                         // Example integer variable
+     int Max  = 2147483647;                
+     int Min  = -2147483648;               
+   <b>double</b>
+      double Art     = 10.123;                
+     double B_27    = -1.0;                  
+     double Num     = 0.5;                   
+     double MMM     = -12.07;                
+  <b>bool</b>
+  bool aa    = True;           // Boolean variable аа    has the value of true
+     bool B17   = TRUE;            
+     bool Hamma = 1;
+     bool Asd   = False;
+     bool Nol   = FALSE;          
+     bool Prim  = 0;    
+    <b>string</b>
+    string Prefix    = "MetaTrader 4";                 
+     string Postfix   = "_of_my_progr. OK";             
+     string Name_Mass = "History";                      
+     string text      ="Upper Line\nLower Line";        // the text contains line feed characters 
+  <b>color</b>
+    color Paint_1 = C'128,128,128';       // The value of gray   was assigned to the variable
+    color Colo    = C'0x00,0x00,0xFF';    // The value of blue   was assigned to the variable
+    color BMP_4   = C'0xFF,0x33,0x00'     // The value of red    was assigned to the variable
+    color K_12  = 0xFF3300;               // The value of red    was assigned to the variable
+    color N_3   = 0x008000;               // The value of green  was assigned to the variable
+    color Color = 16777215;               // The value of white  was assigned to the variable
+    color Alfa  = 32768;                  // The value of green  was assigned to the variable
+    color A       = Red;                  // The value of red    was assigned to the variable
+    color B       = Yellow;               // The value of yellow was assigned to the variable
+    color Colorit = Black;                // The value of black  was assigned to the variable
+    color B_21    = White;                // The value of white  was assigned to the variable
+  <b>date</b>  
+    datetime Alfa    = D'2004.01.01 00:00';       // New Year
+    datetime Tim     = D'01.01.2004';             // New Year
+    datetime Tims    = D'2005.05.12 16:30:45';    // May 12, 2005 4:30:45 p.m.
+    datetime N_3     = D'12.05.2005 16:30:45';    // May 12, 2005 4:30:45 p.m.
+    datetime Compile = D'';
+    `
+        },
+        {title:"variable declation",
+          body:
+  `variables sould be declared at the very start of a program.`
+        },
+        {title:"operators",
+          body:"Operators are just like c++"
+        },
+        {title:"Typecasting",
+          body:
+  `double A = 2.0;                      // The number of John's pencils
+  int    Y = 3;                        // The number of Pete's passages
+  int    F = A + Y;                    // Total number
+  
+  string W1  = "Arctic";             // String 1
+  double A   = 2;                    // Number of John's pencils
+  string Sum = W1 + A;               // Implied transformation to the right
+  `
+       },
+       {title:"External variable",
+  body:`External variable is a variable, the value of which is available from a program properties window. 
+  An external variable is declared outside all functions and is a global one - its scope is the whole program.
+   When declaring an external variable, modifier 'extern' should be indicated before its value type:
+  
+  extern int Number;    `
+       },
+       {title:"Functions and function types",
+        body:
+  `Functions in mql4 are just like c++ functions.
+  <b>Function types</b> are:
+    1-special functions :
+        are init(), start(), and deinit()
+    2-standard (built-in, predefined) functions
+    3-user-defined functions
+  `
+       },
+       {title:"Standard functions",
+        body:
+  `
+  <a href="https://docs.mql4.com/common">Common Functions</a> 
+    are the following functions: Print(), Alert(), Comment(), MarketInfo(), Sleep(), etc.
+    
+  <a href="https://docs.mql4.com/array">Arrays</a> 
+  
+    <a href="https://docs.mql4.com/convert>Conversion functions</a>
+    This is a group of functions that provide conversion of data from one format into another.
+
+    <a href="https://docs.mql4.com/math">Mathematical Functions</a>
+    Standard set of mathematical and trigonometrical functions.
+  
+    <a href="https://docs.mql4.com/strings">String Functions</a>
+    String functions are used for processing variables of string type:
+     searching value, concatenation of lines, retrieval of sub-lines, etc. 
+     Conversion functions are used for converting a variable of one type into another type. 
+     NormalizeDouble() function rounds off values of double type to a certain accuracy.
+  
+     <a href="https://docs.mql4.com/dateandtime">Date and Time</a>
+     This group of functions is used for getting time information in this or that form: 
+     LocalTime() shows the local time of a computer, TimeCurrent()
+     shows server time of the last received quote. 
+     Besides, parameters like a weekday, month day, hour, minute, etc. 
+     can be obtained for an indicated time value.
+   
+    <a href="https://docs.mql4.com/check"> State Checking</a>
+    Functions that return parameters of the current state of the client terminal
+    
+    <a href="https://docs.mql4.com/series"> Timeseries and Indicator Data</a> 
+    They provide access to price data of any available symbol/period.
+    
+
+    <a href="https://docs.mql4.com/customind"> Custom Indicators</a>
+    These functions can be used only when writing custom indicators.
+
+    <a href="https://docs.mql4.com/indicators">Technical Indicator Functions</a>
+    A group of functions intended for calculation of standard and custom indicators.
+For an Expert Advisor (or any other MQL4 program) to take up the value of any indicator, 
+it is not necessary that this indicator is present in the chart.
+ The requested indicator will be loaded and calculated in the thread of the module that has called it.
+Any indicator can be calculated on the data of not only current chart, 
+but also on the data of any available symbol/period. 
+If data (symbol name and/or timeframe differ from the current ones) are requested from another chart,
+ the situation is possible that the corresponding chart was not opened in the client terminal
+ and the necessary data must be requested from the server. In this case,
+ error ERR_HISTORY_WILL_UPDATED (4066 - the requested history data are under updating) 
+ will be placed in the last_error variable,
+ and one will has to re-request (see example of ArrayCopySeries()).
+
+All indicator functions have at least 2 parameters - symbol and period. 
+The NULL value of the symbol means the current symbol, the 0 value of the period means the current timeframe
+    <a href="https://docs.mql4.com/chart_operations">Chart operations</a>
+    A group of functions that are used for 
+    getting information about the current chart,
+    to which a program in MQL4 (script, indicator or Expert Advisor) is attached.
+    The functions defining the chart properties 
+    are actually used for sending change commands to the chart.
+     If these functions are executed successfully, the command is included 
+     in the common queue of the chart events. 
+     The changes are implemented to the chart when handling the queue of the chart events.
+
+    <a href="https://docs.mql4.com/marketinformation"> Market Information</a>
+    functions intended for receiving information about the market state.
+
+    <a href="https://docs.mql4.com/objects">Graphical Objects</a>
+     This group includes functions that are used for programmed creation 
+     such objects as well as for changing their properties, moving them and deleting.
+    
+
+  <a href="https://docs.mql4.com/files">File Operations</a>
+    This group of functions is necessary for reading/recording data on a hard disk.
+    For security reasons, work with files is strictly controlled in the MQL4 language.
+    Files with which file operations are conducted using MQL4 means cannot be outside the file sandbox.
+    There are two directories (with subdirectories) in which working files can be located:
+    terminal_data_folder\MQL4\Files\ (in the terminal menu select to view "File" - "Open the data directory");
+    the common folder for all the terminals installed on a computer - usually located in the directory 
+     C:\Documents and Settings\All Users\Application Data\MetaQuotes\Terminal\Common\Files.
+    There is a program method to obtain names of these catalogs using the TerminalInfoString() function,
+     using the ENUM_TERMINAL_INFO_STRING enumeration:
+    
+    
+  
+  <a href="https://docs.mql4.com/globals">GlobalVariables</a>
+    Functions for working with GlobalVariables.
+    Global variables of the client terminal should not be mixed up with variables 
+    declared in the global scope of the mql4 program.
+    Global variables are kept in the client terminal for 4 weeks since the last access,
+     then they will be deleted automatically. 
+     An access to a global variable is not only setting of a new value, 
+     but reading of the global variable value, as well.
+    Global variables of the client terminal are accessible simultaneously
+     from all mql4 programs launched in the client terminal.
+    When testing and optimizing the Expert Advisors that use global variables,
+     keep in mind that client terminal and the Strategy Tester share common global variables. 
+     Therefore, the names of the global variables must be different from
+     the names of the global variables used by other mql4 programs.
+     Otherwise, it may lead to incorrect work of mql4 programs and inaccurate testing results.
+
+  <a href="https://docs.mql4.com/account">Account Information</a>
+    Functions show information about a client terminal, account and check the current state of a client terminal 
+    (including the state of environment of MQL4-program being executed).
+  
+   <a href="https://docs.mql4.com/trading >Trade Functions</a>
+    Functions for conducting trade operations.
+
+    <a href="https://docs.mql4.com/signals">Trade signals</a>
+    This is the group of functions intended for managing trade signals. The functions allow:
+        get information about trade signals, available for copying,
+        get and set the signal copy settings,
+        subscribe and unsubscribe to the signal copying using MQL4 language functions.
+  `
+       },
+       {title:"formal parameters",
+      body:"parameters of the functions are called formal parameters in mql4"
+       },
+       {title:"Passing parameters by reference",
+        code:
+  `double SecondMethod(int &i,int &j)
+  {
+   double res;
+  //---
+   i*=2;
+   j/=2;
+   res=i+j;
+  //---
+   return(res);
+  }`
+        
+       },
+       {title:"Format of Operator 'return' ",
+       code:
+  `return (Expression);  
+  return;              //returns void   `   
+       },
+       {title:"Program types",
+        body:
+  ` 1- <b>An Expert Advisor (EA)</b>
+       is a program coded in MQL4 and called by the client terminal to be executed at every tick.
+       The main purpose of EAs is the programmed control over trades or autotrading.
+       
+    2- <b>A script </b>
+        is a program  executed by the client terminal only once.
+  
+    3- A <b>custom indicator</b> is a program is called by the client terminal 
+    to be executed at every tick. 
+    It is basically intended for graphical displaying of preliminarily calculated data,
+     such as lines.
+     Indicators cannot trade.
+     There are two types of indicators: technical (built-in) indicators and custom indicators.
+     Indicators are considered in detail in Usage of technical indicators and Creation of custom indicators.
+  
+  `
+        },
+        {title:"Predefined variables",
+  body:`<table  cellpadding="5" border="1" style=" background-color:#DBE9F9;">
+  <tbody><tr>
+  <td style="width:131px;"><p   ><span   >Variable</span></p>
+  </td>
+  <td style="background-color:#DBE9F9;"><p   ><span   >Value</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/_digits" class="topiclink">_Digits</a></span></p>
+  </td>
+  <td><p   ><span   >Number of decimal places</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;background-color:#999999"><p   ><span   ><a href="/predefined/_point" class="topiclink">_Point</a></span></p>
+  </td>
+  <td><p   ><span   >Size of the current symbol point in the quote currency</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/_lasterror" class="topiclink">_LastError</a></span></p>
+  </td>
+  <td><p   ><span   >The last error code</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/_period" class="topiclink">_Period</a></span></p>
+  </td>
+  <td><p   ><span   >Timeframe of the current chart</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/_randomseed" class="topiclink">_RandomSeed</a></span></p>
+  </td>
+  <td><p   ><span   >Current status of the generator of pseudo-random integers</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/_stopflag" class="topiclink">_StopFlag</a></span></p>
+  </td>
+  <td><p   ><span   >Program stop flag</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/_symbol" class="topiclink">_Symbol</a></span></p>
+  </td>
+  <td><p   ><span   >Symbol name of the current chart</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/_uninitreason" class="topiclink">_UninitReason</a></span></p>
+  </td>
+  <td><p   ><span   >Uninitialization reason code</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/ask" class="topiclink">Ask</a></span></p>
+  </td>
+  <td><p   ><span   >The latest known seller's price (ask price) of the current symbol</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/bars" class="topiclink">Bars</a></span></p>
+  </td>
+  <td><p   ><span   >Number of bars in the current chart</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/bid" class="topiclink">Bid</a></span></p>
+  </td>
+  <td><p   ><span   >The latest known buyer's price (offer price, bid price) of the current symbol</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/close" class="topiclink">Close</a></span></p>
+  </td>
+  <td><p   ><span   >Series array that contains close prices for each bar of the current chart</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/digitsvar" class="topiclink">Digits</a></span></p>
+  </td>
+  <td><p   ><span   >Number of digits after decimal point for the current symbol prices</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/high" class="topiclink">High</a></span></p>
+  </td>
+  <td><p   ><span   >Series array that contains the highest prices of each bar of the current chart</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/low" class="topiclink">Low</a></span></p>
+  </td>
+  <td><p   ><span   >Series array that contains the lowest prices of each bar of the current chart</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/open" class="topiclink">Open</a></span></p>
+  </td>
+  <td><p   ><span   >Series array that contains open prices of each bar of the current chart</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/pointvar" class="topiclink">Point</a></span></p>
+  </td>
+  <td><p   ><span   >The current symbol point value in the quote currency</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/time" class="topiclink">Time</a></span></p>
+  </td>
+  <td><p   ><span   >Series array that contains open time of each bar of the current chart</span></p>
+  </td>
+  </tr>
+  <tr>
+  <td style="width:131px;"><p   ><span   ><a href="/predefined/volume" class="topiclink">Volume</a></span></p>
+  </td>
+  <td><p   ><span   >Series array that contains tick volumes of each bar of the current chart</span></p>
+  </td>
+  </tr>
+  </tbody></table>`
+        }
+  
+      ]
+    },
+    {GrpTitle:"Deatails",
+      items:
+      [
+      {title:"Order magic number",
+      body:`when placing an order,
+a unique number can be assigned to the order to reference to it later.
+this number is called magic number.
+int OrderSend( string symbol, int cmd, double volume, double price, int slippage,
+  double stoploss, double takeprofit, string comment=NULL, int magic=0,
+  datetime expiration=0, color arrow_color=CLR_NONE)
+…
+magic - Order magic number. May be used as user defined identifier
+
+I.e., when an order is being placed (a position is being opened), 
+one can assign a unique number to it. This number will consequently 
+be used to distinguish the above order from others.
+  There is no use (or even possibility) applying this feature when trading manually, 
+  but it is really unexpendable when trading using an expert (automated trading).
+
+
+Example 1: A human trader and an expert are trading 
+in the client terminal at the same time. 
+Task: The expert must trade according to its algorithm and 
+may not do anything with positions opened manually.
+Solution: The expert must assign a unique, non-zero MagicNumber
+  to the position being opened. In future, it must manage only positions, 
+  the MagicNumber of which is equal to the preset one.
+
+Example 2: Two experts with different algorithms 
+are trading in the client terminal at the same time.
+Task: The expert must manage only "their" orders.
+Solution: Each expert must use its unique non-zero MagicNumber 
+when opening positions. 
+In future, they must manage only positions,
+  the MagicNumber of which is equal to the preset one.
+      `}  
+      ]
+
+    },
+    {GrpTitle:"MetaEditor",
+      items:
+      [
+        {title:"MetaEditor",
+         body:
+          `MetaEditor is a multifunction specialized editor intended for 
+          creating, editing, and compiling application programs written in MQL4.`
+        },
+        {title:"File system",
+        body :` The client terminal recognizes program types by their location in subordinate directories.
+        All application programs are concentrated in the directory ClientTerminal_folder\experts.
+        EAs, scripts, and custom indicators that you are going t
+        o use in your practical work should be located in corresponding directories.
+        EAs are located right in the directory ClientTerminal_folder\experts.
+        Scripts and indicators are in subdirectories ClientTerminal_folder\experts\scripts and ClientTerminal_folder \experts\indicators, respectively.`
+       },
+       {title:"File types",
+        body:
+          `1-<b>mq4</b>
+            represent a program source code.
+          2-<b>ex4</b>
+            is a compiled program ready for practical use in the client terminal.
+          3-<b> mqh</b>
+          are include files. It is a source text of frequently used blocks of custom programs.
+          
+          files of mqh type are stored in the directory ClientTerminal_folder\experts\include
+          `
+       },
+       {title:"creating a new program",
+       body:
+        `go to the the editor File menu, and click New
+        then complete "EA Wizard" .
+        It creates a new File and opens it in MetaEditor.
+        For example if you choose EA,It will create:`,
+              code:
+        `//+------------------------------------------------------------------+
+        //|                                                       create.mq4 |
+        //|                                                       John Smith |
+        //|                                                  www.company.com |
+        //+------------------------------------------------------------------+
+        #property copyright "John Smith"
+        #property link      "www.company.com"
+        //+------------------------------------------------------------------+
+        //| expert initialization function                                   |
+        //+------------------------------------------------------------------+
+        int init()
+          {
+        //----
+        //----
+          return(0);
+          }
+        //+------------------------------------------------------------------+
+        //| expert deinitialization function                                 |
+        //+------------------------------------------------------------------+
+        int deinit()
+          {
+        //----
+        //----
+          return(0);
+          }
+        //+------------------------------------------------------------------+
+        //| expert start function                                            |
+        //+------------------------------------------------------------------+
+        int start()
+          {
+        //----
+        //----
+          return(0);
+          }
+        //+------------------------------------------------------------------+`
+       }
+      ]
+    },
+    {GrpTitle:"Indicator and Expert advisor Samples",
+      items:
+      [
+        {title:"Hello Indicator",
+        body:"",
+          code:`
+              double ExtMapBuffer1\[\];// This is a usual array. 
+
+              // each indicator has 3 functions :
+              //    init() , deinit(), start()
+
+              // init() - is called by the terminal only once, when we start the indicator.
+              // It prepares the indicator, set up data buffers, 
+              // check parameters (what a user has written) and other preparatory actions.
+              // This function is not obligatory so you may delete it.
+              int init()
+              {
+                // This function sets how to draw the data in the buffer. 
+              
+                SetIndexStyle(0 /* zero based buffer number*/,DRAW_LINE ); // the buffer will be drawn as a line.
+
+                SetIndexBuffer(0,ExtMapBuffer1);//This function shows that the buffer with the indicated number
+                // will use the indicated array for storing data. 
+                //--> So, changing the elements of this array you will change the value of the buffer.<------
+                //  Actually an array is a data buffer. The first argument is the name of the array that should be bound.
+
+                MathSrand(TimeLocal());// initialization of the generator of random numbers
+                return(0);
+              }
+
+              int deinit() //The function of deinitialization is empty by default. 
+              {
+                return(0);
+              }
+              //start() -  in indicators this function is called at each tick(new quotes ) and after the function init().
+
+              int start()// the most important function - the main code is located here. 
+              {
+                int counted_bars=IndicatorCounted();
+                for(int i=0;i < Bars;i++)
+                    ExtMapBuffer1[i]=MathRand()%1001;
+
+                return(0);
+              }
+          `
+        },
+        {title:"Hello Expert Advisor",
+         code :`
+            #property copyright "Copyright © 2016, صëûٌٍîâ آëàنèىèً"
+            #property link      "cmillion@narod.ru"
+            #property strict
+            #property description "ٌîâهٍيèê ïî RSI"
+            #property description "sell ïًè ïهًهٌه÷هيèه ٌâهًَُ âيèç 70 è يà buy ٌيèçَ ââهًُ 30"
+            #property description "ٌٍîïû è ٍهéêè ىîويî âûٌٍîâèٍü â يàًٌٍîéêàُ ٌîâهٍيèêà"
+            //--------------------------------------------------------------------
+            extern int     period_RSI           = 14,
+                           stoploss             = 100,
+                           takeprofit           = 200,
+                           slippage             = 10,
+                           buy_level            = 30,
+                           sell_level           = 70,
+                           Magic                = 777;
+            extern double  Lot                  = 0.1;
+            //--------------------------------------------------------------------
+            void OnTick()
+            {
+               for (int i=0; i<OrdersTotal(); i++)
+                  if (OrderSelect(i,SELECT_BY_POS,MODE_TRADES))
+                     if (OrderSymbol()==Symbol() && Magic==OrderMagicNumber()) return;
+               double RSI0  = iRSI(NULL,0,period_RSI,PRICE_OPEN,0);
+               double RSI1  = iRSI(NULL,0,period_RSI,PRICE_OPEN,1);
+               double SL=0,TP=0;
+               if (RSI0 > buy_level && RSI1 < buy_level)
+               {
+                  if (takeprofit!=0) TP  = NormalizeDouble(Ask + takeprofit*Point,Digits);
+                  if (stoploss!=0)   SL  = NormalizeDouble(Ask - stoploss*  Point,Digits);     
+                  if (OrderSend(Symbol(),OP_BUY, Lot,NormalizeDouble(Ask,Digits),slippage,SL,TP,NULL,Magic)==-1) Print(GetLastError());
+               }
+               if (RSI0 < sell_level && RSI1 > sell_level)
+               {
+                  if (takeprofit!=0) TP = NormalizeDouble(Bid - takeprofit*Point,Digits);
+                  if (stoploss!=0)   SL = NormalizeDouble(Bid + stoploss*  Point,Digits);            
+                  if (OrderSend(Symbol(),OP_SELL,Lot,NormalizeDouble(Bid,Digits),slippage,SL,TP,NULL,Magic)==-1) Print(GetLastError());
+               }
+            }
+         ` 
+        }
+      ]
+    },
+ 
+    {GrpTitle:"Some practical functions",
+      items:
+      [
+        {title: "some functions",
+          code:`
+          Code Checks:
+1-Ensure there is enough money in free margin for trade:
+
+bool CheckMoneyForTrade(string symb, double lots,int type)
+{
+   double free_margin=AccountFreeMarginCheck(symb,type, lots);
+   //-- if there is not enough money
+   if(free_margin<0)
+   {
+      string oper=(type==0)? "Buy":"Sell";
+      Print("Not enough money for ", oper," ",lots, " ", symb, " Error code=",ErrorDescription(GetLastError()));
+      return(0);
+   }
+   //--- checking successful
+   return(1);
+}
+
+
+2-Ensure the trade is a valid size:
+
+bool CheckVolumeValue(double volume,string &description)
+{
+//--- minimal allowed volume for trade operations
+   double min_volume=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_MIN);
+   if(volume<min_volume)
+   {
+      description=StringFormat("Volume is less than the minimal allowed SYMBOL_VOLUME_MIN=%.2f",min_volume);
+      volume=min_volume;
+   }
+
+//--- maximal allowed volume of trade operations
+   double max_volume=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_MAX);
+   if(volume>max_volume)
+   {
+      description=StringFormat("Volume is greater than the maximal allowed SYMBOL_VOLUME_MAX=%.2f",max_volume);
+      volume=max_volume;
+   }
+
+//--- get minimal step of volume changing
+   double volume_step=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_STEP);
+
+   int ratio=(int)MathRound(volume/volume_step);
+   if(MathAbs(ratio*volume_step-volume)>0.0000001)
+   {
+      description=StringFormat("Volume is not a multiple of the minimal step SYMBOL_VOLUME_STEP=%.2f, the closest correct volume is %.2f",
+                               volume_step,ratio*volume_step);
+      return(0);
+   }
+   description="Correct volume value";
+   return(1);
+}
+
+
+3-Ensure that when sending new TP or SL, that it is a valid change to avoid "OrderModify" errors:
+
+bool PositionModifyCheck(int ticket,double sl,double tp)
+  {
+//--- select order by ticket
+   if(OrderSelect(ticket,1,0))
+     {
+      //--- point size and name of the symbol, for which a pending order was placed
+      string symbol=_Symbol;
+      double point=SymbolInfoDouble(symbol,SYMBOL_POINT);
+      //--- check if there are changes in the StopLoss level
+      bool StopLossChanged=(MathAbs(OrderStopLoss()-sl)>point);
+      //--- check if there are changes in the Takeprofit level
+      bool TakeProfitChanged=(MathAbs(OrderTakeProfit()-tp)>point);
+      //--- if there are any changes in levels
+      if(StopLossChanged || TakeProfitChanged)
+         return(true);  // position can be modified      
+      //--- there are no changes in the StopLoss and Takeprofit levels
+      else
+      //--- notify about the error
+         PrintFormat("Order #%d already has levels of Open=%.5f SL=%.5f TP=%.5f",
+                     ticket,OrderOpenPrice(),OrderStopLoss(),OrderTakeProfit());
+     }
+//--- came to the end, no changes for the order
+   return(false);       // no point in modifying 
+  }
+
+
+Display Useful Information:
+
+1-Get historical accuracy, including commission and swap:
+
+double accuracyPercent()
+{
+   double wins=0;
+   double totalClosed=0;
+   double Accuracy=0.0;
+   for(int cnt=0; cnt<OrdersHistoryTotal(); cnt++)
+   {
+      if(OrderSelect(cnt,SELECT_BY_POS,MODE_HISTORY)==1)
+      {
+         if(OrderMagicNumber()==MagicNumber && OrderType()<2) 
+         {
+            totalClosed++;
+            if(OrderProfit()-((int(SymbolInfoInteger(Symbol(),SYMBOL_SPREAD))-OrderSwap()-OrderCommission())*Point())>0)
+            {
+               wins++;
+            }
+         }
+      }
+   }
+   if(totalClosed>0 && wins>0)
+   {
+      Accuracy=(wins/totalClosed)*100;
+   }
+   return(Accuracy);
+}
+
+
+2- Create a static comment in top left corner of chart displaying useful info (including accuracy from above), place in "OnTick":
+
+int Spread=int(SymbolInfoInteger(Symbol(),SYMBOL_SPREAD));
+Comment(StringFormat("Spread = %d\nOpen Orders = %d\nAccount Balance = %g\nFree Margin = %G\nCurrent P/L = %G\nLeverage Used = 1:%d\nHistorical Accuracy = %G percent",
+   version,Spread,OrdersTotal(),AccountBalance(),AccountFreeMargin(),AccountProfit(),AccountLeverage(),accuracyPercent()));
+
+
+
+
+
+
+Order Operations:
+1-Close all sell orders at once, including pending orders:
+
+void CloseAllSell()
+{
+   bool   Result=0;
+   int    i,Pos;
+   int    Total=OrdersTotal();
+   
+   if(Total>0)
+   {
+     for(i=Total-1; i>=0; i--) 
+     {
+       if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES) == TRUE) 
+       {
+         Pos=OrderType();
+         if(Pos==OP_SELL)
+         {Result=OrderClose(OrderTicket(), OrderLots(), Ask, Slippage, CLR_NONE);}
+         if((Pos==OP_SELLSTOP)||(Pos==OP_SELLLIMIT))
+         {Result=OrderDelete(OrderTicket(), CLR_NONE);}
+//-----------------------
+       }   
+     }
+   }
+}
+
+
+2-Close all buy orders at once, including pending orders:
+
+void CloseAllBuy()
+{
+   bool   Result=0;
+   int    i,Pos;
+   int    Total=OrdersTotal();
+   
+   if(Total>0)
+   {
+     for(i=Total-1; i>=0; i--) 
+     {
+       if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES) == TRUE) 
+       {
+         Pos=OrderType();
+         if(Pos==OP_BUY)
+         {Result=OrderClose(OrderTicket(), OrderLots(), Bid, Slippage, CLR_NONE);}
+         if((Pos==OP_BUYSTOP)||(Pos==OP_BUYLIMIT))
+         {Result=OrderDelete(OrderTicket(), CLR_NONE);}
+//-----------------------
+       }   
+     }
+   }
+}
+
+
+3- Automatic lot sizing:
+
+double RealLot()
+{
+   double lot=NormalizeDouble(AccountFreeMargin()*Risk/100/1000.0,2);
+   if(AutoLot==1)
+   {
+      LotSize=lot;
+   }
+   else
+   {
+      LotSize=LotSize;
+   }
+   if(LotSize<0.01)
+   {
+      LotSize=0.01;
+   }
+   return LotSize;
+}
+
+
+4-Determine point size based on broker digits:
+
+double MyPoint()
+{
+   double CalcPoint=0;
+
+   if(_Digits==2 || _Digits==3) CalcPoint=0.01;
+   else if(_Digits==4 || _Digits==5) CalcPoint=0.0001;
+
+   return(CalcPoint);
+}
+
+
+5- Determine slippage based on broker digits:
+
+int MySlippage()
+{
+   int CalcSlippage=0;
+
+   if(_Digits==2 || _Digits==4) CalcSlippage=Slippage;
+   else if(_Digits==3 || _Digits==5) CalcSlippage=Slippage*10;
+
+   return(CalcSlippage);
+}
+
+
+6- Trailing stop loss:
+
+void ScanForTrail()
+{
+   if(OrderType()<=OP_SELL && OrderSymbol()==Symbol())  // check for symbol
+   {
+      if(OrderType()==OP_BUY)
+      {
+         double New_SL=NormalizeDouble(Bid-(MyPoint()*TrailingStop),_Digits);
+         if(TrailingStop>0)  
+         {     
+            if(OrderOpenPrice()+Bid>MyPoint()*TrailingStop)
+            {
+               if(OrderStopLoss()<New_SL && New_SL != OrderTakeProfit())
+               {
+                  bool mod=OrderModify(OrderTicket(),OrderOpenPrice(),New_SL+(TrailingStep*MyPoint()),OrderTakeProfit(),0,Blue);
+                  if(!mod)
+                  {
+                     Print("Error in OrderModify. Error =",ErrorDescription(GetLastError()));
+                  }
+               }
+             }
+          }
+       }
+    else
+    {
+       double New_SL=NormalizeDouble(Ask+(MyPoint()*TrailingStop),_Digits);
+       if(TrailingStop>0)  
+       {          
+          if((OrderOpenPrice()-Ask)>(MyPoint()*TrailingStop))
+          {
+             if((OrderStopLoss()>New_SL) && New_SL != OrderStopLoss())
+             {
+                bool mod=OrderModify(OrderTicket(),OrderOpenPrice(),New_SL-(TrailingStep*MyPoint()),OrderTakeProfit(),0,Red);
+                if(!mod)
+                {
+                  Print("Error in OrderModify. Error =",ErrorDescription(GetLastError()));
+                }
+             }
+          }
+        }
+     }
+  }
+}
+
+Trade Strategies
+1-Moving average crossover:
+
+int MACROSS()
+{
+   int cross=0;
+   double mafast=iMA(_Symbol,NULL,FastMa,0,FastMaMode,PRICE_CLOSE,0);
+   double mafast1=iMA(_Symbol,NULL,FastMa,0,FastMaMode,PRICE_CLOSE,1);
+   double maslow=iMA(_Symbol,NULL,SlowMa,0,SlowMaMode,PRICE_CLOSE,0);
+   double maslow1=iMA(_Symbol,NULL,SlowMa,0,SlowMaMode,PRICE_CLOSE,1);
+   if(mafast>maslow && mafast1<maslow1){cross=1;}
+   if(mafast<maslow && mafast1>maslow1){cross=2;}
+   return(cross);
+}
+
+
+2-MACD signal crossover:
+
+int MACDSigCross()
+{
+   int cross=0;
+   double macd=iMACD(_Symbol,NULL,FastMACD,SlowMACD,SigMACD,PRICE_CLOSE,MODE_MAIN,0);
+   double macdSig=iMACD(_Symbol,NULL,FastMACD,SlowMACD,SigMACD,PRICE_CLOSE,MODE_SIGNAL,0);
+   double macd1=iMACD(_Symbol,NULL,FastMACD,SlowMACD,SigMACD,PRICE_CLOSE,MODE_MAIN,1);
+   double macdSig1=iMACD(_Symbol,NULL,FastMACD,SlowMACD,SigMACD,PRICE_CLOSE,MODE_SIGNAL,1);
+   if(macd>macdSig && macd1<macdSig1){cross=1;}
+   if(macd<macdSig && macd1>macdSig1){cross=2;}
+   return(cross);
+}   
+MQL4 Language
+Enumerated lists code chunks, by category (MQL4 and MQL5)
+ArrayCopySeries and ArrayCopyRates on MQL5?
+Stephen Davies
+2379
+Stephen Davies 2018.12.16 21:52 #1      EN
+Error handling
+1- Display error name instead or number:
+
+string ErrorDescription(int error_code)
+{
+   string error_string;
+  
+//---
+   switch(error_code)
+   {
+      //--- codes returned from trade server
+      case 0:   error_string="no error";                                                   break;
+      case 1:   error_string="no error, trade conditions not changed";                     break;
+      case 2:   error_string="common error";                                               break;
+      case 3:   error_string="invalid trade parameters";                                   break;
+      case 4:   error_string="trade server is busy";                                       break;
+      case 5:   error_string="old version of the client terminal";                         break;
+      case 6:   error_string="no connection with trade server";                            break;
+      case 7:   error_string="not enough rights";                                          break;
+      case 8:   error_string="too frequent requests";                                      break;
+      case 9:   error_string="malfunctional trade operation (never returned error)";       break;
+      case 64:  error_string="account disabled";                                           break;
+      case 65:  error_string="invalid account";                                            break;
+      case 128: error_string="trade timeout";                                              break;
+      case 129: error_string="invalid price";                                              break;
+      case 130: error_string="invalid stops";                                              break;
+      case 131: error_string="invalid trade volume";                                       break;
+      case 132: error_string="market is closed";                                           break;
+      case 133: error_string="trade is disabled";                                          break;
+      case 134: error_string="not enough money";                                           break;
+      case 135: error_string="price changed";                                              break;
+      case 136: error_string="off quotes";                                                 break;
+      case 137: error_string="broker is busy (never returned error)";                      break;
+      case 138: error_string="requote";                                                    break;
+      case 139: error_string="order is locked";                                            break;
+      case 140: error_string="long positions only allowed";                                break;
+      case 141: error_string="too many requests";                                          break;
+      case 145: error_string="modification denied because order is too close to market";   break;
+      case 146: error_string="trade context is busy";                                      break;
+      case 147: error_string="expirations are denied by broker";                           break;
+      case 148: error_string="amount of open and pending orders has reached the limit";    break;
+      case 149: error_string="hedging is prohibited";                                      break;
+      case 150: error_string="prohibited by FIFO rules";                                   break;
+      
+      //--- mql4 errors
+      case 4000: error_string="no error (never generated code)";                           break;
+      case 4001: error_string="wrong function pointer";                                    break;
+      case 4002: error_string="array index is out of range";                               break;
+      case 4003: error_string="no memory for function call stack";                         break;
+      case 4004: error_string="recursive stack overflow";                                  break;
+      case 4005: error_string="not enough stack for parameter";                            break;
+      case 4006: error_string="no memory for parameter string";                            break;
+      case 4007: error_string="no memory for temp string";                                 break;
+      case 4008: error_string="non-initialized string";                                    break;
+      case 4009: error_string="non-initialized string in array";                           break;
+      case 4010: error_string="no memory for array\' string";                              break;
+      case 4011: error_string="too long string";                                           break;
+      case 4012: error_string="remainder from zero divide";                                break;
+      case 4013: error_string="zero divide";                                               break;
+      case 4014: error_string="unknown command";                                           break;
+      case 4015: error_string="wrong jump (never generated error)";                        break;
+      case 4016: error_string="non-initialized array";                                     break;
+      case 4017: error_string="dll calls are not allowed";                                 break;
+      case 4018: error_string="cannot load library";                                       break;
+      case 4019: error_string="cannot call function";                                      break;
+      case 4020: error_string="expert function calls are not allowed";                     break;
+      case 4021: error_string="not enough memory for temp string returned from function";  break;
+      case 4022: error_string="system is busy (never generated error)";                    break;
+      case 4023: error_string="dll-function call critical error";                          break;
+      case 4024: error_string="internal error";                                            break;
+      case 4025: error_string="out of memory";                                             break;
+      case 4026: error_string="invalid pointer";                                           break;
+      case 4027: error_string="too many formatters in the format function";                break;
+      case 4028: error_string="parameters count is more than formatters count";            break;
+      case 4029: error_string="invalid array";                                             break;
+      case 4030: error_string="no reply from chart";                                       break;
+      case 4050: error_string="invalid function parameters count";                         break;
+      case 4051: error_string="invalid function parameter value";                          break;
+      case 4052: error_string="string function internal error";                            break;
+      case 4053: error_string="some array error";                                          break;
+      case 4054: error_string="incorrect series array usage";                              break;
+      case 4055: error_string="custom indicator error";                                    break;
+      case 4056: error_string="arrays are incompatible";                                   break;
+      case 4057: error_string="global variables processing error";                         break;
+      case 4058: error_string="global variable not found";                                 break;
+      case 4059: error_string="function is not allowed in testing mode";                   break;
+      case 4060: error_string="function is not confirmed";                                 break;
+      case 4061: error_string="send mail error";                                           break;
+      case 4062: error_string="string parameter expected";                                 break;
+      case 4063: error_string="integer parameter expected";                                break;
+      case 4064: error_string="double parameter expected";                                 break;
+      case 4065: error_string="array as parameter expected";                               break;
+      case 4066: error_string="requested history data is in update state";                 break;
+      case 4067: error_string="internal trade error";                                      break;
+      case 4068: error_string="resource not found";                                        break;
+      case 4069: error_string="resource not supported";                                    break;
+      case 4070: error_string="duplicate resource";                                        break;
+      case 4071: error_string="cannot initialize custom indicator";                        break;
+      case 4072: error_string="cannot load custom indicator";                              break;
+      case 4073: error_string="no history data";                                           break;
+      case 4074: error_string="not enough memory for history data";                        break;
+      case 4075: error_string="not enough memory for indicator";                           break;
+      case 4099: error_string="end of file";                                               break;
+      case 4100: error_string="some file error";                                           break;
+      case 4101: error_string="wrong file name";                                           break;
+      case 4102: error_string="too many opened files";                                     break;
+      case 4103: error_string="cannot open file";                                          break;
+      case 4104: error_string="incompatible access to a file";                             break;
+      case 4105: error_string="no order selected";                                         break;
+      case 4106: error_string="unknown symbol";                                            break;
+      case 4107: error_string="invalid price parameter for trade function";                break;
+      case 4108: error_string="invalid ticket";                                            break;
+      case 4109: error_string="trade is not allowed in the expert properties";             break;
+      case 4110: error_string="longs are not allowed in the expert properties";            break;
+      case 4111: error_string="shorts are not allowed in the expert properties";           break;
+      case 4200: error_string="object already exists";                                     break;
+      case 4201: error_string="unknown object property";                                   break;
+      case 4202: error_string="object does not exist";                                     break;
+      case 4203: error_string="unknown object type";                                       break;
+      case 4204: error_string="no object name";                                            break;
+      case 4205: error_string="object coordinates error";                                  break;
+      case 4206: error_string="no specified subwindow";                                    break;
+      case 4207: error_string="graphical object error";                                    break;
+      case 4210: error_string="unknown chart property";                                    break;
+      case 4211: error_string="chart not found";                                           break;
+      case 4212: error_string="chart subwindow not found";                                 break;
+      case 4213: error_string="chart indicator not found";                                 break;
+      case 4220: error_string="symbol select error";                                       break;
+      case 4250: error_string="notification error";                                        break;
+      case 4251: error_string="notification parameter error";                              break;
+      case 4252: error_string="notifications disabled";                                    break;
+      case 4253: error_string="notification send too frequent";                            break;
+      case 4260: error_string="ftp server is not specified";                               break;
+      case 4261: error_string="ftp login is not specified";                                break;
+      case 4262: error_string="ftp connect failed";                                        break;
+      case 4263: error_string="ftp connect closed";                                        break;
+      case 4264: error_string="ftp change path error";                                     break;
+      case 4265: error_string="ftp file error";                                            break;
+      case 4266: error_string="ftp error";                                                 break;
+      case 5001: error_string="too many opened files";                                     break;
+      case 5002: error_string="wrong file name";                                           break;
+      case 5003: error_string="too long file name";                                        break;
+      case 5004: error_string="cannot open file";                                          break;
+      case 5005: error_string="text file buffer allocation error";                         break;
+      case 5006: error_string="cannot delete file";                                        break;
+      case 5007: error_string="invalid file handle (file closed or was not opened)";       break;
+      case 5008: error_string="wrong file handle (handle index is out of handle table)";   break;
+      case 5009: error_string="file must be opened with FILE_WRITE flag";                  break;
+      case 5010: error_string="file must be opened with FILE_READ flag";                   break;
+      case 5011: error_string="file must be opened with FILE_BIN flag";                    break;
+      case 5012: error_string="file must be opened with FILE_TXT flag";                    break;
+      case 5013: error_string="file must be opened with FILE_TXT or FILE_CSV flag";        break;
+      case 5014: error_string="file must be opened with FILE_CSV flag";                    break;
+      case 5015: error_string="file read error";                                           break;
+      case 5016: error_string="file write error";                                          break;
+      case 5017: error_string="string size must be specified for binary file";             break;
+      case 5018: error_string="incompatible file (for string arrays-TXT, for others-BIN)"; break;
+      case 5019: error_string="file is directory, not file";                               break;
+      case 5020: error_string="file does not exist";                                       break;
+      case 5021: error_string="file cannot be rewritten";                                  break;
+      case 5022: error_string="wrong directory name";                                      break;
+      case 5023: error_string="directory does not exist";                                  break;
+      case 5024: error_string="specified file is not directory";                           break;
+      case 5025: error_string="cannot delete directory";                                   break;
+      case 5026: error_string="cannot clean directory";                                    break;
+      case 5027: error_string="array resize error";                                        break;
+      case 5028: error_string="string resize error";                                       break;
+      case 5029: error_string="structure contains strings or dynamic arrays";              break;
+      default:   error_string="unknown error";
+   }
+    
+//---
+   return(error_string);
+}
+          `
+
+        }
+      ]
+    }
+]
+

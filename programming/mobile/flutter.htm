@@ -1,0 +1,371 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+	<h2 style="display:flex">
+    <input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />
+
+references</h2>
+<div>
+ <a href='https://www.youtube.com/c/JohannesMilke'>mike on youtube</a>
+ <a href='https://docs.flutter.dev/'>main doc</a>
+ <a href="https://vrgl.ir/k2MRA">recources</a>
+ <a href="https://www.youtube.com/c/ResoCoder">ddd video</a>
+<a href='https://www.javatpoint.com/flutter-layouts'>javapoints</a>
+<a href='https://www.solutelabs.com/blog/flutter-tutorial-for-beginners-step-by-step-guide'>solutelab</a>
+<a href='https://dzone.com/articles/flutter-tutorial-for-developers-step-by-step-guide'>dzone</a>
+<a href='https://www.tangolearn.com/how-to-learn-flutter-the-best-way'>TangoLearn</a>
+<a href='https://www.agiratech.com/flutter-top-7-learning-resources-for-beginners'>7 resource</a>
+
+</div>
+	<h2 style="display:flex">
+    <input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />
+Installation</h2>
+<div>
+1.Installing Android studio and android sdk:
+The proxy must be set in the settings of Android studio to download android sdk:
+ setting> Appearance & Behavior ->System Settings -> Http Proxy  
+ Tick HTTP
+ Tick Manual proxy configuration
+ Host name = fodev.org
+ Port number= 8118
+ <a href='https://dazhyarco.net/%D9%86%D8%B5%D8%A8-%D8%A7%D9%86%D8%AF%D8%B1%D9%88%DB%8C%D8%AF-%D8%A7%D8%B3%D8%AA%D9%88%D8%AF%DB%8C%D9%88/'>..</a>
+ 2. android sdk path must be introduced to the flutter:
+ flutter config --android-sdk <path-to-your-android-sdk-path>
+</div>
+
+<h2 style="display:flex">
+    <input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />
+			Project Structure</h2>
+<div>
+	lib/ - just as pub (Dart’s package manager), all the code will be here
+	pubspec.yml - stores a list of packages that are required to run the application, just like package.json does it.
+			You should remember that in Flutter projects you cannot use pub directly, but instead,
+			you will use the Flutter command: flutter pub get <package_name>
+	test/ -  To run unit tests via flutter test
+	ios/ & android/ - the code specific for each platform
+</div>
+
+<h2 style="display:flex">
+    <input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />
+			Everything is built on Widgets</h2>
+<div>
+	UI elements, styles, themes, and even state is managed in specific Widgets.
+	First widget example: 
+	<code>
+	import 'package:flutter/widgets.dart'; // basic set of widgets
+	
+	// When Dart is running the application, it calls to the main() function
+	main() => runApp( /
+	Text( // this is a widget, it renders the given text 
+		'Hello, World!!!', textDirection: TextDirection.ltr, ),
+	);
+	</code>
+</div>
+
+<h2 style="display:flex">
+    <input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />
+			Directionality,Center,TextStyle and Container Widgets</h2>
+<div>
+<code>
+import 'package:flutter/widgets.dart';
+
+main() => runApp(
+  Directionality(
+    textDirection: TextDirection.ltr,
+    child: Container( // the new widget! It is <div> for the Flutter's world
+      color: Color(0xFF444444),
+      child: Center(
+        child: Text(
+          'Hello, World!',
+          style: TextStyle( // we use the [TextStyle] widget to customize text
+            color: Color(0xFFFD620A), // set the color
+            fontSize: 32.0, // and the font size
+          ),
+        ),
+      ),
+    ),
+  ),
+);
+</code>
+</div>
+<h2 style="display:flex">
+    <input type="button" value="-"
+			class="toggleButton"  onclick="toggle(this)" />
+			Creating  widgets</h2>
+<div>
+	
+	Widgets are Dart classes, that can be declared with properties.
+	“Stateless” doesn’t mean they don’t have a state at all. 
+	But changing those properties in a stateless widget won’t affect what has already been rendered.
+	Updating properties of a stateful widget will trigger life cycle hooks and render its content using the new state.
+
+	Creating a stateless widget example:
+	<code>
+	import 'package:flutter/widgets.dart';
+
+	main() => runApp(
+	Directionality(
+		textDirection: TextDirection.ltr,
+		child: Center(
+		child: MyStatelessWidget()
+		),
+	),
+	);
+
+	class MyStatelessWidget extends StatelessWidget {
+	// @override annotation is needed for optimization, by using it
+	// we say that we don't need the same method from the parent class
+	// so the compiler can drop it
+	@override
+	Widget build(BuildContext context) { // I'll describe [context] later
+		return Text('Hello!');
+	}
+	}
+	</code>
+	An example of the widget with an argument:
+	<code>
+	// …
+
+	class MyStatelessWidget extends StatelessWidget {
+	// All properties of the Stateless widget must be declared with final or const keyword
+	final String name; // usual class property
+	MyStatelessWidget(this.name); // usual class constructor
+
+	@override
+	Widget build(BuildContext context) { // it is yet to early to describe [context]
+		return Text('Hello, $name!');
+	}
+	}
+	</code>
+	An example of the big blue button widget :
+	<code>
+		import 'package:flutter/widgets.dart';
+
+		main() => runApp(
+		  Directionality(
+			textDirection: TextDirection.ltr,
+			child: Container(
+			  color: Color(0xFFFFFFFF),
+			  child: App(),
+			),
+		  ),
+		);
+		
+		class App extends StatelessWidget {
+		  @override
+		  Widget build(BuildContext context) {
+			return Center(
+			  child: GestureDetector( // just a normal widget
+				onTap: () { // one of the [GestureDetector] properties
+				  // This function will be called when child widget is pressed
+				  print('You pressed me');
+				},
+				child: Container( // the [Container] will represent our button
+				  decoration: BoxDecoration( // this is how you style the [Container]
+					shape: BoxShape.circle, // change its shape from rectangular to circular
+					color: Color(0xFF17A2B8), // and paint it in blue
+				  ),
+				  width: 80.0,
+				  height: 80.0,
+				),
+			  ),
+			);
+		  }
+		}		
+	</code>	
+	Statefull widgets require an extra class to store the state of the widget. 
+	Moreover, the visual part of the widget becomes its state.
+	
+	An Example of the StatefulWidget class:
+	<code>
+	// …
+
+	class Counter extends StatefulWidget {
+	// The state is stored not in the widget, but in the specific class
+	// that is created by createState()
+	@override
+	State<Counter> createState() => _CounterState();
+	// The result of the function is an object, that must be
+	// of the type State<Counter> (where Counter is the name of our widget)
+	}
+	</code>
+	counter widget example:
+	<code>
+		// …
+
+	class _CounterState extends State<Counter> {//In the Dart language all names that begin with an underscore are private
+	// Finally, we can declare dynamic variables inside of our classes,
+	// to store the state of our widgets
+	
+	// In this case, we'll store the number
+	int counter = 0;
+
+	// The rest is super simple, we just implement the familiar to us build() method,
+	// in the same way as we did it for our [StatelessWidget]
+	@override
+	Widget build(BuildContext context) {
+		// Almost nothing has changed since the last example.
+		// I've added comments to highlight the difference
+		return Center(
+		child: GestureDetector(
+			onTap: () {
+			// Once the button is tapped we increase the value of [counter] variable
+			setState(() {
+				// Using setState() is required to trigger lifecycle hooks
+				// so the widget will know that it should be updated
+				++counter;
+			});
+			},
+			child: Container(
+			decoration: BoxDecoration(
+				shape: BoxShape.circle,
+				color: Color(0xFF17A2B8),
+			),
+			width: 80.0,
+			child: Center(
+				child: Text( // here we print the value of the [counter]
+				'$counter', // to see how it changes
+				style: TextStyle(fontSize: 30.0),
+				),
+			),
+			),
+		),
+		);
+	}
+	}
+	</code>
+	
+	
+	Using composition of widgets for counter application by using  Column() and Row() widgets:
+	<code>
+		import 'package:flutter/widgets.dart';
+
+		main() => runApp(App());
+		
+		class App extends StatelessWidget {
+		  @override
+		  Widget build(BuildContext context) {
+			return Directionality(
+			  textDirection: TextDirection.ltr,
+			  child: Container(
+				padding: EdgeInsets.symmetric(
+				  vertical: 60.0,
+				  horizontal: 80.0,
+				),
+				color: Color(0xFFFFFFFF),
+				child: Content(),
+			  ),
+			);
+		  }
+		}
+		
+		class Content extends StatelessWidget {
+		  @override
+		  Widget build(BuildContext context) {
+			return Column(
+			  children: [
+				Counter('Manchester United'),
+				Counter('Juventus'),
+			  ],
+			);
+		  }
+		}
+		
+		class Counter extends StatefulWidget {
+		  final String _name;
+		  Counter(this._name);
+		
+		  @override
+		  State<Counter> createState() => _CounterState();
+		}
+		
+		class _CounterState extends State<Counter> {
+		  int count = 0;
+		
+		  @override
+		  Widget build(BuildContext context) {
+			return Container(
+			  margin: EdgeInsets.only(bottom: 10.0),
+			  padding: EdgeInsets.all(4.0),
+			  decoration: BoxDecoration(
+				border: Border.all(color: Color(0xFFFD6A02)),
+				borderRadius: BorderRadius.circular(4.0),
+			  ),
+			  child: Row(
+				mainAxisAlignment: MainAxisAlignment.spaceBetween,
+				children: [
+				  // [widget] is the property of the State class that stores
+				  // the instance of the [StatefulWidget] ([Counter] in our case)
+				  _CounterLabel(widget._name),
+				  _CounterButton(
+					count,
+					onPressed: () {
+					  setState(() {
+						++count;
+					  });
+					},
+				  ),
+				],
+			  ),
+			);
+		  }
+		}
+		
+		class _CounterLabel extends StatelessWidget {
+		  static const textStyle = TextStyle(
+			color: Color(0xFF000000),
+			fontSize: 26.0,
+		  );
+		
+		  final String _label;
+		  _CounterLabel(this._label);
+		
+		  @override
+		  Widget build(BuildContext context) {
+			return Text(
+			  _label,
+			  style: _CounterLabel.textStyle,
+			);
+		  }
+		}
+		
+		class _CounterButton extends StatelessWidget {
+		  final count;
+		  final onPressed;
+		  _CounterButton(this.count, {@required this.onPressed});
+		
+		  @override
+		  Widget build(BuildContext context) {
+			return GestureDetector(
+			  onTap: onPressed,
+			  child: Container(
+				padding: EdgeInsets.symmetric(horizontal: 6.0),
+				decoration: BoxDecoration(
+				  color: Color(0xFFFD6A02),
+				  borderRadius: BorderRadius.circular(4.0),
+				),
+				child: Center(
+				  child: Text(
+					'$count',
+					style: TextStyle(fontSize: 20.0),
+				  ),
+				),
+			  ),
+			);
+		  }
+		}
+	</code>
+</div>
+</body>
+</html>

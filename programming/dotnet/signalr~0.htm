@@ -1,0 +1,225 @@
+<h2>what is SignalR</h2>
+SignalR is an open-source project that enables real-time,
+ bi-directional web communication from server to clients.
+
+  Using SignalR, you can write server-side code that can communicate with the clients instantly.
+
+  It can change the content of a web page without needing to referesh the page.
+  ------------------------
+  SignalR provides an API for creating server-to-client remote procedure calls (RPC) 
+  that call JavaScript code in the client browsers (and other client platforms) from server-side .NET code. 
+  
+  SignalR also includes an API for connection management (for instance, connect and disconnect events), and grouping connections.
+
+  SignalR can be used to add any sort of "real-time" web functionality to your ASP.NET application. 
+  
+  <h3>SignalR Uses Various Technologies:</h3>
+    - WebSockets
+    - Server-Sent Events
+    - Long Polling
+
+<h3>Applications of SignalR</h3>
+
+    Although a chat is the common example used for SignalR, you can do a whole lot more. Here are some excellent applications of SignalR.
+    
+        User notifications
+    
+        Sending high-frequency updates to clients
+    
+        Dashboards containing real-time charts and graphs
+    
+        Collaborative applications, such as chat and messaging services
+    
+        Games and entertainment applications
+    
+        Alerting mechanisms
+
+    <h3>SignalR Hub</h3>
+        SignalR uses hubs to communicate between clients & servers. 
+        Hub is a component that is hosted in your ASP.NET Core Application. 
+        Hub sends messages to & receives messages from the client using a remote procedure call using underlying transport. 
+        Essentially SignalR Hub is a central point in the ASP.NET Core and 
+        this hub is responsible for routing all the communication messages in the ASP.NET Core C# application
+        
+        A combination of hub & remote procedure calls enables real-time web applications using SignalR in ASP.NET Core.
+        Hub in ASP.NET Core application is a class derived from the hub base class.
+    
+<h2>Implement SignalR in ASP.NET Core C#</h2>
+    (you can download the complete source code from <a href='https://github.com/procodeguide/SignalR.Sample'>Here </a> )    
+    <h3>Create ASP.NET Core MVC project</h3>
+    
+    Create a new project of the type ASP.NET Core Web App MVC 
+    
+    <h3>Install required packages for SignalR</h3>
+    Run visual studio
+    In Solution Explorer right-click on project & select Add->Client-Side Library..
+    On the Add Client-Side Library screen shown below select provider ‘unpkg‘ & enter ‘@microsoft/signalr@latest‘ for library
+    Choose specific files to be added i.e. File/dist/browser/signalr.js & File/dist/browser/signalr.min.js as per screenshot shown below)
+    set target location & click on install
+
+    The above steps will add SignalR JavaScript Library to the project under folder wwwroot/lib/microsoft/signalr/dist/browser . 
+    
+    <h3>Create a SignalR Hub</h3>
+    Create a hub class named MessageHub that derives from the base class Hub as shown in the below code:
+    <codee>
+    public class MessageHub : Hub
+    {
+        public async Task SendMessage(string user, string message)
+        {
+            if (string.IsNullOrEmpty(user))
+                await Clients.All.SendAsync("ReceiveMessageHandler", message);
+            else
+                await Clients.User(user).SendAsync("ReceiveMessageHandler", message);
+        }
+    }
+    </codee>
+
+    <h3>Configure SignalR in ASP.NET Core Application</h3>
+    Add this code to program.cs :
+    <code>
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(connectionString));
+        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+        builder.Services.AddControllersWithViews();
+
+        builder.Services.AddSignalR();
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseMigrationsEndPoint();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+        app.MapRazorPages();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapHub<MessageHub>("/messagehub");
+        });
+
+        app.Run();
+    </code>
+    <h3>Add JavaScript code to connect to Hub & Method to Receive Message</h3>
+    We will add a JavaScript file named ConnectSignalR.js on the path wwwroot/js/ that will connect 
+    the client to MessageHub & also implements the client function ‘ReceiveMessageHandler’ to receive messages from the hub.
+    Below code is added to the wwwroot/js/ConnectSignalR.js file :
+
+    "use strict";
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build();
+
+    connection.start();
+
+    connection.on("ReceiveMessageHandler", function (message) {
+        var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        alert(msg);
+    });
+    <h3> load this JavaScript in _Layout.cshtml file </h3>
+    <code>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+            <script src="~/js/ConnectSignalR.js"></script>
+        }For
+    </code>
+
+    To use SignInManager in the cshtml file we will have to import the below namespaces in the cshtml file i.e. in _Layout.cshtml file:
+    <code>
+        @using Microsoft.AspNetCore.Identity
+        @inject SignInManager<IdentityUser> SignInManager
+    </code>
+    <h3>Add SendMessage action to the Home controller</h3>
+    Add the below action method for the SendMessage action in Controllers/HomeController.cs
+    <code>
+        [Authorize]
+        public IActionResult SendMessage()
+        {
+            return View();
+        }
+    </code>
+    <h3>Add View for SendMessage action</h3>
+    Following view is added under Views/Home/SendMessage.cshtml
+    <code>
+        @page
+
+        <div class="container">
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-2">To User</div>
+                <div class="col-4"><input type="text" id="userInput" /></div>
+            </div>
+            <div class="row">
+                <div class="col-2">Message</div>
+                <div class="col-4"><input type="text" id="messageInput" /></div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-6">
+                    <input type="button" id="sendButton" value="Send Message" />
+                </div>
+            </div>
+        </div>
+        <script src="~/js/SendMessage.js"></script>
+    </code>
+    <h3>SendMessage.js </h3>
+    Below is the code that will be added to the JavaScript file named SendMessage.js 
+    on the path wwwroot/js/ to call the method in the hub on the server using a remote procedure call. 
+    <code>
+        "use strict";
+
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            var user = document.getElementById("userInput").value;
+            var message = document.getElementById("messageInput").value;
+            connection.invoke("SendMessage", user, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+        });
+    </code>
+    <h3>Finally</h3>
+    add a menu to call it:
+    <code>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SendMessage">Send Message</a>
+        </li>
+    }
+    </code>
+    <h3>Before run</h3>
+    Before you run the code don’t forget to execute the below-mentioned commands in the package manager console to automate the migrations & create the database.
+
+    add-migration InitialMigration
+    update-database
+
+    <h3>To test</h3>
+    After running the code to test the messaging feature of SignalR in ASP.NET Core C# register at least 3 users in the application
+    and log in with all 3 users from different browsers to test send message functions for all & specific users. Below are the home screens
+     for all the 3 users after login. Since these are the screens after successful login the menu Send Message is available for all the 3 users.
+    

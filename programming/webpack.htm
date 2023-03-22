@@ -1,0 +1,135 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex"><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Bundling </h2>
+<div>
+JavaScript bundling is an optimization technique to reduce the number of server requests for JavaScript files
+by merging multiple JavaScript files together into one file.
+
+Instead of manually including jQuery, Bootstrap, React, etc on the header of every page of your site,
+Nowadays, we can bundle them into a single file (named bundle.js fro example) with just a single line of code.
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Installing</h2>
+<div>
+webpack is on npm
+(npm is a huge registry of packages for all kind of JS development).
+to insatall it locally,in your project folder:
+<pre><code>npm install --save-dev webpack</code></pre>
+If you're using webpack v4 or later and want to call webpack from the command line, you'll also need to install the CLI.
+<pre><code>npm install --save-dev webpack-cli</code></pre>
+Global installation:
+<pre><code>npm install --global webpack</code></pre>
+ package.json file will show dependencies we added.
+( the two packages (webpack and webpack-cli) now listed as dependencies near the bottom)
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Setting up a project to bundle</h2>
+<div>
+In its current state, this project has nothing to bundle yet. 
+So let’s add some stuff to it to demonstrate how a simple bundle process happens.
+
+In the same location as my package.json file, I’m going to add the following:
+
+    A folder called src
+    |- An index.html file inside src
+    |- An index.js file inside src
+    A dist folder
+
+(The “source” code is the code that we’ll write and edit. 
+The “distribution” code is the minimized and optimized output of our build process that the browser will display.)
+
+To begin, I need to add some content to both index.html and index.js. The index.html file.
+</div>
+
+<h2 style="display:flex"><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Installing scripts to bundle</h2>
+<div>
+Traditionally, when you want to add one or more libraries as dependencies in a project, 
+you would list them at the bottom of your index.html page using separate <script> elements, one after another.
+ You’ll also include your custom JavaScript that uses those other dependencies. 
+
+Instead of the traditional and nonoptimal approach to adding and incorporating scripts, I’m going to use npm to install my dependencies, then webpack to bundle them. For demonstration purposes, I’m going to use two JavaScript utility libraries:
+<pre><code>
+    Panzoom – A pan/zoom framework
+    Flicking – A JavaScript carousel
+</code></pre>
+
+To be clear: webpack doesn’t require these; they are a few example utilities that I selected pretty much at random to demonstrate webpack’s bundling features. Your project will include different libraries and utilities, likely larger tools like React, Vue, or Babel.js for cross-browser JavaScript.
+
+To use the utilities I chose, I have to install them, so I’m going to do that first:
+
+<pre><code>
+npm install panzoom --save
+npm install @egjs/flicking --save
+</code></pre>
+In this case, I’m using the --save flag instead of --save-dev because I want these as part of my production build. When I installed webpack, I installed it as a developer dependency, so webpack won’t be part of my production build.
+
+Now my package.json has the following appended below the devDependencies section:
+<pre><code>
+"dependencies": {
+  "@egjs/flicking": "^3.8.1",
+  "panzoom": "^9.4.1"
+}
+</code></pre>
+I can then include in my index.html file elements that my two utilities will interact with. 
+For example, the carousel would require a wrapper and “panel” elements in the HTML 
+while the zoom utility requires one or more HTML elements that the utility’s API would target.
+
+To demonstrate that these utilities are successfully bundled, I’m going to add the following to my index.js file
+in the src folder:
+<pre><code>
+import panzoom from 'panzoom';
+import flicking from '@egjs/flicking';
+
+console.log(panzoom);
+console.log(flicking);
+Code language: JavaScript (javascript)
+</code></pre>
+Behind the scenes, webpack will recognize the two import statements and will look for those two dependencies 
+in my node_modules folder.
+ The console() commands are merely to demonstrate that the bundle was successful and both imports are working as expected.
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+	onclick="toggle(this)" />Creating a bundle</h2>
+<div>
+Webpack uses a specific JavaScript file, named in package.json, as something called an entry point. 
+The entry point indicates to webpack which module to use to build out the project’s dependency graph. 
+A dependency graph is essentially a map of every module your application needs.
+
+I can specify a custom entry point if I want, but I prefer to use webpack with as little configuration as needed,
+ so I’m going to go with the default entry point: ./src/index.js. For info on changing the entry point, see the docs.
+
+Now that I’ve installed a few dependencies, I can build my bundle with webpack. I can do this by 
+running the following command in my project’s directory:
+<pre><code>
+npx webpack
+</code></pre>
+Running this command tells webpack to bundle my JavaScript dependencies using the specified entry point and
+ the dist folder will produce the output. 
+In this case, main.js is the only generated file that my app will use.
+ Even though I included an index.html file in the src folder, webpack hasn’t done anything with that yet, 
+so webpack has only produced main.js so far.
+
+If I open up main.js in the dist folder, I’ll find a minified file containing all the dependencies specified in my project
+ (in this case, the two utilities and any utilities those two depend on).
+</div>
+<h2><a href='https://www.codeinwp.com/blog/webpack-tutorial-for-beginners/'>read more..</a></h2>
+<div>
+<a href='https://www.google.com/search?client=firefox-b-d&q=webpack+example'>more examples</a>
+</div>

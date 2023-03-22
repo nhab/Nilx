@@ -1,0 +1,648 @@
+
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src="/nilx/assets/js/blocks.js"></script>	
+    <link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+</head>
+<body>
+    <script>hljs.highlightAll();</script>
+    <button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-" class="toggleButton"  
+        onclick="toggle(this)" />Resources</h2>
+<p>
+<a href='https://www.ezzylearning.net/tutorial/a-step-by-step-guide-of-using-automapper-in-asp-net-core'>ezzylearning</a>
+
+</p>
+<h2>What is automapper ?</h2>
+
+<div>
+Is a library that transform one object type to another.
+</div>
+<h2>Configure AutoMapper in ASP.NET Core application</h2>
+<p>
+1. To use AutoMapper, you need to install below NuGet packages.
+<cl>
+PM> Install-Package AutoMapper
+PM> Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+<cl/>
+</p>
+<h2>2. Configuration:</h2>
+<p>
+ It should only happen once per AppDomain. 
+ That means the best place to put the configuration code is <b> in application startup</b>.
+<b>ConfigureServices </b> method is called by .NET Core at application startup time to register additional services.
+
+You define the configuration using <b>profiles</b>.
+And then you let AutoMapper know in what assemblies are those profiles defined 
+by calling the <b>IServiceCollection</b> extension method <b>AddAutoMapper</b> at startup:
+<pre><code>
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // Way-1: Register Profiles and/or Mapping manually.
+        services.AddAutoMapper(cfg =>
+        {
+            cfg.AddProfile<CustomerAutoMapperProfile>();
+            //cfg.CreateMap<AddressModel, Address>();
+        });
+
+        // Way-2: Register using Assembly. Scan an assembly for components.
+        //services.AddAutoMapper(typeof(Startup));
+        //services.AddAutoMapper(profileAssembly1, profileAssembly2 /*, ...*/);
+    }
+
+    // Other code is removed for clarity
+}
+</code> </pre>
+</p>
+<h2>AutoMapper Profile</h2>
+<p>
+A good way to organize your mapping configurations is with profiles. 
+It allow us to group common configuration and organize mappings by usage.
+This lets us put mapping configuration closer to where it is used, instead of a single file of configuration that becomes difficult to maintain.
+
+Create classes that inherit from Profile and put the configuration in the constructor.
+
+<pre><code>
+    public class CustomerAutoMapperProfile : Profile
+    {
+        public CustomerAutoMapperProfile()
+        {
+            CreateMap<CustomerModel, Customer>()
+                .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.PhoneNumber));
+    
+            CreateMap<Customer, CustomerModel>()
+                .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.IsAdult, opt => opt.MapFrom(src => src.Age > 18));
+    
+            CreateMap<AddressModel, Address>().ReverseMap();
+        }
+    }    
+</code></pre>
+Profiles can be added to the main mapper configuration in a number of ways, either directly.
+AutoMapper will scan the designated assemblies for classes inheriting from Profile and add them to the configuration.
+<pre><code>
+// Domain entity
+public class Customer
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Phone { get; set; }
+    public Address Address { get; set; }
+}
+
+// DTO model
+public class CustomerModel
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string PhoneNumber { get; set; }
+    public bool IsAdult { get; set; }
+
+    public AddressModel Address { get; set; }
+}
+</code></pre>
+</p>
+<h2>3. Usage:</h2>
+<p>
+ You are done with AutoMapper configuration.
+ Most applications can use dependency injection to inject the created <b>IMapper</b> instance.
+<pre><code>
+ [ApiController]
+[Route("[controller]")]
+public class CustomerController : ControllerBase
+{
+    private readonly IMapper _mapper;
+
+    public CustomerController(IMapper mapper)
+    {
+        _mapper = mapper;
+    }
+
+    [HttpGet]
+    public IActionResult Get()
+    {
+        //TODO: Get it from in database
+        var entity = new Customer()
+        {
+            Name = "Ashish Patel",
+            Age = 30,
+            Phone = "1234567890",
+            Address = new Address { Country = "USA", State = "New York" }
+        };
+
+        var model = _mapper.Map<CustomerModel>(entity);
+
+        return Ok(model);
+    }
+
+    [HttpPost]
+    public IActionResult Add(CustomerModel model)
+    {
+        var entity = _mapper.Map<Customer>(model);
+
+        //TODO: Save in database
+
+        return Ok();
+    }
+}
+</code></pre>
+</p>
+<h2>Example</h2>
+<div>
+<pre> <code>
+        public class PersonModel
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Address { get; set; }
+
+            public override string ToString()
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+    </code></pre>
+ 
+<pre> <code>
+        public class PersonDTO
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
+ </code></pre>
+<pre>  <code>
+        public class MappingProfile : Profile
+        {
+            public MappingProfile()
+            {
+                CreateMap<PersonModel, PersonDTO>().ReverseMap();
+            }
+        }
+    </code></pre>
+    Observe the inheritance from Profile (from AutoMapper) and the <b>ReverseMap</b> which allows us to map in both directions automatically.
+    <pre><code>
+        using AutoMapper;
+        using AutoMapper.Configuration;
+        using AutoMapperDemo;
+        
+        IMapper Mapper;
+        
+        var cfg = new MapperConfigurationExpression();
+        cfg.AddProfile<MappingProfile>();
+        var mapperConfig = new MapperConfiguration(cfg);
+        Mapper = new Mapper(mapperConfig);
+        
+        var person = new PersonModel
+        {
+            FirstName = "Elon",
+            LastName = "Musk"
+        };
+        
+        Console.WriteLine(person);
+        
+        PersonDTO mappedPerson = Mapper.Map<PersonDTO>(person);
+        
+        Console.WriteLine(mappedPerson);
+        Console.WriteLine(mappedPerson.FirstName);        
+    </code></pre>
+</div>
+<h2>Other Features</h2>
+<div>
+AutoMapper uses a programming concept called Reflection to retrieve the type metadata of objects.
+    <ul class="">
+        <li id="cfcc" class="tg th jd kc b kd mf kh mg kl tu kp tv kt tw kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Projection.html" rel="noopener ugc nofollow" target="_blank">Projection</a>
+        </li>
+        <li id="a8f2" class="tg th jd kc b kd tp kh tq kl tr kp ts kt tt kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Nested-mappings.html" rel="noopener ugc nofollow" target="_blank">Nested Mappings</a>
+        </li>
+        <li id="5d62" class="tg th jd kc b kd tp kh tq kl tr kp ts kt tt kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Conditional-mapping.html" rel="noopener ugc nofollow" target="_blank">Conditional Mappings</a>
+        </li>
+        <li id="3f99" class="tg th jd kc b kd tp kh tq kl tr kp ts kt tt kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Flattening.html" rel="noopener ugc nofollow" target="_blank">Flattening</a>
+        </li>
+        <li id="4758" class="tg th jd kc b kd tp kh tq kl tr kp ts kt tt kx tl tm tn to gc" data-selectable-paragraph="">
+            <a class="au qe" href="https://docs.automapper.org/en/latest/Reverse-Mapping-and-Unflattening.html" rel="noopener ugc nofollow" target="_blank">Reverse Mapping and Unflattening</a>
+        </li>
+    </ul>
+</div>
+<h2>Understanding Your Mappings</h2>
+<div>
+AutoMapper creates an execution plan for your mapping.
+That execution plan can be viewed as an expression tree during debugging. 
+You can get a better view of the resulting code by installing the ReadableExpressions VS extension.
+If you need to see the code outside VS, you can use the ReadableExpressions package directly. 
+This DotNetFiddle has a live demo using the NuGet package, and this article describes using the VS extension.
+<pre><code>
+var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Foo, Bar>());
+var executionPlan = configuration.BuildExecutionPlan(typeof(Foo), typeof(Bar));
+</code></pre>
+Be sure to remove all such code before release.
+For ProjectTo, you need to inspect IQueryable.Expression.
+<pre><code>
+var expression = context.Entities.ProjectTo<Dto>().Expression;
+</code></pre>    
+</div>
+
+<h2>Projection</h2>
+<div>
+Projection transforms a source to a destination beyond flattening the object model.
+Without extra configuration, AutoMapper requires a flattened destination to match the source type?s naming structure.
+When you want to project source values into a destination that does not exactly match the source structure, 
+you must specify custom member mapping definitions. 
+For example, we might want to turn this source structure:
+<pre><code>
+public class CalendarEvent
+{
+	public DateTime Date { get; set; }
+	public string Title { get; set; }
+}
+</code></pre>
+Into something that works better for an input form on a web page:
+<pre><code>
+public class CalendarEventForm
+{
+	public DateTime EventDate { get; set; }
+	public int EventHour { get; set; }
+	public int EventMinute { get; set; }
+	public string Title { get; set; }
+}
+</cpde></pre>
+Because the names of the destination properties do not exactly match the source property 
+(CalendarEvent.Date would need to be CalendarEventForm.EventDate), we need to specify custom member mappings in our type map configuration:
+<pre><code>
+// Model
+var calendarEvent = new CalendarEvent
+{
+	Date = new DateTime(2008, 12, 15, 20, 30, 0),
+	Title = "Company Holiday Party"
+};
+
+// Configure AutoMapper
+var configuration = new MapperConfiguration(cfg =>
+  cfg.CreateMap<CalendarEvent, CalendarEventForm>()
+	.ForMember(dest => dest.EventDate, opt => opt.MapFrom(src => src.Date.Date))
+	.ForMember(dest => dest.EventHour, opt => opt.MapFrom(src => src.Date.Hour))
+	.ForMember(dest => dest.EventMinute, opt => opt.MapFrom(src => src.Date.Minute)));
+
+// Perform mapping
+CalendarEventForm form = mapper.Map<CalendarEvent, CalendarEventForm>(calendarEvent);
+
+form.EventDate.ShouldEqual(new DateTime(2008, 12, 15));
+form.EventHour.ShouldEqual(20);
+form.EventMinute.ShouldEqual(30);
+form.Title.ShouldEqual("Company Holiday Party");
+</code></pre>
+Each custom member configuration uses an action delegate to configure each individual member. 
+In the above example, we used the MapFrom option to perform custom source-to-destination member mappings. 
+The MapFrom method takes a lambda expression as a parameter, which is then evaluated later during mapping.
+The MapFrom expression can be any Func<TSource, object> lambda expression.
+</div>
+<h2>Nested Mappings</h2>
+<div>
+As the mapping engine executes the mapping, it can use one of a variety of methods to resolve a destination member value. 
+One of these methods is to use another type map, where the source member type and destination member type are also configured in the mapping configuration.
+This allows us to not only flatten our source types, but create complex destination types as well. 
+For example, our source type might contain another complex type:
+<pre><code>
+public class OuterSource
+{
+	public int Value { get; set; }
+	public InnerSource Inner { get; set; }
+}
+
+public class InnerSource
+{
+	public int OtherValue { get; set; }
+}
+</code></pre>
+We could simply flatten the <b>OuterSource.Inner.OtherValue </b> to one InnerOtherValue property, 
+but we might also want to create a corresponding complex type for the Inner property:
+<pre><code>
+public class OuterDest
+{
+	public int Value { get; set; }
+	public InnerDest Inner { get; set; }
+}
+
+public class InnerDest
+{
+	public int OtherValue { get; set; }
+}
+</code></pre>
+In that case, we would need to configure the additional source/destination type mappings:
+<pre><code>
+var config = new MapperConfiguration(cfg => {
+    cfg.CreateMap<OuterSource, OuterDest>();
+    cfg.CreateMap<InnerSource, InnerDest>();
+});
+config.AssertConfigurationIsValid();
+
+var source = new OuterSource
+	{
+		Value = 5,
+		Inner = new InnerSource {OtherValue = 15}
+	};
+var mapper = config.CreateMapper();
+var dest = mapper.Map<OuterSource, OuterDest>(source);
+
+dest.Value.ShouldEqual(5);
+dest.Inner.ShouldNotBeNull();
+dest.Inner.OtherValue.ShouldEqual(15);
+</code></pre>
+Order of configuring types does not matter
+Call to Map does not need to specify any inner type mappings, only the type map to use for the source value passed in
+With both flattening and nested mappings, we can create a variety of destination shapes to suit whatever our needs may be.
+</div>
+<h2>Conditional Mapping</h2>
+<div>
+AutoMapper allows you to add conditions to properties that must be met before that property will be mapped.
+
+This can be used in situations like the following where we are trying to map from an int to an unsigned int.
+<pre><code>
+class Foo{
+  public int baz;
+}
+
+class Bar {
+  public uint baz;
+}
+</code></pre>
+In the following mapping the property baz will only be mapped if it is greater than or equal to 0 in the source object.
+<pre><code>
+var configuration = new MapperConfiguration(cfg => {
+  cfg.CreateMap<Foo,Bar>()
+    .ForMember(dest => dest.baz, opt => opt.Condition(src => (src.baz >= 0)));
+});
+</code></pre>
+
+
+Preconditions
+Similarly, there is a PreCondition method. 
+The difference is that it runs sooner in the mapping process, before the source value is resolved (think MapFrom).
+So the precondition is called, then we decide which will be the source of the mapping (resolving), 
+then the condition is called and finally the destination value is assigned.
+<pre><code>
+var configuration = new MapperConfiguration(cfg => {
+  cfg.CreateMap<Foo,Bar>()
+    .ForMember(dest => dest.baz, opt => {
+        opt.PreCondition(src => (src.baz >= 0));
+        opt.MapFrom(src => {
+            // Expensive resolution process that can be avoided with a PreCondition
+        });
+    });
+});   
+</code></pre> 
+</div>
+<h2>Flattening</h2>
+<div>
+One of the common usages of object-object mapping is to take a complex object model and flatten it to a simpler model. 
+You can take a complex model such as:
+<pre><code>
+public class Order
+{
+	private readonly IList<OrderLineItem> _orderLineItems = new List<OrderLineItem>();
+
+	public Customer Customer { get; set; }
+
+	public OrderLineItem[] GetOrderLineItems()
+	{
+		return _orderLineItems.ToArray();
+	}
+
+	public void AddOrderLineItem(Product product, int quantity)
+	{
+		_orderLineItems.Add(new OrderLineItem(product, quantity));
+	}
+
+	public decimal GetTotal()
+	{
+		return _orderLineItems.Sum(li => li.GetTotal());
+	}
+}
+
+public class Product
+{
+	public decimal Price { get; set; }
+	public string Name { get; set; }
+}
+
+public class OrderLineItem
+{
+	public OrderLineItem(Product product, int quantity)
+	{
+		Product = product;
+		Quantity = quantity;
+	}
+
+	public Product Product { get; private set; }
+	public int Quantity { get; private set;}
+
+	public decimal GetTotal()
+	{
+		return Quantity*Product.Price;
+	}
+}
+
+public class Customer
+{
+	public string Name { get; set; }
+}
+</code></pre>
+We want to flatten this complex Order object into a simpler OrderDto that contains only the data needed for a certain scenario:
+<pre><code>
+public class OrderDto
+{
+	public string CustomerName { get; set; }
+	public decimal Total { get; set; }
+}
+</code></pre>
+When you configure a source/destination type pair in AutoMapper, 
+the configurator attempts to match properties and methods on the source type to properties on the destination type. 
+If for any property on the destination type a property, method, or a method prefixed with ?Get? does not exist on the source type,
+AutoMapper splits the destination member name into individual words (by PascalCase conventions).
+<pre><code>
+// Complex model
+
+var customer = new Customer
+	{
+		Name = "George Costanza"
+	};
+var order = new Order
+	{
+		Customer = customer
+	};
+var bosco = new Product
+	{
+		Name = "Bosco",
+		Price = 4.99m
+	};
+order.AddOrderLineItem(bosco, 15);
+
+// Configure AutoMapper
+
+var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDto>());
+
+// Perform mapping
+
+OrderDto dto = mapper.Map<Order, OrderDto>(order);
+
+dto.CustomerName.ShouldEqual("George Costanza");
+dto.Total.ShouldEqual(74.85m);
+</code></pre>
+We configured the type map in AutoMapper with the CreateMap method.
+AutoMapper can only map type pairs it knows about, so we have explicitly register the source/destination type pair with CreateMap. 
+To perform the mapping, we use the Map method.
+
+On the OrderDto type, the Total property matched to the GetTotal() method on Order. 
+The CustomerName property matched to the Customer.Name property on Order. 
+As long as we name our destination properties appropriately, we do not need to configure individual property matching.
+
+If you want to disable this behavior, you can use the ExactMatchNamingConvention:
+<pre><code>
+cfg.DestinationMemberNamingConvention = new ExactMatchNamingConvention();
+</code></pre>
+<b>IncludeMembers</b>
+If you need more control when flattening, you can use IncludeMembers. 
+You can map members of a child object to the destination object when you already have a map from the child type to the destination type
+(unlike the classic flattening that doesn?t require a map for the child type).
+<pre><code>
+class Source
+{
+    public string Name { get; set; }
+    public InnerSource InnerSource { get; set; }
+    public OtherInnerSource OtherInnerSource { get; set; }
+}
+class InnerSource
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+class OtherInnerSource
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string Title { get; set; }
+}
+class Destination
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string Title { get; set; }
+}
+
+cfg.CreateMap<Source, Destination>().IncludeMembers(s=>s.InnerSource, s=>s.OtherInnerSource);
+cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+cfg.CreateMap<OtherInnerSource, Destination>();
+
+var source = new Source { Name = "name", InnerSource = new InnerSource{ Description = "description" }, 
+                          OtherInnerSource = new OtherInnerSource{ Title = "title" } };
+var destination = mapper.Map<Destination>(source);
+destination.Name.ShouldBe("name");
+destination.Description.ShouldBe("description");
+destination.Title.ShouldBe("title");
+</code></pre>
+So this allows you to reuse the configuration in the existing map for the child types InnerSource and OtherInnerSource when mapping the parent types Source and Destination.
+It works in a similar way to mapping inheritance, but it uses composition, not inheritance.
+
+The order of the parameters in the IncludeMembers call is relevant. When mapping a destination member,
+the first match wins, starting with the source object itself and then with the included child objects in the order you specified.
+So in the example above, Name is mapped from the source object itself and Description from InnerSource because it?s the first match.
+
+Note that this matching is static, it happens at configuration time, not at Map time, so the runtime types of the child objects are not considered.
+
+IncludeMembers integrates with ReverseMap. An included member will be reversed to
+<pre><code>
+ForPath(destination => destination.IncludedMember, member => member.MapFrom(source => source))
+</code></pre>
+and the other way around. 
+If that?s not what you want, you can avoid ReverseMap (explicitly create the reverse map) 
+or you can override the default settings (using Ignore or IncludeMembers without parameters respectively).    
+</div>
+<h2>Reverse Mapping and Unflattening</h2>
+<div>
+Starting with 6.1.0, AutoMapper now supports richer reverse mapping support. Given our entities:
+<pre><code>
+public class Order {
+  public decimal Total { get; set; }
+  public Customer Customer { get; set; }
+}
+
+public class Customer {
+  public string Name { get; set; }
+}
+We can flatten this into a DTO:
+
+public class OrderDto {
+  public decimal Total { get; set; }
+  public string CustomerName { get; set; }
+}
+</code></pre>
+We can map both directions, including unflattening:
+<pre><code>
+var configuration = new MapperConfiguration(cfg => {
+  cfg.CreateMap<Order, OrderDto>()
+     .ReverseMap();
+});
+</code></pre>
+By calling ReverseMap, AutoMapper creates a reverse mapping configuration that includes unflattening:
+<pre><code>
+var customer = new Customer {
+  Name = "Bob"
+};
+
+var order = new Order {
+  Customer = customer,
+  Total = 15.8m
+};
+
+var orderDto = mapper.Map<Order, OrderDto>(order);
+
+orderDto.CustomerName = "Joe";
+
+mapper.Map(orderDto, order);
+
+order.Customer.Name.ShouldEqual("Joe");
+</code></pre>
+Unflattening is only configured for ReverseMap. 
+If you want unflattening, you must configure Entity -> Dto then call ReverseMap to create an unflattening type map configuration from the Dto -> Entity.
+
+<b>Customizing reverse mapping</b>
+AutoMapper will automatically reverse map ?Customer.Name? from ?CustomerName? based on the original flattening.
+If you use MapFrom, AutoMapper will attempt to reverse the map:
+<pre><code>
+cfg.CreateMap<Order, OrderDto>()
+  .ForMember(d => d.CustomerName, opt => opt.MapFrom(src => src.Customer.Name))
+  .ReverseMap();
+</code></pre>  
+As long as the MapFrom path are member accessors, AutoMapper will unflatten from the same path (CustomerName => Customer.Name).
+
+If you need to customize this, for a reverse map you can use ForPath:
+<pre><code>
+cfg.CreateMap<Order, OrderDto>()
+  .ForMember(d => d.CustomerName, opt => opt.MapFrom(src => src.Customer.Name))
+  .ReverseMap()
+  .ForPath(s => s.Customer.Name, opt => opt.MapFrom(src => src.CustomerName));
+</code></pre>  
+For most cases you shouldn?t need this, as the original MapFrom will be reversed for you. Use ForPath when the path to get and set the values are different.
+
+If you do not want unflattening behavior, you can remove the call to ReverseMap and create two separate maps. Or, you can use Ignore:
+<pre><code>
+cfg.CreateMap<Order, OrderDto>()
+  .ForMember(d => d.CustomerName, opt => opt.MapFrom(src => src.Customer.Name))
+  .ReverseMap()
+  .ForPath(s => s.Customer.Name, opt => opt.Ignore());
+</code></pre>  
+<b>IncludeMembers</b>
+ReverseMap also integrates with IncludeMembers and configuration like
+<pre><code>
+ForMember(destination => destination.IncludedMember, member => member.MapFrom(source => source))
+</code></pre>
+</div> 

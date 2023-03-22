@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+
+<body> <!-- onload="AddToggleButtons()"-->
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />
+References</h2>
+<div>
+<a href="https://youtu.be/G1tSaAAiB_4">course</a >
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />What is redis( Remote Dictionary Server)?</h2>
+<div>
+- Redis is a No SQL database which works on the concept of key-value pair.
+- It is a key-value storage engine with lots of functions.
+- it support 5 data type:
+   <b>strings, hashes, lists, sets</b> and <b>ordered sets</b>.
+- Regardless of the type, a value is accessed by a key. 
+- the key is stored as a byte array but you'll mostly use a string as a key.
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />What is Redis used for?</h2>
+<div>
+- Redis can function as 
+a NoSQL database or a memory-cache store
+to improve performance
+ when serving data that is stored in system memory.
+- redis can used in a seperate server
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+Why we use Redis server?</h2>
+<div>
+- Redis can be used as a cache
+for the most frequently used data.
+
+- We can use it as an alternative to
+forcing every single API call to hit our database.
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Redis executables:</h2>
+<div>
+<b>redis-server </b>is the Redis Server itself.
+<b>redis-sentinel</b> is the Redis Sentinel executable (monitoring and failover).
+<b>redis-cli</b> is the command line interface utility to talk with Redis.
+<b>redis-benchmark</b> is used to check Redis performances.
+<b>redis-check-aof</b> and redis-check-dump are useful in the rare event of corrupted data files.
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to interact with Redis?</h2>
+<div>
+Once installed in a server, run the Redis CLI (Command Line Interface)
+to issue commands to Redis. 
+While working on the CLI tool, your command-line prompt will change to: 
+<cli>redis></cli>
+sample commands:
+<cl>
+$ redis-cli                                                                
+redis 127.0.0.1:6379> ping
+PONG
+redis 127.0.0.1:6379> set mykey somevalue
+OK
+redis 127.0.0.1:6379> get mykey
+"somevalue"
+</cl>
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to  connect to the Redis server?</h2>
+<div>
+When installed locally:
+<cli>redis-cli.exe -h localhost -p 6379</cli>
+From a virtual machine on Azure. Remember to enable non-SSL port because the Redis client may not be compatible with SSL
+
+<cl>redis-cli.exe -h <host name from Azure> -p 6379 -a <password from Azure></password></cl>
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />List all keys</h2>
+<code>
+redis localhost:6379> keys *
+        39) "foo:rand:000000000016"
+        40) "foo:rand:000000000017"
+        41) "foo:rand:000000000018"
+        42) "foo:rand:000000000019"
+        43) "mykey-f9d21bca-48f6-4cf8-b68d-1652b9533633"
+        44) "mykey-43d5b08a-5b60-4c72-8820-dcb6f6372b4b"
+</code>    
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Delete a specific key</h2>
+<code>redis localhost:6379> del mykey-0001</code>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Delete all keys</h2>
+<code>redis localhost:6379> flushall</code>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Set a key-value cached item</h2>
+<code>localhost:6379> set key001 value001
+        Ok</code>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Get a cached item give the key</h2>
+<code>localhost:6379> get key001
+        "value001"</code>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />C#:<b>StackExchangegeneral purpose client</b></h2>
+<p>Redis has a .NET package which wraps up the underlying TCP/IP communications and gives us a nice IDistributedCache to work with.
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Which NUGET package?</h2>
+<p>
+- <cli>StackExchange.Redis</cli> is a managed wrapper which abstracts the low level client server interactions with the Redis server. 
+- This package is completely dependency injection aware.
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Distributed caching and its benefit</h2>
+<div>
+- Distributed caching is when you want to handle caching outside of your application. 
+- This also can be shared by one or more applications/servers. 
+- Distributed cache is application-specific; i.e., multiple cache providers support distributed caches. 
+- To implement distributed cache, we can use Redis and NCache. 
+- We will see about Redis cache in detail.
+- A distributed cache can improve the performance and scalability of an ASP.NET Core app,
+ especially when the app is hosted by a cloud service or a server farm.
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />IDistributedCache interface</h2>
+<div> 
+- <cli>IDistributedCache</cli> Interface provides you with the following methods to perform actions on the actual cache
+<b>GetAsync </b> - Gets the Value from the Cache Server based on the passed key.
+<b>SetAsync  </b>- Accepts a key and Value and sets it to the Cache server
+<b>RefreshAsyn </b>c - Resets the Sliding Expiration Timer (more about this later in the article) if any.
+<b>RemoveAsync  </b>- Deletes the cache data based on the key.
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Framework provided to implement IDistributedCache</h2>
+<div>
+ Register an implementation of IDistributedCache in <cli>Startup.ConfigureServices</cli>. 
+Framework-provided implementations described in this topic include
+<b>
+    Distributed Memory Cache
+    Distributed SQL Server cache
+    Distributed Redis cache
+    Distributed NCache cache</b>
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Setting Up Redis on windows in local machine</h2>
+<div>
+    1. Run Redis-server.exe (Download from Github repo)
+    2. Minimize the Redis-server.exe and open Redis-cli.exe.
+    3. To test, just enter the command ping.
+    4.Go to the path and open up Powershell and run the following command
+    By default, Redis runs on the local 6379 port. To change the port number,
+    <cli>./redis-server --port {your_port}</cli>
+    5.Once Redis is running at your defined port, the Redis CLI will no longer work. 
+    This is because it tries to connect to 6379 by default. 
+   To override this, open up PowerShell again and enter the following command, 
+    <cli> ./redis-cli -p {your_port}</cli>
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to create an instance of IDistributedCache without Dependency Injection</h2>
+<div>
+This snippet demonstrates creating an instance of IDistributedCache via explicit construction, given the host and port number.
+ This is a very simple example and I would recommend following the DI route
+<cl>
+†† [TestMethod]
+††††††† public void BasicCreation()
+††††††† {
+††††††††††† try
+††††††††††† {
+††††††††††††††† string server = "localhost";
+††††††††††††††† string port = "6379";
+††††††††††††††† string cnstring = $"{server}:{port}";
+
+††††††††††††††† var redisOptions = new RedisCacheOptions
+††††††††††††††† {
+††††††††††††††††††† ConfigurationOptions = new ConfigurationOptions()
+††††††††††††††† };
+††††††††††††††† redisOptions.ConfigurationOptions.EndPoints.Add(cnstring);
+††††††††††††††† var opts = Options.Create<RedisCacheOptions>(redisOptions);
+
+††††††††††††††† IDistributedCache cache = new Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache(opts);
+††††††††††††††† string expectedStringData = "Hello world";
+††††††††††††††† cache.Set("key003", System.Text.Encoding.UTF8.GetBytes(expectedStringData));
+††††††††††††††† var dataFromCache = cache.Get("key003");
+††††††††††††††† var actualCachedStringData = System.Text.Encoding.UTF8.GetString(dataFromCache);
+††††††††††††††† Assert.AreEqual(expectedStringData, actualCachedStringData);
+††††††††††† }
+††††††††††† catch (Exception ex)
+††††††††††† {
+††††††††††††††† Trace.WriteLine(ex.ToString());
+††††††††††††††† throw;
+††††††††††† }
+††††††† }
+</cl>
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to create an instance of IDistributedCache via dependency injection?</h2>
+<div>
+This snippet demonstrates creating an instance of IDistributedCache via the ServiceCollection DI container, given the host and port number.
+<pre><code>
+[ClassInitialize]
+††††††† public static void Init(TestContext context)
+††††††† {††††††††††† 
+††††††††††† var builder = new ConfigurationBuilder();
+††††††††††† builder.AddJsonFile("settings.json", optional: false);
+††††††††††† Config = builder.Build();
+
+††††††††††† ServiceCollection coll = new ServiceCollection();
+††††††††††† coll.AddStackExchangeRedisCache(options =>
+††††††††††† {
+††††††††††††††† string server = Config["redis-server"];
+††††††††††††††† string port = Config["redis-port"];
+††††††††††††††† string cnstring = $"{server}:{port}";
+††††††††††††††† options.Configuration = cnstring;
+††††††††††† });
+
+††††††††††† var sprovider = coll.BuildServiceProvider();
+††††††††††† 
+††††††††††† //Use sprovder to create an instance of IDistributedCache
+††††††††††† var cache = sprovider.GetService<IDistributedCache>();
+††††††† }
+</code></pre>
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to create an instance the IServer interface for performing management operations?</h2>
+<div>The IServer interface is useful for managing an instance of Redis cache.
+<pre><code>
+	†† //The overridable Configure method of a Azure function Startup class
+††††††† public override void Configure(IFunctionsHostBuilder builder)
+††††††† {
+††††††††††† var configurationBuilder = new ConfigurationBuilder();
+††††††††††† configurationBuilder.AddEnvironmentVariables();
+††††††††††† IConfiguration config = configurationBuilder.Build();
+††††††††††† builder.Services.AddSingleton<IConfiguration>(config);
+††††††††††† builder.Services.AddSingleton<RedisConfiguration>(provider => new RedisConfiguration
+††††††††††† {
+††††††††††††††† ConnectionStringTxn = provider.GetRequiredService<IConfiguration>()["REDISDEMO_CNSTRING"]
+††††††††††† });
+††††††††††† builder.Services.AddSingleton<REDIS.IServer>(this.CreateRedisServerCallBack);
+
+††††††† }
+††††††† 
+††††††† private REDIS.IServer CreateRedisServerCallBack(IServiceProvider provider)
+††††††† {
+††††††††††† var redisConfig = provider.GetService<RedisConfiguration>();
+††††††††††† var cnstringAdmin = redisConfig.ConnectionStringAdmin;
+††††††††††† //You need allowAdmin=true to call methods .FlushDatabase and .Keys()
+††††††††††† //https://stackexchange.github.io/StackExchange.Redis/Basics.html
+††††††††††† var redis = REDIS.ConnectionMultiplexer.Connect(cnstringAdmin);
+††††††††††† var firstEndPoint = redis.GetEndPoints().FirstOrDefault();
+††††††††††† if (firstEndPoint == null)
+††††††††††† {
+††††††††††††††† throw new ArgumentException("The endpoints collection was empty. Could not get an end point from Redis connection multiplexer.");
+††††††††††† }
+††††††††††† return redis.GetServer(firstEndPoint);
+††††††† }
+††††††† 
+††††††† public class RedisConfiguration
+††††††† {
+††††††††††† public string ConnectionStringAdmin => $"{this.ConnectionStringTxn},allowAdmin=true";
+
+††††††††††† public string ConnectionStringTxn { get; internal set; }
+
+††††††††††† public override string ToString()
+††††††††††† {
+††††††††††††††† return $"{ConnectionStringTxn}";
+††††††††††† }
+††††††† }
+</code></pre>
+</div>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />IServer or IDistributedCache,which one do we need ?</h2>
+<p>
+The interface IDistributedCache will address the requirements if you key-value pair caching is all you need. However, if you want to manage the Redis cache server itself (e.g. flush the cache, enumerate keys, etc.) then the interface IServer is more powerful
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to work with IDistributedCache without having to intall Redis server locally?</h2>
+<p>
+The class MemoryDistributedCache provides an inproc implementation of IDistributedCache and very useful during local development and debugging.
+<pre><code>
+[TestMethod]
+††††††† public void ExampleTestMethod()
+††††††† {
+††††††††††† var expectedData = new byte[] { 100, 200 };
+
+††††††††††† var opts = Options.Create<MemoryDistributedCacheOptions>(new MemoryDistributedCacheOptions());
+††††††††††† IDistributedCache cache = new MemoryDistributedCache(opts);
+††††††††††† cache.Set("key1", expectedData);
+††††††††††† var cachedData = cache.Get("key1");
+
+††††††††††† Assert.AreEqual(expectedData, cachedData);
+
+††††††††††† //Use the variable cache as an input to any class which expects IDistributedCache
+††††††† }
+</code></pre>
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to conditionally inject an IDistributedCache implementation of MemoryDistributedCache during local development?</h2>
+<p>
+You are using the key-value caching functionality of Redis. You are coding an Azure function (could be an ASP.NET Core Web app) and you want to develop and debug the code. Do you need to install Redis locally? Not neccessary. Through a couple of lines of clever DI, you can ‚Äúfool‚Äù your classes to use the MemoryDistributedCache implementation of the interface IDistributedCache.
+
+In this snippet we are checking for the the value of an environment variable and conditionally injecting the desired implementation of IDistributedCache
+<cl>
+	† [TestMethod]
+††††††† public void Condition_Injection_Of_IDistributedCache()
+††††††† {
+††††††††††† var builder = new ConfigurationBuilder();
+††††††††††† builder.AddJsonFile("settings.json", optional: false);
+††††††††††† Config = builder.Build();
+
+††††††††††† ServiceCollection coll = new ServiceCollection();
+††††††††††† if (System.Environment.GetEnvironmentVariable("localdebug") == "1")
+††††††††††† {
+††††††††††††††† coll.AddDistributedMemoryCache();
+††††††††††† }
+††††††††††† else
+††††††††††† {
+††††††††††††††† coll.AddStackExchangeRedisCache(options =>
+††††††††††††††† {
+††††††††††††††††††† string server = Config["redis-server"];
+††††††††††††††††††† string port = Config["redis-port"];
+††††††††††††††††††† string cnstring = $"{server}:{port}";
+††††††††††††††††††† options.Configuration = cnstring;
+††††††††††††††† });
+††††††††††† }
+††††††††††† var provider = coll.BuildServiceProvider();
+††††††††††† var cache = provider.GetService<IDistributedCache>();
+††††††† }
+</cl>
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Steps to integrate Redis cache in ASP.NET core</h2>
+<div>
+    1.Make sure redis server is running,
+ <cli>  ./redis-server --port 6000</cli>
+  2.Install the package that helps you communicate with the Redis server
+  <cli>Install-Package Microsoft.Extensions.Caching.StackExchangeRedis</cli>
+3.Configure in application to support Redis cache with a specific port.
+In startup.cs/ConfigureServices method:
+<pre><code>services.AddStackExchangeRedisCache(options =>  
+    {  
+        options.Configuration = "localhost:6000";  
+    }); </code></pre>
+4.Implementing caching code snippet in Get call of WeatherForeCastController,
+<pre><code>
+    [HttpGet]  
+    public async Task < IActionResult > Get() {  
+        var cacheKey = "weatherList";  
+        string serializedCustomerList;  
+        List < string > weatherList = new List < string > ();  
+        var redisCustomerList = await _distributedCache.GetAsync(cacheKey);  
+        if (redisCustomerList != null) {  
+            serializedCustomerList = Encoding.UTF8.GetString(redisCustomerList);  
+            weatherList = JsonConvert.DeserializeObject < List < string >> (serializedCustomerList);  
+        } else {  
+            weatherList = GetFromDb();  
+            serializedCustomerList = JsonConvert.SerializeObject(weatherList);  
+            redisCustomerList = Encoding.UTF8.GetBytes(serializedCustomerList);  
+            var options = new DistributedCacheEntryOptions().SetAbsoluteExpiration(DateTime.Now.AddMinutes(10)).SetSlidingExpiration(TimeSpan.FromMinutes(2));  
+            await _distributedCache.SetAsync(cacheKey, redisCustomerList, options);  
+        }  
+        return Ok(weatherList);  
+    }     
+</code></pre>
+We check if the key has a value in Redis, then convert it to a weather list and send back the data and if the value does not exist in Redis, then access the database via efcore (in above code value is hardcoded), get the data and set it to Redis.
+ 
+If the key has value then, the data will be stored in Redis as a byte array. We will be converting this array of a string which will convert the string to an object of type, List
+DistributedCacheEntryOptions,
+SetAbsoluteExpiration
+Here you can set the expiration time of the cached object.
+
+SetSlidingExpiration
+This is similar to Absolute Expiration. It expires as a cached object if it not being requested for a defined amount of time period. Note that Sliding Expiration should always be set lower than the absolute expiration
+</div>
+</body>

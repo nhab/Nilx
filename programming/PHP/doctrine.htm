@@ -1,0 +1,415 @@
+<head>
+        
+        <link rel="stylesheet" href="../../assets/css/block.css">
+        <script src="../../assets/js/block.js"></script>
+        <link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+        <script src="../../libs/highlight/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+<script>
+PageHeaderRow("Doctrine");
+NewLine();
+NewLine();
+Block("What is Doctrine ?",
+`it is an <b>ORM</b> that provides 
+transparent persistence for PHP objects.
+ORMs use the Data Mapper pattern at the heart.
+
+it is usually used as a bundle of php.
+
+(A bundle is a  set of all related 
+<b>files within a directory</b> 
+that implement a single feature)`);
+
+
+Block("What is an Entity ?",
+`It is a <b>PHP Objects</b> that can be 
+identified by a <b>unique identifier</b>.`);
+
+
+Block({title:"persistable property",
+body:`A <b>persistable property</b> is an instance variable of the entity
+that is <b>saved into</b> and <b>retrieved from</b> the database .`});
+
+Block({title:"Installing Doctrine to a symfony project",
+body:`First you need to have symfony project
+(by <code>composer create-project symfony/skeleton dbsample</code>)
+ and then Add Doctorine bundle into it:`,
+ code:` composer require symfony/orm-pack
+ composer require symfony/maker-bundle --dev`});
+
+const blkGrp1=BlockGroup("Learn Doctrine ORM by a step by step Example:");
+Block({title:"Create a Symfony Application",
+body:`first creat a new symfony project 
+and name it dbsample`,
+code:`composer create-project symfony/skeleton dbsample`,parent:blkGrp1} );
+Block({title:"Configure a Database",
+body:`The database connection information is stored as
+ an environment variable named <h7>DATABASE_URL</h7> inside <b>.env</b> file:
+ (.env file is located in the root folder of symfony project)`,
+code:`# .env
+
+# customize this line!
+DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name"
+
+# to use sqlite:
+# DATABASE_URL="sqlite:///%kernel.project_dir%/var/app.db"
+CAUTION`,parent:blkGrp1});
+Block({title:"Create a Database",
+body:`Issue the following command to generate
+ “studentsdb” database`,
+ code:`php bin/console doctrine:database:create`,parent:blkGrp1});
+
+ Block({title:"Creating an Entity Class",
+body:`You can use the make:entity command 
+to create this class and any fields you need. 
+The command will ask you some questions - answer them
+(To see more datatypes see <a href='https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic-mapping.html'>this</a>) `,
+code:` php bin/console make:entity
+
+Class name of the entity to create or update:
+> Product
+
+ to stop adding fields):
+> name
+
+Field type (enter ? to see all types) [string]:
+> string
+
+Field length [255]:
+> 255
+
+Can this field be null in the database (nullable) (yes/no) [no]:
+> no
+
+ to stop adding fields):
+> price
+
+Field type (enter ? to see all types) [string]:
+> integer
+
+Can this field be null in the database (nullable) (yes/no) [no]:
+> no
+
+ to stop adding fields):
+>
+(press enter again to finish)
+`,parent:blkGrp1});
+ Block({title:"new Entity class",
+body:"Now we have a new product Entity class:",
+code:`// src/Entity/Product.php
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ */
+class Product
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $price;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    // ... getter and setter methods
+}`,parent:blkGrp1});
+
+Block({title:"Creating the Database Tables(by migration commands)",
+body:`to save our product entity to a product table,
+run following 2 commands.
+
+the first generates a temp file like :
+'src/Migrations/Version20180207231217.php'
+which contains The needed SQL Command
+and the second command,runs the SQL  statement
+`,
+code:
+`php bin/console make:migration
+and
+php bin/console doctrine:migrations:migrate
+`});
+Block({title:`Adding more Fields`,
+body:`It is easy to add property by hand.but
+you can also use <b>make:entity</b> again:
+<code>>php bin/console make:entity</code>
+and then call migration commands again`,
+code:
+`php bin/console make:migration
+and
+php bin/console doctrine:migrations:migrate
+`});
+
+
+Block({title:"Persist Objects to the Database",
+body:`first, we shuld create a controller class
+for Product by following command:
+<code> php bin/console make:controller ProductController</code>
+Inside the controller, you can create a
+ new Product object, set data on it, and save it.
+ you can try it out by <h7>http://localhost:8000/product</h7> `,
+code:`&lt;?php
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Product;
+class ProductController extends AbstractController
+{
+    /**
+     * @Route("/product", name="product")
+     */
+    public function index()
+    {
+		
+		// you can fetch the EntityManager via $this->getDoctrine()
+        // or you can add an argument to your action:
+		// index(EntityManagerInterface $entityManager)
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $product = new Product();
+        $product->setName('Keyboard');
+        $product->setPrice(1999);
+        $product->setDescription('Ergonomic and stylish!');
+
+        // tell Doctrine you want to (eventually) save the Product 
+		//(no queries yet)
+        $entityManager->persist($product);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+		/* return $this->json(['message' => 'Welcome to your new controller!',
+        'path' => 'src/Controller/ProductController.php',   ]);*/
+
+        return new Response('Saved new product with id '.$product->getId());
+    
+    }
+}`});
+Block({title:`Querying database from commandline`,
+body:`To see the newly inserted records in  commandline,
+Run following command.it output records in json format`,
+code:`php bin/console doctrine:query:sql "SELECT * FROM product"`});
+
+Block({title:`Fetch Objects from the Database`,
+body:`Create a function in StudentController that
+ will display the student details.
+ <b>StudentController.php</b>`,
+code:`/** 
+   * @Route("//student//display") 
+*/ 
+public function displayAction() { 
+   $stud = $this->getDoctrine() 
+   ->getRepository('AppBundle:Student') 
+   ->findAll();
+   return $this->render('student//display.html.twig', array('data' => $stud)); 
+}`});
+
+Block({
+   title:`Fetching Objects from the Database`,
+body:`Fetching an object back out of the database
+ is even easier. Suppose you want to be able to
+  go to /product/1 to see your new product:`,
+code:`// src/Controller/ProductController.php
+// ...
+
+/**
+ * @Route("/product/{id}", name="product_show")
+ */
+public function show($id)
+{
+    $product = $this->getDoctrine()
+        ->getRepository(Product::class)
+        ->find($id);
+
+    if (!$product) {
+        throw $this->createNotFoundException(
+            'No product found for id '.$id
+        );
+    }
+
+    return new Response('Check out this great product: '.$product->getName());
+
+    // or render a template
+    // in the template, print things with {{ product.name }}
+    // return $this->render('product/show.html.twig', ['product' => $product]);
+}`
+});
+
+Block({title:"Repository",
+body:`When you query for a particular type of object,
+you always use what's known as its "repository".
+You can think of a repository as a PHP class
+whose only job is to help you fetch entities 
+of a certain class.
+
+Once you have a repository object, you have
+many helper methods:`,
+code:`$repository = $this->getDoctrine()->getRepository(Product::class);
+
+// look for a single Product by its primary key (usually "id")
+$product = $repository->find($id);
+
+// look for a single Product by name
+$product = $repository->findOneBy(['name' => 'Keyboard']);
+// or find by name and price
+$product = $repository->findOneBy([
+    'name' => 'Keyboard',
+    'price' => 1999,
+]);
+
+// look for multiple Product objects matching the name, ordered by price
+$products = $repository->findBy(
+    ['name' => 'Keyboard'],
+    ['price' => 'ASC']
+);
+
+// look for *all* Product objects
+$products = $repository->findAll();
+`});
+Block({title:"Create a View ( UI Page)",
+body:`Move to the views directory and 
+create a file “display.html.twig”.
+Add the following changes :
+<b>display.html.twig</b>`,
+code:`&ltstyle> 
+   .table { border-collapse: collapse; } 
+   .table th, td { 
+      border-bottom: 1px solid #ddd; 
+      width: 250px; 
+      text-align: left; 
+      align: left; 
+   } 
+&lt/style> 
+
+&lth2>Students database application!&lt/h2>  
+&lttable class = "table">  
+   &lttr>  
+      &ltth>Name&lt/th>  
+      &ltth>Address&lt/th>  
+   &lt/tr>  
+   {% for x in data %} 
+   &lttr>  
+      &lttd>{{ x.Name }}&lt/td>   
+      &lttd>{{ x.Address }}&lt/td>   
+   &lt/tr>  
+   {% endfor %} 
+&lt/table>`} );
+Block("Update an Object (student)",
+`To update an object in StudentController,
+create an action and change it as follow`,
+`/** 
+   * @Route("//student//update//{id}") 
+*/ 
+public function updateAction($id) { 
+   $doct = $this->getDoctrine()->getManager(); 
+   $stud = $doct->getRepository(
+       'AppBundle:Student')->find($id);  
+   
+   if (!$stud) { 
+      throw $this->createNotFoundException( 
+         'No student found for id '.$id 
+      ); 
+   } 
+   $stud->setAddress('7 south street'); 
+   $doct->flush();   
+   return new Response('Changes updated!'); 
+}`);
+Block({
+title:`Updating an Object (product)`,
+body:`Once you've fetched an object from
+ Doctrine, updating it is easy.
+ Updating an object involves just three steps:
+
+fetching the object from Doctrine;
+modifying the object;
+calling flush() on the entity manager.`
+,code:`/**
+ * @Route("/product/edit/{id}")
+ */
+public function update($id)
+{
+    $entityManager = $this->getDoctrine()->getManager();
+    $product = $entityManager->getRepository(Product::class)->find($id);
+
+    if (!$product) {
+        throw $this->createNotFoundException(
+            'No product found for id '.$id
+        );
+    }
+
+    $product->setName('New product name!');
+    $entityManager->flush();
+
+    return $this->redirectToRoute('product_show', [
+        'id' => $product->getId()
+    ]);
+}`});
+Block("Delete an Object",
+`Deleting an object is similar and it requires 
+a call to the remove() method of the entity 
+(doctrine) manager,as follow:`,
+`$entityManager->remove($product);
+$entityManager->flush();`);
+Block({title:`Querying with DQL`,
+body:`In addition to the  query builder,
+ you can also query with Doctrine Query Language:`,
+code:`// src/Repository/ProductRepository.php
+// ...
+
+public function findAllGreaterThanPrice($price): array
+{
+    $entityManager = $this->getEntityManager();
+
+    $query = $entityManager->createQuery(
+        'SELECT p
+        FROM App\Entity\Product p
+        WHERE p.price > :price
+        ORDER BY p.price ASC'
+    )->setParameter('price', 1000);
+
+    // returns an array of Product objects
+    return $query->execute();
+}`});
+Block({title:`Quering with SQL`,
+body:`you can also use SQL:`,
+code:`// src/Repository/ProductRepository.php
+// ...
+
+public function findAllGreaterThanPrice($price): array
+{
+    $conn = $this->getEntityManager()->getConnection();
+
+    $sql = '
+        SELECT * FROM product p
+        WHERE p.price > :price
+        ORDER BY p.price ASC
+        ';
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['price' => 1000]);
+
+    // returns an array of arrays (i.e. a raw data set)
+    return $stmt->fetchAll();
+}`});
+</script>
+
+</body>

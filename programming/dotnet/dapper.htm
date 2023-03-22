@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../../assets/css/blocks.css">	
+	<script src='../../assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+    <script src="../../libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+	<script>
+	
+	</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+<h2>References</h2>
+<div>
+<a href="https://github.com/DapperLib/Dapper/tree/main/tests/Dapper.Tests">Comprehensive ewxample</a>
+<a href="https://www.red-gate.com/simple-talk/development/dotnet-development/a-practical-guide-to-dapper/">practical guide</a>
+<a href='https://www.codeproject.com/Articles/1255078/Absolute-Beginners-Tutorial-on-Understanding-and-U'>Understanding and Using Dapper</a>
+</div>
+<h2>What is dapper></h2>
+<div>
+- Dapper is a Micro ORM .
+- To use Dapper, we first need a DbConnection implementation,like <cli>SqlConnection</cli>class in  <cli>System.Data.SqlClient</cli>.
+-Executing commands is as simple as finding the extensions on our DbConnection,like <cli>QueryAsync</cli> and <cli>ExecuteAsync</cli>to manage our data.
+</div>
+<h2>Getting started sample</h2>
+<div>
+<pre><code>
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
+using Dapper;
+
+public class Person
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        using IDbConnection connection =
+            new SqlConnection("Server=localhost,11433;User=sa;Password=Pass123!;Database=basics;");
+        
+        var people = 
+            await connection.QueryAsync<Person>("select * from People");
+
+        foreach (var person in people)
+        {
+            Console.WriteLine($"Hello from {person.Name}");
+        }
+        
+        var name = "Steve Rogers";
+        var count = 
+            await connection
+                .ExecuteAsync(
+                    @"insert People(Name) values (@name)",
+                    new { name });
+
+
+        Console.WriteLine($"Inserted {count} rows.");
+        
+        var removed =
+            await connection.ExecuteAsync(
+                "delete from People where Name = @name",
+                new {name}
+            );
+
+        Console.WriteLine($"Removed {removed} rows.");
+    }
+}   
+</code></pre>    
+</div>
+<h2>Examples</h2>
+<div>
+<h3>Executing a query and map the results to a strongly typed List</h3>
+<cl>public static IEnumerable<T> Query<T>(this IDbConnection cnn, string sql, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)</cl>    
+Example usage:    
+<pre><code>
+public class Dog
+{
+    public int? Age { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public float? Weight { get; set; }
+
+    public int IgnoredProperty { get { return 1; } }
+}
+
+var guid = Guid.NewGuid();
+var dog = connection.Query<Dog>("select Age = @Age, Id = @Id", new { Age = (int?)null, Id = guid });
+
+Assert.Equal(1,dog.Count());
+Assert.Null(dog.First().Age);
+Assert.Equal(guid, dog.First().Id);
+</code></pre>    
+<h3>Execute a query and map it to a list of dynamic objects</h3>
+<cl>public static IEnumerable<dynamic> Query (this IDbConnection cnn, string sql, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)</cl>
+Example usage:
+<pre><code>
+var rows = connection.Query("select 1 A, 2 B union all select 3, 4").AsList();
+
+Assert.Equal(1, (int)rows[0].A);
+Assert.Equal(2, (int)rows[0].B);
+Assert.Equal(3, (int)rows[1].A);
+Assert.Equal(4, (int)rows[1].B);
+</code></pre>    
+<h3>Execute a Command that returns no results</h3>
+<cl>public static int Execute(this IDbConnection cnn, string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)</cl>
+example:
+<pre><code>
+var count = connection.Execute(@"
+set nocount on
+create table #t(i int)
+set nocount off
+insert #t
+select @a a union all select @b
+set nocount on
+drop table #t", new {a=1, b=2 });
+Assert.Equal(2, count);
+</code></pre>
+<h3>Execute a Command multiple times</h3>
+example 1:
+<pre><code>
+var count = connection.Execute(@"insert MyTable(colA, colB) values (@a, @b)",
+new[] { new { a=1, b=1 }, new { a=2, b=2 }, new { a=3, b=3 } }
+);
+Assert.Equal(3, count); // 3 rows inserted: "1,1", "2,2" and "3,3"    
+</code></pre>
+example 2:
+<pre><code>
+var foos = new List<Foo>
+{
+    { new Foo { A = 1, B = 1 } }
+    { new Foo { A = 2, B = 2 } }
+    { new Foo { A = 3, B = 3 } }
+};
+
+var count = connection.Execute(@"insert MyTable(colA, colB) values (@a, @b)", foos);
+Assert.Equal(foos.Count, count);    
+</code></pre>
+<h3>Parameterized queries</h3>
+Parameters are usually passed in as anonymous classes.
+for example:
+<cli>new {A = 1, B = "b"} // A will be mapped to the param @A, B to the param @B</cli>
+Parameters can also be built up dynamically using the DynamicParameters class:
+<pre><code>
+var sqlPredicates = new List<string>();
+var queryParams = new DynamicParameters();
+if (boolExpression)
+{
+    sqlPredicates.Add("column1 = @param1");
+    queryParams.Add("param1", dynamicValue1, System.Data.DbType.Guid);
+} else {
+    sqlPredicates.Add("column2 = @param2");
+    queryParams.Add("param2", dynamicValue2, System.Data.DbType.String);
+}    
+</code></pre>
+DynamicParameters also supports copying multiple parameters from existing objects of different types:
+<pre><code>
+var queryParams = new DynamicParameters(objectOfType1);
+queryParams.AddDynamicParams(objectOfType2);    
+</code></pre>
+<h3>List Support</h3>
+Dapper allows you to pass in IEnumerable<int> and will automatically parameterize your query.
+For example:    
+<cli>connection.Query<int>("select * from (select 1 as Id union all select 2 union all select 3) as X where Id in @Ids", new { Ids = new int[] { 1, 2, 3 } });</cli>
+Will be translated to: 
+<cli>select * from (select 1 as Id union all select 2 union all select 3) as X where Id in (@Ids1, @Ids2, @Ids3)" // @Ids1 = 1 , @Ids2 = 2 , @Ids2 = 3</cli>   
+<h3>Literal replacements for bool and numeric types</h3>
+<cl>connection.Query("select * from User where UserTypeId = {=Admin}", new { UserTypeId.Admin });</cl>
+<h3>Buffered vs Unbuffered readers</h3>
+Dapper's default behavior is to execute your SQL and buffer the entire reader on return.
+This is ideal in most cases as it minimizes shared locks in the db and cuts down on db network time.
+However when executing huge queries you may need to minimize memory footprint and only load objects as needed. 
+To do so pass, buffered: false into the Query method
+<h3>Multi Mapping</h3>
+Dapper allows you to map a single row to multiple objects. 
+This is a key feature if you want to avoid extraneous querying and eager load associations.
+
+Example:
+
+Consider 2 classes: Post and User
+<cl>
+class Post
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+    public User Owner { get; set; }
+}
+
+class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}    
+</cl>
+Now let us say that we want to map a query that joins both the posts and the users table. Until now if we needed to combine the result of 2 queries, we'd need a new object to express it but it makes more sense in this case to put the User object inside the Post object.
+
+This is the use case for multi mapping. You tell dapper that the query returns a Post and a User object
+ and then give it a function describing what you want to do with each of the rows containing both a Post and a User object.
+In our case, we want to take the user object and put it inside the post object.
+So we write the function:<cli>(post, user) => { post.Owner = user; return post; }</cli>
+The 3 type arguments to the Query method specify what objects dapper should use to deserialize the row 
+and what is going to be returned. 
+We're going to interpret both rows as a combination of Post and User and we're returning back a Post object. 
+Hence the type declaration becomes <cli>< Post, User, Post ></cli>
+Everything put together, looks like this:
+<pre><code>
+var sql =
+@"select * from #Posts p
+left join #Users u on u.Id = p.OwnerId
+Order by p.Id";
+
+var data = connection.Query<Post, User, Post>(sql, (post, user) => { post.Owner = user; return post;});
+var post = data.First();
+
+Assert.Equal("Sams Post1", post.Content);
+Assert.Equal(1, post.Id);
+Assert.Equal("Sam", post.Owner.Name);
+Assert.Equal(99, post.Owner.Id);    
+</code></pre>
+Dapper is able to split the returned row by making an assumption that your Id columns are named Id or id.
+If your primary key is different or you would like to split the row at a point other than Id, use the optional splitOn parameter.
+<h3>Multiple Results Example</h3>
+<pre><code>
+var sql =
+@"
+select * from Customers where CustomerId = @id
+select * from Orders where CustomerId = @id
+select * from Returns where CustomerId = @id";
+
+using (var multi = connection.QueryMultiple(sql, new {id=selectedId}))
+{
+    var customer = multi.Read<Customer>().Single();
+    var orders = multi.Read<Order>().ToList();
+    var returns = multi.Read<Return>().ToList();
+    ...
+}    
+</code></pre>
+<h3>Stored Procedures</h3>
+Example 1:
+<cl>using var cn= new SqlConnection(strCn);
+cn.Open();
+var sql = "exec GetEntity @Id";
+var values=new{id=1};
+var result=cn.Query(sql,values).ToList();
+</cl>
+Example 2:
+<cl>var user = cnn.Query<User>("spGetUser", new {Id = 1},
+    commandType: CommandType.StoredProcedure).SingleOrDefault();</cl>
+more fancy example:
+<pre><code>
+var p = new DynamicParameters();
+p.Add("@a", 11);
+p.Add("@b", dbType: DbType.Int32, direction: ParameterDirection.Output);
+p.Add("@c", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+
+cnn.Execute("spMagicProc", p, commandType: CommandType.StoredProcedure);
+
+int b = p.Get<int>("@b");
+int c = p.Get<int>("@c");    
+</code></pre>    
+<h3>Ansi Strings and varchar</h3>
+Dapper supports varchar params, 
+if you are executing a where clause on a varchar column using a param be sure to pass it in this way:
+<cli>Query< Thing >("select * from Thing where Name = @Name", new {Name = new DbString { Value = "abcde", IsFixedLength = true, Length = 10, IsAnsi = true });</cli>
+<h3>Type Switching Per Row</h3>
+Usually you'll want to treat all rows from a given table as the same data type. 
+However, there are some circumstances where it's useful to be able to parse different rows as different data types.
+ This is where IDataReader.GetRowParser comes in handy.
+
+Imagine you have a database table named "Shapes" with the columns:
+ Id, Type, and Data, and you want to parse its rows into Circle, Square, or Triangle objects based on the value of the Type column.
+<pre><code>
+var shapes = new List<IShape>();
+using (var reader = connection.ExecuteReader("select * from Shapes"))
+{
+    // Generate a row parser for each type you expect.
+    // The generic type <IShape> is what the parser will return.
+    // The argument (typeof(*)) is the concrete type to parse.
+    var circleParser = reader.GetRowParser<IShape>(typeof(Circle));
+    var squareParser = reader.GetRowParser<IShape>(typeof(Square));
+    var triangleParser = reader.GetRowParser<IShape>(typeof(Triangle));
+
+    var typeColumnIndex = reader.GetOrdinal("Type");
+
+    while (reader.Read())
+    {
+        IShape shape;
+        var type = (ShapeType)reader.GetInt32(typeColumnIndex);
+        switch (type)
+        {
+            case ShapeType.Circle:
+                shape = circleParser(reader);
+                break;
+            case ShapeType.Square:
+                shape = squareParser(reader);
+                break;
+            case ShapeType.Triangle:
+                shape = triangleParser(reader);
+                break;
+            default:
+                throw new NotImplementedException();
+        }
+
+            shapes.Add(shape);
+    }
+}    
+</code></pre> 
+
+</div>
+
+
+

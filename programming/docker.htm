@@ -1,0 +1,204 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Resources</h2>
+<div>
+<a href='https://www.youtube.com/watch?v=gAkwW2tuIqE'>In 7 steps</a><br>
+<a href='https://docker-curriculum.com/'>curriculum</a>
+
+<a href='https://itnext.io/how-to-build-an-event-driven-asp-net-core-microservice-architecture-e0ef2976f33f'>How to Build an Event-Driven ASP.NET Core Microservice Architecture</a>
+<a href='https://github.com/hafizmfadli/MicroservicesTutorial'>Microservices Tutorial</a>
+<a href='https://github.com/Albertchong/Kubernetes-Tutorials'>kubernbaties</a>
+<a href='https://github.com/knrt10/kubernetes-basicLearning'>Basics of kubernbaties</a>
+<a href='https://github.com/Anil10Kulkarni/Kubernetes-examples'>Kubernetes Examples</a>
+<a href='https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu'>installing dockeron ubuntu(and list of commands)</a>
+
+</div>
+<h2>What is Docker?</h2>
+<div>
+A platform for building, running and shipping applications in a consistent manner. If the application works on development machine
+it can run and function the same way on other machines.
+
+[
+	It works on my machine but does not in production environment! Docker solves this problem
+	Reasons:
+		i) one or more files missing
+		ii) software version mismatch
+		iii) different configuration settings  
+]
+
+With Docker we can 'package' our application and run it on any machine. So all dependencies, configuration etc are going to be
+'packaged' and now we can use that package on any environment.
+And one thing is worth to mention is if someone joins the team he/she has not spend time to setting up a new machine 
+to run the application
+
+Dependencies inside an isolated environment is called Container
+
+One more benefit of Docker is when we are done with an application (container) and we do not want to work on it anymore
+we can remove the application and all its dependencies we can do it in one go. Without docker it is hard to remove because we are 
+afraid that we would mess up with some application.
+
+Virtual Machines (VMs) vs Containers    (How are containers  different from VMs?)
+- In Docker, an app is put to a Container along with all the dependencies of the software, 
+these are packed together as a Container Image.
+-Docker contains Containers and containers contain Images.
+-Since apps kept inside the containers can run on their own therefore developers can work directly on these containers. 
+This comes out to be handy for continuous integration and continuous delivery (CI/CD) workflows.
+-An image is contained by a Docker Container. You can create, start, stop, move, or delete a container 
+using commands send from the docker client to daemon. 
+As already discussed, the container is self-sustained, that is – the app kept in the image can run on it’s own without needing anything else from the outside world.
+
+-A Docker Registry stores docker images. We can create a Docker Image on our local pc and then push the image on a docker registry. 
+-The 2 famous Docker Registry are:
+
+1. Docker Hub
+2. Azure Container Registry
+Docker Hub contains millions of docker images which you can pull to your local pc and use them to create great apps.
+</div>
+
+<h2>Container</h2>
+<div>
+An isolated environment for running an application.
+Allow running multiple apps in isolation.
+Lightweight (They do not need a full OS)
+Use OS of the host (They share the host.)
+Starts quickly (OS is started on the host) 
+Needs less hardware resources	
+</div>
+
+
+<h2>Virtual Machine</h2>
+<div>
+An abstraction of a machine (physical hardware). We can run several VMs on a real physical machine
+
+A HYPERVISOR is software we use to create and manage virtual machines
+Some of the hypervisors: VirtualBox, VMWare (both are cross-platform) Hyper-V (windows only)	
+</div>
+
+<h2>Problems with VMs</h2>
+<div>
+
+Each VM needs a full-blown(tam gelismis?) OS.
+Slow to start (like starting the computer) 
+Resource intensive (VMs take an actual physical hardware resources like cpu memory etc.
+ -> we have a limit in terms of the number of VMs we can run on a machine.)	
+</div>
+
+<h2> Docker Architecture</h2>
+ <div>
+
+ Docker uses client-server architecture. 
+ Client component talks to the server component using a Restful API. (Server Component: Docker Engine)
+ Server component (Docker Engine) takes care of building and running docker containers. 
+
+ Technically a container is just a special kind of process like other processes running on the computer. All containers
+ share the OS of the host MORE ACCURATELY containers share the Kernel of the Host. Kernel is Core of an OS. Kernel manages all
+ applications and hardware resources. Every OS has its own kernel and that kernels have different APIs, that's why we cannot run
+ a windows application on a Linux machine. Because under the hood the application needs to talk the kernel of the OS.
+
+ We can run linux containers on a linux machine. But we cannot run windows containers on a linux machine.
+ However we can run windows containers and linux containers on a windows machine. Because Windows 10 has both 
+ linux kernel and windows kernel. Windows containers share windows kernel, linux containers share linux kernel.
+
+ </div>
+<h2> Installing WSL2 & Docker Desktop</h2>
+<div>
+Docker runs on linux
+
+Docker Linux platformda calisan bir container platformu [Cikarim: Bu nedenle WSL2 ile ubuntu kurduk] Docker Linux OS e gerek duyuyor.
+
+Docker Desktop kucuk bir VM i ayaga kaldirip Dockeri buraya kuruyor. Docker o sistemde (sistem : Docker Desktop) calisan VM de calisiyordu.
+
+WSL2 destegiyle beraber Windows 10 a linux kernel gomuldugu icin (bir nevi VM gomdugu icin) Docker kendi kurulumunu degistirdi ve WSL2 instance in icine kurulabilir hale geldi
+
+Windows/Mac e Docker kurmak istedigimizde kuracagimiz uygulama Docker Desktop. 	
+</div>
+<h2>Development Workflow</h2> 
+<div>
+We add Dockerfile to the application [We 'dockerize' the application] A dockerfile includes instructions that docker uses to package up
+this application into an image. Image contains everything the application needs to run.
+
+Docker uses this image to start a container. Application gets loaded inside a container and  this is how the application runs locally
+in the development machine. 
+
+We tell to Docker to run the application inside a container/an isolated environment.
+We push the image which is on the development machine to Docker Hub and we 'pull' it on to production/test machine. Now these environments
+have the same image with development environment. We just say to Docker 'create a container using this image /run it.'
+
+Docker Hub is a storage for images that is created by us/someone.
+
+<b>docker run</b> -- every time when we run it, it creates a container, docker goes to docker hub and pulls down that image, ex: sql server image etc.
+<b>docker start [container_id]</b> -- starts an existing container 
+<b>docker stop [container_id]</b> -- stops a container
+<b>docker ps</b> -- shows running containers
+<b>docker push [docker_hub_id/image_name]</b> -- pushes the image to Docker Hub
+
+Images are built up in what called 'layers'. When we upload/pUsh our image to Docker Hub second time, it will be quicker than the first one. 
+Because Docker will upload changes/'effect to the layer'
+</div>
+<h2>What is Kubernetes?</h2> 
+<div>
+'Onion' --> Layers involved
+'Control Mechanism'	
+</div>
+<h2>Kubernetes: Container Orchestrator</h2>
+<div>
+We want to make sure that the containers continue to run, 
+if containers crash that they get restarted 
+or we want to scale them out	
+</div>
+<h2>What Kubernetes responsible for: </h2>
+<div>
+Is everything running in the right way?
+Scale out in the right way.
+
+We are going to tell Kubernetes how we want Kubernetes to run things
+We give Kubernetes like an end state we want Kubernetes to get to.
+
+"DEFINE A DESIRED 'END STATE' LET KUBERNETES FIGURE OUT HOW TO GET THERE"	
+</div>
+
+<h2>Docker Compose</h2>
+<div>
+ middle ground between Docker and Kubernetes. It allows run up multiple containers and network containers together. 
+
+Docker Compose: In Development
+Kubernetes: In Production
+
+Kubernetes: K8S 
+
+WE ARE NOT FOCUSING ON HOW KUBERNETES WORKS/COMPOSED 'UNDER THHE HOOD'.
+WE ARE FOCUSING ON HOW THINGS WORK ON TOP OF KUBERNETES
+
+Single-node cluster: we just have one 'machine'
+[Cluster = Master node + Worker node(s)] master/slave architecture 
+
+Cluster
+Node	
+</div>
+
+<h2>Pod</h2> 
+<div>
+- a pod is used to host and run containers (one or more containers) [In our app one pod consists one container]
+[
+    i) take platform service image, run it on kubernetes in a pod (we are going to do that using 'deployment')
+]
+Node port - (accessing containers that inside a pod) 'kubernetes service'. in test and development environment. 
+external traffic comes into it
+and it directs to internal port and through internal port we can access the container inside the pod. ['LOAD BALANCER'] 	
+</div>
+
+
+</body>

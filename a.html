@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<htmL>
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <script src="assets\js\fdate.js"></script>
+   <script src="assets\js\dateTime.js"></script>
+   <script src="assets\js\btc.js"></script>
+   <script src="LazyNews.json"></script>
+   <script src="curiosity.json"></script>
+   <script src="assets/js/block.js"></script> 
+   
+   <link rel="stylesheet" type="text/css" href="assets\css\main.css" />    
+   <link rel="stylesheet" href="assets/css/block.css">  
+   <link rel="stylesheet" href="assets/css/bootstrap5.min.css">
+	<style>
+	p{white-space:none}
+	</style>
+	</head>
+<body>
+	<table class="topBand" style="height: 30px;width:100%;position: fixed;">
+		<tr>
+			<td  class="topBand" width="40%"></td>
+			<td class="topBand"><script>getUTCNow()</script></td>
+			<td  class="topBand" ><a href="http://www.time.ir/" target="_blank" style="color:#999999" >
+				<script>document.write(getdateP());</script></a>
+			</td>
+			<td id="div1"  class="topBand" ></td>
+		</tr>
+	</table>
+
+    <script>  DatTimeClock();   </script>
+
+    <div class="pageHeader" title='Nilx uses blocks.js to show texts more managed and readable' >Nilx Knowledge hub</div>
+	    <!--div class="pre fullwidth paddings">       
+	    </div-->
+		
+	<div style="display:flex;margin-top:3px;margin-left:3px;" id=”langdropdown” class="row">
+		<select id="select1" style="margin-right:3px" class="col-md-2 col-sm-10 p-2 m-2">
+			<option selected="selected"></option>
+			<option selected="selected">what is</option>
+			<option value="spa">use cases of</option>
+			<option selected="selected">fundamentals</option>
+			<option >crash course</option>
+			<option>learn</option>
+			<option value="spa">Minute</option>
+			<option value="spa">walk through</option>
+			<option value="spa">step by step</option>
+			<option value="spa">tutorial</option>
+			<option value="spa">Practical</option>
+			<option value="spa">in action</option>
+			<option value="spa">simplified</option>
+			<option value="spa"> by doing</option>
+			<option value="spa"> explained</option>
+			<option value="spa"> understanding</option>
+			<option> github </option>
+			<option> udemy </option>
+			<option> stackoverflow </option>
+			<option>interview preparation</option>
+			<option value="spa">best practices</option>
+			<option value="spa">kickstart</option>
+			<option>pros of </option>
+			<option value="spa">How to</option>
+			<option value="spa">what part</option>
+			<option value="spa">features of </option>
+			<option value="spa">why using</option>
+			<option> awesome </option>
+			<option >checklist of</option>
+			<option >real world problem </option>
+			<option>kpi of</option>
+			</select>
+		<input type="text" id="searchterms" name="searchterms" style="margin-right:3px" class="col-md-4 col-sm-10  p-2 m-2">
+		<button onclick="search()" style="padding-right:3px;padding-left:3px;" class="col-md-2 col-sm-10  p-2 m-2"> Search </button>
+	</div>
+	<div  id="app" class="blockContainer CenterChildren-H" >
+	</div>
+<script>
+
+json1=`{
+"topics":[`;
+
+json1+=`
+	{
+	"title":"My Projects",
+	"topic":
+		[
+			{"caption":"Blocks"             , "href":"https://github.com/nhab/Blocks"},
+			{"caption":"Focus"              , "href":"https://github.com/nhab/Focus"},
+			{"caption":"IFW win framework"  , "href":"https://github.com/nhab/IFW-windows-Framework" },
+			{"caption":"working sample codes", "href":"https://github.com/nhab/IFW-windows-Framework"},
+			{"caption":"acalt"              , "href":"https://sourceforge.net/projects/acalt/" },
+			{"caption":"my Github"          , "href":"https://github.com/nhab/" }
+		]
+	}
+	`;
+json1+=`,
+	{
+	"title":"Mental skills",
+	"topic":
+		[
+			{"href":"/nilx/Topics/softskills/howtothink.htm" ,
+			"tooltip":"Thinking is a mental tool works base on the cause and effect law. it is a proccess to use imagination, intution  and other higher facaulties to find the cause of an effect and use it",
+			"caption":"How to think"
+			},
+			{"href":"/nilx/Topics/softskills/howtolearn.htm" ,
+			"caption":"How to learn"
+			},
+			{"href":"Topics/Wisdom/unlearningwisdom.htm",
+			"caption":"Unlearning"
+			},
+			{"href":"/nilx/Topics/softskills/howtosloveaproblem.htm" ,
+			"caption":"How to solve a problem"
+			},
+			{"href":"/nilx/Topics/softskills/howtosearch.htm" ,
+			"caption":"How to search"
+			},
+			{"href":"/nilx/Topics/softskills/howtodebug.htm" ,
+			"caption":"How to debug"
+			},
+			{"href":"/nilx/Topics/softskills/howtocommunicate.htm" ,
+			"caption":"how to communicate"
+			},
+			{"href":"/nilx/Topics/softskills/howtomanage.htm" ,
+			"caption":"How to manage "
+			},
+			{"href":"/nilx/Topics/softskills/howtoreadcode.htm" ,
+			"tooltip":"There is main functions in the code file which may have used some other functions inside.you should begin by the main class of the project and the main function(s) of the classs and follow the code."
+			,"caption":"How to read code"
+			},
+			{"tooltip":"عملی که پشت آن نتیجه خردمندانه ای که در اثر تجارب قبلی بهو فکر به آن رسیده ایم میباشد.مثلا برای جستجوی آموزش اتوفک نمیزنیم آموزش اتوفک بلکه ابتدا لغات پیشرفته این علم را در میاریم وآنرا جستجو میکنیم که در مورد اتوفک اتریبیوتز میباشد.. ",
+			"caption":"wise move"
+			}
+		]
+	}`;
+json1+=`,
+	{
+	"title":"Managemnet/Professionalism",
+	"topic":
+		[
+			{"caption":"Project management","href":"Topics/Management/projectManagement.htm"},
+			{"href":"Topics/Management/PM-best-practices.htm" , "caption":"Project management(2)"},
+			{"href":"Topics/Management/0-bussiness-steps.htm" , "caption":"Bussiness steps"},
+			{"href":"Topics/Management/1-management-perception.htm", "caption":"Management perception"},
+			{"href":"Topics/Management/2-defining tasks.htm" , "caption":"Work creation"},
+			{"href":"Topics/Management/3-reporting.htm", "caption":"Reporting"},
+			{"href":"Topics/Management/4-presenting.htm", "caption":"Presenting"},
+			{"href":"Topics/Management/5-market-researching.htm", "caption":"Market research"}  ,
+			{"href":"Topics/Management/6-marketing.htm", "caption":"Marketing"},
+			{"href":"Topics/Management/7-support.htm", "caption":"Support"}     ,
+			{"href":"Topics/Management/proffessionalism-skills.htm", "caption":"Proffessionalism skills"}  ,
+			{"href":"Topics/Management/strategicplanning.htm", "caption":"strategic planning"} ,   
+			{"href":"Topics/Management/policy.htm", "caption":"Policy"}  
+		]
+	}`;
+json1+=`,
+{
+	"title":"Software Eng",
+	"topic":
+	[
+		{"caption":"Solid","href":"https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design"},
+		{"caption":"Agile", "href":"Topics/softwareEngineering/agile.htm"},
+		{"caption":"DevOps", "href":"Topics/softwareEngineering/devops.htm"},
+		{"caption":"Scrum", "href":"Topics/softwareEngineering/scrum.htm"},
+		{"caption":"Jira", "href":"programming/topics/jira.htm"},
+		{"caption":"Design patterns", "href":"programming/design/designpatterns.htm"},
+		{"caption":"change management", "href":"https://www.google.com/search?q=K%C3%BCbler-Ross%20change%20management%20framework&ie=utf-8&oe=utf-8&client=firefox-b-1-m"},
+		{"caption":"Refactoring", "href":"programming/dotnet/refactoring.htm"},
+		{"caption":"Transaction Acid properties", "href":"Topics/softwareEngineering/transactionacid.htm"},
+		{"caption":"Grasp", "href":"Topics/softwareEngineering/grasp.htm"},
+		{"caption":"Grasp principals", "href":"https://www.fluentcpp.com/2021/06/23/grasp-9-must-know-design-principles-for-code/"},
+		{"caption":"Class diagram relationships", "href":"Topics/softwareEngineering/classdiagramrelations.htm"},
+		{"caption":"Algorithms and Data structures", "href":"programming/algods.htm"}
+	]
+}
+`;
+json1+=`,
+{
+	"title":"Software Architect",
+	"topic":
+	[
+		{"caption":"DDD","href":"programming/design/ddd.htm"},
+		{"caption":"DDD research","href":"https://www.google.com/search?q=c%23+ddd+context+maps+domain+event&&oq=c%23+ddd+context+maps+domain+event"},
+		{"caption":"BDD","href":"programming/architecture/bdd.htm"},
+		{"caption":"Cleanarchitect","href":"https://youtu.be/dK4Yb6-LxAk"},
+		{"caption":"Abp Steps","href":"programming/design/abpsteps.htm"},
+		{"caption":"DDD =>microservice","href":"https://www.infoq.com/presentations/microservices-ddd-bounded-contexts/"},
+		{"caption":"Event driven Architecture<","href":"https://ably.com/blog/introduction-event-driven-architecture"},
+		{"caption":"Event driven with kafka","href":"https://www.google.com/search?q=event-driven+architecture+kafka+c%2523"},
+		{"caption":"Business Architecture (Togaf)","href":"Topics/Management/togaf.htm"}
+	]
+}
+`;
+
+json1+=`,
+{
+	"title":"Dev. tools",
+	"topic":
+	[
+		{"caption":"git","href":"programming/git/git.htm"},
+		{"caption":"github","href":"programming/git/github.htm"},
+		{"caption":"composer","href":"programming/composer.htm"},
+		{"caption":"Jenkins","href":"https://www.tutorialspoint.com/jenkins/"},
+		{"caption":"Docker","href":"programming/docker.htm"},
+		{"caption":"CI/CD Pipeline","href":"https://dzone.com/articles/learn-how-to-setup-a-cicd-pipeline-from-scratch"}
+	]
+}`;
+
+json1+=`,
+{
+	"title":".Net set ",
+	"topic":
+	[
+		{"caption":"Clean code manifesto","href":"programming/cleancode.htm"},
+		{"caption":"CSharp","href":"programming/dotnet/cs-advanced.htm"},
+		{"caption":"Asp.net web api","href":"programming/dotnet/asp.net_web_api.htm"},
+		{"caption":"XUnit","href":"programming/xunit.htm"},
+		{"caption":"C# with VSCode","href":"programming/dotnet/CS_VSCode.htm"},
+		{"caption":"Angular 6 + ASP.NET Core 2","href":"http://dotnetdetail.net/how-to-create-crud-operations-using-angular-6-and-asp-net-core-2-0/"},
+		{"caption":"Aspect. net Boilerplate","href":"https://aspnetboilerplate.com/Pages/Documents"},
+		{"caption":"lambda","href":"programming/dotnet/lambda.htm"},
+		{"caption":"Linq","href":"programming/dotnet/linq.htm"},
+		{"caption":".Net","href":"programming/dotnet/dotnet.htm"},
+		{"caption":".Net Core","href":"programming/dotnet/dotnetCore.htm"},
+		{"caption":"Entity framework core","href":"programming/dotnet/ef-core.htm"},
+		{"caption":"Asp.net core","href":"programming/dotnet/aspnetcore.htm"},
+		{"caption":"Identity core","href":"programming/dotnet/identity.htm"},
+		{"caption":"Automapper","href":"programming/dotnet/automapper.htm"},
+		{"caption":"tfs automated build","href":"https://stackoverflow.com/questions/47898996/how-to-automate-build-and-deployment-in-visual-studio-tfs"},
+		{"caption":"Speed up visual studio","href":"https://stackoverflow.com/questions/42764166/vs-2017-very-slow-laggy-when-debugging"},
+		{"caption":"SOAP Protochol","href":"https://www.tutorialspoint.com/soap/soap_quick_guide.htm"},
+		{"caption":"WCF","href":"programming/dotnet/wcf.htm"},
+		{"caption":"WCF","href":"https://www.c-sharpcorner.com/learn/learn-wcf-in-10-hours"},		
+		{"caption":"Microservices -.net core","href":"https://www.youtube.com/watch?v=Z9vphGImsas"},
+		{"caption":".NET Microservices","href":"https://docs.microsoft.com/en-us/dotnet/architecture/microservices/"},
+		{"caption":"Concurrency","href":"programming/dotnet/concurrency.htm"},
+		{"caption":"signalR","href":"programming/dotnet/signalr.htm"},
+		{"caption":"autofac","href":"programming/dotnet/autofac.htm"},
+		{"caption":"Testing","href":"programming/dotnet/testing.htm"},
+		{"caption":"dapper","href":"programming/dotnet/dapper.htm"},
+		{"caption":"asynchronous-programming","href":"https://www.c-sharpcorner.com/learn/c-sharp-asynchronous-programming"}
+	]
+}`;
+
+json1+=`,
+{
+	"title":"JavaScript",
+	"topic":
+	[
+		{"caption":"JavaScript","href":"programming/js/js.htm"},
+		{"caption":"EcmaScript6","href":"https://www.tutorialspoint.com/es6/es6_quick_guide.htm"},
+		{"caption":"vue js","href":"programming/js/vuejs.htm"},
+		{"caption":"Bookmarlet","href":"programming/bookmarklet.htm"},
+		{"caption":"Asp.net core","href":"https://www.tutorialsteacher.com/core/aspnet-core-introduction"},
+		{"caption":"JQuery","href":"programming/js/jquery.htm"},
+		{"caption":"React.Js","href":"programming/React.js/reactjs.htm"},
+		{"caption":"redux","href":"programming/React.js/redux.htm"},
+		{"caption":"Next.js","href":"https://snipcart.com/blog/react-ecommerce-tutorial"},
+		{"caption":"React native","href":"/programming/reactnative.htm"},
+		{"caption":"Jade","href":"programming/jade.htm"},
+		{"caption":"webpack","href":"programming/webpack.htm'"},
+		{"caption":"Node.js<","href":"programming/NodeJS.htm"},
+		{"caption":"ExpressJS Overview","href":"https://www.tutorialspoint.com/expressjs/expressjs_overview.htm"},
+		{"caption":"ExpressJS main source","href":"https://expressjs.com/en/4x/api.html"},
+		{"caption":"AngularJS","href":"programming\Angular\AngularJS.htm"},
+		{"caption":"Angular 4","href":"https://www.tutorialspoint.com/angular4"}
+	]
+}`;
+
+json1+=`,
+{
+	"title":"Databases",
+	"topic":
+	[
+		{"caption":"sql server","href":"programming/db/sqlserver.htm"},
+		{"caption":"sql joins","href":"programming/db/joins.htm"},
+		{"caption":"Sqlite","href":"programming/db/Sqlite.htm"},
+		{"caption":"sqlite-php web ","href":"http://www.sqlitetutorial.net/sqlite-php/"},
+		{"caption":"Redis","href":"programming/redis.htm"},
+		{"caption":"MongoDB","href":"programming/mongodb.htm"},
+		{"caption":"MongoDB detailed","href":"https://www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm"},
+		{"caption":"MySql commands","href":"programming/db/mysqlcommands.htm"}
+	]
+}`;
+
+json1+=`,
+{
+	"title":"Tech",
+	"topic":
+	[
+		{"caption":"Elastic search","href":"programming/topics/Elasticsearch.htm"},
+		{"caption":"Kibana","href":"programming/topics/kibana.htm"},
+		{"caption":"RabitMQ","href":"https://klausnji.wordpress.com/2015/01/31/getting-started-with-rabbitmq-in-15-minutes"}
+	]
+}`;
+json1+=`,
+{
+	"title":"PHP",
+	"topic":
+	[
+		{"caption":"php","href":"programming/PHP/php.htm"},
+		{"caption":"wordpress","href":"programming/PHP/wordpress.htm"},
+		{"caption":"word press dev.","href":"programming/PHP/wordpressdev.htm"},
+		{"caption":"Symfony","href":"programming/PHP/symfony.htm"},
+		{"caption":"Laravel","href":"programming/PHP/laravel.htm"}
+	]
+}`;
+
+json1+=`,
+{
+	"title":"Web  dev",
+	"topic":
+	[
+		{"caption":"Website Security Checklis","href":"https://www.upguard.com/blog/the-website-security-checklist",
+		"title":"1. Ensure Sitewide SS:Encrypt website traffic 2. Verify the SSL Certificate:Stay on top of expiration and trust.." ,
+		"href":"#"
+	    },
+		{"caption":"web performance optimization",
+		"title":"Web performance optimization occurs by monitoring and analyzing the performance of your web application and identifying ways to improve it.Web applications are a mixture of server-side and client-side code. ",
+	    "href":"#"
+	    },
+		{"caption":"Chrome Dev Tools","href":"https://developers.google.com/web/tools/chrome-devtools/"}
+	]
+}`;
+
+json1+=`,
+{
+	"title":"Dev",
+	"topic":
+	[
+		{"caption":"Learn x in y minutes","href":"https://learnxinyminutes.com/"},
+		{"caption":"Flutter","href":"programming/mobile/flutter.htm"},
+		{"caption":"Expo","href":"https://docs.expo.dev/"},
+		{"caption":"SAP","href":"Sap\sap.html"},
+		{"caption":"ABAP","href":"Sap\abap.html"},
+		{"caption":"other","href":"https://github.com/nhab/Tutorials"}
+	]
+}`;
+json1+=`,
+{
+	"title":"Python",
+	"topic":
+	[
+		{"caption":"Python","href":"programming/py/py.htm"},
+		{"caption":"Django","href":"https://www.djangoproject.com/"},
+		{"caption":"Django REST","href":"#", "tooltip":"Django REST framework is a flexible toolkit for building Web APIs."}
+	]
+}`;
+json1+=`,
+{
+	"title":"Java",
+	"topic":
+	[
+		{"caption":"java","href":"programming/j2ee/java.htm"},
+		{"caption":"Hibernate","href":"programming/j2ee/Hibernate.htm"},
+		{"caption":"Maven","href":"programming/j2ee/maven.htm"},
+		{"caption":"Managed Bean","href":"programming/j2ee/ManagedBean.htm"},
+		{"caption":"Jsf 2","href":"programming/j2ee/jsf.htm"},
+		{"caption":"Expression language","href":"programming/j2ee/ExpressionLanuage.htm"}
+	]
+}`;
+json1+=`,
+{
+	"title":"Office",
+	"topic":
+	[
+		{"caption":"Excel","href":"programming/Excel/index.htm"}
+	]
+}`;
+json1+=`,
+{
+	"title":"Online bussniess",
+	"topic":
+	[
+		{"caption":"KDP","href":"Topics/book/index.htm"},
+		{"caption":"Audio book","href":"Topics/book/audiobook.htm"},
+		{"caption":"","href":""}
+	]
+}`;
+json1+=`,
+{
+	"title":"Trading",
+	"topic":
+	[
+		{"caption":"Bitcoin","href":"Topics/bitcoin.htm"},
+		{"caption":"MQL4","href":"Topics/OnlineTrading/mql4.htm"},
+		{"caption":"MQL4 to MQL5","href":"https://www.mql5.com/en/articles/81"},
+		{"caption":"Forex","href":"Topics/OnlineTrading/forex.htm"},
+		{"caption":"PineScript","href":"programming/pineScript.htm"}
+	]
+}`;
+json1+=`,
+{
+	"title":"General",
+	"topic":
+	[
+		{"caption":"Immigration","href":"Topics\immi\immi.htm"},
+		{"caption":"German","href":"languages/german/index.htm"},
+		{"caption":"Linux","href":"Topics/linux.htm"},
+		{"caption":"Biochemistry","href":"Topics/biochemistry.htm"},
+		{"caption":"network","href":"Topics/network.htm"}
+	]
+}`;
+json1+=`,
+{
+	"title":"Own Business",
+	"topic":
+	[
+		{"caption":"Personal branding","href":"Topics/ownbusiness/personal-branding.htm"},
+		{"caption":"Bussiness Model","href":"Topics/ownbusiness/BussinessModelCanvas.htm"},
+		{"caption":"Choosing a Hosting","href":"Topics/ownbusiness/ChoosingHosting.htm"},
+		{"caption":"Seo","href":"Topics/ownbusiness/seo.htm"},
+		{"caption":"Funnel","href":"Topics/ownbusiness/digitalmarketingfunnels.png"}
+	]
+}`;
+json1+=`,
+{
+	"title":"Desktop tools",
+	"topic":
+	[
+		{"caption":"TidyTabs","href":"Topics\Tools\TidyTabs.gif"},
+		{"caption":"Extreme Download manager","href":"https://downloads.sourceforge.net/project/xdman/xdmsetup-2018.msi?r=https%3A%2F%2Fwww.google.com%2F&ts=1543520300&use_mirror=cytrane"},
+		{"caption":"network meter","href":"https://netbalancer.com/"}
+	]
+}`;
+json1+=`,
+{
+	"title":"Job",
+	"topic":
+	[
+		{"caption":"Job","href":"Topics/jobseek/job.htm"},
+		{"caption":"Cover letter","href":"Topics/jobseek/CoverLetter.htm"}
+	]
+}`;	
+json1+=`,
+{
+	"title":"Refrences",
+	"topic":
+	[
+		{"caption":"Shortcut keys","href":"shortcutkeys.htm"},
+		{"caption":"Useful Settings","href":"Topics/Tech/usefulsettings.htm"},
+		{"caption":"android tune ups","href":"Topics/Tech/androidtuneups.htm"}
+	]
+}`;
+json1+=`,
+{
+	"title":"Temp Desktop",
+	"topic":
+	[
+		{"caption":"gRpc","href":"https://youtu.be/bPdWa3mr7c8 "},
+		{"caption":"redux","href":"https://youtu.be/wZVzeob4ywc"},
+		{"caption":".net core DI","href":"https://www.stevejgordon.co.uk/aspnet-core-dependency-injection-what-is-the-iservicecollection"},
+		{"caption":"wordpress trace plaugin","href":"https://github.com/bobbingwide/oik-bwtrace"},
+		{"caption":"vertical slice architecture","href":"https://www.google.com/search?q=vertical+slice+architecture"},
+		{"caption":"Kubernetes","href":"https://www.c-sharpcorner.com/blogs/build-endtoend-net-core-api-and-angular-application-on-kubernetes"},
+		{"caption":"WPA","href":"https://www.c-sharpcorner.com/learn/build-progressive-web-apps"},
+		{"caption":"powerApps","href":"https://www.avepoint.com/blog/office-365/microsoft-powerapps"},
+		{"caption":"c# blogs","href":"https://www.c-sharpcorner.com/blogs/"},
+		{"caption":"copilot","href":""},
+		{"caption":"postsharp","href":""},
+		{"caption":"KingAOP","href":""}
+	]
+}`;
+
+json1+=`]}`;
+console.log(json1);
+const obj = JSON.parse(json1).topics;
+s="";
+l1=obj.length;
+for(j=0;j<l1;j++)
+{
+	s+="<div class='LinkBlock bordered' ><div class='header indent' >"+obj[j].title+"</div>" ;
+	s+="<p class='indent vAlign-top'> ";
+	l=+obj[j].topic.length;
+	for(i=0;i<l;i++)
+		s+="<a href='"+obj[j].topic[i].href+"' target='_blank'>"+obj[j].topic[i].caption+"</a>\r\n";
+	s+="</p></div>";
+}
+s+="</div>";
+document.getElementById("app").innerHTML = s;
+
+</script>
+
+</body>
+</htmL>

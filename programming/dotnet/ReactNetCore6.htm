@@ -1,0 +1,185 @@
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+
+    <link rel='stylesheet' href='/nilx/assets/css/blocks.css'>
+    <script src='/nilx/assets/js/highlight.min.js'></script>
+    <script src='/nilx/assets/js/blocks.js'></script>
+    <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+    <link rel='stylesheet' href='/nilx/libs/highlight/androidstudio2.css'>
+    <!--- 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/androidstudio.min.css'-->
+    <!--github-dark.min.css-->
+    
+    <!--script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/3024.min.css'></script-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-dark.min.css" integrity="sha512-3e6qtecCEv4ZXH4PYXK1qbqfFI/Lb1BuPFK19tSi9I1p0BFjEHVATQ1QkbX1ehDFyu60chdPHpIDvXMnwm7muQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <!--script>hljs.initHighlightingOnLoad();</script-->
+     <script></script>
+    </head>
+    <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+    <button onclick='toggleAll(this);'>-</button>
+    <script>
+    function ReplaceLtGt()
+    {
+        len=$("code").length;
+        for(i=0;i<len;i++)
+        {
+            if($("code")[i]==undefined)continue;
+            s=$("code")[i].innerHTML
+            s=s.replaceAll("<"," < ")
+            s=s.replaceAll("&lt;","<")
+            s=s.replaceAll("&gt;",">")
+            s=s.replaceAll("&amp;","&")
+            
+            $("code").eq(i).text( s)
+        }
+    }
+    </script>
+    
+<h2>.Net Core 6 React Sample</h2>
+<div>
+    <pre>
+
+- create new react .net Core project :
+ Vs2022 > Create a new Project > Search react > Aspnet Core with react.js ,Next
+     > Project name=AppReact, Next > Create (finish) 
+
+- check react and reactdom version in: 
+    Solution explorer >  ClientApp folder (is react application)  > package.json 
+
+- updating react version:
+     Solution explorer >  ClientApp folder (is react application)  > right click > open in terminal (power shell):
+        npm install react@latest react-dom@latest 
+-deleting unnessary folder and files:
+    - delete components folder 
+    - delete App.test.js , custom.css, reportWebVitals.js ,service-worker.js ,serviceWorkerregistration.js 
+
+- Edit react source in index.js :
+in  ClientApp  >Src > index.js > remove everything except these 4 reference lines:
+    </pre>
+<pre>
+<code>
+  import 'botstrap/dist/css/bootstrap.css'
+  import React from 'react';
+  import ReactDom from 'react-dom';
+  import App from './App';
+</code></pre>
+and Add These Lines :
+
+<pre><code>
+    const root = ReactDom.creatRoot(document.getElementById("root")); //"root" is a div in ClientApp/public/inde.html
+
+    root.render (<App/>) //App is defined in CientApp/src/App.js
+</code></pre>
+- Remove verything in App.js and add:
+<pre><code>
+const App=()=>{
+ return (<div></div>)
+}
+export default App;
+</code></pre>
+- AppReact Project,right click > Add new folder >Models
+- AppReact Project,right click > Manage nuget packages >Browse>Microsoft.EntityFameworkCore.sqlServer >install 
+- AppReact Project,right click > Manage nuget packages >Browse>Microsoft.EntityFameworkCore.Tools >install 
+-Vs2022 menu>Tools> nuget package managet>Package manager console
+- use sqlserver database DBTEST
+<cl>
+ select * from Employee :
+  idemployee Name           Email               Address         phone 
+  1           Giffin avarez qusa.arcu@gmail.co 369-433 Ac road  056 2416 0638
+  ...     
+</cl>
+
+- in package manager console 
+<cl> Scaffold-DbContext "Server=(local);Database=DBTEST;Integrated Security=True" Microsoft.EntityFrameworkCore.Sqlserver -OutPutDir Models </cl>
+- in program.cs :
+<code>
+1 using AppReact.Model;
+8 builder.Services.AddDbContext<DBTESTContext>();   
+</code> 
+- In the solution explorer > right click project >Add > Controller .. > Common>API > API-Controller-Empty >Name: EmployeeController
+- In EmployeeContoller.cs :
+<pre><code>
+    using AppReact.Models;
+    .. 
+    public class EmployeeController:ControllerBase 
+    {
+        private readonly DBTestContext _dbContext;
+
+        public EmployeeController(DBTESTContext dbcontext)
+        {
+            _dbContext=dbContext;
+        }
+
+        [HttpGet]
+        [Rout("GetEmployees")]
+        public IACtionResult GetEmployee()
+        {
+            List<Employee> list=_dbContext.Employee.ToList();
+                return StatusCode(StatusCodes.Status200k,list);
+        }
+    }
+</code></pre>
+
+-In AppReact>src > setupProxy.js 
+<pre>
+<code>
+    const context=[
+        "/weatherforcast",
+        "/api/employee"
+    ]
+</code></pre>
+- In App.js:
+<pre>
+<code>
+import {useEffect,useState} from "react";
+
+const App=()=>{
+    // 1 create useState 
+    const [employees, setEmployees]=useState( []) 
+
+    // 2 call api 
+    useEffect(()=> {
+        fetch("api/employee/GetEmployees")
+        .then( response => {return respones.json()})
+        .then( responseJson =>{
+            setEmployees(responseJson)
+        }) 
+    },[])
+
+    // 3 create div and table 
+    return (
+        <div className="container">
+            <h1>Employees</h1>
+            <div className="col-sm-12">
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>IdEmployee</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            employee.map( (item)=>(
+                                <tr>
+                                    <td>{item.idEmployee}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.address}</td>
+                                    <td>{item.phone}</td>
+                                </tr>
+                                )
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>)
+   }
+   export default App;
+</code></pre> 
+- Run AppReact in vs2022
+
+</div>

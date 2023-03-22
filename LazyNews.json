@@ -1,0 +1,115 @@
+var LazyNews=[
+    {
+        "title":"my coursera: project manager course of google",
+        "lnk":"https://www.coursera.org/learn/project-management-foundations/home/welcome"
+    },
+   {
+        "title":"چگونگی اپلای کورسرا",
+        "lnk":"https://virgool.io/@amintaheri90/how-to-apply-for-coursera-g8hiqw59eiod"
+
+    },
+    {"title":"laravel Homestead",
+	       "lnk":"https://laravel.com/docs/5.7/homestead",
+	       "tooltip":"Laravel Homestead is an official, pre-packaged Vagrant box that provides you a development environment without requiring you to install PHP, a web server, and any other server software on your local machine"},
+	{"title":"10seo tools 2019",
+	       "lnk":"https://www.business2community.com/seo/the-top-10-seo-tools-marketers-want-in-2019-02160206/amp"},
+	      {"title":"How to use $.ajax()","lnk":"https://dev.to/williamragstad/how-to-use-ajax-3b5e"},
+	{"title":"tab grouping in chrome",
+	       "lnk":"https://mspoweruser.com/this-is-how-tab-grouping-will-work-on-google-chrome/amp/"},
+	{
+	"title":"what is KAFKA?",
+	"lnk":"https://kafka.apache.org/intro"
+	},
+	{"title":"فوروم. کسب درآمد",
+	 "lnk":"http://iradsense.com/forums/topic/%D9%BE%D8%A7%D8%B3%D8%AE-%D8%A8%D9%87-%D8%B3%D9%88%D8%A7%D9%84%D8%A7%D8%AA-%D8%AF%D8%B1-%D9%85%D9%88%D8%B1%D8%AF-%DA%AF%D9%88%DA%AF%D9%84-%D8%A7%D8%AF%D8%B3%D9%86%D8%B3-%D8%A8%D9%87-%D9%85%D8%AF%D8%AA/"
+	},
+    {
+        "title":"Conversion Rate Optimization Best Practices",
+        "lnk":"https://vwo.com/blog/conversion-optimization-best-practices/",
+        "tooltip":"converting visitor/lead to customer"
+    },
+	{
+	  "title":"ERPs comparison",
+	"lnk":"https://www.odoo.com/page/odoo-white-paper"
+	},
+	{
+	"title":"StackOverflow reputation",
+	"lnk":"https://www.polidea.com/blog/Best_ways_to_gain_Stack_Overflow_reputation/"
+	},
+    {
+        "title":"Delivery manager vs project manager",
+        "lnk":"http://itsadeliverything.com/delivery-manager-a-new-role-for-an-agile-world"
+    },
+    {
+        "title":"what is webpack",
+        "tooltip":`DescriptionWebpack is an open-source JavaScript module bundler.
+         Its main purpose is to bundle JavaScript files (along with other needed files)
+        for usage in a browser.
+         Webpack takes modules with dependencies and generates static assets representing those modules.`
+    },
+    {
+        "title":"What is Google Tag Manager(GTM)?",
+        "tooltip":`Tags, in a general sense, are bits of code you embed in your website’s javascript or HTML to extract certain information.
+
+        For marketers, necessary tag information typically includes how long users visit a page on your site, form submissions,
+         how they arrived on your site, which links they clicked, or even what products they removed from their shopping cart.
+         Each tag tracks something different. For instance, you might create a tag just to see how many people fill out the form on your “Contact Us” page.
+          That tag can then send more precise information to Google Analytics, or AdWords, or another third party.`,
+        "lnk":"https://blog.hubspot.com/marketing/google-tag-manager-guide"
+    },
+    {
+        "title":"CSS,CSS 2 & 3,HTML4 & 5 differences",
+        "lnk":"https://www.besanttechnologies.com/difference-html-html5-css-css3",
+        "tooltip":
+        `CSS released in 1996 ,CSS2 released in 1998 with added styles for other media types,CSS3 released in 1999 .
+        CSS3: - Unlike CSS2, which was comprised of a single document, CSS3 document can be divided into individual modules.
+              - special fonts, like those available in Google Fonts and Typecast. 
+                Earlier, with CSS and CSS2, designers could only use “web safe fonts”.
+             - ‘simple selectors’, CSS3 calls the components as ‘a sequence of simple selectors’.
+             - rounded borders,capability to split text sections into multiple columns so that it can be read as a newspaper.`
+    },
+    {
+        "title":"PTE or IELTS english tests?",
+        "lnk":"https://pearsonpte.com/why-pte-academic/"
+    },
+	{
+	"title":"Free Cloud Hosting Services & Tools",
+	"lnk":"https://iwantmyname.com/services/developer/"
+	},
+	{
+		"title":"Searching components and lib for .net",
+		"lnk":"https://marketplace.visualstudio.com/search?term=PDF%20Viewer%20WPF&target=VS&category=All%20categories&vsVersion=&sortBy=Relevance"
+	},
+    {
+        "title":"Canadian Statup visa",
+        "lnk":"https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa/designated-organizations.html"
+    },
+    {
+        "title":"Germany jobseeker visa",
+        "lnk":"https://www.germany-visa.org/job-seeker-visa/"
+    },
+    {
+        "title":"Isha volenteer",
+        "lnk":"https://isha.sadhguru.org/us/en/volunteer"
+    },
+    {
+        "title":"Isha jobs",
+        "lnk":"https://suvya.isha.in/careers"
+    },
+    {
+        "title":"Countries for English teachers",
+        "lnk":"https://payment24.ir/blog/%D8%AA%D8%AF%D8%B1%DB%8C%D8%B3-%D8%B2%D8%A8%D8%A7%D9%86-%D8%A7%D9%86%DA%AF%D9%84%DB%8C%D8%B3%DB%8C-%D8%AF%D8%B1-%D8%A7%DB%8C%D9%86-%DA%A9%D8%B4%D9%88%D8%B1%D9%87%D8%A7-%D8%B4%D9%85%D8%A7-%D8%B1%D8%A7/"
+    },
+    {
+        "title":"Crypto Mining",
+        "lnk":"https://www.google.com/search?num=100&ei=ruDMW9eGO4ma0gL1tbKIDg&q=%D9%85%D8%A7%DB%8C%D9%86%DB%8C%D9%86%DA%AF&oq=%D9%85%D8%A7%DB%8C%D9%86%DB%8C%D9%86%DA%AF&gs_l=psy-ab.3..0l5j0i203l5.15679.21244..22119...1.0..0.634.3436.3-3j4j1......0....1..gws-wiz.....6..0i71j35i39j0i131j0i3.CY92boauRCw"
+    },
+    {
+        "title":"work for btc",
+        "lnk":"https://myincomeideas.com/earn-bitcoin-by-freelancing/"
+    },
+    {
+        "title":"React \ JSX Online test",
+        "lnk":"https://www.google.com/search?q=React+%2F+jsx+online+test&oq=React+%2F+jsx+online+test&aqs=chrome..69i57j69i60j0l4.3988j0j7&sourceid=chrome&ie=UTF-8"
+    }
+]

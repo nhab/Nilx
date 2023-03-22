@@ -1,0 +1,52 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />ASP.NET Web API</h2>
+<p>
+⦿ It is a framework from 	Microsoft for building HTTP (or WCF) services.
+⦿ The resources of an application can be manipulated over HTTP using the standard HTTP methods of <b> GET, POST, PUT, and DELETE</b>,
+	so you can say that the application supports a web API for other applications to use.
+⦿ A <b>resources</b> can be identified through a URI (uniform resource identifier ).
+	For example each employee is a resource The URI is <b>http://server/hrapp/employees/12345. </b>
+	It includes the employee ID and serves as an identifier to the resource, which is an employee in this case. 
+⦿Actions on this resource are accomplished through the HTTP verbs.
+⦿ To delete this employee, the request will be an HTTP DELETE request, again on the same URI.
+⦿ To create a new employee, the request will be an HTTP POST to the URI without any identifier (http://server/hrapp/employees).
+⦿ In the case of POST and PUT, the service must be passed the employee data or the resource representation. 
+	It is typically <b>XML or JSON</b> that is sent as the HTTP request message body. 
+
+	An HTTP service sends responses in XML or JSON, similar to the request. 
+	For example, a GET to http://server/hrapp/employees/12345 results in a response
+	containing JSON representing the employee with an ID of 12345.
+	</p>
+	<h2>Status codes</h2>
+	<p>
+	HTTP service responds with the HTTP status code indicating success or failure. 
+	For example, if the employee  with identifier 12345 does not exist, the HTTP status code of 404 - Not found will be returned.
+	If the request is successful, the HTTP status code of 200 - OK will be returned.
+</p>
+    
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />ApiController</h2>
+<p>
+	In your .Net core application,All you need to do is to create a subclass of ApiController, say EmployeesController, 
+	with a method of Get(int id) to retrieve the data of the employee and return the employee object in form of JSON or XML.
+
+for post,you need to implement the Post(Employee employee) with a parameter of type Employee.
+</p>
+</div>
+</body>
+</html>

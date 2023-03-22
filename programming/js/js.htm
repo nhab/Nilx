@@ -1,0 +1,958 @@
+<html>
+  <head> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+    <script src='/nilx/assets/js/blocks.js'></script>
+    <link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+      <script src="/nilx/libs/highlight/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad()</script>
+  </head>
+  <body>
+  <button onclick="toggleAll(this);" >-</button>
+  
+  <h2><input type="button" value="-"
+        style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+        onclick="toggle(this)" />Resources</h2>
+<div>
+<a href="https://babeljs.io/docs/en/learn">ES2015</a>
+<a href="https://www.tutorialspoint.com/es6/es6_quick_guide.htm">ES6</a>
+<a href="https://www.tutorialspoint.com/es6/es6_quick_guide.htm">ES 6</a>
+</div>
+
+ <h2><input type="button" value="-"
+  style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+  onclick="toggle(this)" />Basics</h2>
+<div>
+  Javascript is a high-level, dynamic, untyped,and interpreted programming language.
+ <pre><code>
+//javascript in HTML file(test.html ) :
+
+ &lt;script type="text/javascript">
+    document.write ( new Date() );
+  &lt;/script>
+
+// Comments: ---------------------------------------------
+
+    // Single-line comments start with two slashes
+    /* Multiline comments start with slash-star
+      and end with star-slash*/
+
+//  Numbers : ---------------------------------------
+     0.1  + 0.2; // = 0.30000000000000004
+    5  /  2;    // = 2.5 uneven division.
+10  %  2;   // = 0"  modulo division.
+30  %  4;   // = 2"
+18.5  %  7; // = 4.5`);
+
+//bitwise operations :  ---------------------------------------------
+
+1  &lt;&lt;  2; // = 4
+
+// Special values : ---------------------------------------------
+
+Infinity;  // result of e.g. 1/0
+-Infinity; // result of e.g. -1/0
+NaN;       // result of e.g. 0/0, ('Not a Number)'
+null;      // indicates a deliberate non-value
+undefined; // indicates a value is not currently present (although 'undefined' is actually a value itself)
+true;      //  a boolean type value
+false;     //  another boolean type  value
+// false, null, undefined, NaN, 0 and "" are falsy;  everything else is truthy.
+// Note that 0 is falsy and "0" is truthy, even though 0 == "0".
+
+// Including a javaScript file : ---------------------------------------------
+
+&lt;script type='text/javascript' src='Script1.js'&gt;&lt;/script>
+
+//Including from another js file : ---------------------------------------------
+
+//Put all the code using the remote library in the callback function :
+function loadScript(url, callback)
+{
+    // Adding the script tag to the head as suggested before
+    var head    = document.getElementsByTagName('head')[0];
+    var script  = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src  = url;
+
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback;
+    script.onload = callback;
+
+    // Fire the loading
+    head.appendChild(script);
+}
+
+// Then you write the code you want to use AFTER
+// the script is loaded in a lambda function:
+
+var myPrettyCode = function() {
+
+    // Here, do what ever you want
+};
+
+//Then you run all that:
+
+ loadScript("my_lovely_script.js", myPrettyCode);
+
+
+// Note that the script may execute after the DOM has loaded, 
+or before,depending on the browser and whether you included the line script.async = false;
+
+// Concatenation : ---------------------------------------------
+
+// Strings are <b>concatenated with +</b>
+"Hello "+ "world!"; // = "Hello world!"
+// ... which works with more than just strings
+   "1, 2, "  +  3; // = "1, 2, 3"
+   "Hello "  + [ "world",  "!"]; // = "Hello world,!"
+
+// Comparision : ---------------------------------------------
+
+// and are <b>compared with < and ></b>
+   "a"  <  "b"; // = true
+// Type coercion is performed for comparisons with double equals
+   "5"  ==  5; // = true
+   null  ==  undefined; // = true
+// ...unless you use ===
+   "5"  ===  5; // = false
+   null  ===  undefined; \// = false
+// ...which can result in some weird behaviour...
+   13  +  ! 0; // 14
+   "13"  +  ! 0; // '13true'
+
+// Access parts of a string : ---------------------------------------------
+// You can access characters in a string with 'charAt'
+   "This is a string".charAt( 0);  // = 'T'
+// ...or use 'substring' to get larger pieces.
+   "Hello world".substring( 0,  5); // = "Hello"
+// 'length' is a property, so don't use ().
+   "Hello".length; // = 
+
+// multiline strings("Template Literals") (ES6) :---------------------------------------------
+// They have many features, variable interpolation among others,
+// but most importantly they can be multiline.
+//A template literal is delimited by backticks:
+var html = \`
+  &lt;div>
+    &lt;span>Some HTML here&lt;/span>
+  &lt;/div>`
+//Template strings can use placeholders for string substitution
+// using the ${ } syntax, as demonstrated.");
+var name = "Brendan"; 
+console.log(`Hello, \$\{name}!`);
+ //output is :
+//Hello, Brendan!
+
+// Variables : ---------------------------------------------
+
+//Variables are declared with the 'var' keyword,but it is not mandatory:
+omeOtherVar  =  10;
+// but your variable will be created in the global scope, not in the scope you defined it in.
+// Variables declared without being assigned to are set to undefined.
+var someThirdVar; // = undefined
+
+// If you want to declare a couple of variables, 
+//then you could use a comma separator
+var someFourthVar  =  2, someFifthVar  =  4;
+
+// There's shorthand for performing math operations on variables:
+someVar  +=  5; // or  someVar = someVar + 5; someVar is 10 now
+someVar  *=  10; // now someVar is 100
+
+// and an even-shorter-hand for adding or subtracting 1
+someVar ++; // now someVar is 101
+someVar --; // back to 100`);
+    
+// Arrays : ---------------------------------------------
+ 
+// Arrays are ordered lists of values, of any type.
+var myArray  = [ "Hello",  45,  true];
+
+// Their members can be accessed using the square-brackets subscript syntax.
+// Array indices start at zero.
+myArray[ 1]; // = 45
+
+// Arrays are mutable and of variable length.
+myArray.push( "World");
+myArray.length; // = 4
+
+// Add/Modify at specific index
+myArray[ 3]  =  "Hello";
+
+// Add/remove element from front or back end of an array
+myArray.unshift( 3);        // Add as the first element
+someVar  = myArray.shift(); // Remove first element and return it
+myArray.push( 3);           // Add as the last element
+someVar  = myArray.pop();   // Remove last element and return it
+
+// Join all elements of an array with semicolon
+var myArray0  = [ 32, false, "js", 12, 56, 90];
+myArray0.join( ";") // = "32;false;js;12;56;90"
+
+// Get subarray of elements from index 1 to 4 
+myArray0.slice( 1, 4); // = [false,"js",12]
+
+// Remove 4 elements starting from index 2,and insert there strings
+// "hi","wr" and "ld"; return removed subarray
+myArray0.splice( 2, 4, "hi", "wr", "ld");
+// = ["js",12,56,90]
+// myArray0 === [32,false,"hi","wr","ld"]`);
+
+// Module pattern  ---------------------------------------------
+
+var myModule = (function() {
+    'use strict';
+ 
+    var _privateProperty = 'Hello World';
+    var publicProperty = 'I am a public property';
+  
+    function _privateMethod() {
+        console.log(_privateProperty);
+    }
+  
+  	function publicMethod() {
+    	_privateMethod();
+  	}
+     
+    return {
+        publicMethod: publicMethod,
+        publicProperty: publicProperty
+    };
+}());
+  
+myModule.publicMethod();    		        // outputs 'Hello World'   
+console.log(myModule.publicProperty);       // outputs 'I am a public property'
+console.log(myModule._privateProperty);     // is undefined protected by the module closure
+myModule._privateMethod();                  // is TypeError protected by the module closure
+
+//Objets : ---------------------------------------------
+//JavaScript's objects are equivalent to "dictionaries" or "maps" in other languages: 
+//an unordered collection of key-value pairs.
+
+`var myObj  = {key1 :  "Hello", key2 :  "World"};
+
+// Keys are strings, but quotes aren' required if they're a valid JavaScript identifier. Values can be any type.
+var myObj  = {myKey :  "myValue",  "my other key" :  4};
+
+// Object attributes can also be accessed using the subscript syntax,
+myObj[ "my other key"]; // = 4
+
+// ... or using the dot syntax, provided the key is a valid identifier.
+myObj.myKey; // = "myValue"
+
+// Objects are mutable; values can be changed and new keys added.
+myObj.myThirdKey  =  true;
+
+// If you try to access a value that's not yet set, you'll get undefined.
+myObj.myFourthKey; // = undefined
+   
+//Logic : ---------------------------------------------
+// The 'if' structure works as you'd expect.
+var count  =  1;
+if (count  ==  3){
+  // evaluated if count is 3
+} else if (count  ==  4){
+  // evaluated if count is 4
+} else {
+  // evaluated if it's not either 3 or 4
+}
+
+// && is logical and, || is logical or
+if (house.size  ==  "big"  && house.colour  ==  "blue"){
+  house.contains  =  "bear";
+}
+if (colour  ==  "red"  || colour  ==  "blue"){
+  // colour is either red or blue
+}
+
+// && and || "short circuit", which is useful 
+//for setting default values.
+var name  = otherName  ||  "default";
+
+// The 'switch' statement checks for equality with '==='.
+// Use 'break' after each case
+// or the cases after the correct one will be executed too.
+grade  = <span class="s1">'B';
+switch (grade) {
+case <span class="s1">'A' :
+  console.log( "Great job");
+  break;
+case <span class="s1">'B' :
+  console.log( "OK job");
+  break;
+case <span class="s1">'C' :
+  console.log( "You can do better");
+  break;
+default :
+  console.log( "Oy vey");
+  break;
+}
+
+//Loops : ---------------------------------------------
+
+`// As does 'while'.
+while ( true){
+  // An infinite loop!
+}
+
+// Do-while loops are like while loops, except 
+//they always run at least once.
+var input;
+do {
+  input  = getInput();
+} while ( !isValid(input));
+
+// The 'for' loop is the same as C and Java:
+// initialization; continue condition; iteration.
+for (var i  =  0; i  &lt;  5; i ++){
+  // will run 5 times
+}
+
+// Breaking out of labeled loops is similar to Java
+outer :
+for (var i  =  0; i  &lt;  10; i ++) {
+  for (var j  =  0; j  &lt;  10; j ++) {
+      if (i  ==  5  && j  == 5) {
+          break outer;
+          // breaks out of outer loop instead of 
+            //only the inner one
+      }
+  }
+}
+
+// The for/in statement allows iteration over properties of an object.
+var description  =  "";
+var person  = {fname : "Paul", lname : "Ken", age : 18};
+for (var x in person){
+  description  += person[x]  +  " ";
+} // description = 'Paul Ken 18 '
+
+// Functions: ---------------------------------------------
+//JavaScript functions are declared with the "function" keyword:
+function myFunction(thing){
+  return thing.toUpperCase();
+}
+myFunction( "foo"); // = "FOO"
+
+// Note that the value to be returned must start 
+//on the same line as the "return" keyword, 
+//otherwise you'll always return "undefined" due to
+// automatic semicolon insertion.
+function myFunction(){
+  return // &lt;- semicolon automatically inserted here
+  {thisIsAn : <span class="s1">'object literal' };
+}
+myFunction(); // = undefined
+
+//- functions can be reassigned to different variable names
+//- functions can be passed to other functions as arguments 
+//  for example,  when supplying an event handler:
+function myFunction(){
+  // this code will be called in 5 seconds' time
+}
+setTimeout(myFunction,  5000);
+
+// Function objects don't even have to be declared with a name-
+//you can write an anonymous function definition directly into 
+//the arguments of another.
+setTimeout(function(){
+  // this code will be called in 5 seconds' time
+},  5000);
+
+//'By reference' parameter to function:
+
+//it can be implemented by passing object to function as parameter
+`function alterObject(obj) {
+ obj.foo = "goodbye";
+}
+var myObj = { foo: "hello world" };
+alterObject(myObj);
+alert(myObj.foo); // "goodbye" instead of "hello world"
+
+//optional parameters:
+
+//you can call functions omitting some parameters and js will
+// fil in the other parameters with the value undefined. 
+Example: 
+ connect("www.google.com"); 
+  function connect(hostname, port, method)
+  {
+   // inside the function, // hostname === "www.google.com", 
+   // port === undefined, // method === undefined
+  } 
+
+//Named parameters: ---------------------------------------------
+
+//There is a reasonably 
+//elegant  for it: via an object literal.
+//(A JavaScript object literal is a comma-separated list of name-value pairs wrapped in curly braces.)
+ myFunction({ param1 : 70, param2 : 175});
+
+//The Arguments Object: ---------------------------------------------
+//JavaScript functions have a built-in object called the arguments object.
+//The argument object contains an array of the arguments 
+//used when the function was called (invoked)`);
+
+//functions and Scope: ---------------------------------------------
+//functions get their own scope but other blocks do not.
+if ( true){
+  var i  =  5;
+}
+i; // = 5 - not undefined as you'd expect in c#
+
+// This has led to a common pattern  of "immediately-executing anonymous functions",
+// which prevent temporary variables from leaking into the global scope.
+(function(){
+  var temporary  =  5;
+  // We can access the global scope by assigning to the
+  // "global object", which in a web browser is always 'window'.
+  // The global object may have a different name in non-browser 
+  // environments such as Node.js.
+   window.permanent  =  10;
+})();
+temporary; // raises ReferenceError
+permanent; // = 10
+
+// Nested Functions:  ---------------------------------------------
+function add() { 
+    var counter = 0; 
+    function plus() {
+        counter += 1;
+    }
+     plus();
+      return counter;
+ }
+
+// Closures:  ---------------------------------------------
+//Global variables are defined outside any fuction or used without declaration keywords.
+//Global variables can be made local (private) with closures.
+//(In a web page, global variables belong to the window object.)
+//A closure is a feature in JavaScript where an inner function has access to the
+//outer (enclosing) function’s variables — a scope chain.
+
+//If a function is an inner function which
+//has access to all the outer function's 
+//variables, even after the outer function exits.`);
+
+function sayHelloInFiveSeconds(name){
+  var prompt  =  "Hello, "  + name  +  "!";
+  // Inner functions are put in the local scope by default, 
+  // as if they were declared with 'var'.
+  function inner(){
+      alert(prompt);
+  }
+  setTimeout(inner,  5000);
+  // setTimeout is asynchronous, so the sayHelloInFiveSeconds
+  // function will exit immediately, and setTimeout will call 
+  //inner afterwards. However,because inner is "closed over"
+  // sayHelloInFiveSeconds, inner still has access to the
+  // 'prompt' variable when it is finally called.
+}
+sayHelloInFiveSeconds( "Adam"); 
+// will open a popup with "Hello, Adam!" in 5s`);
+
+// IIFE(Immediately-Invoked Function Expression) :
+//It executes immediately after it’s created.
+//This pattern is often used when trying to 
+//avoid polluting the global namespace, 
+//because all the variables used inside the IIFE 
+//(like in any other normal function)
+ //are not visible outside its scope.`:
+(function(){
+    // all your code here
+    var foo = function() {};
+    window.onload = foo;
+    // ...
+})();
+
+//Objects Constructors and function : ---------------------------------------------
+//Objects can contain functions.
+ var myObj  = {
+      myFunc : function(){
+          return  "Hello world!";
+      }
+  };
+  myObj.myFunc(); // = "Hello world!"
+
+//When functions of an object are called, 
+ // they can access the object using the 'this' keyword:`);
+myObj  = {
+      myString :  "Hello world!",
+      myFunc : function(){
+          return this.myString;
+      }
+  };
+  myObj.myFunc(); // = "Hello world!"
+
+  // the function doesn't work if it isn't
+  //  called in the context of the object:
+  var myFunc  = myObj.myFunc;
+  myFunc(); // = undefined
+ // Inversely, a function can be assigned to the object and gain access to it
+//through 'this', even if it wasn't attached when it was defined.
+var myOtherFunc  = function(){
+      return this.myString.toUpperCase();
+  };
+  myObj.myOtherFunc  = myOtherFunc;
+  myObj.myOtherFunc(); // = "HELLO WORLD!"
+
+// Call , apply and bind :
+
+//We can also specify a context for a function to 
+//execute in when we invoke it using 'call' or 'apply'
+ var anotherFunc  = function(s){
+      return this.myString  + s;
+  };
+  anotherFunc.call(myObj,  " And Hello Moon!");
+   // = "Hello World! And Hello Moon!"
+// The <strong><b>'apply()'</b></strong> function is nearly identical,
+//   but takes an array for an argument list. 
+ anotherFunc.apply(myObj, [ " And Hello Sun!"]); 
+ // = "Hello World! And Hello Sun!"
+
+ // This is useful when working with a function
+ // that accepts a sequence of
+ // arguments and you want to pass an array.
+
+   Math.min( 42,  6,  27); // = 6
+   Math.min([ 42,  6,  27]); // = NaN (uh-oh!)
+   Math.min.apply( Math, [ 42,  6,  27]); // = 6
+//But, 'call' and 'apply' are only temporary. 
+//When we want it to stick, we can use <strong><b>'bind'</b></strong>:   
+var boundFunc  = anotherFunc.bind(myObj);
+  boundFunc( " And Hello Saturn!"); 
+  // = "Hello World! And Hello Saturn!"`);
+
+//'bind' can also be used to partially apply (curry) a function.
+ var product  = function(a, b){ return a  * b; };
+  var doubler  = product.bind( this,  2);
+  doubler( 8); // = 16
+
+//New Keyword : ---------------------------------------------
+
+//When you call a function with the 'new' keyword, a new object is created, and made available to the function via the 'this' keyword.
+// Functions designed to be  called like that are called constructors.
+ var MyConstructor  = function(){
+      this.myNumber  =  5;
+  };
+  myNewObj  = new MyConstructor(); // = {myNumber: 5}
+  myNewObj.myNumber; // = 5
+ 
+ //Prototypes : ---------------------------------------------
+//Every JavaScript object has a public 'prototype' object.
+// The prototype object is special type of enumerable object
+//  to which additional properties can be attached to it
+//which will be shared across all the instances of it's constructor function.
+
+// When you go to access a property on an object 
+// that doesn't exist on the actual object, 
+// the interpreter will look at its prototype.
+// Example:
+ function Student() {
+                this.name = 'John';
+                this.gender = 'M';
+  }
+
+  Student.prototype.age = 15;
+
+  var studObj1 = new Student();
+  alert(studObj1.age); // 15
+
+  var studObj2 = new Student();
+  alert(studObj2.age); // 15
+
+//All JavaScript objects inherit their properties 
+//and methods from their prototype.`);
+
+`  var myObj  = {
+    myString :  "Hello world!"
+};
+var myPrototype  = {
+    meaningOfLife :  42,
+    myFunc : function(){
+        return this.myString.toLowerCase();
+    }
+};
+
+myObj.__proto__  = myPrototype;
+myObj.meaningOfLife; // = 42
+
+// This works for functions, too.
+myObj.myFunc(); // = "hello world!"
+
+// Of course, if your property isn't on your prototype, 
+//the prototype's prototype is searched, and so on.
+myPrototype.__proto__  = {
+    myBoolean :  true
+};
+myObj.myBoolean; // = true
+
+// There's no copying involved here; each object stores
+// a reference to its prototype. This means we can alter 
+// the prototype and our changes will be reflected everywhere.
+myPrototype.meaningOfLife  =  43;
+myObj.meaningOfLife; // = 43
+
+//--------------------- Objects : ---------------------------------------------
+//properties of an object:
+//The for/in statement allows iteration over properties of an object,
+//walking up the prototype chain until it sees a null prototype.
+for (var x in myObj){
+          console.log(myObj[x]);
+      }
+      ///prints:
+      // Hello world!
+      // 43
+      // [Function: myFunc]`
+  ,parent:objObjects
+}
+
+//hasOwnProperty() check
+
+//To only consider properties attached to the object itself
+and <b>not its prototypes</b>, use the 'hasOwnProperty()' check:`,
+for (var x in myObj){
+    if (myObj.hasOwnProperty(x)){
+        console.log(myObj[x]);
+    }
+}
+///prints:
+// Hello world!
+
+//Creating New Object (by Object.create) :
+var myObj  =  Object.create(myPrototype);
+  myObj.meaningOfLife; // = 43
+  
+//Creating New Object (by constructor):
+//Constructors have a property called prototype. 
+//This is *not* the prototype of the constructor 
+//function itself; instead, it's the prototype 
+//that new objects are given when they're created
+// with that constructor and the new keyword.`,
+MyConstructor.prototype  = {
+    myNumber :  5,
+    getMyNumber : function(){
+        return this.myNumber;
+    }
+};
+var myNewObj2  = new MyConstructor();
+myNewObj2.getMyNumber(); // = 5
+myNewObj2.myNumber  =  6;
+myNewObj2.getMyNumber(); // = 6
+`,parent:objObjects
+};
+
+//Built-in types vs wrapper objects:
+// Built-in types like strings and numbers also have
+// constructors that create equivalent wrapper objects.`,
+var myNumber  =  12;
+var myNumberObj  = new  Number( 12);
+myNumber  == myNumberObj; // = true
+
+// Except, they aren't exactly equivalent.
+typeof myNumber; // = 'number'
+typeof myNumberObj; // = 'object'
+myNumber  === myNumberObj; // = false
+if ( 0){
+    // This code won't execute, because 0 is falsy.
+}
+if ( new  Number( 0)){
+    // This code will execute, because wrapped numbers 
+    // are objects, and objects are always truthy.
+}
+
+//Adding function to objects by prototypes: ---------------------------------------------
+
+//However, the wrapper objects and the regular builtins
+// share a prototype, so you can actually add 
+// functionality to a string, for instance.
+String.prototype.firstCharacter  = function(){
+    return this.charAt( 0);
+};
+"abc".firstCharacter(); // = "a"
+
+//polyfilling of an object: ---------------------------------------------
+
+//prototypes is often used in "polyfilling", 
+//which is implementing newer features of JavaScript
+//in an older subset of JavaScript, so that they can be
+ //used in older environments such as outdated browsers.
+
+ //For instance, we mentioned that Object.create isn't
+ //yet available in all implementations, but we can 
+ //still use it with this polyfill:
+if ( Object.create  ===  undefined){ 
+    // don't overwrite it if it exists
+    Object.create  = function(proto){
+     // make a temporary constructor with the right prototype
+     var Constructor  = function(){};
+     Constructor.prototype  = proto;
+     // then use it to
+     
+//object inheritannce: ---------------------------------------------
+
+var animal = { eats: true }
+rabbit = Object.create(animal)
+alert(rabbit.eats) // true
+
+//Events: ---------------------------------------------
+
+&lt;script type="text/javascript">
+function checkRange(t,low,high) {
+    var n = parseInt(t);
+    if (t!="" && (isNaN(n) || n<low || n>high))
+    alert("Enter a number between "+low+" and "+high);
+
+&lt;/script>
+&lt;form> 
+&lt;input type=text name=number size=10 
+  onBlur="checkRange(this.value,1000,2000);">
+  &lt;/form>
+}
+  
+//Raising events : ---------------------------------------------
+//to raise an event use <b>dispatchEvent</b> (equivalent of raisevent in vb)
+//to  Listen for the event use <b>addEventListener</b>
+//in the function you want raise event,you call dispatchevent:
+ x.onchange=function()
+ {
+      x2.innerHTML=x.value;
+
+      var event = new Event('chang');  // (*)
+      x.dispatchEvent(event);	
+ }
+ return x;
+ ............................
+ //in the place you want to use it,call addEventListener:
+ // Listen for the event.
+  ra.addEventListener('chang', function (e) {
+  // e.target matches elem
+      alert(e.target);
+      console.log(e);
+  }, false);`,
+  parent:objEvents
+};
+  
+//Arrow Functions: ---------------------------------------------
+//Arrow functions allows a short syntax for writing function",
+
+  var x = function(x, y) {
+     return x * y;
+  }// ES5
+  
+  const x = (x, y) => x * y;// ES6
+  
+//Implicit returns: ---------------------------------------------
+
+//The return keyword can be omitted 
+//if using arrow functions without a block body`,
+let func = (a, b, c) => a + b + c; 
+// curly brackets must be omitted
+
+//Key/property shorthand :
+//shorter notation for assigning properties 
+// to variables of the same name:
+ var obj = { a: a, b: b} //ES5
+    let obj = {  a, b}  //ES6    `
+    ,parent:objES6
+}
+options[ind++]={
+    title:"Method definition shorthand",
+    body:`//ES5:
+    var obj = {
+        a: function(c, d) {},
+        b: function(e, f) {}
+    };
+//ES6:
+    let obj = {
+        a(c, d) {},
+        b(e, f) {}
+    } 
+    
+//DeStructuring (object matching): ---------------------------------------------
+
+//Use curly brackets to assign properties of an object to their own variable.
+// for example assume:
+  var obj = { a: 1, b: 2, c: 3 };`,
+//ES5:
+var a = obj.a;
+var b = obj.b;
+var c = obj.c;
+//ES6:
+let {a, b, c} = obj;
+
+//looping ,the new syntax:
+//ES5:
+for (var i = 0; i < arr.length; i++)
+{
+    console.log(arr[i]);
+}
+//ES6:
+for (let i of arr) {
+    console.log(i);
+}
+
+// Spread syntax : ---------------------------------------------
+
+//to expand arrays and for function parameters`,
+// to expand array:
+let arr1 = [1, 2, 3];
+let arr2 = ['a', 'b', 'c'];
+let arr3 = [...arr1, ...arr2];
+
+console.log(arr3); // [1, 2, 3, "a", "b", "c"]
+
+// function parameters: ---------------------------------------------
+let arr1 = [1, 2, 3];
+let func = (a, b, c) => a + b + c;
+
+console.log(func(...arr1)); // 6
+
+
+//Classes/constructor functions: ---------------------------------------------
+// ES5                          :
+function Func(a, b) {
+    this.a = a;
+    this.b = b;
+}
+
+Func.prototype.getSum = function() {
+    return this.a + this.b;
+}
+
+var x = new Func(3, 4);
+
+// ES6                           :
+class Func {
+    constructor(a, b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    getSum() {
+        return this.a + this.b;
+    }
+}
+
+let x = new Func(3, 4);
+x.getSum(); // returns 7
+
+//Inheritance : ---------------------------------------------
+
+//The <h7>extends</h7> keyword creates a subclass",
+//ES5                                           :
+function Inheritance(a, b, c) {
+    Func.call(this, a, b);
+    this.c = c;
+}
+
+Inheritance.prototype = Object.create(Func.prototype);
+Inheritance.prototype.getProduct = function() {
+    return this.a * this.b * this.c;
+}
+
+var y = new Inheritance(3, 4, 5);
+
+//ES6                                       :
+class Inheritance extends Func {
+    constructor(a, b, c) {
+        super(a, b);
+
+        this.c = c;
+    }
+
+    getProduct() {
+        return this.a * this.b * this.c;
+    }
+}
+
+let y = new Inheritance(3, 4, 5);
+y.getProduct(); // 60
+
+//Modules: ---------------------------------------------
+
+//Modules can be created to <h7>export</h7> and <h7>import</h7>
+code between files.
+//index.html                                :
+&ltscript src="export.js">&lt;/script>
+&ltscript type="module" src="import.js">&lt;/script>
+//export.js                                  : 
+let func = a => a + a;
+let obj = {};
+let x = 0;
+
+export \{ func, obj, x \};
+//import.js                               :
+import \{ func, obj, x \} from './export.js';
+
+console.log(func(3), obj, x);
+
+//CallBacks [ES5]:
+
+//A function may be <h7>passed as a parameter</h7>
+//to another function.This mechanism is termed
+//as a Callback
+//ES5 callback              :
+function doSecond() {
+    console.log('Do second.');
+}
+
+function doFirst(callback) {
+    setTimeout(function() {
+        console.log('Do first.');
+
+        callback();
+    }, 500);
+}
+
+doFirst(doSecond);
+
+// promise:
+//Promise represent the <h7>completion (or failiure) of an asynchronous function</h7>.
+//(it can be used as an alternative to chaining functions)`,
+//ES6 Promise                :
+//-------------------------------------------------------------
+// Example 1:
+let doSecond = () => {
+    console.log('Do second.');
+}
+
+let doFirst = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('Do first.');
+
+        resolve();
+    }, 500);
+});
+
+doFirst.then(doSecond);
+//-------------------------------------------------------------
+// Example 2:
+
+var promise1 = new Promise(function(resolve, reject) {
+  setTimeout(function() {
+    resolve('foo');
+  }, 300);
+});
+
+promise1.then(function(value) {
+  console.log(value);
+  // expected output: "foo"
+});
+
+console.log(promise1);
+// expected output: [object Promise]
+
+`
+ , parent:objES6
+}
+
+built-in objects:
+<a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects'>built-ins</a>
+
+</code></pre>
+</div>
+ </body>

@@ -1,0 +1,76 @@
+
+<html>
+    <head> 
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+        <script src='/nilx/assets/js/blocks.js'></script>
+        <link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+        <script src="/nilx/libs/highlight/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad()</script>
+    </head>
+    <body>
+  <h2><button onclick="toggleAll(this);" >-</button>
+    <input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" /> Bootstrap 5 </h2>   
+<div>
+ <pre><code>
+ # is mobile-first:
+< meta name="viewport" content="width=device-width, initial-scale=1" > #zoom level 1
+
+# Bootstrap requires container
+# containers type:
+# 1.The .container class provides a responsive fixed width container
+# 2.The .container-fluid class provides a full width container, spanning the entire width of the viewport
+
+# grid system
+# Bootstrap's grid system is built with flexbox and allows up to 12 columns across the page
+# it divides screen width into 12 columns. 
+# you can define griding of a page for 6 types of screens,all in one place.
+# they are:
+    .col-     #(extra small devices - screen width less than 576px)
+    .col-sm-  #(small devices - screen width equal to or greater than 576px)
+    .col-md-  #(medium devices - screen width equal to or greater than 768px)
+    .col-lg-  #(large devices - screen width equal to or greater than 992px)
+    .col-xl-  #(xlarge devices - screen width equal to or greater than 1200px)
+    .col-xxl- #(xxlarge devices - screen width equal to or greater than 1400px)
+
+# an example of automatic griding:
+ < div class="row">
+    < div class="col-*-*">< /div>
+    < div class="col-*-*">< /div>
+  < /div>
+  < div class="row">
+    < div class="col-*-*">< /div>
+    < div class="col-*-*">< /div>
+    < div class="col-*-*">< /div>
+  < /div>
+
+#  Text/Typography
+# use .h1 to .h6. for example:
+< p class="h2">h2 Bootstrap heading< /p>
+
+# Display Headings (bigger than normal)
+# are .display-1 to 6
+
+.lead	               Makes a paragraph stand out	
+.text-start	           Indicates left-aligned text	
+.text-break	           Prevents long text from breaking layout	
+.text-center	       Indicates center-aligned text	
+.text-decoration-none  Removes the underline from a link	
+.text-end	           Indicates right-aligned text	
+.text-nowrap	Indicates no wrap text	
+.text-lowercase	Indicates lowercased text	
+.text-uppercase	Indicates uppercased text	
+.text-capitalize	Indicates capitalized text	
+.initialism	Displays the text inside an <abbr> element in a slightly smaller font size	
+.list-unstyled	Removes the default list-style and left margin on list items (works on both <ul> and <ol>). This class only applies to immediate children list items (to remove the default list-style from any nested lists, apply this class to any nested lists as well)	
+.list-inline	Places all list items on a single line (used together with .list-inline-item on each <li> elements)	
+
+
+</code></pre>
+read more <a href="https://www.w3schools.com/bootstrap5/bootstrap_tables.php">here</a>
+</div>
+
+

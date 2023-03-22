@@ -1,0 +1,1392 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />object oriented principles</h2>
+<div>
+<b>1- Data Encapsulation</b>
+-Data Encapsulation is the hiding of data in your objects by restricting access.
+-In JavaScript data is stored in:
+  -properties which are immediately accessible, such as: employee.name
+  -or possibly via a couple of getter and setter methods, such as: employee.getName  /* accessor */  and employee.setName /* mutator method*/
+-JavaScript does not support access modifiers. By default all properties and methods are public, meaning they are accessible by anyone in the program.
+- In js, to encapsulate data in your object,we use the concept of function closure:
+<pre><code>
+var Employee = function (name) {
+    var hiddenName = name;
+    return {
+    getName: function () { return hiddenName; },
+    setName: function (name) { hiddenName = name; }
+    };
+};
+var employee = new Employee("Mike");
+employee.setName("David");
+alert(employee.getName()); // => David
+alert(employee.hiddenName); // => undefined  
+</code></pre>
+  
+<b>2- abstraction</b>
+Data abstraction refers to the development of objects that are abstractions of real world concepts. This
+is done primarily by defining an interface .
+
+For example, if we need to create a Customer object, we are interested in their name, contact
+information, and purchase history perhaps. If, on the other hand, we need to model a new hire, say a
+JavaScript Programmer, we are more interested in their education, skill level, years of experience, and
+salary requirements. The interesting thing is that both are people, but we abstract out only what is of
+interest to us at that time
+<pre><code>
+var Customer = function () {
+    this.name = "";
+    this.contact = "";
+    this.history = [];
+};
+var Hire = function () {
+    this.name = "";
+    this.education = "";
+    this.skills = [];
+    this.salary = 0;
+}; 
+</code></pre>
+
+<b>3- inheritance</b>
+-There are different ways that objects can relate to each other:
+    - "has a" = composition
+    - "is a"  = inheritance
+-Inheritance is when an object derives data and functionality from an ancestor object.
+-By inheriting the class obtains the data and the behavior from the ancestor class.
+-Inheritance is fully supported in JavaScript, but through a different mechanism, called prototypal
+inheritance.
+- Each object in JavaScript has a prototype object from which it derives properties and
+methods.
+<pre><code>var Car = function () {
+    this.wheels = 4;
+    this.doors = 4;
+   };
+   var Toyota = function (color) {
+    this.color = color;
+   };
+   Toyota.prototype = new Car(); // set Car as 'ancestor' object
+   var toyota = new Toyota("red");
+   alert(toyota.color); // => red
+   alert(toyota.wheels); // => 4
+   alert(toyota.doors); // => 4
+   alert(toyota instanceof Toyota); // => true
+   alert(toyota instanceof Car); // => true
+   alert(toyota instanceof Object); // => true
+</code></pre>
+<b>4- polymorphism</b>
+- The word polymorphism literally means many forms. 
+- It is the ability to create multiple objects that to the program appear of the same type but they are different. 
+- This is accomplished by creating objects that have the same interface (properties and methods) but their concrete implementation is very
+different. 
+-for example:
+Suppose we are modeling different zoo animals: a swan, a monkey, and an elephant. 
+All these animals have a skin and they can move and can talk (make a sound). 
+for each animal, we create an object with the following interface: a skin property and two methods: move and talk
+<pre><code>
+    var Animal = function (home) {
+        this.home = home;
+       };
+       Animal.prototype = {
+        say: function () {
+        alert("I live in a " + this.home);
+        }
+       };
+       var Swan = function (skin, move, talk) {
+        this.skin = skin;
+        this.move = move;
+        this.talk = talk;
+       };
+       Swan.prototype = new Animal("pond");
+       var Monkey = function (skin, move, talk) {
+        this.skin = skin;
+        this.move = move;
+        this.talk = talk;
+       };
+       Monkey.prototype = new Animal("jungle");
+       var Elephant = function (skin, move, talk) {
+        this.skin = skin;
+        this.move = move;
+        this.talk = talk;
+       };
+       Elephant.prototype = new Animal("zoo");
+       //Next we create 3 different animal instances and add these to an array:
+       var animals = [];
+       var swan = new Swan("Feathers",
+        function () { alert("I fly"); } ,
+       function () { alert("Honk"); });
+       var monkey = new Monkey("Furr",   function () { alert("I climb"); } ,
+       function () { alert("Ooh Ooh"); });
+       var elephant = new Elephant("Thick skin",
+        function () { alert("I walk"); } ,
+        function () { alert("Trumpet"); });
+       animals.push(swan);
+       animals.push(monkey);
+       animals.push(elephant);
+       
+</code></pre>
+</div>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />concepts</h2>
+<div>
+<b>Loose Coupling</b>
+Loose coupling means there is a low degree of dependency among objects. Loose coupling is a design
+goal that seeks to reduce the interdependencies between objects with the goal of reducing the risk that
+changes in one object will require changes in any other object.
+
+-Coupling is a measure of how much direct knowledge an object has about another object. The more it
+knows, the more tightly coupled it is with that object. T
+-Tight coupling creates highly interdependent systems that are much harder to change and maintain.
+
+<b>High Cohesion</b>
+Objects with high cohesion are those that are highly focused and have elements that form a coherent
+group and they truly belong together. Cohesion is a measure of how strongly related each piece of code
+is forming a comprehensive unit of functionality. Objects with high cohesion are preferred because they
+are reliable, reusable, understandable, and easier to maintain.
+
+It is important to note
+that cohesion exists within objects and modules (the blocks), whereas coupling exists between objects
+and modules (the arrows). 
+
+<b>continuous refactoring</b>
+The DRY principle is also intertwined with to the notion of continuous refactoring in which developers
+constantly look for refinements and improvements in their code base as they develop or maintain the
+application. 
+A common refactoring technique is to extract code and use object composition through which objects share functionality. 
+Another is to adjust the inheritance hierarchy of objects to reflect a new way of thinking. 
+
+<b>Rule of Three</b>
+The Rule of Three is another principle. Essentially it is a milder version of DRY. With DRY, any duplication
+should be avoided. The Rule of Three states that under certain circumstances allowing two copies of the
+same code may be fine. The idea is that you should only start refactoring when the code is repeated
+three times, because only then the necessary abstraction becomes clear.
+
+<b>Deep dive: The Event Loop</b>
+events like keyboard , mouse and network events, goes to 'events queue' and proccess sequentialy in an 'event loop'
+,if the 'event handler' exits for the event.
+
+<b>Callbacks</b>
+
+Event handlers are also referred to as callbacks(although call backs are not limited to event handlers). 
+Callbacks are function references that are passed around to other functions which will call these function references back 
+(i.e. execute the function) at the appropriate time.
+<pre><code>
+function mathematics(x, y, callback) {
+    return callback(x,y);
+}
+function add(x,y) { alert(x + y); }
+function multiply(x,y) { alert(x * y); }
+mathematics(3, 5, add); // => 8
+mathematics(3, 5, multiply); // => 15
+</code></pre>
+
+<b>Asynchronous callbacks</b>
+This is a technique that prevents long running functions from blocking the UI.
+As an example, JavaScript has a built-in function called setTimeout that allows callbacks to be called
+asynchronously after a given number of seconds:
+<pre><code>
+function say () {
+ alert("Hello");
+}    
+setTimeout(say, 2000); //=> after 2 seconds: Hello
+console.log("I am here"); //=> immediately: 
+//When running the above snippet, we will see "I am here" (on the console) before "Hello"
+//This shows that the invocation of say does not does not block the UI thread and is therefore an asynchronous callback. 
+</code></pre>
+all events placed
+on the event queue are asynchronous because there is a delay between when the event occurs and
+when the event gets handled by the event loop.
+We mention this because there are also synchronous (not asynchronous) browser events. These are
+events that are so critical that they need to be executed immediately, even when JavaScript is in the
+middle of running some code.
+An example of such an event is mouse move. Indeed mouse move events get entered into the event
+queue, but the actual mouse pointer (the arrow or hand) that hovers over the page updates
+immediately. Another example is DOM manipulation. 
+<b>Zero Timeout pattern</b>
+Calling setTimeout with no delay is called the Zero Timeout pattern. 
+It allows you to break up long running JavaScript functions in smaller pieces. 
+By breaking it up, you are giving the browser and the event loop some breathing room, 
+allowing it to catch up with whatever it needs to do. 
+<pre><code>
+    < button class="btn" onclick="start();">Start< /button>
+    < button class="btn" onclick="stop();">Stop< /button>
+    < button class="btn" onclick="reset();">Reset< /button>
+    < div id="myDiv" style="width:10px;height:50px;background:#f00;">< /div>
+
+    var timeout;
+function start() {
+ var div = document.getElementById("myDiv");
+ var size = 10;
+
+ var func = function () {
+ timeout = setTimeout(func, 0);
+ div.style.width = size + "px";
+ if (size++ == 600) stop();
+ }
+ func(); // starts the process
+}
+function stop() {
+ clearInterval(timeout);
+}
+function reset() {
+ var div = document.getElementById("myDiv");
+ div.style.width = "10px";
+}
+
+</code></pre>
+
+<b>Ajax calls</b>
+
+Following an Ajax call, the browser detects when the network call comes back. The details of how this
+works do not matter because this is native code and each browser has its own implementation of the
+XMLHttpRequest object. The bottom line is it just knows when the network call has come back.
+When this occurs an event gets added to the event queue.
+
+<b>What is a prototype? </b>
+Each object has an internal
+prototype property that points to a prototype object from which it inherits all members (properties and
+methods)
+<pre><code>
+    var Car = function () { };
+    Car.prototype = { make: "Mercedes" }; // prototypal inheritance.
+    var toyota = new Car();
+    var mercedes = new Car();
+    alert(toyota.make); // => Mercedes
+    alert(mercedes.make); // => Mercedes
+    toyota.make = "Toyota";
+    alert(toyota.make); // => Toyota
+
+</code></pre>
+
+<b>[[Prototype]] and __proto__</b>
+
+To get to this internal property, ES5 (EcmaScript 5) offers a standard accessor method:
+Object.getPrototypeOf(object). This is available in all modern browsers. In addition, all browsers,
+except IE 9 and below, also offer a non-standard accessor named __proto__. If none of these work you
+can still get to the prototype object via the prototype property on the object's constructor. Let's explain
+all this with some code:
+<pre><code>
+    // 3 ways to get to the internal prototype property:
+var document = {};
+// ES5 (all modern browsers)
+alert(Object.getPrototypeOf(document)); // => [object Object]
+// not available in IE9 and below
+alert(document.__proto__); // => [object Object]
+// availabe in all browsers
+alert(document.constructor.prototype); // => [object Object]    
+</code></pre>
+There are no properties named prototype, except in constructor functions. 
+It's a little broader than that: only function objects have prototype properties, but no other objects. 
+
+The following is important: The prototype property of a constructor function is the prototype that will
+be assigned as the prototype to all newly created objects. Constructor functions have a prototype
+property, but it is only used to assign a prototype to a newly created object. A constructor function is an
+object itself, so it must have its own prototype, that is, [[Prototype]] or __proto__. This is correct, but
+don't confuse it with the one named prototype.
+The code below demonstrates that the prototype property of a constructor function is a genuine object
+(unlike undefined as we saw before in our document object): 
+<pre><code>
+    var Document = function () {}; // Constructor function
+    alert(Document.prototype); // => [object Object]
+</code></pre>
+this prototype will be assigned as the prototype to all instances that are
+created by the constructor. These prototype objects can be customized with properties and methods,
+like so (you are probably already familiar with this style of code): 
+<pre><code>
+    var Document = function () {
+        this.type = "unknown";
+       };
+       Document.prototype.say = function () {
+        alert("Type: " + this.type);
+       };
+       var doc = new Document();
+       doc.type = "pdf";
+       doc.say(); // => Type: pdf
+</code></pre>
+Alternatively, you can assign an object literal (frequently with multiple methods and properties) to a
+prototype:
+<pre><code>
+var Document = function () {
+    this.type = "unknown";
+    };
+Document.prototype = { // object literal
+say: function () {
+alert("Type: " + this.type);
+}
+};
+var doc = new Document();
+doc.type = "pdf";
+doc.say(); // => Type: pdf
+</code></pre>
+Again, the prototype property has nothing do with the function's actual prototype. We will refer to an
+object's true prototype property as __proto__ which works in all browsers, except in IE. By the way,
+__proto__ will be standard in ES6 (EcmaScript 6). Here we confirm that they are indeed different (be
+sure not to run this in IE): 
+<pre><code>
+    var Employee = function () {
+        this.name = "unknown";
+    };
+    alert(Employee.prototype == Employee.__proto__); // => false
+    alert(Employee.__proto__ == Function.prototype); // => true    
+</code></pre>
+What is this Function.prototype on the last line? It is the default prototype object for all function
+objects. Similarly, the default prototype object for all objects is Object.prototype. Object.prototype
+is a root object of all objects in JavaScript.
+Function.prototype is the prototype for all functions. Function.prototype's prototype is
+Object.prototype which we referred to as the root object before. Next we have a diagram that depicts
+these relationships for the following JavaScript code: 
+<pre><code>
+    function Employee() { };
+    var object = new Object();
+    var employee = new Employee();   
+</code></pre>
+a few quick tests: 
+<pre><code>
+    function Employee() { };
+    var object = new Object();
+    var employee = new Employee();
+    alert(Employee.__proto__ === Object.__proto__); // => true
+    alert(object.__proto__ === Function.prototype.__proto__); // => true
+    alert(Object.__proto__); // => undefined or Empty() or function()   
+</code></pre>
+<pre><code>
+    function Employee() { };
+    var object = new Object();
+    var employee = new Employee();
+
+    alert(object.constructor === Object); // => true
+alert(employee.constructor === Employee); // => true
+alert(employee.__proto__ === Employee.prototype); // => true
+alert(Employee.prototype.constructor === Employee); // => true
+alert(employee instanceof Employee); // => true
+
+</code></pre>
+
+<pre><code>
+    function Employee() { };
+    var object = new Object();
+    var employee = new Employee();
+    alert(Function.prototype.constructor === Function); // => true
+    alert(Function.constructor === Function); // => true
+</code></pre>
+Let's recap what we have seen so far. Each object has a prototype from which it inherits properties and
+methods. An internal property named [[Prototype]] references the prototype. In all browsers, except IE,
+this property is called __proto__ and this is how we referred to it in our discussion. Only function
+objects have a property named prototype; no other object has this. Constructor functions use this
+prototype property to assign prototypes to newly created objects. 
+
+<b>Cracking JavaScript Idioms(=hacks)</b>
+A great way to learn JavaScript is by reading the code of libraries and frameworks written by expert
+developers, such as, jQuery, Mootools, Dojo, Backbone, ExtJs, Ember, and many others. Exploring these
+sources will reveal many programming gems which you then add to your own bag of coding tricks and
+techniques. It takes time but it is well worth the effort.
+JavaScript is a language of great flexibility and while spelunking these libraries and frameworks you will
+most likely encounter code that you wonder: what in the world is going on here? 
+<pre><code>
+    options || (options = {}); // what does this mean?
+    var _true_ = true; // why would anyone do this?
+    
+</code></pre>
+What exactly is an idiom? According to Wikipedia it is "an expression of a simple task, algorithm, or data
+structure that is not a built-in feature in the programming language being used, or, conversely, the use of
+an unusual or notable feature that is built in to a programming language ". Then it goes on: "The term
+can be used more broadly, however, to refer to complex algorithms or programming design patterns. 
+Knowing the idioms associated with a programming language and how to use them is an important part
+of gaining fluency in that language."
+
+Most JavaScript idioms are very short and terse. They are used for a variety of reasons: for instance,
+they 1) make the code more effective and/or efficient, 
+2) allow you to do things that are not natively supported by JavaScript, 
+3) reduce the code size which in turn reduces the download times, 
+4) allow the minifier to further reduce the code size, and 
+5) raises the 'cool factor' of the author. The last reason is disappearing quickly as the entire JavaScript community is catching up by learning to read and
+understand these 'hacks'. 
+
+At the highest level we
+have architecture patterns, in the middle we have design patterns, and at the lowest level we are finding
+idioms. Idioms are also referred to as mini patterns.
+
+<b>The && and || operators</b>
+Short-circuiting is a way for the JavaScript engine to increase performance. With &&, when the first
+operand evaluates to false, then the second operand is not executed because the result will always be
+false. Similarly, with ||, when the first operand evaluates to true, then the second operand is not
+executed because the result will always be true. Here is an example of each:
+
+<pre><code>
+if (true || (a + b)) // => a + b will never execute
+if (false && (a + b)) // => a + b will never execute
+</code></pre>
+JavaScript developers use this feature to avoid the 'object has no properties' error. This error occurs
+when you request the value of a property on an object that does not exist. This is what that looks like:
+<pre><code>
+    if (obj && obj.Property) var a = obj.Property;
+</code></pre>
+This code first checks whether obj is undefined (i.e. does not exist); if so, short-circuiting will stop any
+further execution. Next it checks whether obj.Property is undefined. If so, it also stops further
+execution. Only when obj.Property is defined will it execute the code block in which its value is
+assigned to variable a.
+Many developers do not realize that in JavaScript logical expressions with && and || do not return true
+or false; instead, they return the value of the last expression that was evaluated. For example: false
+|| "8" will return "8". Similarly, "apple" && true, returns "apple" and not true (because of shortcircuiting).
+Despite these unexpected return values, these conditions mostly behave as expected because ifstatements only look for 'falsy' and 'truthy' expressions (falsy and truthy are explained in the next
+section).
+Again, JavaScript developers are using this behavior to their advantage by writing shorter code. At the
+beginning of a function you frequently see these kinds of code:
+<pre><code>
+    param = param || '';
+    //Or
+    param || (param = ''};
+</code></pre>
+Both do the same: they assign a default value to an undefined parameter – an empty string in the
+examples. Note that this also works when param is false, null, or 0 as these are all considered 'falsy'.
+These lines are shorthand for this ternary expression:
+<pre><code>param = param ? param : '';
+</code></pre>
+
+If you wish to check param only for undefined then you need something like this:
+<pre><code>param = (typeof param !== "undefined") ? param : '';
+</code></pre>
+Let's say you have three node objects. If you need a property from one of three node objects you could
+use this shorthand:
+<pre><code>var count = (node1 || node2 || node3).count();
+</code></pre>
+It uses the fact that the conditional expression returns a node object and not true or false. If you don't
+know this then the above expression can be rather puzzling.
+Combining && and || allows you to shorten your code, but possibly at the cost of readability:
+<pre><code>return tree && tree.nodes && tree.nodes.length || 0;
+</code></pre>
+Here we check that tree and its nodes property are defined. If so, return the number of nodes, else
+return 0, thus ensuring that the return value is always numeric.
+
+<b>Falsy and Truthy</b>
+In js, we
+have dynamic types, meaning a variable type can change type at any time. A string, for example, can be
+changed to a number, a Boolean, an object, and even a function, at runtime.
+e. Secondly, as we
+demonstrated before, logical statements work perfectly fine with any type, they don't have to be
+Boolean at all.
+Developers use the terms 'falsy' and 'truthy' to denote the falseness or truthiness of an expression. The
+rules are as follows: 'falsy' expressions include those that evaluate to false, null, undefined, the empty
+string, the number 0, and NaN (not a number, which is a special number). Everything else is considered
+'truthy', including Infinity, objects, functions, and arrays, whether they are empty or not.
+These rules can lead to confusing code, like this:
+<pre><code>if ("sidewalk") {
+ alert("sidewalk" == false); // => false
+ alert("sidewalk" == true); // => false
+}
+</code></pre>
+
+<b>Double exclamation (!!)</b>
+Here are a couple examples of code you may run into with double exclamation marks:
+<pre><code>var state = !!options.overlay;
+</code></pre>
+in JavaScript the double !! is used to ensure that what is returned is truly a boolean type.
+The first ! will evaluate the truthy-or falsy-ness of the expression and return a boolean. Remember that
+falsy values include: false, null, undefined, the empty string '', the number 0, and NaN. Everything else is
+truthy. The second ! will then reverse the boolean value and returns a true boolean.
+Here is an example where a numeric value is coerced into a boolean value using !!
+<pre><code>var odd = !!(number % 2);
+</code></pre>
+<b>The $ and _ identifiers</b>
+In JavaScript, identifier names (e.g. variables, object, and functions) must start with $, _, or a letter. The
+remaining characters can be $, _, letters, and numbers. An identifier cannot start with a number.
+Given these rules, both $ and _ are valid identifiers.
+<b>Assign globals to locals</b>
+Sometimes you see code like this in JavaScript modules:
+<pre><code>
+    (function () {
+        var oProto = Object.prototype,  
+        aProto = Array.prototype,
+ fProto = Function.prototype;
+ // ...
+
+})();
+</code></pre>
+In this code the prototypes of built-in Object, Function, and Array are assigned to local variables. The
+main reason for doing this is to assist the minifier in further reducing the code size. The minifier cannot
+change the name of native JavaScript objects and its members (nor can it change any reference to a 3rd
+party library).
+However, by assigning the reference to a local variable (just once), you allow the minifier to minify the
+local variable at all locations that it is used. For instance, each Object.prototype reference gets
+reduced to x (if this is the minifier's assigned name). This is the Minification idiom whereby you
+structure your code for maximum compression.
+You may also see this: 
+<pre><code>
+    (function () {
+        var slice = Array.slice,
+        unshift = Array.unshift,
+        toString = Object.toString,
+        hasOwnProperty = Object.hasOwnProperty;
+        // ...
+       })();       
+</code></pre>
+There are two reasons for doing this: it speeds up access to built-in prototype methods and it facilitates
+further minification. Perhaps a slight disadvantage is that, in the case of functions, they need to be
+invoked using a call or apply method, for example: 
+<pre><code>
+    slice.call(array, 0, n);
+    hasOwnProperty.call(obj, key); 
+</code></pre>
+Alternatively, you may see the pattern below. It may look a bit odd, but the end-result is exactly the
+same as the example above. The only difference is that literal object expressions and literal array
+expressions are used rather than their type names. This one is a bit slower than the one above because
+new array or object instances are created on each line.
+<pre><code>(function () {
+ var slice = [].slice;
+ var unslice = [].unslice;
+ var toString = {}.toString;
+ var hasOwnProperty = {}.hasOwnProperty;
+ //...
+}();
+</code></pre>
+In computational or graphics libraries you may find code that looks like this:
+<pre><code>(function () {
+    var math = Math,
+     mathRound = math.round,
+     mathFloor = math.floor,
+     mathCeil = math.ceil,
+     mathMax = math.max,
+     mathMin = math.min,
+     mathAbs = math.abs,
+     mathCos = math.cos,
+     mathSin = math.sin,
+     mathPI = math.PI
+     //...
+    }();    
+</code></pre>
+Again, the authors are creating fast-access references to frequently used native methods. Having local
+variables prevents the JavaScript engine from having to search the prototype chain for these frequently
+used types and methods. This is particularly beneficial for methods and properties that are on the global
+object because it is always the last searched object in the prototype chain. Examples include Document,
+Math, and alert.
+Finally, you may run into code that looks like this:
+<pre><code>
+(function () {
+ var _true_ = true,
+ _false_ = false,
+ _null_ = null;
+ // ...
+})();
+</code></pre>
+This may not be obvious at first, but it allows the minifier to reduce the length of native variable names,
+shaving off extra bytes from the JavaScript files being downloaded. 
+
+Bonus arguments
+Functions in JavaScript come with two bonus arguments: this and arguments. They are not visible in
+the formal parameter list, but are passed by the compiler and are available within the scope of the
+function. As you know, this references the current object context, meaning the object it is currently
+working on. This can be a built-in object or your own custom object. By default, global functions have
+the global object as their context, whereas methods that are part of an object will have their object as
+the current context. The Invocation pattern, which is part of the Modern Patterns section, has a lot
+more to say about the value of this.
+The other bonus argument is named arguments. It has a list of arguments that were provided with the
+invocation. It looks like an array, but it is not because other than length and item(index) it is lacking
+all array methods. One of the first things you see done in many functions is that the incoming
+arguments object is transformed into an array. The code looks like this:
+function func(a, b, c) {
+ var args = [].slice.call(arguments, 0);
+
+ // ...
+}
+Or this:
+function func(a, b, c) {
+ var args = Array.prototype.slice.call(arguments, 0);
+
+ // ...
+}
+Both statements convert arguments to an array. The first example uses an array literal. Its slice
+method is explicitly called with arguments entered as the this value and 0 as the begin argument into
+slice. The second does exactly the same with slightly different syntax. It explicitly includes 'prototype'
+to speed up the JavaScript engine because we know that the built-in slice method lives on the array's
+prototype. Not including prototype will return the same results, like so:
+function func(a, b, c) {
+ var args = Array.slice.call(arguments, 0);
+
+ // ...
+}
+Now, with all arguments stored in an array we have full access to the built-in array methods. 
+
+It is interesting to note that the argument feature allows you to declare functions without any
+parameters and then invoke these with any combination of arguments. Inside the function you can then
+use the arguments bonus variable to determine the arguments passed in. The disadvantage of course is
+that your arguments are not assigned a name.
+There may be a use case for not declaring parameters when you don't know what arguments to expect,
+but generally it serves little purpose other than making functions more obscure. However, this feature
+does highlight the highly flexible and forgiving nature of JavaScript functions.
+Placeholder parameters
+Sometimes you need to declare a parameter that is not used. This is the case when your code is invoked
+in a certain way but you have no use for the argument provided. Examples are callback functions and
+try-catch exception blocks. You could name the parameter notUsed, blah, xyz, or ex in the case of try
+catch. A common and more expressive way of doing this is by using an underscore (_) which is a valid
+identifier name in JavaScript.
+The beauty is that arguments are visible only locally, that is, within the function body, so their names do
+not interfere with variables on the global object namespace. If it did, this would be a problem because
+there is a popular library called underscore.js which, uses the underscore (_) as its alias (similar to $ and
+jQuery). Here is how you use this placeholder parameter:
+function myCallback(_, result) {
+ // ...
+}
+And
+try {
+ // ...
+} catch(_) {
+ // do not respond to an exception
+}
+So, now when you see an underscore parameter, you can be pretty certain it is unused.
+
+Function overloading
+
+JavaScript does not natively support function overloading. Function overloading allows you to create
+functions with the same name but with different signatures. A function signature is the combination of
+arguments, their types and the order in which they appear (in some languages it also includes the return
+data type). 
+As an example, createUser(first, last) is different from createUser(age, name, street). These
+function are said to be overloaded and the runtime determines which function to call, based on the
+arguments provided.
+In JavaScript this does not exist. When invoking a function, any number of arguments is accepted as well
+as any argument data type. So, JavaScript is just fine when invoking a function with any number and any
+type of arguments irrespective of the function definition. It won't even complain.
+This flexibility allows us to mimic function overloading. Here is how this works. You create a single
+function and immediately inside this function you check the arguments and their types. If they do not
+match the 'default' argument pattern (signature) you switch them around and adjust them to another
+signature. Here is an example:
+var animate = function (delay, callback, size)
+ // potentially switch arguments
+ if (isFunction(delay)) { // test for function
+ callback = delay;
+ size = callback;
+ delay = 100; // default delay
+ }
+ // execute according to default pattern
+}
+var isFunction = function (item) {
+ return Object.prototype.toString.call(item) == "[object Function]";
+}
+// can be invoked in two ways
+animate(2000, function () { alert('hi'); }, 200);
+animate(function () { alert('hi'); }, 200);
+The animate function expects 3 arguments of type: number, function, and number. However, it can also
+be called with 2 arguments: function and number. The function first checks if the first argument is a
+function. If it is then it swaps the arguments until they match the default signature. The missing delay is
+given a default value of 100. Next, it continues executing based on the default parameter pattern.
+Alternatively, you could check the arguments coming in and then build a switch statement calling any
+number of appropriate helper functions (possibly nested methods).
+Options hash
+The Options hash idiom is designed to create better function signatures and APIs in general. Here is the
+problem. Suppose you write a constructor function that creates a new element to be placed onto the
+HTML document:
+var Element = function (type, content, width, height, margin, padding, border,
+background) {
+ // code goes here
+};
+As a client of this function you have to provide 8 arguments and they must be in the correct order or
+else unexpected things start to happen. Furthermore, some may be optional whereas others are
+required. It is common to have the required parameters first followed by the optional ones, so you can
+do things like:
+var element = new Element("TextBox", "Joe", "200px");
+The remaining 5 parameters will be undefined and the function can check for arguments that are
+undefined or null and set these to reasonable default values.
+Now assume that you only have argument values for type and padding, the first and sixth argument.
+Your function call will look something like this:
+var element = new Element("TextBox", null, null, null, null, "12px", null, null);
+This is an awful way to program, as well as very error prone.
+Fortunately an elegant idiom exists that will greatly improve the API. It is called Options hash. It has also
+been referred to as the Configuration pattern.
+Options hash allows you to pass all optional arguments in a single object. It works like this: you partition
+the parameters in two groups: required and optional. The required ones are placed at the beginning of
+the parameter list. All optional parameters are captured in a single parameter, usually called options or
+settings. This options parameter is an object with name/value pairs that include all optional
+parameters. Any arguments that the caller cannot provide can be skipped.
+Let's apply this pattern to improve our Element function. We have only one required parameter and the
+remainder is optional, so the function signature can be changed to this:
+var Element = function (type, options) {
+ // code goes here
+};
+That looks much better. In fact, the options parameter itself is optional, so only the first argument is
+required.
+Here are a few examples of how you can invoke this function:
+var button = new Element("Button", {content: "Submit", padding: "8px"});
+var textbox = new Element("TextBox", {width: "120px", height: "22px", border: "1px"});
+var checkbox = new Element("Checkbox");
+Nice. But how do you handle this inside the function? First you create an object with reasonable default
+values for each optional parameter. The Element function will look like this:
+var Element = function (type, options) {
+ var defaults = {
+ content: null,
+ width: "120px",
+ height: "20px",
+ margin: "3px",
+ padding: "2px",
+ border: "0px",
+ background: "white"
+ };
+ // more code here
+};
+Next, you extend the default object with the incoming options argument. Extending means that you
+copy all properties from one object to another object. You can use the jQuery extend method or write
+your own (it is fairly simple). Here we use jQuery extend:
+var Element = function (type, options) {
+ var defaults = {
+ content: null,
+ width: "120px",
+ height: "20px",
+ margin: "3px",
+ padding: "2px",
+ border: "0px",
+ background: "white"
+ };
+ this.type = type;
+ this.settings = $.extend({}, defaults, options);
+};
+The extend method starts with an empty object (the object literal) and extends it with the properties of
+the default values and then overwrites only the ones that are provided in the options parameter: very
+elegant.
+Remember that the options parameter itself is optional. How do we handle the situation that it is not
+provided? Here is how: 
+var Element = function (type, options) {
+    var defaults = {
+    content: null,
+    width: "120px",
+    height: "20px",
+    margin: "3px",
+    padding: "2px",
+    border: "0px",
+    background: "white"
+    };
+    this.type = type;
+    this.settings = $.extend({}, defaults, options || {});
+   };
+   All we did was add || {}. This checks if the options argument value is falsy (null or undefined). If so, it
+   returns an empty object. Finally, if you prefer, you can also place the default values inline as an extend
+   argument.
+   var Element = function (type, options) {
+    this.type = type;
+    this.settings = $.extend({}, {
+    content: null,
+    width: "120px",
+    height: "20px",
+    margin: "3px",
+    padding: "2px",
+    border: "0px",
+    background: "white"
+    }, options || {});
+    // your code here
+   };
+   This idiom is also called the Configuration pattern because it is frequently used to configure an object.
+   In these scenarios you may see the options parameter named as settings, configuration, or something
+   similar. Also, it is not necessarily the case that all items in this object are optional, some libraries that
+   use this idiom require the client to provide at least some values. In the jQuery Patterns section we will
+   see an example of this.
+   
+   Immediate functions
+   
+   The frequently-used Module pattern (discussed in the Modern Patterns section) is usually implemented
+   as an anonymous immediate (self-executing) function that contains the entire code base for the module.
+   The general format looks like this:
+   (function () {
+    // code goes here..
+   }());
+   The term immediate function is commonly used and describes it well. We will use this term throughout
+   this package. However, you should be aware there are other names including: self-executing anonymous
+   function and self-invoked anonymous function. More recently we are seeing IIFE being used as an
+   abbreviation for immediately invoked function expression.
+   There are many different ways to create immediate functions. When you see the different varieties for
+   the first time they may leave you puzzled until you realize that these are just different ways to ensure
+   that the enclosing function immediately executes. Here we list some of these varieties. Note that, at
+   the end, they all do the same thing, that is, they immediately execute the function. Whichever you
+   choose is your personal preference, although the one above is the more common approach.
+   Let's start with a slight variation, by rearranging the brackets at the end. Note that the effect is the
+   same. Crockford and his JSLint tool do prefer the first syntax as he feels that it more clearly indicates
+   the result of a function being invoked (rather than the function object itself). Here it is:
+   (function () {
+    // code goes here..
+   })();
+   The next one is also becoming popular and this is how Facebook implements the module pattern. It
+   creates an immediate function by placing a leading ! in front of the function keyword instead of having
+   surrounding brackets.
+   !function () {
+    // code goes here..
+   }();
+   You can also explicitly call the function immediately with a call method. The advantage of using call is
+   that you have the option to control the function's scope by passing a different argument. This is
+   explained later in the Invocation pattern in the Modern Patterns section.
+   (function () {
+    // code goes here..
+   }).call();
+   Another variety is with a + or - before the function name. This one can leave you really confused.
+   +function () {
+    // code goes here..
+   }();
+   Finally, let's go totally crazy and see some other valid options:
+   ~function () {
+    // code goes here..
+   }();
+   Or
+   delete function () {
+    // code goes here..
+   }();
+   Or
+   void function () {
+    // code goes here..
+   }();
+   Or
+   100% function () {
+    // code goes here..
+   }();
+   Some developers will actually use these exotic constructs in their programs; possibly to show off their
+   developer 'chops'. Of course, this will make it very difficult for anyone who comes after them that needs
+   to maintain their code long after they have left the project.
+   You may be wondering how these strange constructs work. The answer will help you decipher other
+   weird varieties in case you run into these. To understand the mechanics of these activations, let's start
+   off with a normal function declaration.
+   function go() {
+    // code goes here..
+   }
+   This function has a name, go in this case, and will be loaded at compile time into memory. It will execute
+   whenever it is called; simple enough.
+   Below is a function declaration without a name, a so-called anonymous function. It is somewhat
+pointless to do this as there is no way to reference and execute it anywhere in the program.
+function () {
+ // code goes here..
+}
+By placing parenthesis around the declaration we group what is inside and it gets treated as an
+expression, but without any side effects. JavaScript is happy, but nothing happens.
+(function () {
+ // code goes here..
+})
+We can call the above function expression by placing parenthesis at the end (possibly with arguments).
+This will create an immediate function that executes as soon as the compiler encounters it.
+(function () {
+ // code goes here..
+})();
+There are other ways to turn an anonymous function declaration into an expression. For example by
+prefixing it with a ! (not operator) or + (add operator) or ~ (bitwise NOT operator) which are the tricks
+we have seen before. When adding () at the end, the expression executes immediately. It is important
+to know that there are no side effects due to prefixing the declaration with a ! or + or ~ operator; they
+are totally harmless.
+In summary, anything that turns the function declaration into an expression, followed by () will
+immediately execute the function. This explains why all the above hacks work equally well. You can
+invent your own variety because coming up with an expression is not too hard.
+A function declaration is simply a declaration of a function which can be executed later by calling its
+name followed by two brackets (). These brackets optionally contain arguments.
+
+new function()
+
+Just in case you haven't seen enough ways to build an immediate function here is yet another option.
+You can use new function() to wrap your code and execute it immediately. It works like the immediate
+functions described earlier and it also creates a closure. An important difference is that there is no way
+to pass in arguments, which in many situations is a serious disadvantage. Here is how you'd use it:
+new function () {
+ // code goes here
+};
+You can confirm that it executes immediately by including an alert:
+new function () {
+ alert("In 'new function ()'");
+};
+The same new function () construct can also be used to create a new object instance, like so:
+var person = new function () {
+ this.age = 0;
+ this.setAge = function (age) {
+ this.age = age;
+ };
+};
+This is valid JavaScript and you are using a function expression as if it were a constructor function. The
+only difference is that it is not really reusable. When running the above code through JSLint you will get
+a message that states that the first line is a "weird construction" and suggests removing the new
+keyword. Given all these issues we think it is better not to use this construct.
+Leading semicolon
+When exploring 3rd party source code, you may run into a JavaScript source file that starts with a
+semicolon. Typically this is used with the Module pattern by plugin developers that know that their code
+will be surrounded by other developer's code. It looks like this:
+;(function () {
+ // code goes here..
+})();
+Its purpose is to protect itself from preceding code that was improperly closed which can cause
+problems. A semicolon will prevent this from happening. If the preceding code was improperly closed
+then your semicolon will correct this. If it was properly closed then your semicolon will be harmless and
+there will be no side effects. This idiom is referred to as a leading semicolon.
+Coding Standards and Style
+Imagine a project involving multiple JavaScript developers without any guidelines or rules on naming,
+formatting, and other coding standards. It would probably be messy to say the least. 
+
+Having coding standards and naming conventions is important. It does not matter which standard you
+choose, as long as there is a standard. Ideally, the source code for the entire project should look as if it
+was written by a single developer.
+Coming up with a generally agreed upon set of coding conventions and naming standards frequently
+leads to heated discussions. It takes good leadership to get a team to agree on a set of rules that all
+developers will follow.
+To help you with this process we present a style guide that shouldn’t ruffle too many feathers. It is
+based on general coding conventions that are used throughout the JavaScript community, including
+open source projects, source code libraries, programming books, and blogs. There are a couple
+instances where we allow for a little more flexibility and we will explain why. You can choose to ignore
+these.
+Indentation
+JavaScript code with inconsistent indentation is impossible to read. The indentation rule is very easy to
+remember: anything within curly braces is indented. This includes function bodies, bodies of loops
+(including for, do, while, for-in), as well as ifs, switches, and also object literal notation.
+Each indentations level is 4 space characters deep. Do not use tabs for indentation.
+function show(input) {
+....var temp = 10;
+....if (input === "winter" && temp < 32) {
+........alert('cold');
+....}
+}
+Line length
+The maximum line length is 80 characters. If the line goes beyond that you wrap the line immediately
+after an operator, such as a comma, +, -, &&, ||, etc. Vertically align the next line with the items that
+were interrupted.
+function processRequest( argument1, argument2, argument3, argument4, argument5,
+ argument6) {
+ var x = 3;
+ if (argument1 > 0 && argument2 > 0 && argument3 > 0 && argument4 > 0 &&
+ argument5 > 0 && argument6 > 0) {
+ alert("all args are greater than zero");
+ }
+}
+Curly braces
+Curly braces are used to group a number of statements. Curly braces should always be used, even when
+they are optional, because it makes the code easier to update and less error prone; especially when
+adding a new statement. In the example below it is clear that when adding a new line to the ifstatement you insert it between the braces and it will work as expected.
+if (true) {
+ alert("yes, true");
+}
+Without curly braces, it would be easy to add the new line and not realize it would be outside the if
+statement block.
+if (true)
+ alert("yes, true");
+ alert("really, very true"); // outside the if body
+The one exception we make to adding curly braces is when the single statement is on the same line.
+Usually these are very short statements. However, once you place it on the next line, braces are
+required. Here are two examples: an if-statement and a for-loop.
+if (obj === null) obj = [];
+for(var i = 0; i < 10; i++) increment(value, i);
+The above code is clear and concise. There is no risk of accidentally adding a new statement that is not
+part of the body of the if-statement or the for-loop.
+Function bodies usually make up multiple statements, but sometimes they are extremely brief and in
+those cases you are allowed to place the braces and the body on a single line.
+var Calc = function () {
+ this.add = function (x,y) { return x + y; }; // single line function
+ this.sub = function (x,y) { return x - y; };
+ this.mul = function (x,y) { return x * y; };
+ this.div = function (x,y) { return x / y; };
+};
+var calc = new Calc();
+alert(calc.add(3,4)); // => 7
+Opening braces
+In some languages the question of where to place the opening brace (i.e. on the same line or on the next
+line) is a continuous point of contention. However, for JavaScript the convention is unambiguous: you
+always place it on the same line.
+function process() { // opening brace on same line
+ return {
+ temp: 100
+ };
+}
+The main reason for this rule is that JavaScript automatically adds closing semicolons (;) at the end of
+each statement that it thinks is missing. There are cases where it inserts a semicolon and by doing this it
+excludes the following code block if the braces are on the next line. Here is an example:
+function process() {
+ return
+ {
+ temp: 100
+ };
+}
+The JavaScript engine changes the above code to the code below and now suddenly your process
+function behaves differently. This is easily avoided by moving the opening brace one line up.
+function process() {
+ return; // <= JavaScript added semicolon
+ {
+ temp: 100
+ };
+}
+Object literals generally follow the same curly brace formatting:
+var person = {
+ first: "John",
+ last: "Watson",
+ fullName: function () {
+ return first + " " + last;
+ }
+}
+Similar to small function bodies, in the case of small object and array literals you are allowed to place
+these on a single line:
+var obj = {};
+var array = [];
+var person = {first: "John", age: 25};
+var values = [1, 4, 6, 8, 2, 2];
+Similar to argument parenthesis (discussed below), when curly braces {} and square brackets [] are used
+on a single line then there is no space between the opening brace and the first element and the closing
+brace and the last element. For example, in the person assignment statement there are no spaces
+between '{first' and between '25}'.
+White space
+Consistent use of white space (the spacing used between the coding elements) adds to readability and
+maintainability.
+Operators such as +, -, =, ==, ===, &&, || should be surrounded by a space before and a space after to
+make their expressions easier to read. Below are a few examples:
+var customer = (person.type === "client");
+var odd = number % 2 !== 0;
+if (income > 12000 && status === "gold")
+var found = (hasText && (length > 80));
+Next, we will look at white space and parentheses. There should be no space on the inside of
+parentheses, that is, the opening parenthesis has no white space on the right hand side and the closing
+parenthesis no space on the left hand side. Here are some examples:
+var hero = (person.type === "superman");
+if (income > 10000 && age === 65) {};
+for (var j = 0; j < length; j++) {};
+return (profits - losses + (assets * 2));
+The same rule applies when invoking a function: no spaces on either side:
+go();
+var sum = add(3, 4, 5, 6);
+var josh = new Person("Josh", "Healey");
+Named functions have no space between the name and the opening parenthesis and the argument list.
+However, anonymous functions have a space between the keyword function and the argument list.
+The reason for this is that without a space it may appear that the function name is 'function' which is
+incorrect.
+function go(now) {
+ // ...
+}
+var go = function (now) {
+ // ...
+}
+Opening curly braces are always preceded with a space. If code follows a closing brace then add a space
+as well.
+function go(options) {
+ // ...
+}
+if (income > 10000) {
+ //...
+} else {
+ //...
+}
+do {
+ //...
+} while (counter < 10);
+try {
+ //...
+} catch(ex) {
+ //...
+} finally {
+ //...
+}
+White space must also be used in the places listed below.
+After the commas in a function argument list:
+function (arg1, arg2, arg3, arg4) {
+    // ...
+   }
+   After the commas in an array literal:
+   var array = [23, 48, 2, 0];
+   After the commas and semicolons in a for loop:
+   for (var int i = 0, len = array.length; i < len; i++) {
+    // ...
+   }
+   After the commas and colons in an object literal:
+   var obj = {name: "Joe", age: 29};
+   Naming conventions
+   Choosing proper variable and function names is important for readability and general understanding of
+   the code. Do not include $ or _ in names, except 1) when denoting a 'private' member (variable or
+   function) by prefixing it with an _, or 2) to denote a jQuery variable by a $ prefix.
+   Variable names are written in camelCase in which the first letter is lowercase and the first letters of any
+   subsequent word is uppercase. Try to make the first part of the name a noun (not a verb) which will
+   make it easier to separate it from function names. Here are some examples:
+   var account;
+   var templateHolder = {};
+   var person = new Person("Joe");
+   Make your names as succinct and descriptive as possible. Ambiguity will confuse those that follow you
+   working with the code. Single character names are not very descriptive but they are allowed for
+   iterators and in situations where they hold a temporary value in a lengthy computation.
+   for (var i = 0; i < 100; i++) { // iterator variables
+    for (var j = 0; j < 100; j++) {
+    sum += i * j;
+    }
+   }
+   var t = (x + y) * fudgeFactor; // temporary variable
+var rate = t * 3.14 + (t * t);
+In general the use of abbreviated variable names is discouraged. However, some commonly used and
+widely understood abbreviations are acceptable. Here is a list of those:
+Abbreviation Meaning
+f or fn function
+cd code
+l or len length
+ctx context
+arg argument
+obj object
+el or elem element
+val value
+id identifier
+idx index
+n or num number
+ret return value
+prop property
+attr attribute
+prev previous
+err error
+dup duplicate
+doc document
+win window
+src source
+dest destination
+temp temporary value
+regex regular expression
+JavaScript does not have the notion of an access level for variables, such as, private, protected, and
+public. To indicate that a member (variable or method) is private, JavaScript developers often prefix the
+name with an underscore _. This indicates to clients that it is not meant to be accessed directly. Here
+are a couple examples.
+var _self;
+function _locate(customer) {
+ // ...
+}
+Function names are written in camelCase. Frequently they start with a verb, which separates them from
+variables as these mostly start with nouns. Here are some function examples:
+function processCustomer(customer) {
+ // ...
+}
+function calculateRate(amount) {
+ // ...
+}
+function add(array) {
+ // ...
+}
+An important convention in JavaScript is that all constructor functions start with an upper case
+character. This is to distinguish them from regular functions and prevents developers from forgetting to
+add the new keyword before calling the constructor. The problem with forgetting new is that the
+JavaScript does not flag the error and it causes very hard to detect bugs that may only be found by
+visually inspecting the code. The upper case name is an important visual cue that the keyword new is
+required.
+function Person(name) {
+ this.name = name;
+}
+var arthur = new Person("Arthur");
+Abbreviations in function names are discouraged although some common ones are allowed. The list of
+acceptable abbreviations is the same as the variables names listed before. Function abbreviations you
+may see are:
+Abbreviation Meaning
+init initialize or initializer
+ctor constructor
+cb callback
+Comments
+There are two types of comments: single line and multi-line. Single line comments are written with
+double slashes // and are mostly used as brief hints as to the purpose or inner workings on the code.
+They can be placed immediately above or after the line of code:
+// Ensure membership dues are current and
+// confirm retiree eligibility (age > 60)
+for (var i = 0; len = members.length; i < len; i++) {
+ member = members[i];
+ due = dues[member.payment.id]; // Note: dues are indexed by payment Id
+ // ...
+}
+It is usually best to limit single line comments to 2 or 3 lines at most. If you need more lines, for example
+explaining a complicated algorithm or piece of logic, then use multiline comments. The preferred
+format is as follows:
+/*
+* Ensure membership dues are current and
+* confirm retiree eligibility (age > 60).
+* Also, the difference between eligible and
+* ineligibility is determined by their age,
+* their years of service, their net-worth,
+* and their marital status.
+*/
+function isEligible(person) {
+ // ...
+}
+This format includes asterisks * on each line, vertically aligned to create a clear demarcation of the
+comment block.
+Well written comments will significantly add to the readability and maintainability of the code. So what
+do we mean with 'well written'? It certainly does not mean extensive or lengthy; in fact, programs that
+require lengthy comments are probably not written very clearly. You should try to write your code so
+that it self-documents and that 'reads like a story'.
+You accomplish this with the organization and structure of your files and also with the naming of your
+objects, functions, properties, variables, and namespaces. Even when your code has been optimized for
+readability, there are still instances where you need to explain the purpose and/or the inner workings of
+your algorithms and other code sections.
+Comments you write are intended for 2 audiences: 1) for yourself, for when you come back 3 months
+after writing it, and 2) for your teammates who have never seen your code before and who will need to
+quickly locate and correct a problem (bug) in your program.
+Here are some guidelines for good comments. First: avoid the obvious.
+// iterate over each person
+for (var i = 0, len = persons.length; i < len; i++) {
+ person = persons[i];
+ // ...
+}
+As a programmer you know that a for-statement does looping. You see a persons array so that is what
+you are iterating over. This comment does not add any value; in fact it distracts the reader.
+It is very important to update your comments when the code changes. There is nothing worse than
+comments that are outdated, incorrect, or invalid. Better to have no comments at all.
+When a program is well structured and well written (i.e. it flows like a story), most developers will be
+able to relatively quickly see what is happening at a particular location in the code. After studying it for a
+while it may be clear what is happening, but what may not be obvious is why it is done; essentially what
+is the purpose.
+Suppose you have an array of customers. You see that the program checks for each customer how long
+they have been doing business with your company and then some begin and end dates that are
+compared against the current date. Based on this evaluation some customer's creditworthiness is
+upgraded. You see what is does, but you wonder what it means. It turns out that the company is running
+a special during a limited period in which certain customers are given special rates. It is important that
+this is explained in the comments because by just looking at the code it is not obvious this is a temporary
+sales offer.
+Furthermore, the explanation that this is a sales special is not really sufficient. The rules of the offer (i.e.
+the algorithm used) also need clarification. The above example is not very complex, but sometimes the
+rules for sales offers can get very complicated, so the logic needs to be documented.
+Finally, if you need API documentation of your programs (for internal or external users) then use a tool
+that auto generates it from specially formatted comments in your code. The two most popular tools are
+YUIDoc and JSDoc-Toolkit. Both are open source and can be downloaded for free.
+Before running the documentation tool you decorate all (public) functions with a multi-line comment
+box which follows a special syntax which including special tags that are prefixed with a @. The output is
+nicely formatted documentation in the form of a series of HTML pages that you then can publish. Here is
+an example of the comment syntax:
+/**
+* Invoke a method on each item in the array
+*
+* @param {Array} array The array to iterate over.
+* @param {Function} method The method to invoke.
+*/
+function invoke(array, method) {
+}
+Variable declarations
+All variables should be declared before being used or else they end up in the global namespace. The
+JavaScript engine hoists (raises) all variable declarations to the top of the function in which they are
+declared. This can lead to hard-to-detect problems where variables are being used before they are
+initialized. Here is a simple example. As expected the code below displays 10 (two times);
+function doSomething() {
+ var index = 10;
+ alert(index); // => 10
+ alert(index); // => 10
+}
+doSomething();
+Next we move the variable declaration and initialization one line lower. This results in the index being
+undefined and later it is 10.
+function doSomething() {
+ alert(index); // => undefined
+ var index = 10;
+ alert(index); // => 10
+}
+doSomething();
+What JavaScript does it hoists the variable declaration to the top, but not the initialization. The code
+that actually executes looks like this:
+function doSomething() {
+ var index;
+ alert(index); // => undefined
+ index = 10;
+ alert(index); // => 10
+}
+It gets even weirder when you also have a global variable named index:
+var index = 9;
+function doSomething() {
+ alert(index); // => undefined
+ var index = 10;
+ alert(index); // => 10
+}
+doSomething();
+You would expect that the first alert would print 9 because index gets only shadowed by the local index
+variable in the next line. But this is not the case, again due to the hoisting that takes place the code that
+executes looks like this:
+var index = 9;
+function doSomething() {
+ var index;
+ alert(index); // => undefined
+ index = 10;
+ alert(index); // => 10
+}
+What gets displayed in the first alert is the local index variable, not the global version.
+Single var pattern
+To avoid the above problems you should declare and optionally initialize all variables at the beginning of
+a function. This is a well-known coding pattern in JavaScript and is named the Single var pattern. A
+single var is used to declare all variables used in the function. Here is an example of how this is
+commonly done:
+function func(arg1, arg2, arg3) {
+ var index, textFormat,
+ count = 0,
+ person = new Person("Hillary");
+
+ // ...
+}
+The issue of variable declaration is one of those issues where developers can get into heated debates.
+Some will argue that the above example is not structured enough: they would prefer this:
+function func(arg1, arg2, arg3) {
+ var count = 0,
+ person = new Person("Hillary"),
+ index,
+ textFormat;
+ // ...
+}
+Each variable has its own line. The initialized variables are listed first, followed by the ones that are not
+initialized. Also notice how the = signs of the initializations are vertically aligned.
+If these rules work for your team you should adopt these. In our own work we are a little less strict and
+have adopted a few exceptions to the single var pattern.
+First, it may be helpful to group variable declarations with each group having its own var, like so:
+(function () {
+ var win = window,
+ doc = document,
+ nav = navigator;
+ var userAgent = nav.userAgent,
+ isIE = /msie/t.text(userAgent) && !win.opera,
+ isFirefox = /Firefox/.text(userAgent),
+ isWebKit = /AppleWebKit/.test(userAgent),
+ hasTouch = doc.documentElement.ontouchstart !== "undefined";
+ // ...
+}());
+We also allow multiple uninitialized variables on a line, like so. However, initialized variables are best
+kept on their own line:
+function (employees) {
+ var type, index, element, option,
+ person = new Person("Annie"),
+ employeeCount = employees.length;
+ // ...
+}
+It turns out that the single-var pattern is rather error prone. If you accidentally terminate a line with a
+semicolon (a common mistake), then all subsequent variables become global which is highly
+undesirable.
+function (employees) {
+ var type,
+ person = new Person("Annie");
+ employeeCount = employees.length; // global!
+ // ...
+}
+Some JavaScript developers move the comma forward, to better see that each line has a comma.
+function (employees) {
+    var type
+    , person = new Person("Annie")
+    , employeeCount = employees.length;
+    // ...
+   }
+   A consequence of enforcing the single var rule is that iterator variables (like, i, j, k or count) also end
+   up being declared and initialized at the beginning of the function. Here is an example:
+   function func(arr) {
+    var count = 10,
+    i = 0,
+    len = arr.length;
+    for (; i < len; i++) {
+    // ..
+    }
+   }
+   However, this does not feel right; the for-loop seems incomplete and unnatural. Our approach is to
+   allow the var in the for-statements where they are used. This way the declarations and their
+   initialization are right there ('in your face' so to speak), close to where they are used. In summary, we
+   prefer this:
+   function func(arr) {
+    var count = 10;
+    for (var i = 0, len = arr.length; i < len; i++) {
+    // ..
+    }
+   }
+   Function declarations
+   Just like variables, methods are hoisted and should be declared before they are used. Within a function
+   it is best to declare functions immediately following the variable declarations.
+   function func(arr) {
+    var count, element, status;
+    // immediately declare methods
+    var inner1 = function () { /* ... */ };
+    var inner2 = function () { /* ... */ };
+    // ...
+   }
+   
+</div>
+</body>
+</html>

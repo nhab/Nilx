@@ -1,0 +1,292 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />References(Fluent API )</h2>
+<div>
+- <a href="https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/types-and-properties">Configuring and Mapping Properties and Types</a>
+- <a href="https://codewithmukesh.com/blog/fluent-validation-aspnet-core/">Fluent Validation</a>
+- <a href="https://www.entityframeworktutorial.net/efcore/fluent-api-in-entity-framework-core.aspx">in ef6</a>
+- <a href="https://www.google.com/search?q=ef+migration">EF Migration</a>
+</div>
+<h2>Ef Migrations and fluentapi model configuration</h2>
+<div>
+<a href="http://blogs.msdn.com/b/adonet/archive/2010/12/14/ef-feature-ctp5-fluent-api-samples.aspx">FlentAPI model configuration</a>
+<a href="https://teamtreehouse.com/library/the-migration-fluent-api#transcript">migration fluent api course</a>
+<a href="https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/relationships">fluent-api relationships</a>
+<a href="https://www.barbarianmeetscoding.com/notes/entity-framework/">EF</a>
+<a href="https://riptutorial.com/entity-framework/example/30844/initial-entity-framework-code-first-migration-step-by-step">code-first migration step by step</a>
+<a href="http://thedatafarm.com/data-access/ef-core-6/">EF core 6</a>
+-http://www.hanselman.com/blog/
+-https://weblogs.asp.net/manavi
+</div>
+<h2>Learn</h2>
+<div>
+<a href="https://stackoverflow.com/questions/41543649/how-to-create-tables-in-codefirst-approach">How to create tables in codefirst approach?</a>
+
+- How to use the fluent api to set a foreign key in EF 6?
+Maped to the navigation property, you should add virtual property of type User than map to:
+<pre><code>
+public class User
+{
+ [Key] public int id { get; set; }    
+ public int UserId { get; set; }
+ public virtual User User{get;set;}
+}
+// ...
+ modelBuilder.Entity<User>().HasOptional<User>(x=> x.User);	
+</code></pre>
+
+One-To-Many
+Users have many posts
+<pre><code>public virtual ICollection<Post> Posts { get; set; }</code></pre>
+
+Posts have many comments
+<pre><code>public ICollection<Comment> Comments { get; set; }</code></pre>
+
+One-to-One
+Comments have an author (User)
+<pre><code>public virtual User Author {get; set;}</code></pre>
+
+Many-To-Many
+Posts can contain many Tags
+<pre><code>public virtual ICollection<Tag> Tags { get; set; }</code></pre>
+
+Tags can be applied to many posts
+<pre><code>public virtual ICollection<Post> Posts { get; set; }</code></pre>
+
+Standard Loading
+<pre><code>
+public class user
+public ICollection<Post> Posts { get; set; }	
+</code></pre>
+
+Lazy Loading
+<pre><code>
+public class User
+public virtual ICollection<Post> Posts { get; set; }	
+</code></pre>
+
+<pre><code>
+Database Initialization (IDatabaseInitializer)
+DropCreateDatabaseAlways
+CreateDatabaseIfNotExists
+DropCreateDatabaseIfModelChanges	
+</code></pre>
+
+Seeding Data
+In your Database Initializer class:
+<pre><code>protected override void Seed(DatabaseContext context)</code></pre>
+
+Useful for testing
+Specify connection string + DropCreateDatabaseAlways = consistency + isolation
+
+Validation via ValidationAttribute(s)
+[StringLength]
+[Required]
+[MaxLength]
+[RegularExpression]
+Entity or ComplexType validation
+Honors IValidatableObject interface
+Validating
+Context.SaveChanges() invokes automatically
+Get validation errors with Context.GetValidationErrors()
+
+Data Annotations
+Assembly
+System.ComponentModel.DataAnnotations
+Annotations
+Key
+MaxLength
+MinLength
+Column
+StringLength
+InverseProperty
+NotMapped
+ForeignKey
+ConcurrencyCheck
+Required
+Class-level
+ComplexType
+Table
+
+Fluent API: Model Configuration
+Primary Keys
+Simple or Composite
+CLR-Nullable to required
+Override string length
+Switch off identity
+Ignore property
+Types
+Complex Type
+Relationships
+One to Many
+Many to One
+Turn off cascade delete
+Composite foreign key
+Rename FK
+Rename Many:Many cols
+Mapping (Table, Cols)
+Change names
+
+</div>
+<h2>Learn EF Migration </h2>
+<div>
+
+<pre><code>
+//Creating a Migration :
+[Command Line]
+dotnet ef migrations add <name of migration>
+
+[Package Manager console]
+add-migration <name of migration>	
+
+//Removing the latest Migration
+
+[Command Line]
+dotnet ef migrations remove
+
+[Package Manager Console]
+remove-migration	
+
+
+//Applying A Migration 
+
+[Command line]
+dotnet ef database update
+
+[Package Manager Console]
+update-database	
+
+//Reversing A Migration 
+//To reverse a migration, you pass the name of a target migration to the update command. The target migration is the point to which you want to restore the database. For example, if your first migration is named "Create", and you would like to restore the database to remove all changes made by subsequent migrations, you pass "Create" to the update command:
+
+[Command line]
+dotnet ef database update Create
+
+[Package Manager Console]
+update-database Create	
+
+//Applying A Migration To A Remote Database 
+//At some stage, you will need to deploy one or more migrations against another database, whether that is a test database or a live production database. Currently, the easiest way to accomplish that is to execute SQL scripts against the target database. You can generate the required script via the script command:
+
+[Command Line]
+dotnet ef migrations script
+
+[Package Manager Console]
+script-migration	
+
+
+// Executing Custom SQL 
+// Sometimes, you may want to execute custom SQL at the same time as the migration is applied to the database. You may need to do this because your database provider doesn't support something, or because the operation you want to perform is not related to the migration. Or you might want to add a new coumn to a table and then populate it with data.
+// In these instances, you can use the MigrationBuilder.Sql method. This should be placed in the generated Up method at the point where you want the SQL to be executed. In the example below, the method is called before the first table is created:
+
+public partial class CreateDatabase : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql("Some custom SQL statement");
+
+        migrationBuilder.CreateTable(
+            name: "Authors",
+            columns: table => new
+            {
+                AuthorId = table.Column<int>(nullable: false)
+                    .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                FirstName = table.Column<string>(nullable: true),
+                LastName = table.Column<string>(nullable: true)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Authors", x => x.AuthorId);
+            });
+//If you need to reverse the custom SQL operation in the event that the migration is applied, you would use the Sql method to execute the appropriate SQL in the Down method.
+
+
+
+//Targeting Multiple Providers 
+//Migrations are generated for a specific provider. Although a lot of work has been done to make migrations as provider-agnostic as possible, there will inevitably be cases where a migration generated for one provider cannot be used against another. Annotations are used for provider-specific migrations operations, and if they don't apply to the current provider, they are ignored. You can therefore "overload" the migration with as many annotations as you need safe in the knowledge that the current provider will only apply the ones that relate to it:
+
+public partial class CreateDatabase : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.CreateTable(
+            name: "Authors",
+            columns: table => new
+            {
+                AuthorId = table.Column<int>(nullable: false)
+                    .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                    .Annotation("Sqlite:Autoincrement", true),
+                FirstName = table.Column<string>(nullable: true),
+                LastName = table.Column<string>(nullable: true)
+            },
+//The Migration class exposes an ActiveProvider property that gets the name of the current database provider being used. This can be helpful for generating conditional code enabling a single migration to target multiple providers:
+
+public partial class CreateDatabase : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+
+        if(ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")
+        {
+            // do something SQL Server - specific
+        }
+        if(ActiveProvider == "Microsoft.EntityFrameworkCore.Sqlite")
+        {
+            // do something SqLite - specific
+        }
+
+        migrationBuilder.CreateTable(
+            name: "Authors",
+            columns: table => new
+            {
+                AuthorId = table.Column<int>(nullable: false)
+                    .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                FirstName = table.Column<string>(nullable: true),
+                LastName = table.Column<string>(nullable: true)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Authors", x => x.AuthorId);
+            });
+//Setting The Migration Timeout 
+//Your migration might include a long-running task that exceeds the default command timeout value (30 seconds for SQL Server), resulting in an exception being raised. You can set a different value for the timeout at the DbContext level, but this will apply to all operations undertaken by the DbContext which may not be desirable.
+
+//The IDesignTimeDbContextFactory interface was introduced to enable you to change the behaviour of your context when it is being created by tooling at design time such as happens with Migrations.
+
+//To use this approach, create a separate class in your project that implements the IDesignTimeDbContextFactory interface and use the DbContextoptionsBuilder to configure the behaviour you want - in this case, setting the command timeout value to 600 seconds (10 minutes):
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+
+namespace EFCoreSample.Model
+{
+    public class SampleContextFactory : IDesignTimeDbContextFactory<SampleContext>
+    {
+        public SampleContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<SampleContext>();
+            optionsBuilder.UseSqlServer(@"Server=.\;Database=db;Trusted_Connection=True;", opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds));
+
+            return new SampleContext(optionsBuilder.Options);
+        }
+    }
+}
+//Make sure that your existing DbContext has a constructor that takes a DbContextOptions object as a parameter:
+
+public AdventureContext(DbContextOptions options) : base(options){}
+//When the tooling runs the migration, it looks first for a class that implements IDesignTimeDbContextFactory and if found, will use that for configuring the context. Runtime behaviour is not affected by any configuration set in the factory class.
+</code></pre>
+</div>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../../assets/css/blocks.css">	
+	<script src='../../assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+    <script src="../../libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+	<script>
+	
+	</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+<h2>References</h2>
+<div>
+https://docs.microsoft.com/en-us/learn/modules/aspnet-logging/3-aspnet-log-overview"},
+ benfoster.io/blog/serilog-best-practices
+ github.com/serilog/serilog/wiki
+ github.com/serilog/serilog/wiki/Enrichment
+</div>
+<h2>Serilog</h2>
+<div>
+Serilog uses a simple C# API to configure logging.
+ When external configuration is desirable it can be mixed in (sparingly) using the <cli>Serilog.Settings.AppSettings</cli> package or <cli>Serilog.Settings.Configuration</cli> 
+ package.
+</div>
+<h2>Creating a logger</h2>
+<div>
+Loggers are created using a LoggerConfiguration object:
+<cl>
+Log.Logger = new LoggerConfiguration().CreateLogger();
+Log.Information("No one listens to me!");
+
+// Finally, once just before the application exits...
+Log.CloseAndFlush();
+</cl>
+The example above will create a logger that does not record events anywhere. To see log events, a sink must be configured.
+</div>
+<h2>Sinks</h2>
+<div>
+Log event "sinks" generally record log events to some external representation, 
+typically the console, a file or data store.
+
+"Serilog sinks" are distributed via NuGet.
+A curated list of available sinks is listed here on the wiki.
+
+This example will use the console sink package, 
+which pretty-prints log data, and the file sink package,
+which writes log events to a set of date-stamped text files.
+<cl>
+$ dotnet add package Serilog.Sinks.Console
+$ dotnet add package Serilog.Sinks.File
+Sinks are configured using the WriteTo configuration object.
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
+Log.Information("Ah, there you are!");
+</cl>
+Multiple sinks can be active at the same time. Adding additional sinks is a simple as chaining WriteTo blocks:
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+</cl>    
+</div>    
+<h2>Output templates</h2>
+<div>
+Text-based sinks use output templates to control formatting. 
+this can be modified through the outputTemplate parameter:
+<cl>
+.WriteTo.File("log.txt",
+    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+</cl>        
+The default template, shown in the example above, uses built-in properties like Timestamp and Level.
+Properties from events, including those attached using enrichers, can also appear in the output template.
+
+The {Message:lj} format options cause data embedded in the message to be output in JSON (j) except for string literals, which are output as-is.
+
+For more compact level names, use a format such as {Level:u3} or {Level:w3} for three-character upper- or lowercase level names, respectively.
+
+Add {Properties:j} to the output template to include additional context information.
+</div>
+<h2>Minimum level</h2>
+<div>
+Serilog implements the common concept of a 'minimum level' for log event processing.
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .CreateLogger();
+</cl>    
+The MinimumLevel configuration object provides for one of the log event levels to be specified as the minimum.
+In the example above, log events with level Debug and higher will be processed and ultimately written to the console.
+</div>
+<h2>Level	Usage</h2>
+<div>
+<table>
+<tr>
+<td>Verbose</td><td>Verbose is the noisiest level, rarely (if ever) enabled for a production app.</td>	
+</tr>
+<tr>
+    <td>
+Debug  </td>  <td> Debug is used for internal system events that are not necessarily observable from the outside, but useful when determining how something happened.</td>
+<tr>
+    <td>Information</td><td>Information events describe things happening in the system that correspond to its responsibilities and functions.
+         Generally these are the observable actions the system can perform.</td>
+<tr>
+    <td>Warning</td><td>When service is degraded, endangered, or may be behaving outside of its expected parameters, Warning level events are used.</td>
+<tr>
+  <td>Error</td><td>When functionality is unavailable or expectations broken, an Error event is used.</td>
+<tr>
+    <td>Fatal</td><td>The most critical level, Fatal events demand immediate attention.</td>	
+<tr>
+    <td>Default Level </td><td>if no MinimumLevel is specified, then Information level events and higher will be processed.</td> 
+</table>
+</div>
+<h2>Overriding per sink</h2>
+<div>
+Sometimes it is desirable to write detailed logs to one medium, but less detailed logs to another.
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.File("log.txt")
+    .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information)
+    .CreateLogger();
+</cl>    
+In this example debug logs will be written to the rolling file, while only Information level logs and higher will be written to the console.
+
+All provided sinks support the restrictedToMinimumLevel configuration parameter.
+
+Logger vs. sink minimums - it is important to realize that the logging level can only be raised for sinks, not lowered.
+ So, if the logger's MinimumLevel is set to Information then a sink with Debug as its specified level will still only see Information level events.
+ This is because the logger-level configuration controls which logging statements will result in the creation of events, while the sink-level configuration only filters these.
+ To create a single logger with a more verbose level, use a separate LoggerConfiguration.
+</div>
+<h2>Enrichers</h2>
+<div>
+Enrichers are simple components that add, remove or modify the properties attached to a log event. 
+This can be used for the purpose of attaching a thread id to each event, for example.
+<cl>
+class ThreadIdEnricher : ILogEventEnricher
+{
+    public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
+    {
+        logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(
+                "ThreadId", Thread.CurrentThread.ManagedThreadId));
+    }
+}
+</cl>
+Enrichers are added using the Enrich configuration object.
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .Enrich.With(new ThreadIdEnricher())
+    .WriteTo.Console(
+        outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
+    .CreateLogger();
+</cl>    
+The configuration above shows how a property added by an enricher can be used in output formatting.
+
+If the enriched property value is constant throughout the application run, the shortcut WithProperty method can be used to simplify configuration.
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .Enrich.WithProperty("Version", "1.0.0")
+    .WriteTo.Console()
+    .CreateLogger();
+</cl>    
+Enrichers and the properties they attach are generally more useful with sinks that use structured storage, where the property values can be viewed and filtered.
+</div>
+<h2>Filters</h2>
+<div>
+Events can be selectively logged by filtering. Filters are just predicates over LogEvent, with some common scenarios handled by the Matching class.
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .Filter.ByExcluding(Matching.WithProperty<int>("Count", p => p < 10))
+    .CreateLogger();
+</cl>    
+</div>    
+<h2>Sub-loggers</h2>
+<div>
+Sometimes a finer level of control over what is seen by a sink is necessary. 
+For this, Serilog allows a full logging pipeline to act as a sink.
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.Logger(lc => lc
+        .Filter.ByIncludingOnly(...)
+        .WriteTo.File("log.txt"))
+    .CreateLogger();
+</cl>    
+For scenarios not handled well by sub-loggers, it's fine to create multiple independent top-level pipelines.
+ Only one pipeline can be assigned to Log.Logger, but your app can use as many additional ILogger instances as it requires.
+
+Note that destructuring policies will not have an effect if they are specified inside the WriteTo.Logger() callback since sub-loggers work with already created LogEvents.
+</div>
+<h2>Structured Data</h2>
+<div>
+Serilog is a kind of serialiser.
+In many cases it has good default behaviour that suits its purpose,
+but on occasion it is necessary to instruct Serilog on how to store properties that are attached to a log event.
+
+There are a few unusual terms that Serilog uses to refer to how .NET objects map to its internal (sink-agnostic) property representation. 
+These are explained in more detail below, so you can skip this section if you're planning to read the whole page.
+
+Stringification is the process of taking a supplied .NET property and invoking its ToString() method so that the representation reaching the sinks is a simple string
+Destructuring is the process of taking a complex .NET object and converting it into a structure, which may later be represented as say, a JSON object or XML blob
+Scalars are .NET types that can be represented as atomic values; most value types like int fit this description, but so do some reference types like Uri and string
+
+<h3>Why Control Representation?</h3>
+There are potentially many ways to record an object to the log. 
+Most types can be nicely represented as strings or simple values, but some make more sense to record as collections, and others as structures with named properties.
+
+The storage representation for a log event property makes a big difference to its size in the log, and the memory and processing overhead involved in getting it there.
+
+With this in mind, let’s take a look at how Serilog is configured to work in the simple cases.
+
+<h3>Default Behaviour</h3>
+When properties are specified in log events, Serilog does its best to determine the correct representation.
+
+Simple, Scalar Values
+<cl>
+var count = 456;
+Log.Information("Retrieved {Count} records", count);
+</cl>
+There's little ambiguity as to how the Count property should be stored in this case.
+Being a simple integer value, Serilog will choose that as its representation.
+<cl>{ "Count": 456 }</cl>
+These examples use JSON, but the same principles apply to other formats as well.
+
+Out of the box, Serilog recognises the following list as basic scalar types, regardless of any other policies applied:
+
+Booleans - bool
+Numerics - byte, short, ushort, int, uint, long, ulong, float, double, decimal
+Strings - string, byte[]
+Temporals - DateTime, DateTimeOffset, TimeSpan
+Others - Guid, Uri
+Nullables - nullable versions of any of the types above
+
+<h3>Collections</h3>
+If the object passed as a property is IEnumerable, Serilog will treat that property as a collection.
+<cl>
+var fruit = new[] { "Apple", "Pear", "Orange" };
+Log.Information("In my bowl I have {Fruit}", fruit);
+</cl>
+The equivalent JSON includes an array.
+<cl>{ "Fruit": ["Apple", "Pear", "Orange"] }</cl>
+Serilog makes this choice because most enumerable types are of interest for their elements, and represent poorly as structures or strings.
+
+Serilog also recognises Dictionary<TKey,TValue>, as long as the key type is one of the scalar types listed above.
+<cl>
+var fruit = new Dictionary<string,int> {{ "Apple", 1}, { "Pear", 5 }};
+Log.Information("In my bowl I have {Fruit}", fruit);
+</cl>
+Formatters that support dictionaries can record the property as such.
+<cl>{ "Fruit": { "Apple": 1, "Pear": 5 }}</cl>
+IDictionary<TKey,TValue> - objects implementing dictionary interfaces are not serialised as dictionaries. 
+Firstly because it is less efficient in .NET to check for generic interface compatibility, 
+and second because a single object may implement more than one generic dictionary interface, creating an ambiguity.
+
+<h3>Objects</h3>
+Apart from the types above, which are specially handled by Serilog, 
+it is difficult to make intelligent choices about how data should be rendered and persisted. 
+Objects not explicitly intended for serialisation tend to serialise very poorly.
+
+<cl>
+SqlConnection conn = ...;
+Log.Information("Connected to {Connection}", conn);
+</cl>
+(Yikes! How does one serialise an SqlConnection?)
+
+When Serilog doesn't recognise the type, and no operator is specified (see below) then the object will be rendered using ToString().
+
+<h3>Preserving Object Structure</h3>
+There are many places where, given the capability, it makes sense to serialise a log event property as a structured object.
+DTOs (data transfer objects), messages, events and models are often best logged by breaking them down into properties with values.
+
+For this task, Serilog provides the @ destructuring operator.
+<cl>
+var sensorInput = new { Latitude = 25, Longitude = 134 };
+Log.Information("Processing {@SensorInput}", sensorInput);
+</cl>
+('Destructuring' is a term borrowed from various programming languages; it is a style of pattern matching used to pull values out from structured data.
+The usage is Serilog is only notionally related at the moment, but possible future extensions to this operator could match the broader definition more accurately.)
+
+<h3>Customizing the stored data</h3>
+Often only a selection of properties on a complex object are of interest.
+To customise how Serilog persists a destructured complex type, use the Destructure configuration object on LoggerConfiguration:
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .Destructure.ByTransforming<HttpRequest>(
+        r => new { RawUrl = r.RawUrl, Method = r.Method })
+    .WriteTo...
+</cl>    
+This example transforms objects of type HttpRequest to preserve only the RawUrl and Method properties. 
+A number of different strategies for destructuring are available, and custom ones can be created by implementing IDestructuringPolicy.
+
+Note: the function provided to Destructure.ByTransforming() must return a different type from the one passed in, or it will be called recursively.
+Use a custom IDestructuringPolicy instead to implement conditional transformations.
+
+<h3>Operators vs. Formats</h3>
+While both operators and formats affect the representation of a property, it is important to realise their distinct roles.
+Operators are applied at the point the property is captured, to preserve or structure the data in some way. 
+Formats are used only when displaying properties as text, and don't impact the serialised representation at all.
+
+<h3>Formatting Collections and Structures</h3>
+When format strings are specified for complex properties, they are generally ignored.
+Only enumerables take format string strings into account, passing them to their elements when rendering for display.
+
+<h3>Forcing Stringification</h3>
+Sometimes, the type of an object being logged may not be exactly known, or may vary in a way that is undesirable to preserve in the log events.
+In these cases the $ stringification operator will convert the property value to a string before any other processing takes place, 
+regardless of its type or implemented interfaces.
+<cl>
+var unknown = new[] { 1, 2, 3 }
+Log.Information("Received {$Data}", unknown);
+</cl>
+Despite being an enumerable type, the unknown variable is captured and rendered as a string.
+<cl>Received "System.Int32[]"</cl>
+</div>
+<h2>Writing Log Events</h2>
+<div>
+Log events are written to sinks using the Log static class, or the methods on an ILogger. 
+These examples will use Log for syntactic brevity, but the same methods shown below are available also on the interface.
+
+Log.Warning("Disk quota {Quota} MB exceeded by {User}", quota, user);
+The warning event created from this log method will have two associated properties, Quota and User. 
+Assuming quota is an integer, and user a string, the rendered message may look like the one below.
+
+Disk quota 1024 MB exceeded by "nblumhardt"
+(Serilog renders string values in double quotes to more transparently indicate the underlying data type, 
+and to make the property value stand out from the surrounding message text.)
+
+<h3>Message Template Syntax</h3>
+The string above "Disk quota {Quota} exceeded by {User}" is a Serilog message template. 
+Message templates are a superset of standard .NET format strings, so any format string acceptable to string.Format() will also be correctly processed by Serilog.
+
+Property names are written between { and } brackets
+Property names must be valid C# identifiers, for example FooBar, but not Foo.Bar or Foo-Bar
+Brackets can be escaped by doubling them, e.g. {{ will be rendered as {
+Formats that use numeric property names, like {0} and {1} exclusively,
+ will be matched with the log method's parameters by treating the property names as indexes; this is identical to string.Format()'s behaviour
+If any of the property names are non-numeric, then all property names will be matched from left-to-right with the log method's parameters
+Property names may be prefixed with an optional operator, @ or $, to control how the property is serialised
+Property names may be suffixed with an optional format, e.g. :000, to control how the property is rendered;
+ these format strings behave exactly as their counterparts within the string.Format() syntax
+
+<h3>Message Template Recommendations</h3>
+Fluent Style Guideline - good Serilog events use the names of properties as content within the message as in the User example above.
+    This improves readability and makes events more compact.
+
+Sentences vs. Fragments - log event messages are fragments, not sentences; for consistency with other libraries that use Serilog, avoid a trailing period/full stop when possible.
+
+Templates vs. Messages - Serilog events have a message template associated, not a message. Internally, Serilog parses and caches every template (up to a fixed size limit). Treating the string parameter to log methods as a message, as in the case below, will degrade performance and consume cache memory.
+<cl>
+// Don't:
+Log.Information("The time is " + DateTime.Now);
+</cl>
+Instead, always use template properties to include variables in messages:
+<cl>
+// Do:
+Log.Information("The time is {Now}", DateTime.Now);
+</cl>
+Property Naming - Property names should use PascalCase for consistency with other code and libraries from the Serilog ecosystem.
+
+The message template syntax is specified at messagetemplates.org.
+
+<h3>Log Event Levels</h3>
+Serilog uses levels as the primary means for assigning importance to log events. The levels in increasing order of importance are:
+
+Verbose - tracing information and debugging minutiae; generally only switched on in unusual situations
+Debug - internal control flow and diagnostic state dumps to facilitate pinpointing of recognised problems
+Information - events of interest or that have relevance to outside observers; the default enabled minimum logging level
+Warning - indicators of possible issues or service/functionality degradation
+Error - indicating a failure within the application or connected system
+Fatal - critical errors causing complete failure of the application
+
+<h3>The role of the Information level</h3>
+The Information level is unlike the other specified levels - it has no specified semantics and in many ways expresses the absence of other levels.
+
+Because Serilog allows the event stream from the application to be processed or analysed, the Information level can be thought of as a synonym for event. 
+That is, most interesting application event data should be logged at this level.
+
+<h3>Level Detection</h3>
+In most cases, applications should write events without checking the active logging level.
+Level checking is extremely cheap and the overhead of calling disabled logger methods very low.
+
+In rare, performance-sensitive cases, the recommended pattern for level detection is to store the results of level detection in a field, for example:
+<cl>
+readonly bool _isDebug = Log.IsEnabled(LogEventLevel.Debug);
+The _isDebug field can be checked efficiently before writing log events:
+
+if (_isDebug) Log.Debug("Someone is stuck debugging...");
+</cl>
+<h3>Dynamic levels</h3>
+Many larger/distributed apps need to run at a fairly restricted level of logging, say, Information (my preference) or Warning, 
+and only turn up the instrumentation to Debug or Verbose when a problem has been detected and the overhead of collecting a bit more data is justified.
+
+If an app needs dynamic level switching, the first step is to create an instance of LoggingLevelSwitch when the logger is being configured:
+<cl>var levelSwitch = new LoggingLevelSwitch();</cl>
+This object defaults the current minimum level to Information, so to make logging more restricted, set its minimum level up-front:
+<cl>levelSwitch.MinimumLevel = LogEventLevel.Warning;</cl>
+When configuring the logger, provide the switch using MinimumLevel.ControlledBy():
+<cl>
+var log = new LoggerConfiguration()
+    .MinimumLevel.ControlledBy(levelSwitch)
+    .WriteTo.ColoredConsole()
+    .CreateLogger();
+</cl>    
+Now, events written to the logger will be filtered according to the switch’s MinimumLevel property.
+
+To turn the level up or down at runtime, perhaps in response to a command sent over the network, change the property:
+<cl>
+levelSwitch.MinimumLevel = LogEventLevel.Verbose;
+log.Verbose("This will now be logged");
+</cl>
+<h3> Source Contexts</h3>
+Serilog, like most .NET logging frameworks, allows events to be tagged with their source, generally speaking the name of the class writing them:
+<cl>
+var myLog = Log.ForContext<MyClass>();
+myLog.Information("Hello!");
+</cl>
+The event written will include a property SourceContext with value "MyNamespace.MyClass" that can later be used to filter out noisy events,
+or selectively write them to particular sinks.
+
+Not all properties attached to an event need to be represented in the message template or output format; 
+all properties are carried in a dictionary on the underlying LogEvent object.
+
+For more on filters and logger topology see Configuration Basics.
+
+<h3>Correlation</h3>
+Just as ForContext<T>() tags log events with the class that wrote them, other overloads of ForContext() enable log events to be tagged with identifiers 
+ that later support correlation of the events written with that identifier.
+<cl>
+var job = GetNextJob();
+var jobLog = Log.ForContext("JobId", job.Id);
+jobLog.Information("Running a new job");
+job.Run();
+jobLog.Information("Finished");
+</cl>
+
+Here both of the log events will carry the JobId property including the job identifier.
+
+Tip: when logging to sinks that use a text format, such as Serilog.Sinks.Console,
+ you can include {Properties} in the output template to print out all contextual properties not otherwise included.   
+</div>
+
+<h2>Enrichment</h2>
+<div>
+Log events can be enriched with properties in various ways. A number of pre-built enrichers are provided through NuGet:
+
+<cl> Install-Package Serilog.Enrichers.Thread</cl>
+Configuration for enrichment is done via the Enrich configuration object:
+<cl>
+var log = new LoggerConfiguration()
+    .Enrich.WithThreadId()
+    .WriteTo.Console()
+    .CreateLogger();
+</cl>            
+All events written through log will carry a property ThreadId with the id of the managed thread that wrote them. 
+(By convention, any .WithXyz() methods on Enrich create properties named Xyz.)
+
+<h3> The LogContext</h3>
+Serilog.Context.LogContext can be used to dynamically add and remove properties from the ambient "execution context"; 
+for example, all messages written during a transaction might carry the id of that transaction, and so-on.
+
+This feature must be added to the logger at configuration-time using .FromLogContext():
+<cl>
+var log = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+</cl>        
+Then, properties can be added and removed from the context using LogContext.PushProperty():
+<cl>
+log.Information("No contextual properties");
+
+using (LogContext.PushProperty("A", 1))
+{
+    log.Information("Carries property A = 1");
+
+    using (LogContext.PushProperty("A", 2))
+    using (LogContext.PushProperty("B", 1))
+    {
+        log.Information("Carries A = 2 and B = 1");
+    }
+
+    log.Information("Carries property A = 1, again");
+}
+</cl>
+Pushing property onto the context will override any existing properties with the same name, 
+until the object returned from PushProperty() is disposed, as the property A in the example demonstrates.
+
+Important: properties must be popped from the context in the precise order in which they were added. Behavior otherwise is undefined.
+
+Available enricher packages
+The Serilog project provides:
+<cl>
+Serilog.Enrichers.Environment - WithMachineName() and WithEnvironmentUserName()
+Serilog.Enrichers.Process - WithProcessId()
+Serilog.Enrichers.Thread - WithThreadId()
+Other interesting enrichers:
+
+Serilog.Web.Classic - WithHttpRequestId() and many other enrichers useful in classic ASP.NET applications
+Serilog.Exceptions - WithExceptionDetails() adds additional structured properties from exceptions
+Serilog.Enrichers.Demystify - WithDemystifiedStackTraces()
+Serilog.Enrichers.CorrelationId - WithCorrelationId() will add a CorrelationId property to produced events
+Serilog.Enrichers.ClientInfo - WithClientIp() and WithClientAgent() will add properties with client IP and UserAgent
+Serilog.Enrichers.ExcelDna - WithXllPath() and many other enrichers useful in Excel-DNA add-ins
+Serilog.Enrichers.Sensitive - WithSensitiveDataMasking() masks sensitive data in log events
+Serilog.Enrichers.GlobalLogContext - FromGlobalLogContext() adds properties from the "global context" that can be added dynamically    
+</cl>
+</div>
+
+<h2>Formatting Output</h2>
+<div>
+<h3>Formatting plain text</h3>
+Sinks that write plain text output, such as the console and file-based sinks, generally accept output templates to control how log event data is formatted.
+
+The format of events written by these sinks can be modified using the outputTemplate configuration parameter. For example, to control the console sink:
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console(outputTemplate:
+        "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+    .CreateLogger();
+</cl>    
+A number of built-in properties can appear in output templates:
+<cl>
+Exception - The full exception message and stack trace, formatted across multiple lines. Empty if no exception is associated with the event.
+Level - The log event level, formatted as the full level name. For more compact level names, use a format such as {Level:u3} or {Level:w3} for three-character upper- or lowercase level names, respectively.
+Message - The log event's message, rendered as plain text. The :l format specifier switches of quoting of strings, and :j uses JSON-style rendering for any embedded structured data.
+NewLine - A property with the value of System.Environment.NewLine.
+Properties - All event property values that don't appear elsewhere in the output. Use the :j format to use JSON rendering.
+Timestamp - The event's timestamp, as a DateTimeOffset.
+</cl>
+Properties from events, including those attached using enrichers, can also appear in the output template.
+
+<h3>Formatting JSON</h3>
+Many sinks record log events as JSON, or can be configured to do so. To emit JSON, rather than plain text, a formatter can be specified. 
+This example configures the file sink using the formatter from Serilog.Formatting.Compact.
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File(new CompactJsonFormatter(), "log.txt")
+    .CreateLogger();
+</cl>    
+There are three JSON formatters provided by the Serilog project:
+<cl>
+Serilog.Formatting.Json.JsonFormatter - This is the historical default shipped in the Serilog package. It produces a complete rendering of the log event and supports a few configuration options.
+Serilog.Formatting.Compact.CompactJsonFormatter - A newer, more space-efficient JSON formatter shipped in Serilog.Formatting.Compact.
+Serilog.Formatting.Compact.RenderedCompactJsonFormatter - Also shipped in Serilog.Formatting.Compact, this formatter pre-renders message templates into text.
+</cl>
+<h3>Flexible formatting with ExpressionTemplate</h3>
+The Serilog.Expressions package includes the ExpressionTemplate class for more sophisticated text and JSON formatting.
+Expression templates can include conditional blocks, repeated sections, computations over event properties, and custom formatting functions.
+
+ExpressionTemplate implements ITextFormatter, so it works with any text-based Serilog sink, including Console (with ANSI color themes), File, Debug, and Email.
+
+<h3>Custom formatters</h3>
+Both plain text and JSON formatting are implemented using the ITextFormatter interface. Implementations of this interface can format log events into any text-based format.
+
+Custom JSON formatters can be built around the JsonValueFormatter class included in Serilog. For some details see this blog post.
+
+<h3>Format providers</h3>
+There are a number of options available to formatting the output of individual types like dates.
+One example is the use of the format provider that is accepted by most sinks.
+
+Below is a simple console sample using the Serilog.Sinks.Console sink. This is using the default behavior for rendering a date.
+<cl>
+class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public DateTime Created { get; set; }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateLogger();
+
+        var exampleUser = new User { Id = 1, Name = "Adam", Created = DateTime.Now };
+        Log.Information("Created {@User} on {Created}", exampleUser, DateTime.Now);
+
+        Log.CloseAndFlush();
+    }
+}
+</cl>
+This writes the following output to the console.
+<cl>[18:46:45 INF] Created {"Id": 1, "Name": "Adam", "Created": "2018-05-17T18:46:45.9064879+10:00", "$type": "User"} on 05/17/2018 18:46:45</cl>
+There may be scenarios where it is desirable to override or specify the way a DateTime is formatted.
+This can be done via the implementation of IFormatProvider. This strategy applies to any type that you pass to Serilog.
+<cl>
+class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public DateTime Created { get; set; }
+}
+
+class CustomDateFormatter : IFormatProvider
+{
+    readonly IFormatProvider basedOn;
+    readonly string shortDatePattern;
+    public CustomDateFormatter(string shortDatePattern, IFormatProvider basedOn)
+    {
+        this.shortDatePattern = shortDatePattern;
+        this.basedOn = basedOn;
+    }
+    public object GetFormat(Type formatType)
+    {
+        if (formatType == typeof(DateTimeFormatInfo))
+        {
+            var basedOnFormatInfo = (DateTimeFormatInfo)basedOn.GetFormat(formatType);
+            var dateFormatInfo = (DateTimeFormatInfo)basedOnFormatInfo.Clone();
+            dateFormatInfo.ShortDatePattern = this.shortDatePattern;
+            return dateFormatInfo;
+        }
+        return this.basedOn.GetFormat(formatType);
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var formatter = new CustomDateFormatter("dd-MMM-yyyy", new CultureInfo("en-AU"));
+        Log.Logger = new LoggerConfiguration() 
+            .WriteTo.Console(formatProvider: new CultureInfo("en-AU")) // Console 1
+            .WriteTo.Console(formatProvider: formatter)                // Console 2
+            .CreateLogger();
+
+        var exampleUser = new User { Id = 1, Name = "Adam", Created = DateTime.Now };
+        Log.Information("Created {@User} on {Created}", exampleUser, DateTime.Now);
+
+        Log.CloseAndFlush();
+    }
+}
+//The following is the output of the above example, with two consoles sinks configured.
+
+[13:57:12 INF] Created {"Id": 1, "Name": "Adam", "Created": "2020-09-01T13:56:59.7803740-05:00", "$type": "User"} on 1/09/2020 1:57:12 PM
+[13:57:12 INF] Created {"Id": 1, "Name": "Adam", "Created": "2020-09-01T13:56:59.7803740-05:00", "$type": "User"} on 01-Sep-2020 1:57:12 PM
+</cl>    
+</div>
+<h2>AppSettings</h2>
+<div>
+Serilog supports a simple < appSettings >-based configuration syntax in App.config and Web.config files to set the minimum level, 
+enrich events with additional properties, and control log output.
+
+Serilog is primarily configured using code, with settings support intended as a supplementary feature. 
+It is not comprehensive but most logger configuration tasks can be achieved using it.
+
+<h3>Enabling < appSettings > configuration</h3>
+The < appSettings > support package needs to be installed from NuGet:
+
+<cl>Install-Package Serilog.Settings.AppSettings</cl>
+To read configuration from < appSettings > use the ReadFrom.AppSettings() extension method on your LoggerConfiguration:
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.AppSettings()
+    ... // Other configuration here, then
+    .CreateLogger()
+</cl>    
+You can mix and match XML and code-based configuration,
+but each sink must be configured either using XML or in code - sinks added in code can't be modified via app settings.
+
+<h3> Configuring the logger</h3>
+To configure the logger, an < appSettings > element should be included in the program's App.config or Web.config file.
+<cl>
+< ?xml version="1.0" encoding="utf-8" ? >
+< configuration >
+    < appSettings >
+    < add key="serilog:minimum-level" value="Verbose" / >
+    < !-- More settings here -- >
+</cl>    
+<h3>Setting the minimum level</h3>
+To set the logging level for the app use the serilog:minimum-level setting key.
+<cl> < add key="serilog:minimum-level" value="Verbose" / ></cl>    
+Valid values are those defined in the LogEventLevel enumeration: Verbose, Debug, Information, Warning, Error, Fatal.
+
+<h3>Adding a sink</h3>
+Sinks are added with the serilog:write-to key. The setting name matches the configuration method name that you'd use in code, so the following are equivalent:
+<cl>    .WriteTo.LiterateConsole()</cl>
+In XML:
+<cl> < add key="serilog:write-to:LiterateConsole" / ></cl>
+
+NOTE: When using serilog:* keys need to be unique.
+
+Sink assemblies must be specified using the serilog:using syntax. For example, to configure
+<cl>
+    < add key="serilog:using:LiterateConsole" value="Serilog.Sinks.Literate" / >
+    < add key="serilog:write-to:LiterateConsole"/ >
+</cl>    
+If the sink accepts parameters, these are specified by appending the parameter name to the setting.
+<cl>    .WriteTo.RollingFile(@"C:\Logs\myapp-{Date}.txt", retainedFileCountLimit: 10)</cl>
+In XML:
+<cl>
+    < add key="serilog:using:RollingFile" value="Serilog.Sinks.RollingFile" / >
+    < add key="serilog:write-to:RollingFile.pathFormat" value="C:\Logs\myapp-{Date}.txt" / >
+    < add key="serilog:write-to:RollingFile.retainedFileCountLimit" value="10" / >
+</cl>    
+Any environment variables specified in a setting value (e.g. %TEMP%) will be expanded appropriately when read.
+
+Using sink extensions from additional assemblies
+To use sinks and enrichers from additional assemblies, specify them with the serilog:using key.
+
+For example, to use configuration from the Serilog.Sinks.EventLog assembly:
+<cl>
+    < add key="serilog:using:EventLog" value="Serilog.Sinks.EventLog" / >
+    < add key="serilog:write-to:EventLog.source" value="Serilog Demo" / >
+</cl>    
+<h3>Enriching with properties</h3>
+To attach additional properties to log events, specify them with the serilog:enrich:with-property directive.
+
+For example, to add the property Release with the value "1.2-develop" to all events:
+<cl>    < add key="serilog:enrich:with-property:Release" value="1.2-develop" / > </cl>
+<h3>Adding minimum level overrides</h3>
+Since Serilog 2.1, minimum level overrides can be added to change the minimum level for some specific namespaces.
+This is done with the setting key serilog:minimum-level:override: followed by the source context prefix.
+
+For instance, the following are equivalent :
+<cl>
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Mvc", LogEventLevel.Error)
+</cl>    
+and in XML
+<cl>
+    < add key="serilog:minimum-level" value="Information" / >
+    < add key="serilog:minimum-level:override:Microsoft" value="Warning" / >
+    < add key="serilog:minimum-level:override:Microsoft.AspNetCore.Mvc" value="Error" / >     
+</cl>    
+</div>

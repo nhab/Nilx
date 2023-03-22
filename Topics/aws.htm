@@ -1,0 +1,985 @@
+<head<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+<script src='/nilx/assets/js/blocks.js'></script>
+<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/androidstudio.min.css"><!--github-dark.min.css-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/csharp.min.js" integrity="sha512-9ia7twbVj1OAzFDTFTzf/x2LrAc/Hf1KlzHTbyxfJZXA+YQP2eXOFWr7E3ZZ6SgtAZZza2PDXvcQjXQ5nZ9GAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body  onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+<h2>Resources</h2>
+<div>
+    https://www.tutorialspoint.com/amazon_web_services/index.htm
+</div>
+<h2>AWS Basics</h2>
+<div>
+<pre>
+    <h3>Cloud Computing?</h3>
+    Cloud computing is an internet-based computing service in which 
+    large groups of remote servers are networked to allow centralized data storage,
+    and online access to computer services or resources.
+
+<b>Features</b>
+    - Users can provision and release resources on-demand.
+    - Resources can be scaled up or down automatically, depending on the load.
+    - Resources are accessible over a network with proper security.
+    - Cloud service providers can enable a pay-as-you-go model, 
+      where customers are charged based on the type of resources and per usage.
+
+<b>Cloud Service Models</b>
+    - IaaS (Infrastructure as a Service) 
+        capability of provision processing, storage, and network connectivity on demand.
+    - PaaS ( Platform as a Service) 
+        The customer can then use these components for building their own application
+        like databases, queues, workflow engines, e-mails, etc.
+    - SaaS ( Software as a Service )
+       third-party providers provide end-user applications to their customers with some administrative capability 
+<h3>Basic Architecture</h3>
+<b>AWS EC2</b>
+    - stands for Elastic Compute Cloud.
+    - allow users to use virtual machines of different configurations
+
+<b>Load balancing</b>
+   - hardware or software load over web servers, 
+     that improver's the efficiency of the server as well as the application. 
+
+<b>Elastic Load Balancing</b>
+    - it distributes the traffic to EC2 instances across multiple available sources, 
+      and dynamic addition and removal of Amazon EC2 hosts from the load-balancing rotation.
+    - Elastic Load Balancing can dynamically grow and shrink the load-balancing capacity to adjust to traffic demands 
+      and also support sticky sessions to address more advanced routing needs.
+
+<b>Amazon Cloud-front</b>
+    - It is responsible for content delivery, i.e. used to deliver website. 
+      It may contain dynamic, static, and streaming content using a global network of edge locations.
+    - Requests for content at the user's end are automatically routed to the nearest edge location. 
+
+<b>Elastic Load Balancer</b>
+    - It is used to spread the traffic to web servers, which improves performance.
+    -  traffic is distributed to EC2 instances over multiple available zones, 
+      and dynamic addition and removal of Amazon EC2 hosts from the load-balancing rotation.
+    - Elastic Load Balancing can dynamically grow and shrink the load-balancing capacity as per the traffic conditions
+
+<b>Security Management</b>
+    - EC2 provides a feature called <b>security groups</b>, 
+      which is similar to an inbound <b>network firewall</b>, 
+      in which we have to specify the protocols, ports, and source IP ranges that are allowed to reach your EC2 instances.
+
+    - Each EC2 instance can be assigned one or more security groups, 
+      each of which routes the appropriate traffic to each instance. 
+      Security groups can be configured using specific subnets or IP addresses which limits access to EC2 instances.
+
+<b>Elastic Caches</b>
+    - is a web service that manages the <b>memory cache</b> in the cloud. 
+    - cache helps to reduce the load on the services, 
+      improves the performance and scalability on the database tier 
+      by caching frequently used information.
+
+<b>Amazon RDS ( Relational Database Service )</b>
+    - provides a similar access as that of MySQL, Oracle, or Microsoft SQL Server database engine. 
+      The same queries, applications, and tools can be used with Amazon RDS.
+    - It automatically patches the database software and manages backups as per the user`s instruction.
+    - It also supports point-in-time recovery. 
+
+<b>Hosting RDMS on EC2 Instances , EBS (Elastic Block Storage)</b>
+    - Amazon RDS allows users to <b>install RDBMS of your choice</b> like MySQL, Oracle, SQL Server, DB2, etc. on an EC2 instance 
+    - Amazon EC2 uses Amazon EBS (Elastic Block Storage) similar to network-attached storage. 
+      All data and logs running on EC2 instances should be placed on Amazon EBS <b>volumes</b>, 
+      which will be available even if the database host fails.
+    - Amazon EBS volumes automatically provide redundancy within the availability zone,
+      which increases the availability of simple disks. 
+      Further if the volume is not sufficient for our databases needs, 
+      volume can be added to increase the performance for our database.
+    - Using Amazon RDS, the service provider manages the storage and we only focus on managing the data.
+
+<b>Storage & Backups:  Amazon S3 (Simple Storage Service)</b>
+    - AWS cloud provides various options <b>for storing, accessing, and backing up </b>web application data and assets. 
+      The Amazon S3 (Simple Storage Service) provides a simple web-services interface 
+      that can be used to store and retrieve any amount of data,at any time, from anywhere on the web.
+    - Amazon S3 stores data as <b>objects</b> within resources called <b>buckets</b>. 
+      The user can store as many objects as per requirement within the bucket, 
+      and can read, write and delete objects from the bucket.
+    - Amazon EBS is effective for data that needs to be accessed as block storage
+      and requires persistence beyond the life of the running instance, 
+      such as database partitions and application logs.
+    - Amazon EBS volumes can be maximized up to 1 TB, 
+      and these volumes can be striped for larger volumes and increased performance. 
+      Provisioned IOPS volumes are designed to meet the needs of database workloads 
+      that are sensitive to storage performance and consistency.
+    - Amazon EBS currently supports up to 1,000 IOPS per volume. 
+      We can stripe multiple volumes together to deliver thousands of IOPS per instance to an application.
+    
+<b>Auto Scaling</b>
+    - The difference between AWS cloud architecture and the traditional hosting model is that 
+      AWS can dynamically scale the web application fleet on demand to handle changes in traffic.
+    
+    - In the traditional hosting model, 
+      traffic forecasting models are generally used to provision hosts ahead of projected traffic.
+    In AWS, instances can be provisioned on the fly according to a set of triggers for scaling the fleet out and back in. 
+
+    Amazon Auto Scaling can create capacity groups of servers that can grow or shrink on demand.
+<!------------------------------------------------->
+<h3>AWS Management Console</h3>
+    - AWS Management Console is a web application for managing Amazon Web Services.
+    - This console provides a user interface to perform AWS tasks like :
+       working with Amazon S3 buckets,
+       launching and connecting to Amazon EC2 instances, 
+       setting Amazon CloudWatch alarms, etc.
+
+<b>How to Access AWS ?</b>
+    - Click on <b>"mangement console> navigation bar >services"</b>. 
+     then Select the choice from the list of categories and their sub-categories 
+     the select a service.
+ <!------------------------------------------------->   
+<h3>Amazon Web Services-Console Mobile App</h3>
+- provided by Amazon Web Services:
+    <b>EC2 (Elastic Compute Cloud)</b>
+        Browse, filter and search instances.
+        View configuration details.
+        Check status of CloudWatch metrics and alarms.
+        Perform operations over instances like start, stop, reboot, termination.
+        Manage security group rules.
+        Manage Elastic IP Addresses.
+        View block devices.
+    <b>Elastic Load Balancing</b>
+        Browse, filter and search load balancers.
+        View configuration details of attached instances.
+        Add and remove instances from load balancers.
+    <b>S3</b>
+        Browse buckets and view their properties.
+        View properties of objects.
+    <b>Route 53</b>
+        Browse and view hosted zones.
+        Browse and view details of record sets.
+    <b>RDS (Relational Database Service)</b> 
+        Browse, filter, search and reboot instances.
+        View configuration details, security and network settings.
+    <b>Auto Scaling</b>    
+        View group details, policies, metrics and alarms.
+        Manage the number of instances as per the situation.
+    <b>Elastic Beanstalk</b>
+        View applications and events.
+        View environment configuration and swap environment CNAMEs.
+        Restart app servers.
+    <b>DynamoDB</b>
+        View tables and their details like metrics, index, alarms, etc.
+    <b>CloudFormation</b>
+        View stack status, tags, parameters, output, events, and resources.
+    <b>OpsWorks</b>
+        View configuration details of stack, layers, instances and applications.
+        View instances, its logs, and reboot them.
+    <b>CloudWatch</b>
+        View CloudWatch graphs of resources.
+        List CloudWatch alarms by status and time.
+        Action configurations for alarms.
+    <b>Services Dashboard</b>
+        Provides information of available services and their status.
+        All information related to the billing of the user.
+        Switch the users to see the resources in multiple accounts.
+<!------------------------------------------------->
+<h3>AWS Account</h3>
+<b>How to Use AWS Account?</b>
+        1- Create an AWS account:
+            - (limited)fully functional free account for one year for users to use and learn the different components of AWS:
+              https://aws.amazon.com
+            - sign-up for new account and enter the required details.
+        2- Sign-up for AWS services.
+        3- Create your password and access your account credentials.
+        4- Activate your services in credits section.
+
+<b>AWS Identity & Access Management (IAM)</b>
+    IAM is a limited user account,
+    Hence, we do not have to use the root account in our day-to-day activities 
+    as the root account has unrestricted access to our AWS resources.
+
+<b>How to Create Users in IAM?</b>
+    1 - Open the link https://console.aws.amazon.com/iam/ to sign-in to AWS Management console.
+    2 - Select the Users option on the left navigation pane to open the list of all users.
+    3 - We can also create New Users using the Create New Users option, a new window will open. 
+      Enter the user-name which we want to create. Select the create option and a new user will be created.
+    4 - We can also see Access Key IDs and secret keys by selecting Show Users Security Credentials link.
+       We can also save these details on the computer using the Download Credentials option.
+    5 - We can manage the user`s own security credentials like 
+       creating password, managing MFA devices, managing security certificates, creating/deleting access keys, adding user to groups, etc.
+</pre>
+</div>
+<h2>Amazon Computer Services</h2>
+<div>
+<pre>
+<h3>Elastic Compute Cloud (EC2)</h3>
+    - EC2 is a web service interface that provides resizable compute capacity in the AWS cloud.
+    - It is designed for developers to have complete control over web-scaling and computing resources.
+    - EC2 instances can be resized and the number of instances scaled up or down as per our requirement. 
+    - These instances can be launched in one or more geographical locations or regions, and Availability Zones (AZs). 
+    - Each region comprises of several AZs at distinct locations, connected by low latency networks in the same region.
+
+<b>EC2 Components</b>
+    Operating System Support
+        - Amazon EC2 supports multiple OS in which we need to pay additional licensing fees like: 
+            Red Hat Enterprise, SUSE Enterprise and Oracle Enterprise Linux, UNIX, Windows Server, etc.
+            These OS needs to be implemented in conjunction with Amazon Virtual Private Cloud (VPC).
+
+    Security
+        - Users have complete control over the visibility of their AWS account.
+        - In AWS EC2, the security systems allow create groups and place running instances into it. 
+        - You can specify the groups with which other groups may communicate, 
+        as well as the groups with which IP subnets on the Internet may talk.
+
+    Pricing
+        - AWS offers a variety of pricing options, depending on the type of resources, types of applications and database. 
+        - It allows the users to configure their resources and compute the charges accordingly.
+
+    Fault tolerance
+        - Amazon EC2 allows the users to access its resources to design fault-tolerant applications. 
+        - EC2 also comprises <b>geographic regions</b> and isolated locations known as <b>availability zones</b> 
+          for fault tolerance and stability.
+        - It doesn`t share the exact locations of regional data centers for security reasons.
+        - When the users launch an instance, they must select an AMI that's in the same region where the instance will run.
+        - Instances are distributed across multiple availability zones to provide continuous services in failures, 
+          and Elastic IP (EIPs) addresses are used to quickly map failed instance addresses 
+        - to concurrent running instances in other zones to avoid delay in services.
+
+    Migration
+        - This service allows the users to move existing applications into EC2. 
+        - It costs $80.00 per storage device and $2.49 per hour for data loading.
+        - This service suits those users having large amount of data to move.
+
+<b>How to Use AWS EC2</b>
+     1  - Sign-in to AWS account and open IAM console: 
+            https://console.aws.amazon.com/iam/.
+     2  - In the navigation Panel > create/view groups and follow the instructions.
+     3  - Create IAM user. 
+            Choose users in the navigation pane. 
+            Then create new users and add users to the groups.
+     4  - Create a Virtual Private Cloud using the following instructions.
+            Open the Amazon VPC console :
+               https://console.aws.amazon.com/vpc/
+            Select VPC from the navigation panel. 
+            Then select the same region in which we have created key-pair.
+            Select start VPC wizard on VPC dashboard.
+            Select VPC configuration page and make sure that VPC with single subnet is selected. 
+            Then choose Select.
+            VPC with a single public subnet page will open. 
+            Enter the VPC name in the name field and leave other configurations as default.
+            Select create VPC, then select Ok.
+     5  - Create WebServerSG security groups and add rules using the following instructions.
+            On the VPC console, select Security groups in the navigation panel.
+            Select create security group and fill the required details like group name, name tag, etc.
+            Select your VPC ID from the menu. Then select yes, create button.
+            Now a group is created. Select the edit option in the inbound rules tab to create rules.
+     6  - Launch EC2 instance into VPC using the following instructions.
+            Open EC2 console :
+               https://console.aws.amazon.com/ec2/
+            Select launch instance option in the dashboard.
+            A new page will open. 
+            Choose Instance Type and provide the configuration. 
+            Then select Next: Configure Instance Details.
+            A new page will open. 
+            Select VPC from the network list. 
+            Select subnet from the subnet list and leave the other settings as default.
+            Click Next until the Tag Instances page appears.
+     7  - On the Tag Instances page, provide a tag with a name to the instances. 
+            Select Next: Configure Security Group.
+     8  - On the Configure Security Group page, choose the Select an existing security group option. 
+            Select the WebServerSG group that we created previously, and then choose Review and Launch.
+     9  - Check Instance details on Review Instance Launch page then click the Launch button.
+     10  - A pop up dialog box will open. 
+            Select an existing key pair or create a new key pair. 
+            Then select the acknowledgement check box and click the Launch Instances button
+
+<h3>AWS Auto Scaling</h3>
+    - auto scaling allows you to scale your Amazon EC2 instances up or down automatically
+     as per the instructions set by the user.
+    - Parameters like minimum and maximum number of instances are set by the user. 
+
+<b>Elastic Load Balancing (ELB) </b>
+    - automatically distributes incoming request traffic across multiple Amazon EC2 instances 
+    and results in achieving higher fault tolerance.
+    - It detects unfit instances and automatically reroutes traffic to fit instances
+      until the unfit instances have been restored in a round-robin manner. 
+    - However, if we need more complex routing algorithms, then choose other services like Amazon Route53.
+
+<b>ELB consists of the following three components:</b>
+
+<b>Load Balancer</b>
+        This includes monitoring and handling the requests incoming through the Internet/intranet 
+        and distributes them to EC2 instances registered with it.
+
+        <b>Control Service</b>
+        This includes automatically scaling of handling capacity in response to incoming traffic 
+        by adding and removing load balancers as required.
+        It also performs fitness check of instances.
+
+        <b>SSL Termination</b>
+        ELB provides SSL termination that saves precious CPU cycles, encoding and decoding SSL within your EC2 instances attached to the ELB.
+        An X.509 certificate is required to be configured within the ELB. 
+        This SSL connection in the EC2 instance is optional, we can also terminate it.
+
+        <b>Features of ELB</b>
+    - ELS is designed to handle unlimited requests per second with gradually increasing load pattern.
+    - We can configure EC2 instances and load balancers to accept traffic.
+    - We can add/remove load balancers as per requirement without affecting the overall flow of information.
+    - It is not designed to handle sudden increase in requests like online exams, online trading, etc.
+    - Customers can enable Elastic Load Balancing within a single Availability Zone 
+      or across multiple zones for even more consistent application performance.
+
+<b>How to Create Load Balancers?</b>
+     1 - Go to Amazon EC2 console using this link - https://console.aws.amazon.com/ec2/.
+     2 - Select your load balancer region from the region menu on the right side.
+     3 - Select Load Balancers from the navigation pane and choose Create Load Balancer option. 
+        A pop-up window will open and we need to provide the required details.
+     4 - In load Balancer name box: Enter name of your load balancer.
+     5 - In create LB inside box: Select the same network which you have selected for instances.
+     6 - Select Enable advanced VPC configuration, if selected default VPC.
+     7  - Click the Add button and a new pop-up will appear to select subnets from the list of available subnets as shown in the following screenshot. 
+        Select only one subnet per availability zone. This window will not appear if we do not select Enable advanced VPC configuration.
+     8  - Choose Next; a pop-up window will open. After selecting a VPC as your network, assign security groups to Load Balancers.
+     9  - Follow the instructions to assign security groups to load balancers and click Next.
+     10  - A new pop-up will open having health checkup configuration details with default values. 
+        Values can be set on our own, however these are optional. Click on Next: Add EC2 Instances.
+     11  - A pop-up window will open having information about instances like registered instances, 
+        add instances to load balancers by selecting ADD EC2 Instance option and fill the information required. Click Add Tags.
+     12  - Adding tags to your load balancer is optional. 
+            To add tags click the Add Tags Page and fill the details such as key, value to the tag. 
+            Then choose Create Tag option. Click Review and Create button.
+            A review page opens on which we can verify the setting. 
+            We can even change the settings by choosing the edit link.
+     13  - Click Create to create your load balancer and then click the Close button.
+    
+<b>How to Delete a Load Balancer?</b>
+     1  - Go to Amazon EC2 console using this link  - https://console.aws.amazon.com/ec2/.    
+     2  - Choose Load Balancers option from the navigation pane.
+     3  - Select Load balancer and click the Action button.
+     4  - Click the Delete button. An alert window will appear, click the Yes, Delete button. 
+
+<h3>Amazon WorkSpace</h3>
+    - Is a fully managed desktop computing service in the cloud 
+    that allows its customers to provide <b>cloud-based desktops to their end-users</b>.
+    - Through this the end users can access the documents, applications, and resources 
+    using devices of their choice such as laptops, iPad, Kindle Fire, or Android tablets. 
+    This service was launched to meet its customers rising demand for Cloud based 'Desktop as a Service' (DaaS).
+
+<b>How It Works?</b>
+    Each WorkSpace is a persistent Windows Server 2008 R2 instance that looks like Windows 7, hosted on the AWS cloud. 
+    Desktops are streamed to users via PCoIP and the data backed up will be taken on every 12 hours by default.
+
+<b>How to Create Amazon Workspaces?</b>
+    1-  Create and configure the VPC. 
+    2- Create an AD Directory using the following steps.
+        - open Amazon WorkSpace Console:
+           https://console.aws.amazon.com/workspaces/
+        - Select Directories, then Setup Directory in the navigation panel.
+        - A new page will open.
+         Select Create Simple AD button, then fill the required details.
+      In VPC section, fill the VPC details and select Next step
+      A review page will open to review the information. 
+      Make changes if incorrect, then click the Create Simple AD button.
+    3- Create a WorkSpace using the following steps.
+        Use the following link to open Amazon WorkSpace Console  - https://console.aws.amazon.com/workspaces/
+        Select Workspaces and then launch WorkSpaces option in the navigation panel.
+        Select the cloud directory. Enable/disable WorkDocs for all users in this directory, then click the Yes, Next button.
+        A new page will open. 
+        Fill the details for the new user and select the Create Users button.
+        Once the user is added to the WorkSpace list, select Next.
+        Enter the number of bundles needed in the value field of WorkSpaces Bundles page, then select Next.
+        A review page will open. Check the details and make changes if required. Select Launch WorkSpaces.
+        There will be a message to confirm the account, after which we can use WorkSpaces.
+    4 - Test your WorkSpaces using the following steps.
+        Download and install the Amazon WorkSpaces client application from:
+            https://clients.amazonworkspaces.com/
+        Run the application. For the first time, we need to enter the registration code received in email and click Register.
+        Connect to the WorkSpace by entering the user name and password for the user. Select Sign In.
+        Now WorkSpace desktop is displayed. 
+        Open this link http://aws.amazon.com/workspaces/ on THE web browser. 
+        Navigate and verify that the page can be viewed.
+        A message saying "Congratulations! Your Amazon WorkSpaces cloud directory has been created, 
+        and your first WorkSpace is working correctly and has Internet access"”" will be received.
+<b>Amazon WorkSpaces Features</b>
+    Network Health Check-Up
+    Client Reconnect
+        This AWS WorkSpaces feature allows the users to access to their WorkSpace without entering their credentials every time when they disconnect.
+        The application installed at the client`s device saves an access token in a secure store, 
+        which is valid for 12 hours and uses to authenticate the right user. 
+        Users click on the Reconnect button on the application to get access on their WorkSpace. 
+    Auto Resume Session
+        This AWS WorkSpaces feature allows the client to resume a session that was disconnected due to any reason in network connectivity 
+        within 20 minutes (by default and can be extended for 4 hours). Users can disable this feature any time in group policy section.
+    Console Search
+        This feature allows Administrators to search for WorkSpaces by their user name, bundle type, or directory.
+<h3>AWS Lambda</h3>
+    - AWS Lambda is a responsive cloud service that 
+    <b>inspects actions within the application and responds by deploying the user-defined codes, known as functions. </b>
+     
+    - It automatically manages the compute resources across multiple availability zones 
+      and scales them when new actions are triggered.
+    - AWS Lambda supports the code written in Java, Python and Node.js, 
+      and the service can launch processes in languages supported by Amazon Linux (includes Bash, Go & Ruby).
+    -Following are some recommended tips while using AWS Lambda:
+        . Write your Lambda function code in a stateless style.
+        . Never declare any function variable outside the scope of the handler.
+        . Make sure to have a set of +rx permissions on your files in the uploaded ZIP 
+          to ensure Lambda can execute code on your behalf.
+        . Delete old Lambda functions when no longer required.
+
+<b>How to Configure AWS Lambda?</b>
+    To configure AWS Lambda for the first time:
+    1 - Sign in to AWS account.
+    2 - Select Lambda from AWS services section.
+    3 - Select a Blueprint (optional) and click the Skip button.
+    4  - Provide the necessary details to create a Lambda function and paste the Node.js code 
+        that will be triggered automatically whenever a new item is added in DynamoDB. 
+        Select all the required permissions.
+    5 - Click the Create Function button.
+        Now, when we select the Lambda service and select the Event Sources tab, 
+        there will be no records.
+        Add at least one source to the Lambda function to work. 
+        Here, we are adding DynamoDB Table to it.
+        We have created a table using DynamoDB (we will discuss this in detail in DynamoDB chapter).
+    6 - Select the stream tab and associate it with the Lambda function.
+       You will see this entry in Event Sources Tab of Lambda Service page.
+    7 - Add some entries into the table. When the entry gets added and saved, 
+        then Lambda service should trigger the function. 
+        It can be verified using the Lambda logs.
+    8 - To view logs, select the Lambda service and click the Monitoring tab.
+        Then click the View Logs in CloudWatch.
+</pre>
+</div>
+<h2>Amazon Network Services</h2>
+<div>
+<pre>
+<h3>Virtual Private Cloud (VPC)</h3>
+    - VPC allows the users to use AWS resources in a virtual network. 
+        The users can customize their virtual networking environment as they like, such as 
+        selecting own IP address range, creating subnets, and configuring route tables and network gateways.
+    - The list of AWS services that can be used with Amazon VPC are  -
+        Amazon EC2
+        Amazon Route 53
+        Amazon WorkSpaces
+        Auto Scaling
+        Elastic Load Balancing
+        AWS Data Pipeline
+        Elastic Beanstalk
+        Amazon Elastic Cache
+        Amazon EMR
+        Amazon OpsWorks
+        Amazon RDS
+        Amazon Redshift
+        How to Use Amazon VPC?
+        Following are the steps to create VPC.
+
+    Create VPC
+         1  - Open the Amazon VPC console by using the following link  - https://console.aws.amazon.com/vpc/
+         2  - Select creating the VPC option on the right side of the navigation bar. 
+            Make sure that the same region is selected as for other services.
+         3  - Click the start VPC wizard option, then click VPC with single public subnet option on the left side.
+         4  - A configuration page will open. 
+             Fill in the details like VPC name, subnet name and leave the other fields as default. 
+             Click the Create VPC button.
+         5  - A dialog box will open, showing the work in progress. 
+
+        When it is completed, select the OK button.
+        The Your VPCs page opens which shows a list of available VPCs. 
+        The setting of VPC can be changed here.
+
+    Select/Create VPC Group
+         1  - Open the Amazon VPC console by using the following link  - https://console.aws.amazon.com/vpc/
+         2  - Select the security groups option in the navigation bar, then choose create security group option.
+         3  - A form will open, enter the details like group name, name tag, etc. 
+         Select ID of your VPC from VPC menu, then select the Yes, create button.
+         4  - The list of groups opens. Select the group name from the list and set rules. 
+           Then click the Save button.
+    
+    Launch Instance into VPC
+        1  - Open the Amazon VPC console using the following link  - https://console.aws.amazon.com/vpc/
+        2  - Select the same region as while creating VPC and security group.
+        3  - Now select the Launch Instance option in the navigation bar.
+        4  - A page opens. Choose the AMI which is to be used.
+        5  - A new page opens. Choose an Instance Type and select the hardware configuration. 
+             Then select Next: Configure Instance Details.
+        6  - Select the recently created VPC from the Network list, and the subnet from the Subnet list. 
+            Leave the other settings as default and click Next till the Tag Instance page.
+        7  - On the Tag Instance page, tag the instance with the Name tag. 
+            This helps to identify your instance from the list of multiple instances. 
+            Click Next: Configure Security Group.
+        8  - On the Configure Security Group page, select the recently created group from the list. 
+            Then, select Review and Launch button.
+        9  - On the Review Instance Launch page, check your instance details, then select Launch.
+        10  - A dialog box appears.
+             Choose the option Select an existing key pair or create a new key pair, 
+            then click the Launch Instances button.
+        11  - The confirmation page open which shows all the details related to instances.
+
+    Assign Elastic IP Address to VPC Instances
+     1  - Open the Amazon VPC console: https://console.aws.amazon.com/vpc/
+     2  - Select Elastic IP`s option in the navigation bar.
+     3  - Select Allocate New Address. Then select Yes, Allocate button.
+     4  - Select your Elastic IP address from the list, then select Actions, and then click the Associate Address button.
+     5  - A dialog box will open. First select the Instance from the Associate with list.
+      Then select your instance from the Instance list. Finally click the Yes, Associate button.
+
+    Delete a VPC
+        There are several steps to delete VPC without losing any resources associated with it:
+        1  - Open the Amazon VPC console : https://console.aws.amazon.com/vpc/
+        2  - Select Instances option in the navigation bar.
+        3  - Select the Instance from the list, then select the Actions → Instance State → Terminate button.
+        4  - A new dialog box opens.
+            Expand the Release attached Elastic IPs section, and select the checkbox next to the Elastic IP address.
+            Click the Yes, Terminate button.
+        5  - Again open the Amazon VPC console : https://console.aws.amazon.com/vpc/
+        6  - Select the VPC from the navigation bar. Then select Actions & finally click the Delete VPC button.
+        7  - A confirmation message appears. Click the Yes, Delete button.
+
+    Features of VPC
+        Many connectivity options  
+            There are various connectivity options that exist in Amazon VPC.
+            Connect VPC directly to the Internet via public subnets.
+            Connect to the Internet using Network Address Translation via private subnets.
+            Connect securely to your corporate datacenter via encrypted IPsec hardware VPN connection.
+            Connect privately to other VPCs in which we can share resources across multiple virtual networks
+                    through AWS account.
+            Connect to Amazon S3 without using an internet gateway and have good control over S3 buckets,
+                    its user requests, groups, etc.
+            Combine connection of VPC and datacenter is possible by configuring Amazon VPC route tables
+                    to direct all traffic to its destination.
+        Easy to use  
+            Ease of creating a VPC in very simple steps by selecting network set-ups as per requirement. 
+                    Click "Start VPC Wizard", then Subnets, IP ranges, route tables, 
+                    and security groups will be automatically created.
+        Easy to backup data  
+             Periodically backup data from the datacenter into Amazon EC2 instances by using Amazon EBS volumes.
+        Easy to extend network using Cloud 
+             Move applications, launch additional web servers and increase storage capacity 
+             by connecting it to a VPC
+<h3>Route 53</h3>
+    Amazon Route 53 is a highly available and scalable Domain Name System <b>(DNS)</b> web service. 
+    It is designed for developers and corporates to route the end users to Internet applications 
+    by translating human readable names like www.mydomain.com, into the numeric IP addresses like 192.0.2.1 
+    that computers use to connect to each other.
+<b>How to Configure Amazon Route 53?</b>
+1- open https://console.aws.amazon.com/route53
+2- Click create hosted zone option on the top left corner of the navigation bar
+3-A form page opens. Provide the required details such as domain name and comments, then click the Create button.
+4-Hosted zone for the domain will be created.
+   There will be four DNS endpoints called delegation set
+   and these endpoints must be updated in the domain names Nameserver settings.
+5- If it is godaddy.com then select domain`s control panel and update the Route 53 DNS endpoints. 
+   Delete the rest default values. It will take 2-3 minutes to update.
+6- Go back to Route 53 console and select the go to record sets option.
+   This will show you the list of record sets.
+   By default, there are two record sets of type NS & SOA.
+7- To create your record set, select the create record set option. 
+   Fill the required details such as: Name, Type, Alias, TTL seconds, Value, Routing policy, etc.
+    Click the Save record set button.
+8-Create one more record set for some other region so that there are two record sets 
+  with the same domain name pointing to different IP addresses with your selected routing policy.
+
+Once completed, the user requests will be routed based on the network policy.
+<b>Features of Route 53</b>
+Easy to register your domain 
+    - We can purchase all level of domains like .com, .net, .org, etc. directly from Route 53.
+Highly reliable
+     - Route 53 is built using AWS infrastructure. 
+     - Its distributed nature towards DNS servers ensures
+      a consistent ability to route applications of end users.
+Scalable 
+     - Route 53 is designed in such a way that it automatically handles large volume queries 
+       without the user`s interaction. 
+Can be used with other AWS Services 
+    - Route 53 also works with other AWS services. 
+    It can be used to map domain names to our Amazon EC2 instances, Amazon S3 buckets, Amazon and other AWS resources.
+Easy to use 
+    - It is easy to sign-up, easy to configure DNS settings,
+      and provides quick response to DNS queries.
+Health Check:
+     Route 53 monitors the health of the application. 
+     If an outage is detected, then it automatically redirects the users to a healthy resource.
+Cost-Effective 
+    - Pay only for the domain service and the number of queries that the service answers for each domain.
+Secure 
+    - By integrating Route 53 with AWS (IAM), there is complete control over every user within the AWS account
+    , such as deciding which user can access which part of Route 53.
+
+<h3>Direct Connect</h3>
+  - AWS Direct Connect permits to create a private network connection from our network to AWS location.
+  - It uses 802.1q VLANs, which can be partitioned into multiple virtual interfaces 
+    to access public resources using the same connection.
+  - This results in reduced network cost and increased bandwidth. 
+    Virtual interfaces can be reconfigured at any time as per the requirement.
+
+Requirements to Use AWS Direct Connect
+    Our network must meet one of the following conditions to use AWS Direct Connect -
+        . Our network should be in the AWS Direct Connect location. 
+          to know about the available AWS Direct Connect locations https://aws.amazon.com/directconnect/.
+        . We should be working with an AWS Direct Connect partner 
+          who is a member of the AWS Partner Network (APN).
+          to know the list of AWS Direct Connect partners - https://aws.amazon.com/directconnect/
+        . Our service provider must be portable to connect to AWS Direct Connect.
+
+    Additionally, our network must meet the following necessary conditions -
+        . Connections to AWS Direct Connect requires single mode fiber, 1000BASE-LX (1310nm) for 1 gigabit Ethernet, 
+            or 10GBASE-LR (1310nm) for 10 gigabit Ethernet.
+            Auto Negotiation for the port must be disabled. 
+            Support for 802.1Q VLANs across these connections should be available.
+        . Network must support Border Gateway Protocol (BGP) and BGP MD5 authentication. 
+        Optionally, we may configure Bidirectional Forwarding Detection (BFD).
+
+How to Configure AWS Direct Connect?
+  Following are the steps to configure AWS Direct Connect -
+
+ 1 - Open the AWS Direct Connect console :
+    https://console.aws.amazon.com/directconnect/
+ 2 - Select AWS Direct Connect region from the navigation bar.
+ 3 - Welcome page of AWS Direct Connect opens. Select Get Started with Direct Connect.
+ 4 - Create a Connection dialog box opens up. Fill the required details and click the Create button.
+    AWS will send an confirmation email within 72 hours to the authorized user.
+5 - Create a Virtual Interface using the following steps.
+    Open AWS console page again.
+    Select Connection in the navigation bar, then select Create Virtual Interface. 
+    Fill the required details and click the Continue button.
+    Select Download Router Configuration, then click the Download button.
+    
+Verify the Virtual Interface (optional).
+ To verify the AWS Direct Connect connections use the following procedures.
+    To verify virtual interface connection to the AWS cloud -
+        Run traceroute and verify that the AWS Direct Connect identifier is in the network trace.
+    To verify virtual interface connection to Amazon VPC - 
+        Use any pingable AMI and launch Amazon EC2 instance into the VPC that is attached to the virtual private gateway.
+    When an instance is running, get its private IP address and ping the IP address to get a response.
+<b>Features of Direct Connect</b>
+Reduces bandwidth costs - The cost gets reduced in both ways, i.e. it transfers the data to and from AWS directly. 
+    - The data transferred over your dedicated connection is charged at reduced AWS Direct Connect data transfer 
+    rate rather than Internet data transfer rates.
+    - Compatible with all AWS services - AWS Direct Connect is a network service, supports all the AWS services 
+    that are accessible over the Internet, like Amazon S3, Amazon EC2, Amazon VPC, etc.
+    - Private connectivity to Amazon VPC - AWS Direct Connect can be used to establish a private virtual interface 
+       from our home-network to Amazon VPC directly with high bandwidth.
+    - Elastic
+         - AWS Direct Connect provides 1 Gbps and 10 Gbps connections,
+          having provision to make multiple connections as per requirement.
+    Easy and simple - Easy to sign up on AWS Direct Connect using the AWS Management Console. 
+       Using this console, all the connections and virtual interfaces can be managed.
+</pre>
+</div>
+<h2>Amazon Storage Services</h2>
+<div>
+<pre>
+<h3>Amazon S3 ( Simple Storage Service ) </h3>
+Amazon S3 (Simple Storage Service) is a scalable, high-speed, low-cost web-based service 
+designed for <b>online backup and archiving</b> of data and application programs. 
+It allows to upload, store, and download any type of files up to 5 TB in size. 
+This service allows the subscribers to access the same systems that Amazon uses to run its own web sites.
+The subscriber has control over the accessibility of data, i.e. privately/publicly accessible.
+
+How to Configure S3?
+    1- open the Amazon S3 console using this link - https://console.aws.amazon.com/s3/home
+    2- Step 2 - Create a Bucket 
+    3-  Add an Object to a bucket (upload files)
+
+<b>EBS ( Elastic Block Store )</b>
+Elastic Block Store (EBS) is a block storage system used to store persistent data.
+ Amazon EBS is suitable for EC2 instances by providing highly available block level storage volumes. 
+ It has three types of volume, i.e. General Purpose (SSD), Provisioned IOPS (SSD), and Magnetic.
+These three volume types differ in performance, characteristics, and cost.
+<b>EBS Volume Types</b>
+EBS General Purpose (SSD)
+    - This volume type is suitable for small and medium workloads 
+        like Root disk EC2 volumes, small and medium database workloads,
+        frequently logs accessing workloads, etc. 
+    - By default, SSD supports 3 IOPS (Input Output Operations per Second)/GB means 1 GB volume will give 3 IOPS, 
+    and 10 GB volume will give 30 IOPS. 
+    - Its storage capacity of one volume ranges from 1 GB to 1 TB. 
+    -The cost of one volume is $0.10 per GB for one month.
+
+Provisioned IOPS (SSD)
+    This volume type is suitable for the most demanding I/O intensive, transactional workloads and large relational, 
+    EMR and Hadoop workloads, etc.
+    By default, IOPS SSD supports 30 IOPS/GB means 10GB volume will give 300 IOPS.
+    Its storage capacity of one volume ranges from 10GB to 1TB. 
+    The cost of one volume is $0.125 per GB for one month for provisioned storage and $0.10 per provisioned IOPS for one month.
+
+EBS Magnetic Volumes
+    It was formerly known as standard volumes. 
+    This volume type is suitable for ideal workloads like infrequently accessing data, i.e. data backups for recovery, logs storage, etc.
+    Its storage capacity of one volume ranges from 10GB to 1TB. 
+    The cost of one volume is $0.05 per GB for one month for provisioned storage and $0. 05 per million I/O requests
+
+<b>Volumes Attached to One Instance</b>
+Each account will be limited to 20 EBS volumes.
+For a requirement of more than 20 EBS volumes, contact Amazon`s Support team. 
+We can attach up to 20 volumes on a single instance and each volume ranges from 1GB to 1TB in size.
+    
+In EC2 instances, we store data in local storage which is available till the instance is running.
+However, when we shut down the instance, the data gets lost. 
+Thus, when we need to save anything, it is advised to save it on Amazon EBS,
+as we can access and read the EBS volumes anytime, once we attach the file to an EC2 instance.
+
+<b>How to Set Up Amazon EBS?</b>
+1- Create Amazon EBS volume using the following steps.
+    . Open the Amazon EC2 console.
+    . Select the region in the navigation bar where the volume is to be created.
+    . In the navigation pane, select Volumes, then select Create Volume.
+    . Provide the required information like Volume Type list, Size, IOPS, Availability zone, etc.
+     then click the Create button.
+2- Store EBS Volume from a snapshot
+3- Attach EBS Volume to an Instance 
+4- Detach a volume from Instance.
+<h3>AWS - Storage Gateway</h3>
+AWS Storage Gateway provides integration between the on-premises IT environment and the AWS storage infrastructure.
+ The user can store data in the AWS cloud for scalable, data security features and cost-efficient storage.
+
+ AWS Gateway offers 2 types of storage:
+    1-volume based 2- tape based
+<b>Volume Gateways</b>
+This storage type provides cloud-backed storage volumes 
+which can be mount as Internet Small Computer System Interface (iSCSI) devices
+from on-premises application servers.
+
+Gateway-cached Volumes
+    AWS Storage Gateway stores all the on-premises application data in a storage volume in Amazon S3.
+    Its storage volume ranges from 1GB to 32 TB and up to 20 volumes with a total storage of 150TB. 
+    We can attach these volumes with iSCSI devices from on-premises application servers. It is of two categories 
+
+Cache Storage Disk
+    Every application requires storage volumes to store their data. 
+    This storage type is used to initially store data when it is to be written to the storage volumes in AWS.
+    The data from the cache storage disk is waiting to be uploaded to Amazon S3 from the upload buffer.
+    The cache storage disk keeps the most recently accessed data for low-latency access.
+    When the application needs data, the cache storage disk is first checked before checking Amazon S3.
+
+    There are few guidelines to determine the amount of disk space to be allocated for cache storage. 
+    We should allocate at least 20% of the existing file store size as cache storage. 
+    It should be more than the upload buffer.
+
+Upload buffer disk -
+    This type of storage disk is used to store the data before it is uploaded to Amazon S3 over SSL connection.
+    The storage gateway uploads the data from the upload buffer over an SSL connection to AWS.
+
+Snapshots - 
+    Sometimes we need to back up storage volumes in Amazon S3.
+    These backups are incremental and are known as snapshots. 
+    The snapshots are stored in Amazon S3 as Amazon EBS snapshots. 
+    Incremental backup means that a new snapshot is backing up only the data that has changed since the last snapshot. 
+    We can take snapshots either at a scheduled interval or as per the requirement.
+
+Gateway-stored Volumes
+    When the Virtual Machine (VM) is activated, 
+    gateway volumes are created and mapped to the on-premises direct-attached storage disks.
+     Hence, when the applications write/read the data from the gateway storage volumes, 
+     it reads and writes the data from the mapped on-premises disk.
+
+    A gateway-stored volume allows to store primary data locally
+     and provides on-premises applications with low-latency access to entire datasets.
+    We can mount them as iSCSI devices to the on-premises application servers. 
+    It ranges from 1 GB to 16 TB in size and supports up to 12 volumes per gateway
+     with a maximum storage of 192 TB.
+
+<h3>Gateway-Virtual Tape Library (VTL)</h3>
+This storage type provides a virtual tape infrastructure that scales seamlessly with your business needs 
+and eliminates the operational burden of provisioning, scaling, and maintaining a physical tape infrastructure. 
+Each gateway-VTL is preconfigured with media changer and tape drives, 
+that are available with the existing client backup applications as iSCSI devices. 
+Tape cartridges can be added later as required to archive the data.
+
+Few terms used in Architecture are explained below:
+
+Virtual Tape 
+    Virtual tape is similar to a physical tape cartridge. 
+    It is stored in the AWS cloud. 
+    We can create virtual tapes in two ways: 
+        by using AWS Storage Gateway console or by using AWS Storage Gateway API. 
+    The size of each virtual tape is from 100 GB to 2.5 TB. 
+    The size of one gateway is up to 150 TB and can have maximum 1500 tapes at a time.
+
+Virtual Tape Library (VTL) 
+    Each gateway-VTL comes with one VTL. 
+    VTL is similar to a physical tape library available on-premises with tape drives. 
+    The gateway first stores data locally, then asynchronously uploads it to virtual tapes of VTL.
+
+Tape Drive 
+     A VTL tape drive is similar to a physical tape drive that can perform I/O operations on tape. 
+     Each VTL consists of 10 tape drives that are used for backup applications as iSCSI devices.
+
+Media Changer 
+     - A VTL media changer is similar to a robot 
+     that moves tapes around in a physical tape library's storage slots and tape drives. 
+     - Each VTL comes with one media changer that is used for backup applications as iSCSI device.
+
+Virtual Tape Shelf (VTS) 
+     A VTS is used to archive tapes from gateway VTL to VTS and vice-a-versa.
+
+Archiving Tapes 
+     When the backup software ejects a tape, the gateway moves the tape to the VTS for storage. 
+     It is used data archiving and backups.
+
+Retrieving Tapes 
+     Tapes archived to the VTS cannot be read directly so to read an archived tape, 
+     we need to retrieve the tape from gateway VTL 
+     either by using the AWS Storage Gateway console or by using the AWS Storage Gateway API.
+
+<h3>AWS - CloudFront</h3>
+CloudFront is a CDN (Content Delivery Network). 
+It retrieves data from Amazon S3 bucket and distributes it to multiple datacenter locations. 
+It delivers the data through a network of data centers called edge locations. 
+The nearest edge location is routed when the user requests for data,
+ resulting in lowest latency, low network traffic, fast access to data, etc.
+
+How AWS CloudFront Delivers the Content?
+    1 - The user accesses a website and requests an object to download like an image file.
+    2 - DNS routes your request to the nearest CloudFront edge location to serve the user request.
+    3 - At edge location, CloudFront checks its cache for the requested files.
+     If found, then returns it to the user otherwise does the following :
+        First CloudFront compares the request with the specifications and forwards it to the applicable origin server
+        for the corresponding file type.
+        The origin servers send the files back to the CloudFront edge location.
+        As soon as the first byte arrives from the origin, CloudFront starts forwarding it to the user
+        and adds the files to the cache in the edge location for the next time 
+        when someone again requests for the same file.
+</pre>
+</div>
+<h2>Database Services</h2>
+<div>
+<pre>
+<h3>Relational Database Service ( RDS )</h3>
+Amazon RDS (Relational Database Service) is a fully-managed SQL database cloud service 
+that allows to create and operate relational databases. 
+Using RDS you can access your files and database anywhere in a cost-effective and highly scalable way.
+<h3>How to Set Up?</h3>
+1 - Login to AWS management console and open Amazon RDS console :
+     https://console.aws.amazon.com/rds/
+2 - Select the region where the DB instance is to be created,
+   at the top right corner of the Amazon RDS console.
+3 - Select Instances in the navigation pane, then click Launch DB Instance button.
+4 - The Launch DB Instance Wizard opens. Select the type of instance as required to launch and click the Select button.
+5 - On the Specify DB Details page, provide the required details and click the Continue button.
+6 - On the Additional configuration page,
+    provide the additional information required to launch the MySQL DB instance and click the Continue button.
+7 - On Management options page, make the choices and click the Continue button
+<h3>How to Connect Database to MySQL DB Instance?</h3>
+1 - Type the following command in the command prompt on a client computer 
+     to connect a database on MySQL DB instance (using the MySQL monitor).
+2 - Replace < myDBI > with DNS name of your DB instance, 
+   < myusername > with your master user-name & < mypassword > with your master password.
+<code>PROMPT> mysql -h < myDBI> -P 3306 -u < myusername> -p</code>
+After running the above command, the output looks like -
+<code>
+Welcome to the MySQL monitor.  Commands end with ; or \g. 
+Your MySQL connection id is 350 
+Server version: 5.2.33-log MySQL Community Server (GPL)
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.  
+mysql>
+</code>
+
+<h3>DynamoDB ( NoSQL database service  )</h3>
+Amazon DynamoDB is a fully managed NoSQL database service 
+that allows to create database tables that can store and retrieve any amount of data.
+It automatically manages the data traffic of tables over multiple servers and maintains performance.
+It also relieves the customers from the burden of operating and scaling a distributed database. 
+Hence, hardware provisioning, setup, configuration, replication, software patching, cluster scaling, etc. is managed by Amazon.
+<b>How to Run DynamoDB on Computer?</b>
+1- Download DynamoDB (.jar file) using the following link. It supports multiple Operating Systems like Windows, Linux, Mac, etc.
+.tar.gz format - http://dynamodb-local.s3-website-us-west2.amazonaws.com/dynamodb_local_latest.tar.gz
+.zip format - http://dynamodb-local.s3-website-us-west2.amazonaws.com/dynamodb_local_latest.zip.
+
+Once download is complete, extract the contents and copy the extracted directory to a location wherever you want.
+Open the command prompt and navigate to the directory where you extracted DynamoDBLocal.jar,
+ and execute the following command :
+<code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb</code>
+
+2 - Create a Table using the following steps.
+    . Open AWS Management Console and select DynamoDB.
+    . Select the region where the table will be created and click the Create Table button.
+    . Create Table window opens. Fill the details into their respective fields and click the Continue button.
+    . Finally, a review page opens where we can view details. Click the Create button.
+
+<h3>Redshift</h3>
+Amazon Redshift is a fully managed data warehouse service in the cloud. 
+Its datasets range from 100s of gigabytes to a petabyte.
+The initial process to create a data warehouse is to launch a set of compute resources called nodes, 
+which are organized into groups called cluster. 
+After that you can process your queries.
+<b>How to Set Up Amazon Redshift?</b>
+1- Sign in and launch a Redshift Cluster using the following steps.
+    Sign in to AWS Management console and open Amazon Redshift console - https://console.aws.amazon.com/redshift/
+    Select the region where the cluster is to be created using the Region menu on the top right side corner of the screen.
+    Click the Launch Cluster button.
+    The Cluster Details page opens. Provide the required details and click the Continue button till the review page.
+
+2- Configure security group to authorize client connections to the cluster.
+ The authorizing access to Redshift depends on whether the client authorizes an EC2 instance or not.
+
+    Follow these steps to security group on EC2-VPC platform.
+    Open Amazon Redshift Console and click Clusters on the navigation pane.
+    Select the desired Cluster. Its Configuration tab opens.
+    Click the Security group.
+    Once the Security group page opens, click the Inbound tab.
+    Click the Edit button. Set the fields 
+3- Connect to Redshift Cluster.
+
+There are two ways to connect to Redshift Cluster :
+    Directly or via SSL.
+
+Following are the steps to connect directly.
+    Connect the cluster by using a SQL client tool. It supports SQL client tools that are compatible with PostgreSQL JDBC or ODBC drivers.
+    Use the following links to download - JDBC https://jdbc.postgresql.org/download/postgresql-8.4-703.jdbc4.jar
+    ODBC https://ftp.postgresql.org/pub/odbc/versions/msi/psqlodbc_08_04_0200.zip 
+    or http://ftp.postgresql.org/pub/odbc/versions/msi/psqlodbc_09_00_0101x64.zip for 64 bit machines
+
+Use the following steps to get the Connection String.
+    Open Amazon Redshift Console and select Cluster in the Navigation pane.
+    Select the cluster of choice and click the Configuration tab.
+    A page opens as shown in the following screenshot with JDBC URL under Cluster Database Properties. Copy the URL.
+Use the following steps to connect the Cluster with SQL Workbench/J.
+    Open SQL Workbench/J.   
+    Select the File and click the Connect window.   
+    Select Create a new connection profile and fill the required details like name, etc. 
+    Click Manage Drivers and Manage Drivers dialog box opens. 
+    Click the Create a new entry button and fill the required details.
+    Leave the Classname box and Sample URL box blank. Click OK.
+    Choose the Driver from the list.
+    In the URL field, paste the JDBC URL copied.
+    Enter the username and password to their respective fields.
+    Select the Autocommit box and click Save profile list.
+</pre>
+</div>
+<h2>Amazon Analytics Services</h2>
+<div><pre>
+   <h3> AWS - Amazon Kinesis</h3>
+   <h3> AWS - Elastic MapReduce</h3>  
+   <h3> AWS - Data Pipeline</h3>   
+   <h3> AWS - Machine Learning  </h3>   
+</pre></div>
+<h2>Amazon Application Services</h2>
+<div><pre>
+<h3>AWS - Simple WorkFlow Service</h3>  
+The following services fall under Application Services section:
+
+    Amazon CloudSearch
+    Amazon Simple Queue Services (SQS)
+    Amazon Simple Notification Services (SNS)
+    Amazon Simple Email Services (SES)
+    Amazon SWF
+<b>Amazon Simple Workflow Service (SWF)</b>
+(SWF) is a task based API that makes it easy to coordinate work across distributed application components.
+ It provides a programming model and infrastructure for coordinating distributed components 
+ and maintaining their execution state in a reliable way. 
+ Using Amazon SWF, we can focus on building the aspects of the application that differentiates it.
+
+A workflow is a set of activities that carry out some objective, including logic that coordinates the activities to achieve the desired output.
+Workflow history consists of complete and consistent record of each event that occurred since the workflow execution started.
+ It is maintained by SWF.
+
+How to Use SWF?
+    Step 1 - Sign in to AWS account and select SWF on the Services dashboard.
+    Step 2 - Click the Launch Sample Walkthrough button.
+    Step 3 - Run a Sample Workflow window opens. Click the Get Started button.
+    Step 4 - In the Create Domain section, click the Create a new Domain radio button and then click the Continue button.
+    Step 5 - In Registration section, read the instructions then click the Continue button.
+    Step 6 - In the Deployment section, choose the desired option and click the Continue button.
+    Step 7 - In the Run an Execution section, choose the desired option and click the Run this Execution button.
+
+    Finally, SWF will be created and will be available in the list.
+ <h3>AWS - WorkMail </h3> 
+
+</pre></div>

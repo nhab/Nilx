@@ -1,0 +1,179 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+	<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />
+what is?</h2>
+<p>is a key-value storage engine with lots of functions.
+In another word, Redis is a No SQL database which works on the concept of key-value pair.
+
+it support 5 data type:
+strings, hashes, lists, sets and ordered sets.
+
+Regardless of the type, a value is accessed by a key. 
+
+While the key is stored as a byte array, you'll mostly use a string as a key.
+
+Redis stands for Remote DIctionary Server.
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+What is Redis used for?</h2>
+<p>
+Redis is an advanced key-value store that
+can function as a NoSQL database or as a memory-cache store
+to improve performance when serving data that is stored in system memory.
+redis can used in a seperate server
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+Why we use Redis server?</h2>
+<p>
+Caching is a vitally important way that we can write software 
+that is often much faster for our users. 
+Redis is a key-value store that we can use as a cache
+for our most frequently used data.
+We can use it as an alternative to
+forcing every single API call to hit our database.
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+different executables that are part of Redis:</h2>
+<p>
+<b>redis-server </b>is the Redis Server itself.
+<b>redis-sentinel</b> is the Redis Sentinel executable (monitoring and failover).
+<b>redis-cli</b> is the command line interface utility to talk with Redis.
+<b>redis-benchmark</b> is used to check Redis performances.
+<b>redis-check-aof</b> and redis-check-dump are useful in the rare event of corrupted data files.
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+How to interact with Redis?</h2>
+<p>
+Once installed in a server, run the Redis CLI (Command Line Interface)
+to issue commands to Redis. 
+While working on the CLI tool, your command-line prompt will change to: 
+redis>
+
+sample commands:
+$ redis-cli                                                                
+redis 127.0.0.1:6379> ping
+PONG
+redis 127.0.0.1:6379> set mykey somevalue
+OK
+redis 127.0.0.1:6379> get mykey
+"somevalue"
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to launch the client and connect to the Redis server?</h2>
+<p>
+When installed locally:
+
+<code>redis-cli.exe -h localhost -p 6379</code>
+From a virtual machine on Azure. Remember to enable non-SSL port because the Redis client may not be compatible with SSL
+
+<code>redis-cli.exe -h <host name from Azure> -p 6379 -a <password from Azure></password></code>
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+Example command — List all keys</h2>
+<code>
+redis localhost:6379> keys *
+        39) "foo:rand:000000000016"
+        40) "foo:rand:000000000017"
+        41) "foo:rand:000000000018"
+        42) "foo:rand:000000000019"
+        43) "mykey-f9d21bca-48f6-4cf8-b68d-1652b9533633"
+        44) "mykey-43d5b08a-5b60-4c72-8820-dcb6f6372b4b"
+</code>    
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />    
+Example command — Delete a specific key</h2>
+<code>redis localhost:6379> del mykey-0001</code>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+Example command — Delete all keys</h2>
+<code>redis localhost:6379> flushall</code>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+Example command — Set a key-value cached item</h2>
+<code>localhost:6379> set key001 value001
+        Ok</code>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Example command — Get a cached item give the key</h2>
+<code>localhost:6379> get key001
+        "value001"</code>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />
+C# client application — Programming with StackExchange general purpose client</h2>
+<p>
+We will continue to confine our discussions to using Redis as a key-value pair cache. Redis has a .NET package which wraps up the underlying TCP/IP communications and gives us a nice IDistributedCache to work with.
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />Which NUGET package?</h2>
+<p>
+StackExchange.Redis is a managed wrapper which abstracts the low level client server interactions with the Redis server. This package is completely dependency injection aware.
+</p>
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to create an instance of IDistributedCache without Dependency Injection</h2>
+<p>
+This snippet demonstrates creating an instance of IDistributedCache via explicit construction, given the host and port number. This is a very simple example and I would recommend following the DI route
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to create an instance of IDistributedCache via dependency injection?</h2>
+<p>
+This snippet demonstrates creating an instance of IDistributedCache via the ServiceCollection DI container, given the host and port number.
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to create an instance the IServer interface for performing management operations?</h2>
+<p>The IServer interface is useful for managing an instance of Redis cache.</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />IServer or IDistributedCache — which one do we need ?</h2>
+<p>The interface IDistributedCache will address the requirements if you key-value pair caching is all you need. However, if you want to manage the Redis cache server itself (e.g. flush the cache, enumerate keys, etc.) then the interface IServer is more powerful
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to work with IDistributedCache without having to intall Redis server locally?</h2>
+<p>
+The class MemoryDistributedCache provides an inproc implementation of IDistributedCache and very useful during local development and debugging.
+</p>
+
+<h2 style="display:flex"><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />How to conditionally inject an IDistributedCache implementation of MemoryDistributedCache during local development?
+    </h2>
+<p>
+You are using the key-value caching functionality of Redis. You are coding an Azure function (could be an ASP.NET Core Web app) and you want to develop and debug the code. Do you need to install Redis locally? Not neccessary. Through a couple of lines of clever DI, you can “fool” your classes to use the MemoryDistributedCache implementation of the interface IDistributedCache.
+
+In this snippet we are checking for the the value of an environment variable and conditionally injecting the desired implementation of IDistributedCache
+</p>
+
+
+</body>
+

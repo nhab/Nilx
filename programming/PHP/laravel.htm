@@ -1,0 +1,87 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />References</h2>
+<div>
+	<a href="https://www.codecheef.org/article/create-your-first-laravel-9-crud-application-step-by-step">first laravel-9 crud application step by step</a>
+	<a href="https://www.tutorialspoint.com/laravel/laravel_overview.htm">overview</a>
+</div>
+<h2>
+<input type="button" value="-"
+        class="toggleButton"  onclick="toggle(this)" />laravel</h2>
+<div>
+<b>Installation</b>
+<code>composer create-project laravel/laravel –-prefer-dist</code>
+
+<b>Complete installation and creating first boilerplate project:
+1.create basic project:
+</b><code>composer create-project --prefer-dist laravel/laravel my-blog
+</code>
+2.create database:
+	Go to http://localhost/phpmyadmin/
+	and Create a new Database by clicking on new (shown below in red)
+	Name it my_blog and click Create
+3. set configurations:
+	3.1. Open your file explorer and navigate to my-blog folder
+	3.2. Open the .env file in your code editor
+	3.3. Change the following in the file:-
+	APP_NAME key to name of your blog i.e. “My Blog”
+	DB_DATABASE key to database name i.e. my_blog
+
+<b>starting laravel service</b>
+<code>php artisan servecode
+</code>
+this will run the project at 
+<code>http://localhost:8000</code>
+
+
+<b>BasicRouting</b>
+	routing is meant to route your request to an appropriate controller. 
+	The routes of the application can be defined in app/Http/routes.php file.
+	Here is the general route syntax for each of the possible request.
+<pre><code>
+	Route::get('/', function () {
+		return 'Hello World';
+	});
+	Route::post('foo/bar', function () {
+		return 'Hello World';
+	});
+	Route::put('foo/bar', function () {
+	//
+	});
+	Route::delete('foo/bar', function () {
+	//
+	});
+	
+	Example
+		app/Http/routes.php
+	< ?php
+	Route::get('/', function () {
+	return view('welcome');
+	});
+	
+	parametric example:
+	Route::get('ID/{id}',function($id){
+	echo 'ID: '.$id;
+	});
+
+	Optional Parameters Example:
+	Route::get('/user/{name?}',function($name = 'Virat'){
+		echo "Name: ".$name;
+	});
+</code></pre>
+	
+</div>
+</body>
+</html>

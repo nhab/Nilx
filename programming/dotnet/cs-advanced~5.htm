@@ -1,0 +1,746 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Resources</h2>
+    <p>
+    <a href='https://www.tutorialsteacher.com/csharp/csharp-generics'>generics</a>
+    <a href='https://www.albahari.com/nutshell/code.aspx'>in a nutshell</a>
+    </p>
+  <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />String formatting</h2>
+ <pre>
+ <code>
+ // float with two decimal places
+String.Format("{0:0.00}", 123.4567);      // "123.46"
+String.Format("{0:0.00}", 123.4);         // "123.40"
+String.Format("{0:0.00}", 123.0);         // "123.00"
+ </code>
+ </pre>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />Multidimensional Arrays</h2>
+<pre>
+    <code>
+	int[, , , ,] arr5d; // five-dimensional array
+
+    int[,] arr2d = new int[3,2]{    {1, 2},  {3, 4}, {5, 6}   };
+    // or 
+    int[,] arr2d = {     {1, 2},   {3, 4},  {5, 6}    };
+    </code>
+    </pre>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />Jagged Arrays: An Array of Array</h2>
+    <code>
+    int[][] jArray = new int[2][]; 
+
+    jArray[0] = new int[3]{1, 2, 3};
+
+    jArray[1] = new int[4]{4, 5, 6, 7 };
+    </code>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />Indexers</h2>
+        <div>
+    An indexer is a special type of property that allows a class or a structure to be accessed like an array for its internal collection
+    Example:
+<pre>    <code>
+        class StringDataStore
+        {
+            private string[] strArr = new string[10]; // internal data storage
+
+            public string this[int index]
+            {
+                get
+                {
+                    if (index < 0 || index >= strArr.Length)
+                        throw new IndexOutOfRangeException("Index out of range");
+
+                        return strArr[index];
+                }
+
+                set
+                {
+                    if (index < 0 ||  index >= strArr.Length)
+                        throw new IndexOutOfRangeException("Index out of range");
+
+                    strArr[index] = value;
+                }
+            }
+        }
+    </code></pre>
+   </div>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />Generics</h2>
+  <div>
+    Generic means not specific to a particular data type.
+    Example of definition:
+    <pre><code>
+        class DataStore<T>
+        {
+            public T Data { get; set; } //generic field of the generic class
+            public T GetData(int index){...} //generic method (which returns generic class).
+            //(generic methods can also be defined in a none-generic class)
+        }
+    </code></pre>
+    The DataStore is a generic class. 
+    
+    T is called type parameter, which can be used as a type of fields, properties, method parameters, return types, and delegates in the DataStore class. 
+    You can also define multiple type parameters separated by a comma.
+    <b>Instanciation:</b>You can create an instance of generic classes by specifying an actual type in angle brackets:
+        DataStore<string> store = new DataStore<string>();
+</div>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />C# Generic Constraints</h2>
+<div>
+    C# allows you to use constraints to restrict client code to specify certain types while instantiating generic types. 
+    It will give a compile-time error if you try to instantiate a generic type using a type that is not allowed by the specified constraints.
+
+    There are six types of constraints.
+
+        where T : struct  - Type argument must be a value type
+        where T : class - Type argument must be a reference type
+        where T : new() - Type argument must have a public parameterless constructor.
+        where T : <base class> - Type argument must inherit from <base class> class.
+        where T : <interface> -  Type argument must implement from <interface> interface.
+        where T : U - There are two type arguments T and U. T must be inherit from U.
+
+    <a href='https://www.tutorialsteacher.com/csharp/constraints-in-generic-csharp'>more..</a>
+   </div>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />multicast delegates</h2>
+<div>
+     multicasting is the ability to create an invocation list, or chain, of methods that will be automatically called when a delegate is invoked.
+    A delegate instance can reference not just a single target method, but also a list of target methods.
+    As a result, one delegate instance can call many methods. It is called multicast.
+    All delegate instances have multicast capability.
+
+    Example:
+    <code>
+        // All delegate instances have multicast capability:
+
+        SomeDelegate d = SomeMethod1;
+        d += SomeMethod2;
+
+        d();
+        " -- SomeMethod1 and SomeMethod2 both fired\r\n".Dump();
+
+        d -= SomeMethod1;
+        d();
+        " -- Only SomeMethod2 fired".Dump();
+
+        void SomeMethod1 () => "SomeMethod1".Dump();
+        void SomeMethod2 () => "SomeMethod2".Dump();
+
+        delegate void SomeDelegate();
+    </code>
+</div>    
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />yield return</h2>
+ <div>
+        if you want a collection that you can use "foreach" on, but gathering the items into the collection is expensive for some reason 
+        (like querying them out of a database), AND you will often not need the entire collection, 
+        then you create a function that builds the collection one item at a time and yields it back to the consumer
+        (who can then terminate the collection effort early).
+
+        t first sight, yield return is a .NET sugar to return an IEnumerable.
+
+        Without yield, all the items of the collection are created at once:
+        <code>
+        class SomeData
+        {
+            public SomeData() { }
+
+            static public IEnumerable<SomeData> CreateSomeDatas()
+            {
+                return new List<SomeData> {
+                    new SomeData(), 
+                    new SomeData(), 
+                    new SomeData()
+                };
+            }
+        }
+    </code>
+        Same code using yield, it returns item by item:
+        <code>
+        class SomeData
+        {
+            public SomeData() { }
+
+            static public IEnumerable<SomeData> CreateSomeDatas()
+            {
+                yield return new SomeData();
+                yield return new SomeData();
+                yield return new SomeData();
+            }
+        }
+    </code>
+        The advantage of using yield is that if the function consuming your data simply needs the first item of the collection, the rest of the items won't be created.
+
+        The yield operator allows the creation of items as it is demanded. That's a good reason to use it.
+</div>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />yield break</h2>
+    <code>
+    // The yield break statement indicates that the iterator block should exit early,
+    // without returning more elements:
+
+    foreach (string s in Foo (true))
+    Console.WriteLine (s);
+
+    static IEnumerable<string> Foo (bool breakEarly)
+    {
+        yield return "One";
+        yield return "Two";
+
+        if (breakEarly)
+            yield break;
+
+        yield return "Three";
+    }
+</code>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />Access modifiers</h2>
+<code>
+class Class1 {}         // Class1 is <b>internal</b> (default) - visible to other types in same assembly
+public class Class2 {}  // Class2 is visible to everything, including types in other assemblies
+
+class ClassA
+{
+  int x;               // x is private <b>(default)</b> - cannot be accessed from other types
+}
+
+class ClassB
+{
+  internal int x;    // x can be accessed from other types in same assembly
+}
+
+class BaseClass
+{
+  void Foo()           {}    // Foo is private (default)
+  protected void Bar() {}    // <b>protected</b> is accessible to subclasses
+}
+
+class Subclass : BaseClass
+{
+   void Test1() { Foo(); }     // Error - cannot access Foo
+   void Test2() { Bar(); }     // OK
+}
+Friend Assemblies
+
+// Unsigned friend:
+//    [assembly: InternalsVisibleTo ("Friend")]
+
+// Signed friend:
+//    [assembly: InternalsVisibleTo ("StrongFriend, PublicKey=0024f000048c...")]
+
+// To obtain an assembly's public key, hit F5 to run the following code:
+
+using (var dialog = new OpenFileDialog())
+{
+  dialog.Title = "Locate assembly";
+  dialog.Filter = "Assembly files|*.dll;*.exe";
+  dialog.DefaultExt = ".dll";
+  
+  if (dialog.ShowDialog() != DialogResult.OK) return;
+  if (!File.Exists (dialog.FileName)) return;
+  
+  var aName = Assembly.LoadFile (dialog.FileName).GetName();
+
+  string key = string.Join ("", 
+    aName.GetPublicKey().Select (b => b.ToString ("x2")).ToArray());
+    
+  string assemAttrib = "[assembly: InternalsVisibleTo (\"" 
+    + aName.Name
+    + ", PublicKey=" + key.Dump ("Full Key")
+    + "\")]";
+    
+  assemAttrib.Dump ("Assembly Attribute");
+  
+  Clipboard.SetText (assemAttrib);
+}
+
+
+</code>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />Inheritence</h2>
+<div>
+<b>What is difference between virtual and override in C#?</b>
+
+The virtual keyword is used to modify a method, property, indexer, or event declared in the base class 
+and allow it to be overridden in the derived class.
+The override keyword is used to extend or modify a virtual/abstract method, property, indexer, or event of base class into a derived class.
+
+<b>Polymorphism</b>:
+<code>
+    // A variable of type x can refer to an object that subclasses x.
+
+    // The Display method below accepts an Asset. This means means we can pass it any subtype:
+    Display (new Stock { Name="MSFT", SharesOwned=1000 });
+    Display (new House { Name="Mansion", Mortgage=100000 });
+
+    void Display (Asset asset)
+    {
+    Console.WriteLine (asset.Name);
+    }
+
+    public class Asset
+    {
+    public string Name;
+    }
+
+    public class Stock : Asset   // inherits from Asset
+    {
+    public long SharesOwned;
+    }
+
+    public class House : Asset   // inherits from Asset
+    {
+    public decimal Mortgage;
+    }
+</code>
+<b>Reference Conversions - Upcasting</b>
+<code>
+// An upcast creates a base class reference from a subclass reference:
+
+Stock msft = new Stock();
+Asset a = msft;               // Upcast
+
+// After the upcast, the two variables still references the same Stock object:
+
+Console.WriteLine (a == msft);  // True
+
+public class Asset
+{
+  public string Name;
+}
+
+public class Stock : Asset   // inherits from Asset
+{
+  public long SharesOwned;
+}
+
+public class House : Asset   // inherits from Asset
+{
+  public decimal Mortgage;
+}
+</code>
+<b>Virtual Function Members</b>
+<code>
+// A function marked as virtual can be overridden by subclasses wanting to provide a
+// specialized implementation:
+
+House mansion = new House { Name="McMansion", Mortgage=250000 };
+Console.WriteLine (mansion.Liability);      // 250000
+
+public class Asset
+{
+  public string Name;
+  public virtual decimal Liability => 0;    // Virtual
+}
+
+public class House : Asset
+{
+  public decimal Mortgage;
+  public override decimal Liability => Mortgage;   // Overridden
+}
+
+public class Stock : Asset
+{
+  public long SharesOwned;
+  // We won't override Liability here, because the default implementation will do.
+}
+</code>
+
+<b><Covariant returns/b>
+
+ From C# 9, we can override a method such that it returns a more derived (subclased) type:
+<code>
+House mansion1 = new House { Name = "McMansion", Mortgage = 250000 };
+House mansion2 = mansion1.Clone();
+
+public class Asset
+{
+  public string Name;
+  public virtual Asset Clone() => new Asset { Name = Name };
+}
+
+public class House : Asset
+{
+  public decimal Mortgage;
+  
+  // We can return House when overriding:
+  public override House Clone() => new House { Name = Name, Mortgage = Mortgage };
+}
+</code>
+<b>Abstract Classes & Members</b>
+
+ A class declared as abstract can never be instantiated. Instead, only its concrete subclasses
+ can be instantiated. Abstract classes are able to define abstract members.
+<code>
+new Stock { SharesOwned = 200, CurrentPrice = 123.45M }.NetValue.Dump();
+
+public abstract class Asset    // Note abstract keyword
+{
+  public abstract decimal NetValue { get; }  // Note empty implementation
+}
+
+public class Stock : Asset
+{
+  public long SharesOwned;
+  public decimal CurrentPrice;
+
+  // Override like a virtual method.
+  public override decimal NetValue => CurrentPrice * SharesOwned; 
+}
+</code>
+<b>Sealing Functions & Classes</b>
+ An overridden function member may seal its implementation with the sealed keyword to prevent it
+ from being overridden by further subclasses:
+<code>
+    
+House mansion = new House { Name="McMansion", Mortgage=250000 };
+Console.WriteLine (mansion.Liability);      // 250000
+
+public class Asset
+{
+  public string Name;
+  public virtual decimal Liability => 0;    // Virtual
+}
+
+public class House : Asset
+{
+  public decimal Mortgage;
+  public sealed override decimal Liability => Mortgage;   // Overridden + sealed
+}
+
+// You can also seal the class itself, implicitly sealing all the virtual functions:
+
+public sealed class Stock : Asset { /* ... */ }
+</code>
+<b>Overloading and Resolution</b>
+ When calling an overload method, the method with the most specific 
+ parameter type match has precedence, based on the *compile-time* variable type:
+<code>
+void Main()
+{
+  Foo (new House());      // Calls Foo (House)
+  
+  Asset a = new House();
+  Foo (a);                // Calls Foo (Asset)
+}
+
+static void Foo (Asset a) { "Foo Asset".Dump(); }
+static void Foo (House h) { "Foo House".Dump(); }
+
+public class Asset
+{
+  public string Name;
+}
+
+public class Stock : Asset   // inherits from Asset
+{
+  public long SharesOwned;
+}
+
+public class House : Asset   // inherits from Asset
+{
+  public decimal Mortgage;
+}
+</code>
+</div>
+<h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />
+Boxing & Unboxing</h2>
+<div>
+ Boxing is the act of casting a value-type instance to a reference-type instance; unboxing is the reverse.
+ <code>
+    int x = 9;
+    object obj = x;           // Box the int
+    int y = (int)obj;         // Unbox the int    
+ </code>
+</div>
+ <h2 style="display:flex"><input type="button" value="-"
+        class="toggleButton" onclick="toggle(this)" />Iterators</h2>
+<div>
+ Whereas a foreach statement is a consumer of an enumerator, an iterator is a producer of an enumerator:
+<code>
+foreach (int fib in Fibs(6))
+  Console.Write (fib + "  ");
+
+IEnumerable<int> Fibs (int fibCount)
+{
+  for (int i = 0, prevFib = 1, curFib = 1; i < fibCount; i++)
+  {
+    yield return prevFib;
+    int newFib = prevFib+curFib;
+    prevFib = curFib;
+    curFib = newFib;
+  }
+}    
+</code>
+<b>yield break</b>
+
+
+ The yield break statement indicates that the iterator block should exit early,
+without returning more elements:
+<code>
+foreach (string s in Foo (true))
+  Console.WriteLine (s);
+
+static IEnumerable<string> Foo (bool breakEarly)
+{
+  yield return "One";
+  yield return "Two";
+
+  if (breakEarly)
+    yield break;
+
+  yield return "Three";
+}
+</code>
+
+<b>Multiple yield Statements</b>
+
+
+ Multiple yield statements are permitted:
+<code>
+ foreach (string s in Foo())
+  Console.WriteLine (s);         // Prints "One","Two","Three"
+
+IEnumerable<string> Foo()
+{
+  yield return "One";
+  yield return "Two";
+  yield return "Three";
+}
+
+</code>
+Example 2   
+<code>
+    IEnumerable<string> Foo()
+    {
+        try
+        {
+        yield return "One";
+        yield return "Two";
+        yield return "Three";
+        }
+</code>
+<h2>Null</h2>
+<code>
+    int? x = null;
+    int y = x ?? 5;
+    Console.WriteLine (y);  // 5    
+</code>
+<b>Null-Conditional Operator</b>
+
+//Nullable types also work well with the null-conditional operator
+<code>    
+System.Text.StringBuilder sb = null;
+int? length = sb?.ToString().Length;
+length.Dump();
+
+// We can combine this with the null coalescing operator to evaluate to zero instead of null:
+
+int length2 = sb?.ToString().Length ?? 0;  // Evaluates to 0 if sb is null
+length2.Dump();
+</code>
+<h2>Extension Methods</h2>
+ Extension methods allow an existing type to be extended with new methods without altering
+ the definition of the original type:
+
+<code>
+ 
+Console.WriteLine ("Perth".IsCapitalized());
+// Equivalent to:
+Console.WriteLine (StringHelper.IsCapitalized ("Perth"));
+
+// Interfaces can be extended, too:
+Console.WriteLine ("Seattle".First());   // S
+
+public static class StringHelper
+{
+  public static bool IsCapitalized (this string s)
+  {
+    if (string.IsNullOrEmpty (s)) return false;
+    return char.IsUpper (s [0]);
+  }
+
+  public static T First<T> (this IEnumerable<T> sequence)
+  {
+    foreach (T element in sequence)
+      return element;
+
+    throw new InvalidOperationException ("No elements!");
+  }
+}
+
+</code>
+</div>
+<h2>Extension Method Chaining</h2>
+
+ Extension methods, like instance methods, provide a tidy way to chain functions:
+<code>
+string x = "sausage".Pluralize().Capitalize();
+x.Dump();
+
+// Equivalent to:
+string y = StringHelper.Capitalize (StringHelper.Pluralize ("sausage"));
+y.Dump();
+
+// LINQPad's Dump method is an extension method:
+"sausage".Pluralize().Capitalize().Dump();
+
+public static class StringHelper
+{
+  public static string Pluralize (this string s) => s + "s";   // Very naiive implementation!
+
+  public static string Capitalize (this string s) => s.ToUpper();
+}
+</code>
+<h2>Anonymous Types</h2>
+An anonymous type is a simple class created by the compiler on the fly to store a set of values
+<code>
+    var dude = new { Name = "Bob", Age = 23 };
+</code>
+<b>Anonymous Types - with keyword</b>
+<code>
+    var a1 = new { A = 1, B = 2, C = 3, D = 4, E = 5 };
+    var a2 = a1 with { E = 10 };
+    a2.Dump();
+</code>
+<h2>Tuple</h2>
+Tuple literals
+<code>
+    var bob = ("Bob", 23);    // Allow compiler to infer the element types
+
+    Console.WriteLine (bob.Item1);   // Bob
+    Console.WriteLine (bob.Item2);   // 23
+    
+</code>
+<h2>Record</h2>
+Defining a record
+<code>
+new Point (2, 3).Dump();
+
+// Run the line below to look at Point in ILSpy.
+// Util.OpenILSpy (typeof (Point));
+
+record Point
+{
+  public Point (double x, double y) => (X, Y) = (x, y);
+
+  public double X { get; init; }
+  public double Y { get; init; }    
+}
+</code>
+
+<h2>Dynamic Type</h2>
+
+is to avoid compile-time type checking.
+The dynamic type changes its type at the run time based on the value present on the right-hand side
+<code>
+    dynamic value = 123;
+</code>
+
+<b>var vs dynamic</b>
+<code>
+// var says, “let the compiler figure out the type”.
+// dynamic says, “let the runtime figure out the type”.
+
+dynamic x = "hello";  // Static type is dynamic, runtime type is string
+var y = "hello";      // Static type is string, runtime type is string
+int i = x;            // Run-time error
+int j = y;            // Compile-time error
+</code>
+<h2>Operator Overloading </h2>
+ An operator is overloaded by declaring an operator function:
+<code>
+
+
+Note B = new Note (2);
+Note CSharp = B + 2;
+CSharp.SemitonesFromA.Dump();
+
+CSharp += 2;
+CSharp.SemitonesFromA.Dump();
+
+public struct Note
+{
+  int value;
+  public int SemitonesFromA => value;
+
+  public Note (int semitonesFromA) { value = semitonesFromA; }
+
+  public static Note operator + (Note x, int semitones)
+  {
+    return new Note (x.value + semitones);
+  }
+
+</code>
+<h2> explicit operator</h2>
+<code>
+internal class Explicit
+{
+    public static explicit operator int (Explicit a)
+    {
+        return 5;
+    }
+}
+
+
+internal class Implicit
+{
+    public static implicit operator int(Implicit a)
+    {
+        return 5;
+    }
+}
+//and two objects:
+
+var obj1 = new Explicit();
+var obj2 = new Implicit();
+
+//you can now write:
+
+int integer = obj2; // implicit conversion - you don't have to use (int)
+//or:
+int integer = (int)obj1; // explicit conversion
+//but:
+int integer = obj1; // WON'T WORK - explicit cast required
+</code>
+<h2>Unsafe code (using pointers)</h2>
+<code>
+    Unsafe Code
+
+// C# supports direct memory manipulation via pointers within blocks of code marked unsafe
+// and compiled with the /unsafe compiler option. LINQPad implicitly compiles with this option.
+
+// Here's how to use pointers to quickly process a bitmap:
+
+int [,] bitmap = { { 0x101010, 0x808080, 0xFFFFFF }, { 0x101010, 0x808080, 0xFFFFFF } };
+BlueFilter (bitmap);
+bitmap.Dump();
+
+unsafe static void BlueFilter (int [,] bitmap)
+{
+  int length = bitmap.Length;
+  fixed (int* b = bitmap)
+  {
+    int* p = b;
+    for (int i = 0; i < length; i++)
+      *p++ &= 0xFF;
+  }
+}
+</code>
+</body>
+</html>

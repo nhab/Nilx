@@ -1,0 +1,667 @@
+<head>
+   <link  rel="stylesheet" type="text/css" href="..\assets\css\main.css">
+	<script src="../libs/jquery-3.3.1.slim.min.js" ></script>
+   <script src="../libs/popper.min.js" ></script>
+  <script src="../libs/bootstrap.min.js" ></script>
+
+    <script src="../libs/tooltip/tooltip.js" type="text/javascript"></script>
+    <link href="../libs/tooltip/tooltip.css" rel="stylesheet" type="text/css" />
+    <style>
+        .imagesize{width:350px;height:350px;}
+		.column{color:black; }
+    </style>
+</head>
+
+<body>
+<script type="text/javascript">
+	var idCount=3;
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip({
+            html: true
+        });
+    });
+	function write(s)
+	{
+		document.write(s);
+	}
+
+	function writeInTooltip(title,tooltip){
+		idCount=idCount+1;
+		s1="<a href=\"#\" onmouseover=\"tooltip.pop(this, '#sub" + idCount +"', {offsetY:-10, smartPosition:true})\">";
+		s1+=title+"</a>";
+		s1+="<div style=\"display:none;\"><div id=\"sub"+idCount+"\" class=\"column\" >"+tooltip+"</div>";
+		s1+="</div>";
+		document.write(s1);		debugger;
+		return s1;
+	}
+</script>
+	
+<h1 class="head">Material Management (MM) </h1>
+	Resource :<a href='https://erproof.com/mm/free-training/'>ERproof</a>,
+	<a href='https://www.tutorialspoint.com/sap_mm/sap_mm_quick_guide.htm'>TutorialPoint</a>,
+	<a href='https://www.guru99.com/sap-mm-training-tutorials.html'>Guru99</a>
+<script>
+	write("Concepts:");
+
+	sTopic= "<b>Material Management process</b>";
+	sDesc = "Ensures that there is never a shortage of materials or"
+	  +"<br> any unwanted gaps in the supply chain process of the organization."
+	  +"<br> it also deals with reducing costs.";
+	a = writeInTooltip( sTopic , sDesc );
+	//debugger;
+</script>
+	<h9>
+		<script>
+		 sDesc="<h11>"+
+		   	"the method of <b>getting</b>: services, supplies, and equipment from a vendor (seller),"+ 
+            "at the right price at the right time in right amount .</h11>";
+		 sTopic="<b>Procurement</b>";
+		 a = writeInTooltip( sTopic , sDesc );
+		//debugger;
+		</script>
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		- Procurement for Stock vs  Procurement for Consumption
+		- External (from external vendors) vs Internal Procurement
+		</h11>"><b>Type of Basic Procurement</b></a>
+
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			Material that is available at our store premises, 
+			however it <b>still belongs to the vendor</b> (seller)/Owner of the material.
+			If you utilize the material from consignment stocks, 
+			then you have to pay to the vendor.
+		</h11>"><b>Consignment Stocks</b></a>
+		<br>
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		In third-party processing, a company passes on a sales order to associate external vendor (seller)
+		who sends the goods directly to the customer.
+		The sales order is not processed by your company, however by the vendor (seller).
+		Third-party items can be entered in purchase requisitions, purchase orders and sales orders.
+		</h11>"><b>Third-party processing</b></a>
+	  
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+        In pipeline handling, the company needs not to order or store the material involved.
+		It is obtainable as and when required via a pipeline (for example, oil or water),
+		 or another style of cable (such as electricity).
+		The material that is consumed is settled with the vendor (seller) on a regular basis.
+		</h11>"><b> Pipeline handling </b></a>
+
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+		 The company orders goods from a vendor (seller).
+		 The goods are delivered with returnable transport packaging
+		 (pallets, containers) that belongs to the vendor (seller) 
+		 and is stored on the customer premises 
+		 until they return it to the company.
+		</h11>"><b> Returnable Transport Stock </b>	</a>
+
+		<a href="#" data-toggle="tooltip"  data-placement="left" title="<h11 style='font-size:24px;'>
+			when a company outsources some or all of its
+			 production operations to a vendor.
+
+			 Material A and B which constitute 
+			 the Bill of Material (BOM) of material C
+			 are then delivered to the subcontracting vendor
+		</h11>"><b> Subcontracting </b></a>
+	   <br>
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		Goods are procured and supplied within a company.
+		One plant order the goods internally from another plant (receiving plant/issuing plant).
+		The <b>goods are procured</b> with a special type of purchase order - <b>the stock transport order</b>.
+		You'll be able to request and monitor the transfer of goods with a stock transport order.
+		</h11>"><b> Stock transfer using stock transport order </b></a>
+	</h9>
+		<h2>Menu path for MM Configuration</h2>
+		<h9>
+			<script>
+				sTopic= "<b>implementation guide (IMG)</b>";
+				sDesc = "<h11 style='font-size:24px;'>Configuration is done through  IMG (tcode = SPRO)"+
+				"SAP Easy Access > Tools > Customizing > IMG > Execute Project</h11>"+
+		 	    "<img src='https://www.tutorialspoint.com/sap_mm/images/execute_project.png' width='450px'>";
+				a = writeInTooltip(sTopic, sDesc);
+				debugger;
+			</script>
+				
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>	
+			SAP Customizing Implementation Guide (IMG) > Materials Management
+			SAP Customizing Implementation Guide (IMG) > Enterprise Structure > Definition
+										      ... > Assignment
+											 ...  > Material Master
+			</h11>"><b>The main menu paths for MM area </b></a>
+		</h9>
+		<h2>SAP MM - Enterprise Structure</h2>
+		<h9>	<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Enterprise structure is the structure that represents 
+			an enterprise in SAP ERP system. 
+			It is subdivided into various organizational units 
+			which for legal reason or business related reason.
+			</h11>"><b>Enterprise structure</b></a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="top" 
+			  title="<h11 style='font-size:24px;'><table><tr><td>
+			<p>
+			Client
+			Company Code
+			Plant
+			Storage Location
+			Purchasing Organization
+			Purchasing Group
+			<p>
+			</td>
+				<td><img src='https://erproof.com/wp-content/uploads/2016/11/word-image-320.png' width='400px'>
+				</td></tr>
+			    </table>
+			</h11>"><b>The Organizational hierarchical Structure</b></a>
+
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Path to reach Definition:
+				IMG > Enterprise Structure > Definition
+			<img src='https://www.tutorialspoint.com/sap_mm/images/definition.png' width='350px'>
+			</h11>"><b>(Defining )</b></a>	
+			
+
+			<br/>
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Client is a 'Customer'. in SAP. 
+			We can say that each customer maps to one client.
+			Within one SAP instance, a number of Clients can be created.
+			No need to install separate softwares for each 
+			and every customer.
+			One client cannot see the data of another client.
+			It has its own set of master data with independent table sets.
+			Data that is maintained at client level is valid
+			 for all organizational levels.
+			</h11>"><b>Client</b></a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+					<b>000 Client:</b>  this clients is in the system by installation of SAP r/3 software. 
+					 This is called master client and contains a simple organizational structure of 
+					 a test company and includes parameters for all applications, standard settings,
+					 and configurations for the control of standard transactions and examples to be
+					 used in many different profiles of the business applications.(client independent)
+
+					<b>001 Client:</b> it is a copy of the 000 client but settings are client-independent
+					 if it is configured or customized.it is used normally to create a new client.
+					
+					<b>066 Client:</b>  This client is called early watch client. 
+					The SAP earlywatch <b>alert</b> is a diagnosis service, for solution monitoring 
+					systems in the SAP Solution Manager. Alert may contain Performance issue, 
+					average response time,  current system load, Database administration,etc.
+			</h11>">(3 standard predefined Clients)</a>
+			
+			 <h12 style="font-weight: bolder">. Creating a new client:</h12> 
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			<img src='https://www.guru99.com/images/sap/2013/02/022613_0657_Introductio3.png'/>
+			</h11>"><b>1.</b>Execute T-Code SCC4</a>
+
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			 <img src='https://www.guru99.com/images/sap/2013/02/022613_0657_Introductio5.png'>
+			</h11>"> <b>2.</b>Click New Entry</a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			<img src='https://www.guru99.com/images/sap/2013/02/022613_0657_Introductio6.png'>
+			</h11>"> <b>3.</b>Enter Details</a>
+			<br>
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>							 
+			The company code is an organizational unit used in accounting.
+			It is used to structure the business organization 
+			from a financial accounting perspective. 
+			The company code is an organizational unit used in accounting. 
+			It is a legal entity that has its own profit, loss and balance statement.
+			It is the smallest unit in organization for which 
+			a complete independent account set can be replicated.
+			SAP recommends that copy a company code from an existing company code.
+			</h11>"><b>Company Code</b></a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			 IMG > Enterprise Structure > 
+				Definition > Financial Accounting > Define Company
+			   Select New Entries icon and fill in new company fields and save.
+			  <img src='https://www.tutorialspoint.com/sap_mm/images/entry_details.png' width='350px'>
+			</h11>"><b>Create Company (TCode: OX15)</b></a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			 IMG > Enterprise Structure > Definition > Financial Accounting >
+			 Edit, Copy, Delete, Check Company Code
+			   and Select New Entries icon.
+			 <img src='https://www.tutorialspoint.com/sap_mm/images/company_code_details.png'>
+			  </h11>"><b>Create Company Code (TCode: OX02)</b> </a>
+			
+			<br>
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Plant is an independent, physical and highest organizational unit. 
+			It can be operational unit or manufacturing unit or 
+			a sales branch of an organization. 
+			From material management view, plant can be defined as
+			a location that holds valued stock
+			A plant will makes goods available for the company.
+			It have : manufacturing facility, warehouse distribution center 
+			or a regional sales office within logistic. 
+			 </h11>"><b>Plant</b></a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			IMG > Enterprise Structure > Definition > Logistic General 
+			> Define, Copy, Delete check plant	
+			and Select Define Plant icon ,then Select New Entries
+			icon,to create a new plant.
+			<img src='https://www.tutorialspoint.com/sap_mm/images/plant_entry_details.png' height='350px'>								 
+			</h11>"><b>Create (TCode: OX10)</b> </a>
+			
+			<br>
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Storage location is a place where stock is kept physically.
+			They are also used to define an organizational unit that 
+			allows the differentiation of material stocks within a plant. 								 
+			</h11>"><b>Storage Location</b></a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			 IMG > Enterprise Structure > Definition > Materials Management >
+			 Maintain Storage Location
+			 Enter the name of plant for which you want to create storage location.
+			 then select New Entries icon.
+			 then Enter the name of storage location along with the
+			description of storage location   and Click on save icon
+			<img src='https://www.tutorialspoint.com/sap_mm/images/plant_entry_details.png' height='350px'>
+			</h11>"><b>Create  (TCode: OX09)</b></a>
+		    <br>
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			It is responsible for external Procurement.
+			</h11>"><b>Purchasing Organization</b></a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Centralized Purchasing
+				Purchasing organization is not assigned to 
+				any company code it procures for all company
+				codes belonging to different client.
+
+			Company specific Purchasing
+				Purchasing organization is assigned to a 
+				company code only, Plant belonging to the 
+				company code can purchase through this 
+				Purchasing organization.
+
+			Plant specific Purchasing
+				Purchasing organization is assigned to a Plant,
+				only this specific Plant can purchase through 
+				this Purchasing organization.
+			  </h11>"><b>(Different forms of purchasing) </b></a>	
+
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			IMG > Enterprise Structure > Definition >
+			Materials Management > Maintain Purchasing Organization
+			<img src='https://www.tutorialspoint.com/sap_mm/images/purchasing_organization_entry.png' height='350px'>
+			</h11>"><b>Create (TCode: OX08)</b></a>
+			<br>
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			It is a buyer or group of buyer responsible for everyday 
+			procurement activities within an organization.
+			</h11>"><b>Purchasing Group</b></a>
+			
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			 IMG > Materials Management > Purchasing >
+			Create Purchasing Group
+			<img src='https://www.tutorialspoint.com/sap_mm/images/purchasing_groups_entry.png'>
+			</h11>"><b>Create Purchasing Group(TCode: OME4)</b>	</a>
+		</h9>
+	<h3> establishing relationship between Organizational Units</h3>
+		<p>
+		   4 basic and must assignments in standard SAP are:
+		   <a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			IMG > Enterprise Structure > Assignment > 
+			Logestics general > Assign Plant to Company Code 
+			<img src='https://www.tutorialspoint.com/sap_mm/images/company_new_entry.png' height='350px'>
+		  </h11>"><b>Plant to Company code(TCode: OX18)</b></a>
+		  <a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		       IMG > Enterprise Structure > Assignment > Materials Management >
+		       Assign Purchasing Organization to Company Code 
+			<img src='https://www.tutorialspoint.com/sap_mm/images/purchasing_org_entry.png' height='350px'>
+		   </h11>"><b>Purchasing organization to company code(TCode: OX01)</b></a>
+		  <a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		     IMG > Enterprise Structure > Assignment > Materials Management 
+			> Assign Purchasing organization to Plant
+		  </h11>"><b>Purchasing organization to Plant(TCode: OX17)</b>	</a>
+		  <a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			IMG > Enterprise Structure > Assignment > Materials Management 
+				> Assign Standard Purchasing Organization to Plant
+		 	<img src='https://www.tutorialspoint.com/sap_mm/images/purch_new_entry.png' height='350px'>
+		  </h11>"><b>Standard purchasing organization to plant(TCode: SPRO)</b></a>
+		  <a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		     IMG > Enterprise Structure > Assignment
+		     <img src='https://www.tutorialspoint.com/sap_mm/images/assignment.png' height='350px'>
+		   </h11>"><b>Path to reach Assignment:</b></a>
+		</p>
+	<h2>Material Master Data</h2>
+	<h9>&nbsp&nbsp
+		
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		<p>
+		the data screens that are used to create material master 
+		can be divided into two categories:
+			Main Data:
+				This will include basic data (base unit of measure, weight),
+				purchasing data (over tolerance and under tolerance),
+					accounting data (standard price, moving price).
+			Additional Data:
+				This will include additional information like
+				short description about material, currency etc.
+		</p>
+		</h11>"><b>Material Master Data</b></a>
+		<br>
+		Material master has  4 characteristics
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			Materials with some common attributes are 
+			assigned to a material type.
+			For example: Raw Material, Finished Products 
+			are some of the material types. 
+			<b>To create material type</b>
+				IMG > Logistics General > Material Master > Basic Settings
+				> Material Types > Define Attributes of Material Types
+				TCode: OMS2
+			</h11>"><b>Material Types</b></a>
+		
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+				Material group is a wider range of material type.
+				For Example: Suppose we have some materials
+				which need packaging,
+				so there material type can be electrical or food products 
+				but we can group these material types and put them 
+				in packaged material group
+			     <b>Path to Create Material Group:</b>
+				IMG > Logistic General > Material Master > Settings for Key Fields 
+				   > Define Material Groups
+				TCode: OMSF
+			 </h11>"><b>Material Groups</b></a>
+		
+			<a href="#" data-toggle="tooltip"  data-placement="left" title="<h11 style='font-size:24px;'>
+				Every material is recognized by a number, that number 
+				will be unique and known as material number.
+				We can assign number to material through two ways:
+				External number assignment 
+					While creating material you have to enter your own number
+					(containing alphabets or digits), and that should be unique.
+				Internal number assignment 
+					 While creating material you need not enter any number,
+					system will automatically generate a unique number to that material.
+				Number range is obviously a range of numbers from n to m,
+				which would be assigned to material groups later.
+			    <b>Define Number Range:</b>
+				IMG > Logistic General > Material Master > Basic Settings > 
+				    Material Types > Define Number Range for Each material Type
+				TCode: MMNR
+			 </h11>"><b>Number Range</b></a>
+		
+			<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+				In the same screen as shown above select Groups tab.
+				<img src='https://www.tutorialspoint.com/sap_mm/images/assign_number_range.png'>
+			 </h11>"><b>Assignment of Number Range:</b></a>
+		<br>
+		
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		Material master contains all materials that a company 
+		<b>procures</b>, <b>produces</b> or <b>sells</b>. 
+		</h11>"><b>Material Master Creation</b></a>
+		
+		&nbsp&nbsp&nbsp&nbsp&nbsp
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+		Logistics > Materials Management > Material Master > Material > Create Material
+		TCode: MM01
+		
+		Select the views you want to maintain for your material.
+		Then Enter name of plant and storage location.
+		Then Enter the required information in your material views like
+		unit of measure, currency, standard price, moving price etc.
+		Click on save. A new material will be created.	
+		<img src='https://www.tutorialspoint.com/sap_mm/images/create_material_entry.png' width='300px'/>
+		</h11>"><b>( create )</b></a>
+	</h9>
+			
+	<h2>Vendor Master Data</h2>
+	<h9>
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		It include information on vendors from which a company
+		can procure or it can sell.
+		it contain information like vendor's name, address.
+		 </h11>"><b>Vendor Master Data</b></a>
+		
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			SAP Menu > Logistics > Material Management > Purchasing 
+			  > Master Data > Vendor > Central > Create
+			TCode: XK01
+		Fill in the terms of payment that are defined between 
+		company and vendor. Click on save.
+		A new vendor master will be created:
+		<img src='https://www.tutorialspoint.com/sap_mm/images/create_vendor_accounting.png' height='350px'>
+		</h11>"><b>(Path to create)</b></a>
+		
+		<br>
+		its data has 3 categories:
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		 is maintained at client level and it is valid for all organizational levels.
+		 </h11>"><b>General Data    </b></a>
+		
+		
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+		is maintained at company level and it is valid for all plants belonging to that company.
+		</h11>"><b>Accounting Data  </b></a>
+		
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+		 is maintained at purchasing organization level.
+		</h11>"><b>Purchasing Data  </b></a>
+		<br>
+		Vendor master has the 3 characteristics:
+		
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			 For Example: 
+			All local vendors can be placed under one account group.
+		</h11>"> <b>Vendor Account Group</b></a>	
+		
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			IMG > Logistic General > Business Partner >
+			 Vendors > Control > 
+			Define Account group and field selection(vendor) 
+			TCode: OBD3
+		<img src='https://www.tutorialspoint.com/sap_mm/images/vendor_entry_details.png' height='300px'>
+		</h11>">(Path to create)</a>
+		
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+		Path to create Number Range:
+			IMG > Logistic General > Business Partner > Vendors 
+			 > Control > Define Number Range for Vendor master record
+			TCode: XDN1
+		</h11>"><b>Number Range</b></a>
+
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+		Purchasing info record stores information on
+		material and vendor supplying that material. 
+		For Example: Vendors current price of a 
+		particular material is stored in info record.
+
+		Purchase info record can be maintained at plant 
+		level or at purchasing organization level.
+		 </h11>"><b>Purchase Info Record</b></a>
+		<br>
+		4 procurement types:
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+				 on standard orders
+				(orders include details of vendor and material). 
+				This info record will include vendors price for
+				supplying the particular material. 
+			</h11>"><b>Standard </b> </a>
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+				on subcontract orders. 
+				This info record will include price for assembling 
+				the raw material 
+				that is supplied by the ordering party.
+			</h11>"><b>Subcontracting </b></a>
+			<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+				 on material that is provided by vendor through pipes. 
+				For Example: like water,electricity.
+			</h11>"><b>Pipeline </b></a>
+			<a href="#" data-toggle="tooltip"  data-placement="left" title="<h11 style='font-size:24px;'>
+				 material that is kept at ordering party premises.
+				This info record contains vendors price that is to be paid 
+				for withdrawing material from consignment stock.
+			</h11>"><b>Consignment	 </b></a>
+			<br>
+			
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+				Logistics => Material Management => Purchasing => Master Data => Info Record => Create
+				TCode: ME11
+				<img src='https://www.tutorialspoint.com/sap_mm/images/info_record_vendor.png'>
+				<img src='https://www.tutorialspoint.com/sap_mm/images/info_record_detail.png'>
+		</h11>"><b>Path to create Info Record:</b></a>
+		
+	</h9>
+	<h2>AP MM - Source Determination/List</h2>
+	<h9>
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		The combined information of material and vendor altogether
+		is kept in a record that is known as purchase info record.
+		But a particular material can be ordered from different 
+		vendors in different time intervals. 
+		This information can be maintained in a list that is called as source list.
+		- Source list include list of possible sources of 
+		  supply for a material over a given framework of time.
+		- Source list specifies the time period of ordering
+			of a particular material from a given vendor.
+		- Source list can be copied from one plant to another plant.
+		- Source list can be created Automatically or Manually
+		</h11>"><b>source lists</b></a>
+
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		Go to MM02(Edit mode of material master you wish).
+		Select all the views.
+		then in purchasing view check the box for source list and save.
+		<img src='https://www.tutorialspoint.com/sap_mm/images/source_list_auto.png'>
+		</h11>"><b>(Automatic Creation )</b></a>
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			Path to maintain Source list:
+			Logistics > Material Management > Purchasing > Master Data
+			> Source List > Maintain
+			TCode: ME01
+		<img src='https://www.tutorialspoint.com/sap_mm/images/source_list_manual.png' style='height:400px;'/>
+		</h11>"><b>(Manual Creation)</b></a/>
+	</h9>
+	<h2> Procurement Cycle</h2>
+	<h9>
+		The important steps in 
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			The process of buying materials and obtaining services
+			from vendors or dealers is procurement.
+			The steps which are required to procure a
+			material forms the procurement cycle.
+		</h11>"><b> Procurement Cycle</b></a>:
+		<br>
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			determined that what material or services are 
+			required by company, and which supplier can
+			fulfill the requirement.A list of requirements
+			is made and then it is approved by 
+			senior authority within the organization. 
+			After approval, formal list is made that is 
+			known as purchase order	with one more level
+			of approval which is sent to the vendor.
+		 </h11>">1-<b> Determination of Requirement</b></a>
+
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Purchase order is the formal and final confirmation of the 
+			requirements which is sent to vendor 
+			to supply material or services.
+			Purchase order will include important information like 
+			name of material with its corresponding plant,
+			details of purchasing organization with its company code,
+			 name of vendor,and date for delivery of material.	
+		 </h11>"> 2- <b>Creating Purchase Order</b></a>
+		
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			Logistics > Materials Management > Purchasing 
+			 >Purchase Order> Create 
+			 > Vendor/ Supplying Plant Known
+			TCode: ME21N
+			<img src='https://www.tutorialspoint.com/sap_mm/images/purchase_order_detail.png' height='400px'>
+		</h11>">(Path to create )</a>
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			After processing of purchase order by vendor, 
+			material is delivered to ordering party 
+			and this process is called as goods receipt. 
+			So, goods receipt is the phase in which the
+			material is received by the ordering party 
+			and the condition and quality are verified.
+			Once material is verified against quality 
+			then goods receipt is posted.
+			Goods receipt can be posted by following the below steps.
+
+			Path to post Goods Receipt:
+			Logistics > Materials Management > Inventory management 
+				> Goods movement > Goods movement
+			TCode: MIGO
+			<img src='https://www.tutorialspoint.com/sap_mm/images/goods_receipt_detail.png'>
+			</h11>">3- <b>Posting Goods Receipt</b></a>
+
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Invoice is received from the vendor after goods receipt,
+			and then invoice is verified by the ordering party. 
+			So, this is the phase in which the vendor (seller) 
+			 is paid from the company and reconciliation of the
+			invoice and PO is accomplished.
+			Path to post Invoice:
+			Logistics > Materials Management > Logistic Invoice verification 
+				> Document Entry > Enter Invoice
+			TCode: MIRO
+			<img src='https://www.tutorialspoint.com/sap_mm/images/invoice_posting_detail.png'>
+		  </h11>">4-<b>Posting Invoice</b></a>
+	</h9>
+
+	<h2>Purchase Requisition document</h2>
+	<h9>
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		Procurement in every organization starts with gathering requirements.
+		Once requirements are gathered we need to inform the purchasing organization.
+		Purchase Requisition is a document that will contain list of requirements.
+		Purchase requisition is a request that is made to purchasing
+		organization to procure certain list of material.
+
+		Purchase requisition is an internal document; 
+		specifically it remains within the organization.
+
+		Purchase requisition needs approval from purchasing organization.
+		If purchase requisition is approved then changes are 
+		possible only to limited extent.
+		 </h11>"><b>Purchase Requisition document</b></a>
+		
+		<a href="#" data-toggle="tooltip"  data-placement="bottom" title="<h11 style='font-size:24px;'>
+			<b>Standard</b>:Getting finished material from vendor.
+			<b>Subcontracting </b> :Providing raw material 
+				to vendor and	getting finished material.
+			<b>Consignment </b>: Procuring material that is kept
+				in company’s premises and paying to vendor .
+			<b>Stock transfer </b> : 
+				Getting material from within the organization.
+			<b>External service</b>: Getting services like 
+				maintenance from third party vendor.
+		</h11>"><b>Purchase requisition  procurement types</b></a>
+		
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+			Path to Create Purchase requisition:
+			Logistics > Materials Management > Purchasing > Purchasing Requisition > Create
+			TCode: ME51N
+			<img src="'ttps://www.tutorialspoint.com/sap_mm/images/purchase_requisition_detail.png' height='400px' />
+		</h11>"><b>Create Purchase Requisition</b></a>
+		<p>	
+		Creating Purchase Order from Purchase Requisition steps(TCode: ME21N):
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		  <img src='https://www.tutorialspoint.com/sap_mm/images/po_pr.png'  height='400px'/>
+		 </h11>">- Go to purchase order home screen.Select Purchase requisition as shown in below image. </a>
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		  <img src='https://www.tutorialspoint.com/sap_mm/images/po_pr_number.png' height='400px'/>
+		</h11>">- Provide purchase requisition number for which you want to create purchase order.Then select execute icon.</a>									
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		  <img src='https://www.tutorialspoint.com/sap_mm/images/po_pr_drop.png' height='400px'>
+		</h11>">- Drag the standard reference Purchase requisition to the cart next to NB Standard PO.</a>	
+		<a href="#" data-toggle="tooltip"  data-placement="right" title="<h11 style='font-size:24px;'>
+		  <img src='https://www.tutorialspoint.com/sap_mm/images/po_pr_detail.png' height='400px'>
+		</h11>"- Verify the details of purchase order and do the necessary changes as per requirement.
+		   Click on save. Purchase order from purchase requisition will be created.</a>
+		</p>
+	</h9>
+   </p>
+   <a href="https://www.tutorialspoint.com/sap_mm/sap_mm_quick_guide.htm">Read more..</a>
+</body>

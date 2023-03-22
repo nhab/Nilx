@@ -1,0 +1,551 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<h2>Selenium </h2>
+<div>
+is many things but at its core, it is a toolset for web browser automation that uses the best techniques available to remotely control browser instances and emulate a user’s interaction with the browser.
+
+It allows users to simulate common activities performed by end-users:
+ entering text into fields, selecting drop-down values and checking boxes, and clicking links in documents.
+ It also provides many other controls such as mouse movement, arbitrary JavaScript execution, and much more.
+</div>
+
+<h2>WebDriver</h2> 
+<div>
+WebDriver is an API and protocol that defines a language-neutral interface for controlling the behaviour of web browsers. 
+Each browser is backed by a specific WebDriver implementation, called a driver. 
+The driver is the component responsible for delegating down to the browser, and handles communication to and from Selenium and the browser.
+
+WebDriver drives a browser natively, as a user would, either locally or on a remote machine using the Selenium server, marks a leap forward in terms of browser automation.
+
+Selenium WebDriver refers to both the language bindings and the implementations of the individual browser controlling code. This is commonly referred to as just WebDriver.
+</div>
+
+<h2>Installing</h2>
+<div>
+Before you can start writing Selenium code, you have to install the language bindings libraries for your language of choice, the browser you want to use, and the driver for that browser.
+
+Download from:<a href='https://www.selenium.dev/downloads/'>selenium.dev/downloads</a>
+First you need to install the <b>Selenium bindings</b> for your automation project. 
+The installation process for libraries depends on the language you choose to use(i.e C#). 
+
+Installation of Selenium libraries for C# can be done using NuGet in one of two ways
+
+Using a Packet Manager:
+<pre><code>Install-Package Selenium.WebDriver</code></pre>
+Using .NET CLI
+<pre><code>dotnet add package Selenium.WebDriver</code></pre>
+
+<h3>compatibility</h3>
+Make sure to use the .NET SDK version compatible with relevant <a href='https://www.nuget.org/packages/Selenium.WebDriver'>Selenium package</a>. 
+Check the dependencies section to find out the supported <a href='https://dotnet.microsoft.com/en-us/download/dotnet'>.NET version</a>. 
+</div>
+<h2> get started</h2>
+<div>
+- Install the compatible .NET SDK as per the section above.
+- Also install the vscode extensions (Ctrl-Shift-X) for C# and NuGet.
+- Follow the instruction <a href='https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code?pivots=dotnet-5-0'>here</a> to create and run the “Hello World” console project using C#. 
+- You may also create a NUnit starter project using the command line dotnet new NUnit. 
+  Make sure the file %appdata%\NuGet\nuget.config is configured properly as some developers reported that it will be empty due to some issues. 
+- Add the following section to the file nuget.config :
+<pre><code>
+<configuration>
+  <packageSources>
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    <add key="nuget.org" value="https://www.nuget.org/api/v2/" />   
+  </packageSources>
+...
+</code></pre>
+You may have to <a href='https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file'>customize nuget.config</a> to meet you needs.
+- Now, go back to vscode, press Ctrl-Shift-P, and type “NuGet Add Package”, and enter the required Selenium packages such as Selenium.WebDriver. 
+  Press Enter and select the version.
+- Now you can use the examples in the documentation related to C# with vscode.
+
+<h3>Install browser drivers
+(Setting up your system to allow a browser to be automated.)</h3>
+<a href='https://chromedriver.chromium.org/downloads'>Chromium/Chrome</a>
+<h3> Ways to Use Drivers</h3>
+1- Driver Management Software:
+	Most machines automatically update the browser, but the driver does not. 
+	To make sure you get the correct driver for your browser, there are many third party libraries to assist you.
+	1-1. Import WebDriver Manager Package
+	<pre><code>
+	using WebDriverManager;
+	using WebDriverManager.DriverConfigs.Impl;
+	</code></pre>
+	1-2. Use the SetUpDriver() which requires a config class:
+	<pre><code>new DriverManager().SetUpDriver(new ChromeConfig());</code></pre>
+	1-3. Initialize your driver as you normally would:
+	<pre><code>var driver = new ChromeDriver()</code></pre>
+2- The PATH Environment Variable 
+	This option first requires manually downloading the driver .
+	2-1. <pre><code>echo %path%</code></pre>
+	2-2. If the location to your driver is not already in a directory listed, you can add a new directory to PATH: 
+	<pre><code>setx PATH "%PATH%;C:\WebDriver\bin"</code></pre>
+
+	2-3. You can test if it has been added correctly by starting the driver:
+	<pre><code>chromedriver.exe</code></pre>
+	If your PATH is configured correctly above, you will see some output relating to the startup of the driver:
+	<code>Starting ChromeDriver 95.0.4638.54 ...</code>
+3- Hard Coded Location
+	Hard Coded Location  and Specifying the location in the code :
+	<pre><code>var driver = new ChromeDriver(@"C:\WebDriver\bin");</code></pre>
+</div>
+<h2>Open and close a browser with Selenium</h2>
+<div>
+<h3>Code examples for starting and stopping a session with each browser</h3>
+Once you have a Selenium library installed, and your desired browser driver, you can start and stop a session with a browser.
+Typically, browsers are started with specific options that describe which capabilities the browser must support, and how the browser should behave during the session.to open browser with default options:
+for chrome:
+<pre><code>
+var options = new ChromeOptions();
+var driver = new ChromeDriver(options);
+driver.Quit();
+</code></pre>  
+</div>
+
+<h2>Basic Components</h2>
+<div>
+Everything Selenium does is send the browser commands to do something or send requests for information.
+Most of what you’ll do with Selenium is a combination of these basic commands:
+
+1. Start the session
+<pre><code>driver = new ChromeDriver();</code></pre>
+
+2. Take action on browser
+- Navigation:
+<pre><code>driver.Navigate().GoToUrl("https://www.selenium.dev/selenium/web/web-form.html");</code></pre>
+Pressing the browser’s back button:
+<pre><code>driver.Navigate().Back();</code></pre>
+Pressing the browser’s forward button:
+<pre><code>driver.Navigate().Forward();</code></pre>
+Refresh the current page:
+<pre><code>driver.Navigate().Refresh();</code></pre>
+- Js alert:
+<pre><code>
+//Click the link to activate the alert
+driver.FindElement(By.LinkText("See an example alert")).Click();
+
+//Wait for the alert to be displayed and store it in a variable
+IAlert alert = wait.Until(ExpectedConditions.AlertIsPresent());
+
+//Store the alert text in a variable
+string text = alert.Text;
+
+//Press the OK button
+alert.Accept();
+</code></pre>
+- <a href='https://www.selenium.dev/documentation/webdriver/browser/cookies/'>Cookies</a>
+- <a href='https://www.selenium.dev/documentation/webdriver/browser/frames/'>Working with iFrames and frames</a>
+- Get window handle :
+<pre><code>driver.CurrentWindowHandle;</code></pre>
+- Switching windows or tabs :
+<pre><code>
+//Store the ID of the original window
+string originalWindow = driver.CurrentWindowHandle;
+
+//Check we don't have other windows open already
+Assert.AreEqual(driver.WindowHandles.Count, 1);
+
+//Click the link which opens in a new window
+driver.FindElement(By.LinkText("new window")).Click();
+
+//Wait for the new window or tab
+wait.Until(wd => wd.WindowHandles.Count == 2);
+
+//Loop through until we find a new window handle
+foreach(string window in driver.WindowHandles)
+{
+    if(originalWindow != window)
+    {
+        driver.SwitchTo().Window(window);
+        break;
+    }
+}
+//Wait for the new tab to finish loading content
+wait.Until(wd => wd.Title == "Selenium documentation");
+</code></pre>
+- Create new window (or) new tab and switch:
+<pre><code>
+// Opens a new tab and switches to new tab
+driver.SwitchTo().NewWindow(WindowType.Tab)
+
+// Opens a new window and switches to new window
+driver.SwitchTo().NewWindow(WindowType.Window)
+</code></pre>
+- Closing a window or tab 
+<pre><code> 
+//Close the tab or window
+driver.Close();
+
+//Switch back to the old tab or window
+driver.SwitchTo().Window(originalWindow);
+</code></pre>
+- Quitting the browser at the end of a session :
+<pre><code> driver.Quit();</code></pre>
+- Get window size:
+<pre><code>
+//Access each dimension individually
+int width = driver.Manage().Window.Size.Width;
+int height = driver.Manage().Window.Size.Height;
+
+//Or store the dimensions and query them later
+System.Drawing.Size size = driver.Manage().Window.Size;
+int width1 = size.Width;
+int height1 = size.Height;
+</code></pre>
+- Set window size
+<pre><code>driver.Manage().Window.Size = new Size(1024, 768);</code></pre>
+- Get window position
+<pre><code>
+//Access each dimension individually
+int x = driver.Manage().Window.Position.X;
+int y = driver.Manage().Window.Position.Y;
+
+//Or store the dimensions and query them later
+Point position = driver.Manage().Window.Position;
+int x1 = position.X;
+int y1 = position.Y;
+</code></pre>
+- Set window position
+<pre><code>driver.Manage().Window.Position = new Point(0, 0);</code></pre>
+- TakeElementScreenshot 
+<pre><code>
+using OpenQA.Selenium;
+    using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Support.UI;
+
+    // Webdriver
+    var driver = new ChromeDriver();
+    driver.Navigate().GoToUrl("http://www.example.com");
+
+    // Fetch element using FindElement
+    var webElement = driver.FindElement(By.CssSelector("h1"));
+
+    // Screenshot for the element
+    var elementScreenshot = (webElement as ITakesScreenshot).GetScreenshot();
+    elementScreenshot.SaveAsFile("screenshot_of_element.png");
+ </code></pre>
+-Execute Script
+<pre><code>
+//creating Chromedriver instance
+IWebDriver driver = new ChromeDriver();
+//Creating the JavascriptExecutor interface object by Type casting
+IJavaScriptExecutor js = (IJavaScriptExecutor) driver;
+//Button Element
+IWebElement button = driver.FindElement(By.Name("btnLogin"));
+//Executing JavaScript to click on element
+js.ExecuteScript("arguments[0].click();", button);
+//Get return value from script
+String text = (String)js.ExecuteScript("return arguments[0].innerText", button);
+//Executing JavaScript directly
+js.ExecuteScript("console.log('hello world')");
+
+</code></pre>
+3. Request browser information 
+	current page title: <pre><code>driver.Title;</code></pre>
+	Get current URL : <pre><code>driver.Url;</code></pre>
+
+4.Establish Waiting Strategy  
+<pre><code>    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);</code></pre>
+5. Find an element	
+<pre><code>
+var textBox = driver.FindElement(By.Name("my-text"));
+var submitButton = driver.FindElement(By.TagName("button"));
+</code></pre>
+6. Take action on element 
+<pre><code>
+textBox.SendKeys("Selenium");
+submitButton.Click();
+</code></pre>
+7. Request element information
+<pre><code>var value = message.Text;</code></pre>
+</div>
+
+<h2>Writing the first Selenium script</h2>
+<div>
+Once you have <a href="selenium.dev/documentation/webdriver/getting_started/install_library/">Selenium installed</a> and
+<a href="selenium.dev/documentation/webdriver/getting_started/install_drivers/">Drivers installed</a>, you’re ready to write Selenium code:
+<pre><code>
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
+
+namespace SeleniumDocs.GettingStarted
+{
+    [TestClass]
+    public class FirstScriptTest
+    {
+
+        protected IWebDriver driver;
+
+        [TestInitialize]
+        public void CreateDriver()
+        {
+            new DriverManager().SetUpDriver(new ChromeConfig());
+            driver = new ChromeDriver();
+        }
+
+        [TestCleanup]
+        public void QuitDriver()
+        {
+            driver.Quit();
+        }
+
+        [TestMethod]
+        public void ChromeSession()
+        {
+            driver.Navigate().GoToUrl("https://www.selenium.dev/selenium/web/web-form.html");
+
+            var title = driver.Title;
+            Assert.AreEqual("Web form", title);
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            var textBox = driver.FindElement(By.Name("my-text"));
+            var submitButton = driver.FindElement(By.TagName("button"));
+            
+            textBox.SendKeys("Selenium");
+            submitButton.Click();
+            
+            var message = driver.FindElement(By.Id("message"));
+            var value = message.Text;
+            Assert.AreEqual("Received!", value);
+        }
+    }
+}
+</code></pre>
+</div>
+
+<h2>BiDirectional API </h2>
+<div>
+<h3>Register Basic Auth</h3>
+Some applications make use of browser authentication to secure pages. With Selenium, you can automate the input of basic auth credentials whenever they arise:
+<pre><code>
+NetworkAuthenticationHandler handler = new NetworkAuthenticationHandler()
+{
+    UriMatcher = (d) => d.Host.Contains("your-domain.com"),
+    Credentials = new PasswordCredentials("admin", "password")
+};
+
+INetwork networkInterceptor = driver.Manage().Network;
+networkInterceptor.AddAuthenticationHandler(handler);
+await networkInterceptor.StartMonitoring();
+</code></pre>
+<h3>Mutation Observation</h3>
+Mutation Observation is the ability to capture events via WebDriver BiDi when there are DOM mutations on a specific element in the DOM.
+<pre><code>
+List<DomMutationData> attributeValueChanges = new List<DomMutationData>();
+DefaultWait<List<DomMutationData>> wait = new DefaultWait<List<DomMutationData>>(attributeValueChanges);
+wait.Timeout = TimeSpan.FromSeconds(3);
+
+IJavaScriptEngine monitor = new JavaScriptEngine(driver);
+monitor.DomMutated += (sender, e) =>
+{
+    attributeValueChanges.Add(e.AttributeData);
+};
+await monitor.StartEventMonitoring();
+
+driver.Navigate().GoToUrl("http://www.google.com");
+IWebElement span = driver.FindElement(By.CssSelector("span"));
+
+await monitor.EnableDomMutationMonitoring();
+((IJavaScriptExecutor) driver).ExecuteScript("arguments[0].setAttribute('cheese', 'gouda');", span);
+
+wait.Until((list) => list.Count > 0);
+Console.WriteLine("Found {0} DOM mutation events", attributeValueChanges.Count);
+foreach(var record in attributeValueChanges)
+{
+    Console.WriteLine("Attribute name: {0}", record.AttributeName);
+    Console.WriteLine("Attribute value: {0}", record.AttributeValue);
+}
+
+await monitor.DisableDomMutationMonitoring();
+</code></pre>
+<h3>Listen to console.log events</h3>
+Listen to the console.log events and register callbacks to process the event.
+<pre><code>
+IJavaScriptEngine monitor = new JavaScriptEngine(driver);
+List<string> consoleMessages = new List<string>();
+monitor.JavaScriptConsoleApiCalled += (sender, e) =>
+{
+    Console.WriteLine("Log: {0}", e.MessageContent);
+};
+await monitor.StartEventMonitoring();
+</code></pre>
+<h3>Listen to JS Exceptions</h3>
+<pre><code>
+List<string> exceptionMessages = new List<string>();
+IJavaScriptEngine monitor = new JavaScriptEngine(driver);
+monitor.JavaScriptExceptionThrown += (sender, e) =>
+{
+    exceptionMessages.Add(e.Message);
+};
+
+await monitor.StartEventMonitoring();
+
+driver.Navigate.GoToUrl("<your site url>");
+
+IWebElement link2click = driver.FindElement(By.LinkText("<your link text>"));
+((IJavaScriptExecutor) driver).ExecuteScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
+      link2click, "onclick", "throw new Error('Hello, world!')");
+link2click.Click();
+
+foreach (string message in exceptionMessages)
+{
+    Console.WriteLine("JS exception message: {0}", message);
+}
+</code></pre>
+</div>
+
+<h2>Virtual Authenticator</h2>
+<div>
+Web applications can enable a public key-based authentication mechanism known as Web Authentication to authenticate users in a passwordless manner. Web Authentication defines APIs that allows a user to create a public-key credential and register it with an authenticator. An authenticator can be a hardware device or a software entity that stores user’s public-key credentials and retrieves them on request.
+<h3>Virtual Authenticator Options</h3>
+<pre><code>
+// Create virtual authenticator options
+    VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
+        .SetIsUserVerified(true)
+        .SetHasUserVerification(true)
+        .SetIsUserConsenting(true)
+        .SetTransport(VirtualAuthenticatorOptions.Transport.USB)
+        .SetProtocol(VirtualAuthenticatorOptions.Protocol.U2F)
+        .SetHasResidentKey(false);
+</code></pre>
+<h3>Add Virtual Authenticator </h3>
+<pre><code>
+// Create virtual authenticator options
+    VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
+        .SetProtocol(VirtualAuthenticatorOptions.Protocol.U2F)
+        .SetHasResidentKey(false);
+
+    // Register a virtual authenticator
+    ((WebDriver)driver).AddVirtualAuthenticator(options);
+
+    List<Credential> credentialList = ((WebDriver)driver).GetCredentials();
+</code></pre>
+<h3>Create Resident Credential</h3>
+Creates a resident (stateful) credential 
+<pre><code>
+byte[] credentialId = { 1, 2, 3, 4 };
+byte[] userHandle = { 1 };
+
+Credential residentCredential = Credential.CreateResidentCredential(
+credentialId, "localhost", base64EncodedPK, userHandle, 0);
+</code></pre>
+<h3>Create Non-Resident Credential</h3>
+Creates a resident (stateless) credential
+<pre><code>
+byte[] credentialId = { 1, 2, 3, 4 };
+Credential nonResidentCredential = Credential.CreateNonResidentCredential( credentialId, "localhost", base64EncodedEC256PK, 0);
+</code></pre>
+<h3>Add Credential</h3>
+Registers the credential with the authenticator
+<pre><code>
+VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
+        .SetProtocol(VirtualAuthenticatorOptions.Protocol.U2F)
+        .SetHasResidentKey(false);
+
+    ((WebDriver)driver).AddVirtualAuthenticator(options);
+
+    byte[] credentialId = { 1, 2, 3, 4 };
+
+    Credential nonResidentCredential = Credential.CreateNonResidentCredential(
+      credentialId, "localhost", base64EncodedEC256PK, 0);
+
+    ((WebDriver)driver).AddCredential(nonResidentCredential);
+</code></pre>
+<h3>Get Credential</h3>
+Returns the list of credentials owned by the authenticator.
+<pre><code>
+ VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
+        .SetProtocol(Protocol.CTAP2)
+        .SetHasResidentKey(true)
+        .SetHasUserVerification(true)
+        .SetIsUserVerified(true);
+
+    ((WebDriver)driver).AddVirtualAuthenticator(options);
+
+    byte[] credentialId = { 1, 2, 3, 4 };
+    byte[] userHandle = { 1 };
+
+    Credential residentCredential = Credential.CreateResidentCredential(
+      credentialId, "localhost", base64EncodedPK, userHandle, 0);
+
+    ((WebDriver)driver).AddCredential(residentCredential);
+
+    List<Credential> credentialList = ((WebDriver)driver).GetCredentials();
+</code></pre>
+<h3>Set User Verified</h3>
+Sets whether the authenticator will simulate success or fail on user verification.
+<pre><code>
+    VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions().SetIsUserVerified(true);
+</code></pre>
+</div>
+<h2>File Upload</h2>
+<div>
+The file upload dialog could be handled using Selenium, when the input element is of type file. An example of it, could be found on this web page- https://the-internet.herokuapp.com/upload
+<pre><code>
+using System;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace SeleniumDocumentation.SeleniumPRs
+{
+    class FileUploadExample
+    {
+        static void Main(String[] args)
+        {
+            IWebDriver driver = new ChromeDriver();
+            try
+            {
+                // Navigate to Url
+                driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/upload");
+                driver.FindElement(By.Id("file-upload")).SendKeys("selenium-snapshot.jpg");
+                driver.FindElement(By.Id("file-submit")).Submit();
+                if (driver.PageSource.Contains("File Uploaded!"))
+                {
+                    Console.WriteLine("file uploaded");
+                }
+                else
+                {
+                    Console.WriteLine("file not uploaded");
+                }
+                driver.Quit();
+
+            }
+
+            }
+}
+</code></pre>
+</div>
+<h2>wait and fluentWait</h2>
+<div>
+FluentWait
+FluentWait instance defines the maximum amount of time to wait for a condition, as well as the frequency with which to check the condition.
+
+Users may configure the wait to ignore specific types of exceptions whilst waiting, such as NoSuchElementException when searching for an element on the page
+<pre><code>
+using (var driver = new FirefoxDriver())
+{
+  WebDriverWait wait = new WebDriverWait(driver, timeout: TimeSpan.FromSeconds(30))
+  {
+      PollingInterval = TimeSpan.FromSeconds(5),
+  };
+  wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+
+  var foo = wait.Until(drv => drv.FindElement(By.Id("foo")));
+}
+</code></pre>
+</div>

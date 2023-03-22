@@ -1,0 +1,208 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet"     href="/nilx/libs/highlight/github-dark.min.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Resorces</h2>
+<p>
+</p>
+
+<h2><input type="button" value="-" style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)"/>Date and time</h2>
+    <b>TimeSpan</b>
+    <p>
+        There are 3 ways to construct a TimeSpan :
+          • Through one of the constructors
+          • By calling one of the static From . . . methods
+          • By subtracting one DateTime from another
+    </p>
+    <code>
+        Console.WriteLine (new TimeSpan (2, 30, 0));     // 02:30:00
+        Console.WriteLine (TimeSpan.FromHours (2.5));    // 02:30:00
+        Console.WriteLine (TimeSpan.FromHours (-2.5));   // -02:30:00
+        Console.WriteLine (DateTime.MaxValue - DateTime.MinValue);
+
+        // TimeSpan overloads the < and > operators, as well as the + and - operators:
+
+        (TimeSpan.FromHours(2) + TimeSpan.FromMinutes(30)).Dump ("2.5 hours");
+        (TimeSpan.FromDays(10) - TimeSpan.FromSeconds(1)).Dump ("One second short of 10 days");
+    </code>
+    <b>DateTime vs DateTimeoffset </b>
+    <p>
+    DateTime is capable of storing only two distinct times, the local time and UTC. The Kind property indicates which.
+    DateTimeOffset expands on this by being able to store local times from anywhere in the world. 
+    It also stores the offset between that local time and UTC. 
+    Note how DateTime cannot do this unless you'd add an extra member to your class to store that UTC offset. 
+    Or only ever work with UTC. Which in itself is a fine idea btw.
+    </p>
+    <b>Constructing a DateTime or DateTimeOffset    </b>
+    <code>
+        DateTime d1 = new DateTime (2010, 1, 30);  // Midnight, January 30 2010
+        d1.Dump ("d1");
+
+        DateTime d2 = new DateTime (2010, 1, 30, 12, 0, 0);    // Midday, January 30 2010
+        d2.Dump ("d2");
+        d2.Kind.Dump();
+
+        DateTime d3 = new DateTime (2010, 1, 30, 12, 0, 0, DateTimeKind.Utc);
+        d3.Dump ("d3");
+        d3.Kind.Dump();
+
+        DateTimeOffset d4 = d1;    // Implicit conversion
+        d4.Dump ("d4");
+
+        DateTimeOffset d5 = new DateTimeOffset (d1, TimeSpan.FromHours (-8));  // -8 hours UTC
+        d5.Dump ("d5");
+    </code>
+<h2>Numbers</h2>
+<b>BigInteger</b>
+<code>
+
+// BigInteger supports arbitrary precision.
+BigInteger twentyFive = 25;      // implicit cast from integer
+BigInteger googol = BigInteger.Pow (10, 100); 
+
+// Alternatively, you can Parse a string: 
+BigInteger googolFromString = BigInteger.Parse ("1".PadRight (101, '0'));
+</code>
+RandomNumberGenerator
+<code>
+    // This uses the System.Security.Cryptography namespace:
+    RandomNumberGenerator rand = RandomNumberGenerator.Create();
+    byte[] bytes = new byte [32];
+    rand.GetBytes (bytes);
+    var bigRandomNumber = new BigInteger (bytes);   // Convert to BigInteger
+</code>
+<b>Random</b>
+<code>
+    // If given the same seed, the random number series will be the same:
+Random r1 = new Random (1);
+Random r2 = new Random (1);
+Console.WriteLine (r1.Next (100) + ", " + r1.Next (100));      // 24, 11
+Console.WriteLine (r2.Next (100) + ", " + r2.Next (100));      // 24, 11
+
+// Using system clock for seed:
+Random r3 = new Random();
+Random r4 = new Random();
+Console.WriteLine (r3.Next (100) + ", " + r3.Next (100));      // ?, ?
+Console.WriteLine (r4.Next (100) + ", " + r4.Next (100));      // ", "
+// Notice we still get same sequences, because of limitations in system clock resolution.
+
+// Here's a workaround:
+Random r5 = new Random (Guid.NewGuid().GetHashCode());
+Random r6 = new Random (Guid.NewGuid().GetHashCode());
+Console.WriteLine (r5.Next (100) + ", " + r5.Next (100));      // ?, ?
+Console.WriteLine (r6.Next (100) + ", " + r6.Next (100));      // ?, ?
+
+// Random is not crytographically strong (the following, however, is):
+var rand = System.Security.Cryptography.RandomNumberGenerator.Create();
+byte[] bytes = new byte [4];
+rand.GetBytes (bytes);       // Fill the byte array with random numbers.
+
+BitConverter.ToInt32 (bytes, 0).Dump ("A cryptographically strong random integer");
+</code>
+<b>Guid struct</b>
+<code>
+    Guid g = Guid.NewGuid ();
+g.ToString().Dump ("Guid.NewGuid.ToString()");
+
+Guid g1 = new Guid ("{0d57629c-7d6e-4847-97cb-9e2fc25083fe}");
+Guid g2 = new Guid ("0d57629c7d6e484797cb9e2fc25083fe");
+Console.WriteLine (g1 == g2);  // True
+
+byte[] bytes = g.ToByteArray();
+Guid g3 = new Guid (bytes);
+g3.Dump();
+
+Guid.Empty.Dump ("Guid.Empty");
+default(Guid).Dump ("default(Guid)");
+Guid.Empty.ToByteArray().Dump ("Guid.Empty - bytes");
+</code>
+<b>Order Comparison</b>
+<code>
+// The static Array.Sort method works because System.String implements the IComparable interfaces:
+
+string[] colors = { "Green", "Red", "Blue" };
+Array.Sort (colors);
+foreach (string c in colors) Console.Write (c + " ");   // Blue Green Red
+</code>
+<b>IComparable</b>
+<code>
+// The IComparable interfaces are defined as follows:
+//   public interface IComparable       { int CompareTo (object other); }
+//   public interface IComparable<in T> { int CompareTo (T other);      }
+
+Console.WriteLine ("Beck".CompareTo ("Anne"));       // 1
+Console.WriteLine ("Beck".CompareTo ("Beck"));       // 0
+Console.WriteLine ("Beck".CompareTo ("Chris"));      // -1
+</code>
+<h2>Utility classes</h2>
+    <b>Process </b>
+    <code>Process.Start ("notepad.exe");</code>
+
+    <b>ProcessStartInfo</b>
+    <code>
+        ProcessStartInfo psi = new ProcessStartInfo
+        {
+            FileName = "cmd.exe",
+            Arguments = "/c ipconfig /all",
+            RedirectStandardOutput = true,
+            UseShellExecute = false
+        };
+        Process p = Process.Start (psi);
+        string result = p.StandardOutput.ReadToEnd();
+        Console.WriteLine (result);
+    </code>
+
+    <b>Capturing output and error streams of a process</b>
+    <code>
+        var test1 = Run ("ipconfig.exe");
+        test1.output.Dump ("Output");
+        test1.errors.Dump ("Errors");
+
+        (string output, string errors) Run (string exePath, string args = "")
+        {
+        using var p = Process.Start (new ProcessStartInfo (exePath, args)
+        {
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+        });
+
+        var errors = new StringBuilder ();
+
+        // Read from the error stream asynchronously...
+        p.ErrorDataReceived += (sender, errorArgs) =>
+        {
+            if (errorArgs.Data != null) errors.AppendLine (errorArgs.Data);
+        };
+        p.BeginErrorReadLine ();
+
+        // ...while we read from the output stream synchronously:
+        string output = p.StandardOutput.ReadToEnd();
+
+        p.WaitForExit();
+        return (output, errors.ToString());
+        }
+    </code>
+    <b>Opening a file or URL in Windows and Linux</b>
+    <code>
+        LaunchFileOrUrl ("http://www.albahari.com/nutshell");
+
+        void LaunchFileOrUrl (string url)
+        {
+            Process.Start (new ProcessStartInfo (url) { UseShellExecute = true });
+        }
+    </code>
+    
+</div>
+</body>

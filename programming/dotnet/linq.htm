@@ -1,0 +1,354 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2><input type="button" value="-"
+      style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+      onclick="toggle(this)" />Refrences</h2>
+<div>
+https://www.tutorialspoint.com/linq/linq_query_operators.htm      
+</div>
+
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Language-Integrated Query (LINQ) </h2>
+<div>
+<pre>
+- Is a query language introduced with .Net 3.5 
+- It uses extension methods for classes that implement <b>IEnumerable</b> or <b>IQueryable</b> interface. 
+
+- A query may do one of three things:
+
+1- Retrieve a subset of the elements to produce a new sequence without modifying the individual element.Example:
+<code>
+IEnumerable<int> highScoresQuery =
+from score in scores
+where score > 80
+orderby score descending
+select score;
+</code>
+2-Retrieve a sequence of elements as in the previous example but transform them to a new type of object. Example:
+<code>
+IEnumerable<string> highScoresQuery2 =
+from score in scores
+where score > 80
+orderby score descending
+select $"The score is {score}"
+</code>
+3-Retrieve a singleton value about the source data:
+<code>
+int highScoreCount = (
+from score in scores
+where score > 80
+select score
+).Count();
+</code>
+
+<h3> 2 Syntax of LINQ </h3>
+<b>functional (Method) Syntax</b> example:
+<code>
+var longWords = words.Where( w ⇒ w.length > 10);
+Dim longWords = words.Where(Function(w) w.length > 10)
+</code>
+
+<b>Lamda Syntax</b>Example
+<code>
+    var longwords = from w in words where w.length > 10;
+      Dim longwords = from w in words where w.length > 10
+</code>  
+<b>General lambda syntax</b>
+<code>
+From	[Identifier]
+In	[Source Collection]
+Let	[Expression]
+Where	[Boolean Expression]
+order by	[Expression]
+Select	[Expression]
+group by	[Expression]
+Into	[Expression]
+</code>
+  
+<h3>Code Example</h3>
+<code>
+using System;
+using System.Linq;
+public class Simple {
+  public static void Main() {
+    string[] names = { "Burke", "Laptop", "Computer", 
+                       "Mobile", "Ahemed", "Sania", 
+                       "Kungada", "David","United","Sinshia" };
+
+    var  query = from s in names 
+                               where s.Length == 6
+                               orderby s
+                               select s.ToUpper();
+
+    foreach (string item in query)
+      Console.WriteLine(item);
+	
+  }
+}
+</code>
+
+<h3>Types of LINQ</h3>
+LINQ to Objects
+LINQ to XML(XLINQ)
+LINQ to DataSet
+LINQ to SQL (DLINQ)
+LINQ to Entities
+
+<h3> Query expressions Compilation</h3>
+<b> IEnumerable<T> </b> queries are compiled to delegates.
+<b> IQueryable and IQueryable<T>  </b> queries are compiled to expression trees. 
+
+<h3> LINQ standard query operators </h3>
+(assuming :  List<int> numbers = new List<int>() { 35, 44, 200, 84, 3987, 4, 199, 329, 446, 208, 35 };)
+
+<h3>Filtering Operators</h3>
+<b>where</b>,for example:
+<code>IEnumerable<string> query = from word in words where word.Length == 3 select word;</code>  
+<b> OfType</b>
+                  
+<h3>Join Operators</h3>
+<b>Join</b>
+<code>  
+var list = (from e in employees join d in departments on e.DepartmentId equals d.DepartmentId select new {
+EmployeeName = e.EmployeeName,
+DepartmentName = d.Name
+});
+</code>
+          
+<b>GroupJoin</b> : The GroupJoin operator performs the same task as Join operator except that GroupJoin returns a result in group based on specified group key. 
+Example:
+<code>
+var groupJoin = standardList.GroupJoin(studentList,  //inner sequence
+std => std.StandardID, //outerKeySelector 
+s => s.StandardID,     //innerKeySelector
+(std, studentsGroup) => new // resultSelector 
+{
+Students = studentsGroup,
+StandarFulldName = std.StandardName
+});                                   
+</code>
+
+ <h3>Projection Operations</h3>
+<b>Select</b> for example:<code> var query = from word in words select word.Substring(0, 1);</code> 
+<b>SelectMany</b> for example: <code> var query = from phrase in phrases  from word in phrase.Split(' ')     select word;</code>
+
+<h3>Sorting Operators</h3>
+<b>orderby</b>          example: <code>var posNums = from n in num orderby n descending select n;</code>
+<b>ThenBy</b>           example: <code>var sortedResult = studentList.OrderBy(Function(s) s.StudentName) .ThenBy(Function(s) s.Age)</code>
+<b>ThenByDescending</b> example: <code>var sortedResult = studentList.OrderBy(Function(s) s.StudentName).ThenByDescending(Function(s) s.Age)</code>
+<b>Reverse</b>          Example: <code>IEnumerable<Student> result = Students.Reverse();  //everse the list/collection items order.</code>
+
+<h3>Grouping Operators</h3>
+<b>GroupBy</b>example:<code>  IEnumerable<IGrouping<int, int>> query = from number in numbers group number by number % 2;</code>    
+<b>ToLookup</b> exactly the same as groupBy GroupBy method uses deferred execution whereas the execution of the ToLookup method is immediate.
+
+<h3>Conversions</h3>
+<b>AsEnumerable</b> Returns the input typed as IEnumerable<T> Example:  <code> var result = NumArray.AsEnumerable(); </code>  
+<b>AsQueryable</b> example:
+<code>
+IQueryable<Student> 
+      List<Student> objStudent = new List<Student>(){...}
+      query = objStudent.AsQueryable()
+</code>
+<b>Cast</b>
+<b>OfType</b> Example:
+<code>var doubles = numbers.OfType<double>(); //Numbers stored as doubles</code> 
+<b>ToArray</b>  Example :  <code>var doublesArray = sortedDoubles.ToArray(); // converts IQuerable to array</code>
+ToDictionary
+ToList
+ToLookup
+
+<h3>Concatenation</h3>
+<b>Concat</b><code>IEnumerable<string> query = cats.Select(cat ⇒ cat.Name).Concat(dogs.Select(dog => dog.Name));</code> 
+
+<h3>Aggregation</h3>
+Aggregate : 
+it performs an operation on each element of the list taking into account the operations that have gone before. 
+That is to say it performs the action on the first and second element and carries the result forward. 
+Then it operates on the previous result and the third element and carries forward. etc.
+
+Example :
+<code>
+      var nums = new[]{1,2,3,4};
+      var sum = nums.Aggregate( (a,b) => a + b);
+      Console.WriteLine(sum); // output: 10 (1+2+3+4)                              
+</code>            
+Average : example:<code> double result = list.Average();</code>
+Count    : example :<code>int oddNumbers = numbers.Count(n => n % 2 == 1);   </code> 
+LongCount: exactly like Count() but it returns long instead of int
+Max
+Min
+Sum   : Example :<code> double numSqueredSum = numbers.Sum(n => n*n );</code>
+
+<h3>Quantifier Operations</h3>
+      All : if all eleemnts of the source satisfy the criteria,it returnns true
+      Any : returns true if at least one of the elements matches the condition.
+      Contains
+
+<h3>Partition Operations</h3>
+      Skip      : example : <code>var allButFirst4Numbers = numbers.Skip(4); // all except first 4 elements</code>
+      SkipWhile
+      Take      : example :<code>   var first3Numbers = numbers.Take(3); //takes first 3 numbers</code>
+      TakeWhile : example : <code>var firstNumbersLessThan6 = numbers.TakeWhile(n => n < 6); //First numbers less than 6</code> 
+
+<h3>Generation Operations</h3>
+      DefaultIfEmpty
+      Empty       : is used to return an empty collection (i.e. IEnumerable<T>) of a specified type. i.e. empty array or empty collection. {}
+      Range       : example : <code>IEnumerable<int> obj = Enumerable.Range(100, 10);  //returns 10 eleemnts ,starting from  100th element</code>
+      Repeat      : <code>var numbers = Enumerable.Repeat(7, 2); // returns {7,7}</code>
+
+<h3>Set Operations</h3>
+      Distinct() :  Example :  <code>var distinctNumbers = numbers.Distinct();
+                                    var distinctNames = namesArray.Distinct(StringComparer.OrdinalIgnoreCase);</code>
+
+      Except      : <code>IEnumerable<int> aOnlyNumbers = numbersA.Except(numbersB); //Numbers in first array but not second array</code>
+      Intersect   : <code>var commonNumbers = numbersA.Intersect(numbersB); // Common numbers shared by both arrays</code>
+      Union       : <code>  var uniqueNumbers = numbersA.Union(numbersB);   // Unique numbers from both arrays</code>
+
+<h3>Equality</h3>
+      SequenceEqual : The SequenceEqual method checks whether the number of elements,
+            value of each element and order of elements in two collections are equal or not.
+                        Example :<code>bool isEqual = strList1.SequenceEqual(strList2); // returns true</code> 
+<h3>Element Operators</h3>
+      
+      First             :  example 1:<code> Product product12 = (from p in products where p.ProductID == 12  select p).First();</code>
+                              example 2: <code>string startsWithO = strings.First(s => s[0] == 'o');</code>
+      FirstOrDefault    : .First will throw an exception when there are no results. 
+                              .FirstOrDefault won't, it will simply return either null (reference types) or the default value of the value type. (e.g like 0 for an int.) 
+
+      ElementAt
+      ElementAtOrDefault
+      Last
+      LastOrDefault
+      Single, SingleOrDefault : 
+            Single will throw an exception if it finds more than one record matching the criteria. 
+            First will always select the first record from the list. 
+            If the query returns just 1 record, you can go with First().
+            Both will throw an InvalidOperationException exception if the collection is empty.
+            Alternatively you can use SingleOrDefault(). This won't throw an exception if the list is empty
+
+      DefaultIfEmpty
+      
+
+</pre>
+</div> 
+<h2><input type="button" value="-"
+      style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+      onclick="toggle(this)" />More Examples</h2>
+<div>
+<pre>
+<code>
+// Matches on start, take first 25 record
+var posts1 = context.Posts.Where(p => p.Title.StartsWith("A")).Take(25).ToList();   
+//The filtered include feature, introduced in EF Core 5.0, also allows you to limit which related entities you'd like to load, while keeping the loading process eager and therefore doable in a single roundtrip:
+using (var context = new BloggingContext())
+{
+      var filteredBlogs = context.Blogs
+            .Include(
+            blog => blog.Posts
+                  .Where(post => post.BlogId == 1)
+                  .OrderByDescending(post => post.Title)
+                  .Take(5))
+            .ToList();
+}   
+  
+//condition:
+var students = _context.Students
+.Where(s => s.Age > 25)
+.ToList();
+
+//cross join 
+var combo = from p in people
+            from c in cars
+            select new
+            {
+            p.Name,
+            c.Make,
+            c.Model,
+            c.Colour
+            };
+  
+// inner join in LINQ to SQL:
+from t1 in db.Table1
+join t2 in db.Table2 on t1.field equals t2.field
+  select new { t1.field2, t2.field3}
+
+  // or:
+var dealerContracts = DealerContact.Join(Dealer, 
+                              contact => contact.DealerId,
+                              dealer => dealer.DealerId,
+                              (contact, dealer) => contact);
+  
+//grroup by:
+var result = pList.Where(p => p.Name != null).GroupBy(p => p.Id)
+      .Select(grp => grp.FirstOrDefault());
+//or
+var query = (from t in Transactions
+            group t by new {t.MaterialID, t.ProductID}
+            into grp
+                  select new
+                  {
+                        grp.Key.MaterialID,
+                        grp.Key.ProductID,
+                        Quantity = grp.Sum(t => t.Quantity)
+                  }).ToList();
+
+//find first:
+var result = dc.UserInfos.First(x => x.FName == "Rahul");   
+var result = dc.UserInfos.FirstOrDefault(x => x.ID == 1);
+
+  //region count-syntax
+int[] factorsOf300 = { 2, 2, 3, 5, 5 };
+
+int uniqueFactors = factorsOf300.Distinct().Count();
+
+//region count-conditional
+int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+int oddNumbers = numbers.Count(n => n % 2 == 1);    
+  
+//region nested-count
+List<Customer> customers = GetCustomerList();
+
+var orderCounts = from c in customers
+      select  (c.CustomerID, OrderCount: c.Orders.Count());
+//region grouped-count
+List<Product> products = GetProductList();
+
+var categoryCounts = from p in products
+group p by p.Category into g
+select (Category: g.Key, ProductCount: g.Count())
+#region sum-of-projection
+string[] words = { "cherry", "apple", "blueberry" };
+
+double totalChars = words.Sum(w => w.Length);
+//region min-each-group
+  List<Product> products = GetProductList();
+  
+  var categories = from p in products
+group p by p.Category into g
+let minPrice = g.Min(p => p.UnitPrice)
+select (Category: g.Key, CheapestProducts: g.Where(p => p.UnitPrice == minPrice));
+//region element-at
+int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+int fourthLowNum = (
+      from n in numbers
+      where n > 5
+      select n)
+      .ElementAt(1);  // second number is index 1 because sequences use 0-based indexing   
+                                                              
+      </code></pre>
+</div>
+</body>
+</html>

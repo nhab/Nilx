@@ -1,0 +1,1665 @@
+<head>
+   <link rel="stylesheet" href="..\..\assets\css\main.css">
+</head>
+<body>
+    <h2>Definition</h2>
+        <p>CSS Describes how HTML elements are to be displayed</p>
+    <h2 >Resources</h2>
+   <p>
+      <a href="https://htmlcheatsheet.com/css/">htmlcheatsheet/css</a>
+      <a href="https://css-tricks.com/snippets/css/">Css-tricks Sample Code snippets</a>
+      <a href="https://www.w3schools.co/cssref">w3school css reference</a>
+      <a href="https://www.google.com/search?num=100&ei=7A55W-OcGqSRrgSi3YawCQ&q=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net&oq=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net"> [your question] site:https://jsfiddle.net"</a>
+      <a href="https://www.google.com/search?num=100&q=divs+side+by+side+site%3Ahttps%3A%2F%2Fcodepen.io&oq=divs+side+by+side+site%3Ahttps%3A%2F%2Fcodepen.io">  [your question] site:https://codepen.io</a>
+   </p>
+   <h2 >Debugging CSS</h2>
+   <p>
+    -<b>Test Locally:</b>
+     Copy the code to your local machine and test it there before uploading 
+        to the server.
+        
+        -<b>simplify the question :</b>
+         Shorten the code to its simplest form to seee if the problem exists.
+        
+        -<b>Code Replacement :</b>
+         Press f12 in your browser to check and replace DOM elements and other things
+         replace your code with a working code from the internet .
+         fortunately, css  of all web pages in the internet  can be viewed by right clicking and pressing
+          'view page source'
+         There is also lots of samples and <a href="https://css-tricks.com/snippets/css/"> code sinippets</a> on web.
+        
+        -<b>Realy refresh the page: </b>
+         To Refresh the page compeletly after making changes to css (not to use cached files):
+          Press f12 and see web tools of the web browser.
+           > then press shift or control and right-click referesh button of the top toolbar of the browser
+           > then select Hard refresh 
+        
+        -<b>Not working css classes:</b>
+        Sometimes an error in CSS file causes other class  not to work. 
+        for example an unclosed class  (a missing } ) makes all classes after it not to work.
+        Other times,error in the link tag in the html file,causes the class to not work.exaclty follow This syntax:
+        <pre> < link rel="stylesheet"  type="text/css" href="main.css" / ></pre>
+        <b>css Validators and debuggers</b>
+        <p>
+            1. <a href="http://chrispederick.com/work/web-developer/" target="_blank">Web Developer Extension</a>
+            2.<a href="https://getfirebug.com/" target="_blank">Firebug</a>
+            3.<a href="https://developer.chrome.com/devtools" target="_blank">Google Developer Tools</a>
+            4.<a href="http://www.css-validator.org/" target="_blank">W3 CSS Validation Service</a>
+            5.<a href="http://csslint.net/" target="_blank">CSS Lint</a>
+        </p>
+    </p>
+  
+<h1>Concepts</h1>
+   <h3 id="comments">Comments</h3>
+   <p>starts with /* and ends with */</p>
+   <table>
+        <tr>
+            <td>
+                 <h3 id="padding">padding</h3>
+                 <p>distance between borders  and <b>neighbouring</b> objects.</p>
+                 <h3 id="margin">margin</h3>
+                 <p>distance between borders and <b>internal</b> objects.</p>
+            </td>
+            <td>
+                
+                 <img src="pics\margin-padding.gif">
+            </td>
+         </tr>
+    </table>
+    
+   <h2 id="terms-and-concepts">Selecting elements</h2>
+   
+   <h3 id="selectors">Selectors</h3>
+   <p>
+        <h4 id="the-element-selector">The element Selector</h4>
+        selects HTML elements based on the element name.
+        Example:
+        <pre>
+            p {
+                text-align: center;
+                color: red;
+            }
+        </pre>
+        <a href="selector.htm">Other Selector Types</a>
+    </p>
+<br>
+   
+   <h3 id="rule-set">Rule-set</h3>
+   <p>
+       The following line is a rule-set:
+        <pre>
+            h1      { color  : blue  ;   font-size : 12px>;  }
+        </pre>
+        So the rule-set is a combination of a selector and a declaration block (a set of prperty:value)
+   </p>
+
+   <h3 id="combinator">Combinator</h3>
+   <p>
+        <pre>
+        /*The following example selects all &lt;p&gt; elements inside &lt;div&gt; elements:*/
+        div p {
+            background-color>: yellow;
+        }
+        </pre>
+        So the combinator explains the relationship between the selectors.
+   </p>
+
+   <h3 >Pseudo-classes</h3>
+   <p>
+       defines a special state of an element
+        (for example on  mouse  over it or when got focus or  visited links)</p>
+        <b>syntax</b>
+        <pre><code class="lang-css">selector:pseudo-class {
+            property : value;
+        }
+        </code></pre>
+        <b>Example:</b>
+        <pre><code class="lang-css">/* unvisited link */>
+        a:link {
+            color: #FF0000;
+        }
+
+        /* visited link */>
+        a:visited {
+            color: #00FF00;
+        }
+
+        /* mouse over link */>
+        a:hover {
+            color: #FF00FF;
+        }
+        </code></pre>
+    </p>
+
+   <h3 >pseudo-element</h3>
+   <p>
+       to style <b>specified parts</b> of an element.
+            <b>Syntax (double colon) :</b>
+        <pre><code >selector::pseudo-element {
+            property:value;
+        }
+        </code></pre>
+        <b>Example :</b>
+        <pre><code >    p.intro::first-letter {
+                color     : #ff0000;
+                font-size : 200%;
+            }
+        </code></pre>
+
+   
+   <pre><code class="lang-css">::first-line
+   ::first-letter
+   ::before 
+   ::after
+   ::selection 
+   :matches the portion of an element that is selected by a user.
+   :X ::selection {   color: red;  background: yellow;}
+   </code></pre>
+
+   <h2>Positions</h2>
+   <pre><code class="lang-css">        right  : 0px;/*the distance of the element from right is 0px*/
+           left   : 0px;/*the distance of the element from left is 0px*/
+           top    : 0px;/*the distance of the element from the top is 0px*/
+           bottom : 0px;/*the distance of the element from the bottom is 0px*/
+   </code></pre>
+
+   <h1>CSS Layout</h1>
+   <p>
+       <h2>Layouting systems:</h2>
+        First, we used <b>tables</b>, 
+        then <b>floats</b>, 
+        <b>positioning</b> 
+        and <b>inline-block</b>,
+            but all of these methods were essentially hacks and left out a lot of important functionality (vertical centering, for instance).
+       
+        <b>Flexbox</b> helped out, but it's intended for simpler one-dimensional layouts, not complex two-dimensional ones 
+        (Flexbox and Grid actually work very well together). 
+        
+        <b>Grid</b> is the very first CSS module created specifically to solve the layout problems .
+   </p>
+   <h2>grid lyout</h2>
+   <pre>
+        container {
+            display: grid;
+            grid-template-columns: 100px 200px;
+            grid-template-rows: 100px 50px;
+            grid-column-gap: 25px;
+            grid-row-gap: 25px;
+          }
+          
+   </pre>
+   <img src="pics\gridLayout.png">
+   <a href="https://flaviocopes.com/css-grid/">Read more</a>
+   <h2>FlexBox</h2>
+   <p>
+        flexbox is a one-dimensional layout model. It will control the layout based on a row or on a column, but not together at the same time.
+
+        The main goal of flexbox is to allow items to fill the whole space offered by their container, depending on some rules you set.
+        
+        Unless you need to support old browsers like IE8 and IE9, Flexbox is the tool that lets you forget about using
+        
+        Table layouts
+        Floats
+        clearfix hacks
+        display: table hacks
+        <h3>ENABLE FLEXBOX</h3>
+        <p>
+                A flexbox layout is applied to a container, by setting
+
+                display: flex;
+                or  
+                display: inline-flex;
+
+                the content inside the container will be aligned using flexbox.                
+        </p>
+        <a href="https://flaviocopes.com/flexbox/">read more</a>
+        <a href="https://flexbox.help/">see in action</a>
+   </p>
+   <h2 >display</h2>
+   <p> this  is the most important CSS property for <b>controlling layout</b>
+     - The display property specifies if/how an element is displayed.
+     - Every HTML element has a default display value depending on what type of element it is.
+     - The default display value for most elements is block or inline.
+        
+        <h4 >Block-level Elements ( display: block;)</h4>
+        <p> always starts on a new line and takes up the full width available
+        .like div ,h1 to h6,p;form and more.
+        </p>
+        <h4 id="inline-elements-display-inline-">Inline Elements (  display: inline;)</h4>
+        <p>An inline element does not start on a new line and only takes up as much width as necessary.
+        :x</p>
+        <pre><code class="lang-html">&lt;span&gt;>
+        &lt;a&gt;>
+        &lt;img&gt;>
+        </code></pre>
+        <h4 id="inline-block">inline-block</h4>
+        <p> Displays an element as an inline-level block container
+        . The inside of this block is formatted as block-level box, 
+        and the element itself is formatted as an inline-level box.
+        -this,acts as a floating box inside the page
+        Example:</p>
+        <pre><code class="lang-css">    .floating-box> {
+                display>: inline-block;
+                width>: 150px>;
+                height>: 75px>;
+                margin>: 10px>;
+                border>: 3px> solid #73AD21>;
+            }
+        </code></pre>
+        <p>other values
+        | value | Description
+        |----|----
+        |flex        |         Displays an element as an block-level flex container. New in CSS3<br>|inline-flex |        Displays an element as an inline-level flex container. New in CSS3<br>|inline-table|         The element is displayed as an inline-level table
+        |run-in         |        Displays an element as either block or inline, depending on context
+        |list-item         |    Let the element behave like a <li> element
+        |table             |    Let the element behave like a <table> element<br>|table-caption     |    Let the element behave like a <caption> element<br>|table-column-group|     Let the element behave like a <colgroup> element<br>|table-header-group |    Let the element behave like a <thead> element<br>|table-footer-group |    Let the element behave like a <tfoot> element<br>|table-row-group|     Let the element behave like a <tbody> element<br>|table-cell     |        Let the element behave like a <td> element<br>|table-column     |    Let the element behave like a <col> element<br>|table-row         |    Let the element behave like a <tr> element
+        |none             |    The element will not be displayed at all (has no effect on layout)<br>|initial         |    Sets this property to its default value.<br>|inherit        |         Inherits this property from its parent element. Read about inherit</p>
+        <p>Default value:     inline</p>
+        <p>##position</p>
+        <pre><code class="lang-css">            position>: static; /*default;are not affected by the top, bottom, left, and right properties.
+                        //is not positioned in any special way;*/>
+                    position>: relative; /*is positioned relative to its normal position.*/>
+                    position>: fixed; /*it always stays in the same place even if the page is scrolled.*/>
+                    position>: absolute;/*is positioned relative to the nearest positioned ancestor */>
+                            /*/(instead of positioned relative to the viewport, like fixed).*/>
+        </code></pre>
+    </p>
+   
+    <h2 id="z-index">z-index</h2>
+   <p>:which element should be placed in front of, or behind, the others.
+   :x img {position: absolute;}//makes the image be uder the content</p>
+   <h3 id="margins">Margins</h3>
+   <p>: to generate space around elements
+   :X</p>
+   <pre><code class="lang-css">    p> {
+           margin-top>: 100px>;
+           margin-bottom>: 100px>;
+           margin-right>: 150px>;
+           margin-left>: 80px>;
+       }
+   </code></pre>
+   
+   <h2>Float</h2> 
+       float: puts the element in the left or right of its container(parent);
+       (should be used with clear property in many senarios)
+   <p>Example</p>
+   <pre><code class="lang-css"> #sidebar> {
+    float>: right;            
+    }
+   </code></pre>
+
+   <h3 id="clear">clear</h3>
+   <pre>
+       <code>
+           Elements after a floating element will flow around it.
+           To avoid this, use the clear property.
+       </code>
+
+   </pre>
+   <b>Clear Values:</b>
+    <br>Clear: none - Allows floating elements on both sides. This is default
+    <br>Clear: left - No floating elements allowed on the left side
+    <br>Clear: right- No floating elements allowed on the right side
+    <br>Clear: both - No floating elements allowed on either the left or the right side
+
+
+   <h3 id="margin-auto-">margin: auto;</h3>
+   <pre><code>it> place the> element> at> the> center of> its container.
+   </code></pre><h2 id="dimentions-size">Dimentions /size</h2>
+   <pre><code class="lang-css">height>: 200px>;
+   width>: 50%>;
+   max-width>: 500px>;
+   </code></pre>
+   <h3 id="padding">padding</h3>
+   <p>: to generate space around content.
+   :X</p>
+   <pre><code class="lang-css">padding-top>: 50px>;
+   padding-right>: 50px>;
+   padding-bottom>: 50px>;
+   padding-left>: 50px>;
+   </code></pre>
+   <pre><code class="lang-css">background-attachment>    : fixed; /*fix positioning*/>
+   background-position>     : right top;
+
+   list-style-position>: inside; /*or outside ; used to Position The List Item Markers wheter inside or outside the content*/>
+   text-align>: left; /* horizontal position of texts "INSIDE" the element (content)*/>
+   vertical-align>:bottom;/*vertical position of the content of the element*/>
+   </code></pre>
+
+   <h3 id="flex">flex</h3>
+   <p>specifies the length of the item, relative to the rest of the flexible items inside the same container.<br>
+   <b>values:</b><br></p>
+   <table>
+   <thead>
+   <tr>
+   <th>Value</th>
+   <th>Description</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>flex-grow</td>
+   <td>A number specifying how much the item will grow relative to the rest of the flexible items</td>
+   </tr>
+   <tr>
+   <td></td>
+   <td>Example :    div:nth-of-type(1) {flex-grow: 1;}</td>
+   </tr>
+   <tr>
+   <td>flex-shrink</td>
+   <td>A number specifying how much the item will shrink relative to the rest of the flexible items</td>
+   </tr>
+   <tr>
+   <td>flex-basis</td>
+   <td>The Initial length of the item. Legal values: &quot;auto&quot;, &quot;inherit&quot;,</td>
+   </tr>
+   <tr>
+   <td></td>
+   <td>or a number followed by &quot;%&quot;, &quot;px&quot;, &quot;em&quot; or any other length unit</td>
+   </tr>
+   <tr>
+   <td>auto</td>
+   <td>Same as 1 1 auto.</td>
+   </tr>
+   <tr>
+   <td>initial</td>
+   <td>Same as 0 1 auto. Read about initial</td>
+   </tr>
+   <tr>
+   <td>none</td>
+   <td>Same as 0 0 auto.</td>
+   </tr>
+   <tr>
+   <td>inherit</td>
+   <td>Inherits this property from its parent element. Read about inherit</td>
+   </tr>
+   </tbody>
+   </table>
+   <h3 id="overflow">overflow</h3>
+   <p>specifies whether to clip content or to add scrollbars when the content of an element is too big
+   to fit in a specified area.<br></p>
+   <p>values:</b><br></p>
+   <table>
+   <thead>
+   <tr>
+   <th>Value</th>
+   <th>Description</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>visible -</td>
+   <td>Default. The overflow is not clipped. It renders outside the box of element</td>
+   </tr>
+   <tr>
+   <td>hidden  -</td>
+   <td>The overflow is clipped, and the rest of the content will be invisible</td>
+   </tr>
+   <tr>
+   <td>scroll  -</td>
+   <td>The overflow is clipped, but a scrollbar is added to see the rest of the content</td>
+   </tr>
+   <tr>
+   <td>auto    -</td>
+   <td>If overflow is clipped, a scrollbar should be added to see the rest of the content</td>
+   </tr>
+   <tr>
+   <td>overflow-x</td>
+   <td>specifies what to do with the left/right (overflowed )edges of the content.<br> values: visibe,hidden,scroll,auto</td>
+   </tr>
+   <tr>
+   <td>overflow-y</td>
+   <td>specifies what to do with the top/bottom (overflowed )edges of the content.<br> values: visibe,hidden,scroll,auto</td>
+   </tr>
+   </tbody>
+   </table>
+   <h3 id="resize">resize</h3>
+   <p>to prevent textareas from being resized (disable the &quot;grabber&quot; in the bottom right corner):
+   <br>Example</p>
+   <pre><code class="lang-css">textarea> {
+       width>: 100%>;
+       height>: 150px>;
+       padding>: 12px> 20px>;
+       box-sizing>: border-box;
+       border>: 2px> solid #ccc>;
+       border-radius>: 4px>;
+       background-color>: #f8f8f8>;
+       resize>: none;
+   }
+   </code></pre>
+
+   <h3 >Image Sprites</h3>
+   <p>
+       <table><tr>
+           <td>
+               <p>
+                An image sprite is a collection of images put into a single image.
+                A web page with many images can take a long time to load and generates multiple server requests.
+                Using image sprites will reduce the number of server requests and save bandwidth.
+                </p>
+            </td>
+            <td>
+                <img src="pics\imageSprite.png">
+            </td>
+        </tr></table>
+    </p>
+   
+   <h3 >Counters</h3>
+   <p>  Ordered lists aren't the only elements that can be automatically numbered. 
+       Thanks to the various counter-related properties, any element can be.
+       <pre> 
+            < body>
+            < section></ section>
+            < section></ section>
+            < section></ section>
+            < section></ section>
+            < / body >
+            body           { counter-reset     : my-awesome-counter;  }
+            section        { counter-increment : my-awesome-counter;   }
+            section:before { content           : counter(my-awesome-counter); }
+        </pre>
+        Each < section > will respectively start with "1", "2", "3", or "4".
+        To work with CSS counters we will use the following properties:
+   </p>
+   <table>
+        <thead>
+        <tr>
+        <th>function</th>
+        <th>description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>counter-reset</td>
+        <td>Creates or resets a counter</td>
+        </tr>
+        <tr>
+        <td>counter-increment</td>
+        <td>Increments a counter value</td>
+        </tr>
+        <tr>
+        <td>content</td>
+        <td>Inserts generated content</td>
+        </tr>
+        <tr>
+        <td>counter() or counters()</td>
+        <td>Adds the value of a counter to an element</td>
+        </tr>
+        </tbody>
+   </table>
+   
+
+   <h3 >CSS Functions</h3>
+   <table>
+       <tr>
+           <td>function</td><td>Description</td><td> usage</td>
+       </tr>
+       <tr>
+            <td>attr>() </td><td>  Returns the value of an attribute of the selected element</td>
+              <td>
+                  <p>
+                        /* Simple usage */
+                        attr(data-count);
+                        attr(title);
+                 
+                        /* With type */
+                        attr(src url);
+                        attr(data-count number);
+                        attr(data-width px);>
+                 
+                        /* With fallback */
+                        attr(data-count number, 0);
+                        attr(src url, '');
+                        attr(data-width px, inherit);
+                        attr(data-something, 'default');
+                  </p>
+              </td>
+        </tr>
+        <tr>
+            <td>calc>()</td> <td>Allows you to perform calculations to determine CSS property values</td> <td></td>
+        </tr>
+        <tr>
+            <td>linear-gradient() </td> <td>Creates an "image" which represents a linear gradient of colors</td> <td></td>
+        </tr>
+        <tr> <td>radial-gradient()</td> <td> Creates an "image" which represents a gradient of colors radiating from
+                the center of the gradient</td> <td></td> </tr>
+        <tr><td>repeating-linear-gradient() </td> <td>Creates an "image" consisting of repeating gradients</td> <td></td> </tr>
+        <tr><td>repeating-radial-gradient()</td> <td>Similarly to radial-gradient(), but it automatically repeats the color stops infinitely
+                in> both directions</td> <td></td> </tr>
+       <tr><td>content</td><td>Inserts generated content</td><td>section { content : counter(my-awesome-counter); }</td></tr>
+   </table>
+
+ <h3>Variables</h3>
+ <p>
+        
+        A CSS Variable is defined with a special syntax, prepending two dashes to a name (--variable-name), then a colon and a value.
+        Like this:
+        
+        :root {
+          --primary-color: yellow;
+        }
+        (more on :root later)
+        
+        You can access the variable value using var():
+        
+        p {
+          color: var(--primary-color)
+        }
+        The variable value can be any valid CSS value, for example:
+        
+        :root {
+          --default-padding: 30px 30px 20px 20px;
+          --default-color: red;
+          --default-background: #fff;
+        }
+    <a href="https://flaviocopes.com/css-variables/">Read more..</a>
+    </p>  
+
+   <h3 >opacity</h3>
+   <p>To add <b>transparency</b> to the background of an element.
+        all of its child elements become transparent as well.
+   can take a value from 0.0 - 1.0.
+   </p> 
+   <table>
+       <tr><td>Syntax</td><td>Example</td></tr>
+       <tr>
+           <td>
+               <b>for old browser:</b>
+                <br> filter:alpha(opacity=x). /*The x can take a value from 0 - 100.*/
+               <br> <b>for modern browsers</b>
+               <br> opacity:x;
+           </td>
+           <td>
+               div {   opacity: 0.5;     }
+            </td>
+       </tr>
+   </table> 
+   </code></pre>
+
+   <h3 >border/outline/devider</h3>
+   <p>
+        border-style
+        <code>
+            dotted - Defines a dotted border
+            dashed - Defines a dashed border
+            solid - Defines a solid border
+            double - Defines a double border
+            groove - Defines a 3D grooved border. The effect depends on the border-color value
+            ridge - Defines a 3D ridged border. The effect depends on the border-color value
+            inset - Defines a 3D inset border. The effect depends on the border-color value
+            outset - Defines a 3D outset border. The effect depends on the border-color value
+            none - Defines no border
+            hidden - Defines a hidden border
+            </code>
+    
+        border-width: 5px;
+        border-color: green;
+    
+        border-collapse
+        <p>
+           Is used for table elements(or table like elements trough display: table or display: inline-table).  
+            may have 2 values:
+            border-collapse:seperate; /* borders of  cells are seperate;so it could be space between cells */
+            border-collapse: collapse; /* boders of cells are in common; so the table looks like a real table */
+        </p>
+        border-radius 
+        <p>
+            gives any element "rounded corners"
+            <b>Examples:</b>
+            <pre>
+                    border-radius: 25px;
+                    border-radius: 15px 50px 30px:
+                    border-radius: 15px 90px 30px 120px;
+            </pre>
+        </p>
+  
+        border-image
+        <p>
+            An image can be used as the border around an element.
+            it can be a gradiant instead of the image.
+            border-image property is actually a shorthand property
+            <b>Example:</b>
+            <pre> 
+                .borderimg { 
+                    border-image         : url(border.png) 30 round;
+                    -webkit-border-image : url(border.png) 30 round; /* Safari 3.1-5 */
+                    -o-border-image      : url(border.png) 30 round; /* Opera 11-12.1 */
+                    border               : 10px solid transparent;
+                    padding              : 15px;
+                }
+            </pre>
+            its detailed properties are:
+            <pre>
+                    border-image-source  /* example : border-image-source: url(border.png); */
+                    border-image-slice   /* it show the place of occurances of slicing the picture into 9 piecs */
+                    border-image-width
+                    border-image-outset
+                    border-image-repeat
+                        Values
+                            stretch: the initial value. The border image is stretched as needed to fill the area.
+                            repeat : the image tiles to fill the area, dividing tiles if necessary.
+                            round  : the image tiles to fill the area, and is rescaled if necessary to avoid dividing tiles.
+                            space  : the image tiles to fill the area. If the area can't be filled with whole tiles, 
+                                     space is inserted around the tiles for an even fit. Note: this value is not implemented by any browser yet.
+            </pre>
+            <a href="https://codepen.io/gssxgss/pen/raQMvg"> More demos</a>
+            
+            <pre><code>
+                table, td, th {    border: 1px solid black;} /* To temporarily/permenantly set borders for all tables:*/
+                th, td {    border-bottom: 1px solid #ddd;}  /* Horizontal Dividers*/
+            </code></pre>
+        </p>
+</p>
+    <h2 id="outline">outline</h2>
+   <p>s a line that is drawn around elements (outside the borders) to make the element &quot;stand out&quot;.
+       However, the outline property is different from the border property:
+            
+        <pre><code> The outline is NOT a part of dimensions of an element ; 
+        total width and height of the element is not affected by the width of the outline.
+        </code></pre>
+        
+        <pre><code >outline-style: solid; /* dotted;dashed;double;groove;ridge;inset;outset;*/
+        outline-color>: red;
+        outline-width>: thick;
+        </code></pre>
+        <h3 >outline-offset</h3>
+        <p>adds space between an outline and the edge or border of an element.
+        Example
+        <pre><code class="lang-css">div> {
+            border>: 1px> solid black;
+            outline>: 1px> solid red;
+            outline-offset>: 15px>;
+        }
+        </code></pre>
+        </p>
+    </p>
+ 
+   <h2 id="colors">Colors</h2>
+   <pre><code class="lang-css">color>: green>;
+   background>-color>        : green>;
+   </code></pre>
+   <h3 id="rgba">RGBA</h3>
+   <p>:color values are an extension of RGB color values with an alpha channel - which specifies the opacity for a color.
+       :x rgba(255, 0, 0, 0.4);</p>
+   <h3 id="hsl-hue-saturation-lightness-">hsl ( hue, saturation, lightness )</h3>
+   <p>:HSL stands for Hue, Saturation and Lightness.
+           Hue is a degree on the color wheel (from 0 to 360):
+               0 (or 360) is red
+               120 is green
+               240 is blue
+           Saturation is shining percentage value:0- 100%  .
+           Lightness is also darkness percentage; 0% is dark (black) and 100% is white.</p>
+   <pre><code class="lang-css">hsla(hue> color>,shining percent, brightness> perent , alpha>); /*alpha value can range from 0.0 (fully transparent) to 1.0 (fully opaque).*/>
+   </code></pre>
+   <h3 id="gradiant">gradiant</h3>
+   <h4 id="linear-gradiant">linear gradiant</h4>
+   <h5 id="top-to-bottom-this-is-default-">Top to Bottom (this is default)</h5>
+   <p>background: linear-gradient(direction, color-stop1, color-stop2, ...);</p>
+   <p>:X</p>
+   <pre><code class="lang-css">#grad> {
+       background>: red; /* For browsers that do not support gradients */>
+       background>: -webkit-linear-gradient>(red, yellow); /* For Safari 5.1 to 6.0 */>
+       background>: -o-linear-gradient>(red, yellow); /* For Opera 11.1 to 12.0 */>
+       background>: -moz-linear-gradient>(red, yellow); /* For Firefox 3.6 to 15 */>
+       background>: linear-gradient>(red, yellow); /* Standard syntax */>
+   }
+   </code></pre>
+   <h5 id="left-to-right">Left to Right</h5>
+   <p>:X</p>
+   <pre><code class="lang-css">#grad> {
+       background>: red; /* For browsers that do not support gradients */>
+       background>: -webkit-linear-gradient>(left, red , yellow); /* For Safari 5.1 to 6.0 */>
+       background>: -o-linear-gradient>(right, red, yellow); /* For Opera 11.1 to 12.0 */>
+       background>: -moz-linear-gradient>(right, red, yellow); /* For Firefox 3.6 to 15 */>
+       background>: linear-gradient>(to right, red , yellow); /* Standard syntax */>
+   }
+   </code></pre>
+   <h5 id="diagonal">Diagonal</h5>
+   <p>:You can make a gradient diagonally by specifying both the horizontal and vertical starting positions.
+   :X</p>
+   <pre><code class="lang-css">    #grad> {
+       background>: red; /* For browsers that do not support gradients */>
+       background>: -webkit-linear-gradient>(left top, red, yellow); /* For Safari 5.1 to 6.0 */>
+       background>: -o-linear-gradient>(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */>
+       background>: -moz-linear-gradient>(bottom right, red, yellow); /* For Firefox 3.6 to 15 */>
+       background>: linear-gradient>(to bottom right, red, yellow); /* Standard syntax */>
+       }
+   </code></pre>
+   <h4 id="using-angles">Using Angles</h4>
+   <p>background: linear-gradient(angle, color-stop1, color-stop2); </p>
+   <p>:X</p>
+   <pre><code class="lang-css">    #grad> {
+       background>: red; /* For browsers that do not support gradients */>
+       background>: -webkit-linear-gradient>(-90deg, red, yellow); /* For Safari 5.1 to 6.0 */>
+       background>: -o-linear-gradient>(-90deg, red, yellow); /* For Opera 11.1 to 12.0 */>
+       background>: -moz-linear-gradient>(-90deg, red, yellow); /* For Firefox 3.6 to 15 */>
+       background>: linear-gradient>(-90deg, red, yellow); /* Standard syntax */>
+       }
+   </code></pre>
+   <h4 id="multiple-colors">MULTIPLE COLORS</h4>
+   <pre><code class="lang-css">    #grad> {
+       background>: red; /* For browsers that do not support gradients */>
+       background>: -webkit-linear-gradient>(red, yellow, green); /* For Safari 5.1 to 6.0 */>
+       background>: -o-linear-gradient>(red, yellow, green); /* For Opera 11.1 to 12.0 */>
+       background>: -moz-linear-gradient>(red, yellow, green); /* For Firefox 3.6 to 15 */>
+       background>: linear-gradient>(red, yellow, green); /* Standard syntax */>
+       }
+   </code></pre>
+   <h4 id="repeating-a-linear-gradient">Repeating a linear-gradient</h4>
+   <pre><code class="lang-css">    #grad> {
+       background>: red; /* For browsers that do not support gradients */>
+       /* Safari 5.1 to 6.0 */>
+       background>: -webkit-repeating-linear-gradient>(red, yellow 10%, green 20%);
+       /* Opera 11.1 to 12.0 */>
+       background>: -o-repeating-linear-gradient>(red, yellow 10%, green 20%);
+       /* Firefox 3.6 to 15 */>
+       background>: -moz-repeating-linear-gradient>(red, yellow 10%, green 20%);
+       /* Standard syntax */>
+       background>: repeating-linear-gradient>(red, yellow 10%, green 20%);
+       }
+   </code></pre>
+   <h3 id="radial-gradient">Radial Gradient</h3>
+   <ul>
+   <li><p>Evenly Spaced Color Stops (this is default)</p>
+   <pre><code class="lang-css">  #grad> {
+         background>: red; /* For browsers that do not support gradients */>
+         background>: -webkit-radial-gradient>(red, yellow, green); /* Safari 5.1 to 6.0 */>
+         background>: -o-radial-gradient>(red, yellow, green); /* For Opera 11.6 to 12.0 */>
+         background>: -moz-radial-gradient>(red, yellow, green); /* For Firefox 3.6 to 15 */>
+
+         background>: radial-gradient>(red, yellow, green); /* Standard syntax */>
+     }
+   </code></pre>
+   </li>
+   <li><p>Differently Spaced Color Stops</p>
+   <pre><code class="lang-css">  #grad> {
+         background>: red; /* For browsers that do not support gradients */>
+         background>: -webkit-radial-gradient>(red 5%, yellow 15%, green 60%); /* Safari 5.1-6.0 */>
+         background>: -o-radial-gradient>(red 5%, yellow 15%, green 60%); /* For Opera 11.6-12.0 */>
+         background>: -moz-radial-gradient>(red 5%, yellow 15%, green 60%); /* For Firefox 3.6-15 */>
+
+         background>: radial-gradient>(red 5%, yellow 15%, green 60%); /* Standard syntax */>
+     }
+   </code></pre>
+   <h4 id="set-shape">set shape</h4>
+   <pre><code class="lang-css">#grad> {
+     background>: red; /* For browsers that do not support gradients */>
+     background>: -webkit-radial-gradient>(circle, red, yellow, green); /* Safari */>
+     background>: -o-radial-gradient>(circle, red, yellow, green); /* Opera 11.6 to 12.0 */>
+     background>: -moz-radial-gradient>(circle, red, yellow, green); /* Firefox 3.6 to 15 */>
+
+     background>: radial-gradient>(circle, red, yellow, green); /* Standard syntax */>
+   }
+   </code></pre>
+   <h4 id="different-size-keywords">Different Size Keywords</h4>
+   <p>|values        |<br>|closest-side |
+   |farthest-side|
+   |closest-corner|
+   |farthest-corner|
+   |background: radial-gradient(closest-side at 60% 55%, red, yellow, black);|
+   |background: radial-gradient(farthest-side at 60% 55%, red, yellow, black);|</p>
+   </li>
+   </ul>
+   <h3 id="repeating-a-radial-gradient">Repeating a radial-gradient</h3>
+   <pre><code class="lang-css">    background: repeating-radial>-gradient(red, yellow 10>%, green 15>%);
+   </code></pre>
+   <h2 id="shadow">shadow</h2>
+   <h3 id="text-shadow">text-shadow</h3>
+   <p>Example</p>
+   <pre><code class="lang-css">{
+       color>: white;
+       text-shadow>: 2px> 2px> 4px> #000000>;
+   }
+   </code></pre>
+   <h3 id="box-shadow">box-shadow</h3>
+   <pre><code class="lang-css">box-shadow>: 7px> 6px> grey;
+   box-shadow>: 10px> 10px> 5px> grey; /* blur effect */>
+   box-shadow>: 6px> 7px> 31px> grey;/* heavy blur effect */>
+   </code></pre>
+   <h3 id="multiple-shadows">Multiple Shadows</h3>
+   <pre><code class="lang-css">text-shadow>: 0> 0> 3px> #FF0000>, 0> 0> 5px> #0000FF>;
+   </code></pre>
+   <p>Example</p>
+   <pre><code class="lang-css">{
+       color>: white;
+       text-shadow>: 1px> 1px> 2px> black, 0> 0> 25px> blue, 0> 0> 5px> darkblue;
+   }
+   </code></pre>
+   <h2 id="texts">Texts</h2>
+   <h3 id="horizontal-text-align">horizontal text-align</h3>
+   <pre><code class="lang-css">text>-align: center;/*left*/
+   text>-align: justify;/* each line is> stretched so that> every> line has equal> width, and> the> left and> right margins are straight (like in> magazines and> newspapers)*/
+   </code></pre>
+   <h3 id="decoration">decoration</h3>
+   <pre><code class="lang-css">a> {   text-decoration>: none;/*  is often used to remove underlines from links*/>
+       /* overline ,    line-through,underline*/>
+   }
+   </code></pre>
+   <h3 id="text-transform">text-transform</h3>
+   <p>:to specify uppercase and lowercase letters in a text.
+   :x    text-transform: lowercase;</p>
+   <h3 id="text-indent-50px-">text-indent: 50px;</h3>
+   <h3 id="letter-spacing">Letter Spacing</h3>
+   <p>:to specify the space between the characters in a text.
+   :X letter-spacing: 3px; 
+           :X2 letter-spacing: -3px;</p>
+   <h3 id="line-height">line-height</h3>
+   <pre><code>:to specify the space between lines
+   :x   line-height:> 0.8;
+   </code></pre><h3 id="direction">direction</h3>
+   <pre><code>: to change the text direction of an element:>
+   :x direction:> rtl;
+   </code></pre><h3 id="word-spacing">word-spacing</h3>
+   <pre><code>: to> specify the> space> between> the> words> in> a text>.
+   :x 
+       word>-spacing: 10>px;
+       word>-spacing: -5>px;
+   </code></pre><h3 id="text-shadow">text-shadow</h3>
+   <pre><code>:Specifies the> shadow effect added to> text>
+   </code></pre><h3 id="text-transform">text-transform</h3>
+   <pre><code>:Controls the> capitalization of> text>
+   </code></pre><h3 id="unicode-bidi">unicode-bidi</h3>
+   <pre><code>:Used together with> the> direction property to> set> or> return> whether the> text> should be overridden to>
+       support multiple languages in> the> same document
+   </code></pre><h3 id="font-family-times-new-roman-times-serif-">font-family: &quot;Times New Roman&quot;, Times, serif;</h3>
+   <pre><code>The font-family property should hold several font names as> a> "fallback"> system>. 
+   If the> browser does not> support the> first> font, it> tries the> next font, and> so on>.
+   Start with> the> font you want, and> end> with> a> generic> family>, >
+   to> let the> browser pick a> similar font in> the> generic family, if> no other fonts are available. 
+   </code></pre><h3 id="list-style-type-circle-square-upper-roman-lower-alpha">list-style-type: circle;//square  upper-roman  lower-alpha</h3>
+   <pre><code>//List> Item> Markers
+   </code></pre><h3 id="list-style-image-url-sqpurple-gif-an-image-as-the-list-item-marker">list-style-image: url(&#39;sqpurple.gif&#39;); //An Image as The List Item Marker</h3>
+   <h3 id="text-overflow-ellipsis-shows-when-overflown-">text-overflow: ellipsis; /<em> shows ... when overflown</em>/</h3>
+   <h3 id="word-wrap">word-wrap</h3>
+   <pre><code>:     Allows long words> to> be able to> be broken and> wrap onto> the> next line
+   :x break-word>;
+   </code></pre><h3 id="word-break">word-break</h3>
+   <p>: property specifies line breaking rules.
+       Specifies line breaking rules for non-CJK scripts
+   :x</p>
+   <pre><code class="lang-css">    p>.test1> {
+           word-break>: keep-all;
+       }
+
+       p>.test2> {
+           word-break>: break-all;
+       }
+   </code></pre>
+   <h3 id="text-align-last-specifies-how-to-align-the-last-line-of-a-text">text-align-last     Specifies how to align the last line of a text</h3>
+   <h3 id="text-emphasis-a-shorthand-for-setting-text-emphasis-style-and-text-emphasis-color-in-one-declaration">text-emphasis     A shorthand for setting text-emphasis-style and text-emphasis-color in one declaration</h3>
+   <h3 id="text-justify-specifies-how-justified-text-should-be-aligned-and-spaced">text-justify     Specifies how justified text should be aligned and spaced</h3>
+   <h3 id="text-overflow-specifies-how-overflowed-content-that-is-not-displayed-should-be-signaled-to-the-user">text-overflow     Specifies how overflowed content that is not displayed should be signaled to the user</h3>
+   <h3 id="font-style-normal-italic-oblique">font-style: normal;//italic oblique</h3>
+   <h3 id="font-size-40px-">font-size: 40px;</h3>
+   <h3 id="font-size-2-5em-">font-size: 2.5em;</h3>
+   <pre><code>To allow users to resize the text (in the browser menu), many developers use> em instead of> pixels.
+   The em size> unit is> recommended by> the W3C.
+   1>em is> equal to> the current> font size. The default> text> size> in> browsers is> 16>px. So, the default> size> of> 1>em is> 16>px.
+   </code></pre><h3 id="font-size-100-">font-size: 100%;</h3>
+   <h3 id="font-weight-bold-normal">font-weight: bold; //normal</h3>
+   <h3 id="font-variant-small-caps-normal">font-variant: small-caps;  //normal</h3>
+   <pre><code>// specifies whether or> not> a> text> should be displayed in> a> small-caps font
+   // small-caps:>
+   // In a small-caps font, all lowercase letters are converted to uppercase letters.>
+   // However, the converted uppercase letters appears in a smaller font size than the original uppercase letters in the text.>
+   </code></pre><h3 id="web-font">web font</h3>
+   <pre><code>Web fonts allow Web designers to use> fonts that are> not> installed on> the  computer of> the user>
+   by>  automatically downloading them  when> needed.
+   </code></pre><h4 id="defining-a-font">defining a font</h4>
+   <pre><code class="lang-css">@font-face> {
+       font-family>: myFirstFont;
+       src>: url>(sansation_light.woff);
+   }
+
+   div> {
+       font-family>: myFirstFont;
+   }
+   </code></pre>
+   <h3 id="font-descriptors">font descriptors</h3>
+   <pre><code>        Descriptor         Values             Description
+           font-family     name             Required. Defines a> name for> the> font
+           src     URL>                     Required. Defines the> URL> of> the> font file>
+           font-stretch     normal>
+           condensed
+           ultra-condensed
+           extra-condensed
+           semi-condensed
+           expanded
+           semi-expanded
+           extra-expanded
+           ultra-expanded     Optional.         Defines how the> font should be stretched. Default is "normal">
+           font-style         normal>
+           italic
+           oblique         Optional.         Defines how the> font should be styled. Default is "normal">
+           font-weight     normal>
+           bold
+           100>
+           200>
+           300>
+           400>
+           500>
+           600>
+           700>
+           800>
+           900>             Optional.         Defines the> boldness of> the> font. Default is "normal">
+           unicode-range     unicode-range     Optional. Defines the> range of> UNICODE characters> the> font supports. Default is "U+0-10FFFF">
+   </code></pre><h4 id="multi-column-layout">Multi-column Layout</h4>
+   <pre><code class="lang-css">    column>-count>
+       column>-gap
+       column>-rule-style
+       column>-rule-width
+       column>-rule-color
+       column>-rule
+       column>-span
+       column>-width
+   </code></pre>
+   <h2 id="images-painting">Images /painting</h2>
+   <h3 id="single-background">single background</h3>
+   <pre><code class="lang-css">background-image>        : url("paper.gif">);
+   background-repeat>        : repeat-x; //or no-repeat>
+   </code></pre>
+   <h3 id="multiple-backgrounds-layers-">Multiple Backgrounds (layers)</h3>
+   <pre><code class="lang-css">#example1> {
+       background-image>: url>(img_flwr.gif), url>(paper.gif);
+       background-position>: right bottom, left top;
+       background-repeat>: no-repeat, repeat;
+   }
+   or> shorthanded>
+       #example1> {
+           background>: url>(img_flwr.gif) right bottom no-repeat, url>(paper.gif) left top repeat;
+       }
+   </code></pre>
+   <h3 id="image-sizing">Image sizing</h3>
+   <h4 id="background-size">background-size</h4>
+   <pre><code>allows you to specify the size of background> images
+   The size can be specified in>
+   :{
+       -lengths 
+       -percentages 
+       -keyword contain
+           The contain keyword scales the background> image> to be as large as possible
+           (but both its width> and> its height> must fit inside the content> area).
+           As such, depending on the proportions of the background> image> and> the background> positioning area, 
+           there may be some> areas of the background> which are not> covered by the background> image>.
+
+       -keyword cover.
+           The cover keyword scales the background> image> so that the content> area is> completely 
+           covered by the background> image> (both its width> and> height> are equal> to or> exceed the content> area). 
+           As such, some> parts of the background> image> may not> be visible in> the background> positioning area.
+   </code></pre><h4 id="background-origin">background-origin</h4>
+   <pre><code class="lang-css">    :specifies where the background> image> is> positioned.
+       :{values>
+           border>-box> - the background> image> starts from the upper left corner of the border>
+           padding-box> - (default) the background> image> starts from the upper left corner of the padding edge
+           content>-box> - the background> image> starts from the upper left corner of the content>
+               :x background>-origin>: content>-box>;
+   background>-clip
+       :specifies the painting area of the background>.
+       :{values>
+           border>-box> - (default) the background> is> painted to the outside edge of the border>
+           padding-box> - the background> is> painted to the outside edge of the padding
+           content>-box> - the background> is> painted within the content> box>
+   </code></pre>
+   <h2>The At-Rules</h2>
+   The at-rule is a statement that provides CSS with instructions to perform or how to behave.
+   
+   <pre style="background-color:black;"><code style="background-color:black;color:white;">
+    @charset "UTF-8";
+    /***********************************************************8/
+    @import 'global.css';
+    /***********************************************************8/
+    /* Namespace for XHTML */
+    @namespace url(http://www.w3.org/1999/xhtml);
+
+    /* Namespace for SVG embedded in XHTML */
+    @namespace svg url(http://www.w3.org/2000/svg);
+    /***********************************************************8/
+    @document 
+    /* Rules for a specific page */
+    url(http://css-tricks.com/),
+    
+    /* Rules for pages with a URL that begin with... */
+    url-prefix(http://css-tricks.com/snippets/),
+    
+    /* Rules for any page hosted on a domain */
+    domain(css-tricks.com),
+  
+    /* Rules for all secure pages */
+    regexp("https:.*")
+  {
+    
+    /* Start styling */
+    body { font-family: Comic Sans; }
+  
+  }
+  @font-face {//This rule allows us to load custom fonts on a webpage
+    font-family: 'MyWebFont';
+    src:  url('myfont.woff2') format('woff2'),
+          url('myfont.woff') format('woff');
+  }
+    </code></pre>
+   <h2 id="animations">Animations</h2>
+   <h3 id="animations">animations</h3>
+   <pre><code>        animation 
+               :allows animation of> most HTML elements without> using> JavaScript or> Flash
+               :?concept
+                   -To use CSS3 animation, you must first> specify CSS styles inside the> @keyframes rule
+                   -Keyframes hold what styles the> element> will have at> certain times.
+                   To get> an> animation to> work, you must bind the> animation to> an> element>.
+               :X
+   </code></pre><pre><code class="lang-css">/* The animation code */>
+       @keyframes> example {
+           from> {background-color>: red;}
+           to> {background-color>: yellow;}
+       }
+
+       /* The element to apply the animation to */>
+       div> {
+           width>: 100px>;
+           height>: 100px>;
+           background-color>: red;
+
+           animation-name>: example;
+           animation-duration>: 4s>;
+       }
+   </code></pre>
+   <p>###animation-iteration-count
+   : specifies the number of times an animation should run.
+   animation steps are specifed by percent.</p>
+   <pre><code class="lang-html">&lt;!DOCTYPE html&gt;>
+   &lt;html>&gt;>
+   &lt;head>&gt;>
+   &lt;style>&gt;> 
+   div> {
+       width>: 100px>;
+       height>: 100px>;
+       background-color>: red;
+       position>: relative;
+       -webkit-animation-name>: example; /* Chrome, Safari, Opera */>
+       -webkit-animation-duration>: 4s>; /* Chrome, Safari, Opera */>
+       -webkit-animation-iteration-count>: 3>; /* Chrome, Safari, Opera */>
+       -webkit-animation-direction>: reverse; /* Chrome, Safari, Opera */>
+       animation-name>: example;
+       animation-duration>: 4s>;
+       animation-iteration-count>: 3>;
+       animation-direction>: reverse;    
+   }
+
+   /* Chrome, Safari, Opera */>
+   @-webkit>-keyframes> example {
+       0%   {background-color>:red; left>:0px>; top>:0px>;}
+       25%  {background-color>:yellow; left>:200px>; top>:0px>;}
+       50%  {background-color>:blue; left>:200px>; top>:200px>;}
+       75%  {background-color>:green; left>:0px>; top>:200px>;}
+       100% {background-color>:red; left>:0px>; top>:0px>;}
+   }
+
+   /* Standard syntax */>
+   @keyframes> example {
+       0%   {background-color>:red; left>:0px>; top>:0px>;}
+       25%  {background-color>:yellow; left>:200px>; top>:0px>;}
+       50%  {background-color>:blue; left>:200px>; top>:200px>;}
+       75%  {background-color>:green; left>:0px>; top>:200px>;}
+       100% {background-color>:red; left>:0px>; top>:0px>;}
+   }
+   >&lt;/style>&gt;>
+   &lt;/head>&gt;>
+   &lt;body>&gt;>
+
+   &lt;p>&gt;>&lt;b>&gt;>Note:&lt;/b>&gt;> This example does not work in Internet Explorer 9 and earlier versions.&lt;/p>&gt;>
+
+   &lt;div>&gt;>&lt;/div>&gt;>
+
+   &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <h2 id="transitions">transitions</h2>
+   <p>###transition
+   : allows you to change property values, smoothly (from one value to another), over a given duration.
+   ( provide a way to control animation speed when changing CSS properties)
+   :x</p>
+   <pre><code class="lang-html">&lt;!DOCTYPE html&gt;>
+   &lt;html>&gt;>
+   &lt;head>&gt;>
+   &lt;style>&gt;> 
+   div> {
+       width>: 100px>;
+       height>: 100px>;
+       background>: red;
+       -webkit-transition>: width 2s>; /* For Safari 3.1 to 6.0 */>
+       transition>: width 2s>;
+   }
+
+   div>:hover> {
+       width>: 300px>;
+   }
+   >&lt;/style>&gt;>
+   &lt;/head>&gt;>
+   &lt;body>&gt;>
+
+   &lt;p>&gt;>&lt;b>&gt;>Note:&lt;/b>&gt;> This example does not work in Internet Explorer 9 and earlier versions.&lt;/p>&gt;>
+
+   &lt;div>&gt;>&lt;/div>&gt;>
+
+   &lt;p>&gt;>Hover over the div element above, to see the transition effect.&lt;/p>&gt;>
+
+   &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <p>###transition-timing-function</p>
+   <pre><code>:specifies the> speed curve of> the> transition effect.
+   :{values
+       ease         - specifies a transition effect with> a slow start, then> fast, then> end> slowly (this is> default)
+       linear         - specifies a transition effect with> the> same speed from> start to> end>
+       ease-in>     - specifies a transition effect with> a slow start
+       ease-out     - specifies a transition effect with> a slow end>
+       ease-in>-out - specifies a transition effect with> a slow start and> end>
+       cubic-bezier(n,n,n,n) - lets you define your own values in> a cubic-bezier function
+   transition-delay>     Specifies a delay> (in> seconds) for> the> transition effect
+   transition-duration     Specifies how many seconds or> milliseconds a transition effect takes to> complete
+   transition-property>     Specifies the> name> of> the> CSS property> the> transition effect is> for>
+   transition-timing-function     Specifies the> speed curve of> the> transition effect
+   </code></pre><h2 id="2d-transforms">2D Transforms</h2>
+   <pre><code class="lang-css">-> translate>()     : moves> an> element> from> its> current> position>
+           :x>
+               translate>(50px>, 100px>);
+   -> rotate> ()        : rotates> an> element> 
+       :x>  transform>: rotate>(20deg>);
+   -> scale>()        : increases> or> decreases> the> size> of> an> element>
+   -> skewX>()        : skews> an> element> along> the> X-axis> by> the> given> angle>.
+       :x>
+           div> {
+               -ms-transform>: skewX>(20deg); /* IE 9 */>
+               -webkit-transform>: skewX>(20deg); /* Safari */>
+               transform>: skewX>(20deg);
+           }
+   -> skewY>()        : method> skews> an> element> along> the> Y-axis> by> the> given> angle>.
+   -> skew>()        : skews> an> element> along> the> X> and> Y-axis> by> the> given> angles>.
+   -> matrix>()         : combines> all> the> 2D> transform> methods> into> one>.
+           The> parameters> are> as> follow>: matrix>(scaleX>(),skewY>(),skewX>(),scaleY>(),translateX>(),translateY>()):
+           :x> transform>: matrix>(1, -0>.3>, 0, 1, 0, 0);
+   </code></pre>
+   <h2 id="3d-transforms">3D Transforms</h2>
+   <p>:allows you to format your elements using 3D transformations</p>
+   <pre><code class="lang-css">rotateX>()>> method rotates an element around its X-axis at a> given degree
+   rotateY>()>> method rotates an element around its Y-axis at a> given degree
+   rotateZ>()>> method rotates an element around its Z-axis at a> given degree
+   -cursor>: pointer;//makes the mouse cursor look like hand>
+   </code></pre>
+   <h2 id="process">process</h2>
+   <h3 id="include-a-css-in-a-html-">include a css in a html:</h3>
+   <pre><code class="lang-html">&lt;head>&gt;>    &lt;link> rel>="stylesheet"> type>="text/css"> href>="theme.css"> /&gt;>
+   &lt;/head>&gt;>
+   </code></pre>
+   <h3 id="embeding-css-inside-html">embeding css inside html</h3>
+   <pre><code class="lang-html">&lt;style> media>="screen"> type>="text/css">&gt;>
+       Add style rules here
+   >&lt;/style>&gt;>
+   </code></pre>
+   <h3 id="importing-a-css-file-from-within-css">Importing a CSS file from within CSS</h3>
+   <pre><code>This lets us attach a new CSS file> from> within CSS file> itself. 
+   To import a new CSS file> from> within CSS simply use the> following rule:
+   @import "newstyles.css">;
+
+   -it> is> not> seo friendly
+       From a page speed standpoint, @import from> a CSS file> should almost never be used,
+       as> it> can prevent stylesheets from> being downloaded concurrently. For instance, if> stylesheet A contains> the> text>:
+       @import url("stylesheetB.css">);
+       then> the> download of> the> second> stylesheet may not> start until> the> first> stylesheet has been downloaded.
+   - If you need a stylesheet that> depends on> another one, use @import. Do the> optimization in> a separate step.
+   </code></pre><h3 id="rounded-button-hover-font-shadow">rounded button + hover + font + shadow</h3>
+   <pre><code class="lang-css">.button> {
+       background-color>: #4BCD37>;
+       border>: 3px> solid;
+       border-color>: white;
+       border-radius>: 20px>;
+       padding>: 15px> 32px>;
+       text-align>: center;
+       text-decoration>: none;
+       display>: inline-block;
+       font-size>: 16px>;
+       margin>: 4px> 2px>;
+       cursor>: pointer;
+           box-shadow>: 0> 12px> 16px> 0> rgba>(0,0,0,0.24), 0> 17px> 50px> 0> rgba>(0,0,0,0.19);
+   }
+   .button>:hover> {
+       background>: #8db1c7>;
+       text-decoration>: none;
+   }
+   </code></pre>
+   <h3 id="grouping-selectors">grouping selectors</h3>
+   <pre><code class="lang-css">        It will be better to group the selectors, to minimize the code>.
+           h1>, h2>, p> {
+               text-align>: center;
+               color>: red;
+           }
+   </code></pre>
+   <h3 id="striped-tables-even-rows-to-another-color-">Striped Tables (even rows to another color)</h3>
+   <pre><code>    tr>:nth-child(even)> {background-color>: #f2f2f2>}
+   </code></pre><h3 id="text-in-transparent-box-over-an-image">Text in Transparent Box over an image</h3>
+   <pre><code class="lang-css">&lt;!DOCTYPE html&gt;>
+   &lt;html>&gt;>
+   &lt;head>&gt;>
+   &lt;style>&gt;>
+   div>.background> {
+   background>: url>(klematis.jpg) repeat;
+   border>: 2px> solid black;
+   }
+
+   div>.transbox> {
+   margin>: 30px>;
+   background-color>: #ffffff>;
+   border>: 1px> solid black;
+   opacity>: 0.55>;
+   filter>: alpha>(opacity=60); /* For IE8 and earlier */>
+   }
+
+   div>.transbox> p> {
+   margin>: 5%>;
+   font-weight>: bold;
+   color>: #000000>;
+   }
+   >&lt;/style>&gt;>
+   &lt;/head>&gt;>
+   &lt;body>&gt;>
+
+   &lt;div> class>="background">&gt;>
+   &lt;div> class>="transbox">&gt;>
+   This is some text that is placed in the transparent box.
+   &lt;/div>&gt;>
+   &lt;/div>&gt;>
+
+   &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <h3 id="full-height-fixed-vertical-navbar">Full-height Fixed Vertical Navbar</h3>
+   <pre><code class="lang-css">&lt;!DOCTYPE html&gt;>
+   &lt;html>&gt;>
+       &lt;head>&gt;>
+       &lt;style>&gt;>
+       body> {
+           margin>: 0>;
+       }
+
+       ul> {
+           list-style-type>: none;
+           margin>: 0>;
+           padding>: 0>;
+           width>: 25%>;
+           background-color>: #f1f1f1>;
+           position>: fixed;
+           height>: 100%>;
+           overflow>: auto;
+       }
+
+       li> a> {
+           display>: block;
+           color>: #000>;
+           padding>: 8px> 16px>;
+           text-decoration>: none;
+       }
+
+       li> a>.active> {
+           background-color>: #4CAF50>;
+           color>: white;
+       }
+
+       li> a>:hover>:not(.active)> {
+           background-color>: #555>;
+           color>: white;
+       }
+       >&lt;/style>&gt;>
+       &lt;/head>&gt;>
+       &lt;body>&gt;>
+
+       &lt;ul>&gt;>
+       &lt;li>&gt;>&lt;a> class>="active"> href>="#home">&gt;>Home&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;li>&gt;>&lt;a> href>="#news">&gt;>News&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;li>&gt;>&lt;a> href>="#contact">&gt;>Contact&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;li>&gt;>&lt;a> href>="#about">&gt;>About&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;/ul>&gt;>
+
+       &lt;div> style>="margin-left:25%;padding:1px 16px;height:1000px;">&gt;>
+       &lt;h2>&gt;>Fixed Full-height Side Nav&lt;/h2>&gt;>
+       &lt;h3>&gt;>Try to scroll this area, and see how the sidenav sticks to the page&lt;/h3>&gt;>
+       &lt;p>&gt;>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.&lt;/p>&gt;>
+       &lt;p>&gt;>Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).&lt;/p>&gt;>
+       &lt;p>&gt;>Some text..&lt;/p>&gt;>
+       &lt;p>&gt;>Some text..&lt;/p>&gt;>
+       &lt;p>&gt;>Some text..&lt;/p>&gt;>
+       &lt;p>&gt;>Some text..&lt;/p>&gt;>
+       &lt;p>&gt;>Some text..&lt;/p>&gt;>
+       &lt;p>&gt;>Some text..&lt;/p>&gt;>
+       &lt;p>&gt;>Some text..&lt;/p>&gt;>
+       &lt;/div>&gt;>
+
+       &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <h3 id="active-current-navigation-link-and-right-align-links">Active/Current Navigation Link and Right-Align Links</h3>
+   <pre><code class="lang-css">&lt;!DOCTYPE html&gt;>
+   &lt;html>&gt;>
+       &lt;head>&gt;>
+       &lt;style>&gt;>
+       ul> {
+           list-style-type>: none;
+           margin>: 0>;
+           padding>: 0>;
+           overflow>: hidden;
+           background-color>: #333>;
+       }
+
+       li> {
+           float>: left;
+       }
+
+       li> a> {
+           display>: block;
+           color>: white;
+           text-align>: center;
+           padding>: 14px> 16px>;
+           text-decoration>: none;
+       }
+
+       li> a>:hover>:not(.active)> {
+           background-color>: #111>;
+       }
+
+       .active> {
+           background-color>: #4CAF50>;
+       }
+       >&lt;/style>&gt;>
+       &lt;/head>&gt;>
+       &lt;body>&gt;>
+
+       &lt;ul>&gt;>
+       &lt;li>&gt;>&lt;a> href>="#home">&gt;>Home&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;li>&gt;>&lt;a> href>="#news">&gt;>News&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;li>&gt;>&lt;a> href>="#contact">&gt;>Contact&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;li> style>="float:right">&gt;>&lt;a> class>="active"> href>="#about">&gt;>About&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;/ul>&gt;>
+
+       &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <h3 id="dropdown-menu-inside-a-navigation-bar">Dropdown Menu inside a Navigation Bar</h3>
+   <pre><code class="lang-css">&lt;style>&gt;>
+       ul> {
+           list-style-type>: none;
+           margin>: 0>;
+           padding>: 0>;
+           overflow>: hidden;
+           background-color>: #333>;
+       }
+
+       li> {
+           float>: left;
+       }
+
+       li> a>, .dropbtn> {
+           display>: inline-block;
+           color>: white;
+           text-align>: center;
+           padding>: 14px> 16px>;
+           text-decoration>: none;
+       }
+
+       li> a>:hover>, .dropdown>:hover> .dropbtn> {
+           background-color>: red;
+       }
+
+       li>.dropdown> {
+           display>: inline-block;
+       }
+
+       .dropdown-content> {
+           display>: none;
+           position>: absolute;
+           background-color>: #f9f9f9>;
+           min-width>: 160px>;
+           box-shadow>: 0px> 8px> 16px> 0px> rgba>(0,0,0,0.2);
+       }
+
+       .dropdown-content> a> {
+           color>: black;
+           padding>: 12px> 16px>;
+           text-decoration>: none;
+           display>: block;
+           text-align>: left;
+       }
+
+       .dropdown-content> a>:hover> {background-color>: #f1f1f1>}
+
+       .dropdown>:hover> .dropdown-content> {
+           display>: block;
+       }
+       >&lt;/style>&gt;>
+       &lt;/head>&gt;>
+       &lt;body>&gt;>
+
+       &lt;ul>&gt;>
+       &lt;li>&gt;>&lt;a> class>="active"> href>="#home">&gt;>Home&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;li>&gt;>&lt;a> href>="#news">&gt;>News&lt;/a>&gt;>&lt;/li>&gt;>
+       &lt;li> class>="dropdown">&gt;>
+           &lt;a> href>="#"> class>="dropbtn">&gt;>Dropdown&lt;/a>&gt;>
+           &lt;div> class>="dropdown-content">&gt;>
+           &lt;a> href>="#">&gt;>Link 1&lt;/a>&gt;>
+           &lt;a> href>="#">&gt;>Link 2&lt;/a>&gt;>
+           &lt;a> href>="#">&gt;>Link 3&lt;/a>&gt;>
+           &lt;/div>&gt;>
+       &lt;/li>&gt;>
+       &lt;/ul>&gt;>
+
+       &lt;h3>&gt;>Dropdown Menu inside a Navigation Bar&lt;/h3>&gt;>
+       &lt;p>&gt;>Hover over the "Dropdown" link to see the dropdown menu.&lt;/p>&gt;>
+
+       &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <h3 id="tooltip">Tooltip</h3>
+   <pre><code class="lang-css">&lt;!DOCTYPE html&gt;>
+   &lt;html>&gt;>
+       &lt;style>&gt;>
+       .tooltip> {
+           position>: relative;
+           display>: inline-block;
+           border-bottom>: 1px> dotted black;
+
+       }
+
+       .tooltip> .tooltiptext> {
+           visibility>: hidden;
+           width>: 220px>;
+           background-color>: black;
+           color>: #fff>;
+           text-align>: center;
+           border-radius>: 6px>;
+           padding>: 5px> 0>;
+           position>: absolute;
+           z-index>: 1>;
+           bottom>: 100%>;
+           left>: 50%>;
+           margin-left>: -60px>;
+
+           /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */>
+           opacity>: 0>;
+           transition>: opacity 1s>;
+       }
+
+       .tooltip>:hover> .tooltiptext> {
+           visibility>: visible;
+           opacity>: 1>;
+       }
+       >&lt;/style>&gt;>
+       &lt;body> style>="text-align:center;">&gt;>
+
+       &lt;h2>&gt;>Fade In Tooltip on Hover&lt;/h2>&gt;>
+       &lt;p>&gt;>When you move the mouse over the text below, the tooltip text will fade in and take 1 second to go from completely invisible to visible.&lt;/p>&gt;>
+
+       &lt;div> class>="tooltip">&gt;>Hover over me
+       &lt;span> class>="tooltiptext">&gt;>Tooltip text.sometimes we have lots of content&lt;br>&gt;>in many lines&lt;/span>&gt;>
+       &lt;/div>&gt;>
+
+       &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <h3 id="focused-input-textboxes">focused input textboxes</h3>
+   <pre><code class="lang-css">&lt;!DOCTYPE html&gt;>
+       &lt;html>&gt;>
+       &lt;head>&gt;>
+       &lt;style>&gt;> 
+       input>[type=text]> {
+           width>: 100%>;
+           padding>: 12px> 20px>;
+           margin>: 8px> 0>;
+           box-sizing>: border-box;
+           border>: 1px> solid #555>;
+           outline>: none;
+       }
+
+       input>[type=text]>:focus> {
+           background-color>: lightblue;
+       }
+       >&lt;/style>&gt;>
+       &lt;/head>&gt;>
+       &lt;body>&gt;>
+
+       &lt;p>&gt;>In this example, we use the :focus selector to add a background color 
+       to the text field when it gets focused (clicked on):&lt;/p>&gt;>
+
+       &lt;form>&gt;>
+       &lt;label> for>="fname">&gt;>First Name&lt;/label>&gt;>
+       &lt;input> type>="text"> id>="fname"> name>="fname"> value>="John">&gt;>
+       &lt;label> for>="fname">&gt;>Last Name&lt;/label>&gt;>
+       &lt;input> type>="text"> id>="lname"> name>="lname"> value>="Doe">&gt;>
+       &lt;/form>&gt;>
+
+       &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <h3 id="inputbox-with-image-inside">inputbox with image inside</h3>
+   <pre><code class="lang-css">&lt;!DOCTYPE html&gt;>
+   &lt;html>&gt;>
+   &lt;head>&gt;>
+   &lt;style>&gt;> 
+   input>[type=text]> {
+       width>: 100%>;
+       box-sizing>: border-box;
+       border>: 2px> solid #ccc>;
+       border-radius>: 4px>;
+       font-size>: 16px>;
+       background-color>: white;
+       background-image>: url>('searchicon.png'>);
+       background-position>: 10px> 10px>; 
+       background-repeat>: no-repeat;
+       padding>: 12px> 20px> 12px> 40px>;
+   }
+   >&lt;/style>&gt;>
+   &lt;/head>&gt;>
+   &lt;body>&gt;>
+
+   &lt;p>&gt;>Input with icon:&lt;/p>&gt;>
+
+   &lt;form>&gt;>
+   &lt;input> type>="text"> name>="search"> placeholder>="Search..">&gt;>
+   &lt;/form>&gt;>
+
+   &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+   <h3 id="thumbnail-image-as-link">thumbnail image as link</h3>
+   <pre><code class="lang-html">&lt;!DOCTYPE html&gt;>
+   &lt;html>&gt;>
+       &lt;head>&gt;>
+       &lt;style>&gt;>
+       a> {
+           display>: inline-block;
+           border>: 1px> solid #ddd>;
+           border-radius>: 4px>;
+           padding>: 5px>;
+           transition>: 0.3s>;
+       }
+
+       a>:hover> {
+           box-shadow>: 0> 0> 2px> 1px> rgba>(0, 140, 186, 0.5);
+       }
+       >&lt;/style>&gt;>
+       &lt;/head>&gt;>
+       &lt;body>&gt;>
+
+       &lt;h2>&gt;>Thumbnail Image as Link&lt;/h2>&gt;>
+       &lt;p>&gt;>Use the border property to create thumbnail images.&lt;br>&gt;>
+        Wrap an anchor around the image to use it as a link.&lt;/p>&gt;>
+       &lt;p>&gt;>Hover over the image and click on it to see the effect.&lt;/p>&gt;>
+
+       &lt;a> target>="_blank"> href>="paris.jpg">&gt;>
+       &lt;img> src>="paris.jpg"> alt>="Paris"> width>="400"> height>="300">&gt;>
+       &lt;/a>&gt;>
+
+       &lt;/body>&gt;>
+   &lt;/html>&gt;>
+   </code></pre>
+      
+      
+      
+  <h2>Responsive pages</h2>    
+
+   <pre>:Responsive Web Design is about using CSS and HTML 
+           to resize, hide, shrink, enlarge, or move the content 
+           to make it look good on any screen(desktops, tablets, and phones)
+
+    Example
+   </pre>
+
+   <pre><code class="lang-html"> &lt;!DOCTYPE html&gt;>
+    &lt;html> lang>="en-us">&gt;>
+    &lt;head>&gt;>
+    &lt;style>&gt;>
+    .city> {
+    float>: left;
+    margin>: 10px>;
+    padding>: 10>p;
+    max-width>: 300px>;
+    height>: 300px>;
+    border>: 1px> solid black;
+    }   
+    >&lt;/style>&gt;>
+    &lt;/head>&gt;>
+    &lt;body>&gt;>
+       &lt;h1>&gt;>Responsive Web Design Demo&lt;/h1>&gt;>
+          &lt;h2>&gt;>Resize this responsive page!&lt;/h2>&gt;>
+               &lt;div> class>="city">&gt;>
+               &lt;h2>&gt;>London&lt;/h2>&gt;>
+               &lt;p>&gt;>London is the capital of England.&lt;/p>&gt;>
+               &lt;p>&gt;>It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.&lt;/p>&gt;>
+               &lt;/div>&gt;>
+
+               &lt;div> class>="city">&gt;>
+               &lt;h2>&gt;>Paris&lt;/h2>&gt;>
+               &lt;p>&gt;>Paris is the capital of France.&lt;/p>&gt;> 
+               &lt;p>&gt;>The Paris area is one of the largest population centers in Europe, with more than 12 million inhabitants.&lt;/p>&gt;>
+               &lt;/div>&gt;>
+
+               &lt;div> class>="city">&gt;>
+               &lt;h2>&gt;>Tokyo&lt;/h2>&gt;>
+               &lt;p>&gt;>Tokyo is the capital of Japan.&lt;/p>&gt;>
+               &lt;p>&gt;>It is the center of the Greater Tokyo Area, and the most populous metropolitan area in the world.&lt;/p>&gt;>
+               &lt;/div>&gt;>
+
+               &lt;div> class>="city">&gt;>
+               &lt;h2>&gt;>New York&lt;/h2>&gt;>
+               &lt;p>&gt;>The City of New York is the most populous city in the United States.&lt;/p>&gt;>
+               &lt;p>&gt;>New York is an important center for international diplomacy and has been described as the cultural and financial capital of the world.&lt;/p>&gt;>
+               &lt;/div>&gt;>
+
+               &lt;/body>&gt;>
+               &lt;/html>&gt;>
+   </code></pre>
+   <p>
+       <h3>process</h3>
+   for whole page,include <meta> tag in your page:</p>
+   <pre><code class="lang-html">&lt;meta name>="viewport"> content="width=device-width, initial-scale=1.0">&gt;
+   </code></pre>
+   <p>for elements of the page,one way is to use a responsive style sheet, like W3.CSS</p>
+   
+</body>

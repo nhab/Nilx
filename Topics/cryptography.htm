@@ -1,0 +1,84 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2 style="display:flex"><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />Cryptography</h2>
+<div>
+Cryptography 
+    study of algorithms used for encryption
+Encryption 
+    uses an algorithm and a key to transform an input (i.e., plaintext) into an encrypted output(ie., ciphertext=Hash).
+    The given algorithm will always transform the same plaintext into the same ciphertext if the same key is used.
+
+Decryption
+    If encryption locks the file, then decryption reverses the process, turning ciphertext back to plaintext. Decryption requires two elements: the correct password and the corresponding decryption algorithm.
+
+symmetric cryptography
+    the same key is used for both encryption and decryption.
+    A sender and a recipient must already <b>have a shared key</b> that is known to both. 
+    Key distribution is a tricky problem.
+
+asymmetric crypto
+    two different keys are used for encryption and decryption.
+    Every user in an asymmetric cryptosystem has both a public key and a private key. 
+    The private key is kept secret at all times, but the public key may be freely distributed.
+    Any data encrypted with a private key can only be decrypted with the corresponding public key.
+     for example, anyone with Jane’s public key could decrypt the signed message.
+
+Key 
+    The encryption process requires a cryptographic key that tells the algorithm how to transform the plaintext into ciphertext
+
+ Salt
+    When passwords are part of key creation, At a basic level, a salt adds random data to a one-way hash function, to distinguish between two diffent user whith the same password.
+
+Some algorithms of encryption:
+     MD5, SHA, SHA-1, and SHA-2. 
+
+digital signatures
+    asymmetric crypto is generally used to encrypt the hashes of messages rather than entire messages.
+ 
+HTTPS
+     When using a HTTPS connection, your data is encrypted using Transport Layer Security (TLS), protecting your data while in transit.
+     HTTPS generates long-term private and public keys that, in turn, are used to create a short-term session key. The session key is a single-use symmetric key that the connection destroys once you leave the HTTPS site (closing the connection and ending its encryption). However, you will receive another single-use session key to secure your communication when you revisit the site
+
+encryption certificate
+    -A user’s public key, which has been signed and encrypted, using a private key of a well-known certificate authority, is what is referred to as a cryptographic certificate.
+    -The cryptographic certificate allows its users to give out their public key to others, and allows the others to trust that they get the correct user’s public key.
+    -for example, websites and emails may have certificates
+Public Key Infrastructure (PKI) 
+    is the set of hardware, software, people, policies, and procedures that are needed to create, manage, distribute, use, store, and revoke digital certificates.
+
+Certification Authority (CA)
+    A CA issues certificates to, and vouches for the authenticity of entities. The level of trust you can assign to a CA is individual, per CA, and depends on the CAs Policy (CP) and CA Practices Statement (CPS). PKI is also what binds keys with user identities by means of a Certificate Authority (CA). 
+    
+Certificate tree or certificate path
+    Normally, a root certificate of well-known Certification Authorities (CA) or root CA Certificate is usually loaded to your browser or application. The lists of all signed certificates and revoked certificates are usually maintained by the CA.
+
+    A signed certificate cannot be changed, so certificate remains unsecure until it is signed. You can use the certificate to sign the certificate itself, and this is known as a self-signed certificate. All root CA certificates sign themselves.
+
+    As you may have noted, the certificate has some important documents which prove that it has not been tampered with. The certificate should never be transmitted in any form whatsoever, and in that case, it doesn’t have a private key. This certificate can use the public key to send a message to the owner or verify a message signed by the owner of the certificate.
+RootCA
+    A RootCA has a self-signed certificate and is also called Trusted Root. Verification of other certificates in the PKI ends with the RootCAs self-signed certificate. Since the RootCAs certificate is self-signed it must somehow be configured as a trusted root for all clients in the PKI.
+
+SubCA
+    A subordinate CA, or SubCA for short, is a CA whose certificate is signed by another CA, that can be another SubCA or a RootCA. Since the SubCAs certificate is signed by another CA, it does not have to be configured as a trusted root. It is part of a certificate chain that ends in the RootCA.
+
+Registration Authority (RA)
+    An RA is an administrative function that registers entities in the PKI. The RA is trusted to identify and authenticate entities according to the CAs policy. There can be one or more RAs connected to each CA in the PKI.
+
+Validation Authority (VA)
+    A VA is responsible for providing information on whether certificates are valid or not. There can be one or more VAs connected to each CA in the PKI.
+
+End-entity
+    An end-entity is a user, such as an e-mail client, a web server, a web browser or a VPN-gateway. End-entities are not allowed to issue certificates to other entities, they make up the leaf nodes in the PKI.
+</div>

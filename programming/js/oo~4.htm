@@ -1,0 +1,419 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />object oriented principles</h2>
+<div>
+<b>1- Data Encapsulation</b>
+-Data Encapsulation is the hiding of data in your objects by restricting access.
+-In JavaScript data is stored in:
+  -properties which are immediately accessible, such as: employee.name
+  -or possibly via a couple of getter and setter methods, such as: employee.getName  /* accessor */  and employee.setName /* mutator method*/
+-JavaScript does not support access modifiers. By default all properties and methods are public, meaning they are accessible by anyone in the program.
+- In js, to encapsulate data in your object,we use the concept of function closure:
+<pre><code>
+var Employee = function (name) {
+    var hiddenName = name;
+    return {
+    getName: function () { return hiddenName; },
+    setName: function (name) { hiddenName = name; }
+    };
+};
+var employee = new Employee("Mike");
+employee.setName("David");
+alert(employee.getName()); // => David
+alert(employee.hiddenName); // => undefined  
+</code></pre>
+  
+<b>2- abstraction</b>
+Data abstraction refers to the development of objects that are abstractions of real world concepts. This
+is done primarily by defining an interface .
+
+For example, if we need to create a Customer object, we are interested in their name, contact
+information, and purchase history perhaps. If, on the other hand, we need to model a new hire, say a
+JavaScript Programmer, we are more interested in their education, skill level, years of experience, and
+salary requirements. The interesting thing is that both are people, but we abstract out only what is of
+interest to us at that time
+<pre><code>
+var Customer = function () {
+    this.name = "";
+    this.contact = "";
+    this.history = [];
+};
+var Hire = function () {
+    this.name = "";
+    this.education = "";
+    this.skills = [];
+    this.salary = 0;
+}; 
+</code></pre>
+
+<b>3- inheritance</b>
+-There are different ways that objects can relate to each other:
+    - "has a" = composition
+    - "is a"  = inheritance
+-Inheritance is when an object derives data and functionality from an ancestor object.
+-By inheriting the class obtains the data and the behavior from the ancestor class.
+-Inheritance is fully supported in JavaScript, but through a different mechanism, called prototypal
+inheritance.
+- Each object in JavaScript has a prototype object from which it derives properties and
+methods.
+<pre><code>var Car = function () {
+    this.wheels = 4;
+    this.doors = 4;
+   };
+   var Toyota = function (color) {
+    this.color = color;
+   };
+   Toyota.prototype = new Car(); // set Car as 'ancestor' object
+   var toyota = new Toyota("red");
+   alert(toyota.color); // => red
+   alert(toyota.wheels); // => 4
+   alert(toyota.doors); // => 4
+   alert(toyota instanceof Toyota); // => true
+   alert(toyota instanceof Car); // => true
+   alert(toyota instanceof Object); // => true
+</code></pre>
+<b>4- polymorphism</b>
+- The word polymorphism literally means many forms. 
+- It is the ability to create multiple objects that to the program appear of the same type but they are different. 
+- This is accomplished by creating objects that have the same interface (properties and methods) but their concrete implementation is very
+different. 
+-for example:
+Suppose we are modeling different zoo animals: a swan, a monkey, and an elephant. 
+All these animals have a skin and they can move and can talk (make a sound). 
+for each animal, we create an object with the following interface: a skin property and two methods: move and talk
+<pre><code>
+    var Animal = function (home) {
+        this.home = home;
+       };
+       Animal.prototype = {
+        say: function () {
+        alert("I live in a " + this.home);
+        }
+       };
+       var Swan = function (skin, move, talk) {
+        this.skin = skin;
+        this.move = move;
+        this.talk = talk;
+       };
+       Swan.prototype = new Animal("pond");
+       var Monkey = function (skin, move, talk) {
+        this.skin = skin;
+        this.move = move;
+        this.talk = talk;
+       };
+       Monkey.prototype = new Animal("jungle");
+       var Elephant = function (skin, move, talk) {
+        this.skin = skin;
+        this.move = move;
+        this.talk = talk;
+       };
+       Elephant.prototype = new Animal("zoo");
+       //Next we create 3 different animal instances and add these to an array:
+       var animals = [];
+       var swan = new Swan("Feathers",
+        function () { alert("I fly"); } ,
+       function () { alert("Honk"); });
+       var monkey = new Monkey("Furr",   function () { alert("I climb"); } ,
+       function () { alert("Ooh Ooh"); });
+       var elephant = new Elephant("Thick skin",
+        function () { alert("I walk"); } ,
+        function () { alert("Trumpet"); });
+       animals.push(swan);
+       animals.push(monkey);
+       animals.push(elephant);
+       
+</code></pre>
+</div>
+<h2><input type="button" value="-"
+    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+    onclick="toggle(this)" />concepts</h2>
+<div>
+<b>Loose Coupling</b>
+Loose coupling means there is a low degree of dependency among objects. Loose coupling is a design
+goal that seeks to reduce the interdependencies between objects with the goal of reducing the risk that
+changes in one object will require changes in any other object.
+
+-Coupling is a measure of how much direct knowledge an object has about another object. The more it
+knows, the more tightly coupled it is with that object. T
+-Tight coupling creates highly interdependent systems that are much harder to change and maintain.
+
+<b>High Cohesion</b>
+Objects with high cohesion are those that are highly focused and have elements that form a coherent
+group and they truly belong together. Cohesion is a measure of how strongly related each piece of code
+is forming a comprehensive unit of functionality. Objects with high cohesion are preferred because they
+are reliable, reusable, understandable, and easier to maintain.
+
+It is important to note
+that cohesion exists within objects and modules (the blocks), whereas coupling exists between objects
+and modules (the arrows). 
+
+<b>continuous refactoring</b>
+The DRY principle is also intertwined with to the notion of continuous refactoring in which developers
+constantly look for refinements and improvements in their code base as they develop or maintain the
+application. 
+A common refactoring technique is to extract code and use object composition through which objects share functionality. 
+Another is to adjust the inheritance hierarchy of objects to reflect a new way of thinking. 
+
+<b>Rule of Three</b>
+The Rule of Three is another principle. Essentially it is a milder version of DRY. With DRY, any duplication
+should be avoided. The Rule of Three states that under certain circumstances allowing two copies of the
+same code may be fine. The idea is that you should only start refactoring when the code is repeated
+three times, because only then the necessary abstraction becomes clear.
+
+<b>Deep dive: The Event Loop</b>
+events like keyboard , mouse and network events, goes to 'events queue' and proccess sequentialy in an 'event loop'
+,if the 'event handler' exits for the event.
+
+<b>Callbacks</b>
+
+Event handlers are also referred to as callbacks(although call backs are not limited to event handlers). 
+Callbacks are function references that are passed around to other functions which will call these function references back 
+(i.e. execute the function) at the appropriate time.
+<pre><code>
+function mathematics(x, y, callback) {
+    return callback(x,y);
+}
+function add(x,y) { alert(x + y); }
+function multiply(x,y) { alert(x * y); }
+mathematics(3, 5, add); // => 8
+mathematics(3, 5, multiply); // => 15
+</code></pre>
+
+<b>Asynchronous callbacks</b>
+This is a technique that prevents long running functions from blocking the UI.
+As an example, JavaScript has a built-in function called setTimeout that allows callbacks to be called
+asynchronously after a given number of seconds:
+<pre><code>
+function say () {
+ alert("Hello");
+}    
+setTimeout(say, 2000); //=> after 2 seconds: Hello
+console.log("I am here"); //=> immediately: 
+//When running the above snippet, we will see "I am here" (on the console) before "Hello"
+//This shows that the invocation of say does not does not block the UI thread and is therefore an asynchronous callback. 
+</code></pre>
+all events placed
+on the event queue are asynchronous because there is a delay between when the event occurs and
+when the event gets handled by the event loop.
+We mention this because there are also synchronous (not asynchronous) browser events. These are
+events that are so critical that they need to be executed immediately, even when JavaScript is in the
+middle of running some code.
+An example of such an event is mouse move. Indeed mouse move events get entered into the event
+queue, but the actual mouse pointer (the arrow or hand) that hovers over the page updates
+immediately. Another example is DOM manipulation. 
+<b>Zero Timeout pattern</b>
+Calling setTimeout with no delay is called the Zero Timeout pattern. 
+It allows you to break up long running JavaScript functions in smaller pieces. 
+By breaking it up, you are giving the browser and the event loop some breathing room, 
+allowing it to catch up with whatever it needs to do. 
+<pre><code>
+    < button class="btn" onclick="start();">Start< /button>
+    < button class="btn" onclick="stop();">Stop< /button>
+    < button class="btn" onclick="reset();">Reset< /button>
+    < div id="myDiv" style="width:10px;height:50px;background:#f00;">< /div>
+
+    var timeout;
+function start() {
+ var div = document.getElementById("myDiv");
+ var size = 10;
+
+ var func = function () {
+ timeout = setTimeout(func, 0);
+ div.style.width = size + "px";
+ if (size++ == 600) stop();
+ }
+ func(); // starts the process
+}
+function stop() {
+ clearInterval(timeout);
+}
+function reset() {
+ var div = document.getElementById("myDiv");
+ div.style.width = "10px";
+}
+
+</code></pre>
+
+<b>Ajax calls</b>
+
+Following an Ajax call, the browser detects when the network call comes back. The details of how this
+works do not matter because this is native code and each browser has its own implementation of the
+XMLHttpRequest object. The bottom line is it just knows when the network call has come back.
+When this occurs an event gets added to the event queue.
+
+<b>What is a prototype? </b>
+Each object has an internal
+prototype property that points to a prototype object from which it inherits all members (properties and
+methods)
+<pre><code>
+    var Car = function () { };
+    Car.prototype = { make: "Mercedes" }; // prototypal inheritance.
+    var toyota = new Car();
+    var mercedes = new Car();
+    alert(toyota.make); // => Mercedes
+    alert(mercedes.make); // => Mercedes
+    toyota.make = "Toyota";
+    alert(toyota.make); // => Toyota
+
+</code></pre>
+
+<b>[[Prototype]] and __proto__</b>
+
+To get to this internal property, ES5 (EcmaScript 5) offers a standard accessor method:
+Object.getPrototypeOf(object). This is available in all modern browsers. In addition, all browsers,
+except IE 9 and below, also offer a non-standard accessor named __proto__. If none of these work you
+can still get to the prototype object via the prototype property on the object's constructor. Let's explain
+all this with some code:
+<pre><code>
+    // 3 ways to get to the internal prototype property:
+var document = {};
+// ES5 (all modern browsers)
+alert(Object.getPrototypeOf(document)); // => [object Object]
+// not available in IE9 and below
+alert(document.__proto__); // => [object Object]
+// availabe in all browsers
+alert(document.constructor.prototype); // => [object Object]    
+</code></pre>
+There are no properties named prototype, except in constructor functions. 
+It's a little broader than that: only function objects have prototype properties, but no other objects. 
+
+The following is important: The prototype property of a constructor function is the prototype that will
+be assigned as the prototype to all newly created objects. Constructor functions have a prototype
+property, but it is only used to assign a prototype to a newly created object. A constructor function is an
+object itself, so it must have its own prototype, that is, [[Prototype]] or __proto__. This is correct, but
+don't confuse it with the one named prototype.
+The code below demonstrates that the prototype property of a constructor function is a genuine object
+(unlike undefined as we saw before in our document object): 
+<pre><code>
+    var Document = function () {}; // Constructor function
+    alert(Document.prototype); // => [object Object]
+</code></pre>
+this prototype will be assigned as the prototype to all instances that are
+created by the constructor. These prototype objects can be customized with properties and methods,
+like so (you are probably already familiar with this style of code): 
+<pre><code>
+    var Document = function () {
+        this.type = "unknown";
+       };
+       Document.prototype.say = function () {
+        alert("Type: " + this.type);
+       };
+       var doc = new Document();
+       doc.type = "pdf";
+       doc.say(); // => Type: pdf
+</code></pre>
+Alternatively, you can assign an object literal (frequently with multiple methods and properties) to a
+prototype:
+<pre><code>
+var Document = function () {
+    this.type = "unknown";
+    };
+Document.prototype = { // object literal
+say: function () {
+alert("Type: " + this.type);
+}
+};
+var doc = new Document();
+doc.type = "pdf";
+doc.say(); // => Type: pdf
+</code></pre>
+Again, the prototype property has nothing do with the function's actual prototype. We will refer to an
+object's true prototype property as __proto__ which works in all browsers, except in IE. By the way,
+__proto__ will be standard in ES6 (EcmaScript 6). Here we confirm that they are indeed different (be
+sure not to run this in IE): 
+<pre><code>
+    var Employee = function () {
+        this.name = "unknown";
+    };
+    alert(Employee.prototype == Employee.__proto__); // => false
+    alert(Employee.__proto__ == Function.prototype); // => true    
+</code></pre>
+What is this Function.prototype on the last line? It is the default prototype object for all function
+objects. Similarly, the default prototype object for all objects is Object.prototype. Object.prototype
+is a root object of all objects in JavaScript.
+Function.prototype is the prototype for all functions. Function.prototype's prototype is
+Object.prototype which we referred to as the root object before. Next we have a diagram that depicts
+these relationships for the following JavaScript code: 
+<pre><code>
+    function Employee() { };
+    var object = new Object();
+    var employee = new Employee();   
+</code></pre>
+a few quick tests: 
+<pre><code>
+    function Employee() { };
+    var object = new Object();
+    var employee = new Employee();
+    alert(Employee.__proto__ === Object.__proto__); // => true
+    alert(object.__proto__ === Function.prototype.__proto__); // => true
+    alert(Object.__proto__); // => undefined or Empty() or function()   
+</code></pre>
+<pre><code>
+    function Employee() { };
+    var object = new Object();
+    var employee = new Employee();
+
+    alert(object.constructor === Object); // => true
+alert(employee.constructor === Employee); // => true
+alert(employee.__proto__ === Employee.prototype); // => true
+alert(Employee.prototype.constructor === Employee); // => true
+alert(employee instanceof Employee); // => true
+
+</code></pre>
+
+<pre><code>
+    function Employee() { };
+    var object = new Object();
+    var employee = new Employee();
+    alert(Function.prototype.constructor === Function); // => true
+    alert(Function.constructor === Function); // => true
+</code></pre>
+Let's recap what we have seen so far. Each object has a prototype from which it inherits properties and
+methods. An internal property named [[Prototype]] references the prototype. In all browsers, except IE,
+this property is called __proto__ and this is how we referred to it in our discussion. Only function
+objects have a property named prototype; no other object has this. Constructor functions use this
+prototype property to assign prototypes to newly created objects. 
+
+<b>Cracking JavaScript Idioms(=hacks)</b>
+A great way to learn JavaScript is by reading the code of libraries and frameworks written by expert
+developers, such as, jQuery, Mootools, Dojo, Backbone, ExtJs, Ember, and many others. Exploring these
+sources will reveal many programming gems which you then add to your own bag of coding tricks and
+techniques. It takes time but it is well worth the effort.
+JavaScript is a language of great flexibility and while spelunking these libraries and frameworks you will
+most likely encounter code that you wonder: what in the world is going on here? 
+<pre><code>
+    options || (options = {}); // what does this mean?
+    var _true_ = true; // why would anyone do this?
+    
+</code></pre>
+What exactly is an idiom? According to Wikipedia it is "an expression of a simple task, algorithm, or data
+structure that is not a built-in feature in the programming language being used, or, conversely, the use of
+an unusual or notable feature that is built in to a programming language ". Then it goes on: "The term
+can be used more broadly, however, to refer to complex algorithms or programming design patterns. 
+Knowing the idioms associated with a programming language and how to use them is an important part
+of gaining fluency in that language."
+
+Most JavaScript idioms are very short and terse. They are used for a variety of reasons: for instance,
+they 1) make the code more effective and/or efficient, 
+2) allow you to do things that are not natively supported by JavaScript, 
+3) reduce the code size which in turn reduces the download times, 
+4) allow the minifier to further reduce the code size, and 
+5) raises the 'cool factor' of the author. The last reason is disappearing quickly as the entire JavaScript community is catching up by learning to read and
+understand these 'hacks'. 
+
+
+</div>
+</body>
+</html>

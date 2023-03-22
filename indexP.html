@@ -1,0 +1,496 @@
+<html>
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <script src="assets\js\fdate.js"></script>
+   <script src="assets\js\dateTime.js"></script>
+   <script src="assets\js\btc.js"></script>
+   <script src="LazyNews.json"></script>
+   <script src="curiosity.json"></script>
+   <script src="assets/js/block.js"></script> 
+   
+   <link rel="stylesheet" type="text/css" href="assets\css\main.css" />    
+   <link rel="stylesheet" href="assets/css/block.css">  
+   <link rel="stylesheet" href="assets/css/bootstrap5.min.css">
+<style>
+   p{white-space:none}
+</style>
+</head>
+<body>
+	<table class="topBand" style="height: 30px;width:100%;position: fixed;">
+		<tr>
+			<td  class="topBand" width="40%"></td>
+			<td class="topBand"><script>getUTCNow()</script></td>
+			<td  class="topBand" ><a href="http://www.time.ir/" target="_blank" style="color:#999999" >
+				<script>document.write(getdateP());</script></a>
+			</td>
+			<td id="div1"  class="topBand" ></td>
+		</tr>
+	</table>
+
+    <script>  DatTimeClock();   </script>
+
+    <div class="pageHeader" title='Nilx uses blocks.js to show texts more managed and readable' >Nilx Knowledge hub</div>
+	    <!--div class="pre fullwidth paddings">       
+	    </div-->
+		
+	<div style="display:flex;margin-top:3px;margin-left:3px;" id=”langdropdown” class="row">
+		<select id="select1" style="margin-right:3px" class="col-md-2 col-sm-10 p-2 m-2">
+			<option selected="selected"></option>
+			<option selected="selected">what is</option>
+			<option value="spa">use cases of</option>
+			<option selected="selected">fundamentals</option>
+			<option >crash course</option>
+			<option>learn</option>
+			<option value="spa">Minute</option>
+			<option value="spa">walk through</option>
+			<option value="spa">step by step</option>
+			<option value="spa">tutorial</option>
+			<option value="spa">Practical</option>
+			<option value="spa">in action</option>
+			<option value="spa">simplified</option>
+			<option value="spa"> by doing</option>
+			<option value="spa"> explained</option>
+			<option value="spa"> understanding</option>
+			<option> github </option>
+			<option> udemy </option>
+			<option> stackoverflow </option>
+			<option>interview preparation</option>
+			<option value="spa">best practices</option>
+			<option value="spa">kickstart</option>
+			<option>pros of </option>
+			<option value="spa">How to</option>
+			<option value="spa">what part</option>
+			<option value="spa">features of </option>
+			<option value="spa">why using</option>
+			<option> awesome </option>
+			<option >checklist of</option>
+			<option >real world problem </option>
+			<option>kpi of</option>
+			</select>
+		<input type="text" id="searchterms" name="searchterms" style="margin-right:3px" class="col-md-4 col-sm-10  p-2 m-2">
+		<button onclick="search()" style="padding-right:3px;padding-left:3px;" class="col-md-2 col-sm-10  p-2 m-2"> Search </button>
+	</div>
+	
+<div class="blockContainer CenterChildren-H" >
+
+<div class="LinkBlock bordered" ><!-- My Projects-->
+<div class="header indent "  >My Projects</div>
+<p class="indent vAlign-top">  
+<a href="https://github.com/nhab/Blocks" target="_blank">Blocks</a>
+<a href="https://github.com/nhab/Focus" target="_blank">Focus</a>
+<a href="https://github.com/nhab/IFW-windows-Framework" target="_blank">IFW win framework</a>
+<a href="https://github.com/nhab/IFW-windows-Framework" target="_blank">working sample codes</a>
+<a href="https://sourceforge.net/projects/acalt/" target="_blank">acalt</a>
+<a href="https://github.com/nhab/" target="_blank" >Github.com/nhab</a>
+</p>
+</div>	  
+    
+<!-- Mental skills cts-->    
+<div class="LinkBlock bordered" >
+	<div class="header indent ">  Mental skills</div>
+	<p class="indent vAlign-top">  
+	<a href="/nilx/Topics/softskills/howtothink.htm" target="_blank"
+	tooltip="Thinking is a mental tool works base on the cause and effect law. it is a proccess to use imagination, intution  and other higher facaulties to find the cause of an effect and use it">How to think</a>
+	<a href="/nilx/Topics/softskills/howtolearn.htm" 
+	target="_blank">How to learn</a>
+	<a href='Topics\Wisdom\unlearningwisdom.htm'>Unlearning</a>
+	<a href="/nilx/Topics/softskills/howtosloveaproblem.htm" 
+	target="_blank">How to solve a problem</a>
+	<a href="/nilx/Topics/softskills/howtosearch.htm" 
+	target="_blank" >How to search</a>
+	<a href="/nilx/Topics/softskills/howtodebug.htm" 
+	target="_blank" >How to debug</a>
+	<a href="/nilx/Topics/softskills/howtocommunicate.htm" 
+	target="_blank" >how to communicate </a>
+	<a href="/nilx/Topics/softskills/howtomanage.htm"  
+	target="_blank" >How to manage </a>
+	<a href="/nilx/Topics/softskills/howtoreadcode.htm"     		   target="_blank" tooltip="There is main functions in the code file which may have used some other functions inside.you should begin by the main class of the project and the main function(s) of the classs and follow the code." >How to read code</a>
+	<a tooltip='عملی که پشت آن نتیجه خردمندانه ای که در اثر تجارب قبلی بهو فکر به آن رسیده ایم میباشد.مثلا برای جستجوی آموزش اتوفک نمیزنیم آموزش اتوفک بلکه ابتدا لغات پیشرفته این علم را در میاریم وآنرا جستجو میکنیم که در مورد اتوفک اتریبیوتز میباشد.. '>wise move</a>
+	</p>
+</div>	  
+
+<div class="LinkBlock bordered" ><!-- Managemnet -->
+<div class="header indent"  >Managemnet /<br>Professionalism</div>
+<p class="indent vAlign-top">
+<a href='Topics/Management/projectManagement.htm' target="_blank">Project management</a>   
+<a href='Topics/Management/PM-best-practices.htm' target="_blank"       >Project management(2)</a>
+<a href='Topics/Management/0-bussiness-steps.htm' target="_blank">Bussiness steps</a>
+<a href='Topics/Management/1-management-perception.htm' target="_blank" >Management perception</a>
+<a href='Topics/Management/2-defining tasks.htm' target="_blank" >Work creation</a>
+<a href='Topics/Management/3-reporting.htm' target="_blank">Reporting</a>
+<a href='Topics/Management/4-presenting.htm' target="_blank">Presenting</a>
+<a href='Topics/Management/5-market-researching.htm' target="_blank">Market research</a>  
+<a href='Topics/Management/6-marketing.htm' target="_blank">Marketing</a>
+<a href='Topics/Management/7-support.htm' target="_blank">Support</a>     
+<a href='Topics/Management/proffessionalism-skills.htm' target="_blank">Proffessionalism skills</a>  
+<a href='Topics/Management/strategicplanning.htm' target="_blank">strategic planning</a>    
+<a href='Topics/Management/policy.htm' target="_blank">Policy</a>  
+</p>
+</div> 
+
+<div class="LinkBlock bordered" >     <!--Software Eng. -->
+	<div class="header indent"  >Software Eng.</div>
+	<p class="indent vAlign-top">
+	<a href="https://www.agilealliance.org/agile101/agile-glossary/">Agile glossary</a>
+	<a href='Topics/softwareEngineering/agile.htm'>Agile</a>
+	<a href='Topics/softwareEngineering/devops.htm'>DevOps</a>
+	<a href="Topics/softwareEngineering/scrum.htm" target="_blank" >scrum</a>
+	<a href="programming/topics/jira.htm" target="_blank">Jira</a>
+	<a href="programming/design/designpatterns.htm" target="_blank">Design patterns</a>
+	<a href="https://www.google.com/search?q=K%C3%BCbler-Ross%20change%20management%20framework&ie=utf-8&oe=utf-8&client=firefox-b-1-m">change management</a>
+	<a href="programming/dotnet/refactoring.htm">Refactoring</a>
+	<a href="Topics/softwareEngineering/transactionacid.htm">Transaction Acid properties</a>
+	<a href="Topics/softwareEngineering/grasp.htm">Grasp</a>
+	<a href='https://www.fluentcpp.com/2021/06/23/grasp-9-must-know-design-principles-for-code/'>Grasp principals</a>
+	<a href='Topics/softwareEngineering/classdiagramrelations.htm'>   Class diagram relationships</a>
+    <a href='programming/algods.htm'>Algorithms and Data structures</a>
+</p>
+</div>
+
+<div class="LinkBlock bordered" > <!--Software Architecture -->
+<div class="header indent"  >Software Architect</div>
+<p class="indent vAlign-top">
+<a href='programming/design/ddd.htm'>DDD</a>
+<a href="https://www.google.com/search?q=c%23+ddd+context+maps+domain+event&&oq=c%23+ddd+context+maps+domain+event">DDD research</a>
+<a href='programming/architecture/bdd.htm'>BDD</a>
+<a href="https://youtu.be/dK4Yb6-LxAk">Cleanarchitect</a>
+<a href='programming/design/abpsteps.htm'>Abp Steps</a>
+<a href='https://www.infoq.com/presentations/microservices-ddd-bounded-contexts/'>DDD =>microservice</a>
+<a href="'https://ably.com/blog/introduction-event-driven-architecture">Event driven Architecture</a>
+<a href="https://www.google.com/search?q=event-driven+architecture+kafka+c%2523">Event driven with kafka</a>
+<a href='Topics/Management/togaf.htm'>Business Architecture (Togaf)</a>	
+</p>
+</div>
+
+<div class="LinkBlock bordered" >     <!--Dev.-->
+<div class="header indent"  >Dev. tools</div>   
+<p class="indent vAlign-top">
+<a href="programming/git/git.htm" target="_blank" >git</a>
+<a href="programming/git/github.htm" target="_blank" >github</a>
+<a href="programming/composer.htm" target="_blank" >composer</a> 
+<a href="https://www.tutorialspoint.com/jenkins/">Jenkins</a>
+<a href="programming/docker.htm">Docker</a>   
+<a href="https://dzone.com/articles/learn-how-to-setup-a-cicd-pipeline-from-scratch">CI/CD Pipeline</a>
+</p>
+</div>
+
+<div class="LinkBlock bordered" >    <!--.Net --> 
+<div class="header indent"  >.Net set </div>			
+<p class="indent vAlign-top">
+<a href='programming/cleancode.htm'>Clean code manifesto</a>
+<a href="programming/dotnet/cs-advanced.htm"                      target="_blank">CSharp</a>
+<a href="programming/dotnet/asp.net_web_api.htm"                  target="_blank">Asp.net web api</a>
+<a href='programming/xunit.htm' target="_blank">XUnit</a>
+<a href="programming/dotnet/CS_VSCode.htm"                        target="_blank">C# with VSCode</a>
+<a href="http://dotnetdetail.net/how-to-create-crud-operations-using-angular-6-and-asp-net-core-2-0/" target="_blank" > Angular 6 + ASP.NET Core 2</a>
+<a href="https://aspnetboilerplate.com/Pages/Documents"           target="_blank" >Aspect. net Boilerplate</a>
+<a href="programming/dotnet/lambda.htm"                           target="_blank">lambda</a>
+<a href="programming/dotnet/linq.htm" target="_blank">linq</a>
+<a href="programming/dotnet/dotnet.htm" target="_blank">.Net</a>
+<a href="programming/dotnet/dotnetCore.htm" target="_blank">.Net Core</a>
+<a href="programming/dotnet/ef-core.htm" target="_blank">Entity framework core</a>
+<a href="programming/dotnet/aspnetcore.htm" target="_blank">Asp.net core</a> 
+<a href="programming/dotnet/identity.htm" target="_blank">Identity core</a>   
+<a href='programming/dotnet/automapper.htm' target="_blank">Automapper</a>
+<a href='https://stackoverflow.com/questions/47898996/how-to-automate-build-and-deployment-in-visual-studio-tfs' target="_blank">tfs automated build</a>
+<a href='https://stackoverflow.com/questions/42764166/vs-2017-very-slow-laggy-when-debugging' target="_blank">Speed up visual studio</a>
+<a href='https://www.tutorialspoint.com/soap/soap_quick_guide.htm' target="_blank">SOAP Protochol</a>
+<a href='programming/dotnet/wcf.htm" target="_blank'>WCF</a>
+<a href='https://www.youtube.com/watch?v=Z9vphGImsas' target="_blank">Microservices -.net core</a>
+<a href='https://docs.microsoft.com/en-us/dotnet/architecture/microservices/'> .NET Microservices </a>
+<a href='programming/dotnet/concurrency.htm'>Concurrency </a> 
+<a href='programming/dotnet/signalr.htm'>signalR</a>
+<a hreAsp.net coref='programming/dotnet/autofac.htm'>autofac</a>
+<a href='programming/dotnet/testing.htm'>Testing</a>
+<a href='programming/dotnet/dapper.htm'>dapper</a>
+<a href='https://www.c-sharpcorner.com/learn/c-sharp-asynchronous-programming'>asynchronous-programming</a>
+<a href='https://www.c-sharpcorner.com/learn/learn-wcf-in-10-hours'>WCF</a>
+mediatr learn easy
+postsharp
+castle core c#
+</p>
+</div>
+        
+<div class="LinkBlock bordered" > <!--web UI Tutorials-->
+<div class="header indent"  >Web UI/UX</div>
+<p class="indent vAlign-top">
+<a href="programming/css/index.htm" target="_blank" >CSS</a>
+<a href="programming/bootstrap.htm" target="_blank">Bootstrap</a>	
+<a href="programming/css/tailwind/" target="_blank">Tailwind</a>
+<a href="programming/css/responsive.htm" target="_blank">Responsive Design</a>
+<a href="https://sass-lang.com/guide">sass/scss</a>
+<a href="http://lesscss.org/"
+				title="Writing CSS can become a repetitive and time consuming for little tasks such as having to look up hex color values, closing your tags, etc. . And so that is where a preprocessor comes into play. A CSS preprocessor is basically a scripting language that extends CSS and then compiles it into regular CSS."	>Less</a>
+<a href="https://www.javatpoint.com/less-example">Less example</a>
+<a href="http://ui-patterns.com/patterns">UI Design patterns</a>
+<a href="programming/UI.htm" target="_blank" >UI</a>
+<a href="programming/UX.htm" target="_blank" >UX</a>	
+</p>
+</div>
+
+		<div class="LinkBlock bordered" >    <!--JavaScript--> 
+			<div class="header indent"  >JavaScript </div>
+			<p class="indent vAlign-top">
+				<a href="programming/js/js.htm" target="_blank" >JavaScript</a>
+				<a href="programming/js/vuejs.htm" target="_blank" >vue js</a>
+				<a href='programming\bookmarklet.htm'  target="_blank">Bookmarlet</a>
+				<a href="https://www.tutorialspoint.com/es6/es6_quick_guide.htm" targer="_blank">EcmaScript6</a>
+				<a href='https://www.tutorialsteacher.com/core/aspnet-core-introduction'>As.net core</a>
+				<a href="programming/js/jquery.htm" target="_blank" >JQuery</a>
+				<a href="programming/React.js/reactjs.htm" target="_blank" >React.Js</a>, <a href="programming/React.js/redux.htm"  target="_blank">redux</a>
+                <a href='https://snipcart.com/blog/react-ecommerce-tutorial'>Next.js</a>
+				<a href="/programming/reactnative.htm" target="_blank" >React native</a>
+				<a href='programming/webpack.htm'>webpack</a>
+<a href="programming/NodeJS.htm" target="_blank" >Node.js</a>
+ <a href="programming/jade.htm" target="_blank" >Jade</a>
+				<a href='https://www.tutorialspoint.com/expressjs/expressjs_overview.htm' target="_blank" >ExpressJS Overview</a>
+				<a href='https://expressjs.com/en/4x/api.html' target="_blank" >ExpressJS main source</a>
+				<a href="programming\Angular\AngularJS.htm" target="_blank" >AngularJS</a>
+				<a href="https://www.tutorialspoint.com/angular4/" target="_blank" >Angular 4</a>
+			</p>
+		</div>
+
+		<div class="LinkBlock bordered" >     <!--Databases-->
+			<div class="header indent"  >Databases </div>
+			
+			<p class="indent vAlign-top">
+				<a href='https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design'>Solid</a>
+				<a href='programming/db/sqlserver.htm' target="_blank" > sql server</a>
+				<a href='programming/db/joins.htm' target="_blank" > sql joins</a>
+				<a href='programming/db/Sqlite.htm' target="_blank" >Sqlite</a>
+				<a href="http://www.sqlitetutorial.net/sqlite-php/" target="_blank" >sqlite-php web  </a>
+				<a href="programming/redis.htm" target="_blank" >redis</a>
+				<a href='programming/mongodb.htm' target="_blank" >MongoDB</a>
+				<a href="https://www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm">MongoDB detailed</a>
+				<a href='programming/db/mysqlcommands.htm'>MySql commands</a>
+			</p>
+		</div>
+		
+        <div class="LinkBlock bordered" >    <!--.Tech --> 
+			<div class="header indent"  >Tech </div>
+			
+			<p class="indent vAlign-top">
+            <a href='programming/topics/Elasticsearch.htm'>Elasticsearch</a>
+            <a href='programming/topics/kibana.htm'>Kibana</a>
+            <a href="https://klausnji.wordpress.com/2015/01/31/getting-started-with-rabbitmq-in-15-minutes/">RabitMQ</a>
+            </p>
+        </div>
+	
+		<div class="LinkBlock bordered" >   <!--PHP-->  
+			<div class="header indent"  >PHP </div>
+			<p class="indent vAlign-top">
+				<a href="programming/PHP/php.htm" target="_blank" >php</a>
+                <a href="programming/PHP/wordpress.htm"  target="_blank" >wordpress</a>
+				<a href="programming/PHP/wordpressdev.htm" target="_blank" >word press dev.</a>
+				<a href="programming/PHP/symfony.htm" target="_blank" >Symfony</a>
+				<a href="programming/PHP/laravel.htm" target="_blank" >Laravel </a>
+			</p>
+		</div>
+
+		<div class="LinkBlock bordered" >     <!--web  dev. Tutorials-->
+			<div class="header indent"  >Web  dev.<br> (cross cutting) </div>
+			<p class="indent vAlign-top">
+				<a href="https://www.upguard.com/blog/the-website-security-checklist" 
+				title="1. Ensure Sitewide SSL->	Encrypt website traffic   2. Verify the SSL Certificate->	Stay on top of expiration and trust                    3. Use SHA256 Encryption->	Use the best encryption                    4. Disable Insecure Cipher Suites->	Shore up vulnerabilities in SSL                    5. Obscure Header Info->	Keep your configurations private                    6. Enable HTTP Strict Transport Security->	Disallow unencrypted traffic                    7. Use HttpOnly Cookies->	Prevent scripts from reading cookie data      8. Use Secure Cookies->	Disallow unencrypted transmission of cookies                    9. Secure the Web Server Processes->	Use best practice configurations                    10. Ensure Forms Validate Input->	Prevent form mishandling                    11. Protect against SQL Injection->	Prevent form exploits       12. Protect against DoS ->	Maintain service through an attack  13. Regularly Test Configurations->	Make sure the steps above stay true                    "
+			    > Website Security Checklist</a> 
+<a href=""  title="Web performance optimization occurs by monitoring and analyzing the performance of your web application and identifying ways to improve it.Web applications are a mixture of server-side and client-side code. ">web performance optimization</a>
+<a href="https://developers.google.com/web/tools/chrome-devtools/">Chrome_Dev_Tools</a>	
+</p>
+</div>  	
+        
+<div class="LinkBlock bordered" >     <!--Dev.-->
+<div class="header indent"  >Dev. (others)</div>   
+<p class="indent vAlign-top">
+<a href="https://learnxinyminutes.com/" target="_blank">Learn x in y minutes</a>
+<a href="https://guides.rubyonrails.org/getting_started.html" target="_blank" >Ruby on rails</a>
+<a href="programming/mobile/flutter.htm"  target="_blank">Flutter</a>
+<a href='https://docs.expo.dev/'  target="_blank">expo</a>
+<a href="Sap\sap.html" target="_blank">SAP</a> 
+<a href="Sap\abap.html"  target="_blank">ABAP</a>
+<a href="https://github.com/nhab/Tutorials" target="_blank">other</a>
+</p>
+</div>	
+
+<div class="LinkBlock bordered"> <!--Python-->
+<div class="header indent">Python</div>  
+<p  class="indent vAlign-top">
+<a href="programming/py/py.htm"  target="_blank" >Python</a>
+<a href="http://www.django-rest-framework.org/" tooltip="Django REST framework is a flexible toolkit for building Web APIs.">django REST</a>
+<a href="https://www.djangoproject.com/">django</a>			
+</p>
+</div>
+
+<div class="LinkBlock bordered" ><!--Java-->
+<div class="header indent"  >Java </div>   
+<p class="indent vAlign-top">
+<a href="programming/j2ee/java.htm"  target="_blank" >java</a>
+<a href="programming/j2ee/Hibernate.htm"  target="_blank">Hibernate</a>
+<a href="programming/j2ee/maven.htm" target="_blank">Maven</a> 
+<a href="programming/j2ee/ManagedBean.htm" target="_blank">Managed Bean</a>
+<a href="programming/j2ee/jsf.htm">Jsf 2</a>
+<a href="programming/j2ee/ExpressionLanuage.htm">Expression language</a>
+</p>
+</div>
+
+<div class="LinkBlock bordered"><!--Excel-->
+<div class="header indent">Excel</div>   
+<div class="indent vAlign-top">
+<a href="programming/Excel/index.htm" target="_blank">Excel</a>	
+</div>
+</div>
+
+<div class="LinkBlock bordered"> <!--Online bussniess-->
+<div class="header indent">Online bussniess</div>
+<p class="indent vAlign-top">
+<a href="Topics/book/index.htm" target="_blank">KDP</a>
+<a href="Topics/book/audiobook.htm" target="_blank">Audio book</a>
+</p>			
+</div>
+
+<div class="LinkBlock bordered" ><!--trading-->
+<div class="header indent"  >Trading</div>
+<p class="indent vAlign-top">
+<a href="Topics/bitcoin.htm" target="_blank" >Bitcoin</a>
+<a href='Topics/OnlineTrading/mql4.htm' target="_blank" >MQL4</a>
+<a href='https://www.mql5.com/en/articles/81' target="_blank" >MQL4 to MQL5</a>
+<a href="Topics/OnlineTrading/forex.htm" target="_blank" >forex</a>    
+<a href="programming/pineScript.htm" target="_blank" >PineScript</a>    
+</p>
+</div>
+
+<div class="LinkBlock bordered" >     <!--General Tutorials-->
+<div class="header indent"  >General</div>
+<p class="indent vAlign-top">
+<a href="Topics\immi\immi.htm" target="_blank" >Immigration</a>
+<a href="languages/german/index.htm" target="_blank" >german</a>
+<a href="Topics/linux.htm" target="_blank" >linux</a>
+<a href="Topics\biochemistry.htm">biochemistry</a>
+<a href="Topics\network.htm">network</a>
+</p>
+</div>
+	
+<div class="LinkBlock bordered"  > <!--Own Business-->
+<div class="header indent">Own Business</div>
+<p class="indent vAlign-top">
+<a href="Topics/ownbusiness/personal-branding.htm" target="_blank">Personal branding</a>
+<a href="Topics/ownbusiness/BussinessModelCanvas.htm">Bussiness Model</a>
+<a href="Topics/ownbusiness/ChoosingHosting.htm" target="_blank">Choosing a Hosting</a> 
+<a href="Topics/ownbusiness/seo.htm" target="_blank">Seo</a>
+<a href="Topics\ownbusiness\digitalmarketingfunnels.png" target="_blank">Funnel</a>
+</p>
+</div>
+
+<div class="LinkBlock bordered"  > <!-Job-->
+<div class="header indent">Job</div>
+<p class="indent vAlign-top">
+<a href="Topics/jobseek/CoverLetter.htm" target="_blank">Cover letter</a>
+<a href="Topics/jobseek/job.htm" target="_blank">Job</a>
+</p>
+</div>
+
+<div class="LinkBlock bordered"  > <!--Desktop tools-->
+<div class="header indent">Desktop tools</div>
+<p class="indent vAlign-top">
+<a href="Topics\Tools\TidyTabs.gif">TidyTabs </a>
+<a href="https://downloads.sourceforge.net/project/xdman/xdmsetup-2018.msi?r=https%3A%2F%2Fwww.google.com%2F&ts=1543520300&use_mirror=cytranet">Extreme Download manager</a>
+<a href="https://netbalancer.com/">network meter</a>
+</p>
+</div>
+
+<div class="LinkBlock bordered"  > <!--Refrences-->
+<div class="header indent">Refrences</div>
+<p class="indent">
+<a href="shortcutkeys.htm">Shortcut keys </a>
+<a href="Topics/Tech/usefulsettings.htm">Useful Settings</a>
+<a href="Topics/Tech/androidtuneups.htm">android tune ups</a>
+</p>
+</div>
+
+<div class="LinkBlock bordered"  > <!--desktop-->
+<div class="header indent">Temp Desktop</div>
+<p class="indent">
+<a href="https://youtu.be/bPdWa3mr7c8 ">gRpc </a>
+<a href="https://youtu.be/wZVzeob4ywc">redux/a  
+<a href="https://www.stevejgordon.co.uk/aspnet-core-dependency-injection-what-is-the-iservicecollection">.netcore DI</a> 
+<a href='https://github.com/bobbingwide/oik-bwtrace'>wordpress trace plaugin</a>
+<a href='https://www.google.com/search?q=vertical+slice+architecture'>
+vertical slice architecture</a>
+<a href='https://www.c-sharpcorner.com/blogs/build-endtoend-net-core-api-and-angular-application-on-kubernetes'>Kubernetes</a>
+	https://www.c-sharpcorner.com/blogs/
+<a href='https://www.c-sharpcorner.com/learn/build-progressive-web-apps'>WPA</a>
+<a href='https://www.avepoint.com/blog/office-365/microsoft-powerapps'>powerApps</a>
+	copilot
+	postsharp
+	KingAOP
+	</p>
+</div>
+	<div class="LinkBlock bordered"  ><!--Markets-->
+		<div class="header indent">Markets</div>
+		<p class="indent">
+			<div id="btc" >
+				<script>document.write(getprice());</script>
+			</div>
+			<a href="http://www.tgju.org/currency">$</a> &nbsp
+			<a href="http://www.iranjib.ir/showgroup/23/realtime_price/">$</a>
+		</p> 
+	</div>
+	<script>
+		function LoadJson(jsn)
+		{
+		for(i=0;i<jsn.length;i++)
+						{
+							var s1="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+							s1 += "<a target='_blank'";
+							
+							if(jsn[i].lnk)
+							s1 +=" href='" + jsn[i].lnk + "'" ;
+							if(jsn[i].tooltip)
+							s1= s1+" title='" + jsn[i].tooltip + "'";
+							s1  = s1+ ">"       + jsn[i].title   + "</a><br>";
+							
+							document.write( s1 );
+						}
+
+		}
+	</script>
+	<div class="LinkBlock bordered" style="width:400px">
+		<div class="header indent" style="width:350px;">Lazy News</div>
+		<div style="height:400px;overflow-y: scroll;">
+		<script>
+			LoadJson(LazyNews);
+			</script>
+		</div>
+		<br/>
+	</div>
+	
+	<div class="LinkBlock bordered" style="width:400px">
+		<div class="header indent" style="width:350px;" >curiosities</div>
+		<div style="height:400px;overflow-y: scroll;">
+			<script>  LoadJson(curiosity);			</script>
+		</div>
+
+	</div>
+	
+	<br/> <br/> <br/>
+
+    </div>
+        <br/>
+     <div style='background-color:#111133'>Powered by <a href='https://github.com/nhab/Blocks'> Blocks.js</a> </div>
+	</body>
+	<script>
+		var select=document.getElementById('select1');
+		
+		var input=document.getElementById('searchterms');
+		select.onchange=function(){
+		input.value += " "+select.options[select.selectedIndex].text;
+		}
+		
+		function search()
+		{
+			s ='https://www.google.com/search?q=+'+input.value+'&tbs=qdr:y';
+			window.open(s  , "_blank"); 
+		}
+	</script>
+</htmL>

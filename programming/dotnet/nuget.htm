@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../../assets/css/blocks.css">	
+	<script src='../../assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+    <script src="../../libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+	<script>
+	
+	</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+<h2>Create NuGet Package</h2>
+<div>
+A NuGet package is just a ZIP file that's been renamed with the *.nupkg extension and whose contents match certain conventions. 
+You use nuget.exe to package that functionality into a component that can be shared with and used by any number of other developers.
+</div>
+
+<h2>Prerequisites</h2>
+<div>
+Install Visual Studio 2017 from visualstudio.com with any .NET-related workload. Visual Studio 2017 automatically includes NuGet capabilities when a .NET workload is installed.
+Install the nuget.exe CLI by downloading it from nuget.org and add it to your PATH environment variable.
+Register for a free account on nuget.org if you don't have one already.
+</div>
+<h2>Create Project</h2>
+<div>
+You can use an existing .NET Framework Class Library project for the code you want to package or create a new class library project.
+
+In professional NuGet package, you can implement many useful features with which others can build applications.
+But here we have a simple function in a class library project which will print a string on a console.
+<pre><code>
+    namespace SuperLogger
+    {
+        public class Logger
+        {
+            public void Log(string message)
+            {
+                Console.WriteLine(message);
+            }
+        }
+    }    
+</code></pre>
+
+- Select the Project > Properties menu command, then select the Application tab.
+
+- In the Assembly name field, give your package a unique identifier. 
+Select the Assembly Information... button,
+which brings up a dialog box in which you can enter other properties that carry into the manifest (a .nuspec file).
+
+- Once all the properties are set, build the project in Release mode.
+</div>
+<h2>Generate Manifest (.nuspec)</h2>
+<div>
+- You can use the <b>nuget spec</b> command to generate an initial .nuspec file from the project.
+- you run nuget spec only once to generate the initial manifest.
+- When updating the package, you either change values in your project or edit the manifest directly.
+- Open a command prompt and navigate to the project folder containing *.csproj file and run the following command.
+<cl>nuget spec SuperLogger.csproj</cl>
+- NuGet creates a manifest that matches the name of the project, in this case, SuperLogger.nuspec. It also includes replacement tokens in the manifest.
+<pre><code>
+< ?xml version="1.0"?>
+< package >
+    < metadata>
+    < id>$id$< /id>
+    < version>$version$< /version>
+    < title>$title$< /title>
+    < authors>$author$< /authors>
+    < owners>$author$< /owners>
+    < licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE< /licenseUrl>
+    < projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE< /projectUrl>
+    < iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE< /iconUrl>
+    < requireLicenseAcceptance>false< /requireLicenseAcceptance>
+    < description>$description$< /description>
+    < releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    < copyright>Copyright 2019< /copyright>
+    < tags>Tag1 Tag2< /tags>
+    < /metadata>
+</package>    
+</code></pre>
+</div>
+<h2>Change Manifest (.nuspec)</h2>
+<div>
+NuGet produces an error if you try to create a package with default values in your .nuspec file, 
+so you must change the following fields before proceeding.
+
+licenseUrl
+projectUrl
+iconUrl
+releaseNotes
+tags
+For packages built for public consumption, you must define Tags property,
+ as tags help others find your package on sources like nuget.org and understand what it does.
+
+You can also add any other elements to the manifest at this time, 
+as described on .nuspec file reference.    
+</div>
+<h2>Create Package</h2>
+<div>
+ You can create a package by running <b>nuget pack</b> command.
+NuGet generates a <b>identifier-version.nupkg</b> file in your project folder.  
+</div>
+<h2>Publish Package</h2>
+<div>
+- Once you have a <b>.nupkg</b> file, you publish it to nuget.org using nuget.exe with an API key acquired from nuget.org. For nuget.org you must use nuget.exe 4.1.0 or higher. 
+To publish your package, you will need to follow the following steps.
+
+- Sign into your nuget.org account or create an account if you don't have one already.
+Click on your username which is on the upper right, and select API Keys and then on webpage click on Create.
+
+- Provide a name for your key, and enter * for Glob pattern, and then click on the **Create button.
+
+- Once the key is created, select Copy to retrieve the access key you need in the CLI.
+
+<b>Important:</b> Save your key in a secure location because you cannot copy the key again later on.
+If you return to the API key page, you need to regenerate the key to copy it. 
+You can also remove the API key if you no longer want to push packages via the CLI.
+
+- Run the nuget push command to publish your package to nuget.org by specifying your package name and replacing the key value with your API key.
+<cl>nuget push SuperLogger.1.0.0.nupkg oy2edepystx5fzm45guqybyr7vgmnboudmnxr5e2gsy36a -Source https://api.nuget.org/v3/index.json</cl>
+= The nuget.exe displays the results of the publishing process,
+ and you will see a warning because we didn't provide the license information,but that's ok.    
+</div>
+<h2>Package Manager Console</h2>
+<div>
+- You can use NuGet PowerShell commands to find, install, uninstall, and update NuGet packages.
+- To open the console in Visual Studio, go to the main menu and select Tools > NuGet Package Manager > Package Manager Console command.
+<h3>Install Package Example</h3>
+<cl>PM> Install-Package Z.EntityFramework.Classic</cl>
+The following command adds the Z.EntityFramework.Classic package to a project named EFDemo that is not the default
+<cl>PM> Install-Package Z.EntityFramework.Classic -ProjectName EFDemo</cl>
+When you install a package, it performs the following actions.
+
+- The console displays applicable license terms in its window with an implied agreement.
+- If you do not agree to the terms, you should uninstall the package immediately.
+- A reference to the package is added to the project file and appears in Solution Explorer under the References node.
+<h3>Uninstall Package</h3>
+Uninstalls the Elmah package from the default project:
+<cl>Uninstall-Package Elmah</cl>
+Uninstalls the Elmah package and all its unused dependencies.
+<cl>Uninstall-Package Elmah -RemoveDependencies</cl>
+uninstalls the Elmah package even if another package depends on it:
+<cl>Uninstall-Package Elmah -Force</cl>
+</div>
+<h2>Local Feed</h2>
+<div>
+<b>Local NuGet package feeds</b> are simply hierarchical folder structures on your local computer or network in which you place packages.
+- NuGet creates this structure automatically when you use the nuget add command to copy a package to the feed.
+- These feeds can then be used as package sources with all other NuGet operations using the CLI, the Package Manager UI, and the Package Manager Console.
+- The following command adds a package to our local feed.
+<cl>nuget add SuperLogger.1.0.0.nupkg -source D:\MyPackages</cl>
+</div>
+<h2>NuGet Server</h2>
+<div>
+Microsoft provides NuGet.Server package that can host a package feed on any server that runs IIS using ASP.NET application.
+NuGet.Server makes a folder on the server available through HTTP(S) specifically OData.
+It is easy to set up and is best for simple scenarios.
+<h3>Create ASP.NET  NuGet Server Application#</h3>
+- Create an empty ASP.NET Web application in Visual Studio.
+- Select the ASP.NET Web Application (.NET Framework) and enter the name for your server in the Name field and then select OK.
+- Select the Empty template, then click OK. Now add the NuGet.Server package to your project using NuGet Package Manager.
+    It converts the empty Web application into a package source.
+    It installs a variety of other packages, creates a Packages folder in the application, and modifies web.config to include additional settings.
+    You can change the packages folder in web.config file by specifying the value of packagesPath.
+-  Open your Web.config and set the value of packagesPath to D:\MyPackages.
+<cl>
+< !-- Change the path to the packages folder. The default is ~/Packages. 
+It can be a virtual or physical path. -- >
+
+< add key="packagesPath" value="D:\MyPackages" / >    
+</cl>
+- Run your application, and you will have a NuGet Server
+-The home page provides the package feed URLs.
+- If you see errors, carefully inspect your web.config for duplicate elements.
+<h3>Add Packages to the Feed</h3>
+- Once a NuGet.Server site is running; you can add packages using nuget push provided that you set an API key value in web.config.
+- After installing the NuGet.Server package, web.config contains an empty appSetting/apiKey value.
+- When apiKey is blank, pushing packages to the feed is disabled.
+<cl>
+< !-- Set the value here to allow people to push/delete packages from the server.
+    NOTE: This is a shared key (password) for all users. -- >
+    < add key="apiKey" value="" / >    
+</cl>
+To enable this capability, set the apiKey to a value (strong password) and add a key called appSettings/requireApiKey with the value of true.
+<cl>
+< !-- Determines if an Api Key is required to push\delete packages from the server. -- >
+< add key="requireApiKey" value="true" / >
+
+< !-- Set the value here to allow people to push/delete packages from the server.
+    NOTE: This is a shared key (password) for all users. -- >
+< add key="apiKey" value="" / >    
+</cl>
+If your server is already secured or you do not require an API key, you can set requireApiKey to false. 
+All users with access to the server can then push packages.
+<h3>Removing Packages from the Feed</h3>
+- You can remove a package using nuget delete command from the repository provided that you include the API key with the comment.
+- If you want to change the behavior to delist the package instead and leaving it available for package restore, 
+change the enableDelisting key in web.config to true.
+<cl>
+< !-- Set enableDelisting to true to enable delist instead of delete as a result of a "nuget delete" command.
+    - delete: package is deleted from the repository's local filesystem.
+    - delist: 
+      - "nuget delete": the "hidden" file attribute of the corresponding nupkg on the repository local filesystem is turned on instead of deleting the file.
+      - "nuget list" skips delisted packages, i.e. those that have the hidden attribute set on their nupkg.
+      - "nuget install packageid -version version" command will succeed for both listed and delisted packages.
+        e.g. delisted packages can still be downloaded by clients that explicitly specify their version. -- >
+< add key="enableDelisting" value="true" / >    
+</cl>
+</div>
+<h2>Dotnet CLI commands:</h2>
+<pre><code>
+// dotnet add ToDo.csproj package Microsoft.Azure.DocumentDB.Core -v 1.0.0
+dotnet add package Newtonsoft.Json
+
+// Add a specific version of a package to a project.
+dotnet add ToDo.csproj package Microsoft.Azure.DocumentDB.Core -v 1.0.0    
+
+// Add a package using a specific NuGet source.
+dotnet add package Microsoft.AspNetCore.StaticFiles -s https://dotnet.myget.org/F/dotnet-core/api/v3/index.json
+
+// Removes Newtonsoft.Json NuGet package from a project in the current directory.
+dotnet remove package Newtonsoft.Json
+
+// Restore dependencies and tools for the project in the current directory.
+dotnet restore
+
+//Restore dependencies and tools for the app1 project found in the given path.
+dotnet restore ~/projects/app1/app1.csproj
+
+//Restore the dependencies and tools for the project in the current directory using the file path provided as the source.
+dotnet restore -s c:\packages\mypackages
+
+// Restore the dependencies and tools for the project in the current directory using the two file paths provided as sources.
+dotnet restore -s c:\packages\mypackages -s c:\packages\myotherpackages
+
+// Restore dependencies and tools for the project in the current directory and shows only minimal output.
+dotnet restore --verbosity minimal
+
+// Displays the paths of all the local cache directories (http-cache directory, global-packages cache directory, and temporary cache directory).
+dotnet nuget locals –l all
+
+// Displays the path for the local http-cache directory.
+dotnet nuget locals --list http-cache
+
+// Clears all files from all local cache directories (http-cache directory, global-packages cache directory, and temporary cache directory):
+dotnet nuget locals --clear all
+
+// Clears all files in the local global-packages cache directory.
+dotnet nuget locals -c global-packages
+
+// Clears all files in the local temporary cache directory.
+dotnet nuget locals -c temp
+
+// Pack the project in the current directory.
+dotnet pack
+
+// Pack the app1 project.
+dotnet pack ~/projects/app1/project.csproj
+
+// Pack the project in the current directory and place the resulting packages into the nupkgs folder.
+dotnet pack --output nupkgs
+
+// Pushes foo.nupkg to the default push source, specifying an API key:
+dotnet nuget push foo.nupkg -k 4003d786-cc37-4004-bfdf-c4f3e8ef9b3a
+
+// Push foo.nupkg to the custom push source https://customsource, specifying an API key:
+dotnet nuget push foo.nupkg -k 4003d786-cc37-4004-bfdf-c4f3e8ef9b3a -s https://customsource/
+
+//Pushes foo.nupkg to the default push source:
+dotnet nuget push foo.nupkg
+
+//Pushes foo.symbols.nupkg to the default symbols source:
+dotnet nuget push foo.symbols.nupkg
+
+//Pushes foo.nupkg to the default push source, specifying a 360-second timeout:
+dotnet nuget push foo.nupkg --timeout 360
+
+//Pushes all .nupkg files in the current directory to the default push source:
+dotnet nuget push *.nupkg
+
+// Deletes version 1.0 of package Microsoft.AspNetCore.Mvc:
+dotnet nuget delete Microsoft.AspNetCore.Mvc 1.0
+
+//Deletes version 1.0 of package Microsoft.AspNetCore.Mvc, not prompting user for credentials or other input:
+dotnet nuget delete Microsoft.AspNetCore.Mvc 1.0 --non-interactive
+
+</code></pre>

@@ -1,0 +1,1456 @@
+<html>
+    <head> 
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+        <script src='/nilx/assets/js/blocks.js'></script>
+        <link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+        <script src="/nilx/libs/highlight/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad()</script>
+    </head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Resources</h2>
+<div>
+    <a href='https://www.csharp-console-examples.com/basic/c-algorithms-examples/'>csharp-console-examples</a>
+</div>
+<h2>    
+<input type="button" value="-"
+class="toggleButton"  onclick="toggle(this)" />Time complexity</h2>
+<div>
+    - <b>Time complexity</b> : The number of times a statement is executed.  
+    - <b>The “Big O notation”</b>: is the time complexity of an algorithm.
+    -<b>O(n) </b> (Linear Time Complexity) :
+        When time complexity grows in direct proportion to the size of the input, you are facing Linear Time Complexity, or O(n).
+        Algorithms with this time complexity will process the input (n) in “n” number of operations. 
+    -<b> O(n²) </b>  : If we say that the run time of an algorithm grows “on the order of the square of the size of the input”, 
+                we would express it as “O(n²)”.for example sort algorithms.
+    - <b>O(1) </b>   : When time complexity is constant (notated as “O(1)”), the size of the input (n) doesn’t matter.
+    -<b>O(log n)</b> :  time complexity of binary search is O(log n)
+    - <b>O(2^n) </b> :  Exponential Time Complexity:  brute force algo
+    - <b>O(1)constant:</b> when only one operation is executed(for example printing "hello world!")
+    - <b>O(n log n),O(2^{n}), etc</b>
+</div>
+
+<h2><input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />HashTable = HashMap = Dictionary</h2>
+<div>
+<b>What is Hashing</b> 
+Is converting an object into an integer value. 
+The integer value helps in indexing and faster searches.
+
+<b>What is HashMap</b>
+It store key-value items. 
+So instead of storing just one value like the 
+stack, array list and queue, the hash table stores 2 values. 
+These 2 values form an element of the hash table:
+<pre><code>
+{ "001" , ".Net" }
+{ "002" , ".C#" }
+{ "003" , "ASP.Net" }   
+
+//for example,In c#:
+static void Main(string[] args)
+{
+ Hashtable ht = new Hashtable();
+ ht.Add("001",".Net");
+ ht.Add("002","C#");
+ ht.Add("003","ASP.Net");
+
+ ICollection keys = ht.Keys;
+
+ foreach (String k in keys)
+ {
+  Console.WriteLine(ht[k]);
+ }
+  Console.ReadKey();
+ }
+}
+</code></pre>
+</div>
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Stack</h2>
+<div>
+the principle of stack structure operation is LIFO (last in first out), the last element entered first out.
+<pre><code>
+    Stack myStack = new Stack();
+    myStack.Push("Hello");
+    myStack.Push("World");
+    myStack.Push("!");
+    foreach ( Object obj in myStack )
+        Console.Write( "    {0}", obj );
+    // !    World    Hello
+</code></pre>
+Stack applications:
+
+    undo / redo functionality
+    word reversal
+    stack back/forward on browsers
+    backtracking algorithms
+    bracket verification
+</div>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Queue</h2>
+<div>
+the working principle of queue structures is FIFO (first in first out), 
+the first element entered first out.
+<pre><code>
+Queue myQ = new Queue();
+myQ.Enqueue("Hello");
+myQ.Enqueue("World");
+myQ.Enqueue("!");
+foreach ( Object obj in myQ )
+    Console.Write( "    {0}", obj );
+//Hello    World    !
+</code></pre>
+
+</div>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />linked list</h2>
+<div>
+    each node in the list has a reference to the next node, except the tail of the list,
+     which has no reference to the next node.
+<pre><code>
+    // Create a list of strings  
+    var names = new LinkedList<string>();  
+    names.AddLast("Sonoo Jaiswal");  
+    names.AddLast("Ankit");  
+    names.AddLast("Peter");  
+    names.AddLast("Irfan");  
+    names.AddFirst("John");//added to first index  
+  
+    // Iterate list element using foreach loop  
+    foreach (var name in names)  
+    {  
+        Console.WriteLine(name);  
+    }  
+/*
+John
+Sonoo Jaiswal
+Ankit
+Peter
+Irfan
+*/
+</code></pre>
+</div>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Binary Search</h2>
+<div>
+we access the middle element
+and compare with the searched one
+if it is smaller, repeats the recursive process for the first half, 
+otherwise, it is searching in the second half, the binary.
+<pre>
+<b>Binary search tree traversal:</b>
+<strong>Preorder</strong>
+
+    Root through
+    Go through the left subtree
+    Go through the right subtree
+
+<strong>Inorder</strong>
+    Go through the left subtree
+    Root through
+    Go through the right subtree
+
+<strong>Postorder</strong>
+
+    Go through the left subtree
+    Go through the right subtree
+    Root through
+</pre>
+In the .NET Framework , the <b>SortedList</b> data structure uses internally a binary tree to keep the sorted elements.
+
+</div>
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Binary Search Tree</h2>
+<div>
+-we assume array is sorted. 
+- it works by repeatedly dividing the search interval in half. 
+
+1 Sort the array in ascending order.
+2 Set the low index to the first element of the array and the high index to the last element.
+3 Set the middle index to the average of the low and high indices.
+4 If the element at the middle index is the target element, return the middle index.
+5 If the target element is less than the element at the middle index, set the high index to the middle index – 1.
+6 If the target element is greater than the element at the middle index, set the low index to the middle index + 1.
+7 Repeat steps 3-6 until the element is found or it is clear that the element is not present in the array.
+<pre><code>
+   // Iteration Method
+
+    binarySearch(int arr[],int x,int low,int high)
+    {
+        While( low != high)
+        {
+               mid = (low + high)/2;
+                   if (x == arr[mid])
+                   return mid;
+   
+                   else if (x > arr[mid]) // x is on the right side
+                       low = mid + 1;
+   
+                   else                  // x is on the left side
+                       high = mid - 1;
+        }
+    }
+
+    // Recursive Method 
+    binarySearch(arr, x, low, high)
+    {
+        if (low > high)
+            return False ;
+        else
+            mid = (low + high) / 2 ;
+            if (x == arr[mid])
+                return mid
+        
+            else (if x > arr[mid])        // x is on the right side
+                return binarySearch(arr, x, mid + 1, high);
+                
+            else                        // x is on the left side
+                return binarySearch(arr, x, low, mid - 1) ;
+    }
+</code></pre>
+</div>
+<h2><input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />Hashset < T ></T></h2>
+<div>
+- Is an <b>unordered</b> collection of <b>unique</b> elements.
+- The HashSet class implements the 
+ <b>ICollection, IEnumerable, IReadOnlyCollection, ISet, IEnumerable, 
+   IDeserializationCallback, and ISerializable</b>
+ interfaces.
+- In HashSet, the order of the element is not defined. You cannot sort the elements of HashSet.
+- Is provides many mathematical set operations, such as <b>intersection, union, and difference</b>.
+- The capacity of a HashSet is the number of elements it can hold.
+- Is a <b>dynamic collection</b> means the size of the HashSet is automatically increased when the new elements are added.
+- In HashSet, you can only store the <b>same type</b> of elements.
+<pre><code>
+    using System.Collections.Generic;
+    .. 
+    HashSet< string> myhash1 = new HashSet< string>();
+        myhash1.Add("C");
+        myhash1.Add("C++");
+        myhash1.Add("C#");
+        myhash.Add("Ruby");
+
+        myhash.Remove("Ruby");
+
+        // IntersectWith(IEnumerable): This method is used to modify the current HashSet object 
+        // to contain only elements that are present in that object and in the specified collection.
+        myhash1.IntersectWith(myhash2);
+
+        // ExceptWith(IEnumerable): This method is used to remove all elements in the specified collection from the current HashSet object.
+        myhash1.ExceptWith(myhash2);
+</code></pre>
+</div>
+<h2><input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />Dictionary< TKey, TValue></h2>
+<div>
+- is a generic collection that stores <strong>key-value pairs</strong> in no particular order.
+- Comes under <strong>System.Collections.Generic </strong>namespace.
+- Implements <i>IDictionary< TKey, TValue></TKey></i> interface.
+- Keys must be <i>unique</i> and cannot be null.
+- Values can be null or duplicate.
+- Values can be accessed :<strong>myDictionary[key]</strong> 
+- Elements are stored as <strong>KeyValuePair< TKey, TValue> </strong>objects.
+<pre><code>
+    IDictionary< int, string> numberNames = new Dictionary< int, string>();
+    numberNames.Add(1,"One"); //adding a key/value using the Add() method
+    numberNames.Add(2,"Two");
+    numberNames.Add(3,"Three");
+
+    //numberNames.Add(3, "Three");    //throws run-time exception: key already added. 
+
+    foreach(KeyValuePair< int, string> kvp in numberNames)
+        Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
+		
+    //creating a dictionary using collection-initializer syntax
+    var cities = new Dictionary< string, string>(){
+        {"UK", "London, Manchester, Birmingham"},
+        {"USA", "Chicago, New York, Washington"},
+        {"India", "Mumbai, New Delhi, Pune"}
+    };
+	//Accessing elements
+    foreach(var kvp in cities)
+        Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
+    
+    Console.WriteLine(cities["UK"]); //prints value of UK key
+    // use TryGetValue() to get a value of unknown key
+    string result;
+
+    if(cities.TryGetValue("France", out result))
+    {
+        Console.WriteLine(result);
+    }
+
+    // Update Dictionary Elements
+    if(cities.ContainsKey("France")){
+        cities["France"] = "Paris";
+    }
+    // Removing 
+    cities.Remove("UK"); // removes UK 
+    //cities.Remove("France"); //throws run-time exception: KeyNotFoundException
+
+</code></pre>
+</div>
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Graphs</h2>
+<div>
+- The graphs are data structures characterized by <b>nodes</b>(or vertices) and <b>edges joining the nodes</b>
+- usually using the notation G = (V, E) 
+  where, V represents the set of nodes (vertices, vertices),
+  and E represents the set of edges (edges), 
+
+  for example
+    a [i, j] = k, means that between node i and j we have an edge with weight k, 
+    and adjacent lists are also used for their representation.
+- In a directed graph, edges are unidirectional/bi-directional. 
+  For example, you can reach vertex 1 from vertex 2, but you cannot reach vertex 2 from vertex 1 in our example here.
+<h3>Representation of Graphs</h3>
+ for example:
+<pre>
+    1 [2,3] , 2 [1,4],3[1,4], 4 [2,3,5,6] , 5 [4], 6 [4]
+     becomes:
+    [1,2],[1,3],
+    [2,1],[2,4],
+    [3,1],[3,4],
+    [4,2],4,3],[4,5],[4,6],
+    [5,4],
+    [6.,4] 
+</pre>
+1- Adjacency Matrix 
+    Indicies of row and column will represent the vertices and the values in each cell represent edges.
+    We will mark a cell value to be 1 if there is an edge between two vertices, else it will be marked as 0.
+
+2- Adjacency List
+    we will use an array structure to represent our graph,graphically. 
+    all the edges of a vertex are stored as a list of vertices.
+    <cl>
+      AdjacencyList = new Dictionary< T, HashSet< T>>();
+
+        {1:{2, 3}, 2:{1}, 3:{1}}  
+    </cl>
+
+   
+Graph:
+<pre><code>
+using System;
+using System.Collections.Generic;
+
+namespace KoderDojo.Examples {
+    public class Graph< T> {
+        public Graph() {}
+        public Graph(IEnumerable< T> vertices, IEnumerable< Tuple< T,T>> edges) {
+            foreach(var vertex in vertices)
+                AddVertex(vertex);
+
+            foreach(var edge in edges)
+                AddEdge(edge);
+        }
+
+        public Dictionary< T, HashSet<T>> AdjacencyList { get; } = new Dictionary< T, HashSet< T>>();
+
+        public void AddVertex(T vertex) {
+            AdjacencyList[vertex] = new HashSet< T>();
+        }
+
+        public void AddEdge(Tuple< T,T> edge) {
+            if (AdjacencyList.ContainsKey(edge.Item1) && AdjacencyList.ContainsKey(edge.Item2)) {
+                AdjacencyList[edge.Item1].Add(edge.Item2);
+                AdjacencyList[edge.Item2].Add(edge.Item1);
+            }
+        }
+    }
+}
+</code></pre>
+Graph traversal :
+1- DFS(Depth First Search)
+    we keep visiting the child node of each vertex 
+    and back track to the parent node to traverse the other child node path. 
+2- BFS(Breadth First Search)
+    we first visit all the child vertices of a node 
+    and then move on to the next level. 
+
+The code for breadth-first search is nearly identical to depth-first search
+except we will be using a Queue instead of a Stack to make sure we visit the closest neighbors first. 
+<b>BFS</b>
+<pre><code>
+using System.Collections.Generic;
+
+namespace KoderDojo.Examples {
+    public class Algorithms {
+        public HashSet< T> BFS< T>(Graph< T> graph, T start) {
+            var visited = new HashSet< T>();
+
+            if (!graph.AdjacencyList.ContainsKey(start))
+                return visited;
+            
+            var queue = new Queue< T>();
+            queue.Enqueue(start);
+
+            while (queue.Count > 0) {
+                var vertex = queue.Dequeue();
+
+                if (visited.Contains(vertex))
+                    continue;
+
+                visited.Add(vertex);
+
+                foreach(var neighbor in graph.AdjacencyList[vertex])
+                    if (!visited.Contains(neighbor))
+                        queue.Enqueue(neighbor);
+            }
+
+            return visited;
+        }
+    }
+}
+</code></pre>
+usage example 
+<pre><code>
+using System;
+
+namespace KoderDojo.Examples {
+    public class Program {
+        public static void Main(string[] args) {
+            var vertices = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            var edges = new[]{Tuple.Create(1,2), Tuple.Create(1,3),
+                Tuple.Create(2,4), Tuple.Create(3,5), Tuple.Create(3,6),
+                Tuple.Create(4,7), Tuple.Create(5,7), Tuple.Create(5,8),
+                Tuple.Create(5,6), Tuple.Create(8,9), Tuple.Create(9,10)};
+
+            var graph = new Graph< int>(vertices, edges);
+            var algorithms = new Algorithms();
+
+            Console.WriteLine(string.Join(", ", algorithms.BFS(graph, 1)));
+            # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+        }
+    }
+}
+/*
+Start Level 0: 1
+Traverse Level 1: 2, 3
+Traverse Level 2: 4, 5, 6
+Traverse Level 3: 7, 8
+Traverse Level 4: 9, 10
+*/
+</code></pre>
+<b>Tracing the Path of Breadth-First Search</b>
+If you want a list of the vertices as they are visited by breadth-first search, 
+just add each vertex one-by-one to a list. Here is breadth-first search with an extra parameter, 
+preVisit, which allows one to pass a function that gets called each time a vertex is visited.
+<pre><code>
+public HashSet<T> BFS<T>(Graph< T> graph, T start, Action< T> preVisit = null) {
+    var visited = new HashSet< T>();
+
+    if (!graph.AdjacencyList.ContainsKey(start))
+        return visited;
+    
+            var queue = new Queue< T>();
+            queue.Enqueue(start);
+
+            while (queue.Count > 0) {
+                var vertex = queue.Dequeue();
+
+                if (visited.Contains(vertex))
+                    continue;
+
+                if (preVisit != null)
+                    preVisit(vertex);
+
+                visited.Add(vertex);
+
+                foreach(var neighbor in graph.AdjacencyList[vertex])
+                    if (!visited.Contains(neighbor))
+                        queue.Enqueue(neighbor);
+            }
+
+    return visited;
+}  
+</code></pre>
+Modify the client a bit to initiate a new list, called path, that gets updated each time a new vertex is visited.
+ As you can see, the HashSet happens to be preserving the order that each vertex was inserted, but it is not guaranteed. 
+A list is guaranteed to maintain its order.
+<pre><code>
+using System;
+using System.Collections.Generic;
+
+namespace KoderDojo.Examples {
+    public class Program {
+        public static void Main(string[] args) {
+            var vertices = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            var edges = new[]{Tuple.Create(1,2), Tuple.Create(1,3),
+                Tuple.Create(2,4), Tuple.Create(3,5), Tuple.Create(3,6),
+                Tuple.Create(4,7), Tuple.Create(5,7), Tuple.Create(5,8),
+                Tuple.Create(5,6), Tuple.Create(8,9), Tuple.Create(9,10)};
+
+            var graph = new Graph< int>(vertices, edges);
+            var algorithms = new Algorithms();
+
+            var path = new List< int>();
+
+            Console.WriteLine(string.Join(", ", algorithms.BFS(graph, 1, v => path.Add(v)));
+            # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+            Console.WriteLine(string.Join(", ", path));
+            # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+        }
+    }
+}
+</code></pre>
+<b>Shortest Path Using BFS</b>
+Breadth-first search is unique with respect to depth-first search in that 
+you can use breadth-first search to find the shortest path between 2 vertices.
+ This assumes an unweighted graph. 
+ The shortest path in this case is defined as the path with the minimum number of edges between the two vertices.
+
+In these cases it might be useful to calculate the shortest path to all vertices in the graph from the starting vertex, 
+and provide a function that allows the client application to query for the shortest path to any other vertex.
+ I've created a ShortestPathFunction in C# that does just this. 
+ It caculates the shortest path to all vertices from a starting vertex 
+ and then returns a function that allows one to query for the shortest path to any vertex from the original starting vertex.
+
+Breadth-first search is being used to traverse the graph from the starting vertex and storing how it got to each node 
+( the previous node ) into a C# Dictionary, called previous. 
+To find the shortest path to a node, the code looks up the previous node of the destination node 
+and continues looking at all previous nodes until it arrives at the starting node.
+ Since this will be the path in reverse, the code simply reverses the list and returns it.
+ <pre><code>
+    public Func<T, IEnumerable<T>> ShortestPathFunction<T>(Graph<T> graph, T start) {
+        var previous = new Dictionary<T, T>();
+        
+        var queue = new Queue<T>();
+        queue.Enqueue(start);
+
+        while (queue.Count > 0) {
+            var vertex = queue.Dequeue();
+            foreach(var neighbor in graph.AdjacencyList[vertex]) {
+                if (previous.ContainsKey(neighbor))
+                    continue;
+            
+                previous[neighbor] = vertex;
+                queue.Enqueue(neighbor);
+            }
+        }
+
+        Func<T, IEnumerable<T>> shortestPath = v => {
+            var path = new List<T>{};
+
+            var current = v;
+            while (!current.Equals(start)) {
+                path.Add(current);
+                current = previous[current];
+            };
+
+            path.Add(start);
+            path.Reverse();
+
+            return path;
+        };
+
+        return shortestPath;
+    }
+ //   The code return an IEnumerable< T>, which provides all the vertices that make up the shortest path to get from the starting vertex
+ // to the destination vertex. Here is some example code to show how it works.
+
+    using System;
+
+    namespace KoderDojo.Examples {
+        public class Program {
+            public static void Main(string[] args) {
+                var vertices = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+                var edges = new[]{Tuple.Create(1,2), Tuple.Create(1,3),
+                    Tuple.Create(2,4), Tuple.Create(3,5), Tuple.Create(3,6),
+                    Tuple.Create(4,7), Tuple.Create(5,7), Tuple.Create(5,8),
+                    Tuple.Create(5,6), Tuple.Create(8,9), Tuple.Create(9,10)};
+
+                var graph = new Graph<int>(vertices, edges);
+                var algorithms = new Algorithms();
+
+                var startVertex = 1;
+                var shortestPath = algorithms.ShortestPathFunction(graph, startVertex);
+                foreach (var vertex in vertices)
+                    Console.WriteLine("shortest path to {0,2}: {1}",
+                            vertex, string.Join(", ", shortestPath(vertex)));
+
+                    # shortest path to  1: 1
+                    # shortest path to  2: 1, 2
+                    # shortest path to  3: 1, 3
+                    # shortest path to  4: 1, 2, 4
+                    # shortest path to  5: 1, 3, 5
+                    # shortest path to  6: 1, 3, 6
+                    # shortest path to  7: 1, 2, 4, 7
+                    # shortest path to  8: 1, 3, 5, 8
+                    # shortest path to  9: 1, 3, 5, 8, 9
+                    # shortest path to 10: 1, 3, 5, 8, 9, 10
+            }
+        }
+    }
+ </code></pre>
+<b>DFS:</b>
+<pre><code>
+    /**
+    * Recursively traverse the graph and return an array of vertex names
+    * @param startVertexName Name for the starting vertex from where the traversal should start.
+    */
+    dfsTraversalRecursive(startVertexName: string): string[] {
+      let result: string[] = [];
+      let visited: any = {}; // 
+      let startVertex = this._adjList.find(v => v.name === startVertexName);
+
+      // We are saving into a variable 
+      // due to the fact that the scope of "this" keyword will change in the dfs inner function.
+      // We will not be able to access this._adjList within the dfs inner function
+      let adjList = this._adjList;
+
+      (function dfs(vertex: Vertex): void {
+          // Return if vertex has no edges - This is our base case
+          if (vertex === null || vertex === undefined) return null;
+
+          // Add vertex to result list
+          result.push(vertex.name);
+
+          // Add vertex to visited list
+          visited[vertex.name] = true;
+
+          // For each edge of the vertex, traverse through the neighbors
+          adjList.find(v => v.name === vertex.name).edges.forEach(neighbor => {
+              // If not visited, recurse of the neighbor edges
+              if (visited[neighbor] !== true) {
+                  dfs(adjList.find(e => e.name === neighbor));
+              }
+          });
+
+      })(startVertex);
+
+      // Return all the vertices
+      return result;
+    }
+
+    dfsTraversalIterative(startVertexName: string): string[] {
+      let result: string[] = [];
+      let visited: any = {};
+      let stack: string[] = [];
+      stack.push(startVertexName);
+
+      while (stack.length > 0) {
+          let name = stack.pop();
+          let currentVertex = this._adjList.find(e => e.name === name);
+          if (!visited[currentVertex.name]) {
+              // Mark the current vertex as visited
+              visited[currentVertex.name] = true;
+
+              // Add the current vertex to result list
+              result.push(currentVertex.name);
+
+              // Visit the neighbors of the current vertex one by on, if they are not already visited
+              currentVertex.edges.forEach(neighbor => {
+                  if (!visited[neighbor])
+                      stack.push(neighbor);
+              });
+
+          }
+      }
+
+      return result;
+    }
+</code></pre>
+</div>
+
+<h2>ً<input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Quick sort</h2>
+<div>
+Choosing an element as a pivot and using it to partition the array.
+
+The left subarray contains all elements that are less than the pivot.
+The right subarray contains all the elements that are greater than the pivot. 
+We recursively repeat this process until we sort the array. 
+We can select the pivot the algorithm uses during this process in different ways:
+
+The first element of the array
+The last element of the array
+A random element of the array
+Median element of the array
+So, what is the best pivot to select when implementing the quicksort algorithm? 
+The answer to this question is not that simple.
+
+Selecting the middle element of the unsorted array seems to make sense as it divides the array into equal halves. 
+However, the process of finding that middle element is difficult and time-consuming.
+ Using this strategy involves calculating the array’s length in every iteration 
+ and halving it to determine the index of the element in the middle of the array. 
+
+On the other hand, when using the median element of the array as the pivot,
+we use the median-of-three technique where we select the pivot 
+based on the median of three values such as the first, middle, and last elements of the array. 
+
+Therefore, selecting the first, last, random, or median element of the array as the pivot is the best approach. 
+<pre><code>
+    public int[] QuickSort(int[] array, int leftIndex, int rightIndex)
+    {
+        var i = leftIndex;
+        var j = rightIndex;
+        var pivot = array[leftIndex];
+    
+        while (i <= j)
+        {
+            while (array[i] < pivot)
+                i++;
+            
+            while (array[j] > pivot)
+                j--;
+    
+            if (i <= j)
+            {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        
+        if (leftIndex < j)
+            SortArray(array, leftIndex, j);
+    
+        if (i < rightIndex)
+            SortArray(array, i, rightIndex);
+    
+        return array;
+    }
+</code></pre>
+</div>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Bubble Sort</h2>
+<div>
+<pre><code>
+    public static void BubbleSort(int[] input)
+    {
+        var itemMoved = false;
+        do
+        {
+            itemMoved = false;
+            for (int i = 0; i < input.Count() - 1; i++)
+            {
+                if (input[i] > input[i + 1])
+                {
+                    var lowerValue = input[i + 1];
+                    input[i + 1] = input[i];
+                    input[i] = lowerValue;
+                    itemMoved = true;
+                }
+            }
+        } while (itemMoved);
+    }
+</code></pre>
+</div>
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Brute-Force Algorithm</h2>
+<div>
+<pre><code>
+    using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+ 
+namespace BruteForceAlgorithm
+{
+    class BruteForceAlgo
+    {
+ 
+        public delegate bool BruteForceTest(ref char[] testChars);
+ 
+        public static bool BruteForce(string testChars, int startLength, int endLength, BruteForceTest testCallback)
+        {
+            for (int len = startLength; len <= endLength; ++len)
+            {
+                char[] chars = new char[len];
+ 
+                for (int i = 0; i < len; ++i)
+                    chars[i] = testChars[0];
+ 
+                if (testCallback(ref chars))
+                    return true;
+ 
+                for (int i1 = len - 1; i1 > -1; --i1)
+                {
+                    int i2 = 0;
+ 
+                    for (i2 = testChars.IndexOf(chars[i1]) + 1; i2 < testChars.Length; ++i2)
+                    {
+                        chars[i1] = testChars[i2];
+ 
+                        if (testCallback(ref chars))
+                            return true;
+ 
+                        for (int i3 = i1 + 1; i3 < len; ++i3)
+                        {
+                            if (chars[i3] != testChars[testChars.Length - 1])
+                            {
+                                i1 = len;
+                                goto outerBreak;
+                            }
+                        }
+                    }
+ 
+                outerBreak:
+                    if (i2 == testChars.Length)
+                        chars[i1] = testChars[0];
+                }
+            }
+ 
+            return false;
+        }
+ 
+ 
+        static void Main(string[] args)
+        {
+            BruteForceTest testCallback = delegate(ref char[] testChars)
+            {
+                var str = new string(testChars);
+                return (str == "bbc");
+            };
+ 
+ 
+            bool result = BruteForce("abcde", 1, 5, testCallback);
+            Console.WriteLine(result);
+        }
+    }
+}
+ 
+</code></pre>
+</div>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Bellman–Ford Algorithm for determining the shortest paths</h2>
+<div>
+<pre><code>
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Diagnostics;
+     
+    namespace BellmanFordAlgorithm
+    {
+        class BellmanFordAlgo
+        {
+            public struct Edge
+            {
+                public int Source;
+                public int Destination;
+                public int Weight;
+            }
+     
+            public struct Graph
+            {
+                public int VerticesCount;
+                public int EdgesCount;
+                public Edge[] edge;
+            }
+     
+            public static Graph CreateGraph(int verticesCount, int edgesCount)
+            {
+                Graph graph = new Graph();
+                graph.VerticesCount = verticesCount;
+                graph.EdgesCount = edgesCount;
+                graph.edge = new Edge[graph.EdgesCount];
+     
+                return graph;
+            }
+     
+            private static void Print(int[] distance, int count)
+            {
+                Console.WriteLine("Vertex   Distance from source");
+     
+                for (int i = 0; i < count; ++i)
+                    Console.WriteLine("{0}\t {1}", i, distance[i]);
+            }
+     
+            public static void BellmanFord(Graph graph, int source)
+            {
+                int verticesCount = graph.VerticesCount;
+                int edgesCount = graph.EdgesCount;
+                int[] distance = new int[verticesCount];
+     
+                for (int i = 0; i < verticesCount; i++)
+                    distance[i] = int.MaxValue;
+     
+                distance[source] = 0;
+     
+                for (int i = 1; i <= verticesCount - 1; ++i)
+                {
+                    for (int j = 0; j < edgesCount; ++j)
+                    {
+                        int u = graph.edge[j].Source;
+                        int v = graph.edge[j].Destination;
+                        int weight = graph.edge[j].Weight;
+     
+                        if (distance[u] != int.MaxValue && distance[u] + weight < distance[v])
+                            distance[v] = distance[u] + weight;
+                    }
+                }
+     
+                for (int i = 0; i < edgesCount; ++i)
+                {
+                    int u = graph.edge[i].Source;
+                    int v = graph.edge[i].Destination;
+                    int weight = graph.edge[i].Weight;
+     
+                    if (distance[u] != int.MaxValue && distance[u] + weight < distance[v])
+                        Console.WriteLine("Graph contains negative weight cycle.");
+                }
+     
+                Print(distance, verticesCount);
+            }
+     
+            static void Main(string[] args)
+            {
+                int verticesCount = 5;
+                int edgesCount = 8;
+                Graph graph = CreateGraph(verticesCount, edgesCount);
+     
+                // Edge 0-1
+                graph.edge[0].Source = 0;
+                graph.edge[0].Destination = 1;
+                graph.edge[0].Weight = -1;
+     
+                // Edge 0-2
+                graph.edge[1].Source = 0;
+                graph.edge[1].Destination = 2;
+                graph.edge[1].Weight = 4;
+     
+                // Edge 1-2
+                graph.edge[2].Source = 1;
+                graph.edge[2].Destination = 2;
+                graph.edge[2].Weight = 3;
+     
+                // Edge 1-3
+                graph.edge[3].Source = 1;
+                graph.edge[3].Destination = 3;
+                graph.edge[3].Weight = 2;
+     
+                // Edge 1-4
+                graph.edge[4].Source = 1;
+                graph.edge[4].Destination = 4;
+                graph.edge[4].Weight = 2;
+     
+                // Edge 3-2
+                graph.edge[5].Source = 3;
+                graph.edge[5].Destination = 2;
+                graph.edge[5].Weight = 5;
+     
+                // Edge 3-1
+                graph.edge[6].Source = 3;
+                graph.edge[6].Destination = 1;
+                graph.edge[6].Weight = 1;
+     
+                // Edge 4-3
+                graph.edge[7].Source = 4;
+                graph.edge[7].Destination = 3;
+                graph.edge[7].Weight = -3;
+     
+                BellmanFord(graph, 0);
+            }
+        }
+    }
+</code></pre>
+</div>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Breadth First Search (BFS) using Queue</h2>
+<div>
+Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. 
+It starts at the tree root (or some arbitrary node of a graph) and explores the neighbor nodes first, 
+before moving to the next level neighbors.
+
+
+<pre><code>
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+     
+    namespace BreadthFirst
+    {
+        class Program
+        {
+            public class Employee
+            {
+                public Employee(string name)
+                {
+                    this.name = name;
+                }
+     
+                public string name { get; set; }
+                public List<Employee> Employees
+                {
+                    get
+                    {
+                        return EmployeesList;
+                    }
+                }
+     
+                public void isEmployeeOf(Employee p)
+                {
+                    EmployeesList.Add(p);
+                }
+     
+                List<Employee> EmployeesList = new List<Employee>();
+     
+                public override string ToString()
+                {
+                    return name;
+                }
+            }
+     
+            public class BreadthFirstAlgorithm
+            {
+                public Employee BuildEmployeeGraph()
+                {
+                    Employee Eva = new Employee("Eva");
+                    Employee Sophia = new Employee("Sophia");
+                    Employee Brian = new Employee("Brian");
+                    Eva.isEmployeeOf(Sophia);
+                    Eva.isEmployeeOf(Brian);
+     
+                    Employee Lisa = new Employee("Lisa");
+                    Employee Tina = new Employee("Tina");
+                    Employee John = new Employee("John");
+                    Employee Mike = new Employee("Mike");
+                    Sophia.isEmployeeOf(Lisa);
+                    Sophia.isEmployeeOf(John);
+                    Brian.isEmployeeOf(Tina);
+                    Brian.isEmployeeOf(Mike);
+     
+                    return Eva;
+                }
+     
+                public Employee Search(Employee root, string nameToSearchFor)
+                {
+                    Queue<Employee> Q = new Queue<Employee>();
+                    HashSet<Employee> S = new HashSet<Employee>();
+                    Q.Enqueue(root);
+                    S.Add(root);
+     
+                    while (Q.Count > 0)
+                    {
+                        Employee e = Q.Dequeue();
+                        if (e.name == nameToSearchFor)
+                            return e;
+                        foreach (Employee friend in e.Employees)
+                        {
+                            if (!S.Contains(friend))
+                            {
+                                Q.Enqueue(friend);
+                                S.Add(friend);
+                            }
+                        }
+                    }
+                    return null;
+                }
+     
+                public void Traverse(Employee root)
+                {
+                    Queue<Employee> traverseOrder = new Queue<Employee>();
+     
+                    Queue<Employee> Q = new Queue<Employee>();
+                    HashSet<Employee> S = new HashSet<Employee>();
+                    Q.Enqueue(root);
+                    S.Add(root);
+     
+                    while (Q.Count > 0)
+                    {
+                        Employee e = Q.Dequeue();
+                        traverseOrder.Enqueue(e);
+     
+                        foreach (Employee emp in e.Employees)
+                        {
+                            if (!S.Contains(emp))
+                            {
+                                Q.Enqueue(emp);
+                                S.Add(emp);
+                            }
+                        }
+                    }
+     
+                    while (traverseOrder.Count > 0)
+                    {
+                        Employee e = traverseOrder.Dequeue();
+                        Console.WriteLine(e);
+                    }
+                }
+            }
+     
+            static void Main(string[] args)
+            {
+                BreadthFirstAlgorithm b = new BreadthFirstAlgorithm();
+                Employee root = b.BuildEmployeeGraph();
+                Console.WriteLine("Traverse Graph\n------");
+                b.Traverse(root);
+     
+                Console.WriteLine("\nSearch in Graph\n------");
+                Employee e = b.Search(root, "Eva");
+                Console.WriteLine(e == null ? "Employee not found" : e.name);
+                e = b.Search(root, "Brian");
+                Console.WriteLine(e == null ? "Employee not found" : e.name);
+                e = b.Search(root, "Soni");
+                Console.WriteLine(e == null ? "Employee not found" : e.name);
+            }
+        }
+    }
+     
+</code></pre>
+</div>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Depth First Seach (DFS) using List</h2>
+<div>
+Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at the root
+(selecting some arbitrary node as the root in the case of a graph) 
+and explores as far as possible along each branch before backtracking.
+<pre><code>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+    
+namespace DefthFirst
+{
+    class Program
+    {
+        public class Employee
+        {
+            public Employee(string name)
+            {
+                this.name = name;
+            }
+    
+            public string name { get; set; }
+            public List<Employee> Employees
+            {
+                get
+                {
+                    return EmployeesList;
+                }
+            }
+    
+            public void isEmployeeOf(Employee e)
+            {
+                EmployeesList.Add(e);
+            }
+    
+            List<Employee> EmployeesList = new List<Employee>();
+    
+            public override string ToString()
+            {
+                return name;
+            }
+        }
+    
+        public class DepthFirstAlgorithm
+        {
+            public Employee BuildEmployeeGraph()
+            {
+                Employee Eva = new Employee("Eva");
+                Employee Sophia = new Employee("Sophia");
+                Employee Brian = new Employee("Brian");
+                Eva.isEmployeeOf(Sophia);
+                Eva.isEmployeeOf(Brian);
+    
+                Employee Lisa = new Employee("Lisa");
+                Employee Tina = new Employee("Tina");
+                Employee John = new Employee("John");
+                Employee Mike = new Employee("Mike");
+                Sophia.isEmployeeOf(Lisa);
+                Sophia.isEmployeeOf(John);
+                Brian.isEmployeeOf(Tina);
+                Brian.isEmployeeOf(Mike);
+    
+                return Eva;
+            }
+    
+            public Employee Search(Employee root, string nameToSearchFor)
+            {
+                if (nameToSearchFor == root.name)
+                    return root;
+    
+                Employee personFound = null;
+                for (int i = 0; i < root.Employees.Count; i++)
+                {
+                    personFound = Search(root.Employees[i], nameToSearchFor);
+                    if (personFound != null)
+                        break;
+                }
+                return personFound;
+            }
+    
+            public void Traverse(Employee root)
+            {
+                Console.WriteLine(root.name);
+                for (int i = 0; i < root.Employees.Count; i++)
+                {
+                    Traverse(root.Employees[i]);
+                }
+            }
+        }
+    
+        static void Main(string[] args)
+        {
+            DepthFirstAlgorithm b = new DepthFirstAlgorithm();
+            Employee root = b.BuildEmployeeGraph();
+            Console.WriteLine("Traverse Graph\n------");
+            b.Traverse(root);
+    
+            Console.WriteLine("\nSearch in Graph\n------");
+            Employee e = b.Search(root, "Eva");
+            Console.WriteLine(e == null ? "Employee not found" : e.name);
+            e = b.Search(root, "Brian");
+            Console.WriteLine(e == null ? "Employee not found" : e.name);
+            e = b.Search(root, "Soni");
+            Console.WriteLine(e == null ? "Employee not found" : e.name);
+        }
+    }
+}
+    
+</code></pre>
+</div>
+
+<h2><input type="button" value="-"
+    class="toggleButton"  onclick="toggle(this)" />Huffman coding using Dictionary</h2>
+<div>
+Huffman coding is a lossless data compression algorithm. 
+The idea is to assign variable-legth codes to input characters, 
+lengths of the assigned codes are based on the frequencies of corresponding characters.
+The most frequent character gets the smallest code and the least frequent character gets the largest code.
+Node.cs :
+<pre><code>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+ 
+namespace HuffmanTest
+{
+    public class Node
+    {
+        public char Symbol { get; set; }
+        public int Frequency { get; set; }
+        public Node Right { get; set; }
+        public Node Left { get; set; }
+ 
+        public List<bool> Traverse(char symbol, List<bool> data)
+        {
+            // Leaf
+            if (Right == null && Left == null)
+            {
+                if (symbol.Equals(this.Symbol))
+                {
+                    return data;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                List<bool> left = null;
+                List<bool> right = null;
+ 
+                if (Left != null)
+                {
+                    List<bool> leftPath = new List<bool>();
+                    leftPath.AddRange(data);
+                    leftPath.Add(false);
+ 
+                    left = Left.Traverse(symbol, leftPath);
+                }
+ 
+                if (Right != null)
+                {
+                    List<bool> rightPath = new List<bool>();
+                    rightPath.AddRange(data);
+                    rightPath.Add(true);
+                    right = Right.Traverse(symbol, rightPath);
+                }
+ 
+                if (left != null)
+                {
+                    return left;
+                }
+                else
+                {
+                    return right;
+                }
+            }
+        }
+    }
+}
+ 
+</code></pre>
+HuffmanTree.cs :
+<pre><code> 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+ 
+namespace HuffmanTest
+{
+    public class HuffmanTree
+    {
+        private List<Node> nodes = new List<Node>();
+        public Node Root { get; set; }
+        public Dictionary<char, int> Frequencies = new Dictionary<char, int>();
+ 
+        public void Build(string source)
+        {
+            for (int i = 0; i < source.Length; i++)
+            {
+                if (!Frequencies.ContainsKey(source[i]))
+                {
+                    Frequencies.Add(source[i], 0);
+                }
+ 
+                Frequencies[source[i]]++;
+            }
+ 
+            foreach (KeyValuePair<char, int> symbol in Frequencies)
+            {
+                nodes.Add(new Node() { Symbol = symbol.Key, Frequency = symbol.Value });
+            }
+ 
+            while (nodes.Count > 1)
+            {
+                List<Node> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList<Node>();
+ 
+                if (orderedNodes.Count >= 2)
+                {
+                    // Take first two items
+                    List<Node> taken = orderedNodes.Take(2).ToList<Node>();
+ 
+                    // Create a parent node by combining the frequencies
+                    Node parent = new Node()
+                    {
+                        Symbol = '*',
+                        Frequency = taken[0].Frequency + taken[1].Frequency,
+                        Left = taken[0],
+                        Right = taken[1]
+                    };
+ 
+                    nodes.Remove(taken[0]);
+                    nodes.Remove(taken[1]);
+                    nodes.Add(parent);
+                }
+ 
+                this.Root = nodes.FirstOrDefault();
+ 
+            }
+ 
+        }
+ 
+        public BitArray Encode(string source)
+        {
+            List<bool> encodedSource = new List<bool>();
+ 
+            for (int i = 0; i < source.Length; i++)
+            {
+                List<bool> encodedSymbol = this.Root.Traverse(source[i], new List<bool>());
+                encodedSource.AddRange(encodedSymbol);
+            }
+ 
+            BitArray bits = new BitArray(encodedSource.ToArray());
+ 
+            return bits;
+        }
+ 
+        public string Decode(BitArray bits)
+        {
+            Node current = this.Root;
+            string decoded = "";
+ 
+            foreach (bool bit in bits)
+            {
+                if (bit)
+                {
+                    if (current.Right != null)
+                    {
+                        current = current.Right;
+                    }
+                }
+                else
+                {
+                    if (current.Left != null)
+                    {
+                        current = current.Left;
+                    }
+                }
+ 
+                if (IsLeaf(current))
+                {
+                    decoded += current.Symbol;
+                    current = this.Root;
+                }
+            }
+ 
+            return decoded;
+        }
+ 
+        public bool IsLeaf(Node node)
+        {
+            return (node.Left == null && node.Right == null);
+        }
+ 
+    }
+}
+ 
+</code></pre>
+Program to test Huffman Coding:
+<pre><code>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+ 
+namespace HuffmanTest
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Please enter the string:");
+            string input = Console.ReadLine();
+            HuffmanTree huffmanTree = new HuffmanTree();
+ 
+            // Build the Huffman tree
+            huffmanTree.Build(input);
+ 
+            // Encode
+            BitArray encoded = huffmanTree.Encode(input);
+ 
+            Console.Write("Encoded: ");
+            foreach (bool bit in encoded)
+            {
+                Console.Write((bit ? 1 : 0) + "");
+            }
+            Console.WriteLine();
+ 
+            // Decode
+            string decoded = huffmanTree.Decode(encoded);
+ 
+            Console.WriteLine("Decoded: " + decoded);
+ 
+            Console.ReadLine();
+        }
+    }
+}
+</code></pre>
+
+</div>

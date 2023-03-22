@@ -1,0 +1,104 @@
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="..\..\editing.css">	
+    <!--link rel="stylesheet" href="..\..\libs/highlight/androidstudio2.css"-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/androidstudio.min.css" >
+    <!--script src="../../libs/highlight/highlight.pack.js"></script-->
+    <scrip src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></scrip>
+</head>
+<body>
+    <script>hljs.highlightAll();</script>
+<h2>Helllo Vue Example:</h2>
+<pre><code  class = 'hljs-javascript'>
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <div id="app">{{ message }}</div>
+
+    < script >
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+        return {
+            message: 'Hello Vue!'
+        }
+        }
+    }).mount('#app')
+    </script>
+</code></pre>
+
+The script section of the code can be written in ES6 modules syntax:
+<code class = 'hljs-comment'>
+    < script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+      < /script>
+</code>
+
+<h2>Binding</h2>
+<code class = 'hljs-comment'>
+ < div id="app">
+    {{ message }}
+    < /div>
+    
+    < script>
+    var myObject = new Vue({
+        el: '#app',
+        data: {message: 'Hello Vue!'}
+    })
+    
+    function myFunction() {
+        myObject.message = "John Doe";
+    }
+    < /script>
+</code>
+
+<h2>Two-Way Binding</h2>
+
+<code class = 'hljs-comment'>
+    
+< div id="app">
+    < p>{{ message }}</p>
+    < p><input v-model="message"></p>
+  < /div>
+  
+  < script>
+  var myObject = new Vue({
+      el: '#app',
+      data: {message: 'Hello Vue!'}
+  })
+  < /script>
+  
+</code>
+
+<h2>Loop Binding</h2>
+Using the v-for directive to bind an array of Vue objects to an "array" of HTML element:
+<span class = 'hljs-comment'>
+    
+< div id="app">
+    < ul>
+      < li v-for="x in todos">
+      {{ x.text }}
+      < /li>
+     < /ul>
+   < /div>
+   
+   < script>
+   myObject = new Vue({
+       el: '#app',
+       data: {
+       todos: [
+           { text: 'Learn JavaScript' },
+           { text: 'Learn Vue.js' },
+           { text: 'Build Something Awesome' }
+           ]
+       }
+   })
+   < /script>
+</span>
+
+</body>

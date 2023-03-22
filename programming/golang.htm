@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../assets/css/blocks.css">	
+	<script src='../assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="../libs/highlight/androidstudio2.css">
+    <script src="../libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+	<script>
+	
+	</script>
+</head>
+<body onload="AddToggleButtons()">
+<button onclick="toggleAll(this);" >-</button>
+<h2>setup and testing go</h2>
+<div>
+    - setup from : https://go.dev/doc/install
+    - Enable dependency tracking for your code.
+        When your code imports packages contained in other modules, you manage those dependencies through your code's own module. 
+        That module is defined by a <b>go.mod</b> file that tracks the modules that provide those packages. 
+        That go.mod file stays with your code, including in your source code repository.
+
+        To enable dependency tracking for your code by creating a go.mod file, run the go mod init command, 
+        giving it the name of the module your code will be in. 
+        The name is the module's module path.
+
+        In actual development, the module path will typically be the repository location where your source code will be kept. 
+        For example, the module path might be github.com/mymodule. 
+        If you plan to publish your module for others to use, the module path must be a location from which Go tools can download your module.
+        
+        For the purposes of this tutorial, just use example/hello.
+
+        $ go mod init example/hello
+    - In your text editor, create a file <b>hello.go</b> in which to write your code.
+    - Paste the following code into your hello.go file and save the file.
+        <pre><code>
+        package main
+        
+        import "fmt"
+        
+        func main() {
+            fmt.Println("Hello, World!")
+        }</code></pre>
+    - Run your code to see the greeting.
+
+        <cli>$ go run .</cli>
+        // Hello, World!
+    <h3>VSCode setup</h3>
+    -Launch the VS Code editor
+    -Open the extension manager or alternatively, press Ctrl + Shift + x
+    -In the search box, type "go" and hit enter
+    -Find the Go extension by the GO team at Google and install the extension
+    -After the installation is complete, open the command palette by pressing Ctrl + Shift + p
+    -Run the Go: Install/Update Tools command
+    -Select all the provided tools and click OK
+    -VS Code is now configured to use Go.
+    -for example,Open up a terminal window and type:
+
+    <cl>go mod init example.com/hello</cl>
+
+</div>
+<h2>Introduction</h2>
+<div>
+    <h3>What is Go?</h3>
+    Go is a cross-platform, open source programming language
+    Go can be used to create high-performance applications
+    Go is a fast, statically typed, compiled language that feels like a dynamically typed, interpreted language
+    Go was developed at Google by Robert Griesemer, Rob Pike, and Ken Thompson in 2007
+    Go's syntax is similar to C++
+
+    <h3>What is Go Used For?</h3>
+    Web development (server-side)
+    Developing network-based programs
+    Developing cross-platform enterprise applications
+    Cloud-native development
+
+    <h3>Why Use Go?</h3>
+    Go is fun and easy to learn
+    Go has fast run time and compilation time
+    Go supports concurrency
+    Go has memory management
+    Go works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc.)    
+
+</div>
+<h2>Syntax</h2>
+<div>
+<pre><code>
+// comments: 
+// single line comment  
+
+/* multiline
+comments*/
+//-----------------------------------------------
+// Variables :
+//  all variables are initialized
+// syntax:
+// var variablename type = value  
+var student1 string = "John" //type is string
+var student2 = "Jane" //type is inferred
+x := 2 //type is inferred
+
+a = 1  // variablee declration insid a function
+
+var a, b, c, d int = 1, 3, 5, 7 //Multiple Variable Declaration
+
+// If the type keyword is not specified, you can declare different types of variables in the same line:
+package main
+import ("fmt")
+
+func main() {
+  var a, b = 6, "Hello"
+  c, d := 7, "World!"
+
+  fmt.Println(a)  //6
+  fmt.Println(b)  // Hello 
+  fmt.Println(c)  // 7
+  fmt.Println(d)  // World!
+}
+
+//Multiple variable declarations can also be grouped together into a block for greater readability:
+package main
+import ("fmt")
+
+func main() {
+   var (
+     a int
+     b int = 1
+     c string = "hello"
+   )
+
+  fmt.Println(a)
+  fmt.Println(b)
+  fmt.Println(c)
+}
+//-----------------------------------------------
+//constants:
+const PI = 3.14
+const A = 1          //Untyped constant
+
+// The Printf() Function
+fmt.Printf("i has value: %v and type: %T\n", i, i)
+// %v is used to print the value of the arguments
+// %T is used to print the type of the arguments
+//------------------------------------------------
+// Integer Formatting
+package main
+import ("fmt")
+
+func main() {
+  var i = 15
+ 
+  fmt.Printf("%b\n", i)   //111
+  fmt.Printf("%d\n", i)   //15
+  fmt.Printf("%+d\n", i)  //+15
+  fmt.Printf("%o\n", i)   //17
+  fmt.Printf("%O\n", i)   //0o17
+  fmt.Printf("%x\n", i)   //f
+  fmt.Printf("%X\n", i)   //F
+  fmt.Printf("%#x\n", i)  //0xf 
+  fmt.Printf("%4d\n", i)  //   15
+  fmt.Printf("%-4d\n", i) //15 
+  fmt.Printf("%04d\n", i) //0015
+}
+//-----------------------------------------------
+// String Formatting
+  fmt.Printf("%s\n", txt)   //Hello
+  fmt.Printf("%q\n", txt)   //"Hello"
+  fmt.Printf("%8s\n", txt)  //   Hello
+  fmt.Printf("%-8s\n", txt) //Hello
+  fmt.Printf("%x\n", txt)   //48656c6c6f
+  fmt.Printf("% x\n", txt)  //48 65 6c 6c 6f
+//-----------------------------------------------
+//Boolean Formatting Verbs
+fmt.Printf("%t\n", i)    //true
+fmt.Printf("%t\n", j)   //false
+//-----------------------------------------------
+//Float Formatting
+fmt.Printf("%e\n", i)         //3.141000e+00
+fmt.Printf("%f\n", i)         //3.141000
+fmt.Printf("%.2f\n", i)       //3.14
+fmt.Printf("%6.2f\n", i)     //  3.14
+fmt.Printf("%g\n", i)        //3.141
+//-----------------------------------------------
+//Go Data Types
+var a bool = true     // Boolean
+var b int = 5         // Integer
+var c float32 = 3.14  // Floating point number
+var d string = "Hi!"  // String
+//-----------------------------------------------
+var b1 bool = true // typed declaration with initial value
+var b2 = true // untyped declaration with initial value
+var b3 bool // typed declaration without initial value (false)
+b4 := true // untyped declaration with initial value
+//-----------------------------------------------
+// Signed Integers
+int	Depends on platform:
+32 bits in 32 bit systems and
+64 bit in 64 bit systems	-2147483648 to 2147483647 in 32 bit systems and
+-9223372036854775808 to 9223372036854775807 in 64 bit systems
+int8	8 bits/1 byte	-128 to 127
+int16	16 bits/2 byte	-32768 to 32767
+int32	32 bits/4 byte	-2147483648 to 2147483647
+int64	64 bits/8 byte	-9223372036854775808 to 9223372036854775807
+//-----------------------------------------------
+//Unsigned Integers
+uint	Depends on platform:
+32 bits in 32 bit systems and
+64 bit in 64 bit systems	0 to 4294967295 in 32 bit systems and
+0 to 18446744073709551615 in 64 bit systems
+uint8	8 bits/1 byte	0 to 255
+uint16	16 bits/2 byte	0 to 65535
+uint32	32 bits/4 byte	0 to 4294967295
+uint64	64 bits/8 byte	0 to 18446744073709551615
+//-----------------------------------------------
+Float,float32,Float64
+//-----------------------------------------------
+// Arrays
+//Declare an Array :
+var array_name = [length]datatype{values} // here length is defined
+var array_name = [...]datatype{values} // here length is inferred
+array_name := [length]datatype{values} // here length is defined
+array_name := [...]datatype{values} // here length is inferred
+
+var arr1 = [3]int{1,2,3}
+arr2 := [5]int{4,5,6,7,8}
+fmt.Println(arr1)     //[1 2 3]
+fmt.Println(arr2)     //[4 5 6 7 8]
+
+// two arrays (arr1 and arr2) with inferred lengths:
+var arr1 = [...]int{1,2,3}
+arr2 := [...]int{4,5,6,7,8}
+
+var cars = [4]string{"Volvo", "BMW", "Ford", "Mazda"}
+
+// Access Elements of an Array
+prices := [3]int{10,20,30}
+
+fmt.Println(prices[0]) //10
+fmt.Println(prices[2]) //30
+
+// Slices
+// Slices are similar to arrays, but unlike arrays, the length of a slice can grow and shrink as you see fit.
+
+//Creating slies :
+
+myslice := []int{}      // Create a Slice With []datatype{values}
+myslice := []int{1,2,3}
+//len() function - returns the length of the slice (the number of elements in the slice)
+//cap() function - returns the capacity of the slice (the number of elements the slice can grow or shrink to)
+
+arr1 := [6]int{10, 11, 12, 13, 14,15} // An array
+myslice := arr1[2:4]                  // A slice made from the array
+
+// Create a Slice With The make() Function
+myslice1 := make([]int, 5, 10)       // slice_name := make([]type, length, capacity)
+
+prices := []int{10,20,30}
+
+fmt.Println(prices[0]) //10
+fmt.Println(prices[2]) //30
+prices[2] = 50
+
+myslice1 := []int{1, 2, 3, 4, 5, 6}
+myslice1 = append(myslice1, 20, 21)
+fmt.Printf("myslice1 = %v\n", myslice1)
+
+myslice1 := []int{1,2,3}
+myslice2 := []int{4,5,6}
+myslice3 := append(myslice1, myslice2...)
+fmt.Printf("myslice3=%v\n", myslice3)    // myslice3=[1 2 3 4 5 6]
+
+arr1 := [6]int{9, 10, 11, 12, 13, 14} // An array
+myslice1 := arr1[1:5] // Slice array
+
+// When using slices, Go loads all the underlying elements into the memory.
+// If the array is large and you need only a few elements, it is better to copy those elements using the copy() function.
+package main
+import ("fmt")
+
+func main() {
+  numbers := []int{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+  // Original slice
+  fmt.Printf("numbers = %v\n", numbers)
+  fmt.Printf("length = %d\n", len(numbers))
+  fmt.Printf("capacity = %d\n", cap(numbers))
+
+  // Create copy with only needed numbers
+  neededNumbers := numbers[:len(numbers)-10]
+  numbersCopy := make([]int, len(neededNumbers))
+  copy(numbersCopy, neededNumbers)
+
+  fmt.Printf("numbersCopy = %v\n", numbersCopy)
+  fmt.Printf("length = %d\n", len(numbersCopy))
+  fmt.Printf("capacity = %d\n", cap(numbersCopy))
+}
+Result:
+
+// Original slice
+numbers = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15]
+length = 15
+capacity = 15
+// New slice
+numbersCopy = [1 2 3 4 5]
+length = 5
+capacity = 5
+
+//Operators
+// %	Modulus	Returns the division remainder	x % y	
+// ++	Increment	Increases the value of a variable by 1	x++	
+// --	Decrement	Decreases the value of a variable by 1	x--
+
+x *= 3	// x = x * 3	
+x /= 3	// x = x / 3	
+x %= 3	// x = x % 3	
+x &= 3	// x = x & 3	
+x |= 3	// x = x | 3	
+x ^= 3	// x = x ^ 3	
+x >>= 3	// x = x >> 3	
+!(x < 5 && x < 10) || z<4
+
+// Bitwise Operators
+x & y // Sets each bit to 1 if both bits are 1
+x | y // Sets each bit to 1 if one of two bits is 1
+x ^ b // Sets each bit to 1 if only one of two bits is 1
+x >> 2 // Shift right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off
+
+//if 
+if 20 > 18 {
+  fmt.Println("20 is greater than 18")
+} else {
+  fmt.Println("Good evening.")
+}
+
+if (temperature > 15) {
+  fmt.Println("It is warm out there.")
+} // this raises an error(Having the else brackets in a different line will raise an error)
+else {
+  fmt.Println("It is cold out there.")
+}
+
+if time < 10 {
+  fmt.Println("Good morning.")
+} else if time < 20 {
+  fmt.Println("Good day.")
+} else {
+  fmt.Println("Good evening.")
+}
+
+// switch
+day := 8
+
+switch day {
+case 1,3:
+  fmt.Println("Monday")
+case 2:
+  fmt.Println("Tuesday")
+default:
+  fmt.Println("other weekday")
+}
+
+//for 
+for i:=0; i < 5; i++ {
+  fmt.Println(i)
+}
+
+//continue statement is used to skip one or more iterations in the loop.
+for i:=0; i < 5; i++ {
+  if i == 3 {
+    continue
+  }
+ fmt.Println(i)
+}
+
+//break statement is used to break/terminate the loop execution.
+for i:=0; i < 5; i++ {
+  if i == 3 {
+    break
+  }
+ fmt.Println(i)
+
+ //The range keyword is used to more easily iterate over an array, slice or map. 
+ fruits := [3]string{"apple", "orange", "banana"}
+  for idx, val := range fruits {
+     fmt.Printf("%v\t%v\n", idx, val)
+  }
+/*  Result:
+  0      apple
+  1      orange
+  2      banana
+*/
+//To only show the value or the index, you can omit the other output using an underscore (_).
+for _, val := range fruits {
+  fmt.Printf("%v\n", val)
+}
+Result:
+  apple
+  orange
+  banana
+
+
+//Function
+//Create a Function
+func myMessage() {
+  fmt.Println("I just got executed!")
+}
+// call the Function
+func main() {
+  myMessage() // call the function
+}
+// Function Parameters
+func familyName(fname string, age int) {
+  fmt.Println("Hello", age, "year old", fname, "Refsnes")
+}
+
+func myFunction(x int, y int) int {
+  return x + y
+}
+//Named Return Values
+func myFunction(x int, y int) (result int) {
+  result = x + y
+  return
+}
+//Multiple Return Values
+func myFunction(x int, y string) (result int, txt1 string) {
+  result = x + x
+  txt1 = y + " World!"
+  return
+}
+
+//Recursion Functions :
+
+package main
+import ("fmt")
+
+func testcount(x int) int {
+  if x == 5 {
+    return 0
+  }
+  fmt.Println(x)
+  return testcount(x + 1)
+}
+
+func main(){
+  testcount(1)
+}
+Result:
+    1
+    2
+    3
+    4
+
+// Struct
+type Person struct {
+  name string
+  age int
+  job string
+  salary int
+}
+
+// Maps are used to store data values in key:value pairs.
+var a = map[string]string{"brand": "Ford", "model": "Mustang", "year": "1964"}
+b := map[string]int{"Oslo": 1, "Bergen": 2, "Trondheim": 3, "Stavanger": 4}
+
+var a = make(map[string]string) // The map is empty now
+  a["brand"] = "Ford"
+  a["model"] = "Mustang"
+  a["year"] = "1964"
+                                 // a is no longer empty
+  b := make(map[string]int)
+  b["Oslo"] = 1
+  b["Bergen"] = 2
+  b["Trondheim"] = 3
+  b["Stavanger"] = 4
+
+  var a = make(map[string]string)
+  var b map[string]string
+
+  fmt.Println(a == nil) //false
+  fmt.Println(b == nil)   // true
+  delete(a,"year")
+
+  // If you only want to check the existence of a certain key, you can use the blank identifier (_) in place of val.
+  func main() {
+    var a = map[string]string{"brand": "Ford", "model": "Mustang", "year": "1964", "day":""}
+  
+    val1, ok1 := a["brand"] // Checking for existing key and its value
+    val2, ok2 := a["color"] // Checking for non-existing key and its value
+    val3, ok3 := a["day"]   // Checking for existing key and its value
+    _, ok4 := a["model"]    // Only checking for existing key and not its value
+  
+    fmt.Println(val1, ok1)  //Ford true
+    fmt.Println(val2, ok2) //false
+    fmt.Println(val3, ok3) //true
+    fmt.Println(ok4)       //true
+  }
+
+//Maps are references to hash tables.
+package main
+import ("fmt")
+
+func main() {
+  var a = map[string]string{"brand": "Ford", "model": "Mustang", "year": "1964"}
+  b := a
+
+  fmt.Println(a)  //map[brand:Ford model:Mustang year:1964]
+  fmt.Println(b)  // map[brand:Ford model:Mustang year:1964]
+
+  b["year"] = "1970"
+  fmt.Println("After change to b:")
+
+  fmt.Println(a) //map[brand:Ford model:Mustang year:1970]
+  fmt.Println(b)  // map[brand:Ford model:Mustang year:1970]
+}
+
+//Iterating Over Maps
+package main
+import ("fmt")
+
+func main() {
+  a := map[string]int{"one": 1, "two": 2, "three": 3, "four": 4}
+
+  for k, v := range a {
+    fmt.Printf("%v : %v, ", k, v)
+  }
+}
+// two : 2, three : 3, four : 4, one : 1
+
+//Iterate Over Maps in a Specific Order
+package main
+import ("fmt")
+
+func main() {
+  a := map[string]int{"one": 1, "two": 2, "three": 3, "four": 4}
+
+  var b = []string             // defining the order
+  b = append(b, "one", "two", "three", "four")
+
+  for k, v := range a {        // loop with no order
+    fmt.Printf("%v : %v, ", k, v)
+  }
+
+  fmt.Println()
+
+  for _, element := range b {  // loop with the defined order
+    fmt.Printf("%v : %v, ", element, a[element])
+  }
+}
+Result:
+
+two : 2, three : 3, four : 4, one : 1,
+one : 1, two : 2, three : 3, four : 4,
+</code></pre>    
+</div>

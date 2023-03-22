@@ -1,0 +1,2249 @@
+<html>
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
+	<script src='/nilx/assets/js/blocks.js'></script>
+	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
+    <script src="/nilx/libs/highlight/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+</head>
+<body>
+<button onclick="toggleAll(this);" >-</button>
+
+<h2><input type="button" value="-"
+			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
+			onclick="toggle(this)" />References</h2>
+<div>
+  
+  <a href='https://www.javatpoint.com/react-conditional-rendering'>javapint react tutorial(text)</a>
+<a href='https://scrimba.com/learn/learnreact'>Intractive course by creating prrojects like airbnb clone</a>
+<a href='https://www.javatpoint.com/reactjs-tutorial'>text tutorial</a>
+<a href="https://www.youtube.com/watch?v=1DklrGoAxDE">youtube video</a>
+<a href='https://stackoverflow.com/tags/reactjs/info'>react on stack over flow</a>
+<br/><a href="https://www.taniarascia.com/getting-started-with-react/">getting-started-with-react</a>
+<br/><a href="https://medium.freecodecamp.org/learn-react-js-in-5-minutes-526472d292f4">react-js-in-5-minutes-</a>
+<br/><a href='https://reactjs.org/docs/react-api.html'>react api</a>
+<br/><a href='https://reactjs.org/docs/react-component.html'>components</a>
+<br/><a href='https://reactjs.org/docs/react-dom.html'>ReactDOM</a>
+<br/><a href='https://reactjs.org/docs/react-dom-server.html'>DomServer</a>
+<br/><a href='https://reactjs.org/docs/dom-elements.html'>Dom Elements</a>
+<br/><a href='https://reactjs.org/docs/events.html'>SyntheticEvents</a>
+<br/><a href='https://reactjs.org/docs/test-utils.html'>TestUtils</a>
+<br/><a href='https://reactjs.org/docs/glossary.html'>Glossary</a>
+<br/><a href='https://reactjs.org/docs/jsx-in-depth.html'>jsx-in-depth</a>
+<br/><a href='https://github.com/mikechau/react-primer-draft'>primer-draft</a>
+<br/><a href='https://github.com/enaqx/awesome-react'>awesome-react</a>
+<br/><a href='https://www.codecademy.com/courses/react-101/lessons/react-jsx-intro/exercises/why-react?action=resume_content_item'>why-react<\a>
+<br/><a href='https://devhints.io/redux'>redux</a>
+<br/><a href="https://codesandbox.io/s/r5w8zk8qzn">example1
+<br> <img alt="Edit r5w8zk8qzn" src="https://codesandbox.io/static/img/play-codesandbox.svg">
+  </a>
+  <a href="https://codepen.io/bradleyboy/pen/OPBpGw">2nd Example</a> `
+
+</div>
+<h2>StandAlone example</h2>
+<pre>
+  <code>
+    < head>
+      < script crossorigin src="https://unpkg.com/react@17/umd/react.development.js">< /script>
+      < script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js">< /script>
+      < script src="https://unpkg.com/@babel/standalone/babel.min.js">< /script>
+      < script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js" crossorigin="anonymous"
+         referrerpolicy="no-referrer">< /script>
+  < /head>
+  < body>
+      < div id="root">< /div>
+  < script type="text/babel">
+      const MainContent = () => {
+          return (
+              < div>
+                  < p>Main content goes here...< /p>
+              < /div>
+          );
+      }
+  
+      //render the component to the DOM
+      ReactDOM.render(< MainContent />, document.getElementById('root'));
+  < /script>
+  < /body>
+  </code>
+</pre>
+<h2>Functional Components</h2>
+<div>
+<pre><code>
+function WelcomeMessage(props) {  
+  return < h1>Welcome to the , {props.name}< /h1>;  
+}  
+///example:
+import React, { Component } from 'react';  
+class App extends React.Component {  
+   render() {  
+      return (  
+         < div>  
+            < First/>  
+            < Second/>  
+         < /div>  
+      );  
+   }  
+}  
+class First extends React.Component {  
+   render() {  
+      return (  
+         < div>  
+            < h1>JavaTpoint< /h1>  
+         < /div>  
+      );  
+   }  
+}  
+class Second extends React.Component {  
+   render() {  
+      return (  
+         < div>  
+            < h2>www.javatpoint.com< /h2>  
+            < p>This websites contains the great CS tutorial.< /p>  
+         < /div>  
+      );  
+   }  
+}  
+export default App;  
+</code></pre>
+</div>
+<h2>Class Components</h2>
+<div>
+<pre><code>
+class MyComponent extends React.Component {  
+  render() {  
+    return (  
+      < div>This is main component.< /div>  
+    );  
+  }  
+}  
+</code></pre>
+Example:
+<pre><code>
+import React, { Component } from 'react';  
+class App extends React.Component {  
+   constructor() {  
+      super();  
+      this.state = {  
+         data:[{"name":"Abhishek"},  
+            {  "name":"Saharsh"},  
+            {  "name":"Ajay"} ]  
+      }  
+   }  
+  render() {  
+     return (  
+       < div>  
+         < StudentName/>  
+         < ul>            
+         {this.state.data.map((item) =>  < List data = {item} />)}           
+         < /ul>  
+       < /div>  
+     );  
+   }  
+}  
+class StudentName extends React.Component {  
+   render() {  
+      return (  
+         < div>  
+            < h1>Student Name Detail< /h1>  
+         < /div>  
+      );  
+   }  
+}  
+class List extends React.Component {  
+   render() {  
+      return (  
+         < ul>            
+            < li>{this.props.data.name}< /li>   
+         < /ul>  
+      );  
+   }  
+}  
+export default App;
+</code></pre>
+</div>
+<h2> State</h2>
+<div>
+Defining and using state:
+<pre><code>
+import React, { Component } from 'react';  
+class App extends React.Component {  
+ constructor() {  
+      super();        
+      this.state = { displayBio: true };  
+      }  
+      render() {  
+          const bio = this.state.displayBio ? (  
+              < div>  
+                  < p>< h3>some text< /h3>< /p>   
+            < /div>  
+              ) : null;  
+              return (  
+                  < div>  
+                      < h1> Welcome !! < /h1>  
+                      { bio }   
+                  < /div>  
+              );  
+     }  
+}  
+export default App;  
+</code>
+</pre>
+Changing the State
+<pre><code>
+import React, { Component } from 'react';  
+class App extends React.Component {  
+ constructor() {  
+      super();        
+      this.state = { displayBio: false };  
+      console.log('Component this', this);  
+      this.toggleDisplayBio = this.toggleDisplayBio.bind(this);  
+      }  
+      toggleDisplayBio(){  
+          this.setState({displayBio: !this.state.displayBio});  
+          }  
+      render() {  
+          return (  
+              < div>  
+                  < h1>Welcome!< /h1>  
+                  {  
+                      this.state.displayBio ? (   
+                          < div>  
+                              < p><h4>somthing.< /h4>< /p>  
+                              < button onClick={this.toggleDisplayBio}> Show Less < /button>  
+                        < /div>  
+                          ) : (  
+                              < div>  
+                                  < button onClick={this.toggleDisplayBio}> Read More < /button>  
+                              < /div>  
+                          )  
+                  }  
+             < /div>  
+        )  
+    }  
+}  
+export default App;  
+</code></pre>
+
+</div>
+
+<h2>Props</h2>
+<div>
+ Example:
+ <pre><code>
+import React, { Component } from 'react';  
+class App extends React.Component {  
+   render() {     
+      return (  
+          < div>  
+            < h1> Welcome to { this.props.name } < /h1>    
+            < p> < h4> Javatpoint is one of the best Java training institute in Noida, Delhi, Gurugram, Ghaziabad and Faridabad. < /h4> < /p>          
+          < /div>  
+      );  
+   }  
+}  
+export default App;  
+</code></pre>
+//usage : ReactDOM.render(<App name = "hoora!" />, document.getElementById('app')); 
+</div>
+It is poosible to define default props in the component definition:
+<pre><code>
+App.defaultProps = {  
+   name: "amazing"  
+}  
+</code></pre>
+Changing the state :
+<pre><code>
+class Car extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brand: "Ford",
+      model: "Mustang",
+      color: "red",
+      year: 1964
+    };
+  }
+  changeColor = () => {
+    this.setState({color: "blue"});
+  }
+  render() {
+    return (
+      < div>
+        < h1>My {this.state.brand}< /h1>
+        < p>
+          It is a {this.state.color}
+          {this.state.model}
+          from {this.state.year}.
+        < /p>
+        < button
+          type="button"
+          onClick={this.changeColor}
+        >Change color< /button>
+      < /div>
+    );
+  }
+}
+</code></pre>
+</div>
+
+<h2>Props Validation</h2>
+<div>
+App.propTypes is used for props validation in react component.
+propTypes can be :
+PropTypes.array,PropTypes.bool,PropTypes.func,PropTypes.number,PropTypes.object,PropTypes.string and more.
+<pre><code>
+class App extends React.Component {  
+    render() {}  
+}  
+Component.propTypes = { /*Definition */};  
+</code></pre>
+Example:
+<pre><code>
+import React, { Component } from 'react';  
+import PropTypes from 'prop-types';  
+class App extends React.Component {  
+   render() {  
+      return (  
+          < div>  
+              < h1>ReactJS Props validation example</h1>  
+              < table>  
+                  < tr>  
+                      < th>Type< /th>  
+                      < th>Value< /th>  
+                      < th>Valid< /th>  
+                   </tr>  
+                < tr>  
+                      < td>Array< /td>  
+                      < td>{this.props.propArray}< /td>  
+                      < td>{this.props.propArray ? "true" : "False"}< /td>  
+                  < /tr>  
+                  < tr>  
+                      < td>Boolean</td>  
+                      < td>{this.props.propBool ? "true" : "False"}< /td>  
+                      < td>{this.props.propBool ? "true" : "False"}< /td>  
+                  < /tr>  
+                  < tr>  
+                      < td>Function< /td>  
+                      < td>{this.props.propFunc(5)}< /td>  
+                      < td>{this.props.propFunc(5) ? "true" : "False"}< /td>  
+                  < /tr>  
+                  < tr>  
+                      < td>String< /td>  
+                      < td>{this.props.propString}< /td>  
+                      < td>{this.props.propString ? "true" : "False"}< /td>  
+                  < /tr>  
+                  < tr>  
+                      < td>Number< /td>  
+                      < td>{this.props.propNumber}< /td>  
+                      < td>{this.props.propNumber ? "true" : "False"}< /td>  
+                  < /tr>  
+             < /table>  
+        < /div>  
+        );  
+   }  
+}  
+App.propTypes = {  
+    propArray: PropTypes.array.isRequired,  
+    propBool: PropTypes.bool.isRequired,  
+    propFunc: PropTypes.func,  
+    propNumber: PropTypes.number,  
+    propString: PropTypes.string,   
+}  
+App.defaultProps = {  
+    propArray: [1,2,3,4,5],  
+    propBool: true,  
+    propFunc: function(x){return x+5},  
+    propNumber: 1,  
+    propString: "JavaTpoint",  
+}  
+export default App;  
+</code></pre>
+custom validation:
+<pre><code>
+var Component = React.createClass({  
+App.propTypes = {  
+   customProp: function(props, propName, componentName) {  
+        if (!item.isValid(props[propName])) {  
+          return new Error('Validation failed!');  
+        }  
+      }  
+   }  
+})  
+</code></pre>
+</div>
+<h2>Component Life-Cycle  and Events</h2>
+<div>
+Events of Components in the life cycle 
+1. Initial Phase
+	getDefaultProps()
+	It is used to specify the default value of this.props. It is invoked before the creation of the component or any props from the parent is passed into it.
+	getInitialState()
+	It is used to specify the default value of this.state. It is invoked before the creation of the component.
+2.Mounting Phase
+	componentWillMount()
+	This is invoked immediately before a component gets rendered into the DOM. In the case, when you call setState() inside this method, the component will not re-render.
+	componentDidMount()
+	This is invoked immediately after a component gets rendered and placed on the DOM. Now, you can do any DOM querying operations.
+	render()
+	This method is defined in each and every component. It is responsible for returning a single root HTML node element. If you don't want to render anything, you can return a null or false value.
+3. Updating Phase
+	componentWillRecieveProps()
+	It is invoked when a component receives new props. If you want to update the state in response to prop changes, you should compare this.props and nextProps to perform state transition by using this.setState() method.
+	shouldComponentUpdate()
+	It is invoked when a component decides any changes/updation to the DOM. It allows you to control the component's behavior of updating itself. If this method returns true, the component will update. Otherwise, the component will skip the updating.
+	componentWillUpdate()
+	It is invoked just before the component updating occurs. Here, you can't change the component state by invoking this.setState() method. It will not be called, if shouldComponentUpdate() returns false.
+	render()
+	It is invoked to examine this.props and this.state and return one of the following types: React elements, Arrays and fragments, Booleans or null, String and Number. If shouldComponentUpdate() returns false, the code inside render() will be invoked again to ensure that the component displays itself properly.
+	componentDidUpdate()
+	It is invoked immediately after the component updating occurs. In this method, you can put any code inside this which you want to execute once the updating occurs. This method is not invoked for the initial render.
+4. Unmounting Phase
+	componentWillUnmount()
+	This method is invoked immediately before a component is destroyed and unmounted permanently. It performs any necessary cleanup related task such as invalidating timers, event listener, canceling network requests, or cleaning up DOM elements. If a component instance is unmounted, you cannot mount it again.
+
+Example:
+<pre><code>
+import React, { Component } from 'react';  
+  
+class App extends React.Component {  
+   constructor(props) {  
+      super(props);  
+      this.state = {hello: "JavaTpoint"};  
+      this.changeState = this.changeState.bind(this)  
+   }    
+   render() {  
+      return (  
+         <div>  
+             < h1>ReactJS component's Lifecycle< /h1>  
+             < h3>Hello {this.state.hello}< /h3>  
+             < button onClick = {this.changeState}>Click Here!< /button>          
+         </div>  
+      );  
+   }  
+   componentWillMount() {  
+      console.log('Component Will MOUNT!')  
+   }  
+   componentDidMount() {  
+      console.log('Component Did MOUNT!')  
+   }  
+   changeState(){  
+      this.setState({hello:"All!!- Its a great reactjs tutorial."});  
+   }  
+   componentWillReceiveProps(newProps) {      
+      console.log('Component Will Recieve Props!')  
+   }  
+   shouldComponentUpdate(newProps, newState) {  
+      return true;  
+   }  
+   componentWillUpdate(nextProps, nextState) {  
+      console.log('Component Will UPDATE!');  
+   }  
+   componentDidUpdate(prevProps, prevState) {  
+      console.log('Component Did UPDATE!')  
+   }  
+   componentWillUnmount() {  
+      console.log('Component Will UNMOUNT!')  
+   }  
+}  
+export default App;  
+</code></pre>
+</div>
+<h2>React Forms</h2>
+<div>
+Creating Form
+	There are mainly two types of form input in React.
+		1- Uncontrolled component : similar to the traditional HTML form inputs, The DOM itself handles the form data.
+		2- Controlled component:The input form element is handled by the component rather than the DOM,on every onChange event. 
+
+For Uncontrolled components,use a ref to access the input field value of the form from the DOM.For Example:
+<pre><code>
+import React, { Component } from 'react';  
+class App extends React.Component {  
+  constructor(props) {  
+      super(props);  
+      this.updateSubmit = this.updateSubmit.bind(this);  
+      this.input = React.createRef();  
+  }  
+  updateSubmit(event) {  
+      alert('You have entered the UserName and CompanyName successfully.');  
+      event.preventDefault();  
+  }  
+  render() {  
+    return (  
+      < form onSubmit={this.updateSubmit}>  
+        < h1>Uncontrolled Form Example</h1>  
+        < label>Name:  
+            < input type="text" ref={this.input} />  
+        < /label>  
+        < label>  
+            CompanyName:  
+            < input type="text" ref={this.input} />  
+        < /label>  
+        < input type="submit" value="Submit" />  
+      < /form>  
+    );  
+  }  
+}  
+export default App;  
+</code></pre>
+
+Controlled component example:
+<pre><code>
+import React, { Component } from 'react';  
+class App extends React.Component {  
+  constructor(props) {  
+      super(props);  
+      this.state = {value: ''};  
+      this.handleChange = this.handleChange.bind(this);  
+      this.handleSubmit = this.handleSubmit.bind(this);  
+  }  
+  handleChange(event) {  
+      this.setState({value: event.target.value});  
+  }  
+  handleSubmit(event) {  
+      alert('You have submitted the input successfully: ' + this.state.value);  
+      event.preventDefault();  
+  }  
+  render() {  
+      return (  
+          < form onSubmit={this.handleSubmit}>  
+            < h1>Controlled Form Example</h1>  
+            < label>  
+                Name:  
+                < input type="text" value={this.state.value} onChange={this.handleChange} />  
+            < /label>  
+            < input type="submit" value="Submit" />  
+         < /form>  
+      );  
+  }  
+}  
+export default App;  
+</code></pre>
+
+Handling Multiple Inputs in Controlled Component
+<pre><code>
+import React, { Component } from 'react';  
+class App extends React.Component {  
+    constructor(props) {  
+        super(props);  
+        this.state = {  
+            personGoing: true,  
+            numberOfPersons: 5  
+        };  
+        this.handleInputChange = this.handleInputChange.bind(this);  
+   }  
+   handleInputChange(event) {  
+       const target = event.target;  
+       const value = target.type === 'checkbox' ? target.checked : target.value;  
+       const name = target.name;  
+       this.setState({  
+           [name]: value  
+       });  
+  }  
+  render() {  
+      return (  
+          < form>  
+              < h1>Multiple Input Controlled Form Example< /h1>  
+              < label>  
+                  Is Person going:  
+                  < input  
+                    name="personGoing"  
+                    type="checkbox"  
+                    checked={this.state.personGoing}  
+                    onChange={this.handleInputChange} />  
+             < /label>  
+             < br />  
+             < label>  
+                 Number of persons:  
+                 < input  
+                 name="numberOfPersons"  
+                 type="number"  
+                 value={this.state.numberOfPersons}  
+                 onChange={this.handleInputChange} />  
+             < /label>  
+         < /form>  
+     );  
+  }  
+}  
+export default App;  
+</code></pre>
+</div>
+<h2>Events</h2>
+<div>
+	- they are camle cased
+	- they dont needd () , for example: < button onClick={showMessage}>Hello< /button>  
+
+Example:
+<pre><code>
+import React, { Component } from 'react';  
+class App extends React.Component {  
+    constructor(props) {  
+        super(props);  
+        this.state = {  
+            companyName: ''  
+        };  
+    }  
+    changeText(event) {  
+        this.setState({  
+            companyName: event.target.value  
+        });  
+    }  
+    render() {  
+        return (  
+            < div>  
+                < h2>Simple Event Example< /h2>  
+                < label htmlFor="name">Enter company name: < /label>  
+                 <input type="text" id="companyName" onChange={this.changeText.bind(this)}/>  
+                 <h4>You entered: { this.state.companyName }< /h4>  
+            <  /div>  
+        );  
+    }  
+}  
+export default App;  
+</code></pre>
+</div>
+
+<h2>some more example</h2>
+<div>
+Conditional rendering example:
+<pre><code>
+function UserLoggin(props) {  
+  return <h1>Welcome back!</h1>;  
+}  
+function GuestLoggin(props) {  
+  return <h1>Please sign up.</h1>;  
+}  
+function SignUp(props) {  
+  const isLoggedIn = props.isLoggedIn;  
+  if (isLoggedIn) {  
+    return < UserLogin />;  
+  }  
+  return < GuestLogin />;  
+}  
+  
+ReactDOM.render(  
+  < SignUp isLoggedIn={false} />,  
+  document.getElementById('root')  
+);  
+</code></pre>
+
+Logical operator outside parantheses example:
+<pre><code>
+function f1(){return(<div> (10 > 5) && alert('This alert will be shown!')  </div>)}
+</code></pre>
+Ternary operator example:
+<pre><code>
+function f1(){return(<div>     Welcome {isLoggedIn ? 'Back' : 'Please login first'}.  </div>)}
+</code></pre>
+
+</div>
+<h2>Keys</h2>
+<div>
+  are unique values used to identify elements and components.
+  Examples:
+  <pre><code>
+    //Example 1:
+    
+    const stringLists = [ 'Peter', 'Sachin', 'Kevin', 'Dhoni', 'Alisa' ];   
+    const updatedLists = stringLists.map((strList)=>{   
+        < li key={strList.id}> {strList} < /li>;   
+    });   
+
+    // Example 1:
+    // If there are no stable IDs for rendered items, you can assign the item index as a key
+    const stringLists = [ 'Peter', 'Sachin', 'Kevin', 'Dhoni', 'Alisa' ];   
+    const updatedLists = stringLists.map((strList, index)=>{   
+        < li key={index}> {strList} < /li>;   
+    });  
+  </code></pre>
+</div>
+
+<h2>Refs</h2>
+<div>
+  Refs is the shorthand used for references in React. 
+  It is similar to keys in React. 
+  It is an attribute which makes it possible to store a reference to particular DOM nodes or React elements.
+  
+  How To Create and access:
+  <pre><code>
+    class MyComponent extends React.Component {  
+      constructor(props) {  
+        super(props);  
+        this.callRef = React.createRef();  
+      }  
+      render() {  
+        return <div ref={this.callRef} />;  
+      }  
+    }      
+    // How to access :
+    // when a ref is passed to an element inside render method, 
+    // a reference to the node can be accessed via the current attribute of the ref.
+  </code></pre>
+   Example of Adding Ref to DOM elements:
+   <pre><code>
+  import React, { Component } from 'react';  
+  import { render } from 'react-dom';  
+   
+  class App extends React.Component {  
+    constructor(props) {  
+      super(props);  
+      this.callRef = React.createRef();  
+      this.addingRefInput = this.addingRefInput.bind(this);  
+  }  
+   
+  addingRefInput() {  
+    this.callRef.current.focus();  
+  }  
+   
+    render() {  
+      return (  
+        < div>  
+          < h2>Adding Ref to DOM element< /h2>  
+          < input  
+            type="text"  
+            ref={this.callRef} />  
+          < input  
+            type="button"  
+            value="Add text input"  
+            onClick={this.addingRefInput}  
+          />  
+        < /div>  
+      );  
+    }  
+  }  
+  export default App;  
+ </code></pre>
+</div>
+<h2>Callback refs</h2>
+<div>
+  here is another way to use refs that is called "callback refs" and it gives more control when the refs are set and unset. Instead of creating refs by createRef() method, React allows a way to create refs by passing a callback function to the ref attribute of a component. It looks like the below code.
+
+  < input type="text" ref={element => this.callRefInput = element} />  
+  The callback function is used to store a reference to the DOM node in an instance property and can be accessed elsewhere. It can be accessed as below:
+
+  this.callRefInput.value  
+  
+  Example:
+  <pre><code>
+    import React, { Component } from 'react';  
+import { render } from 'react-dom';  
+   
+class App extends React.Component {  
+    constructor(props) {  
+    super(props);  
+  
+    this.callRefInput = null;  
+  
+    this.setInputRef = element => {  
+      this.callRefInput = element;  
+    };  
+  
+    this.focusRefInput = () => {  
+      //Focus the input using the raw DOM API  
+      if (this.callRefInput) this.callRefInput.focus();  
+    };  
+  }  
+  
+  componentDidMount() {  
+    //autofocus of the input on mount  
+    this.focusRefInput();  
+  }  
+  
+  render() {  
+    return (  
+      < div>  
+        < h2>Callback Refs Example< /h2>  
+            < input  
+              type="text"  
+              ref={this.setInputRef}  
+            />  
+            < input  
+              type="button"  
+              value="Focus input text"  
+              onClick={this.focusRefInput}  
+            />  
+          < /div>  
+        );  
+      }  
+    }  
+    export default App;  
+  </code></pre>
+</div>
+<h2>Forwarding Ref from one component to another component</h2>
+<div>
+  It can be performed by making use of the React.forwardRef() method. This technique is particularly useful with higher-order components
+  Example
+  <pre><code>
+    // there is a component TextInput that has a child as an input field. 
+    // to pass or forward the ref down to the input, first, create a ref 
+    // and then pass your ref down to <TextInput ref={inputRef}>. 
+    // After that, React forwards the ref to the forwardRef function as a second argument. 
+    // Next, we forward this ref argument down to <input ref={ref}>. 
+    //Now, the value of the DOM node can be accessed at inputRef.current.
+    import React, { Component } from 'react';  
+    import { render } from 'react-dom';  
+      
+    const TextInput = React.forwardRef((props, ref) => (  
+      < input type="text" placeholder="Hello World" ref={ref} />  
+    ));  
+      
+    const inputRef = React.createRef();  
+      
+    class CustomTextInput extends React.Component {  
+      handleSubmit = e => {  
+        e.preventDefault();  
+        console.log(inputRef.current.value);  
+      };  
+      render() {  
+        return (  
+          < div>  
+            < form onSubmit={e => this.handleSubmit(e)}>  
+              < TextInput ref={inputRef} />  
+              < button>Submit< /button>  
+            < /form>  
+          < /div>  
+        );  
+      }  
+    }  
+    export default App;
+  </code></pre>
+</div>
+
+<h2>useRef()</h2>
+<div>
+  It returns the ref object whose .current property initialized to the passed argument. 
+  The returned object persist for the lifetime of the component.
+  <pre><code>
+   // In the below code, useRef is a function that gets assigned to a variable, inputRef, 
+   // and then attached to an attribute called ref inside the HTML element in which you want to reference.
+
+  function useRefExample() {  
+    const inputRef= useRef(null);  
+    const onButtonClick = () => {  
+      inputRef.current.focus();  
+    };  
+    return (  
+      <>  
+        < input ref={inputRef} type="text" />  
+        < button onClick={onButtonClick}>Submit</button>  
+      </>  
+    );  
+  }  
+  </code></pre>  
+</div>
+<h2>Fragments</h2>
+<div>
+  Fragments allow you to group a list of children without adding extra nodes to the DOM.
+
+Syntax:
+<pre><code>
+  < React.Fragment>  
+    < h2> child1 </h2>   
+    < p> child2 </p>   
+      .. ..... .... ...  
+  < /React.Fragment>  
+</code></pre>
+Example:
+<pre><code>
+  // Rendering with fragments tag  
+class App extends React.Component {   
+    render() {   
+     return (   
+       < React.Fragment>  
+            < h2> Hello World! < /h2>   
+        < p> Welcome to the JavaTpoint. < /p>   
+         < /React.Fragment>  
+     );   
+    }   
+}   
+
+</code></pre>
+fragment short syntax is <>  ...</> 
+
+Keyed Fragments
+Example:
+<pre><code>
+  Function  = (props) {  
+    return (  
+      < Fragment>  
+        {props.items.data.map(item => (  
+          // Without the 'key', React will give a key warning  
+          < React.Fragment key={item.id}>  
+            < h2>{item.name}< /h2>  
+            < p>{item.url}< /p>  
+            < p>{item.description}< /p>  
+          < /React.Fragment>  
+        ))}  
+      < /Fragment>  
+    )  
+  }    
+</code></pre>
+
+</div>
+<h2>Router</h2>
+<div>
+  //Routing is a process in which a user is directed to different pages based on their action or request
+  <b>React Router Installation</b>
+  <pre><code>
+    $ npm install react-router-dom --save   
+  </code></pre>
+</div>
+
+<b>Components in React Router:</b>
+  < BrowserRouter>: It is used for handling the dynamic URL.
+  < HashRouter>: It is used for handling the static request.
+Example:
+<pre><code>
+  //About.js :
+
+  import React from 'react'  
+  class About extends React.Component {  
+    render() {  
+      return < h1>About< /h1>  
+    }  
+  }  
+  export default About  
+  
+  // Contact.js:  -------------------------------------------
+  
+  import React from 'react'  
+  class Contact extends React.Component {  
+    render() {  
+      return < h1>Contact< /h1>  
+    }  
+  }  
+  export default Contact  
+  
+  //App.js: -------------------------------------------------
+  
+  import React from 'react'  
+  class App extends React.Component {  
+    render() {  
+      return (  
+        < div>  
+          < h1>Home< /h1>  
+        < /div>  
+      )  
+    }  
+  }  
+  export default App    
+
+  //Index.js  -------------------------------------------------
+  import React from 'react';  
+  import ReactDOM from 'react-dom';  
+  import { Route, Link, BrowserRouter as Router } from 'react-router-dom'  
+  import './index.css';  
+  import App from './App';  
+  import About from './about'  
+  import Contact from './contact'  
+    
+  const routing = (  
+    < Router>  
+      < div>  
+        < h1>React Router Example< /h1>  
+        < Route exact path="/" component={App} />  
+        < Route path="/about" component={About} />  
+        < Route path="/contact" component={Contact} />  
+      < /div>  
+    < /Router>  
+  )  
+  ReactDOM.render(routing, document.getElementById('root')); 
+</code></pre>
+
+<b>Adding Navigation using Link component :</b>
+
+Example:
+<pre><code>
+// Index.js
+// Sometimes, we want to need multiple links on a single page.
+// When we click on any of that particular Link
+
+import React from 'react';  
+import ReactDOM from 'react-dom';  
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'  
+import './index.css';  
+import App from './App';  
+import About from './about'  
+import Contact from './contact'  
+  
+const routing = (  
+  < Router>  
+    < div>  
+      < h1>React Router Example< /h1>  
+      < ul>  
+        < li>  
+          < Link to="/">Home< /Link>  
+        < /li>  
+        < li>  
+          < Link to="/about">About< /Link>  
+        < /li>  
+        < li>  
+          < Link to="/contact">Contact< /Link>  
+        < /li>  
+      < /ul>  
+      < Route exact path="/" component={App} />  
+      < Route path="/about" component={About} />  
+      < Route path="/contact" component={Contact} />  
+    < /div>  
+  < /Router>  
+)  
+ReactDOM.render(routing, document.getElementById('root'));
+</code></pre>
+
+<b>Router Switch</b>
+The < Switch> component is used to render components only when the path will be matched.
+ Otherwise, it returns to the not found component.
+ <pre><code>
+ // Index.js
+
+import React from 'react';  
+import ReactDOM from 'react-dom';  
+import { BrowserRouter as Router, Route, Link, NavLink, Switch } from 'react-router-dom'  
+import './index.css';  
+import App from './App';  
+import About from './about'  
+import Contact from './contact'  
+import Notfound from './notfound'  
+  
+const routing = (  
+  < Router>  
+    < div>  
+      < h1>React Router Example< /h1>  
+      < ul>  
+        < li>  
+          < NavLink to="/" exact activeStyle={  
+             {color:'red'}  
+          }>Home< /NavLink>  
+        < /li>  
+        < li>  
+          < NavLink to="/about" exact activeStyle={  
+             {color:'green'}  
+          }>About< /NavLink>  
+        < /li>  
+        < li>  
+          < NavLink to="/contact" exact activeStyle={  
+             {color:'magenta'}  
+          }>Contact< /NavLink>  
+        < /li>  
+      < /ul>  
+      < Switch>  
+         < Route exact path="/" component={App} />  
+         < Route path="/about" component={About} />  
+         < Route path="/contact" component={Contact} />  
+         < Route component={Notfound} />  
+      < /Switch>  
+    < /div>  
+  < /Router>  
+)  
+ReactDOM.render(routing, document.getElementById('root'));  
+ </code></pre> 
+<b>Router &<Redirect></b> 
+  A < Redirect > component is used to redirect to another route in our application to maintain the old URLs
+  
+ <b>Nested Routing</b>  
+  Example
+  <pre><code>
+  //index.js _________________________________________________________
+  
+  import React from 'react';  
+  import ReactDOM from 'react-dom';  
+  import { BrowserRouter as Router, Route, Link, NavLink, Switch } from 'react-router-dom'  
+  import './index.css';  
+  import App from './App';  
+  import About from './about'  
+  import Contact from './contact'  
+  import Notfound from './notfound'  
+    
+  const routing = (  
+    < Router>  
+      < div>  
+        < h1>React Router Example< /h1>  
+        < ul>  
+          < li>  
+            < NavLink to="/" exact activeStyle={  
+               {color:'red'}  
+            }>Home< /NavLink>  
+          < /li>  
+          < li>  
+            < NavLink to="/about" exact activeStyle={  
+               {color:'green'}  
+            }>About< /NavLink>  
+          < /li>  
+          < li>  
+            < NavLink to="/contact" exact activeStyle={  
+               {color:'magenta'}  
+            }>Contact< /NavLink>  
+          < /li>  
+        < /ul>  
+        < Switch>  
+           < Route exact path="/" component={App} />  
+           < Route path="/about" component={About} />  
+           < Route path="/contact" component={Contact} />  
+           < Route component={Notfound} />  
+        < /Switch>  
+      < /div>  
+    < /Router>  
+  )  
+  ReactDOM.render(routing, document.getElementById('root'));  
+  
+  // contact.js _________________________________________________________
+  // implement the subroutes
+  
+  import React from 'react'  
+  import { Route, Link } from 'react-router-dom'  
+    
+  const Contacts = ({ match }) => < p>{match.params.id}< /p>  
+    
+  class Contact extends React.Component {  
+    render() {  
+      const { url } = this.props.match  
+      return (  
+        < div>  
+          < h1>Welcome to Contact Page< /h1>  
+          < strong>Select contact Id< /strong>  
+          < ul>  
+            < li>  
+              < Link to="/contact/1">Contacts 1 < /Link>  
+            < /li>  
+            < li>  
+              < Link to="/contact/2">Contacts 2 < /Link>  
+            < /li>  
+            < li>  
+              < Link to="/contact/3">Contacts 3 < /Link>  
+            < /li>  
+            < li>  
+              < Link to="/contact/4">Contacts 4 < /Link>  
+            < /li>  
+          < /ul>  
+          < Route path="/contact/:id" component={Contacts} />  
+        < /div>  
+      )  
+    }  
+  }  
+  export default Contact  
+  </code></pre>
+  
+  <h2>Bootstrap</h2>
+  <div>
+      <b>Adding Bootstrap </b>
+      Using the Bootstrap CDN
+          < link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+      
+      Bootstrap as Dependency
+              npm install bootstrap --save  
+  </div>
+
+  <h2>Styling Components</h2>
+  <div>
+      using css class :
+      <pre><code>
+          import React from "react"  
+          import './style.css'  
+          function myComponent(){  
+              return(  
+                  return < p className="paragraph-text">ClassName Styled Text< /p>  
+              )  
+          }  
+      </code></pre>
+      Inline css Styles :
+      <pre><code>
+          function MyComponent(){  
+              return < div style={{ color: 'blue', lineHeight : 10, padding: 20 }}> Inline Styled Component< /div>  
+              }  
+      </code></pre>
+  </div>
+  <h2>React Table</h2>
+  <div>
+  Installation
+      npm install react-table  
+  then in the project
+      import ReactTable from "react-table";  
+  Example
+  <pre><code>
+      import React, { Component } from 'react';  
+      import ReactTable from "react-table";  
+      import "react-table/react-table.css";  
+        
+      class App extends Component {  
+        render() {  
+           const data = [{  
+              name: 'Ayaan',  
+              age: 26  
+              },{  
+               name: 'Ahana',  
+               age: 22  
+               },{  
+               name: 'Peter',  
+               age: 40      
+               },{  
+               name: 'Virat',  
+               age: 30  
+               },{  
+               name: 'Rohit',  
+               age: 32  
+               },{  
+               name: 'Dhoni',  
+               age: 37  
+               }]  
+              const columns = [{  
+              Header: 'Name',  
+              accessor: 'name'  
+              },{  
+              Header: 'Age',  
+              accessor: 'age'  
+              }]  
+              return (  
+                  < div>  
+                      < ReactTable  
+                          data={data}  
+                          columns={columns}  
+                          defaultPageSize = {2}  
+                          pageSizeOptions = {[2,4, 6]}  
+                      />  
+                  < /div>        
+              )  
+          }  
+          }  
+          export default App;  
+  </code></pre>
+  </div>
+  
+  <h2>Higher-Order Components (HOC)</h2>
+  <div>
+      It is a function that takes a component and returns a new component.
+      <pre><code>
+          //Function Creation  
+          function add (a, b) {  
+            return a + b  
+          }  
+          function higherOrder(a, addReference) {  
+            return addReference(a, 20)  
+          }  
+          //Function call  
+          higherOrder(30, add) // 50      
+      </code></pre>
+      Example
+      <pre><code>
+          // HOC.js________________________________________________________
+          import React, {Component} from 'react';  
+            
+          export default function Hoc(HocComponent){  
+              return class extends Component{  
+                  render(){  
+                      return (  
+                          < div>  
+                              < HocComponent>< /HocComponent>  
+                          < /div>  
+            
+                      );  
+                  }  
+              }   
+          }    
+          // App.js _________________________________________________________
+  
+          import React, { Component } from 'react';  
+          import Hoc from './HOC';  
+            
+          class App extends Component {  
+            render() {  
+              return (  
+                < div>  
+                  < h2>HOC Example< /h2>  
+                  JavaTpoint provides best CS tutorials.  
+                < /div>  
+              )  
+            }  
+          }  
+          App = Hoc(App);  
+          export default App;  
+      </code></pre>
+  </div>
+  
+  <h2> Code Splitting</h2>
+  <div>
+  -The React app bundled their files using tools like Webpack or Browserfy.
+  -Bundling is a process which takes multiple files and merges them into a single file, which is called a bundle.
+  -The bundle is responsible for loading an entire app at once on the webpage. 
+  
+  -Code-Splitting is a feature supported by Webpack and Browserify, which can create multiple bundles that can be dynamically loaded at runtime.
+  -Code splitting uses React.lazy and Suspense tool/library, which helps you to load a dependency lazily and only load it when needed by the user.
+  <pre><code>
+   const ExampleComponent = React.lazy(() => import('./ExampleComponent'));  
+    
+  function MyComponent() {  
+    return (  
+      < div>  
+        < ExampleComponent />  
+      < /div>  
+    );  
+  }  
+  //The code snippet automatically loads the bundle which contains the ExampleComponent when the ExampleComponent gets rendered.
+  </code></pre>
+  <b>Suspense</b>
+  if the ExampleComponent is not looded yet,we show callback content instead:
+  <pre><code>
+      const ExampleComponent = React.lazy(() => import('./ ExampleComponent'));  
+    
+      function MyComponent() {  
+        return (  
+          < div>  
+            < Suspense fallback={< div>Loading...< /div>}>  
+              < ExampleComponent />  
+            < /Suspense>  
+          < /div>  
+        );  
+      }      
+  </code></pre>
+  <b>Error boundaries</b>
+  If any module fails to load, for example, due to network failure,  We can handle these errors with Error Boundaries. 
+  <pre><code>
+      import MyErrorBoundary from './MyErrorBoundary';  
+      const ExampleComponent = React.lazy(() => import('./ ExampleComponent'));  
+      const ExamComponent = React.lazy(() => import('./ ExamComponent'));  
+        
+      const MyComponent = () => (  
+        < div>  
+          < MyErrorBoundary>  
+            < Suspense fallback={< div>Loading...< /div>}>  
+              < section>  
+                < ExampleComponent />  
+                < ExamComponent />  
+              < /section>  
+            < /Suspense>  
+          < /MyErrorBoundary>  
+        < /div>  
+      );      
+  </code></pre>
+  <b>Route-based code splitting</b>
+  The route is the best place to start the code splitting.Example:
+  <pre><code>
+      import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';  
+      import React, { Suspense, lazy } from 'react';  
+        
+      const Home = lazy(() => import('./routes/Home'));  
+      const About = lazy(() => import('./routes/About'));  
+      const Contact = lazy(() => import('./routes/Contact'));  
+        
+      const App = () => (  
+        < Router>  
+          < Suspense fallback={< div>Loading...< /div>}>  
+            < Switch>  
+              < Route exact path="/" component={Home}/>  
+              < Route path="/about" component={About}/>  
+              < Route path="/contact" component={Contact}/>  
+            < /Switch>  
+          < /Suspense>  
+        < /Router>  
+      );      
+  </code></pre>
+  <b>Named Export</b>
+  Currently, React.lazy supports default exports only. 
+  If any module you want to import using named exports, you need to create an intermediate module that re-exports it as the default. 
+  <pre><code>
+  //ExampleComponents.js________________________________________________________
+  
+  export const MyFirstComponent = /* ... */;  
+  export const MySecondComponent = /* ... */;  
+  
+  //MyFirstComponent.js _________________________________________________________
+  export { MyFirstComponent as default } from "./ExampleComponents.js";  
+  
+  //MyApp.js________________________________________________________
+  import React, { lazy } from 'react';  
+  const MyFirstComponent = lazy(() => import("./MyFirstComponent.js"));  
+  </code></pre>
+  </div>
+  
+  <h2>Context</h2>
+  <div>
+  Context allows passing data through the component tree without passing props down manually at every level.
+  <b>How to use Context</b>
+      1- Setup a context provider and define the data which you want to store.
+      2- Use a context consumer whenever you need the data from the store
+  Context is used to share data which can be considered "global" for React components tree 
+  and use that data where needed, such as the current authenticated user, theme, etc.     
+  <pre><code>
+      // Create a context for the current theme which is "light" as the default.  
+      const ThemeContext = React.createContext('light');  
+        
+      class App extends React.Component {  
+        render() {  
+          /* Use a ContextProvider to pass the current theme, which allows every component to read it, no matter how deep it is. Here, we are passing the "dark" theme as the current value.*/  
+        
+          return (  
+            < ThemeContext.Provider value="dark">  
+              < Toolbar />  
+            < /ThemeContext.Provider>  
+          );  
+        }  
+      }  
+        
+      // Now, it is not required to pass the theme down explicitly for every component.  
+      function Toolbar(props) {  
+        return (  
+          < div>  
+            < ThemedButton />  
+          < /div>  
+        );  
+      }  
+        
+      class ThemedButton extends React.Component {  
+        static contextType = ThemeContext;  
+        render() {  
+          return < Button theme={this.context} />;  
+        }  
+      }      
+  </code></pre>
+  <b>Context API</b>
+  The React Context API is a component structure, which allows us to share data across all levels of the application. 
+  The main aim of Context API is to solve the problem of prop drilling (also called "Threading"). 
+  The Context API in React are given below:
+      1.React.createContext
+      2.Context.provider
+      3.Context.Consumer
+      4.Class.contextType
+  <pre><code>
+      import React, { Component } from 'react';  
+      import 'bootstrap/dist/css/bootstrap.min.css';  
+        
+      const BtnColorContext = React.createContext('btn btn-darkyellow');  
+        
+      class App extends Component {  
+        render() {  
+          return (  
+            < BtnColorContext.Provider value="btn btn-info">  
+              < Button />  
+            < /BtnColorContext.Provider>  
+          );  
+        }  
+      }  
+        
+      function Button(props) {  
+        return (  
+        < div className="container">  
+          < ThemedButton />      
+        < /div>  
+        );  
+      }  
+        
+      class ThemedButton extends Component {  
+          
+        static contextType = BtnColorContext;  
+        render() {  
+          return < button className={this.context} >  
+            welcome to javatpoint  
+          < /button>;  
+        }  
+      }  
+      export default App;    
+  </code></pre>
+  </div>
+  
+  <h2>Hooks</h2>
+  <div>
+      <b>Hooks State</b>
+      useState() functional component is used for setting and retrieving state.
+      
+      useState() example:
+      <pre><code>
+          //App.js
+          
+  
+          import React, { useState } from 'react';  
+            
+          function CountApp() {  
+            // Declare a new state variable, which we'll call "count"  
+            const [count, setCount] = useState(0);  
+            
+            return (  
+              < div>  
+                < p>You clicked {count} times</p>  
+                < button onClick={ () => setCount(count + 1)}>  
+                  Click me  
+                < /button>  
+              < /div>  
+            );  
+          }  
+          export default CountApp;          
+      </code></pre>
+  
+      <b>Hooks Effect</b>
+       - The Effect Hook allows us to perform side effects (an action) in the function components
+       -Effects Hooks are equivalent to componentDidMount(), componentDidUpdate(), and componentWillUnmount() lifecycle methods.
+       <pre><code>
+          import React, { useState, useEffect } from 'react';  
+    
+          function CounterExample() {  
+            const [count, setCount] = useState(0);  
+            
+            // Similar to componentDidMount and componentDidUpdate:  
+            useEffect(() => {  
+              // Update the document title using the browser API  
+              document.title = `You clicked ${count} times`;  
+            });  
+            
+            return (  
+              < div>  
+                < p>You clicked {count} times< /p>  
+                < button onClick={ () => setCount(count + 1)}>  
+                  Click me  
+                < /button>  
+              < /div>  
+            );  
+          }  
+          export default CounterExample;  
+          //The above code is based on the previous example with a new feature which we set the document title to a custom message, including the number of clicks.
+          </code></pre>
+  
+          <b>Custom Hooks</b>
+          - A custom Hook is a JavaScript function. 
+          - The name of custom Hook starts with "use" which can call other Hooks. 
+          - A custom Hook is just like a regular function, and the word "use" in the beginning tells that this function follows the rules of Hooks. 
+          - Building custom Hooks allows you to extract component logic into reusable functions.  
+          <pre><code>
+              import React, { useState, useEffect } from 'react';  
+    
+              const useDocumentTitle = title => {  
+                useEffect( () => {  
+                  document.title = title;  
+                }, [title])  
+              }  
+                
+              function CustomCounter() {  
+                const [count, setCount] = useState(0);  
+                const incrementCount = () => setCount(count + 1);  
+                useDocumentTitle(`You clicked ${count} times`);  
+                // useEffect( () => {  
+                //   document.title = `You clicked ${count} times`  
+                // });  
+                
+                return (  
+                  < div>  
+                    < p>You clicked {count} times< /p>  
+                    < button onClick={incrementCount}>Click me< /button>  
+                  < /div>  
+                )  
+              }  
+              export default CustomCounter;              
+          </code></pre>
+          <b>Additional Hooks</b>
+              useReducer
+              useCallback
+              useMemo
+              useRef
+              useImperativeHandle
+              useLayoutEffect
+              useDebugValue
+       
+  </div>
+  <h2>Flux  Architecture</h2>
+  <div>
+      Flux applications have three major roles in dealing with data:
+          Dispatcher
+          Stores
+          Views (React components)
+      
+      <b>Stores</b>
+      -It primarily contains the application state and logic.(similar to the model in a traditional MVC).
+      -It is used for maintaining a particular state within the application
+      , updates themselves in response to an action
+      , and emit the change event to alert the controller view.
+      <b>Views</b>(also called as controller-views)
+      - It is located at the top of the chain to store the logic to generate actions and receive new data from the store.
+      - It is a React component listen to change events and receives the data from the stores and re-render the application.
+      <b>Actions</b>
+      -The dispatcher method allows us to trigger a dispatch to the store and include a payload of data, which we call an action.
+      - It is an action creator or helper methods that pass the data to the dispatcher.
+      <b>Dispacher</b>
+      controller-views (views) retrieves data from the stores and then passes this data down to their children. 
+      Additionally, action creators - dispatcher helper methods used to describe all changes that are possible in the application. 
+  </div>
+  
+  <h2>Redux</h2>
+  <div>
+      - Redux allows React components to read data from a Redux Store, and dispatch Actions to the Store to update data. 
+      - React Redux is conceptually simple. It subscribes to the Redux store, checks to see if the data which your component wants have changed, and re-renders your component.
+      <b>redux vs flux architecture </b>
+          Redux does not have Dispatcher concept.
+          Redux has an only Store whereas Flux has many Stores.
+          The Action objects will be received and handled directly by Store.
+      <b>The components of Redux :</b>
+          STORE: 
+              A Store is a place where the entire state of your application lists. 
+              It manages the status of the application and has a dispatch(action) function.
+              It is like a brain responsible for all moving parts in Redux.
+          ACTION: 
+              Action is sent or dispatched from the view which are payloads that can be read by Reducers. 
+              It is a pure object created to store the information of the user's event. 
+              It includes information such as type of action, time of occurrence, location of occurrence, its coordinates, and which state it aims to change.
+          REDUCER: 
+              Reducer read the payloads from the actions and then updates the store via the state accordingly. 
+              It is a pure function to return a new state from the initial state.
+      <b>Redux Installation</b>
+      <pre><code>
+          npm install redux react-redux --save  
+      </code></pre>
+  </div>
+
+  <h2>redux sample ToDo project, step by step </h2>
+  <div>
+      Step-1 Create a new react project and install redux:
+      <pre><code>
+          create-react-app reactproject  
+          npm install redux react-redux --save  
+      </code></pre>
+      Step-2 Create these Folders inside the project folder:
+          actions,components,containers,reducers 
+      
+      Step-3 Create files inside "Actions" folder 
+          In this folder, we will create two files: index.js and index.spec.js
+          It uses 'type' property to inform about data that should be sent to the Store.
+          <pre><code>
+              // Index.js________________________________________________________
+  
+              let nextTodoId = 0  
+              export const addTodo = text => ({  
+              type: 'ADD_TODO',  
+              id: nextTodoId++,  
+              text  
+              })  
+              
+              export const setVisibilityFilter = filter => ({  
+              type: 'SET_VISIBILITY_FILTER',  
+              filter  
+              })  
+              
+              export const toggleTodo = id => ({  
+              type: 'TOGGLE_TODO',  
+              id  
+              })  
+              
+              export const VisibilityFilters = {  
+              SHOW_ALL: 'SHOW_ALL',  
+              SHOW_COMPLETED: 'SHOW_COMPLETED',  
+              SHOW_ACTIVE: 'SHOW_ACTIVE'  
+              }  
+  
+              // Index.spec.js________________________________________________________
+  
+              import * as actions from './index'  
+              
+              describe('todo actions', () => {  
+              it('addTodo should create ADD_TODO action', () => {  
+                  expect(actions.addTodo('Use Redux')).toEqual({  
+                  type: 'ADD_TODO',  
+                  id: 0,  
+                  text: 'Use Redux'  
+                  })  
+              })  
+              
+              it('setVisibilityFilter should create SET_VISIBILITY_FILTER action', () => {  
+                  expect(actions.setVisibilityFilter('active')).toEqual({  
+                  type: 'SET_VISIBILITY_FILTER',  
+                  filter: 'active'  
+                  })  
+              })  
+              
+              it('toggleTodo should create TOGGLE_TODO action', () => {  
+                  expect(actions.toggleTodo(1)).toEqual({  
+                  type: 'TOGGLE_TODO',  
+                  id: 1  
+                  })  
+              })  
+              })  
+          </code></pre>
+      Step-4 Reducers Folder
+          - As we know, Actions only trigger changes in the app, and the Reducers specify those changes. 
+          - The Reducer is a function which takes two parameters 'Action' and 'State' to calculate and return an updated State.
+            It read the payloads from the 'Actions' and then updates the 'Store' via the State accordingly.
+  
+          - In the given files, each Reducer managing its own part of the global State.
+          - The State parameter is different for every Reducer and corresponds to the part of the 'State' it manages. 
+          - When the app becomes larger, we can split the Reducers into separate files and keep them completely independent and managing different data domains.
+          <pre><code>
+              // index.js _________________________________________________________
+  
+              import { combineReducers } from 'redux'  
+              import todos from './todos'  
+              import visibilityFilter from './visibilityFilter'  
+              
+              export default combineReducers({  
+              todos,  
+              visibilityFilter  
+              })  
+  
+              // Todos.js _________________________________________________________
+  
+              const todos = (state = [], action) => {  
+              switch (action.type) {  
+                  case 'ADD_TODO':  
+                  return [  
+                      ...state,  
+                      {  
+                      id: action.id,  
+                      text: action.text,  
+                      completed: false  
+                      }  
+                  ]  
+                  case 'TOGGLE_TODO':  
+                  return state.map(todo =>  
+                      (todo.id === action.id)  
+                      ? {...todo, completed: !todo.completed}  
+                      : todo  
+                  )  
+                  default:  
+                  return state  
+              }  
+              }  
+              export default todos  
+              
+              // Todos.spec.js _________________________________________________________
+  
+              import todos from './todos'  
+              
+              describe('todos reducer', () => {  
+              it('should handle initial state', () => {  
+                  expect(  
+                  todos(undefined, {})  
+                  ).toEqual([])  
+              })  
+              
+              it('should handle ADD_TODO', () => {  
+                  expect(  
+                  todos([], {  
+                      type: 'ADD_TODO',  
+                      text: 'Run the tests',  
+                      id: 0  
+                  })  
+                  ).toEqual([  
+                  {  
+                      text: 'Run the tests',  
+                      completed: false,  
+                      id: 0  
+                  }  
+                  ])  
+              
+                  expect(  
+                  todos([  
+                      {  
+                      text: 'Run the tests',  
+                      completed: false,  
+                      id: 0  
+                      }  
+                  ], {  
+                      type: 'ADD_TODO',  
+                      text: 'Use Redux',  
+                      id: 1  
+                  })  
+                  ).toEqual([  
+                  {  
+                      text: 'Run the tests',  
+                      completed: false,  
+                      id: 0  
+                  }, {  
+                      text: 'Use Redux',  
+                      completed: false,  
+                      id: 1  
+                  }  
+                  ])  
+              
+                  expect(  
+                  todos([  
+                      {  
+                      text: 'Run the tests',  
+                      completed: false,  
+                      id: 0  
+                      }, {  
+                      text: 'Use Redux',  
+                      completed: false,  
+                      id: 1  
+                      }  
+                  ], {  
+                      type: 'ADD_TODO',  
+                      text: 'Fix the tests',  
+                      id: 2  
+                  })  
+                  ).toEqual([  
+                  {  
+                      text: 'Run the tests',  
+                      completed: false,  
+                      id: 0  
+                  }, {  
+                      text: 'Use Redux',  
+                      completed: false,  
+                      id: 1  
+                  }, {  
+                      text: 'Fix the tests',  
+                      completed: false,  
+                      id: 2  
+                  }  
+                  ])  
+              })  
+              
+              it('should handle TOGGLE_TODO', () => {  
+                  expect(  
+                  todos([  
+                      {  
+                      text: 'Run the tests',  
+                      completed: false,  
+                      id: 1  
+                      }, {  
+                      text: 'Use Redux',  
+                      completed: false,  
+                      id: 0  
+                      }  
+                  ], {  
+                      type: 'TOGGLE_TODO',  
+                      id: 1  
+                  })  
+                  ).toEqual([  
+                  {  
+                      text: 'Run the tests',  
+                      completed: true,  
+                      id: 1  
+                  }, {  
+                      text: 'Use Redux',  
+                      completed: false,  
+                      id: 0  
+                  }  
+                  ])  
+              })  
+              })  
+  
+  
+              // VisibilityFilter.js _________________________________________________________
+  
+              import { VisibilityFilters } from '../actions'  
+              
+              const visibilityFilter = (state = VisibilityFilters.SHOW_ALL, action) => {  
+              switch (action.type) {  
+                  case 'SET_VISIBILITY_FILTER':  
+                  return action.filter  
+                  default:  
+                  return state  
+              }  
+              }  
+              export default visibilityFilter  
+              </code></pre>
+      Step-5 Components Folder 
+      components receives data and invokes callbacks exclusively via props. 
+      It does not know where the data comes from or how to change it, It only renders what is given to them.
+  
+      <pre><code>
+          //App.js _________________________________________________________
+          //It is the root component which renders everything in the UI.
+          import React from 'react'  
+          import Footer from './Footer'  
+          import AddTodo from '../containers/AddTodo'  
+          import VisibleTodoList from '../containers/VisibleTodoList'  
+          
+          const App = () => (  
+          <div>  
+              <AddTodo />  
+              <VisibleTodoList />  
+              <Footer />  
+          </div>  
+          )  
+          export default App  
+  
+          // Footer.js _________________________________________________________
+          //It tells where the user changes currently visible todos.
+  
+          import React from 'react'  
+          import FilterLink from '../containers/FilterLink'  
+          import { VisibilityFilters } from '../actions'  
+          
+          const Footer = () => (  
+          < p>  
+              Show: < FilterLink filter={VisibilityFilters.SHOW_ALL}>All< /FilterLink>  
+              {', '}  
+              < FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>Active< /FilterLink>  
+              {', '}  
+              < FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>Completed< /FilterLink>  
+          < /p>  
+          )  
+          export default Footer  
+          // Link.js _________________________________________________________
+          // It is a link with a callback.
+  
+          import React from 'react'  
+          import PropTypes from 'prop-types'  
+          
+          const Link = ({ active, children, onClick }) => {  
+          if (active) {  
+              return < span>{children}< /span>  
+          }  
+          
+          return (  
+              < a  
+              href=""  
+              onClick={e => {  
+                  e.preventDefault()  
+                  onClick()  
+              }}  
+              >  
+              {children}  
+              < /a>  
+          )  
+          }  
+          
+          Link.propTypes = {  
+          active: PropTypes.bool.isRequired,  
+          children: PropTypes.node.isRequired,  
+          onClick: PropTypes.func.isRequired  
+          }  
+          
+          export default Link  
+          
+          // Todo.js________________________________________________________
+          //It represents a single todo item which shows text.
+  
+          import React from 'react'  
+          import PropTypes from 'prop-types'  
+          
+          const Todo = ({ onClick, completed, text }) => (  
+          < li  
+              onClick={onClick}  
+              style = { {  
+              textDecoration: completed ? 'line-through' : 'none'  
+              }}  
+          >  
+              {text}  
+          < /li>  
+          )  
+          
+          Todo.propTypes = {  
+          onClick: PropTypes.func.isRequired,  
+          completed: PropTypes.bool.isRequired,  
+          text: PropTypes.string.isRequired  
+          }  
+          
+          export default Todo  
+          
+          // TodoList.js _________________________________________________________
+          // It is a list to show visible todos{ id, text, completed }.
+  
+          import React from 'react'  
+          import PropTypes from 'prop-types'  
+          import Todo from './Todo'  
+          
+          const TodoList = ({ todos, onTodoClick }) => (  
+          < ul>  
+              {todos.map((todo, index) => (  
+              < Todo key={index} {...todo} onClick={() => onTodoClick(index)} />  
+              ))}  
+          < /ul>  
+          )  
+          
+          TodoList.propTypes = {  
+          todos: PropTypes.arrayOf(  
+              PropTypes.shape({  
+              id: PropTypes.number.isRequired,  
+              completed: PropTypes.bool.isRequired,  
+              text: PropTypes.string.isRequired  
+              }).isRequired  
+          ).isRequired,  
+          onTodoClick: PropTypes.func.isRequired  
+          }  
+          export default TodoList  
+      </code></pre>
+      Step-6 Containers folder 
+      It is a Container Component which concerned with how things work such as data fetching, updates State. 
+      It provides data and behavior to presentational components or other container components. 
+      It uses Redux State to read data and dispatch Redux Action for updating data.
+    <pre><code>
+        // AddTodo.js________________________________________________________
+        //It contains the input field with an ADD (submit) button.
+    
+        import React from 'react'  
+        import { connect } from 'react-redux'  
+        import { addTodo } from '../actions'  
+        
+        const AddTodo = ({ dispatch }) => {  
+        let input  
+        
+        return (  
+            <div>  
+            <form onSubmit={e => {  
+                e.preventDefault()  
+                if (!input.value.trim()) {  
+                return  
+                }  
+                dispatch(addTodo(input.value))  
+                input.value = ''  
+            }}>  
+                <input ref={node => input = node} />  
+                <button type="submit">  
+                Add Todo  
+                </button>  
+            </form>  
+            </div>  
+        )  
+        }  
+        export default connect()(AddTodo)  
+        
+        // FilterLink.js _________________________________________________________
+        // It represents the current visibility filter and renders a link.
+    
+        import { connect } from 'react-redux'  
+        import { setVisibilityFilter } from '../actions'  
+        import Link from '../components/Link'  
+        
+        const mapStateToProps = (state, ownProps) => ({  
+        active: ownProps.filter === state.visibilityFilter  
+        })  
+        
+        const mapDispatchToProps = (dispatch, ownProps) => ({  
+        onClick: () => dispatch(setVisibilityFilter(ownProps.filter))  
+        })  
+        
+        export default connect(  
+        mapStateToProps,  
+        mapDispatchToProps  
+        )(Link)  
+        VisibleTodoList.js
+    
+        It filters the todos and renders a TodoList.
+    
+        import { connect } from 'react-redux'  
+        import { toggleTodo } from '../actions'  
+        import TodoList from '../components/TodoList'  
+        import { VisibilityFilters } from '../actions'  
+        
+        const getVisibleTodos = (todos, filter) => {  
+        switch (filter) {  
+            case VisibilityFilters.SHOW_ALL:  
+            return todos  
+            case VisibilityFilters.SHOW_COMPLETED:  
+            return todos.filter(t => t.completed)  
+            case VisibilityFilters.SHOW_ACTIVE:  
+            return todos.filter(t => !t.completed)  
+            default:  
+            throw new Error('Unknown filter: ' + filter)  
+        }  
+        }  
+        
+        const mapStateToProps = state => ({  
+        todos: getVisibleTodos(state.todos, state.visibilityFilter)  
+        })  
+        
+        const mapDispatchToProps = dispatch => ({  
+        toggleTodo: id => dispatch(toggleTodo(id))  
+        })  
+        
+        export default connect(  
+        mapStateToProps,  
+        mapDispatchToProps  
+        )(TodoList)  
+    </code></pre>
+    
+  Step-7 Store folder
+      All container components need access to the Redux Store to subscribe to it. 
+      For this, we need to pass it(store) as a prop to every container component. 
+      So we recommend using special React Redux component called which make the store available to all container components without passing it explicitly. 
+      It used once when you render the root component.
+  <pre><code>
+   // index.js _________________________________________________________
+   
+  import React from 'react'  
+  import { render } from 'react-dom'  
+  import { createStore } from 'redux'  
+  import { Provider } from 'react-redux'  
+  import App from './components/App'  
+  import rootReducer from './reducers'  
+    
+  const store = createStore(rootReducer)  
+    
+  render(  
+    < Provider store={store}>  
+      < App />  
+    < /Provider>,  
+    document.getElementById('root')  
+  )  
+  </code></pre>
+  </div>
+
+  <h2>React Portals</h2>
+  <div>
+      - A React portal provides a way to render an element outside of its component hierarchy,
+       i.e., in a separate component.
+      <b>Installation</b>
+      <pre><code> npm install react-portal --save  </code></pre>
+      create a portal component:
+      <pre><code>
+          import React from 'react'  
+          import ReactDOM from 'react-dom'  
+          
+          function PortalDemo(){  
+              return ReactDOM.createPortal(  
+              < h1>Portals Demo< /h1>,  
+              document.getElementById('portal-root')  
+              )  
+          }  
+          export default PortalDemo  
+      </code></pre>
+      Then add to index.js: 
+      <pre><code>
+          // Index.html_______________________________________________
+          < !DOCTYPE html>  
+          < html lang="en">  
+          < head>  
+              < meta charset="utf-8" />  
+              < link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />  
+              < meta name="viewport" content="width=device-width, initial-scale=1" />  
+              < meta name="theme-color" content="#000000" />  
+              < link rel="manifest" href="%PUBLIC_URL%/manifest.json" />  
+              < title>React App< /title>  
+          < /head>  
+          < body>  
+              < noscript>It is required to enable JavaScript to run this app.< /noscript>  
+              < div id="root">< /div>  
+              < div id="portal-root">< /div>  
+          < /body>  
+          < /html>  
+      </code></pre>
+      Now, open the Inspect (ctrl + shift + I). In this window, select the Elements section and then
+       click on the < div id="portal-root"> < /div> component. 
+      Here, we can see that each tag is under the "portal-root" DOM node, not the "root" DOM node. 
+      Hence, we can see that how React Portal provides the ability to break out of root DOM tree.
+  </div>
+  <h2>using WebAPi by React Axios</h2>
+  <div>
+      Sample code for call delete request :
+      <pre><code>
+          import React from 'react';  
+      
+  import axios from 'axios';  
+      
+  export default class PostList extends React.Component {  
+    state = {  
+      posts: []  
+    }  
+      
+    componentDidMount() {  
+      axios.get(`https://jsonplaceholder.typicode.com/posts`)  
+        .then(res => {  
+          const posts = res.data;  
+          this.setState({ posts });  
+        })  
+    }  
+      
+    deleteRow(id, e){  
+      axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)  
+        .then(res => {  
+          console.log(res);  
+          console.log(res.data);  
+      
+          const posts = this.state.posts.filter(item => item.id !== id);  
+          this.setState({ posts });  
+        })  
+      
+    }  
+      
+    render() {  
+      return (  
+        < div>  
+          < h1> Example of React Axios Delete Request < /h1>  
+      
+          < table className="table table-bordered">  
+              < thead>  
+                < tr>  
+                    < th>ID< /th>  
+                    < th>Title< /th>  
+                    < th>Body< /th>  
+                    < th>Action< /th>  
+                < /tr>  
+              < /thead>  
+      
+              < tbody>  
+                {this.state.posts.map((post) => (  
+                  < tr>  
+                    < td>{post.id}< /td>  
+                    < td>{post.title}< /td>  
+                    < td>{post.body}< /td>  
+                    < td>  
+                      < button className="btn btn-danger" onClick={(e) => this.deleteRow(post.id, e)}>Delete< /button>  
+                    < /td>  
+                  < /tr>  
+                ))}  
+              < /tbody>      
+          < /table>  
+        < /div>  
+      )  
+    }  
+  }  
+      </code></pre>
+  </div>
+  <H2>Pagination</H2>
+  <div>
+      there are different pagination libraries for react.
+      Example of using react-page library:
+      <pre><code>
+          // Install the react page with npm:  
+          // npm install react-page --save  
+          import React, { useEffect, useState } from 'react';  
+          import ReactDOM from 'react-dom';  
+          import ReactPaginate from 'react-paginate';  
+          // Example to simulate obtaining the resources.  
+          constant elements = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];  
+          
+          Function elements ({current elements}) {  
+              return (  
+                  < >  
+                  {current items &&  
+                      currentelements.map((element) => (< div>  
+                      < h3>Article #{article}< /h3>  
+                      < /div>  
+                  ))}  
+              < />  
+              );  
+          }function Paginated Items ({ items per page }) {  
+          // We start with an empty list of elements.  
+          const [currentitems, setcurrentitems] = useState(null);  
+              const [pageCount, setPageCount] = useState(0);  
+              // element offsets; we also use as page scrolls  
+              // API we are working with.  
+              const [element offset, set Element Offset] = usestate(0);  
+          
+              useEffect(() => {    // Get the items of other resources.  
+              const endOffset = itemOffset + itemsPerPage;  
+              console.log(`Loading items from ${itemOffset} to ${endOffset}`);  
+              setCurrentItems(items.slice(itemOffset, endOffset));  
+              setPageCount(Math.ceil(items.length / itemsPerPage));  
+          }, [element offset, elements per page]);  
+          
+          // Call user clicks to request another page.  
+          const handlePageClick = (event) => {  
+              const newOffset = (event.selected * itemsPerPage) % items.length;  
+              console.log(  
+              `User requested page number ${event.selected}, offset by ${newOffset}`  
+              );  
+              setItemOffset(newOffset);  
+          };  
+          return (  
+              < >  
+              < articles current articles={current articles} />  
+              < ReactPaginate  
+                  breakLabel="..."  
+                  nextLabel="next >"  
+                  onPageChange={handlePageClick}  
+                  Displayed Page Range = {5}  
+                  pageCount={pageCount}  
+                  previousLabel="< previous"  
+                  renderOnZeroPageCount={null}  
+              />  
+              < />  
+          );  
+          }  
+          // Add a <div id="container"> to HTML to see the component.  
+          ReactDOM.render(  
+          < Items Paginated itemsPerPage={4} />,  
+          document.getElementById('container')  
+          );  
+      </code></pre>
+  </div>
+  
+ 
