@@ -750,12 +750,8 @@ list(filter(lambda x: x > 5, [3, 4, 5, 6, 7]))  #  [6, 7]
 {x for x in 'abcddeef' if x not in 'abc'}  #  {'d', 'e', 'f'}
 {x: x**2 for x in range(5)}  #  {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 
-
- `;
-  title1="Control Flow and Iterables";
-  options[i++]= { title:title1, code:code1, parent:objother  };
-
- code1=`# You can import modules
+# Control Flow and Iterables ----------------------------------------------
+# You can import modules -------------------------------------------
 import math
 print(math.sqrt(16))  #  4.0
 
@@ -784,11 +780,9 @@ dir(math)
 # If you have a Python script named math.py in the same folder as your current script,
 #  the file math.py will be loaded instead of the built-in Python module.
 # This happens because the local folder has priority over Python's built-in libraries.
-  `;
-  title1="Modules";
-  options[i++]= { title:title1, code:code1, parent:objother  };
 
-  code1=`# We use the "class" statement to create a class
+# Modules -------------------------------------------------------
+# We use the "class" statement to create a class
 class Human:
 
 # A class attribute. It is shared by all instances of this class
@@ -896,7 +890,6 @@ del i.age
 # from "filename-without-extension" import "function-or-class"
 
 from human import Human
-
 
 # Specify the parent class(es) as parameters to the class definition
 class Superhero(Human):
@@ -1117,7 +1110,5 @@ print(say(say_please=True))  # Can you buy me a beer? Please!
 
 </code></pre>
 </div>
-
- 
 
  </body>
