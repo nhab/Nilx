@@ -1,45 +1,44 @@
 <head>
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <link rel='stylesheet' href='/nhab/assets/css/blocks.css'>
-    <script src='/nhab/assets/js/blocks.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
-    <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
-    <link rel='stylesheet' href='/nhab/libs/highlight/androidstudio2.css'>
-    <!--- 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/androidstudio.min.css'-->
-    <!--github-dark.min.css-->
-    
-    <!--script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/3024.min.css'></script-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-dark.min.css" integrity="sha512-3e6qtecCEv4ZXH4PYXK1qbqfFI/Lb1BuPFK19tSi9I1p0BFjEHVATQ1QkbX1ehDFyu60chdPHpIDvXMnwm7muQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <!--script>hljs.initHighlightingOnLoad();</script-->
-     <script></script>
-    </head>
-    <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
-    <button onclick='toggleAll(this);'>-</button>
-    <script>
-    function ReplaceLtGt()
-    {
-        len=$("code").length;
-        for(i=0;i<len;i++)
-        {
-            s=$("code").eq(i)[0].innerHTML
-            s=s.replaceAll("<"," < ")
-            s=s.replaceAll("&lt;","<")
-            s=s.replaceAll("&gt;",">")
-            s=s.replaceAll("&amp;","&")
-            
-            $("code").eq(i).text( s)
-        }
-    }
-    </script>
-    
-<h2>References</h2>
-<div>
-</div>
+    <meta charset="UTF-8">  
+    <script src="../../libs/jquery-3.3.1.slim.min.js" ></script>
 
-<h2>Syntax</h2>
-<div>
-<pre><code>
+    <!--script src="../../libs/tooltip/tooltip.js" type="text/javascript"></script-->
+    <!--link href="../../libs/tooltip/tooltip.css" rel="stylesheet" type="text/css" /-->
+    <link rel="stylesheet" href="../../assets/css/block.css">
+    <link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
+    <script src="../../libs/jquery-3.3.1.slim.min.js" ></script>
+    <script src="../../libs/highlight/highlight.pack.js"></script>
+    <script src="../../assets/js/block.js"></script>
+    <meta charset="UTF-8">
+    
+    <script>
+          $('code').each(function() {
+          var that = $(this);
+          // cache the content of 'code'
+          var html = that.html().trim();
+          that.empty();
+          // escape the content
+          that.text(html);
+        });
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+      <style>
+        *{
+          font-family:'Open Sans';
+        }
+        hljs-comment{line-height: 25px;}
+      </style>
+  </head>
+  <body>
+  <script>
+  var objBasics=BlockGroup("Python syntax");
+  
+  var options=[];
+  var  i=0;
+  
+   var code1=`
 # print function :
 
 print("I'm Python. Nice to meet you!")  #  I'm Python. Nice to meet you!
@@ -1163,10 +1162,12 @@ def say(say_please=False):
 
 print(say())                 # Can you buy me a beer?
 print(say(say_please=True))  # Can you buy me a beer? Please!
+`;
+options[i++]= { title:title1, code:code1, parent:objother  };
 
-</code></pre>
-</div>
-
+options=RenderBlocks(options);
+ </script>
  
+ <br>
 
  </body>
