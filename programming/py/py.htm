@@ -40,20 +40,17 @@
 <h2>Syntax</h2>
 <div>
 <pre><code>
-# print function :
+# print function : ----------------------------------------------------------
 
 print("I'm Python. Nice to meet you!")  #  I'm Python. Nice to meet you!
+print("Hello, World", end="!")  #  Hello, World! # ( a newline is default )
 
-# The print function prints a newline at the end ,by default ,
-# Use the optional argument 'end' to change it :
-
-print("Hello, World", end="!")  #  Hello, World!
-
-# Input function: 
-# the Simple way to get input data from console :
+# Input function: ----------------------------------------------------------
+# gets input data from console :
 
 input_string_var = input("Enter some data: ") # Returns the data as a string
 
+# Varaibles : ---------------------------------------------------------------
 # New varaiable declartion is not needed
 # variable naming Convention is : lower_case_with_underscores :
 
@@ -61,10 +58,9 @@ some_var = 5
 some_var  #  5
 
 # but accessing a previously unassigned variable is an exception :
-
 some_unknown_var  # Raises a NameError
 
-# if :
+# if : --------------------------------------------------------------------
 # if can be used as an expression  :
 
 "yay!" if 0 > 1 else "nay!"  #  "nay!"
@@ -82,64 +78,52 @@ some_unknown_var  # Raises a NameError
 # numbers : _____________________________________________________________
 
 # Math operators are what you  expect :
-
 1 + 1   #  2
 8 - 1   #  7
 10 * 2  #  20
 35 / 5  #  7.0
 
 # Integer division rounds down for both positive and negative numbers :
-
 5 // 3       #  1
 -5 // 3      #  -2
 5.0 // 3.0   #  1.0 # works on floats too
 -5.0 // 3.0  #  -2.0
 
 # The result of division is always a float :
-
 10.0 / 3  #  3.3333333333333335
 
 # Modulo operation :
-
 7 % 3   #  1
 # i % j have the same sign as j, unlike C
 -7 % 3  #  2
 
 # Exponentiation (x**y, x to the yth power) :
-
 2**3  #  8
 
 # Enforce precedence with parentheses :
-
 1 + 3 * 2    #  7
 (1 + 3) * 2  #  8
 
 # Booleans _____________________________________________________________
 # Boolean values are primitives (Note: the capitalization) :
-
 True   #  True
 False  #  False
 
 # negate with 'not' :
-
 not True   #  False
 not False  #  True
 
 # Boolean Operators :
-
 # Note "and" and "or" are case-sensitive :
-
 True and False  #  False
 False or True   #  True
 
 # True and False are actually 1 and 0 but with different keywords :
-
 True + True #  2
 True * 8    #  8
 False - 5   #  -5
 
 # Comparison operators look at the numerical value of True and False :
-
 0 == False  #  True
 1 == True   #  True
 2 == True   #  False
@@ -147,7 +131,6 @@ False - 5   #  -5
 
 # Using boolean logical operators on ints casts them to booleans for evaluation, 
 #but their non-cast value is returned
-
 bool(0)     #  False
 bool(4)     #  True
 bool(-6)    #  True
@@ -233,39 +216,33 @@ bool(())  #  False
   var objCollections=BlockGroup("Collections");
 
  var code1=`
+
 # Lists : to store sequences :______________________________________________________
 
 li = []
 
 # You can start with a prefilled list
-
 other_li = [4, 5, 6]
 
 # append(): Add stuff to the end of a list with append :
-
 li.append(1)    # li is now [1]
 li.append(2)    # li is now [1, 2]
 li.append(4)    # li is now [1, 2, 4]
 li.append(3)    # li is now [1, 2, 4, 3]
 
 # pop(): Remove from the end with pop :
-
 li.pop()        #  3 and li is now [1, 2, 4]
 
 # Let's put it back :
-
 li.append(3)    # li is now [1, 2, 4, 3] again.
 
 # Accessing a list, is  just like an array :
-
 li[0]   #  1
 
 # Accesing the last element :
-
 li[-1]  #  3
 
 # Looking out of bounds is an IndexError:
-
 li[4]  # Raises an IndexError
 
 # Slice syntax :
@@ -282,49 +259,37 @@ li[::-1]  # Return list in reverse order => [3, 4, 2, 1]
 # li[start:end:step]
 
 # Make a one layer deep copy using slices:
-
 li2 = li[:]  #  li2 = [1, 2, 4, 3] but (li2 is li) will result in false.
 
 # Remove arbitrary elements from a list with "del"
-
 del li[2]  # li is now [1, 2, 3]
 
 # Remove first occurrence of a value
-
 li.remove(2)  # li is now [1, 3]
 li.remove(2)  # Raises a ValueError as 2 is not in the list
 
 # Insert an element at a specific index
-
 li.insert(1, 2)  # li is now [1, 2, 3] again
 
 # Get the index of the first item found matching the argument
-
 li.index(2)  #  1
 li.index(4)  # Raises a ValueError as 4 is not in the list
 
 # You can add lists
-
 # Note: values for li and for other_li are not modified.
 li + other_li  #  [1, 2, 3, 4, 5, 6]
 
 # Concatenate lists with "extend()"
-
 li.extend(other_li)  # Now li is [1, 2, 3, 4, 5, 6]
 
 # Check for existence in a list with "in"
-
 1 in li  #  True
 
 # Examine the length with "len()"
-
 len(li)  #  6
 
-`;
- title1="Lists : to store sequences  []";
- options[i++]=  { title:title1, code:code1, parent:objCollections  };
-  
- var code1=`
+#Lists : to store sequences  []"
+
  # Tuples are like lists but are immutable.
 
 tup = (1, 2, 3)
@@ -334,9 +299,9 @@ tup[0] = 3  # Raises a TypeError
 # Note that a tuple of length one has to have a comma after the last element but
 # tuples of other lengths, even zero, do not.
 
-type((1))   #  <class 'int'>
-type((1,))  #  <class 'tuple'>
-type(())    #  <class 'tuple'>
+type((1))   #  < class 'int'>
+type((1,))  #  < class 'tuple'>
+type(())    #  < class 'tuple'>
 
 # You can do most of the list operations on tuples too
 
@@ -363,10 +328,8 @@ d, e, f = 4, 5, 6  # tuple 4, 5, 6 is unpacked into variables d, e and f
 
 e, d = d, e  # d is now 5 and e is now 4
  `;
- title1="Tuples ()";
- options[i++]=  { title:title1, code:code1, parent:objCollections  };
-  
- var code1=`
+
+ # Tuples ()----------------------------------------------
  # Dictionaries store mappings from keys to values
 
 empty_dict = {}
@@ -388,12 +351,12 @@ filled_dict["one"]  #  1
 
 # Get all keys as an iterable with "keys()". We need to wrap the call in list()
 # to turn it into a list. We'll talk about those later.  Note - for Python
-# versions <3.7, dictionary key ordering is not guaranteed. Your results might
+# versions < 3.7, dictionary key ordering is not guaranteed. Your results might
 # not match the example below exactly. However, as of Python 3.7, dictionary
 # items maintain the order at which they are inserted into the dictionary.
 
 list(filled_dict.keys())  
-# ( ["three", "two", "one"] in Python <3.7 )
+# ( ["three", "two", "one"] in Python < 3.7 )
 
 list(filled_dict.keys())  
 # ( ["one", "two", "three"] in Python 3.7+ )
@@ -404,7 +367,7 @@ list(filled_dict.keys())
 # ordering.
 
 list(filled_dict.values())  
-#  [3, 2, 1]  in Python <3.7
+#  [3, 2, 1]  in Python < 3.7
 
 list(filled_dict.values())  
 #  [1, 2, 3] in Python 3.7+
@@ -452,10 +415,9 @@ del filled_dict["one"]  # Removes the key "one" from filled dict
 {'a': 1, **{'a': 2}}  #  {'a': 2}
 
  `;
- title1="Dictionaries {}";
- options[i++]=  { title:title1, code:code1, parent:objCollections  };
- 
- var code1=`# Sets ----------------------------------------------
+
+# Dictionaries -------------------------------------------------------
+# Sets ----------------------------------------------
 
 empty_set = set()
 
