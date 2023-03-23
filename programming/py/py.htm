@@ -50,6 +50,11 @@ print("Hello, World", end="!")  #  Hello, World! # ( a newline is default )
 
 input_string_var = input("Enter some data: ") # Returns the data as a string
 
+# if : --------------------------------------------------------------------
+# if can be used as an expression  :
+
+"yay!" if 0 > 1 else "nay!"  #  "nay!"
+
 # Varaibles : ---------------------------------------------------------------
 # New varaiable declartion is not needed
 # variable naming Convention is : lower_case_with_underscores :
@@ -60,15 +65,7 @@ some_var  #  5
 # but accessing a previously unassigned variable is an exception :
 some_unknown_var  # Raises a NameError
 
-# if : --------------------------------------------------------------------
-# if can be used as an expression  :
-
-"yay!" if 0 > 1 else "nay!"  #  "nay!"
-  `;
-  title='Variables';
-  options[i++]={title:title,code:code1,parent:objBasics};
-  
-  var code1=`
+# Comments -----------------------------------------------------------
   #single line comment beging with: #
 
 """ Triple double quote is used for Multiline strings
