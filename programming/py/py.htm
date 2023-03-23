@@ -1022,10 +1022,9 @@ j.say(j.age)                    #  "Joel: 0"
 del i.age
 # i.age                         #  this would raise an AttributeError
 `;
-  title1="Classes";
-  options[i++]= { title:title1, code:code1, parent:objother  };
 
-  code1=`
+#Classes ---------------------------------------------------------------
+
 # Inheritance allows new child classes to be defined that inherit methods and
 # variables from their parent class.
 
@@ -1093,8 +1092,8 @@ if __name__ == '__main__':
 
     # Get the Method Resolution search Order used by both getattr() and super()
     # This attribute is dynamic and can be updated
-    print(Superhero.__mro__)    #  (<class '__main__.Superhero'>,
-                                #  <class 'human.Human'>, <class 'object'>)
+    print(Superhero.__mro__)    #  (< class '__main__.Superhero'>,
+                                #  < class 'human.Human'>, < class 'object'>)
 
     # Calls parent method but uses its own class attribute
     print(sup.get_species())    #  Superhuman
