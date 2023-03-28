@@ -42,6 +42,19 @@ function AddToggleButtons()
 		para.setAttribute("class","toggleButton");
 		childDiv.prepend(para);
 	}
-	
+}
 
+function ReplaceLtGt()
+{
+    len=$("code").length;
+    for(i=0;i<len;i++)
+    {
+        s=$("code").eq(i)[0].innerHTML
+        s=s.replaceAll("<"," < ")
+        s=s.replaceAll("&lt;","<")
+        s=s.replaceAll("&gt;",">")
+        s=s.replaceAll("&amp;","&")
+        
+        $("code").eq(i).text( s)
+    }
 }
