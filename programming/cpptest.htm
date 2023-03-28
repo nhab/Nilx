@@ -1,0 +1,80 @@
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='/nhab/assets/css/blocks.css'>
+<script src='/nhab/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+</head>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+<button onclick='toggleAll(this);'>-</button>
+
+
+<h2>References</h2>
+<div>
+    https://learn.microsoft.com/en-us/cpp/cpp/?view=msvc-170
+    https://en.cppreference.com/w/cpp
+    https://cplusplus.com/
+    https://www.learncpp.com/
+    https://riptutorial.com/cplusplus/awesome-learning/book
+</div>
+<h2>Comparison to C</h2>
+<div>
+<pre><code  class="language-cpp">
+    // C++ is _almost_ a superset of C and shares its basic syntax for
+    // variable declarations, primitive types, and functions.
+
+    // Just like in C, your program's entry point is a function called
+    // main with an integer return type.
+    // This value serves as the program's exit status.
+    // See https://en.wikipedia.org/wiki/Exit_status for more information.
+    int main(int argc, char** argv)
+    {
+        // Command line arguments are passed in by argc and argv in the same way
+        // they are in C.
+        // argc indicates the number of arguments,
+        // and argv is an array of C-style strings (char*)
+        // representing the arguments.
+        // The first argument is the name by which the program was called.
+        // argc and argv can be omitted if you do not care about arguments,
+        // giving the function signature of int main()
+
+        // An exit status of 0 indicates success.
+        return 0;
+    }
+
+    // However, C++ varies in some of the following ways:
+
+    // In C++, character literals are chars
+    sizeof('c') == sizeof(char) == 1
+
+    // In C, character literals are ints
+    sizeof('c') == sizeof(int)
+
+
+    // C++ has strict prototyping
+    void func(); // function which accepts no arguments
+
+    // In C
+    void func(); // function which may accept any number of arguments
+
+    // Use nullptr instead of NULL in C++
+    int* ip = nullptr;
+
+    // C standard headers are available in C++.
+    // C headers end in .h, while
+    // C++ headers are prefixed with "c" and have no ".h" suffix.
+
+    // The C++ standard version:
+    #include <cstdio>
+
+    // The C standard version:
+    #include <stdio.h>
+
+    int main()
+    {
+        printf("Hello, world!\n");
+        return 0;
+    }
+</code></pre>
+</div>
