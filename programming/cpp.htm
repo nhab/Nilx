@@ -16,22 +16,7 @@
 </head>
 <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
 <button onclick='toggleAll(this);'>-</button>
-<script>
-function ReplaceLtGt()
-{
-    len=$("code").length;
-    for(i=0;i<len;i++)
-    {
-        s=$("code").eq(i)[0].innerHTML
-        s=s.replaceAll("<"," < ")
-        s=s.replaceAll("&lt;","<")
-        s=s.replaceAll("&gt;",">")
-        s=s.replaceAll("&amp;","&")
-        
-        $("code").eq(i).text( s)
-    }
-}
-</script>
+
 
 <h2>References</h2>
 <div>
