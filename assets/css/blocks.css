@@ -152,6 +152,14 @@ pre {
 .width8{width:11%}
 .width10{width:10%}
 
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    font-family: Vazirmatn,Consolas,Droid Sans Mono,Noto Sans Mono;
+    line-height: 1.4;
+}
+
 .hljs-comment, .hljs-quote {
     font-style: italic;
    
@@ -178,20 +186,10 @@ color:#00FFFF;
 .hljs-keyword{
    color:#E53f71;
 }
-* {
-    padding: 0;
-    margin: 0;
-    font-size: 24px;
-    font-family: Vazirmatn,Consolas,Droid Sans Mono,Noto Sans Mono;
-    line-height: 1.4;
-}
+
 .hljs {
-    background: #333;
-    color: #fff;
-}
-.hljs {
-    color: #a9b7c6;
-    background: #282b2e;
+    color: #fafaff;
+    background: #000033;
     display: block;
     overflow-x: auto;
     padding: 0.5em;
