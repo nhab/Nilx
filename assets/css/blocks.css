@@ -156,19 +156,24 @@ pre {
     font-style: italic;
    
 }
-
+.hljs-title{
+color:#00FFFF;
+}
 .hljs-comment {
     color: #e2ebe3;
     background-color: darkgreen; 
     color: #9c6; 
 }
 
-.hljs-class .hljs-title, .hljs-title.class_, .hljs-type {
+.hljs-class, .hljs-title.class_ {
     font-weight: 700;
     color: #96c;
 }
-.hljs-section, .hljs-title, .hljs-type {
+.hljs-section {
     color: #ffc66d;
+}
+.hljs-type{
+   color:#fffff;
 }
 * {
     padding: 0;
