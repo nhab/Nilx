@@ -173,7 +173,10 @@ color:#00FFFF;
     color: #ffc66d;
 }
 .hljs-type{
-   color:#fffff;
+   color:#ffffff;
+}
+.hljs-keyword{
+   color:#E53f71;
 }
 * {
     padding: 0;
