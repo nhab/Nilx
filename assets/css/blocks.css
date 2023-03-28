@@ -151,3 +151,75 @@ pre {
 .width8{width:12%}
 .width8{width:11%}
 .width10{width:10%}
+
+.hljs-comment, .hljs-quote {
+    font-style: italic;
+   
+}
+
+.hljs-comment {
+    color: #e2ebe3;
+    background-color: darkgreen; 
+    color: #9c6; 
+}
+
+.hljs-class .hljs-title, .hljs-title.class_, .hljs-type {
+    font-weight: 700;
+    color: #96c;
+}
+.hljs-section, .hljs-title, .hljs-type {
+    color: #ffc66d;
+}
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    font-family: Vazirmatn,Consolas,Droid Sans Mono,Noto Sans Mono;
+    line-height: 1.4;
+}
+.hljs {
+    background: #333;
+    color: #fff;
+}
+.hljs {
+    color: #a9b7c6;
+    background: #282b2e;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+}
+code {
+    display: inline-block;
+    overflow-wrap: nowrap;
+    text-indent: 1%;
+}
+samp, code {
+    background-color: #000033;
+    color: #eeeeff;
+}
+user agent stylesheet
+code {
+    font-family: monospace;
+}
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+user agent stylesheet
+pre {
+    font-family: monospace;
+    white-space: pre;
+}
+/*
+p, div {
+    white-space: pre-line;
+    margin-top: -1em;
+    margin-left: 7px;
+    text-indent: 5%;
+}
+html {
+    word-break: break-word;
+}*/
