@@ -48,7 +48,7 @@ json1+=`,{"title":"Managemnet"
 json1+=`,{"title":"Software Eng"
 ,"topic":
         [
-            {"caption":"Solid","href":"https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design"}
+            {"caption":"Solid","href":"https://github.com/nhab/nhab/tree/main/programming/solid.htm"}
             ,{"caption":"Agile","href":"Topics/softwareEngineering/agile.htm"}
             ,{"caption":"DevOps","href":"Topics/softwareEngineering/devops.htm"}
             ,{"caption":"Scrum","href":"Topics/softwareEngineering/scrum.htm"}
