@@ -48,7 +48,7 @@ json1+=`,{"title":"Managemnet"
 json1+=`,{"title":"Software Eng"
 ,"topic":
         [
-            {"caption":"Solid","href":"https://nhab.github.io/nhab/nhab/programming/solid.htm"}
+            {"caption":"Solid","href":"https://nhab.github.io/nhab/programming/solid.htm"}
             ,{"caption":"Agile","href":"Topics/softwareEngineering/agile.htm"}
             ,{"caption":"DevOps","href":"Topics/softwareEngineering/devops.htm"}
             ,{"caption":"Scrum","href":"Topics/softwareEngineering/scrum.htm"}
