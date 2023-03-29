@@ -1,19 +1,33 @@
 
-options=[{title:"What is scrum",
-body:`Scrum is a agile way to manage a project,
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+</head>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	
+<h2>What is scrum</h2>
+<div>
+Scrum is a agile way to manage a project,
 usually software development.
 Agile software development with Scrum 
 is often perceived as a methodology;
 but rather than viewing Scrum as methodology, 
 think of it as a framework for managing a process.
-`},
-{title:"Roles",
-body:`Has only 3 distinct roles:
+</div>
+<h2>Roles</h2>
+<div>
+Has only 3 distinct roles:
 product owner, 
 scrum master,
-and team member`},
-{title:`The product owner`,
-body:`is responsible for maximizing the return the business gets on this investment (ROI).
+and team member
+</div>
+<h2>The product owner</h2>
+<div>is responsible for maximizing the return the business gets on this investment (ROI).
 One way that the product owner maximizes ROI is 
 by directing the team toward the most valuable work, and away from less valuable work.
  That is, the product owner controls the order, sometimes called priority,
@@ -98,9 +112,10 @@ So, how many team members should a scrum team have?
  That is, from five to nine. Fewer team members and the team may not have 
  enough variety of skills to do all of the work needed to complete user stories. 
  More team members and the communication overhead starts to get excessive.
-`},
-{title:"spirint",
-body:`a Sprint, a time-box of one month or less during which a “Done”, useable, 
+</div>
+<h2>spirint</h2>
+<div>
+a Sprint, a time-box of one month or less during which a “Done”, useable, 
 and Scrum Sprint is part of the Empirical Processpotentially releasable product Increment is created. 
 Sprints have consistent durations throughout a development effort. 
 A new Sprint starts immediately after the conclusion of the previous Sprint.
@@ -109,15 +124,17 @@ During the Sprint:
   No changes are made that would endanger the Sprint Goal;
   Quality goals do not decrease; and,
   Scope may be clarified and re-negotiated between the Product Owner and Development Team as more is learned.
-Each Sprint may be considered a project with no more than a one-month horizon. `},
-{title:"Scrum Artifacts",body:
-`Product Backlog. 
+Each Sprint may be considered a project with no more than a one-month horizon. 
+</div>
+
+<h2>Scrum Artifacts</h2>
+<div>Product Backlog. 
 Sprint Backlog.
 Increment.
-Sprint Burn-Down Chart.`},
-{
-title:"The Product Backlog and user story",
-body:`The product backlog is the cumulative <h7>list of desired deliverables</h7> for the product.
+Sprint Burn-Down Chart.
+</div>
+<h2>The Product Backlog and user story</h2>
+<div>The product backlog is the cumulative <h7>list of desired deliverables</h7> for the product.
  This includes :
     features, bug fixes, documentation changes, 
     and anything else that might be meaningful and valuable to produce. 
@@ -141,9 +158,10 @@ A brief description of the desired functionality (what needs to be built)
 The reason that this story is valuable (why we should do it)
 An estimate as to how much work the story requires to implement
 Acceptance criteria that will help us know when it has been implemented correctly`
-},{
-  title:"The Sprint Backlog",
-body:`The sprint backlog is the team’s to do list for the sprint.
+</div>
+<h2>The Sprint Backlog</h2>
+<div>
+The sprint backlog is the team’s to do list for the sprint.
  Unlike the product backlog, it has a finite life-span: 
  the length of the current sprint. 
  It includes:
@@ -156,10 +174,9 @@ body:`The sprint backlog is the team’s to do list for the sprint.
    and so tasks can be thought of as units of work.
  A story is something a team delivers; a task is a bit of work that a person does. 
  Each story will normally require many tasks.`
-
-},
-{title:"Burn Charts",
-body:`A burn chart shows us the relationship between time and scope.
+</div>
+<h2>Burn Charts</h2>
+<div>A burn chart shows us the relationship between time and scope.
  Time is on the horizontal X-axis and scope is on the vertical Y-axis.
   A burn up chart shows us how much scope the team has got done over a period of time.
    Each time something new is completed the line on the chart moves up. 
@@ -167,9 +184,10 @@ body:`A burn chart shows us the relationship between time and scope.
    In general, we expect the work remaining to go down over time as the team gets things done. 
    Sometimes the work remaining changes suddenly, when scope is added or removed. 
    These events appear as vertical lines on the burn down chart: 
-   a vertical line up when we add new work, or down when we remove some work from the plan.`},
-  {title:"Task Board",
-body:`When the team's tasks are visible to everyone from across the room,
+   a vertical line up when we add new work, or down when we remove some work from the plan.
+</div>
+<h2>Task Board</h2>
+<div>When the team's tasks are visible to everyone from across the room,
  you never have to worry that some important piece of work will be forgotten.
 
 The simplest task board consists of 3 columns:
@@ -199,9 +217,11 @@ In order to avoid confusion, good scrum teams create their own definition of the
   " The team will likely print out their definition of done as a checklist, and post it next to their task board. 
   When the team thinks a story is done, they all gather around and review each item, 
   to confirm that it has been completed.
-   Only then will the team declare the story as done.`},
-{title:"The Sprint Cycle",
-body:`The sprint cycle is the foundational rhythm of the scrum process.
+   Only then will the team declare the story as done.
+</div>
+
+<h2>The Sprint Cycle</h2>
+<div>The sprint cycle is the foundational rhythm of the scrum process.
  Whether you call your development period a sprint, a cycle or an iteration, 
  you are talking about exactly the same thing: 
  a fixed period of time within which you bite off small bits of your project 
@@ -225,7 +245,8 @@ Additionally, the more frequently the team delivers and
 As of this writing, it is common for scrum teams to work in sprints that last two weeks, 
 and many teams are starting to work in one-week sprints.
  Much of the original writing about scrum assumed a month-long sprint, 
- and at the time that seemed very short indeed!`},
+ and at the time that seemed very short indeed!
+</div>
  {title:"Sprint Planning Meeting",
 body:`Sprint planning marks the beginning of the sprint. 
 Commonly, this meeting has two parts. 
