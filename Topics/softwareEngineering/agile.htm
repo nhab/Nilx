@@ -1,24 +1,19 @@
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nilx/assets/css/blocks.css">	
-	<script src='/nilx/assets/js/blocks.js'></script>
-	<link rel="stylesheet" href="/nilx/libs/highlight/androidstudio2.css">
-    <script src="/nilx/libs/highlight/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad()</script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
-<button onclick="toggleAll(this);" >-</button>
-
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />References</h2>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	
+<h2 >References</h2>
 <div>
 <a href="https://www.agilealliance.org/agile101/agile-glossary">Glossary</a>
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Agile project management</h2>
+<h2 >Agile project management</h2>
 <div>
  is an iterative approach to delivering a project, 
  which focuses on continuous releases 
@@ -26,9 +21,7 @@
  The ability to adjust during each iteration promotes velocity and adaptability. 
 </div>
  
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Roadmaps</h2>
+<h2 >Roadmaps</h2>
 <div>
 A product roadmap outlines how a product or solution develops over time. 
 A roadmap in agile development provides important context that empowers teams to reach both incremental and project-wide goals. 
@@ -39,9 +32,7 @@ The goal is to keep the roadmap focused on current conditions that impact the pr
 The following is a simple roadmap for a product team, with initiatives in the boxes and timelines indicated by the milestone-markers in red. 
 Agile roadmap | Atlassian agile coach
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Requirements</h2>
+<h2 >Requirements</h2>
 <div>
 Each initiative in the roadmap breaks down into a set of requirements. 
 Agile requirements are lightweight descriptions of required functionality, rather than the 100-page documents associated with traditional projects. 
@@ -49,9 +40,7 @@ They evolve over time and capitalize on the team's shared understanding of the c
 Agile requirements remain lean while everyone on the team develops a shared understanding via ongoing conversation and collaboration. 
 Only when implementation is about to begin are they fleshed out with full details.
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Backlog</h2>
+<h2 >Backlog</h2>
 <div>
 The backlog sets the priorities for the agile program. 
 The team includes all work items in the backlog: 
@@ -59,27 +48,21 @@ new features, bugs, enhancements, technical or architectural tasks, etc.
 The product owner prioritizes the work on the backlog for the engineering team.
 The development team then uses the prioritized backlog as its single source of truth for what work needs to be done.
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Agile metrics</h2>
+<h2 >Agile metrics</h2>
 <div>
 Agile teams thrive on metrics. 
 Work in progress (WIP) limits keep the team, and the business, focused on delivering the highest priority work. 
 Graphs like burndown charts and control charts help the team predict their delivery cadence, and continuous flow diagrams help identify bottlenecks. 
 These metrics and artifacts keep everyone focused on the big goals and boost confidence in the team's ability to deliver future work. 
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Agile runs on trust</h2>
+<h2 >Agile runs on trust</h2>
 <div>
 Agile processes cannot function without a high level of trust amongst team members and therefore create trust. 
 It requires candor to have difficult conversations regarding what's right for the program and the product. 
 Because conversations happen at regular intervals, ideas and concerns are regularly expressed. 
 That means team members need to be confident in each other's ability (and willingness) to execute on the decisions made during those conversations.
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />workflow</h2>
+<h2 >workflow</h2>
 	<div>
     Start simple, start now 
     work states:    To Do, In progress, code review(by tester),done( ready to merge into the main or release branch.).
@@ -88,9 +71,7 @@ That means team members need to be confident in each other's ability (and willin
 <div>
 are short requirements or requests written from the perspective of an end user
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Epics</h2>
+<h2 >Epics</h2>
 <div>
  are large bodies of work that can be broken down into a number of smaller tasks (called stories).
 </div>
@@ -100,9 +81,7 @@ are short requirements or requests written from the perspective of an end user
 <div>
 			are collections of epics that drive toward a common goal.
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Estimation</h2>
+<h2 >Estimation</h2>
 <div>
  <h3>Story points vs. hours</h3>
   stiry points are relative estimates about the effort it might take to complete each item in the backlog(using points instead of date period). For example, an item that is assigned two story points is expected to be twice the effort as an item estimated as one poin
@@ -117,9 +96,7 @@ Teams assign story points relative to work complexity, the amount of work, and r
 
  </p>
  </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Metrics</h2>
+<h2 >Metrics</h2>
  <div>
  <h3>Sprint burndown </h3>
  A sprint burndown report then tracks the completion of work throughout the sprint. The x-axis represents time, and the y-axis refers to the amount of work left to complete, measured in either story points or hours. The goal is to have all the forecasted work completed by the end of the sprint.
@@ -139,9 +116,7 @@ Teams assign story points relative to work complexity, the amount of work, and r
 
 Control charts focus on the cycle time of individual issues–the total time from "in progress" to "done". 
 </div>
-<h2 ><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Agile manifesto</h2>
+<h2 >Agile manifesto</h2>
 <p>
 . Individuals and interactions over processes and tools
 . Working software over comprehensive documentation
