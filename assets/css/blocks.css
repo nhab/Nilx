@@ -153,8 +153,6 @@ pre {
 .width8{width:11%}
 .width10{width:10%}
 
-
-
 .hljs-comment, .hljs-quote {
     font-style: italic;
    
@@ -174,6 +172,7 @@ color:#00FFFF;
     border-style: solid;
     border-color:#003400;
 }
+
 .hljs-class, .hljs-title.class_ {
     font-weight: 700;
     color: #96c;
