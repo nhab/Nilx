@@ -167,7 +167,13 @@ color:#00FFFF;
     background-color: darkgreen; 
     color: #9c6; 
 }
-
+hljs-meta prompt_{
+    color: yellow;
+    background-color: darkgreen; 
+    border-width:1px;
+    border-style: solid;
+    border-color:#003400;
+}
 .hljs-class, .hljs-title.class_ {
     font-weight: 700;
     color: #96c;
