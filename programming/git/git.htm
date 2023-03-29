@@ -5,13 +5,9 @@
 <script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
-
- <script></script>
 </head>
 <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
-
  <button onclick="toggleAll(this);" >-</button>
- 
  <h2>References:</h2>
 <div>
  <a href="https://dev.to/web/list-of-all-git-commands-4m83">Allcommands</a> 
@@ -25,6 +21,7 @@
  <a href="https://www.javatpoint.com/git-rebase">git in javapoint / rebase</a>
  <a href="https://git-scm.com/search/results?search=rebase"> git documentation</a>
 </div>
+ 
  <h2>What is git</h2>
  <div>
  A managable repository (database) of snapshots of working directory(ies).   
@@ -33,7 +30,7 @@
  <div>
 1- You modify files in <b>working folder</b>.
 2- To add those changes to the <b>staging area</b>:
-  <pre><code>$ git add</code> </pre>
+  <code>$ git add</code>
 3- To save the files in the staging area into <b>local Git repository</b>: 
   <pre><code>$ git commit -m "Added x() function to a.cs" </code></pre>
 4- To push the changes from local repository to <b>remote repository</b>: 
