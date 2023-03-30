@@ -1,18 +1,15 @@
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src="/nhab/assets/js/blocks.js"></script>	
-    <link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
-
-<button onclick="toggleAll(this);" >-</button>
-
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Resources</h2>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	
+<h2>Resources</h2>
 <p>
     <a href="https://www.professionalqa.com/integration-testing#:~:text=Features%20Of%20Integration%20Testing%3A&text=Once%20the%20performance%20of%20each,described%20in%20the%20test%20plan.">
     Integration test</a>
@@ -23,23 +20,20 @@
     <a href="'https://techcommunity.microsoft.com/t5/testingspot-blog/what-is-bdd-how-to-use-specflow-in-visual-studio-2022-specflow/ba-p/3255140">BDD in vs</a>
 </p>  
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Test Methods</h2>
+<h2>Test Methods</h2>
 <div>
 It's decorated with the [TestMethod] attribute.
 It returns void.
 It cannot have parameters.
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />requirements for a test class </h2>
+<h2>requirements for a test class </h2>
 <div>
 .The <b>[TestClass]</b> attribute is required on any class that contains unit test methods that you want to <b>run in Test Explorer</b>.
 .Each test method that you want Test Explorer to recognize must have the<b> [TestMethod] attribute</b>.
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />A sample test method</h2>
+<h2>A sample test method</h2>
 <pre><code>
 [TestMethod]
 public void Debit_WithValidAmount_UpdatesBalance()
@@ -59,8 +53,7 @@ public void Debit_WithValidAmount_UpdatesBalance()
 }    
 </code></pre>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Build and run the test</h2>
+<h2>Build and run the test</h2>
 <div>
 On the Build menu, choose Build Solution (or press Ctrl + SHIFT + B).
 
@@ -69,8 +62,7 @@ If Test Explorer is not open, open it by choosing Test > Windows > Test Explorer
 Choose Run All to run the test (or press Ctrl + R, V).    
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Exception</h2>
+<h2>Exception</h2>
 <pre><code>
 [TestMethod]
 public void Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange()
@@ -85,8 +77,7 @@ public void Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange()
 }
 </code></pre>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Microsoft fake</h2>
+<h2>Microsoft fake</h2>
 <div>
     Microsoft Fakes helps you isolate the code you're testing by replacing other parts of the application with stubs or shims. 
     The stubs and shims are small pieces of code that are under the control of your tests.
@@ -94,8 +85,7 @@ public void Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange()
      Stubs and shims also let you test your code even if other parts of your application aren't working yet.
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />test with stubs</h2>
+<h2>test with stubs</h2>
     <pre><code>
         [TestClass]
         class TestStockAnalyzer
@@ -127,8 +117,7 @@ public void Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange()
         }       
     </code></pre>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> Verify parameter values</h2>
+<h2> Verify parameter values</h2>
 <div>
 You can verify that when your component makes a call to another component, it passes the correct values.
  You can either place an assertion in the stub, or you can store the value and verify it in the main body of the test. For example: 
@@ -168,8 +157,7 @@ You can verify that when your component makes a call to another component, it pa
 </code></pre>   
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> Stubs for different kinds of type members</h2>
+<h2> Stubs for different kinds of type members</h2>
 <div>
  <b>Methods</b>
     As described in the example, methods can be stubbed by attaching a delegate to an instance of the stub class. The name of the stub type is derived from the names of the method and parameters. For example, given the following IMyInterface interface and method MyMethod:
@@ -259,8 +247,7 @@ You can verify that when your component makes a call to another component, it pa
     To isolate components of your solution from each other, use stubs.
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />How to use shims</h2>
+<h2>How to use shims</h2>
 <div>
 First, add a Fakes assembly:
 
@@ -274,8 +261,7 @@ Select the assembly that contains the class definitions for which you want to cr
 On the shortcut menu, choose Add Fakes Assembly.    
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Use ShimsContext</h2>
+<h2>Use ShimsContext</h2>
 <div>
 When using shim types in a unit test framework, wrap the test code in a ShimsContext to control the lifetime of your shims.
  Otherwise, the shims would last until the AppDomain shut down. 
@@ -298,8 +284,7 @@ If you forget to clear the registered shim in the test method, the rest of the t
  as the DateTime.Now value. This might be surprising and confusing.
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Write a test with shims</h2>
+<h2>Write a test with shims</h2>
 <div>
 <pre>
 <code>
@@ -352,9 +337,7 @@ You might see a build error stating that the Fakes namespace does not exist.
 <div>
     https://docs.microsoft.com/en-us/visualstudio/test/using-shims-to-isolate-your-application-from-other-assemblies-for-unit-testing?view=vs-2022&tabs=csharp
 </div>
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />data-driven unit test
-</h2>
+<h2>data-driven unit test</h2>
 <div>
     set up a unit test method to retrieve values from a data source. 
     The method is run successively for each row in the data source, which makes it easy to test a variety of input by using a single method.
@@ -371,8 +354,7 @@ Create a unit test method and add a DataSourceAttribute attribute to it.
 Use the DataRow indexer property to retrieve the values that you use in a test.
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> Add a TestContext to the test class</h2>
+<h2>Add a TestContext to the test class</h2>
     <div>
 The unit test framework creates a TestContext object to store the data source information for a data-driven test. 
 The framework then sets this object as the value of the TestContext property that you create.
@@ -413,8 +395,7 @@ public TestContext TestContext
     By default, the asserted values - expected and actual - are already included in failed test details.
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> Run an inline data-driven test</h2>
+<h2>Run an inline data-driven test</h2>
 <div>
 For inline tests, MSTest uses DataRow to retrieve values from a data source. 
 The test in this example runs successively for each data row.
