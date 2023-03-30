@@ -13,8 +13,8 @@
 <p>
 </p>
 
-<h2><input type="button" value="-" style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)"/>Date and time</h2>
+<h2>Date and time</h2>
+<div>
     <b>TimeSpan</b>
     <p>
         There are 3 ways to construct a TimeSpan :
@@ -22,7 +22,7 @@
           • By calling one of the static From . . . methods
           • By subtracting one DateTime from another
     </p>
-    <code>
+    <pre><code>
         Console.WriteLine (new TimeSpan (2, 30, 0));     // 02:30:00
         Console.WriteLine (TimeSpan.FromHours (2.5));    // 02:30:00
         Console.WriteLine (TimeSpan.FromHours (-2.5));   // -02:30:00
@@ -32,7 +32,8 @@
 
         (TimeSpan.FromHours(2) + TimeSpan.FromMinutes(30)).Dump ("2.5 hours");
         (TimeSpan.FromDays(10) - TimeSpan.FromSeconds(1)).Dump ("One second short of 10 days");
-    </code>
+    </code></pre>
+    
     <b>DateTime vs DateTimeoffset </b>
     <p>
     DateTime is capable of storing only two distinct times, the local time and UTC. The Kind property indicates which.
@@ -42,7 +43,7 @@
     Or only ever work with UTC. Which in itself is a fine idea btw.
     </p>
     <b>Constructing a DateTime or DateTimeOffset    </b>
-    <code>
+    <pre><code>
         DateTime d1 = new DateTime (2010, 1, 30);  // Midnight, January 30 2010
         d1.Dump ("d1");
 
@@ -59,7 +60,8 @@
 
         DateTimeOffset d5 = new DateTimeOffset (d1, TimeSpan.FromHours (-8));  // -8 hours UTC
         d5.Dump ("d5");
-    </code>
+    </code></pre>
+  </div>
 <h2>Numbers</h2>
 <b>BigInteger</b>
 <code>
