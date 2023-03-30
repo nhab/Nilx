@@ -1,20 +1,16 @@
 <html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src='/nhab/assets/js/blocks.js'></script>
-	<link rel="stylesheet" href="/nhab/libs/highlight/androidstudio2.css">
-    <script src="/nhab/libs/highlight/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad()</script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
-<button onclick="toggleAll(this);" >-</button>
-
-
-<h2><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Resources</h2>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	
+<h2>Resources</h2>
 <div>
     <a href="https://github.com/oskardudycz/EventSourcing.NetCore">Full example in github</a>
     <a href="https://git.ir/pluralsight-modern-software-architecture-domain-models-cqrs-and-event-sourcing/">course of dino esposito</a>
@@ -29,9 +25,7 @@
     <a href="https://medium.com/aspnetrun/cqrs-and-event-sourcing-in-event-driven-architecture-of-ordering-microservices-fb67dc44da7a">C# example</a>
     <a href="https://www.google.com/search?q=CQRS+and+Event+Sourcing+core">Other .net core examples</a>
 </div>
-<h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" />What is?</h2>
+<h2>What is?</h2>
 <div>
 An event source pattern is an approach to a sequence of events. 
 The system stores a history of the changes in data states and notifies a consumer to handle them. 
@@ -42,9 +36,7 @@ The system stores a history of the changes in data states and notifies a consume
  CQRS – Command Query Responsibility Segregation – promotes separation of commands and queries – in practice, the read and write functions.  
 In this article we describe each approach, illustrate how CQRS facilitates event sourcing, and help you determine whether and how to proceed with this architecture. 
 </div>
- <h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" />Event Sourcing – Explaining the Pattern</h2>
+ <h2>Event Sourcing – Explaining the Pattern</h2>
  <div>
 Event sourcing stores the state of a database object as a sequence of events – essentially a new event for each time the object changed state, from the beginning of the object’s existence. 
  An event can be anything user-generated – a mouse click, a key press on a keyboard, and so on.
