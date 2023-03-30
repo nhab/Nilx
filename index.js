@@ -111,7 +111,7 @@ json1 +=`,{"title":".Net other"
             ,{"caption":"MediatR","href":"programming/dotnet/mediatr.htm"}
             ,{"caption":".Net Core 6 React","href":"programming/dotnet/ReactNetCore6.htm"}
         ,{"caption":"Blazor","href":"programming/dotnet/blazor.htm"}
-        ,{"caption":"Razor page","href":"https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0"}
+        ,{"caption":"Razor page","href":"programming/dotnet/razor.htm"}
         ,{"caption":"MAUI","href":"programming/dotnet/maui.htm"}
    
        ]
