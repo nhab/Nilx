@@ -1,37 +1,8 @@
 var json1=`{
     "topics":[`;
     
-/*json1+=`{ "title":"My Projects"
-,"topic":
-            [
-                {"caption":"Blocks"             ,"href":"https://github.com/nhab/Blocks"}
-                ,{"caption":"Focus"              ,"href":"https://github.com/nhab/Focus"}
-                ,{"caption":"IFW win framework"  ,"href":"https://github.com/nhab/IFW-windows-Framework" }
-                ,{"caption":"acalt"              ,"href":"https://sourceforge.net/projects/acalt/" }
-                ,{"caption":"my Gcmaithub"          ,"href":"https://github.com/nhab/" }
-            ]
-        }
-        `;*/
 
-json1+=`{"title":"Managemnet"
-,"topic":
-            [
-                 {"caption":"Project management","href":"Topics/Management/projectManagement.htm"}
-                ,{"href":"Topics/Management/PM-best-practices.htm" ,"caption":"Project management(2)"}
-                ,{"href":"Topics/Management/0-bussiness-steps.htm" ,"caption":"Bussiness steps"}
-                ,{"href":"Topics/Management/1-management-perception.htm","caption":"Management perception"}
-                ,{"href":"Topics/Management/2-defining tasks.htm" ,"caption":"Work creation"}
-                ,{"href":"Topics/Management/3-reporting.htm","caption":"Reporting"}
-                ,{"href":"Topics/Management/4-presenting.htm","caption":"Presenting"}
-                ,{"href":"Topics/Management/5-market-researching.htm","caption":"Market research"}  
-                ,{"href":"Topics/Management/6-marketing.htm","caption":"Marketing"}
-                ,{"href":"Topics/Management/7-support.htm","caption":"Support"}     
-                ,{"href":"Topics/Management/proffessionalism-skills.htm","caption":"Proffessionalism skills"}  
-                ,{"href":"Topics/Management/strategicplanning.htm","caption":"strategic planning"} 
-                ,{"href":"Topics/Management/policy.htm","caption":"Policy"}  
-            ]
-        }`;
-json1+=`,{"title":"Software Eng"
+json1+=`{"title":"Software Eng"
 ,"topic":
         [
             {"caption":"Solid","href":"https://nhab.github.io/programming/solid.htm"}
@@ -163,6 +134,26 @@ json1 +=`,{"title":"Testing"
             ,{"caption":"Moq","href":"programming/topics/testing/moq.htm"}
         ]
     }`;
+
+json1+=`,{"title":"Managemnet"
+,"topic":
+            [
+                 {"caption":"Project management","href":"Topics/Management/projectManagement.htm"}
+                ,{"href":"Topics/Management/PM-best-practices.htm" ,"caption":"Project management(2)"}
+                ,{"href":"Topics/Management/0-bussiness-steps.htm" ,"caption":"Bussiness steps"}
+                ,{"href":"Topics/Management/1-management-perception.htm","caption":"Management perception"}
+                ,{"href":"Topics/Management/2-defining tasks.htm" ,"caption":"Work creation"}
+                ,{"href":"Topics/Management/3-reporting.htm","caption":"Reporting"}
+                ,{"href":"Topics/Management/4-presenting.htm","caption":"Presenting"}
+                ,{"href":"Topics/Management/5-market-researching.htm","caption":"Market research"}  
+                ,{"href":"Topics/Management/6-marketing.htm","caption":"Marketing"}
+                ,{"href":"Topics/Management/7-support.htm","caption":"Support"}     
+                ,{"href":"Topics/Management/proffessionalism-skills.htm","caption":"Proffessionalism skills"}  
+                ,{"href":"Topics/Management/strategicplanning.htm","caption":"strategic planning"} 
+                ,{"href":"Topics/Management/policy.htm","caption":"Policy"}  
+            ]
+        }`;
+
 
 json1 +=`,{ "title":"JavaScript"
 ,"topic":
