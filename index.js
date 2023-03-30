@@ -70,7 +70,7 @@ json1 +=`,{"title":".Net Backend"
             ,{"caption":"Fluent API and EF Migrations","href":"programming/dotnet/FluentAPI.htm"}
             ,{"caption":"Entity framework core","href":"programming/dotnet/ef-core.htm"}
             ,{"caption":"Asp.net core","href":"programming/dotnet/aspnetcore.htm"}
-            ,{"caption":"Identity core","href":"programming/dotnet/identity.php"}
+            ,{"caption":"Identity core","href":"programming/dotnet/identity.htm"}
             ,{"caption":"jwt","href":"programming/dotnet/jwt.htm"}
             ,{"caption":"MVC4","href":"programming/dotnet/mvc4.htm"}
             ,{"caption":"MVC core6","href":"programming/dotnet/mvccore6.htm"}
