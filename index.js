@@ -34,7 +34,7 @@ json1+=`{"title":"Managemnet"
 json1+=`,{"title":"Software Eng"
 ,"topic":
         [
-            {"caption":"Solid","href":"https://nhab.github.io/nhab/programming/solid.htm"}
+            {"caption":"Solid","href":"https://nhab.github.io/programming/solid.htm"}
             ,{"caption":"Agile","href":"Topics/softwareEngineering/agile.htm"}
             ,{"caption":"DevOps","href":"Topics/softwareEngineering/devops.htm"}
             ,{"caption":"Scrum","href":"Topics/softwareEngineering/scrum.htm"}
@@ -267,7 +267,6 @@ json1 +=`,{"title":"Dev"
             ,{"caption":"SAP","href":"Sap\sap.html"}
             ,{"caption":"ABAP","href":"Sap\abap.html"}
             ,{"caption":"Regular expressions","href":"programming/regx.htm"}
-            ,{"caption":"other","href":"https://github.com/nhab/Tutorials"}
             ,{"caption":"Markdown (md)","href":"programming/topics/markdown"}
         ]
     }`;
