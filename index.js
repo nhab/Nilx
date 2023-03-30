@@ -172,7 +172,6 @@ json1 +=`,{ "title":"JavaScript"
             ,{"caption":"ExpressJS main source","href":"https://expressjs.com/en/4x/api.html"}
             ,{"caption":"Angular","href":"programming/Angular/Angular.htm"}
             ,{"caption":"AngularJS","href":"programming/Angular/AngularJS.htm"}
-            ,{"caption":"Angular 4","href":"https://www.tutorialspoint.com/angular4"}
             ,{"caption":"Typescript","href":"https://www.javatpoint.com/typescript-installation"}
         ]
     }`;
