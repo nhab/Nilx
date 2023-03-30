@@ -31,6 +31,7 @@ bloob box:
 
 body{ background-color:#cccccc;}
 html  {  word-break: break-word;}
+div{margin-bottom:10px;}
 cl,cli{
 background-color:#000000;
 color:#aaccff;
