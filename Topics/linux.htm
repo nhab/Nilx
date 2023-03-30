@@ -204,35 +204,23 @@ tar -xvzf Komodo
 sh ./configure
 
 <h2>Directory operations ::</h2>
-<h3>- to <b>list</b> the names of the directories and files in the current directory:</h3>
-ls </b> 
-<h3>- to <b>copy</b> all contents of dir1 to dir2 recurcievly:</h3> cp -r dir1 dir22  .
-<h3>- To <b>remove</b> a file or directory :</h3> rm -f -r {file-name} 
+
+<b>ls</b>  to <b>list</b>   - the names of the directories and files in the current directory
+<b>cp -r dir1 dir22<b>      - to copy all contents of dir1 to dir2 recurcievly
+<b>rm -f -r {file-name} </b>- To <b>remove</b> a file or directory 
 <br>Where,     -f: Forcefully remove file and     -r: Remove the contents of directories recursively
 <a href="http://www.ahinc.com/linux101/permission.htm">linux permissions</a>
 
 <h2>SYSTEM INFORMATION</h2>
+<pre>
+<b>uname -a </b> Display Linux system information
+<b>uname -r </b>Display kernel release information
+<b>cat /etc/redhat-release</b> Show which version of redhat installed
+<b>uptime</b> Show how long the system has been running + load
+<b>hostname</b>Show system host name
+<b>hostname -I</b> Display the IP addresses of the host
+<b>last reboot</b> Show system reboot history
 
-<h3> Display Linux system information</h3>
-uname -a
-
-<h3>Display kernel release information</h3>
-uname -r
-
-<h3>Show which version of redhat installed</h3>
-cat /etc/redhat-release
-
-<h3>Show how long the system has been running + load</h3>
-uptime
-
-<h3>Show system host name</h3>
-hostname
-
-<h3>Display the IP addresses of the host</h3>
-hostname -I
-
-<h3>Show system reboot history</h3>
-last reboot
 
 <h3>Show the current date and time</h3>
 date
