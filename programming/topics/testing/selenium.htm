@@ -1,17 +1,18 @@
 <html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src='/nhab/assets/js/blocks.js'></script>
-	<link rel="stylesheet" href="/nhab/libs/highlight/androidstudio2.css">
-    <script src="/nhab/libs/highlight/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad()</script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	
 <h2>Selenium </h2>
 <div>
-is many things but at its core, it is a toolset for web browser automation that uses the best techniques available to remotely control browser instances and emulate a userís interaction with the browser.
+is many things but at its core, it is a toolset for web browser automation that uses the best techniques available to remotely control browser instances and emulate a user‚Äôs interaction with the browser.
 
 It allows users to simulate common activities performed by end-users:
  entering text into fields, selecting drop-down values and checking boxes, and clicking links in documents.
@@ -52,7 +53,7 @@ Check the dependencies section to find out the supported <a href='https://dotnet
 <div>
 - Install the compatible .NET SDK as per the section above.
 - Also install the vscode extensions (Ctrl-Shift-X) for C# and NuGet.
-- Follow the instruction <a href='https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code?pivots=dotnet-5-0'>here</a> to create and run the ìHello Worldî console project using C#. 
+- Follow the instruction <a href='https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code?pivots=dotnet-5-0'>here</a> to create and run the ‚ÄúHello World‚Äù console project using C#. 
 - You may also create a NUnit starter project using the command line dotnet new NUnit. 
   Make sure the file %appdata%\NuGet\nuget.config is configured properly as some developers reported that it will be empty due to some issues. 
 - Add the following section to the file nuget.config :
@@ -65,7 +66,7 @@ Check the dependencies section to find out the supported <a href='https://dotnet
 ...
 </code></pre>
 You may have to <a href='https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file'>customize nuget.config</a> to meet you needs.
-- Now, go back to vscode, press Ctrl-Shift-P, and type ìNuGet Add Packageî, and enter the required Selenium packages such as Selenium.WebDriver. 
+- Now, go back to vscode, press Ctrl-Shift-P, and type ‚ÄúNuGet Add Package‚Äù, and enter the required Selenium packages such as Selenium.WebDriver. 
   Press Enter and select the version.
 - Now you can use the examples in the documentation related to C# with vscode.
 
@@ -115,7 +116,7 @@ driver.Quit();
 <h2>Basic Components</h2>
 <div>
 Everything Selenium does is send the browser commands to do something or send requests for information.
-Most of what youíll do with Selenium is a combination of these basic commands:
+Most of what you‚Äôll do with Selenium is a combination of these basic commands:
 
 1. Start the session
 <pre><code>driver = new ChromeDriver();</code></pre>
@@ -123,9 +124,9 @@ Most of what youíll do with Selenium is a combination of these basic commands:
 2. Take action on browser
 - Navigation:
 <pre><code>driver.Navigate().GoToUrl("https://www.selenium.dev/selenium/web/web-form.html");</code></pre>
-Pressing the browserís back button:
+Pressing the browser‚Äôs back button:
 <pre><code>driver.Navigate().Back();</code></pre>
-Pressing the browserís forward button:
+Pressing the browser‚Äôs forward button:
 <pre><code>driver.Navigate().Forward();</code></pre>
 Refresh the current page:
 <pre><code>driver.Navigate().Refresh();</code></pre>
@@ -273,7 +274,7 @@ submitButton.Click();
 <h2>Writing the first Selenium script</h2>
 <div>
 Once you have <a href="selenium.dev/documentation/webdriver/getting_started/install_library/">Selenium installed</a> and
-<a href="selenium.dev/documentation/webdriver/getting_started/install_drivers/">Drivers installed</a>, youíre ready to write Selenium code:
+<a href="selenium.dev/documentation/webdriver/getting_started/install_drivers/">Drivers installed</a>, you‚Äôre ready to write Selenium code:
 <pre><code>
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -411,7 +412,7 @@ foreach (string message in exceptionMessages)
 
 <h2>Virtual Authenticator</h2>
 <div>
-Web applications can enable a public key-based authentication mechanism known as Web Authentication to authenticate users in a passwordless manner. Web Authentication defines APIs that allows a user to create a public-key credential and register it with an authenticator. An authenticator can be a hardware device or a software entity that stores userís public-key credentials and retrieves them on request.
+Web applications can enable a public key-based authentication mechanism known as Web Authentication to authenticate users in a passwordless manner. Web Authentication defines APIs that allows a user to create a public-key credential and register it with an authenticator. An authenticator can be a hardware device or a software entity that stores user‚Äôs public-key credentials and retrieves them on request.
 <h3>Virtual Authenticator Options</h3>
 <pre><code>
 // Create virtual authenticator options
