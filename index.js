@@ -1,7 +1,7 @@
 var json1=`{
     "topics":[`;
     
-json1+=`{ "title":"My Projects"
+/*json1+=`{ "title":"My Projects"
 ,"topic":
             [
                 {"caption":"Blocks"             ,"href":"https://github.com/nhab/Blocks"}
@@ -11,23 +11,9 @@ json1+=`{ "title":"My Projects"
                 ,{"caption":"my Gcmaithub"          ,"href":"https://github.com/nhab/" }
             ]
         }
-        `;
-json1+=`,{"title":"Mental skills"
-,"topic":
-            [
-                {"href":"/nilx/Topics/softskills/howtothink.htm" ,"tooltip":"Thinking is a mental tool works base on the cause and effect law. it is a proccess to use imagination,intution  and other higher facaulties to find the cause of an effect and use it","caption":"How to think"}
-                ,{"href":"/nilx/Topics/softskills/howtolearn.htm" ,"caption":"How to learn"}
-                ,{"href":"Topics/Wisdom/unlearningwisdom.htm","caption":"Unlearning"}
-                ,{"href":"/nilx/Topics/softskills/howtosloveaproblem.htm" ,"caption":"How to solve a problem"}
-                ,{"href":"/nilx/Topics/softskills/howtosearch.htm" ,"caption":"How to search"}
-                ,{"href":"/nilx/Topics/softskills/howtodebug.htm","caption":"How to debug"}
-                ,{"href":"/nilx/Topics/softskills/howtocommunicate.htm" ,"caption":"how to communicate"}
-                ,{"href":"/nilx/Topics/softskills/howtomanage.htm" ,"caption":"How to manage "}
-                ,{"href":"/nilx/Topics/softskills/howtoreadcode.htm" ,"tooltip":"There is main functions in the code file which may have used some other functions inside.you should begin by the main class of the project and the main function(s) of the classs and follow the code." ,"caption":"How to read code"}
-                ,{"tooltip":"عملی که پشت آن نتیجه خردمندانه ای که در اثر تجارب قبلی بهو فکر به آن رسیده ایم میباشد.مثلا برای جستجوی آموزش اتوفک نمیزنیم آموزش اتوفک بلکه ابتدا لغات پیشرفته این علم را در میاریم وآنرا جستجو میکنیم که در مورد اتوفک اتریبیوتز میباشد.. ","caption":"wise move"}
-            ]
-        }`;
-json1+=`,{"title":"Managemnet"
+        `;*/
+
+json1+=`{"title":"Managemnet"
 ,"topic":
             [
                  {"caption":"Project management","href":"Topics/Management/projectManagement.htm"}
@@ -344,6 +330,21 @@ json1+=`,{"title":"General"
             ,{"caption":"scada","href":"Topics/scada.htm"}
         ]
     }`;
+json1+=`,{"title":"Mental skills"
+,"topic":
+            [
+                {"href":"/nilx/Topics/softskills/howtothink.htm" ,"tooltip":"Thinking is a mental tool works base on the cause and effect law. it is a proccess to use imagination,intution  and other higher facaulties to find the cause of an effect and use it","caption":"How to think"}
+                ,{"href":"/nilx/Topics/softskills/howtolearn.htm" ,"caption":"How to learn"}
+                ,{"href":"Topics/Wisdom/unlearningwisdom.htm","caption":"Unlearning"}
+                ,{"href":"/nilx/Topics/softskills/howtosloveaproblem.htm" ,"caption":"How to solve a problem"}
+                ,{"href":"/nilx/Topics/softskills/howtosearch.htm" ,"caption":"How to search"}
+                ,{"href":"/nilx/Topics/softskills/howtodebug.htm","caption":"How to debug"}
+                ,{"href":"/nilx/Topics/softskills/howtocommunicate.htm" ,"caption":"how to communicate"}
+                ,{"href":"/nilx/Topics/softskills/howtomanage.htm" ,"caption":"How to manage "}
+                ,{"href":"/nilx/Topics/softskills/howtoreadcode.htm" ,"tooltip":"There is main functions in the code file which may have used some other functions inside.you should begin by the main class of the project and the main function(s) of the classs and follow the code." ,"caption":"How to read code"}
+                ,{"tooltip":"عملی که پشت آن نتیجه خردمندانه ای که در اثر تجارب قبلی بهو فکر به آن رسیده ایم میباشد.مثلا برای جستجوی آموزش اتوفک نمیزنیم آموزش اتوفک بلکه ابتدا لغات پیشرفته این علم را در میاریم وآنرا جستجو میکنیم که در مورد اتوفک اتریبیوتز میباشد.. ","caption":"wise move"}
+            ]
+        }`;
 json1+=`,{ "title":"Own Business"
 ,"topic":
         [
