@@ -365,12 +365,7 @@ json1+=`,{ "title":"Refrences"
 json1+=`,{ "title":"Temp Desktop"
 ,"topic":
         [
-            {"caption":"using razor string variable in javascript","title":"it should be enclosed in quotes: '@strvariable'"}
-            ,{"caption":"mvc razor grid:awesome grid","href":"www.apnetawesome.com"}
-            ,{"caption":"C# owned entity","href":"https://stackoverflow.com/questions/61706738/what-is-owned-entity-when-and-why-to-use-owned-entity-in-entity-framework-core"}
-            ,{"caption":"chalenge recomandation holand","href":"chalenge.htm"}
-            ,{"caption":"DDD,cqrs,event sourcing awesome","href":"https://github.com/heynickc/awesome-ddd"}
-            ,{"caption":"Creating custom html tag","href":"https://code.tutsplus.com/tutorials/extending-the-html-by-creating-custom-tags--cms-28622"}
+        {"caption":"Creating custom html tag","href":"https://code.tutsplus.com/tutorials/extending-the-html-by-creating-custom-tags--cms-28622"}
             ,{"caption":"wordpress trace plaugin","href":"https://github.com/bobbingwide/oik-bwtrace"}
             ,{"caption":"vertical slice architecture","href":"https://www.google.com/search?q=vertical+slice+architecture"}
             ,{"caption":"Kubernetes","href":"https://www.c-sharpcorner.com/blogs/build-endtoend-net-core-api-and-angular-application-on-kubernetes"}
@@ -378,13 +373,11 @@ json1+=`,{ "title":"Temp Desktop"
             ,{"caption":"WPA","href":"https://www.c-sharpcorner.com/learn/build-progressive-web-apps"}
             ,{"caption":"powerApps","href":"https://www.avepoint.com/blog/office-365/microsoft-powerapps"}
             ,{"caption":"c# blogs","href":"https://www.c-sharpcorner.com/blogs/"}
-            ,{"caption":"my coursera","href":"https://www.coursera.org/learn/project-management-foundations"}
             ,{"caption":"sutra ","href":"https://www.google.com/search?num=100&biw=1500&bih=648&tbm=vid&ei=nnIiXJzgEIWxkwXGsbGADw&q=sutra+sadhguru&oq=sutra+sadhguru"}
             ,{"caption":"bit box","href":"https://www.youtube.com/watch?v=Pvq05v6PfTE"}
             ,{"caption":"applied kinesiology","href":"https://www.google.com/search?q=applied%20kinesiology"}
             ,{"caption":"thymus tapping","href":"https://www.google.com/search?q=tymus+tapping&oq=timus+tapping"}
             ,{"caption":"belief system elimination by jimmy scott phd","href":"https://www.google.com/search?q=belief+system+elimination+by+jimmy+scott+phd"}
-            ,{"caption":" چگونگی اپلای کورسرا","href":"https://virgool.io/@amintaheri90/how-to-apply-for-coursera-g8hiqw59eiod"}
             ,{"caption":"Laravel Homestead","href":"https://laravel.com/docs/5.7/homestead"}
             ,{"caption":"seo tools","href":"https://www.business2community.com/seo/the-top-10-seo-tools-marketers-want-in-2019-02160206"}
             ,{"caption":"tab grouping in chrome","href":"https://mspoweruser.com/this-is-how-tab-grouping-will-work-on-google-chrome/amp/"}
