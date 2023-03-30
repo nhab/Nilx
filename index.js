@@ -53,15 +53,6 @@ json1+=`,{"title":"Developement"
             ,{"caption":"cpp","href":"programming/cpp.htm"}
         ]
     }`; 
-json1+=`,{"title":".Net Front"
-,"topic":
-    [
-        {"caption":"Angular 6 + ASP.NET Core 2","href":"http://dotnetdetail.net/how-to-create-crud-operations-using-angular-6-and-asp-net-core-2-0/"}
-        ,{"caption":"Blazor","href":"programming/dotnet/blazor.htm"}
-        ,{"caption":"Razor page","href":"https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0"}
-        ,{"caption":"MAUI","href":"programming/dotnet/maui.htm"}
-    ]
-    }`;
 
 json1 +=`,{"title":".Net Backend"
 ,"topic":
@@ -95,7 +86,7 @@ json1 +=`,{"title":".Net Backend"
            ]
     }`;
 
-json1 +=`,{"title":".Net Backend other"
+json1 +=`,{"title":".Net other"
 ,"topic":
         [ 
             {"caption":"Speed up visual studio","href":"https://stackoverflow.com/questions/42764166/vs-2017-very-slow-laggy-when-debugging"}
@@ -119,7 +110,10 @@ json1 +=`,{"title":".Net Backend other"
             ,{"caption":"Azure DevOps","href":"programming/dotnet/AzureDevOps.htm"}
             ,{"caption":"MediatR","href":"programming/dotnet/mediatr.htm"}
             ,{"caption":".Net Core 6 React","href":"programming/dotnet/ReactNetCore6.htm"}
-
+        ,{"caption":"Blazor","href":"programming/dotnet/blazor.htm"}
+        ,{"caption":"Razor page","href":"https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0"}
+        ,{"caption":"MAUI","href":"programming/dotnet/maui.htm"}
+   
        ]
     }`;
 
