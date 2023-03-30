@@ -1,20 +1,17 @@
 <html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src='/nhab/assets/js/blocks.js'></script>
-	<link rel="stylesheet" href="/nhab/libs/highlight/androidstudio2.css">
-    <script src="/nhab/libs/highlight/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad()</script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
-<button onclick="toggleAll(this);" >-</button>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	
 
-<h2>
-	<input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />References</h2>
+<h2>References</h2>
 <div>
 	<a href="https://www.youtube.com/playlist?list=PL6tu16kXT9Po4w7VVPh6VGU7G7nm3fxZb">specflow 2021 youtube</a> 
 	<a href="https://www.youtube.com/playlist?list=PL6tu16kXT9Pp3wrsaYyNRnK1QkvVv6qdI" >BDD and Specflow</a>
@@ -22,6 +19,7 @@
 specflow hook before a scenario selenium</a>
 <a href="https://www.google.com/search?q=youtube+specflow+selenium+c%2523+.net+core">youtube specflow selenium c# .net core</a>
 </div>
+	
 <h2>spec flow installatiion</h2>
 <div>
 - install visual studio extention ( vs > extentions > manage extentions > Search for SpecFlow for visual studio )
