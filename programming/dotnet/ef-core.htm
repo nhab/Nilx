@@ -1,27 +1,22 @@
-<html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src='/nhab/assets/js/blocks.js'></script>
-	<link rel="stylesheet" href="/nhab/libs/highlight/androidstudio2.css">
-    <script src="/nhab/libs/highlight/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad()</script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
-<button onclick="toggleAll(this);" >-</button>
-<h2 style="display:flex">
-<input type="button" value="-"
-    class="toggleButton"  onclick="toggle(this)" />Resources</h2>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	
+<h2 style="display:flex">Resources</h2>
 <p>
 <a href="https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx">Ef core Tutorial</a>
 <a href='https://www.youtube.com/watch?v=22BJVr1D2-A'>Ef 6 code first</a>
 <a href="https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli">Migrations</a>
 <a href='C:\root\projs\BookstoreAngular-fresh\BookstoreAngular\angular\'>dbcontext example</a>
 </p>
-<h2 style="display:flex"><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" />Introduction</h2>
+<h2 style="display:flex">Introduction</h2>
 <p>
 Entity Framework is Microsoft’s ORM (Object-Relational Mapping) framework for data access. 
 Entity Framework initially supported Model First and Database First approach where domain object models are defined in a XML based edmx files.
