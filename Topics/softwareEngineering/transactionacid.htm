@@ -1,4 +1,14 @@
-ACID properties.
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+</head>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+<h2>ACID properties</h2>
 <div>
 <h3>Atomicity </h3>
 means that you can guarantee that all of a transaction happens, or none of it does; you can do complex operations as one single unit, all or nothing, and a crash, power failure, error, or anything else won't allow you to be in a state in which only some of the related changes have happened.
