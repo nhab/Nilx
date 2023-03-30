@@ -1,18 +1,16 @@
 <html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src='/nhab/assets/js/blocks.js'></script>
-	<link rel="stylesheet" href="/nhab/libs/highlight/androidstudio2.css">
-    <script src="/nhab/libs/highlight/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad()</script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
-<button onclick="toggleAll(this);" >-</button>
-<h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-        onclick="toggle(this)" />References</h2>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	
+<h2>References</h2>
 <div>
 <a href="https://docs.microsoft.com/en-us/aspnet/signalr/">SignalR</a>
 <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/signalr?view=aspnetcore-6.0&tabs=visual-studio">Get started with ASP.NET Core SignalR</a>
@@ -21,9 +19,7 @@
 <a href="https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client">ASP.NET SignalR Hubs API Guide - JavaScript Client</a>
 <a href="https://docs.microsoft.com/en-us/learn/modules/aspnet-core-signalr/2-what-is-signalr">What is ASP.NET Core SignalR?</a>
 </div>
-<h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-        onclick="toggle(this)" />What is SignalR</h2>
+<h2>What is SignalR</h2>
 <div>
 - Using SignalR, server-side code, that can change the content of a web page without needing to referesh the page.
 - SignalR provides an API for creating server-to-client remote procedure calls (RPC) 
@@ -32,9 +28,7 @@ that call JavaScript code in the client browsers (and other client platforms) fr
 - SignalR can be used to add any sort of "real-time" web functionality to your ASP.NET application. 
 </div>
 
-<h2><h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-        onclick="toggle(this)" />SignalR Hub</h2>
+<h2>SignalR Hub</h2>
 <div>
 SignalR uses hubs to communicate between clients & servers. 
 Hub is a component that is hosted in your ASP.NET Core Application. 
@@ -46,9 +40,7 @@ A combination of hub & remote procedure calls enables real-time web applications
 Hub in ASP.NET Core application is a class derived from the hub base class.    
 </div>
 
-<h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-        onclick="toggle(this)" />Getting started</h2>
+<h2>Getting started</h2>
 <div>
 To develop SignalR Application, we need 2 things in our Application. 
 <p>
@@ -201,9 +193,7 @@ namespace SignalRChat
 </code></pre>
 </div>
 
-<h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-        onclick="toggle(this)" />Concepts</h2>
+<h2>Concepts</h2>
 <div>
     Transports
 SignalR supports the following techniques, or transports, for handling real-time communication:
