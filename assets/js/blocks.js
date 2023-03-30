@@ -49,6 +49,7 @@ function ReplaceLtGt()
     len=$("code").length;
     for(i=0;i<len;i++)
     {
+	    if($("code").eq(i)[0]==undefined) return;
         s=$("code").eq(i)[0].innerHTML
         s=s.replaceAll("<"," < ")
         s=s.replaceAll("&lt;","<")
