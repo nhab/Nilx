@@ -1,23 +1,19 @@
 <html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src='/nhab/assets/js/blocks.js'></script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
-<button onclick="toggleAll(this);" >-</button>
-	<h2>
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />
-		What is wordpress</h2>	
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+	<h2>What is wordpress</h2>	
 <div>
 Open-source free cms  platform by community volunteers for building a website .  
 </div>
-<h2>
-    <input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />
-	Dashboard
-</h2>
+<h2>Dashboard</h2>
 <diV>
 		Posts 		 	 : to manage your posts
 		Media 			: to uploaded all images, documents or files are stored.
@@ -58,16 +54,12 @@ Open-source free cms  platform by community volunteers for building a website .
 					You can also import data to your WordPress site
 						export all your WordPress data to a file from this section.
 </diV>
-<h2>
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />Plugins</h2>
+<h2>Plugins</h2>
 <div>
 		wordpress with sql lite
 		https://wordpress.org/plugins/sqlite-integration/
 </div>	
-<h2>
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />SQLite Integration</h2>
+<h2>SQLite Integration</h2>
 <div>
 	SQLite Integration is the plugin that enables WordPress to use SQLite. If you want to build a WordPress website with it, this plugin is for you.
 
@@ -174,9 +166,7 @@ Open-source free cms  platform by community volunteers for building a website .
 
 	Log in to vote.
 </div>
-<h2>
-<input type="button" value="-"
-class="toggleButton"  onclick="toggle(this)" />Enabling features </h2>
+<h2>Enabling features </h2>
 <div>
 	<b>Enabling debugging and logging:</b>
 		In Root folder of wordpress installation -> Inside wp-config.php -> set these parameter to ture based on your need:
