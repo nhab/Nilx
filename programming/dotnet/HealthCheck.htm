@@ -115,4 +115,50 @@
   This status is defined by AddCheck 
 
 </div>
+
+<h2>Register health check services</h2>
+<div>
+- To register a health check service, call <b>AddCheck</b> in Program.cs:
+<pre><code>
+    builder.Services.AddHealthChecks()
+    .AddCheck<SampleHealthCheck>("Sample");
+</code></pre>
+- Tags can be used to filter health checks.
+<pre><code>
+    builder.Services.AddHealthChecks()
+    .AddCheck<SampleHealthCheck>(
+        "Sample",
+        failureStatus: HealthStatus.Degraded,
+        tags: new[] { "sample" });
+</code></pre>
+- AddCheck can also execute a lambda function. In the following example, the health check always returns a healthy result:
+<pre><code>
+    builder.Services.AddHealthChecks()
+    .AddCheck("Sample", () => HealthCheckResult.Healthy("A healthy result."));
+</code></pre>
+</div>
+- Call AddTypeActivatedCheck to pass arguments to a health check implementation. 
+   In the following example, a type-activated health check accepts an integer and a string in its constructor: 
+<pre><code>
+    public class SampleHealthCheckWithArgs : IHealthCheck
+    {
+        private readonly int _arg1;
+        private readonly string _arg2;
+    
+        public SampleHealthCheckWithArgs(int arg1, string arg2)
+            => (_arg1, _arg2) = (arg1, arg2);
+    
+        public Task<HealthCheckResult> CheckHealthAsync(
+            HealthCheckContext context, CancellationToken cancellationToken = default)
+        {
+            // ...
+    
+            return Task.FromResult(HealthCheckResult.Healthy("A healthy result."));
+        }
+    }
+</code></pre>
+
+<h2>Read more</h2>
+<div>
+<a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-7.0">Health check on microsoft website</a>
 </div>
