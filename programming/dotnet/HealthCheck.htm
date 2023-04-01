@@ -13,8 +13,8 @@
 <div>
 - ASP.NET Core offers Health Checks Middleware and libraries for reporting the health of app infrastructure components.
 - Health checks are exposed by an app as HTTP endpoints.
-- Health check endpoints can be configured for various real-time monitoring scenarios:
-
+- Health check endpoints can be configured for various <b>real-time monitoring scenarios</b>:
+<pre>
     . Health probes can be used by container orchestrators and load balancers to check an app's status. 
         For example, a container orchestrator may respond to a failing health check by halting a rolling deployment
         or restarting a container. 
@@ -24,6 +24,7 @@
 
     . Health checks can test an app's dependencies, such as databases and external service endpoints, 
         to confirm availability and normal functioning.
+</pre>      
 - Health checks are typically used with an external monitoring service or container orchestrator to check the status of an app. 
 </div>
 
@@ -46,13 +47,13 @@
     HealthStatus.Unhealthy.
 
 -Register health check services with 
-    AddHealthChecks in Program.cs. 
+    <b>AddHealthChecks</b> in Program.cs. 
     
 - Create a health check endpoint by calling 
-    MapHealthChecks.
+    <b>MapHealthChecks</b>.
 
 - The following example creates a health check endpoint at 
-    /healthz:
+    <b>/healthz:</b>
 
 <pre><code>
     var builder = WebApplication.CreateBuilder(args);
@@ -72,13 +73,15 @@
 - Docker offers a built-in HEALTHCHECK directive that can be used to check the status of an app 
   that uses the basic health check configuration:
 <pre><code>HEALTHCHECK CMD curl --fail http://localhost:5000/healthz || exit</code></pre>
-- curl isn't included in the .NET Linux container images, but it can be added by installing the required package in the Dockerfile.
+- curl isn't included in the .NET Linux container images,
+   but it can be added by installing the required package in the Dockerfile.
 </div>
 
 <h2>Create health checks</h2>
 <div>
-- Health checks are created by implementing the IHealthCheck interface. 
-- The CheckHealthAsync method returns a HealthCheckResult that indicates the health as Healthy, Degraded, or Unhealthy. 
+- Health checks are created by implementing the <b>IHealthCheck</b> interface. 
+- The <b>CheckHealthAsync</b> method returns a <b>HealthCheckResult</b> that indicates the health as
+   Healthy, Degraded, or Unhealthy. 
 - The result is written as a plaintext response with a configurable status code. 
 - Configuration is described in the Health check options section. 
 - HealthCheckResult can also return optional key-value pairs.
@@ -111,8 +114,5 @@
   Status set to the FailureStatus. 
   This status is defined by AddCheck 
 
-
 </div>
 </div>
-
-
