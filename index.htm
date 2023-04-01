@@ -93,7 +93,7 @@ input.value += " "+selecthow.options[selecthow.selectedIndex].text;
 }
 function search()
 {
-	s ='https://www.google.com/search?q=+'+input.value+'&tbs=qdr:y'+'+site%3Astackoverflow.com+OR+site%3Amedium.com+OR+site%3Ac-sharpcorner.com+OR+site%3Agithub.com';
+	s ='https://www.google.com/search?q=+'+input.value +'+site%3Astackoverflow.com+OR+site%3Amedium.com+OR+site%3Ac-sharpcorner.com+OR+site%3Agithub.com'+'&tbs=qdr:y';
 	window.open(s  , "_blank"); 
 }
 </script>
