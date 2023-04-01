@@ -54,17 +54,27 @@ json1+=`,{"title":"Developement"
         ]
     }`; 
 
-json1 +=`,{"title":".Net Backend"
+json1 +=`,{"title":"C# .Net"
 ,"topic":
         [
             {"caption":"CSharp","href":"programming/dotnet/cs-advanced.htm"}
             ,{"caption":"Object oriented(oo)","href":"programming/oop.htm"}
-            ,{"caption":"Asp.net web api","href":"programming/dotnet/asp.net_web_api.htm"}
-            ,{"caption":"Minimal api","href":"programming/dotnet/minimalapi.htm"}
             ,{"caption":"C# with VSCode","href":"programming/dotnet/CS_VSCode.htm"}
             ,{"caption":"Aspect. net Boilerplate","href":"https://aspnetboilerplate.com/Pages/Documents"}
             ,{"caption":"lambda","href":"programming/dotnet/lambda.htm"}
             ,{"caption":"Linq","href":"programming/dotnet/linq.htm"}
+            ,{"caption":"SOAP Protochol","href":"https://www.tutorialspoint.com/soap/soap_quick_guide.htm"}
+            ,{"caption":"WCF","href":"programming/dotnet/wcf.htm"}
+            ,{"caption":"Nuget","href":"programming/dotnet/nuget.htm"}
+            ,{"caption":"Nuget powershell commands","href":"https://learn.microsoft.com/en-us/nuget/reference/powershell-reference"}            
+        ]
+}`; 
+
+json1 +=`,{"title":".Net Framework"
+,"topic":
+        [
+            ,{"caption":"Asp.net web api","href":"programming/dotnet/asp.net_web_api.htm"}
+            ,{"caption":"Minimal api","href":"programming/dotnet/minimalapi.htm"}
             ,{"caption":".Net","href":"programming/dotnet/dotnet.htm"}
             ,{"caption":".Net Core","href":"programming/dotnet/dotnetCore.htm"}
             ,{"caption":"Fluent API and EF Migrations","href":"programming/dotnet/FluentAPI.htm"}
@@ -74,15 +84,11 @@ json1 +=`,{"title":".Net Backend"
             ,{"caption":"jwt","href":"programming/dotnet/jwt.htm"}
             ,{"caption":"MVC4","href":"programming/dotnet/mvc4.htm"}
             ,{"caption":"MVC core6","href":"programming/dotnet/mvccore6.htm"}
-            ,{"caption":"SOAP Protochol","href":"https://www.tutorialspoint.com/soap/soap_quick_guide.htm"}
-            ,{"caption":"WCF","href":"programming/dotnet/wcf.htm"}
             ,{"caption":"asynchronous-programming","href":"https://www.c-sharpcorner.com/learn/c-sharp-asynchronous-programming"}
             ,{"caption":".Net Logging","href":"programming/dotnet/logging.htm"}
             ,{"caption":"serilog","href":"programming/dotnet/serilog.htm"}
             ,{"caption":".Net hosting model","href":"programming/dotnet/dotnet_hosting_model.htm"}
             ,{"caption":"Middle ware","href":"programming/dotnet/middleware.htm"}
-            ,{"caption":"Nuget","href":"programming/dotnet/nuget.htm"}
-            ,{"caption":"Nuget powershell commands","href":"https://learn.microsoft.com/en-us/nuget/reference/powershell-reference"}
            ]
     }`;
 
