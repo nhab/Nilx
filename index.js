@@ -89,6 +89,7 @@ json1 +=`,{"title":".Net Framework"
             ,{"caption":"serilog","href":"programming/dotnet/serilog.htm"}
             ,{"caption":".Net hosting model","href":"programming/dotnet/dotnet_hosting_model.htm"}
             ,{"caption":"Middle ware","href":"programming/dotnet/middleware.htm"}
+            ,{"caption":"Health Check","href":"programming/dotnet/HealthCheck.htm"}
            ]
     }`;
 
