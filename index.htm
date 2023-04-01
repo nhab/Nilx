@@ -51,14 +51,14 @@
 				}
 		    }
 			var whats=["","what is","glossary","terminology","What is the difference between","use cases of","fundamentals","key concepts","learn","in Minutes","explained","Awesome","cheat sheet","summary","what part","features","structure","understanding","kpi of","patterns","checklist of","why using","simplified","pros of ","kickstart","best practices","interview preparation"];	
-			var hows=["","Getting started","step by step","walk through","Example","practice","hello world","crud","sample code","github","stackoverflow","hotexamples","crash course","How to","real world problem","udemy","by doing","in action","Practical","tutorial"];
+			var hows=["","Getting started","step by step","walk through","Example","practice","hello world","crud","sample code","hotexamples","crash course","How to","real world problem","udemy","by doing","in action","Practical","tutorial"];
 			const selectWhat = document.getElementById("selectWhat");
 			const selectHow = document.getElementById("selectHow");
 			fill(selectWhat,whats);
 			fill(selectHow,hows);
 			
 		</script>
-		<input type="text" id="searchterms" name="searchterms" style="margin-right:3px" class="col-md-3 col-sm-10  p-2 m-2" value='stackoverflow '>
+		<input type="text" id="searchterms" name="searchterms" style="margin-right:3px" class="col-md-3 col-sm-10  p-2 m-2" value=''>
 		<button onclick="search()" style="padding-right:3px;padding-left:3px;" class="col-md-1 col-sm-10  p-2 m-2"> Search </button>
 	</div>
 	<div  id="app" class="blockContainer CenterChildren-H" >
@@ -93,7 +93,7 @@ input.value += " "+selecthow.options[selecthow.selectedIndex].text;
 }
 function search()
 {
-	s ='https://www.google.com/search?q=+'+input.value+'&tbs=qdr:y';
+	s ='https://www.google.com/search?q=+'+input.value+'&tbs=qdr:y'+'+site%3Astackoverflow.com+OR+site%3Amedium.com+OR+site%3Ac-sharpcorner.com+OR+site%3Agithub.com';
 	window.open(s  , "_blank"); 
 }
 </script>
