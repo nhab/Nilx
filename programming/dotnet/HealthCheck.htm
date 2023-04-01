@@ -1,0 +1,117 @@
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+</head>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+<button onclick='toggleAll(this);'>-</button>
+
+<h2>Health checks in ASP.NET Core</h2>
+<div>
+- ASP.NET Core offers Health Checks Middleware and libraries for reporting the health of app infrastructure components.
+- Health checks are exposed by an app as HTTP endpoints.
+- Health check endpoints can be configured for various real-time monitoring scenarios:
+
+    . Health probes can be used by container orchestrators and load balancers to check an app's status. 
+        For example, a container orchestrator may respond to a failing health check by halting a rolling deployment
+        or restarting a container. 
+        A load balancer might react to an unhealthy app by routing traffic away from the failing instance to a healthy instance.
+        
+    . Use of memory, disk, and other physical server resources can be monitored for healthy status.
+
+    . Health checks can test an app's dependencies, such as databases and external service endpoints, 
+        to confirm availability and normal functioning.
+- Health checks are typically used with an external monitoring service or container orchestrator to check the status of an app. 
+</div>
+
+<h2>Basic health probe</h2>
+<div>
+- For many apps, a basic health probe configuration that reports the app's availability to process requests (liveness) 
+   is sufficient to discover the status of the app.
+
+- The basic configuration registers health check services and calls the Health Checks Middleware 
+   to respond at a URL endpoint with a health response. 
+
+- By default, no specific health checks are registered to test any particular dependency or subsystem. 
+
+- The app is considered healthy if it can respond at the health endpoint URL. 
+  The default response writer writes HealthStatus as a plaintext response to the client. 
+  
+- The HealthStatus is 
+    HealthStatus.Healthy, 
+    HealthStatus.Degraded, or 
+    HealthStatus.Unhealthy.
+
+-Register health check services with 
+    AddHealthChecks in Program.cs. 
+    
+- Create a health check endpoint by calling 
+    MapHealthChecks.
+
+- The following example creates a health check endpoint at 
+    /healthz:
+
+<pre><code>
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddHealthChecks();
+    
+    var app = builder.Build();
+    
+    app.MapHealthChecks("/healthz");
+    
+    app.Run();
+</code></pre>
+
+<h2>Docker HEALTHCHECK</h2>
+<div>
+- Docker offers a built-in HEALTHCHECK directive that can be used to check the status of an app 
+  that uses the basic health check configuration:
+<pre><code>HEALTHCHECK CMD curl --fail http://localhost:5000/healthz || exit</code></pre>
+- curl isn't included in the .NET Linux container images, but it can be added by installing the required package in the Dockerfile.
+</div>
+
+<h2>Create health checks</h2>
+<div>
+- Health checks are created by implementing the IHealthCheck interface. 
+- The CheckHealthAsync method returns a HealthCheckResult that indicates the health as Healthy, Degraded, or Unhealthy. 
+- The result is written as a plaintext response with a configurable status code. 
+- Configuration is described in the Health check options section. 
+- HealthCheckResult can also return optional key-value pairs.
+- The following example demonstrates the layout of a health check:  
+<pre><code>
+    public class SampleHealthCheck : IHealthCheck
+    {
+        public Task<HealthCheckResult> CheckHealthAsync(
+            HealthCheckContext context, CancellationToken cancellationToken = default)
+        {
+            var isHealthy = true;
+    
+            // ...
+    
+            if (isHealthy)
+            {
+                return Task.FromResult(
+                    HealthCheckResult.Healthy("A healthy result."));
+            }
+    
+            return Task.FromResult(
+                new HealthCheckResult(
+                    context.Registration.FailureStatus, "An unhealthy result."));
+        }
+    }
+</code></pre>
+- The health check's logic is placed in the CheckHealthAsync method. 
+- If CheckHealthAsync throws an exception during the check,
+  a new HealthReportEntry is returned with its HealthReportEntry.
+  Status set to the FailureStatus. 
+  This status is defined by AddCheck 
+
+
+</div>
+</div>
+
+
