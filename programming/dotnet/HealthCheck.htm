@@ -141,7 +141,7 @@
     builder.Services.AddHealthChecks()
     .AddCheck("Sample", () => HealthCheckResult.Healthy("A healthy result."));
 </code></pre>
-</div>
+
 - Call AddTypeActivatedCheck to pass arguments to a health check implementation. 
    In the following example, a type-activated health check accepts an integer and a string in its constructor: 
 <pre><code>
@@ -162,6 +162,7 @@
         }
     }
 </code></pre>
+</div>
 
 <h2>Read more</h2>
 <div>
