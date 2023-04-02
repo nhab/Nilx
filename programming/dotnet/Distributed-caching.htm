@@ -51,17 +51,17 @@
     
 <h2>Prerequisites</h2>
   <div>
-- Add a nuget package reference for the distributed cache provider used :
+      - Add a <b>nuget package</b> reference for the distributed cache provider used :
 <pre>
-    . For a <i>Redis</i> distributed cache, <i>Microsoft.Extensions.Caching.StackExchangeRedis</i>.
-    . For <i>SQL Server</i>, <i>Microsoft.Extensions.Caching.SqlServer</i>.
-    . For the <i>NCache</i> distributed cache, <i>NCache.Microsoft.Extensions.Caching.OpenSource</i> .   
+    . For a <b>Redis</b> distributed cache, <b>Microsoft.Extensions.Caching.StackExchangeRedis</b>.
+    . For <b>SQL Server</b>, <b>Microsoft.Extensions.Caching.SqlServer</b>.
+    . For the <b>NCache</b> distributed cache, <b>NCache.Microsoft.Extensions.Caching.OpenSource</b> .   
 </pre>
 </div>
 
 <h2>IDistributedCache interface</h2>
 <div>
-The IDistributedCache interface provides the following methods to manipulate items in the distributed cache implementation:
+    The IDistributedCache interface provides the following <b>methods</b> to manipulate items in the distributed cache implementation:
 <pre>
     . <b>Get, GetAsync</b>:
       Accepts a string key and retrieves a cached item as a byte[] array if found in the cache.
@@ -88,12 +88,11 @@ The IDistributedCache interface provides the following methods to manipulate ite
     Distributed SQL Server cache
     Distributed NCache cache    
 </pre>
-
 </div>
 
 <h2>Distributed Redis Cache</h2>
 <div>
-- We recommend production apps use the Distributed Redis Cache because it's the most performant.
+- We recommend production apps use the Distributed Redis Cache because <i>it's the most performant</i>.
 
 - Redis is an open source in-memory data store, which is often used as a distributed cache.
 
