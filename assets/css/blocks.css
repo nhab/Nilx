@@ -106,9 +106,15 @@ b{
 	padding-left: 5PX;  padding-right: 5PX;
 	display: inline;
 }
-i{
+cg{
 	font-weight: 900;
-	color:#002200;
+	font-style:normal;
+	color:#007700;
+}
+cb{
+	font-weight: 900;
+	font-style:normal;
+	color:#000077;
 }
 p,div{
 		white-space: pre-line;
