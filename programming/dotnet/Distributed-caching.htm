@@ -211,7 +211,7 @@ builder.Services.AddNCacheDistributedCache(configuration =>
 - To use the IDistributedCache interface, request an instance of IDistributedCache in the app. 
 - The instance is provided by dependency injection (DI).
 - When the sample app starts, IDistributedCache is injected into Program.cs. 
-    - The current time is cached using <i>IHostApplicationLifetime</i>
+- The current time is cached using <i>IHostApplicationLifetime</i>
 <pre><code>
 app.Lifetime.ApplicationStarted.Register(() =>
 {
