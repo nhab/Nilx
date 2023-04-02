@@ -1,3 +1,7 @@
+h9{
+	font-weight: 900;
+	color:#000077;
+}
 /*
 In html you can use:
   -Ė„Ė…Ė†Ė‡Ö¨ā€”ā†ā†‘ā†’ā†“ā†”ā‘āā˛ā‰ ā‰¤ā‰�ā”‚ā– ā–ā–ā–²ā–ŗā–¼ā—„āŗā™¦ļ´¾ļ´æ
@@ -92,10 +96,7 @@ h8{
 	padding-right: 10px;
 	white-space: nowrap;
 }
-h9{
-	font-weight: 900;
-	color:#000077;
-}
+
 
 b{
 	font-size:1.3em;
