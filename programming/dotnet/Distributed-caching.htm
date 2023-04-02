@@ -46,7 +46,7 @@
     (i.e. SQL Server, Redis,and NCache on GitHub). 
 
 - Regardless of which implementation is selected, 
-    the app interacts with the cache using the <i>IDistributedCache</i> interface.
+    the app interacts with the cache using the <cg>IDistributedCache</cg> interface.
 </div>
     
 <h2>Prerequisites</h2>
@@ -92,14 +92,14 @@
 
 <h2>Distributed Redis Cache</h2>
 <div>
-- We recommend production apps use the Distributed Redis Cache because <i>it's the most performant</i>.
+- We recommend production apps use the Distributed Redis Cache because <cb>it's the most performant</cb>.
 
-- Redis is an open source <i>in-memory data store</i>, which is often used as a distributed cache.
+- Redis is an open source <cg>in-memory data store</cg>, which is often used as a distributed cache.
 
 - You can configure an Azure Redis Cache for an Azure-hosted ASP.NET Core app,
-    and use an <i>Azure Redis Cache for local development</i>.
+    and use an <cg>Azure Redis Cache for local development</cg>.
 
-- An app configures the cache implementation using a <i>RedisCache</i> instance (<i>AddStackExchangeRedisCache</i>).
+- An app configures the cache implementation using a <cg>RedisCache</cg> instance (<cb>AddStackExchangeRedisCache</cb>).
 <pre>
 1.Create an Azure Cache for Redis.
 
