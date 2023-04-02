@@ -26,13 +26,13 @@
 </div>
 <h2>What is?</h2>
 <div>
-- A distributed cache is a cache shared by multiple app servers, 
-   typically maintained as an external service to the app servers that access it. 
+- is a cache shared by multiple app servers, 
+- typically maintained as an external service to the app servers that access it. 
      
-- A distributed cache can improve the performance and scalability of an ASP.NET Core app, 
+- can improve the performance and scalability of an ASP.NET Core app, 
    especially when the app is hosted by a cloud service or a server farm.
 
-- A distributed cache has several advantages over other caching scenarios 
+- has several advantages over other caching scenarios 
    where cached data is stored on individual app servers.
 
 - When cached data is distributed, the data:   
@@ -42,22 +42,20 @@
     . Doesn't use local memory.
 </pre>
 
-- Distributed cache configuration is implementation specific. 
+- Distributed cache configuration is implementation specific
+    (i.e. SQL Server, Redis,and NCache on GitHub). 
 
-- This article describes how to configure SQL Server and Redis distributed caches. 
-
-- Third party implementations are also available, such as NCache (NCache on GitHub). 
-
-- Regardless of which implementation is selected, the app interacts with the cache using the <b>IDistributedCache</b> interface.
+- Regardless of which implementation is selected, 
+    the app interacts with the cache using the <i>IDistributedCache</i> interface.
 </div>
     
 <h2>Prerequisites</h2>
   <div>
 - Add a nuget package reference for the distributed cache provider used :
 <pre>
-    . For a <b>Redis</b> distributed cache, <b>Microsoft.Extensions.Caching.StackExchangeRedis</b>.
-    . For <b>SQL Server</b>, <b>Microsoft.Extensions.Caching.SqlServer</b>.
-    . For the <b>NCache</b> distributed cache, <b>NCache.Microsoft.Extensions.Caching.OpenSource</b> .   
+    . For a <i>Redis</i> distributed cache, <i>Microsoft.Extensions.Caching.StackExchangeRedis</i>.
+    . For <i>SQL Server</i>, <i>Microsoft.Extensions.Caching.SqlServer</i>.
+    . For the <i>NCache</i> distributed cache, <i>NCache.Microsoft.Extensions.Caching.OpenSource</i> .   
 </pre>
 </div>
 
