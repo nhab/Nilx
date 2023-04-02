@@ -100,14 +100,38 @@ select *
 from (
 select *, rn=row_number() over (partition by EmployeeName order by empId)
 from Employee
+
+
 ) x
 where rn > 1;
 
+/*------------------------------------------------------------------*
+Description of Tables with their schema names :
+-------------------------------------------------------------------*/
 
-
-
-
-
+SELECT
+   SCHEMA_NAME(tbl.schema_id) AS SchemaName,	
+   tbl.name AS TableName, 
+   p.name AS ExtendedProperty_Name,
+   CAST(p.value AS sql_variant) AS ExtendedProperty_Value
+FROM
+   sys.tables AS tbl
+   INNER JOIN sys.extended_properties AS p ON p.major_id=tbl.object_id 
+   AND p.minor_id=0 AND p.class=1
+/*------------------------------------------------------------------*
+Description of Columns (tables included):
+-------------------------------------------------------------------*/
+SELECT S.name as [Schema_Name],
+    O.name AS [Table_Name], c.name as column_Name, 
+	ep.name AS [Extended_property_Name]  , 
+	ep.value AS [Extended_property_value]  
+  FROM sys.extended_properties EP
+LEFT JOIN sys.all_objects O ON ep.major_id = O.object_id 
+LEFT JOIN sys.schemas S on O.schema_id = S.schema_id
+LEFT JOIN sys.columns AS c ON ep.major_id = c.object_id AND 
+ep.minor_id = c.column_id
+where o.type_desc='USER_TABLE'
+order by [Schema_Name],[Table_Name],EP.minor_id
 
 </code></pre>
 </div>
