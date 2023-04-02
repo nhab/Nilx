@@ -66,7 +66,10 @@ json1 +=`,{"title":"C# .Net"
             ,{"caption":"SOAP Protochol","href":"https://www.tutorialspoint.com/soap/soap_quick_guide.htm"}
             ,{"caption":"WCF","href":"programming/dotnet/wcf.htm"}
             ,{"caption":"Nuget","href":"programming/dotnet/nuget.htm"}
-            ,{"caption":"Nuget powershell commands","href":"https://learn.microsoft.com/en-us/nuget/reference/powershell-reference"}            
+            ,{"caption":"Nuget powershell commands","href":"https://learn.microsoft.com/en-us/nuget/reference/powershell-reference"}
+            ,{"caption":"Health Check","href":"programming/dotnet/HealthCheck.htm"}
+            ,{"caption":"Distributed caching","href":"programming/dotnet/Distributed-caching.htm"}
+            ,{"caption":"Prometheus","href":"programming/dotnet/prometheus.htm"}
         ]
 }`; 
 
@@ -89,8 +92,7 @@ json1 +=`,{"title":".Net Framework"
             ,{"caption":"serilog","href":"programming/dotnet/serilog.htm"}
             ,{"caption":".Net hosting model","href":"programming/dotnet/dotnet_hosting_model.htm"}
             ,{"caption":"Middle ware","href":"programming/dotnet/middleware.htm"}
-            ,{"caption":"Health Check","href":"programming/dotnet/HealthCheck.htm"}
-            ,{"caption":"Distributed caching","href":"programming/dotnet/Distributed-caching.htm"}
+
            ]
     }`;
 
