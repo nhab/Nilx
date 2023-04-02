@@ -1,0 +1,312 @@
+
+
+<h2>what is prometheus?</h2>
+<div>
+
+- is monitoring solution
+
+- is typically used to collect numeric metrics 
+    from services that run 24/7 
+    and allow metric data to be accessed via HTTP endpoints. 
+
+- it collects metrics data and stores that data in a time series database.
+
+- you point it at an URL exposed by your application, 
+    Prometheus grabs metrics from that URL every once in a while, and stores them. 
+</div>
+<h2>Setting up our Application</h2>
+<div>
+
+ - create an ASP.NET Core Web API project. 
+    At the time of writing, .NET Core 3.1 is the latest.
+
+ - Next up, we want to expose a basic set of metrics. 
+ - There is a library available named <h9>prometheus-net </h9> that comes with a companion ASP.NET Core Package.
+ - Run the following commands in the Package Manager Console:
+<pre><code>
+
+    Install-Package prometheus-net
+    Install-Package prometheus-net.AspNetCore
+</code></pre>
+- We can now start exposing a default set of metrics using one simple line in Startup.cs:
+<cl>app.UseMetricServer();</cl>
+- Make sure to place it before the call to app.UseEndPoints(...) — 
+    otherwise we may be missing some important HTTP metrics later on.
+
+That’s all there’s to it — 
+    if you start your service and navigate to the /metrics endpoint, 
+    you should see a default set of metrics exposed by your service:
+<cl>
+
+    # HELP process_private_memory_bytes Process private memory size
+    # TYPE process_private_memory_bytes gauge
+    process_private_memory_bytes 74604544
+    # HELP process_virtual_memory_bytes Virtual memory size in bytes.
+    # TYPE process_virtual_memory_bytes gauge
+    process_virtual_memory_bytes 2223070081024
+    # HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+    # TYPE process_start_time_seconds gauge
+    process_start_time_seconds 1576244939.1073897
+    # HELP dotnet_total_memory_bytes Total known allocated memory
+    # TYPE dotnet_total_memory_bytes gauge
+    dotnet_total_memory_bytes 3013928
+    # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+    # TYPE process_cpu_seconds_total counter
+    process_cpu_seconds_total 0.796875
+    # HELP dotnet_collection_count_total GC collection count
+    # TYPE dotnet_collection_count_total counter
+    dotnet_collection_count_total{generation="1"} 0
+    dotnet_collection_count_total{generation="2"} 0
+    dotnet_collection_count_total{generation="0"} 0
+    # HELP process_working_set_bytes Process working set
+    # TYPE process_working_set_bytes gauge
+    process_working_set_bytes 56242176
+    # HELP process_num_threads Total number of threads
+    # TYPE process_num_threads gauge
+    process_num_threads 35
+    # HELP process_open_handles Number of open handles
+    # TYPE process_open_handles gauge
+    process_open_handles 566    
+</cl>
+
+- While the amount of memory used by our service is a great starting metric, it is very general.
+- Of course, the type of metrics you want to collect depend heavily on your specific application.
+
+- For most ASP.NET Core applications however, response times is a meaningful metric. 
+- Any spikes in response times may in the worst case indicate possible outage, 
+    if not a plain nuisance for your users. 
+</div>
+
+<h2>Choosing Our Metrics</h2>
+<div>
+- Before we can start reporting metrics, we’ll need to settle on the type of metric we’re going to report. 
+    Prometheus defines the following metrics in their documentation:
+<pre>
+
+    <h9>Counter</h9> 
+        — A counter is a cumulative metric that represents a single monotonically increasing counter 
+         whose value can only increase or be reset to zero on restart.
+
+    <h9>Gauge</h9> 
+        — A gauge is a metric that represents a single numerical value 
+            that can arbitrarily go up and down.
+
+    <h9>Histogram</h9>
+        — A histogram samples observations (usually things like request durations or response sizes) 
+            and counts them in configurable buckets. 
+            It also provides a sum of all observed values.
+
+    <h9>Summary</h9> 
+        — Similar to a histogram, a summary samples observations 
+            (usually things like request durations and response sizes). 
+            While it also provides a total count of observations 
+            and a sum of all observed values, 
+            it calculates configurable quantiles over a sliding time window.
+</pre>
+- The number of requests our service serves will ever only go up during its lifetime. 
+    Therefore, a monotonic counter represented by a Counter will be perfect.
+
+- Request duration can be represented using a Histogram. 
+    Each time we measure the time elapsed between a request and a response, 
+    that’s an observation.
+    Prometheus will subsequently divide these observations in quantiles (or buckets) for us.
+
+</div>
+
+<h2>Obtaining Metrics</h2>
+<div>
+- Before we can send our metrics off to Prometheus, we’ll need to collect them. 
+- It’s perfectly fine to define the individual Counter and Histogram objects close to use, 
+    but for this article we will keep them in a reporter type 
+    that we inject into the middleware component, 
+    to keep things slightly more manageable.
+
+- For our use case, we can start off with a fairly simple MetricReporter type:
+<pre><code>
+
+    public class MetricReporter
+    {
+        private readonly ILogger<MetricReporter> _logger;
+        private readonly Counter _requestCounter;
+        private readonly Histogram _responseTimeHistogram;
+    
+        public MetricReporter(ILogger<MetricReporter> logger)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    
+            _requestCounter =
+                Metrics.CreateCounter("total_requests", "The total number of requests serviced by this API.");
+    
+            _responseTimeHistogram = Metrics.CreateHistogram("request_duration_seconds",
+                "The duration in seconds between the response to a request.", new HistogramConfiguration
+                {
+                    Buckets = Histogram.ExponentialBuckets(0.01, 2, 10),
+                    LabelNames = new[] { "status_code", "method" }
+                });
+        }
+    
+        public void RegisterRequest()
+        {
+            _requestCounter.Inc();
+        }
+    
+        public void RegisterResponseTime(int statusCode, string method, TimeSpan elapsed)
+        {
+            _responseTimeHistogram.Labels(statusCode.ToString(), method).Observe(elapsed.TotalSeconds);
+        }
+    }    
+</code></pre>
+
+As you can see, the Reporter contains two methods; RegisterRequest() , 
+which is called whenever a request is considered handled, and regardless of its response type. 
+The second method is RegisterResponseType , which takes a handful of parameters.
+We’ll obtain the values for these parameters in our middleware component later on.
+
+The interesting thing to note here is that our histogram contains a handful of labels, 
+which the metrics will be grouped by. By applying the status_code and method labels, 
+we’ll be able to differentiate between any combination of them in our metrics — 
+e.g. we’ll be able to tell the duration of POST requests 
+with a response code of 200 apart from GET requests with the same response.
+
+We could extend these labels much further,
+ for example with the Controller and Action parameters that handled the request. 
+ By doing so we would be able to collect very in-depth information 
+ regarding the performance of our actions and controllers, 
+ and be able to optimize them very specifically.
+
+Next up, we’ll need a middleware component that actually gathers the data for us:
+<pre><code>
+    public class ResponseMetricMiddleware
+    {
+        private readonly RequestDelegate _request;
+    
+        public ResponseMetricMiddleware(RequestDelegate request)
+        {
+            _request = request ?? throw new ArgumentNullException(nameof(request));
+        }
+    
+        public async Task Invoke(HttpContext httpContext, MetricReporter reporter)
+        {
+            var path = httpContext.Request.Path.Value;
+            if (path == "/metrics")
+            {
+                await _request.Invoke(httpContext);
+                return;
+            }
+            var sw = Stopwatch.StartNew();
+    
+            try
+            {
+                await _request.Invoke(httpContext);
+            }
+            finally
+            {
+                sw.Stop();
+                reporter.RegisterRequest();
+                reporter.RegisterResponseTime(httpContext.Response.StatusCode, httpContext.Request.Method, sw.Elapsed);
+            }
+        }
+    }
+</code></pre>
+Nothing special about this middleware component. 
+We inject MetricReporter into the middleware, gather some data and we do some reporting.
+We exclude requests to /metrics because we don’t want to include Prometheus’ own crawling in the statistics.
+</div>
+
+<h2>Metrics in Action</h2>
+<div>
+
+We now have all the components we need to expose a solid set of metrics for our service. 
+Before we can take it for a spin however, 
+we’ll need to wire the various components up with the dependency injection framework.
+
+Open Startup.cs and update ConfigureServices 
+and Configure to look something along the lines of:
+<pre><code>
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddSingleton<MetricReporter>();
+
+    services.AddControllers();
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    // Other middleware components omitted for brevity
+
+    // Make sure these calls are made before the call to UseEndPoints.
+    app.UseMetricServer();
+    app.UseMiddleware<ResponseMetricMiddleware>();
+
+    app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+}
+</code></pre>
+Fire up your application and make a couple of requests. 
+You shouldn’t notice much difference in terms of performance from before.
+
+Now, when you move to the /metrics endpoint on your application, 
+you should be able to see some key metrics about the requests your application served:
+<cl>
+    # HELP request_duration_seconds The duration in seconds between the response to a request.
+    # TYPE request_duration_seconds histogram
+    request_duration_seconds_sum{status_code="200",method="GET"} 0.0385083
+    request_duration_seconds_count{status_code="200",method="GET"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="0.01"} 12
+    request_duration_seconds_bucket{status_code="200",method="GET",le="0.02"} 12
+    request_duration_seconds_bucket{status_code="200",method="GET",le="0.04"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="0.08"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="0.16"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="0.32"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="0.64"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="1.28"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="2.56"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="5.12"} 13
+    request_duration_seconds_bucket{status_code="200",method="GET",le="+Inf"} 13
+    request_duration_seconds_sum{status_code="404",method="GET"} 0.0003874
+    request_duration_seconds_count{status_code="404",method="GET"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="0.01"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="0.02"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="0.04"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="0.08"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="0.16"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="0.32"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="0.64"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="1.28"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="2.56"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="5.12"} 9
+    request_duration_seconds_bucket{status_code="404",method="GET",le="+Inf"} 9
+    # HELP total_requests The total number of requests serviced by this API.
+    # TYPE total_requests counter
+    total_requests 22
+</cl>
+There should be more metrics available on your endpoint, 
+but I’ve omitted the ones that we didn’t set up in this article for brevity in the above text.
+
+You can see from both the counter and the histogram that the application serviced 22 requests,
+ 13 of which were successful, and 9 returned 404 Not Found.
+
+Out of the 13 successful requests, 12 took less than 0.01 second, or 10 milliseconds. 
+Because the buckets are defined as quantiles,
+ observations from lower buckets fall into higher buckets as well.
+
+As you can see, even though these metrics are relatively simple to set up, 
+they immediately give us very powerful insights in the performance of our application,
+and where we might be able to optimize it further.
+
+We’ve added a handful of metrics to our application 
+that allow us to obtain information about the environment our application runs in,
+ as well as the requests our application services.
+
+To improve this, you could add the HttpMetrics middleware provided by prometheus-net :
+
+app.UseHttpMetrics();
+This is largely functionally equivalent to the response time middleware we wrote 
+and configured in this article, so you may want to remove that one from your pipeline.
+
+The HTTP Metrics middleware components give you far more information than our simple middleware did. 
+It includes the actions and controllers in the metrics,
+ allowing you to specifically track down the (lack of) 
+ performance of specific actions in your application, and fix them with precision.
+ 
+</div>
