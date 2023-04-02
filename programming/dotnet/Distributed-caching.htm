@@ -24,13 +24,21 @@
     Distributed Cache Tag Helper in ASP.NET Core
     Host ASP.NET Core in a web farm
 </div>
-<h2>What is distributed cach?</h2>
-<div>
     
-- Caching means saving frequently accessed data in-memory, 
+ <h2>Why Caching?</h2>
+ <div>
+ - Caching means saving frequently accessed data in-memory, 
     that is in RAM instead of the hard drive. 
     Accessing data from RAM is always faster than accessing it from the hard drive.
+     
+-Second, it intercepts all the user data requests before they go to the database. 
+     This averts the database bottleneck issue. 
+     The database is hit with comparatively lesser number of requests 
+     eventually making the application as a whole performant.
+ </div>
     
+<h2>What is distributed cach?</h2>
+<div>
 - is a cache shared by multiple app servers, 
 - typically maintained as an external service to the app servers that access it. 
      
