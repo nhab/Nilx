@@ -107,9 +107,9 @@ b{
 	display: inline;
 }
 i{
-	font-weight: 900;
-	font-style:normal;
-	color:#007700;
+	font-weight: 900 !important;
+	font-style:normal !important;
+	color:#007700 !important;
 }
 cb{
 	font-weight: 900;
