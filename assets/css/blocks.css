@@ -92,11 +92,10 @@ h8{
 	padding-right: 10px;
 	white-space: nowrap;
 }
-h9{/*width=remaining to full-width*/
-	border: 1px solid #333333;
-	display: table-cell;
-	width:100%;
-	white-space: nowrap;
+h9{
+	font-weight: 900;
+	font-style:normal;
+	color:#000077;
 }
 
 b{
@@ -111,11 +110,7 @@ i{
 	font-style:normal !important;
 	color:#007700 !important;
 }
-cb{
-	font-weight: 900;
-	font-style:normal;
-	color:#000077;
-}
+
 p,div{
 		white-space: pre-line;
 		margin-top:-1em;
