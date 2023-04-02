@@ -43,7 +43,10 @@
         also across several clusters across several data centres located around the globe.
      
      - Typically maintained as an external service to the app servers that access it.    
-        
+     - A Distributed cache under the covers is a Distributed Hash Table 
+        which has a responsibility of mapping Object Values to Keys spread across multiple nodes.
+
+The distributed Hash table allows a Distributed cache to scale on the fly, it manages the addition, deletion, failure of nodes continually as long as the cache service is online. 
     - Scalability, High Availability, Fault-tolerance are crucial to the large scale services running online today.
         Businesses cannot afford to have their services go offline. Think about health services, stock markets, military. 
         They have no scope for going down. 
