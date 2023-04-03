@@ -1,44 +1,45 @@
 <!DOCTYPE html>
-<html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="../../assets/css/blocks.css">	
-	<script src='../../assets/js/blocks.js'></script>
-	<link rel="stylesheet" href="../../libs/highlight/androidstudio2.css">
-    <script src="../../libs/highlight/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad()</script>
-	<script>
-	
-	</script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body onload="AddToggleButtons()">
-<button onclick="toggleAll(this);" >-</button>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+<button onclick='toggleAll(this);'>-</button>
+
 <h2>References</h2>
 <div>
-	<a href="https://github.com/datalust/dotnet6-serilog-example">>net 6 Step by step example</a>
-	<a href="https://docs.microsoft.com/en-us/learn/modules/aspnet-logging/3-aspnet-log-overview">Overview</a>
-	<a href="github.com/serilog/serilog/wiki/Enrichment">Enrichment</a>
+	
+	<a href="https://github.com/datalust/dotnet6-serilog-example"  target="_blank" rel="noopener noreferrer" >net 6 Step by step example</a>
+	<a href="https://docs.microsoft.com/en-us/learn/modules/aspnet-logging/3-aspnet-log-overview"  target="_blank" rel="noopener noreferrer">Overview</a>
+	<a href="github.com/serilog/serilog/wiki/Enrichment"  target="_blank" rel="noopener noreferrer">Enrichment</a>
 	benfoster.io/blog/serilog-best-practices
  	github.com/serilog/serilog/wiki
 </div>
 <h2>Serilog</h2>
 <div>
-Serilog uses a simple C# API to configure logging.
- When external configuration is desirable it can be mixed in (sparingly) using the <cli>Serilog.Settings.AppSettings</cli> package or <cli>Serilog.Settings.Configuration</cli> 
- package.
+ - Serilog uses a simple API to configure logging.
+	
+ - When external configuration is desirable it can be mixed in using 
+	the <cli>Serilog.Settings.AppSettings</cli> package
+	or <cli>Serilog.Settings.Configuration</cli> package.
 </div>
 <h2>Creating a logger</h2>
 <div>
-Loggers are created using a LoggerConfiguration object:
+- Loggers are created using a LoggerConfiguration object:
 <cl>
+	
 Log.Logger = new LoggerConfiguration().CreateLogger();
 Log.Information("No one listens to me!");
 
 // Finally, once just before the application exits...
 Log.CloseAndFlush();
 </cl>
-The example above will create a logger that does not record events anywhere. To see log events, a sink must be configured.
+The example above will create a logger that does not record events anywhere.
+To see log events, a sink must be configured.
 </div>
 <h2>Sinks</h2>
 <div>
