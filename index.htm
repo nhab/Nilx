@@ -59,6 +59,7 @@
 			
 		</script>
 		<input type="text" id="searchterms" name="searchterms" style="margin-right:3px" class="col-md-3 col-sm-10  p-2 m-2" value=''>
+		<input type="checkbox" id="chksites" alt="Search in specific websites" checked="true">
 		<button onclick="search()" style="padding-right:3px;padding-left:3px;" class="col-md-1 col-sm-10  p-2 m-2"> Search </button>
 	</div>
 	<div  id="app" class="blockContainer CenterChildren-H" >
@@ -93,7 +94,13 @@ input.value += " "+selecthow.options[selecthow.selectedIndex].text;
 }
 function search()
 {
-	s ='https://www.google.com/search?q=+'+input.value +'+site%3Astackoverflow.com+OR+site%3Amedium.com+OR+site%3Ac-sharpcorner.com+OR+site%3Agithub.com'+'&tbs=qdr:y';
+	s  ='https://www.google.com/search?q=+'+input.value ;
+	if( document.getElementById("chksites").checked)
+	{
+		s +='+site%3Amedium.com+OR+site%3Ac-sharpcorner.com+OR+site%3Agithub.com+OR+site%3Astackoverflow.com';
+	}
+	s += +'&tbs=qdr:y';
+          
 	window.open(s  , "_blank"); 
 }
 </script>
