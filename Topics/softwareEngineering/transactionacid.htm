@@ -11,20 +11,32 @@
 <h2>ACID properties</h2>
 <div>
 <h3>Atomicity </h3>
-means that you can guarantee that all of a transaction happens, or none of it does; you can do complex operations as one single unit, all or nothing, and a crash, power failure, error, or anything else won't allow you to be in a state in which only some of the related changes have happened.
-( Atomicity : Either commit all or nothing.)
+ <b>( Either commit all or nothing.)</b>
+- guarantees that all of a transaction happens, 
+	or none of it does; 
+  you can do complex operations as one single unit, all or nothing, 
+  and a crash, power failure, error, or anything else won't allow you to be in a state in which only some of the related changes have happened.
+
 
 <h3>Consistency </h3>
-means that you guarantee that your data will be consistent; none of the constraints you have on related data will ever be violated.
+- guarantees that none of the constraints you have on related data will ever be violated.
 ( Consistency : Make consistent record in terms of validate all rule and constraint of transaction.)
 
 <h3>Isolation </h3>
-means that one transaction cannot read data from another transaction that is not yet completed. If two transactions are executing concurrently, each one will see the world as if they were executing sequentially, and if one needs to read data that is written by another, it will have to wait until the other is finished.
-(Isolation : Make sure that two transaction is unaware to each other).
+<b>(Make sure that two transaction is unaware to each other)</b>
+means that one transaction cannot read data from another transaction that is not yet completed. 
+If two transactions are executing concurrently,
+	each one will see the world as if they were executing sequentially, 
+	and if one needs to read data that is written by another, 
+	it will have to wait until the other is finished.
+
 
 <h3>Durability </h3>
-means that once a transaction is complete, it is guaranteed that all of the changes have been recorded to a durable medium (such as a hard disk), and the fact that the transaction has been completed is likewise recorded.
-( Durability : committed data stored forever.)
+	<b>( committed data stored forever)</b>
+means that once a transaction is complete, 
+	it is guaranteed that all of the changes have been recorded to a durable medium (such as a hard disk),
+	and the fact that the transaction has been completed is likewise recorded.
+
 </div>
 to recap:
 <div>
