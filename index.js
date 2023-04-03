@@ -15,7 +15,6 @@ json1+=`{"title":"Software Eng"
             ,{"caption":"Refactoring","href":"programming/dotnet/refactoring.htm"}
             ,{"caption":"Transaction Acid properties","href":"Topics/softwareEngineering/transactionacid.htm"}
             ,{"caption":"Grasp","href":"Topics/softwareEngineering/grasp.htm"}
-            ,{"caption":"Grasp principals","href":"https://www.fluentcpp.com/2021/06/23/grasp-9-must-know-design-principles-for-code/"}
             ,{"caption":"Class diagram relationships","href":"Topics/softwareEngineering/classdiagramrelations.htm"}
             ,{"caption":"Algorithms and Data structures","href":"programming/algods.htm"}
         ]
