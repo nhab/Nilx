@@ -69,6 +69,7 @@ json1 +=`,{"title":"C# .Net"
             ,{"caption":"Health Check","href":"programming/dotnet/HealthCheck.htm"}
             ,{"caption":"Distributed caching","href":"programming/dotnet/Distributed-caching.htm"}
             ,{"caption":"Prometheus","href":"programming/dotnet/prometheus.htm"}
+            ,{"caption":"Easy caching","href":"programming/dotnet/easycaching.htm"}
         ]
 }`; 
 
