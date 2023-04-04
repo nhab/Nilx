@@ -97,7 +97,11 @@ function search()
 	s  ='https://www.google.com/search?q=+'+input.value ;
 	if( document.getElementById("chksites").checked)
 	{
-		s +='+site%3Amedium.com+OR+site%3Ac-sharpcorner.com+OR+site%3Agithub.com+OR+site%3Astackoverflow.com';
+		s +='+site%3Amedium.com'
+		s +='+OR+site%3Ac-sharpcorner.com';
+		s +='+OR+site%3Agithub.com';
+		s +='+OR+site%3Astackoverflow.com';
+		s +='+OR+site%3Ahttps://zetcode.com/csharp';
 	}
 	s += +'&tbs=qdr:y';
           
