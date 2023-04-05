@@ -318,6 +318,7 @@ json1+=`,{"title":"General"
             {"caption":"Immigration","href":"Topics/immi/immi.htm"}
             ,{"caption":"German","href":"languages/german/german.htm"}
             ,{"caption":"Linux","href":"Topics/linux.htm"}
+            ,{"caption":"Bash script","href":"Topics/bash.htm"}
             ,{"caption":"Biochemistry","href":"Topics/biochemistry.htm"}
             ,{"caption":"network","href":"Topics/network.htm"}
             ,{"caption":"scada","href":"Topics/scada.htm"}
