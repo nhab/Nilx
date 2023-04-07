@@ -43,6 +43,25 @@ function AddToggleButtons()
 		childDiv.prepend(para);
 	}
 }
+function AddToggleButtonsToH2andH3()
+{
+	for(j=2;j<=3;j++)
+	{
+		var childDivs = document.getElementsByTagName('h'+str(j));
+
+		for( i=0; i< childDivs.length; i++ )
+		{
+			var childDiv = childDivs[i];
+
+			const para = document.createElement("input");
+			para.setAttribute("value","-");
+			para.setAttribute("type","button");
+			para.setAttribute("onclick","toggle(this)");
+			para.setAttribute("class","toggleButton");
+			childDiv.prepend(para);
+		}
+	}
+}
 
 function ReplaceLtGt()
 {
