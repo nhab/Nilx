@@ -47,7 +47,7 @@ function AddToggleButtonsToH2andH3()
 {
 	for(j=2;j<=3;j++)
 	{
-		var childDivs = document.getElementsByTagName('h'+str(j));
+		var childDivs = document.getElementsByTagName('h'+j.toString());
 
 		for( i=0; i< childDivs.length; i++ )
 		{
