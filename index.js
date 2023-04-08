@@ -50,6 +50,7 @@ json1+=`,{"title":"Developement"
             ,{"caption":"CI/CD Pipeline","href":"https://dzone.com/articles/learn-how-to-setup-a-cicd-pipeline-from-scratch"}
             ,{"caption":"Amazon web services(AWS)","href":"Topics/aws.htm"}
             ,{"caption":"cpp","href":"programming/cpp.htm"}
+            ,{"caption":"Summary","href":"summary.htm"}
         ]
     }`; 
 
