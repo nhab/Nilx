@@ -4,7 +4,7 @@ function toggle(el)
 	{
 		el.value='+';
 		el.parentElement.nextElementSibling.style.display='none';
-		el.parentElement.nextElementSibling.style.max-height= 0;
+		el.parentElement.nextElementSibling.style.max-height= 0px;
 	}
 	else
 	{
