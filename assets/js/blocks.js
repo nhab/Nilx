@@ -4,13 +4,13 @@ function toggle(el)
 	{
 		el.value='+';
 		el.parentElement.nextElementSibling.style.display='none';
-		el.parentElement.nextElementSibling.style.max-height: 0;
+		el.parentElement.nextElementSibling.style.max-height= 0;
 	}
 	else
 	{
 		el.value='-';
 		el.parentElement.nextElementSibling.style.display='block';
-		el.parentElement.nextElementSibling.style.max-height:10000px;
+		el.parentElement.nextElementSibling.style.max-height=10000px;
 	}
 }
 
