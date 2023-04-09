@@ -155,16 +155,16 @@ that depends on multiple aggregate (entity) type or some external services.
 ● Services come in 3 flavours:
 Domain Services, Application Services, and Infrastructure Services.
 
-**Domain Services :** 
-        Encapsulates business logic that doesn't naturally fit within a domain object,
-        and are NOT typical CRUD operations – those would belong to a Repository. 
-**Application Services :** 
-        Used by external consumers to talk to your system (think Web Services). 
-        If consumers need access to CRUD operations, they would be exposed her
-**Infrastructure Services :** 
-        Used to abstract technical concerns (e.g. MSMQ, email provider, etc).
-        ● Keeping Domain Services along with your Domain Objects is sensible( they are all focused on domain logic).
-        And you can inject Repositories into your Services. Depends on services and repositories. 
+### Domain Services  
+   Encapsulates business logic that doesn't naturally fit within a domain object,
+   and are NOT typical CRUD operations – those would belong to a Repository. 
+### Application Services : 
+   Used by external consumers to talk to your system (think Web Services). 
+   If consumers need access to CRUD operations, they would be exposed her
+### Infrastructure Services : 
+   Used to abstract technical concerns (e.g. MSMQ, email provider, etc).
+   ● Keeping Domain Services along with your Domain Objects is sensible( they are all focused on domain logic).
+   And you can inject Repositories into your Services. Depends on services and repositories. 
 
 ## Speciﬁcation: 
 ● A Speciﬁcation is used to deﬁne named, reusable, combinable and testable ﬁlters 
