@@ -2,10 +2,10 @@
 
 # SOLID
 
-##- Single-Responsibility Principle : 
+## Single-Responsibility Principle : 
     A class should have one and only one reason to change, meaning that a class should have only one job.
 
-##- Open-Closed Principle : 
+## Open-Closed Principle : 
     Objects or entities should be open for extension but closed for modification. 
 
 ##- Liskov Substitution Principle : 
