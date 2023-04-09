@@ -19,16 +19,38 @@
 ## Dependency Inversion Principle : 
    Entities must depend on abstractions, not on concretions. 
    It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.
-
+-------------------------------------------------------------------------------------
 # Design patterns
 ## Structural patterns deal with structure of classes and objects.
-    they are 7: Adapter , Bridge , Composite , Decorator , Facade , Flyweight , proxy 
+    Adapter , 
+    Bridge ,
+    Composite , 
+    Decorator , 
+    Facade ,
+    Flyweight , 
+    proxy 
 
 ## Creational patterns provide instantiation mechanisms instead of using constructors.
-    They are 6: Factory Method , Abstract Factory , Singleton Pattern, Prototype , Builder , Object Pool 
+    Factory Method ,
+    Abstract Factory ,
+    Singleton Pattern,
+    Prototype , 
+    Builder , 
+    Object Pool 
   
 ## Behavioral patterns :
-    Chain of Responsibility Pattern,Command ,Interpreter ,Iterator ,Mediator ,Memento ,Observer ,State ,Strategy ,Template ,Visitor ,Null Object
+    Chain of Responsibility Pattern,
+    Command ,
+    Interpreter ,
+    Iterator ,
+    Mediator ,
+    Memento ,
+    Observer ,
+    State ,
+    Strategy ,
+    Template ,
+    Visitor ,
+    Null Object
 
 -------------------------------------------------------------------------------------
 # Algorithms
@@ -48,11 +70,11 @@
    
 ## Hashset < T >
     Is an unordered collection of unique elements. 
-    - The HashSet class implements the ICollection, IEnumerable, IReadOnlyCollection, ISet, IEnumerable, IDeserializationCallback, and ISerializable interfaces. 
    
 ## Graph
     - The graphs are data structures characterized by nodes(or vertices) and edges joining the nodes
-    -  Adjacency Matrix Indicies of row and column will represent the vertices and the values in each cell represent edges.
+    - Adjacency Matrix Indicies of row and column will represent
+      the vertices and the values in each cell represent edges.
  -------------------------------------------------------------------------------------  
 # DDD
 ## DDD 
@@ -95,27 +117,40 @@
     An Aggregate is a hierarchy of objects (Entities and Value objects) that make up a consistency boundary
     
 ## Agregate root
-    Each AGGREGATE has a root and a boundary. The boundary defines what is inside the AGGREGATE. The root is a single, specific ENTITY contained in the AGGREGATE. 
+    Each AGGREGATE has a root and a boundary. 
+    The boundary defines what is inside the AGGREGATE.
+    The root is a single, specific ENTITY contained in the AGGREGATE. 
     The root is the only member of the AGGREGATE that outside objects are allowed to hold references to.
-    Example: An example is a model containing a Customer entity and an Address entity. We would never access an Address entity directly from the model
+    **Example**: An example is a model containing a Customer entity and an Address entity.
+    We would never access an Address entity directly from the model
     
 ## Repository (interface):
-    A Repository is a collection-like interface that is used by the Domain and Application Layers to access to the data persistence system (the database).
+    A Repository is a collection-like interface 
+    that is used by the Domain and Application Layers 
+    to access to the data persistence system (the database).
+    
     ● It hides the complexity of the DBMS from the business code. 
     ● Domain Layer contains the interfaces of the repositories. 
-    ● "Mediates between the domain and data mapping layers using a collection-like interface for accessing domain objects
+    ● "Mediates between the domain and data mapping layers 
+      using a collection-like interface for accessing domain objects
     
 ## Domain Service: 
-    ● A Domain Service is a stateless service that implements core business rules of the domain. 
-    ● It is useful to implement domain logic that depends on multiple aggregate (entity) type or some external services. 
+    ● A Domain Service is a stateless service 
+      that implements core business rules of the domain. 
+    ● It is useful to implement domain logic 
+      that depends on multiple aggregate (entity) type or some external services. 
     ● Services come in 3 flavours:
       Domain Services, Application Services, and Infrastructure Services.
-      Domain Services : 
-        Encapsulates business logic that doesn't naturally fit within a domain object, and are NOT typical CRUD operations – those would belong to a Repository. 
-      Application Services : 
-        Used by external consumers to talk to your system (think Web Services). If consumers need access to CRUD operations, they would be exposed here. 
-     Infrastructure Services : 
-        Used to abstract technical concerns (e.g. MSMQ, email provider, etc). ● Keeping Domain Services along with your Domain Objects is sensible( they are all focused on domain logic). And you can inject Repositories into your Services. Depends on services and repositories. 
+      **Domain Services :** 
+        Encapsulates business logic that doesn't naturally fit within a domain object,
+        and are NOT typical CRUD operations – those would belong to a Repository. 
+      **Application Services :** 
+        Used by external consumers to talk to your system (think Web Services). 
+        If consumers need access to CRUD operations, they would be exposed here. 
+     **Infrastructure Services :** 
+        Used to abstract technical concerns (e.g. MSMQ, email provider, etc).
+        ● Keeping Domain Services along with your Domain Objects is sensible( they are all focused on domain logic).
+        And you can inject Repositories into your Services. Depends on services and repositories. 
 
 ## Speciﬁcation: 
       ● A Speciﬁcation is used to deﬁne named, reusable, combinable and testable ﬁlters for Domain Objects based on the business rules. 
