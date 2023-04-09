@@ -117,12 +117,12 @@
     An Aggregate is a hierarchy of objects (Entities and Value objects) that make up a consistency boundary
     
 ## Agregate root
-    Each AGGREGATE has a root and a boundary. 
-    The boundary defines what is inside the AGGREGATE.
-    The root is a single, specific ENTITY contained in the AGGREGATE. 
-    The root is the only member of the AGGREGATE that outside objects are allowed to hold references to.
-    **Example**: An example is a model containing a Customer entity and an Address entity.
-    We would never access an Address entity directly from the model
+Each AGGREGATE has a root and a boundary. 
+The boundary defines what is inside the AGGREGATE.
+The root is a single, specific ENTITY contained in the AGGREGATE. 
+The root is the only member of the AGGREGATE that outside objects are allowed to hold references to.
+**Example**: An example is a model containing a Customer entity and an Address entity.
+We would never access an Address entity directly from the model
     
 ## Repository (interface):
     A Repository is a collection-like interface 
