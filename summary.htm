@@ -145,10 +145,10 @@ DDD
     Two subsystems commonly serve very different user communities Bounded contexts define a context where an isolated part of the model applies. 
     The isolation can be achieved by decoupling technical logic, by code base segregation, by database schema segregation and also in terms of team organisation.  
 
-Anti-corruption layer (ACL)
-  An ACL is at the very least a thin translation layer between two bounded contexts. 
-  Even if both bounded contexts are well defined, and share similar models. 
-  The models in one context should not influence the models in another and without a layer in between to translate between the two corruption will creep in. 
-  If the external system a bounded context is talking to is a legacy system with a very poor model it is even more likely it will corrupt unless the ACL acts as a strong buffer
+  Anti-corruption layer (ACL)
+    An ACL is at the very least a thin translation layer between two bounded contexts. 
+    Even if both bounded contexts are well defined, and share similar models. 
+    The models in one context should not influence the models in another and without a layer in between to translate between the two corruption will creep in. 
+    If the external system a bounded context is talking to is a legacy system with a very poor model it is even more likely it will corrupt unless the ACL acts as a strong buffer
 
 </pre>
