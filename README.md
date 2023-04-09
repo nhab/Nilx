@@ -3,22 +3,26 @@
 # SOLID
 
 ## Single-Responsibility Principle : 
-    A class should have one and only one reason to change, meaning that a class should have only one job.
+A class should have one and only one reason to change, meaning that a class should have only one job.
 
 ## Open-Closed Principle : 
-    Objects or entities should be open for extension but closed for modification. 
+Objects or entities should be open for extension but closed for modification. 
 
 ## Liskov Substitution Principle : 
-   Let q(x) be a property provable about objects of x of type T. 
-   Then q(y) should be provable for objects y of type S where S is a subtype of T. 
+Let q(x) be a property provable about objects of x of type T. 
+
+Then q(y) should be provable for objects y of type S where S is a subtype of T. 
 
 ## Interface Segregation Principle : 
-   A client should never be forced to implement an interface that it doesn’t use, 
-   or clients shouldn’t be forced to depend on methods they do not use. 
+A client should never be forced to implement an interface that it doesn’t use,
+
+or clients shouldn’t be forced to depend on methods they do not use. 
 
 ## Dependency Inversion Principle : 
-    Entities must depend on abstractions, not on concretions. 
-    It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.
+Entities must depend on abstractions, not on concretions.
+
+It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.
+
 -------------------------------------------------------------------------------------
 # Design patterns
 ## Structural patterns deal with structure of classes and objects.
@@ -118,10 +122,15 @@
     
 ## Agregate root
 Each AGGREGATE has a root and a boundary. 
+
 The boundary defines what is inside the AGGREGATE.
-The root is a single, specific ENTITY contained in the AGGREGATE. 
+
+The root is a single, specific ENTITY contained in the AGGREGATE.
+
 The root is the only member of the AGGREGATE that outside objects are allowed to hold references to.
+
 **Example**: An example is a model containing a Customer entity and an Address entity.
+
 We would never access an Address entity directly from the model
     
 ## Repository (interface):
@@ -135,41 +144,51 @@ We would never access an Address entity directly from the model
       using a collection-like interface for accessing domain objects
     
 ## Domain Service: 
-    ● A Domain Service is a stateless service 
-      that implements core business rules of the domain. 
-    ● It is useful to implement domain logic 
-      that depends on multiple aggregate (entity) type or some external services. 
-    ● Services come in 3 flavours:
-      Domain Services, Application Services, and Infrastructure Services.
-      **Domain Services :** 
+● A Domain Service is a stateless service 
+
+that implements core business rules of the domain. 
+
+● It is useful to implement domain logic 
+
+that depends on multiple aggregate (entity) type or some external services. 
+
+● Services come in 3 flavours:
+Domain Services, Application Services, and Infrastructure Services.
+
+**Domain Services :** 
         Encapsulates business logic that doesn't naturally fit within a domain object,
         and are NOT typical CRUD operations – those would belong to a Repository. 
-      **Application Services :** 
+**Application Services :** 
         Used by external consumers to talk to your system (think Web Services). 
-        If consumers need access to CRUD operations, they would be exposed here. 
-     **Infrastructure Services :** 
+        If consumers need access to CRUD operations, they would be exposed her
+**Infrastructure Services :** 
         Used to abstract technical concerns (e.g. MSMQ, email provider, etc).
         ● Keeping Domain Services along with your Domain Objects is sensible( they are all focused on domain logic).
         And you can inject Repositories into your Services. Depends on services and repositories. 
 
 ## Speciﬁcation: 
-      ● A Speciﬁcation is used to deﬁne named, reusable, combinable and testable ﬁlters for Domain Objects based on the business rules. 
+      ● A Speciﬁcation is used to deﬁne named, reusable, combinable and testable ﬁlters 
+      for Domain Objects based on the business rules. 
       ● you can think of specifications as of domain classes that categorize other domain classes. 
       ● A specification answers the question of whether a domain object meets some criteria. 
-      ● he main benefit of the Specification pattern is that you can reuse that knowledge (of whether a domain object meets some criteria) in different scenarios 
+      ● he main benefit of the Specification pattern is that you can reuse that knowledge 
+      (of whether a domain object meets some criteria) in different scenarios 
         and therefore adhere to the Don’t Repeat Yourself principle. 
         
 # Domain Event: 
-      A Domain Event is a way of informing other services in a loosely coupled manner, when a domain speciﬁc event occurs.
+      A Domain Event is a way of informing other services in a loosely coupled manner,
+      when a domain speciﬁc event occurs.
       
-    ● Factories Since an aggregate should always be in a consistent state it is important that they are constructed in a consistent state to the user.
-      Factories provide a way to ensure that new instances of an aggregate always start in a consistent state.
+    ● Factories Since an aggregate should always be in a consistent state 
+    it is important that they are constructed in a consistent state to the user.
+    Factories provide a way to ensure that new instances of an aggregate always start in a consistent state.
       
 #    Application layer =============================
 ##    ● Application Service: 
       An Application Service is a stateless service that implements use cases of the application. 
       An application service typically gets and returns DTOs. It is used by the Presentation Layer. 
-      It uses and coordinates the domain objects to implement the use cases. A use case is typically considered as a Unit Of Work.
+      It uses and coordinates the domain objects to implement the use cases.
+      A use case is typically considered as a Unit Of Work.
       
 ##   ● Data Transfer Object (DTO): 
       A DTO is a simple object without any business logic that is used to transfer state (data) between the Application and Presentation Layers.
@@ -178,23 +197,38 @@ We would never access an Address entity directly from the model
     All the operations inside a UOW should be committed on success or rolled back on a failure.  
     
 #   User Interface layer ==========================
-    Responsible for drawing the screens the users use to interact with the application and translating the user’s inputs into application commands. It is important to note that the “users” can be human but can also be other applications connecting to our API, which corresponds entirely to the Boundary objects in the EBI architecture;
+    Responsible for drawing the screens the users use to interact with the application 
+    and translating the user’s inputs into application commands. 
+    It is important to note that the “users” can be human but can also be other applications connecting to our API,
+    which corresponds entirely to the Boundary objects in the EBI architecture;
 
 #  Application Layer ============================
-    Orchestrates Domain objects to perform tasks required by the users: the Use Cases. It does not contain business logic. This relates to the Interactors in the EBI architecture, except that the Interactors were any object that was not related to the UI or an Entity and, in this case, the Application Layer only contains the objects relevant to a Use Case. This layer is where the Application Services belong, as they are the containers where the use case orchestration happens, using repositories, Domain Services, Entities, Value Objects or any other Domain object;
+    Orchestrates Domain objects to perform tasks required by the users: the Use Cases.
+    It does not contain business logic. 
+    This relates to the Interactors in the EBI architecture,
+    except that the Interactors were any object that was not related to the UI or an Entity and,
+    in this case, the Application Layer only contains the objects relevant to a Use Case. 
+    This layer is where the Application Services belong, 
+    as they are the containers where the use case orchestration happens,
+    using repositories, Domain Services, Entities, Value Objects or any other Domain object;
 
 #  Infrastructure ===============================
     The technical capabilities that support the layers above, ie. persistence or messaging.
     =============================================
 #  Bounded context
     In an enterprise application, the model can grow quite a lot and the size of the team working on the code base as well. 
-    The usual solution to a big problem is to break it up into smaller pieces, and this is exactly where the “bounded contexts” come into play. 
-    Two subsystems commonly serve very different user communities Bounded contexts define a context where an isolated part of the model applies. 
-    The isolation can be achieved by decoupling technical logic, by code base segregation, by database schema segregation and also in terms of team organisation.  
+    The usual solution to a big problem is to break it up into smaller pieces, 
+    and this is exactly where the “bounded contexts” come into play. 
+    Two subsystems commonly serve very different user communities Bounded contexts 
+    define a context where an isolated part of the model applies. 
+    The isolation can be achieved by decoupling technical logic, 
+    by code base segregation, by database schema segregation and also in terms of team organisation.  
 
 #  Anti-corruption layer (ACL)
     An ACL is at the very least a thin translation layer between two bounded contexts. 
     Even if both bounded contexts are well defined, and share similar models. 
-    The models in one context should not influence the models in another and without a layer in between to translate between the two corruption will creep in. 
-    If the external system a bounded context is talking to is a legacy system with a very poor model it is even more likely it will corrupt unless the ACL acts as a strong buffer
+    The models in one context should not influence the models in another 
+    and without a layer in between to translate between the two corruption will creep in. 
+    If the external system a bounded context is talking to is a legacy system with a very poor model 
+    it is even more likely it will corrupt unless the ACL acts as a strong buffer
 
