@@ -167,13 +167,13 @@ Domain Services, Application Services, and Infrastructure Services.
         And you can inject Repositories into your Services. Depends on services and repositories. 
 
 ## Speciﬁcation: 
-      ● A Speciﬁcation is used to deﬁne named, reusable, combinable and testable ﬁlters 
-      for Domain Objects based on the business rules. 
-      ● you can think of specifications as of domain classes that categorize other domain classes. 
-      ● A specification answers the question of whether a domain object meets some criteria. 
-      ● he main benefit of the Specification pattern is that you can reuse that knowledge 
-      (of whether a domain object meets some criteria) in different scenarios 
-        and therefore adhere to the Don’t Repeat Yourself principle. 
+● A Speciﬁcation is used to deﬁne named, reusable, combinable and testable ﬁlters 
+for Domain Objects based on the business rules. 
+● you can think of specifications as of domain classes that categorize other domain classes. 
+● A specification answers the question of whether a domain object meets some criteria. 
+● he main benefit of the Specification pattern is that you can reuse that knowledge 
+(of whether a domain object meets some criteria) in different scenarios 
+and therefore adhere to the Don’t Repeat Yourself principle. 
         
 # Domain Event: 
       A Domain Event is a way of informing other services in a loosely coupled manner,
