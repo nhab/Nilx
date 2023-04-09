@@ -121,7 +121,7 @@
     The boundary defines what is inside the AGGREGATE.
     The root is a single, specific ENTITY contained in the AGGREGATE. 
     The root is the only member of the AGGREGATE that outside objects are allowed to hold references to.
-    **Example**: An example is a model containing a Customer entity and an Address entity.
+    __Example__: An example is a model containing a Customer entity and an Address entity.
     We would never access an Address entity directly from the model
     
 ## Repository (interface):
