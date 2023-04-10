@@ -1,32 +1,16 @@
+<!DOCTYPE html>
 <html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-    <link rel="stylesheet" href="/nhab/libs/highlight/androidstudio2.css">
-    <script src="/nhab/libs/highlight/highlight.pack.js"></script>    
-    <script src="/nhab/libs/jquery-3.3.1.slim.min.js" ></script>
-	<script src='/nhab/assets/js/blocks.js'></script>
-    <script src="../../../libs/jquery-3.3.1.slim.min.js" ></script>
-    <script src="../../../libs/highlight/highlight.pack.js"></script>
-  </head>
-  <body>
-  
-      <script>
-          $('code').each(function() {
-          var that = $(this);
-          // cache the content of 'code'
-          var html = that.html().trim();
-          that.empty();
-          // escape the content
-          that.text(html);
-        });
-        
-        hljs.initHighlightingOnLoad();
-    </script>
-  
-  <button onclick="toggleAll(this);" >-</button>
-
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/css/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/nhab@latest/assets/js/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+</head>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+      
  <h2>
   <input type="button" value="-"
   class="toggleButton"  onclick="toggle(this)" />Resources</h2>
