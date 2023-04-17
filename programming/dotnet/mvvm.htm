@@ -1,0 +1,139 @@
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/nhab/assets/css/blocks.css'>
+    <script src='https://cdn.jsdelivr.net/gh/nhab/nhab/assets/js/blocks.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+    <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+</head>
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+    <button onclick='toggleAll(this);'>-</button>
+    
+<h2>Refwrences</h2>
+<p>
+    <a href="https://caliburnmicro.com/">caliburn micro</a>
+    <a href="https://intellitect.com/blog/getting-started-model-view-viewmodel-mvvm-pattern-using-windows-presentation-framework-wpf/">MVVM</a>
+    <a href="https://egvijayanand.in/2022/04/22/mvvm-made-easy/">Microsoft MVVM Toolkit</a>
+</p>
+<h2>Concepts</h2>
+<div>
+<p>    
+- 3 MVVM peaces: 
+  Model, View, and View Model.
+- View: 
+  These are all of the UI elements, the pretty face of your application. 
+  For WPF, these are all of your XAML files. 
+  They may be Windows, User Controls, or Resource Dictionaries. 
+
+- View Model: 
+  These are the objects that provide the functionality for each of your views
+
+- Model:
+  provides access to the data and services that your application needs
+
+- Bindings :
+  are declared in the view and link the data of properties in the 'view', back to properties in the 'view model':
+  <pre><code>
+    // binds the textblock to FirstName of ViewModel class
+    <TextBlock Text="{Binding Path=FirstName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+  </code></pre>
+  of course you should set the DataContext of your view to the viewModel,first:
+  <pre><code>
+public MainWindow()
+{
+    var viewModel = new ViewModel();
+    viewModel.FirstName = "Kevin";
+
+    DataContext = viewModel;
+    InitializeComponent();
+}
+  </code></pre>
+-  INotifyPropertyChanged Interface:
+    interface has a single event that notifies the bindings that a particular property has changed:
+    <pre><code>
+        public class ViewModel : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler PropertyChanged;
+        
+            public string FirstName { get; set; }
+        
+            public void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }     
+    </code></pre>
+- ViewModelBase class:
+   is to make property change notification easier:
+   <pre><code>
+public abstract class ViewModelBase : INotifyPropertyChanged
+{
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName]string propertyName = null)
+    {
+        if(!EqualityComparer<T>.Default.Equals(field, newValue))
+        {
+            field = newValue;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return true;
+        }
+        return false;
+    }
+}
+
+// This allows us to re-write our FirstName property like this:
+
+public class ViewModel : ViewModelBase
+{
+    private string _firstName;
+    public string FirstName
+    {
+        get => _firstName;
+        set => SetProperty(ref _firstName, value);
+    }
+}
+//The INotifyPropertyChanged event raises every time we change the FirstName property.
+   </code></pre>
+
+- Commands:
+   . are objects that implement the <strong>ICommand</strong> interface. 
+   . Commands are messages from the View to your View Model.
+   . When a control’s event occurs, such as a button click, the <strong>Execute method</strong> on the command is invoked.
+
+<pre><code>
+public class DelegateCommand : ICommand
+{
+    private readonly Action<object> _executeAction;
+
+    public DelegateCommand(Action<object> executeAction)
+    {
+        _executeAction = executeAction;
+    }
+
+    public void Execute(object parameter) => _executeAction(parameter);
+
+    public bool CanExecute(object parameter) => true;
+
+    public event EventHandler CanExecuteChanged;
+}
+
+//and in our viewmode:
+
+public class ViewModel : ViewModelBase
+{
+    ...
+
+    private readonly DelegateCommand _changeNameCommand;
+    public ICommand ChangeNameCommand => _changeNameCommand;
+
+    public ViewModel()
+    {
+        _changeNameCommand = new DelegateCommand(OnChangeName);
+    }
+
+    private void OnChangeName(object commandParameter)
+    {
+        FirstName = "Walter";
+    }
+}
+</code></pre>
+</p>
+</div>
