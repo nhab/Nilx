@@ -65,6 +65,7 @@ json1 +=`,{"title":"C# .Net"
             ,{"caption":"Linq","href":"programming/dotnet/linq.htm"}
             ,{"caption":"SOAP Protochol","href":"https://www.tutorialspoint.com/soap/soap_quick_guide.htm"}
             ,{"caption":"WCF","href":"programming/dotnet/wcf.htm"}
+            ,{"caption":"WPF MVVM","href":"programming/dotnet/mvvm.htm"}
             ,{"caption":"Nuget","href":"programming/dotnet/nuget.htm"}
             ,{"caption":"Nuget powershell commands","href":"https://learn.microsoft.com/en-us/nuget/reference/powershell-reference"}
             ,{"caption":"Health Check","href":"programming/dotnet/HealthCheck.htm"}
