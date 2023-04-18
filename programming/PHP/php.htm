@@ -61,7 +61,7 @@ error_reporting(E_ALL);
 //code goes here
 ?>
 &lt?php
-$like=\"I like it\"
+$like="I like it"
 print $like ?>
 
 // Variables ----------------------------
@@ -71,11 +71,11 @@ print $like ?>
 
 // Combining Strings-------------------
 // use dot (.)
-print $like .\" \" .$num;
+print $like ." " .$num;
 
 // Dynamic variable names -------------- 
-$test=\"success\";
-$primary=\"test\";
+$test="success";
+$primary="test";
 $ID=${$primary};
 echo $ID;
 
@@ -88,8 +88,8 @@ function printname()
 };
 
 // Arrays---------------------------
-$cars = array(\"Volvo\", \"BMW\");
-echo \"The car were \" . $cars[1] . \"" 
+$cars = array("Volvo", "BMW");
+echo "The car were " . $cars[1] . \"" 
 
 // Operators --------------------------
 // The same as C++ :
@@ -107,26 +107,26 @@ else{
 
 // Loops ----------------
 // The same as C++
-for($num=1;$num<=10;$num++)
+for($num=1;$num <= 10;$num++)
 {
-    print $num.\" \";
+    print $num." ";
 }
     
-while($num<=10)   {  ...   }
+while($num <= 10)   {  ...   }
 
 $a=array(1,2,3,4,5);
 foreach($a as $b)
 {
-    print $b.\" \";
+    print $b." ";
 }
     
 // Functions ----------------
 function examplefunc()
 {
-    print \"Hi \";
+    print "Hi ";
 }
 
-print \"sample line:&ltbr>+
+print "sample line:&ltbr>+
 examplefunc();
 $s=examplefunc();
 print $s;
@@ -137,7 +137,7 @@ function add_some( &$str2 ){
 ..}
 
 //<b>Default Argument</b> of functions -------- 
-function makeCoffe( $types=array(\"cappuccino\",$coffeMaker=Null ))
+function makeCoffe( $types=array("cappuccino",$coffeMaker=Null ))
 {
     ..
 }
@@ -164,24 +164,29 @@ Include  'http://www.site.com/file.php
 &lt/body>
 &lt/html>
 
-Block({title:"Classes"
-,code:`class test{
+// Classes ---------------------------- 
+class test{
 public static function run(){
     print "works\n";
 }
 $ClassName='test';
 $ClassName::run();
-}`,parent:objPHP});
-Block({title:"Finding IP of the Visitors:",code:`Getenv("REMOTE_ADDR")`,parent:objPHP});
-Block({title:"Uploading files",code:`&ltform enctype="multipart/form-data" 
+
+
+// Finding IP of the Visitors ----------
+Getenv("REMOTE_ADDR")
+
+// Uploading files ----------------
+&ltform enctype="multipart/form-data" 
 action="upload.php" method="post">
 Choose the file :
 &ltinput name="uploaded" type="file" />&ltbr />
 &ltinput type="submit" value="Upload" />
-&lt/form>`,parent:objPHP});
+&lt/form>
 
-
-Block({title:"Forms",body:"A Simple HTML Form",code:`&lthtml>
+// Forms ----------------
+// A Simple HTML Form
+&lthtml>
 &ltbody>
 &ltform action="welcome.php"
 method="post">
@@ -192,55 +197,60 @@ E-mail:&ltinput type="text" name="email">
 &ltinput type="submit">
 &lt/form>
 &lt/body>
-&lt/html>`,parent:objPHP});
+&lt/html>
 
-/*---------------------------------------------------*/
-    var objSession=BlockGroup("Session variables");
- Block({title:"1. define them",
-    code:`session_start();
+//---------- Session variables --------------------------------
+// 1. definition: ----------------------------
+session_start();
 $_SESSION['Color']='red';
 $_SESSION['size']='small';
-...`,parent:objSession});
-Block({title:"2. Then use those variables",
-body:"in the second page :",
-code:`session_start();
-    echo $_SESSION['color'];
-    echo $_SESSION['size'];`,parent:objSession});
-Block({title:"print the whole session",code:"print_r($SESSION)",parent:objSession});
-Block({title:"To delete a session variable",body:"use <b>unset</b>",
-code:`$_SESSION['size']='larg';
+
+//2. Usage: ----------------------------
+// in the second page :
+session_start();
+echo $_SESSION['color'];
+echo $_SESSION['size'];
+
+
+// print the whole session ----------------
+print_r($SESSION)
+
+//To delete a session variable
+//use <b>unset</b>
+$_SESSION['size']='larg';
 unset( $_SESSION['shape']);
 //For total deletion     : 
 session_unset();
-session_destroy();`,parent:objSession});
+session_destroy();
 
-/*---------------------------------------------------*/
-var objFileOp=BlockGroup("Files Operations");
-
-   Block({title:"fopen function:",
-    code:`$a=fopen("/home/files/yourfile.txt","r");
+/*---------------------- Files Operations ---------------------*/
+// fopen function:--------------------------
+$a=fopen("/home/files/yourfile.txt","r");
 $b=fopen("yourfile.gif","w");
-//r   determines mode 
-//other modes for opening files:
-x+,x,a+,a,w+,w-,r+,r-
-`,parent:objFileOp});
-Block({title:"some functions to work with files",
-code:`fwrite();
+
+// r   determines mode 
+// other modes for opening files:
+// x+,x,a+,a,w+,w-,r+,r-
+
+// Some functions to work with files ------------
+fwrite();
 file_get_contents();
+
 //returns the whole file as an string
 file();
 fgets();// to read line by line
-fread();`,parent:objFileOp});
-Block({title:"file() Example:",
-code:`$lines=file('yourfile.txt');
+fread();
+
+// file() Example: --------------------
+
+$lines=file('yourfile.txt');
 foreach($lines as $line_num=>$line)
 {
-print
-"<font color='red'> line # {$line_num}</font>;"
-.$line."< br/>\n";
-}`,parent:objFileOp});
-Block({title:"fgets() Example",
-code:`$myFile="yourfile.txt";
+    print " line # {$line_num};".$line."\n";
+}
+
+// fgets() Example ----------------
+$myFile="yourfile.txt";
 $handle=fopen($myFile,'r');
 while(!feof($handle))
 {
@@ -248,26 +258,25 @@ $data=fgets($handle,512);
 echo $data;
 echo "<br>";
 }
-fclose($handle);`,parent:objFileOp});
-/*-----------------------------------------*/
-var objPhpMySql=BlockGroup("phpMysql");
+fclose($handle);
+
+/*----------------------- phpMysql ------------------*/
 //<b>Open a Connection to MySQL </b>
-Block({title:"MySQLi Object-Oriented",
-code:`$servername = "localhost";
-    $username = "username";
-    $password = "password";
+//MySQLi Object-Oriented --------------
+$servername = "localhost";
+$username = "username";
+$password = "password";
 
-    // Create connection
-    $conn = new mysqli($servername, 
-             $username, $password);
+// Create connection
+$conn = new mysqli($servername, $username, $password);
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: "
-         . $conn->connect_error);
-    }
-    echo "Connected successfully";`,parent:objPhpMySql} );
-Block({title:"MySQLi Procedural",
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: ". $conn->connect_error);
+}
+echo "Connected successfully";
+
+// MySQLi Procedural --------------
 code:`$servername = "localhost";
 $username = "username";
 $password = "password";
@@ -281,14 +290,19 @@ if (!$conn) {
     die("Connection failed: " .
          mysqli_connect_error());
 }
-echo "Connected successfully";`,parent:objPhpMySql});
-Block({title:"PDO",
+echo "Connected successfully";
+
+// PDO --------------------
 code:`$servername = "localhost";
 $username = "username";
 $password = "password";
 $dbname = "myDBPDO";
-try {$conn = new PDO("mysql:host=$servername;dbname=$dbname", 
-    $username, $password);
+try {
+    $conn = new PDO(
+                    "mysql:host=$servername;dbname=$dbname", 
+                    $username,
+                     $password
+                    );
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "INSERT INTO Guest (fname,lname)VALUES ('John', 'Doe')";
@@ -301,12 +315,11 @@ try {$conn = new PDO("mysql:host=$servername;dbname=$dbname",
 }catch(PDOException $e) {
     echo $sql . "< br>" . $e->getMessage();
  }
-$conn = null;`,parent:objPhpMySql});
+$conn = null;
 
-var objPhpWs=BlockGroup("webservice");
-Block({title:"Hello world,sample",
-code:`
-<?php
+//------------- webservice --------------------------------
+// Hello world,sample code ----------- 
+< ?php
 // to test, use this sample url http://localhost/ws/1.webservice_HelloWorld.php?user=2
 if(isset($_GET['user']) && intval($_GET['user'])) {
 	$format ='json';
@@ -315,9 +328,7 @@ if(isset($_GET['user']) && intval($_GET['user'])) {
 	header('Content-type: application/json');
 	echo json_encode(array('posts'=>$posts));
 }
-?>`,parent:objPhpWs});
-</script>
-
+?>
 
 </code></pre>
 </div>
