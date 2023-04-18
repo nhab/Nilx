@@ -11,19 +11,22 @@
  <button onclick="toggleAll(this);" >-</button>
 <h2>Resources</h2>
 <div>
+<p>
     <a href="https://www.taniarascia.com/developing-a-wordpress-theme-from-scratch/">wordpress Theme text</a> 
     <a href="https://www.youtube.com/watch?v=-h7gOJbIpmo">wordpress Theme video</a>
+</p>
 </div>
 
 <h2>A simple wordpress Theme:</h2>
 <div>
-    A index.php and a style.css are enough to create a minimal theme and other files are optional.
+<p>
+A index.php and a style.css are enough to create a minimal theme and other files are optional.
     <b>1.Create a folder for the theme:</b> 
     wp-content >	themes > theme name
 
     <b>2.Create these files inside the folder:</b>
     -<b> style.css</b>
-        <pre><code>
+    <pre><code>
         @charset "UTF-8";
 
         /*
@@ -100,6 +103,7 @@
             
         &lt;/div>	
         </code>
+</p>
 </div>
 
 <h2>Minimal plugin sample</h2>
@@ -123,6 +127,7 @@
 
 <h2>Hooks(Actions,Filters)</h2>
 <div>
+<p>
     Hook exists to add our own code to wordpress.
     <b>Types of hooks:</b>
    
@@ -141,6 +146,7 @@
       
     <a href='https://codex.wordpress.org/Plugin_API/Filter_Reference'>
     List of all core filters + plugins filters</a>
+</p>
 </div>
 
 
@@ -182,7 +188,7 @@
 </div>
 
 <h2>
-	<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Adding admin page to admin menu
+<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Adding admin page to admin menu
 </h2>
 <div>
     <pre><code>
@@ -263,7 +269,7 @@
 </div>
 
 <h2>WordPress Database Tables(ver. 4.4)</h2>
-<div>
+<div><p>
     fields details <a href='https://codex.wordpress.org/Database_Description'> are here</a>
     <b>wp_commentmeta</b>	    : Each comment features information called the meta data and it is stored in the wp_commentmeta.
     <b>wp_comments</b>	        : Comments within WordPress are stored in the wp_comments table.
@@ -278,11 +284,11 @@
     <b>wp_term_taxonomy</b>	    : Describes the taxonomy (category, link, or tag) for the entries in the wp_terms table.
     <b>wp_usermeta</b>	        : Each user features information called the meta data and it is stored in wp_usermeta.
     <b>wp_users</b>		        : The list of users is maintained in table wp_users.
-
+</p>
 </div>
 
 <h2>Conflict-Free JavaScript/CSS</h2>
-<div>
+<div><p>
     A number of JavaScript frameworks are included in WordPress
     by default.(<a href='https://codex.wordpress.org/Function_Reference/wp_enqueue_script#Default_scripts_included_with_WordPress'>The list</a>)
     WordPress includes these libraries so that plugin and theme authors
@@ -297,6 +303,7 @@
     just before the </head> tag, 
     and the footer.php file must include the line <?php wp_footer(); ?>
     just before the </body> tag.
+</p>
 </div>
 
 <h2>using jQuery</h2>
