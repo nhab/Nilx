@@ -10,11 +10,14 @@
     <button onclick='toggleAll(this);'>-</button>
     
 <h2>References</h2>
+<div>
 <p>
     Online code playgrounds:
     <a href='https://www.ideone.com/ryTuHp'>ideone </a>
     <a href="http://codepad.org/w4gyeryk">codepad</a>    
-</p>
+</p>    
+</div>
+
 
 <h2>Basics</h2>
 <p>
@@ -46,9 +49,9 @@
 
 //writing a statement ---------------------
 //
-//'Echo' and 'PRINT
-&lt?php echo \"i like it\" ?>
-&lt?php print \"I like it\" ?>
+//'Echo' and 'PRINT'
+< ?php echo \"i like it\" ?>
+< ?php print \"I like it\" ?>
 
 // Debugging --------------------------
 // Add this code to top of your php code to show error messages
@@ -140,17 +143,17 @@ function makeCoffe( $types=array(\"cappuccino\",$coffeMaker=Null ))
 }
  
 
-  Block({title:`include`,
-    body:`To include other php files to a php file,use :
-INCLUDE(),REQUIRE()
-Even text or html files can be included 
-Example :`,
-code:`Include
-  'http://www.site.com/file.php';`,parent:objPHP});
-  Block({title:`Include example`,
-body:`Include 'filename';//or
-require 'filename';`,
-code:`&lthtml>
+//include --------------------------------
+// To include other php files to a php file,use :
+// INCLUDE(),REQUIRE()
+//Even text or html files can be included 
+//Example :
+Include  'http://www.site.com/file.php
+
+//Include example
+// Include 'filename';//or
+// require 'filename';
+
 &ltbody>
 &ltdiv class="menu">
 &lt?php include 'menu.php';?>
@@ -160,7 +163,7 @@ code:`&lthtml>
 &ltp>Some more text.&lt/p>
 &lt/body>
 &lt/html>
-`,parent:objPHP});
+
 Block({title:"Classes"
 ,code:`class test{
 public static function run(){
