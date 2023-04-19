@@ -316,20 +316,18 @@ then you can use shortcode [mini] insode your page or post`,
 
 <h2>Conflict-Free JavaScript/CSS</h2>
 <div><p>
-    A number of JavaScript frameworks are included in WordPress
-    by default.(<a href='https://codex.wordpress.org/Function_Reference/wp_enqueue_script#Default_scripts_included_with_WordPress'>The list</a>)
-    WordPress includes these libraries so that plugin and theme authors
-    can avoid this problem by using the wp_register_script and
-    wp_enqueue_script PHP functions to include JavaScript in the HTML.
+    A number of JavaScript frameworks are included in WordPress by default.
+    (<a href='https://codex.wordpress.org/Function_Reference/wp_enqueue_script#Default_scripts_included_with_WordPress'>The list</a>)
+    
+    WordPress includes these libraries
+    so that plugin and theme authors can avoid this problem by using 
+    the wp_register_script and wp_enqueue_script PHP functions to include JavaScript in the HTML.
     
     To output the file to the HTML, you need to enqueue the file.
-    Once you’ve done this, WordPress will add the required script tag
-    to the header or footer of the outputted page.
+    Once you’ve done this, WordPress will add the required script tag to the header or footer of the outputted page.
     
-    the theme’s header.php file must include the line <?php wp_head(); ?>
-    just before the </head> tag, 
-    and the footer.php file must include the line <?php wp_footer(); ?>
-    just before the </body> tag.
+    the theme’s header.php file must include the line <?php wp_head(); ?> just before the </head> tag, 
+    and the footer.php file must include the line <?php wp_footer(); ?> just before the </body> tag.
 </p>
 </div>
 
@@ -349,20 +347,20 @@ then you can use shortcode [mini] insode your page or post`,
     function mytheme_register_scripts() { 
         //base.js – dependent on jQuery 
         wp_register_script( 
-           'theme-base', //handle 
-           '/wp-content/themes/my-theme/base.js', //source 
-           array('jquery'), //dependencies 
-               '1.0.0', //version 
-               true //run in footer 
-           ); 
+           'theme-base' //handle 
+           ,'/wp-content/themes/my-theme/base.js' //source 
+           , array('jquery') //dependencies 
+           , '1.0.0' //version 
+           , true //run in footer 
+        ); 
 
         //custom.js – dependent on base.js 
         wp_register_script( 
-            'theme-custom', 
-            '/wp-content/themes/my-theme/custom.js', 
-            array('theme-base'), 
-            '1.0.0', 
-            true 
+            'theme-custom' 
+            ,'/wp-content/themes/my-theme/custom.js' 
+            ,array('theme-base') 
+            ,'1.0.0'
+            ,true 
         ); 
      } 
      add_action('init', 'mytheme_register_scripts');
@@ -385,19 +383,19 @@ then you can use shortcode [mini] insode your page or post`,
         function mytheme_register_styles(){ 
             //mobile.css for all devices 
             wp_register_style( 
-               'theme-mobile', //handle 
-               '/wp-content/themes/my-theme/mobile.css', //source 
-               null, //no dependencies 
-               '1.0.0' //version 
+                'theme-mobile' //handle 
+               , '/wp-content/themes/my-theme/mobile.css' //source 
+               , null //no dependencies 
+               , '1.0.0' //version 
             ); 
  
             //desktop.css for big-screen browsers 
            wp_register_style( 
-             'theme-desktop', 
-             '/wp-content/themes/my-theme/desktop.css', 
-             array('theme-mobile'), 
-             '1.0.0', 
-             'only screen and (min-width : 960px)' //media type 
+             'theme-desktop' 
+             ,'/wp-content/themes/my-theme/desktop.css'
+             , array('theme-mobile') 
+             , '1.0.0' 
+             , 'only screen and (min-width : 960px)' //media type 
            ); 
          } 
          add_action('init', 'mytheme_register_styles');
@@ -420,10 +418,8 @@ then you can use shortcode [mini] insode your page or post`,
     //If bootstrap is registered in wordpress or theme,
         //this code makes bootstrap usable
     function monthem_register_assets(){
-        wp_register_style('bootstrap',
-        'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css');
-        wp_register_script('bootstrap',
-        'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js');
+        wp_register_style('bootstrap' ,'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css');
+        wp_register_script('bootstrap','https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js');
         wp_enqueue_style('bootstrap');
         wp_enqueue_script('bootstrap');
     }
