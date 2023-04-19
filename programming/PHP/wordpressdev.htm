@@ -133,24 +133,24 @@ then you can use shortcode [mini] insode your page or post`,
 <h2>Hooks(Actions,Filters)</h2>
 <div>
 <p>
-    Hook exists to add our own code to wordpress.
+    Hook adds our own code to wordpress.
+	
     <b>Types of hooks:</b>
-   
+
        <b>Actions</b>
-       adds extra functionality at a specific point 
-       in the processing of the page.
+       adds extra functionality, 
+	at a specific point in the processing of the page.
+	
        for example, to add extra widgets or menus, 
        or add a promotional message to the page.
    
        <b>Filters</b>
        To modify data as it is processed.
+	
        For example, To insert another CSS class in a WordPress HTML element,
        or modify some of your pages blocks. 
-    <a href='https://codex.wordpress.org/Plugin_API/Action_Reference'>
-      List of all core Actions + plugins actions</a>
-      
-    <a href='https://codex.wordpress.org/Plugin_API/Filter_Reference'>
-    List of all core filters + plugins filters</a>
+    <a href='https://codex.wordpress.org/Plugin_API/Action_Reference'>List of all core actions + plugins actions</a>
+    <a href='https://codex.wordpress.org/Plugin_API/Filter_Reference'>List of all core filters + plugins filters</a>
 </p>
 </div>
 
@@ -192,9 +192,7 @@ then you can use shortcode [mini] insode your page or post`,
     </code></pre>
 </div>
 
-<h2>
-<input type="button" value="-"	class="toggleButton"  onclick="toggle(this)" />Adding admin page to admin menu
-</h2>
+<h2>Adding admin page to admin menu</h2>
 <div>
     <pre><code>
     function plugin1_admin_menu_option()
@@ -218,47 +216,54 @@ then you can use shortcode [mini] insode your page or post`,
     <pre><code>
     global $wpdb;    	  
     $posts = $wpdb->get_results(  $wpdb->prepare(
-        "SELECT * FROM $wpdb->posts WHERE   post_status = 'draft' limit 4"));
+            "SELECT * FROM $wpdb->posts WHERE   post_status = 'draft' limit 4"));
         
-        echo "Title:". $posts[0]->post_title;  ."<br/>"   ;
+    echo "Title:". $posts[0]->post_title;  ."<br/>"   ;
         
-        foreach( $posts as $post ) {
+     foreach( $posts as $post ) {
         echo $post->post_title;
-        }
+     }
     
-        print_r( $posts );
-        exit;
+     print_r( $posts );
+     exit;
     </code></pre>
 
     <b>Insert</b>
     <pre><code>
     $wpdb->insert($wpdb->usermeta, 
-    array("user_id" => 1, 
-            "meta_key" => "awesome_factor", 
-            "meta_value" => 10), array("%d", %s", "%d"));
-     $meta_id = $wpdb->insert_id;//it returns auto inserted id
+           array("user_id" => 1, 
+                 "meta_key" => "awesome_factor", 
+                 "meta_value" => 10),
+		 array("%d", %s", "%d"));
+		 
+     $meta_id = $wpdb->insert_id; //it returns auto inserted id
     // Equivalent to:
     // INSERT INTO wp_usermeta (user_id, meta_key, meta_value) VALUES
     (1, "awesome_factor", 10);
     
     //secure Insert
     $sql = $wpdb->prepare( "INSERT INTO $wpdb->postmeta
-    (post_id, meta_key, meta_value ) VALUES 
-    ( %d, %s, %d )", 3342, 'post_views', 2290 );
+                           (post_id, meta_key, meta_value ) VALUES 
+                           ( %d, %s, %d )",
+			   3342,
+			   'post_views', 
+			   2290 );
     $wpdb->query($sql);      
     </code></pre>
 
     <b>Update</b>
     <pre><code>
-    $wpdb->update( $wpdb->posts, array(
-        "post_title" => "Modified Post Title"), 
-        array("ID" => 5), array("%s"), array("%d") );        
+    $wpdb->update( $wpdb->posts,
+                   array("post_title" => "Modified Post Title"), 
+                   array("ID" => 5),
+		   array("%s"),
+		   array("%d") );        
     </code></pre>
 
     <b>Delete</b>
     <pre><code>
     $wpdb->query("DELETE FROM wp_usermeta WHERE meta_key = 'first_login' 
-    OR meta_key = 'security_key' ");   
+                  OR meta_key = 'security_key' ");   
     </code></pre>
 
     <b>Error Handling of queries</b>
@@ -276,19 +281,36 @@ then you can use shortcode [mini] insode your page or post`,
 <h2>WordPress Database Tables(ver. 4.4)</h2>
 <div><p>
     fields details <a href='https://codex.wordpress.org/Database_Description'> are here</a>
-    <b>wp_commentmeta</b>	    : Each comment features information called the meta data and it is stored in the wp_commentmeta.
-    <b>wp_comments</b>	        : Comments within WordPress are stored in the wp_comments table.
-    <b>wp_links</b>	            : holds information related to the links entered into the Links feature of WordPress. (This feature has been deprecated, but can be re-enabled with the Links Manager plugin.)
-    <b>wp_options</b>	        : The Options set under the Administration > Settings panel are stored in the wp_options table. See Option Reference for option_name and default values.
-    <b>wp_postmeta</b>	        : Each post features information called the meta data and it is stored in the wp_postmeta. Some plugins may add their own information to this table.
-    <b>wp_posts</b>		        : The core of the WordPress data is the posts. It is stored in the wp_posts table. Also Pages and navigation menu items are stored in this table.
-    <b>wp_terms</b>	            : The categories for both posts and links and the tags for posts are found within the wp_terms table.
-    <b>wp_termmeta</b>        	: Each term features information called the meta data and it is stored in wp_termmeta.
-    <b>wp_term_relationships</b>: Posts are associated with categories and tags from the wp_terms table and this association is maintained in the wp_term_relationships table.
-                                The association of links to their respective categories are also kept in this table.
-    <b>wp_term_taxonomy</b>	    : Describes the taxonomy (category, link, or tag) for the entries in the wp_terms table.
-    <b>wp_usermeta</b>	        : Each user features information called the meta data and it is stored in wp_usermeta.
-    <b>wp_users</b>		        : The list of users is maintained in table wp_users.
+    <b>wp_commentmeta</b>	 : Each comment features information called the meta data 
+    				   and it is stored in the wp_commentmeta.
+				   
+    <b>wp_comments</b>	         : Comments within WordPress are stored in the wp_comments table.
+    
+    <b>wp_links</b>	         : holds information related to the links entered into the Links feature of WordPress.
+    				  (This feature has been deprecated, but can be re-enabled with the Links Manager plugin)
+				  
+    <b>wp_options</b>	         : The Options set under the Administration > Settings panel are stored in the wp_options table.
+    				   See Option Reference for option_name and default values.
+				   
+    <b>wp_postmeta</b>	         : Each post features information called the meta data and it is stored in the wp_postmeta.
+    				   Some plugins may add their own information to this table.
+				   
+    <b>wp_posts</b>	         : The core of the WordPress data is the posts. It is stored in the wp_posts table.
+                                   Also Pages and navigation menu items are stored in this table.
+				   
+    <b>wp_terms</b>	         : The categories for both posts and links and the tags for posts are found within the wp_terms table.
+    
+    <b>wp_termmeta</b>        	 : Each term features information called the meta data and it is stored in wp_termmeta.
+    
+    <b>wp_term_relationships</b> : Posts are associated with categories and tags from the wp_terms table 
+    				   and this association is maintained in the wp_term_relationships table.
+                                  The association of links to their respective categories are also kept in this table.
+				  
+    <b>wp_term_taxonomy</b>      : Describes the taxonomy (category, link, or tag) for the entries in the wp_terms table.
+    
+    <b>wp_usermeta</b>	         : Each user features information called the meta data and it is stored in wp_usermeta.
+    
+    <b>wp_users</b>              : The list of users is maintained in table wp_users.
 </p>
 </div>
 
