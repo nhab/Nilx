@@ -937,8 +937,397 @@ Level="1">
 
 <h2>Adding a user interface</h2>
 <div>
+<p>
+    There is WiX's built-in dialog you can use in sequences.
+
+All of them are stored in an assembly called WixUIExtension.dll. 
+
+You can add a reference to this file with Visual Studio's Add a Reference screen.
+
+The file exists in WiX's Program Files folder.
+ You may have to navigate to
+C:\Program Files (x86)\WiX Toolset v3.6\bin
+
+Once you've added the new reference,
+ add the following line to your WiX source file.
+ 
+It doesn't matter exactly where, as long as it's a child to the Product element:
+</p>
+<cl><UIRef Id="WixUI_Minimal" /></cl>
+<p>
+This will insert the Minimal dialog set into your installation sequence.
+
+It shows a single dialog screen containing a license agreement and an Install button.
+
+Feel free to try any of the other dialog sets.
+
+Just replace WixUI_Minimal, with one of the other names in the UIRef element.
+
+WixUI_Advanced and WixUI_InstallDir require some further setup to really work properly.
+
+You can try out the following attributes:
+</p>
+<pre>
+     WixUI_Advanced
+    WixUI_FeatureTree
+    WixUI_InstallDir
+    WixUI_Mondo   
+</pre>
 </div>
 
+<h2>Viewing the MSI database</h2>
+<div>
+<p>
+an MSI file is really a sort of relational database.
+
+WiX does all the work of creating tables,
+ inserting rows, and matching up keys in this database. 
+ 
+However, as we progress through the rest of the book, 
+I encourage you to explore how it looks behind the scenes. 
+
+For example, we discussed the File and Component elements. 
+
+Sure enough, there are two tables called File 
+and Component in the MSI package that contain the definitions you've set with your XML markup. 
+
+To get inside the installer, you'll need a tool called Orca.
+</p>
+<h3>Orca.exe</h3>
+<p>
+Once you've compiled your project in Visual Studio,
+ you'll have a working MSI package that can be installed by double-clicking on it.
+ 
+ If you'd like to see the database inside, install the MSI viewer, Orca.exe. 
+ 
+ Orca is provided as part of the Windows SDK and despite the icon of a whale on the shortcut, 
+it stands for One Really Cool App. 
+
+You can find versions of the SDK at Microsoft's Windows Development Center website:
+
+http://msdn.microsoft.com/en-us/windows/bb980924.aspx
+
+After you've installed the SDK (specifically, the .NET tools that are included), 
+you can find the installer for Orca—Orca.msi—in the Microsoft
+SDKs folder in Program Files. 
+
+On my machine, it can be found in
+C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin.
+Install Orca and then right-click on your MSI file and select Edit with Orca
+
+Orca lets you view the database structure of your installer. 
+
+This can be a big help in troubleshooting problems 
+or just to get a better idea about how different elements work together. 
+
+The following is a screenshot of the Component database:
+
+If you wanted to, you could edit your MSI package directly with Orca. 
+
+This is helpful when learning or trying out different concepts.
+
+You'll need to know exactly which tables and rows to modify. 
+
+Sometimes, though, you'll be able to just change a single value and check its effect.
+</p>
+</div>
+
+<h2>Turning logging on during installation</h2>
+<div>
+<p>
+If you get into trouble with your installer,
+ it may help to run it with logging turned on. 
+ 
+To do so, install your package from a command prompt using
+msiexec with the arguments /l*v,
+and the name of a file to write the log to. 
+
+For example, if you had an installer called myInstaller.msi, 
+you could use this command to write a log during the installation to a file called myLog.txt:
+
+msiexec i myInstaller.msi l*v myLog.txt
+
+Every event that occurs during installation will be recorded here. 
+
+It works for uninstalls too. 
+
+Simply use the /x argument instead of /i. 
+
+The log can be pretty helpful, but also very verbose. 
+
+If your installer fails midway through, you might try searching the log for the text return value 3. 
+
+This indicates that an action returned a status of failure. 
+
+Often, you'll also see a specific MSI error code. 
+
+You can find its meaning by searching for that number in the MSI SDK Documentation help file that comes with WiX.
+
+- You can also turn on logging for all MSI packages by editing the
+
+HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer
+
+key in the Windows Registry. 
+
+This should be used with care though so as not to use too much disk space.
+</p>
+</div>
+
+<h2>The Fragment element</h2>
+<div>
+<p>
+Up to this point, we've been adding all of our WiX elements to the Product.wxs file.
+
+When your installer packages hundreds of files,
+ you'll find that having all of your code in one place makes reading it difficult.
+
+You can split your elements up into multiple .wxs files
+ for better organization and readability. 
+
+Whereas your main source file, Product.wxs,
+nests everything inside a Product element,
+ your additional .wxs files will use Fragment elements as their roots.
+
+The Fragment element doesn't need any attributes. 
+
+It's simply a container.
+
+You can place just about anything inside of it, 
+such as all of your Directory elements or all of your Component elements.
+
+For the next example, add a new WiX source file to your project 
+and place the following markup inside it. 
+
+Here, we're using the same ComponentGroup that we discussed earlier.
+
+You can call the file Components.wxs, and it should look something like the following code snippet:
+</p>
+<pre><code>
+    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+        <Fragment>
+        <ComponentGroup Id="MyComponentGroup"
+        Directory="INSTALLLOCATION">
+        <Component Id="CMP_MyProgramEXE"
+        Guid="E8A58B7B-F031-4548-9BDD-
+        7A6796C8460D">
+        <File Id="FILE_MyProgramEXE"
+        Source="MyProgram.exe"
+        KeyPath="yes" >
+        <Component>
+        <Component Id="CMP_AnotherFileDLL"
+        Guid="E9D74961-DF9B-4130-8FBC-
+        1669A6DD288E">
+        <File Id="FILE_AnotherFileDLL"
+        Source="AnotherFile.dll"
+        KeyPath="yes" >
+        <Component>
+        </ComponentGroup>
+        </Fragment>
+        </Wix>
+        
+</code></pre>
+<p>
+    Now, the markup for the components is contained within a separate file.
+    We've used ComponentGroup to group them, 
+    but of course, that's optional.
+
+    To include this group in Product.wxs, 
+    reference it with a ComponentGroupRef element in one of your Feature elements
+    , as shown:
+</p>
+<pre><code>
+    <Feature Id="ProductFeature"
+    Title="Main Product"
+    Level="1">
+    <ComponentGroupRef Id="MyComponentGroup" >
+    <Feature>
+</code></pre>
+<p>
+Although the ComponentGroup element is optional, 
+it allows us to reference our fragment back in our main source file. 
+
+Referencing any single element from a fragment like this
+ will pull all of the elements in the fragment into the scope of your project.
+ 
+For components, this doesn't make much difference 
+since you still have to reference all of them—
+or at least a ComponentGroup element of them—inside a Feature element.
+
+However, it makes more of a difference for other elements.
+
+For example, properties, which are variables that you can use to store data, 
+are represented by Property elements 
+and could be stored in a separate file within a Fragment element. 
+
+Then, by referencing just one of them in your main source file with a PropertyRef element, 
+you'd pull all of them into your project.
+
+With fragments, it's all or nothing. Referencing one element in the fragment references them all.
+
+Other elements that don't have a corresponding Ref counterpart need a little more help. 
+
+For example, there's no reference element for the Media element. 
+
+There's no such thing as a "MediaRef". 
+
+However, if you included a Property element in the same fragment as your Media elements, 
+you could pull them in too by referencing that property with PropertyRef.
+
+The Media.wxs file would look like the following code snippet:
+</p>
+<pre><code>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+    <Property Id="MediaProperty"
+    Value="1" >
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes"
+    >
+    <Media Id="2" Cabinet="media2.cab" EmbedCab="yes"
+    >
+<Media Id="3" Cabinet="media3.cab" EmbedCab="yes"
+>
+</Fragment>
+</Wix>
+
+</code></pre>
+<p>
+To reference the Media elements in your project, 
+reference the property that's with them.
+
+This is done by adding the following code to Product.wxs:
+</p>
+<pre><code>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="3E786878-358D-43AD-82D1-1435ADF9F6EA"
+    Name="Awesome Software"
+    Language="1033"
+    Version="1.0.0.0"
+    Manufacturer="Awesome Company"
+    UpgradeCode="B414C827-8D81-4B4A-B3B6-
+    338C06DE3A11">
+    <Package InstallerVersion="301"
+    Compressed="yes" />
+    <PropertyRef Id="MediaProperty" />
+    <Directory Id="TARGETDIR"
+    Name="SourceDir">
+    <Directory Id="ProgramFilesFolder">
+    <Directory Id="MyProgramDir"
+    Name="Awesome Software" >
+    <Directory>
+    </Directory>
+    <DirectoryRef Id="MyProgramDir">
+    <Component Id="CMP_InstallMeTXT"
+    Guid="E8A58B7B-F031-4548-9BDD-
+    7A6796C8460D">
+    <File Id="FILE_InstallMeTXT"
+    Source="InstallMe.txt"
+    KeyPath="yes" >
+    <Component>
+    </DirectoryRef>
+    <Feature Id="ProductFeature"
+    Title="Main Product"
+    Level="1">
+    <ComponentRef Id="CMP_InstallMeTXT" >
+    <Feature>
+    </Product>
+    </Wix>
+</code></pre>
+<p>
+Fragments are a great way of splitting up your code to make it more manageable.
+
+As we've seen, it's easy to pull them into the scope of your project. 
+
+You could even pull one fragment into another and then pull that one into your main source file. 
+
+WiX will take care of running the validity checks to make sure that everything links together properly.
+
+Note that it's possible to have more than one Fragment element in the same source file. 
+
+In that case, you must use a reference element for each one.
+
+They're sort of like islands. They're isolated from one another.
+
+However, it's often simpler to stick to one fragment per file. The following file defines two fragments:
+</p>
+<pre><code>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <Property Id="MediaProperty"
+        Value="1" >
+        <Media Id="1"
+        Cabinet="media1.cab"
+        EmbedCab="yes" >
+        </Fragment>
+        <Fragment>
+        <Property Id="MediaProperty2"
+        Value="1" >
+        <Media Id="2"
+        Cabinet="media2.cab"
+        EmbedCab="yes" >
+    </Fragment>
+</Wix>  
+</code></pre>
+<p>
+Referencing the MediaProperty property with PropertyRef will only pull in
+the elements in the first fragment. To get those in the second fragment,
+you'd have to also reference the MediaProperty2 property.
+The Fragment element is so helpful that the WiX team has employed its
+use for an even bigger type of project organization: .wixlib files. These
+are separate projects that by default contain a single fragment and
+compile into a WiX library (.wixlib) that can be added as a reference in
+your main WiX project. This allows other teams to handle their own WiX
+code and send it to you already compiled. To try it out, create a new
+project in your solution using the Setup Library Project template.
+The contents of this type of project aren't anything you haven't seen
+before. It's simply a fragment. You'll start off with the following markup:
+</p>
+<pre><code>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+    <!-- TODO: Put your code here. -->
+    </Fragment>
+    </Wix>   
+</code></pre>
+<p>
+You can add properties, components, and anything else
+ you'd ordinarily be able to add to a fragment. 
+
+When it's compiled, you'll have a .wixlib file that can be added as a reference
+ in your main WiX project. 
+ 
+Use the Add Reference option in your Solution Explorer window. 
+
+Like other fragments,
+ you'll be able to reference the .wixlib file's contents by using a reference element such as PropertyRef.
+ 
+This is a great tool that allows multiple teams to work on the installer 
+without stepping on one another's toes.
+
+In the past, installation developers often used merge modules (.msm)
+ to separate installation code.
+ 
+ Merge modules, much like WiX libraries, contain compiled installer code 
+ and offer a way of splitting up large projects.
+ 
+ WiX libraries, which are easier to author, can serve as a replacement for merge modules.
+
+WiX does provide an XML element called Merge for importing a merge module into your project. 
+
+You'd probably only need to use this to install a third-party component.
+
+However, even for dependencies such as Microsoft's Visual C++ Runtime,
+ you may be able to avoid using a merge module and use an executable installer instead. 
+ 
+An installer for the Visual C++ Runtime is available
+ and by using WiX's new bootstrapper technology,
+ Burn , it can be installed as a prerequisite before your ownsoftware is installed.
+
+    
+</p>
+</div>
 
 <h2>WiX v4</h2>
 <div>
