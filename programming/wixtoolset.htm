@@ -411,6 +411,33 @@ UpgradeCode="B414C827-8D81-4B4A-B3B6-
 </div>
 
 </div>
+<h3>The Package element</h3>
+<div>
+<p>
+Once you've defined your Product element, the next step is to nest a
+Package element inside. An example is shown as follows:
+</p>
+<pre><code>
+<Wix ... >
+<Product ... >
+<Package InstallerVersion="301"
+Compressed="yes"
+InstallScope="perMachine"
+Manufacturer="Awesome Company"
+Description="Installs Awesome Software"
+Keywords="Practice,Installer,MSI"
+Comments="(c) 2012 Awesome Company" >
+<Product>
+</Wix>
+</code></pre>
+Of the attributes shown in this example, only Compressed is really
+required. By setting Compressed to yes, you're telling the installer to
+package all of the MSI's resources into CAB files. Later, you'll define
+these CAB files with Media elements or a MediaTemplate element.
+Technically, an Id attribute is also required, but by omitting it you're letting
+WiX create one for you.
+</div>
+</div>
 
 <h2>WiX v4</h2>
 <div>
