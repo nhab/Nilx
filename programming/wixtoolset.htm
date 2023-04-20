@@ -27,7 +27,7 @@
 The WiX Toolset creates Windows installation packages from XML source code.
 It lets developers create <b>installers for Windows Installer</b> ( the Windows installation engine).
 To check current version of windows Installer ( msiexec.exe) type:
-    <cl> msiexec /? </cl>
+    <code> msiexec /? </code>
     
  -benifits of installers:
     . All of your executable files can be packaged into one convenient bundle, 
@@ -49,17 +49,16 @@ To check current version of windows Installer ( msiexec.exe) type:
     
     . You can create Wizard-style dialogs to guide the user through the installation
     
-- it is a set of build tools 
+- It is a set of build tools 
     that build Windows Installer packages 
     using the same build concepts as the rest of your product:
     source code is compiled and then linked to create executables;
     in this case 
-    <pre>
         .exe setup bundles, 
         .msi installation packages, 
         .msm merge modules, 
         and .msp patches. 
-    </pre>
+    
 - WiX includes several extensions that offer functionality beyond that of Windows Installer.
     For example, 
     WiX can install IIS web sites
