@@ -677,7 +677,28 @@ have orphaned files (files that aren't being used) installed onto the
 computer. In many instances, if your product doesn't have any optional
 parts, you'll only want to create one feature.
 
+To create a new feature in your WiX file, add a Feature element inside the
+Product element. The following example installs three components under
+the feature MainProduct. Another feature called OptionalTools installs
+another component. Components are included in a feature with the
+ComponentRef element. The Id attribute of ComponentRef targets the Id
+attribute from the corresponding Component element
 </p>
+<pre><code>
+<Feature Id="MainProduct"
+Title="Main Product"
+Level="1">
+<ComponentRef Id="CMP_MyAppEXE" />
+<ComponentRef Id="CMP_ReadMeTXT" />
+<ComponentRef Id="CMP_StartMenuShortcuts" >
+<Feature>
+<Feature Id="OptionalTools"
+Title="Optional Tools"
+Level="1">
+<ComponentRef Id="CMP_ToolsEXE" >
+<Feature>
+</code></pre>
+
 </div>
 
 
