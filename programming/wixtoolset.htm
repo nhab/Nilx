@@ -595,7 +595,89 @@ Source="InstallMe.txt"
 KeyPath="yes" >
 <Component>
 </code></pre>
+<p>
+To add a component to a directory, you have several options. The first,
+which is the simplest, is to add your Component elements directly inside
+the target Directory element, as given in the following code snippet
+</p>
+<Directory Id="TARGETDIR"
+Name="SourceDir">
+<Directory Id="ProgramFilesFolder">
+<Directory Id="MyProgramDir"
+Name="Install Practice">
+<Component Id="CMP_InstallMeTXT"
+Guid="E8A58B7B-F031-4548-9BDD-
+7A6796C8460D">
+<File Id="FILE_MyProgramDir_InstallMeTXT"
+Source="InstallMe.txt"
+KeyPath="yes" />
+</Component>
+</Directory>
+</Directory>
+</Directory>
+<pre><code>
 
+</code></pre>
+<h3>The File element</h3>
+<p>
+the actual files inside components are declared with File
+elements. The File elements can represent everything from simple text
+files to complex DLLs and executables. Remember, you should only
+place one file into each component. The following example would add a
+file called SomeAssembly.dll to the installation package:
+</p>
+<pre><code>
+<Component ... >
+<File Id="FILE_MyProgramDir_SomeAssemblyDLL"
+Name="Some Assembly.dll"
+Source="SomeAssembly.dll"
+KeyPath="yes" >
+<Component>
+</code></pre>
+<p>
+A File element should always get the Source attribute. 
+
+Source defines the path to the file during compilation. 
+
+Id, Name, and KeyPath are optional. 
+The Id attribute becomes the primary key for a row in the MSI database. 
+
+It should be something unique,
+but you might consider starting it with FILE to make it clear that it refers to a File element.
+
+If not set, the Id value will match the filename. 
+
+Name gives you a chance to change the name of the file once it's been copied to the end user's computer.
+
+By default, it will use the name in the Source attribute.
+
+To mark a file as important 
+(and that it should be replaced if it goes missing), set it as the KeyPath file for the component.
+
+Since you should only ever place one file inside a component, 
+in almost all cases that file should be the KeyPath file. 
+
+If not set, the first file in the component will be the KeyPath file automatically.
+</p>
+
+<h3>The Feature element</h3>
+<p>
+After you've defined your components and the directories that they'll be copied into,
+the next step is to define features. 
+
+A feature is a group of components that the user can decide to install all at once.
+
+You'll often see these in an installation dialog as a list of modules, 
+called a feature tree , where each is included or excluded from the installation. 
+
+Every component must be included in a feature. Generally, you should
+group together components that rely on one another or that form a
+complete, self-sufficient unit. That way, if a feature is disabled, you won't
+have orphaned files (files that aren't being used) installed onto the
+computer. In many instances, if your product doesn't have any optional
+parts, you'll only want to create one feature.
+
+</p>
 </div>
 
 
