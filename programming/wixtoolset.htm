@@ -377,6 +377,37 @@ MsuPackage	    A Windows update .msu package
 <h3><a href="https://wixtoolset.org/docs/tools/burn/wixstdba/">WixStandardBootstrapperApplication</a></h3>
 <div></div>
 
+<h3>The Product element</h3>
+<div>
+This is where you define the characteristics of the software you're installing:
+its name, language, version, and manufacturer. 
+
+The end user will be able to see these properties by 
+right-clicking on your MSI file,
+selecting Properties,
+and viewing the Summary tab. 
+
+Most of the time,
+these values will stay the same from one build of your project to the next.
+
+The exception is when you want to increment the software's version
+to indicate that it's an upgrade of a previous installation. 
+
+In that case, you need to only change the Version attribute, and sometimes the Id attribute.
+<pre><code>
+<Wix ... >
+<Product Id="3E786878-358D-43AD-82D1-1435ADF9F6EA"
+Name="Awesome Software"
+Language="1033"
+Version="1.0.0.0"
+Manufacturer="Awesome Company"
+UpgradeCode="B414C827-8D81-4B4A-B3B6-
+338C06DE3A11">
+</Product>
+</Wix
+</code></pre>
+</div>
+
 </div>
 </div>
 
