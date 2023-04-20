@@ -546,6 +546,56 @@ TempFolder              Full path to the Temp folder
 TemplateFolder          Full path to the Template folder for current user
 WindowsFolder           Full path to the Windows folder
 </pre>
+
+<h3>The Component element</h3>
+<p>
+Once you've mapped out the directories that you want to target or create during the installation, 
+the next step is to copy files into them.
+
+To really explain things, we'll need something to install. 
+
+So let's create a simple text file and add it to our project's directory. 
+We'll call it InstallMe.txt.
+
+For our purposes, it doesn't really matter what's in the text file. 
+
+We just need something for testing.
+
+Windows Installer expects every file to be wrapped up in a component before it's installed.
+
+It doesn't matter what type of file it is either. 
+
+Each gets its own Component element.
+
+Components, which always have a unique GUID, allow Windows to track
+every file that gets installed on the end user's computer. 
+
+During an installation, this information is stored away in the registry. 
+
+This lets Windows find every piece of your product
+during an uninstall so that your software can be completely removed. 
+
+It also uses it to replace missing files during a repair, 
+which you can trigger by right-clicking on an MSI file and selecting Repair.
+
+Each Component element gets a unique GUID via its Guid attribute.
+
+To create a GUID in Visual Studio, go to Tools | Create GUID and copy a new GUID using the registry format. 
+
+The component's Id attribute is up to you. 
+
+It will serve as the primary key for the component in the MSI database, so each one must also be unique:
+</p>
+<pre><code>
+<Component Id="CMP_InstallMeTXT"
+Guid="E8A58B7B-F031-4548-9BDD-
+7A6796C8460D">
+<File Id="FILE_MyProgramDir_InstallMeTXT"
+Source="InstallMe.txt"
+KeyPath="yes" >
+<Component>
+</code></pre>
+
 </div>
 
 
