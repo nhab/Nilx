@@ -127,7 +127,7 @@ To check current version of windows Installer ( msiexec.exe) type:
 <h2>In visual studio</h2>
 <div>
 <p>
-    download:
+download:
     http://www.wixtoolset.org
     https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm
     https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2022Extension
@@ -136,12 +136,13 @@ Setup:
     After completing the installation, open Visual Studio and go to 
         File | New | Project | Windows Installer XML.
 
-Crreate
-    Select the Setup Project template from the list of available project types. 
-    The version of .NET that's displayed has no bearing on the project
-        since it's comprised of XML mark-up and not .NET code. Give the project a name and click on OK
+Create
+    . Select the Setup Project template from the list of available project types. 
+    . The version of .NET that's displayed has no bearing on the project
+        since it's comprised of XML mark-up and not .NET code. 
+    . Give the project a name and click on OK
     
-    The project will initially include a file named Product.wxs, 
+    The project will initially include a file named <b>Product.wxs</b>  (WiX source), 
     which contains the skeleton markup you'll need to create an installer:
 <pre><code>
     <?xml version="1.0" encoding="UTF-8"?>
@@ -192,8 +193,17 @@ Crreate
     </Wix>
 </code></pre>
 
- WiX 3.9 supports Visual Studio 2013
+ - WiX 3.9 supports Visual Studio 2013
  
+- Even the most minimal installer must have the following XML elements:
+    .   An XML declaration
+    .   A Wix element that serves as the root element in your XML document
+    .   A Product element that is a child to the Wix element,
+        but all other elements are children to it
+    .   A Package element
+    .   A Media or MediaTemplate element
+    .   At least one Directory element with at least one child Component element
+    .   A Feature element
 </p>
 </div>
 
