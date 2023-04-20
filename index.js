@@ -72,6 +72,7 @@ json1 +=`,{"title":"C# .Net"
             ,{"caption":"Distributed caching","href":"programming/dotnet/Distributed-caching.htm"}
             ,{"caption":"Prometheus","href":"programming/dotnet/prometheus.htm"}
             ,{"caption":"Easy caching","href":"programming/dotnet/easycaching.htm"}
+            ,{"caption":"Wix Toolset","href":"programming/wixtoolset.htm"}
         ]
 }`; 
 
