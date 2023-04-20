@@ -29,35 +29,34 @@ It lets developers create <b>installers for Windows Installer</b> ( the Windows 
 To check current version of windows Installer ( msiexec.exe) type:
     <code> msiexec /? </code>
     
- -benifits of installers:
-    . All of your executable files can be packaged into one convenient bundle, 
-    simplifying deployment Your software is automatically registered with Programs and Features
-    
-    . Windows takes care of uninstalling all of the components that make up your product 
-        when the user chooses to do so
-    
-    . If files for your software are accidently removed, 
-    they can be replaced by right-clicking on the MSI file and selecting Repair
+    -<b>benifits of installers</b>:
+        . All of your executable files can be packaged into one convenient bundle, 
+        simplifying deployment Your software is automatically registered with Programs and Features
 
-    . You can create different versions of your installer
-    and detect which version has been installed
-    
-    . You can create patches to update only specific areas of your application
-    
-    . If something goes wrong while installing your software, 
-    the end user's computer can be rolled back to a previous state
-    
-    . You can create Wizard-style dialogs to guide the user through the installation
-    
-- It is a set of build tools 
-    that build Windows Installer packages 
+        . Windows takes care of uninstalling all of the components that make up your product 
+            when the user chooses to do so
+
+        . If files for your software are accidently removed, 
+        they can be replaced by right-clicking on the MSI file and selecting Repair
+
+        . You can create different versions of your installer
+        and detect which version has been installed
+
+        . You can create patches to update only specific areas of your application
+
+        . If something goes wrong while installing your software, 
+        the end user's computer can be rolled back to a previous state
+
+        . You can create Wizard-style dialogs to guide the user through the installation
+
+    - It originally was a <b>set of build tools</b> that build Windows Installer packages 
     using the same build concepts as the rest of your product:
     source code is compiled and then linked to create executables;
     in this case 
-        .exe setup bundles, 
-        .msi installation packages, 
-        .msm merge modules, 
-        and .msp patches. 
+            .exe setup bundles, 
+            .msi installation packages, 
+            .msm merge modules, 
+            and .msp patches. 
     
 - WiX includes several extensions that offer functionality beyond that of Windows Installer.
     For example, 
