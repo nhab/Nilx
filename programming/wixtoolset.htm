@@ -411,6 +411,7 @@ UpgradeCode="B414C827-8D81-4B4A-B3B6-
 </div>
 
 </div>
+
 <h3>The Package element</h3>
 <div>
 <p>
@@ -437,7 +438,71 @@ these CAB files with Media elements or a MediaTemplate element.
 Technically, an Id attribute is also required, but by omitting it you're letting
 WiX create one for you.
 </div>
+
+<h3>The MediaTemplate element</h3>
+<p>
+The files that you intend to install are compressed into CAB files and
+shipped along with the installer. You decide whether to embed them
+inside the MSI or provide them visibly alongside it. In WiX 3.6, a single
+MediaTemplate element handles all the details for you, intelligently splitting
+your files into the prescribed number of CAB files. Add it after the Package
+element, as shown in the following code snippet
+</p>
+<pre><code>
+<Wix …>
+<Product … >
+<Package … />
+<MediaTemplate EmbedCab="yes" >
+<Product>
+</Wix>
+</code></pre>
+<p>
+The EmbedCab attribute is optional and sets whether the CAB files will be
+embedded inside the MSI, the default being to not embed them. Either
+way, WiX will create up to 999 CAB files, each holding a maximum of 200
+MB of data. You can change that limit with the
+MaximumUncompressedMediaSize attribute, set to a size in megabytes. If a
+single file is bigger than the maximum, it will be placed into its own CAB
+file with enough space to accommodate it.
+If you want to split your installation up into several physical disks—
+conjure up images of "Please insert disk 2"—you want to use the Media
+element instead.
+</p>
+
+<h3>The Media element</h3>
+<p>
+The Media element is an older element that was replaced by
+MediaTemplate and if you use one you can't use the other. However, in
+some cases, the Media element is the only thing for the job. For each
+Media element that you add to your WiX markup, a new CAB file will be
+created.
+</p>
+<pre><code>
+<Wix ... >
+<Product ... >
+<Package ... />
+<Media Id="1"
+Cabinet="media1.cab"
+EmbedCab="yes" >
+<Product>
+</Wix>
+</code></pre>
+<p>
+Each Media element gets a unique Id attribute to distinguish it in the MSI
+Media table. It must be a positive integer. If the files that you add to your
+installation package don't explicitly state which CAB file they wish to be
+packaged into, they'll default to using a Media element with an Id value of
+1. Therefore, your first Media element should always use an Id value of 1.
+The Cabinet attribute sets the name of the CAB file. You won't actually
+see this unless you set EmbedCab to no, in which case the file will be
+shipped alongside the MSI. This is atypical, but might be done to split the
+installation files onto several disks.
+If you do choose to split the installation up into several physical disks (or
+even virtual ISO images), you'll want to add the DiskPrompt and
+VolumeLabel attributes. In
+</p>
 </div>
+
 
 <h2>WiX v4</h2>
 <div>
