@@ -24,8 +24,28 @@
 <h3>what?</h3> 
 <div>
 <p>
-The WiX Toolset lets developers <b>create installers for Windows</b> Installer( the Windows installation engine).
+The WiX Toolset lets developers create <b>installers for Windows Installer</b> ( the Windows installation engine).
 
+ -benifits:
+    . All of your executable files can be packaged into one convenient bundle, 
+    simplifying deployment Your software is automatically registered with Programs and Features
+    
+    . Windows takes care of uninstalling all of the components that make up your product 
+        when the user chooses to do so
+    
+    . If files for your software are accidently removed, 
+    they can be replaced by right-clicking on the MSI file and selecting Repair
+
+    . You can create different versions of your installer
+    and detect which version has been installed
+    
+    . You can create patches to update only specific areas of your application
+    
+    . If something goes wrong while installing your software, 
+    the end user's computer can be rolled back to a previous state
+    
+    . You can create Wizard-style dialogs to guide the user through the installation
+    
 - it is a set of build tools 
     that build Windows Installer packages 
     using the same build concepts as the rest of your product:
