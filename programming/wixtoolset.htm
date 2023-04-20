@@ -737,6 +737,145 @@ Target="[MyProgramDir]InstallMe.txt" >
 <Component>
 </DirectoryRef>
 </code></pre>
+<p>
+Two things that should accompany a shortcut are a RemoveFolder element
+and a RegistryValue element. RemoveFolder ensures that the new Start
+menu subdirectory will be removed during an uninstall. It uses an Id
+attribute to uniquely identify a row in the MSI RemoveFile table and an On
+attribute to specify when to remove the folder. You can set On to install,
+uninstall, or both. You can specify a Directory attribute as well to set to
+the Id attribute of a Directory element to remove. Without one, though,
+the element will remove the directory defined by the parent DirectoryRef
+or ComponentGroup element.
+The RegistryValue element is needed simply because every component
+must have a KeyPath item. Shortcuts aren't allowed to be KeyPath items
+as they aren't technically files. By adding a RegistryValue, a new item is
+added to the registry and this is marked as KeyPath. The actual value
+itself serves no other purpose. We will cover writing to the registry in
+more detail later.
+</p>
+<pre><code>
+<DirectoryRef Id="MyShortcutsDir">
+<Component Id="CMP_DocumentationShortcut"
+Guid="33741C82-30BF-41AF-8246-
+44A5DCFCF953">
+<Shortcut Id="DocumentationStartMenuShortcut"
+Name="Awesome Software Documentation"
+Description="Read Awesome Software
+Documentation"
+Target="[MyProgramDir]InstallMe.txt" />
+<RemoveFolder Id="RemoveMyShortcutsDir"
+On="uninstall" />
+<RegistryValue Root="HKCU"
+Key="Software\Microsoft\AwesomeSoftware"
+Name="installed"
+Type="integer"
+Value="1"
+KeyPath="yes" />
+</Component>
+</DirectoryRef>
+</code></pre>
+<p>
+There's actually another reason for using a RegistryValue element as
+KeyPath. The shortcut we're creating is being installed to a directory
+specific to the current user. Windows Installer requires that you always
+use a registry value as the KeyPath item when doing this in order to
+simplify uninstalling the product when multiple users have installed it.
+
+Another type of shortcut to add is one that uninstalls the product. For this,
+add a second Shortcut element to the same component. This shortcut
+will be different in that it will have its Target set to the msiexec.exe
+program, which is located in the System folder. The following example
+uses the predefined System64Folder directory name because it will
+automatically map to either the 64-bit or 32-bit System folder, depending
+on the end user's operating system.
+By setting Target to the path of an executable, you're telling Windows to
+launch that program when the user clicks the shortcut. The msiexec
+program can remove software by using the /x argument followed by the
+ProductCode attribute of the product you want to uninstall. The
+ProductCode attribute is the Id attribute specified in the Product element.
+</p>
+
+<h3>putting it all together</h3>
+The entire .wxs file:
+<pre><code>
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Product Id="3E786878-358D-43AD-82D1-1435ADF9F6EA"
+Name="Awesome Software"
+Language="1033"
+Version="1.0.0.0"
+Manufacturer="Awesome Company"
+UpgradeCode="B414C827-8D81-4B4A-B3B6-
+338C06DE3A11">
+<Package InstallerVersion="301"
+Compressed="yes"
+InstallScope="perMachine"
+Manufacturer="Awesome Company"
+Description="Installs Awesome Software"
+Keywords="Practice,Installer,MSI"
+Comments="(c) 2012 Awesome Company" >
+<MediaTemplate EmbedCab="yes" >
+<!--Directory structure-->
+<Directory Id="TARGETDIR"
+Name="SourceDir">
+<Directory Id="ProgramFilesFolder">
+<Directory Id="MyProgramDir"
+Name="Awesome Software" >
+<Directory Id="ProgramMenuFolder">
+<Directory Id="MyShortcutsDir"
+Name="Awesome Software" >
+</Directory>
+</Directory>
+</Directory>
+<!--Components-->
+<DirectoryRef Id="MyProgramDir">
+<Component Id="CMP_InstallMeTXT"
+Guid="E8A58B7B-F031-4548-9BDD-
+7A6796C8460D">
+<File Id="FILE_InstallMeTXT"
+Source="InstallMe.txt"
+KeyPath="yes" >
+<Component>
+</DirectoryRef>
+<!--Start Menu Shortcuts-->
+<DirectoryRef Id="MyShortcutsDir">
+<Component Id="CMP_DocumentationShortcut"
+Guid="33741C82-30BF-41AF-8246-
+44A5DCFCF953">
+<Shortcut Id="DocumentationStartMenuShortcut"
+Name="Awesome Software
+Documentation"
+Description="Read Awesome Software
+Documentation"
+Target="[MyProgramDir]InstallMe.txt"
+/>
+<Shortcut Id="UninstallShortcut"
+Name="Uninstall Awesome Software"
+Description="Uninstalls Awesome
+Software"
+Target="[System64Folder]msiexec.exe"
+Arguments="x [ProductCode]" >
+<RemoveFolder Id="RemoveMyShortcutsDir"
+On="uninstall" />
+<RegistryValue Root="HKCU"
+Key="Software\Microsoft\AwesomeSoftware"
+Name="installed"
+Type="integer"
+Value="1"
+KeyPath="yes" >
+<Component>
+</DirectoryRef>
+<!--Features-->
+<Feature Id="ProductFeature"
+Title="Main Product"
+Level="1">
+<ComponentRef Id="CMP_InstallMeTXT" >
+<ComponentRef Id="CMP_DocumentationShortcut" >
+</Feature>
+</Product>
+</Wix>
+</pre></code>
 </div>
 
 
