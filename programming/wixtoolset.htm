@@ -145,7 +145,8 @@ Create
     
     The project will initially include a file named <b>Product.wxs</b>  (WiX source), 
     which contains the skeleton markup you'll need to create an installer:
-<pre><code>
+</p>
+ <pre><code>
     <?xml version="1.0" encoding="UTF-8"?>
     <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
      <Product Id="*"
@@ -193,7 +194,7 @@ Create
      </Fragment>
     </Wix>
 </code></pre>
-
+<p>
  - WiX 3.9 supports Visual Studio 2013
  
 - Even the most minimal installer must have the following XML elements:
@@ -211,7 +212,8 @@ Create
 <h2>Concepts</h2>
 <div>
 <h3>Burn bundles</h3>
-<div><p>
+<div>
+ <p>
 - The Bundle element is the top-level element for a Burn bundle. 
    It contains child elements that let you specify 
    the chain of packages to be installed, 
@@ -219,6 +221,7 @@ Create
    custom and built-in variables, 
    system searches, 
    and all the other goodies that let you define a bundle.
+</P>
 <pre><code>
     <Wix
     xmlns="http://wixtoolset.org/schemas/v4/wxs"
@@ -243,7 +246,6 @@ Create
     </Bundle>
 </Wix>
 </code></pre>
-    </p>
     
 <h3>Bundle package chains</h3>
 <div>
@@ -316,6 +318,7 @@ MsuPackage	    A Windows update .msu package
      WixIUIBA is useful when you have a complex UI defined in an MSI package and don't want to convert it to a BA.
 
 - Here's how you might add a built-in BA to a bundle:
+</p>
 <pre><code>
     <Wix
     xmlns="http://wixtoolset.org/schemas/v4/wxs"
@@ -329,10 +332,11 @@ MsuPackage	    A Windows update .msu package
                 Theme="hyperlinkLicense" />
         </BootstrapperApplication>
 </code></pre>
-
+<p>
 - You can also create an entirely custom bootstrapper application,
  either in native code or managed code. 
  Here's how you might reference a custom native-code BA:
+</p>
 <pre><code>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Bundle>
@@ -344,7 +348,6 @@ MsuPackage	    A Windows update .msu package
                 Id="MyStandardBootstrapperApplicationPayloads" />
         </BootstrapperApplication>
 </code></pre>
-
 - Here's how you might reference a custom managed-code BA written in .NET 6:
 <pre><code>
 <Wix
@@ -362,7 +365,6 @@ MsuPackage	    A Windows update .msu package
             <bal:WixDotNetCoreBootstrapperApplicationHost />
         </BootstrapperApplication>
 </code></pre>
-</p>
 </div>
 
 <h3><a href="https://wixtoolset.org/docs/tools/burn/builtin-variables/">Burn built-in variables</a> </h3>
@@ -375,10 +377,11 @@ MsuPackage	    A Windows update .msu package
 <div></div>
 
 </div>
-</p></div>
+</div>
 
 <h2>WiX v4</h2>
-<div><p>
+<div>
+<p>
 - WiX v4 doesn't have to be installed on every dev machine and build image like WiX v3. 
   Instead, WiX v4 follows the modern .NET model of using NuGet to deliver tools.
 
@@ -401,9 +404,11 @@ MsuPackage	    A Windows update .msu package
   and then calling Light.exe to link and bind the compiled authoring into an .msi package. 
   
   In WiX v4 using wix.exe, that's one command: wix build -o product.msi product.wxs.
+</p>
 
 <h3>Convert WiX authoring from the command line</h3>
 <div>
+<p>
 - By default, wix convert converts the files in place, 
   overwriting the original files. 
   
@@ -427,15 +432,17 @@ MsuPackage	    A Windows update .msu package
 - To convert all WiX source, 
   include, and localization files in a specified directory tree: 
   <b>wix convert --recurse path\to\*.wx?</b> .
+ </p>
 </div>
 
 <h3>Convert WiX projects and authoring from Visual Studio</h3>
 <div>
+<p>
 - <b>FireGiant's HeatWave Community Edition</b> includes support for 
      converting WiX v3 authoring (like using wix convert) 
      and converting WiX v3 .wixproj MSBuild projects to SDK-style WiX v4 projects.
-</div>
 </p>
+</div>
 </div>
 
 <h2>MSBuild</h2>
@@ -462,6 +469,7 @@ MsuPackage	    A Windows update .msu package
 
 <h2>Deployment Tools Foundation</h2>
 <div>
+<p>
     Deployment Tools Foundation is a rich set of .NET class libraries and related resources
      that together bring the Windows deployment platform technologies into the .NET world.
      including:
@@ -469,17 +477,18 @@ MsuPackage	    A Windows update .msu package
         Working with Cabinet Files
         Working with Install Packages
         Managed Custom Actions
-
+</p>
      <a href="https://wixtoolset.org/docs/tools/dtf/">Deployment tools</a>
 </div>
 
 <h2>Preprocessors</h2>
 <div>
+<p>
     The WiX preprocessor lets you 
     use variables in your WiX authoring,
      share fragments of WiX authoring, 
      and conditionally include or exclude XML elements based on conditional expressions. 
-
+</p>
     <a href="https://wixtoolset.org/docs/tools/preprocessor/">Preprocessors</a>
 </div>
 
