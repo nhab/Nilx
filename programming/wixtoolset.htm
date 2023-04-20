@@ -501,6 +501,51 @@ If you do choose to split the installation up into several physical disks (or
 even virtual ISO images), you'll want to add the DiskPrompt and
 VolumeLabel attributes. In
 </p>
+
+<h3>The Directory element</h3>
+<p>
+So, now we've defined the identity of the product, set up its package
+properties, and told the installer to create a CAB file to package up the
+things that we'll eventually install. Then, how do you decide where your
+product will get installed to on the end user's computer? How do we set
+the default install path, for example, to some folder under Program Files?
+When you want to install to C:\Program Files, you can use a sort of
+shorthand. There are several directory properties provided by Windows
+Installer that will be translated to their true paths at install time. For
+example, ProgramFilesFolder usually translates to C:\Program Files
+
+The
+following is a list of these built-in directory properties:
+</p>
+<pre>
+Directory property      Actual path
+AdminToolsFolder        Full path to directory containing administrative tools
+AppDataFolder           Full path to roaming folder for current user
+CommonAppDataFolder     Full path to application data for all users
+CommonFiles64Folder     Full path to the 64-bit Common Files folder
+CommonFilesFolder       Full path to the Common Files folder for current user
+DesktopFolder           Full path to the Desktop folder
+FavoritesFolder         Full path to the Favorites folder for current user
+FontsFolder             Full path to the Fonts folder
+LocalAppDataFolder      Full path to folder containing local (non-roaming) applications
+MyPicturesFolder        Full path to the Pictures folder
+NetHoodFolder           Full path to the NetHood folder
+PersonalFolder          Full path to the Documents folder for current user
+PrintHoodFolder         Full path to the PrintHood folder
+ProgramFiles64Folder    Full path to the 64-bit Program Files folder
+ProgramFilesFolder      Full path to 32-bit Program Files folder
+ProgramMenuFolder       Full path to Program Menu folder
+RecentFolder            Full path to Recent folder
+SendToFolder            Full path to the SendTo folder for current user
+StartMenuFolder         Full path to the Start Menu folder
+StartupFolder           Full path to the Startup folder
+System16Folder          Full path to the 16-bit system DLLs folder
+System64Folder          Full path to the System64 folder
+SystemFolder            Full path to the System folder for current user
+TempFolder              Full path to the Temp folder
+TemplateFolder          Full path to the Template folder for current user
+WindowsFolder           Full path to the Windows folder
+</pre>
 </div>
 
 
