@@ -431,22 +431,24 @@ Comments="(c) 2012 Awesome Company" >
 <Product>
 </Wix>
 </code></pre>
-Of the attributes shown in this example, only Compressed is really
-required. By setting Compressed to yes, you're telling the installer to
-package all of the MSI's resources into CAB files. Later, you'll define
-these CAB files with Media elements or a MediaTemplate element.
-Technically, an Id attribute is also required, but by omitting it you're letting
-WiX create one for you.
+Of the attributes shown in this example, only Compressed is really required.
+
+By setting Compressed to yes, 
+you're telling the installer to package all of the MSI's resources into CAB files. 
+
+Technically, an Id attribute is also required, but by omitting it you're letting WiX create one for you.
 </div>
 
 <h3>The MediaTemplate element</h3>
 <p>
-The files that you intend to install are compressed into CAB files and
-shipped along with the installer. You decide whether to embed them
-inside the MSI or provide them visibly alongside it. In WiX 3.6, a single
-MediaTemplate element handles all the details for you, intelligently splitting
-your files into the prescribed number of CAB files. Add it after the Package
-element, as shown in the following code snippet
+The files that you intend to install are compressed into CAB files and shipped along with the installer.
+
+You decide whether to embed them inside the MSI or provide them visibly alongside it.
+
+In WiX 3.6, a single MediaTemplate element handles all the details for you, 
+intelligently splitting your files into the prescribed number of CAB files.
+
+Add it after the Package element, as shown in the following code snippet
 </p>
 <pre><code>
 <Wix …>
@@ -457,25 +459,31 @@ element, as shown in the following code snippet
 </Wix>
 </code></pre>
 <p>
-The EmbedCab attribute is optional and sets whether the CAB files will be
-embedded inside the MSI, the default being to not embed them. Either
-way, WiX will create up to 999 CAB files, each holding a maximum of 200
-MB of data. You can change that limit with the
-MaximumUncompressedMediaSize attribute, set to a size in megabytes. If a
-single file is bigger than the maximum, it will be placed into its own CAB
-file with enough space to accommodate it.
-If you want to split your installation up into several physical disks—
-conjure up images of "Please insert disk 2"—you want to use the Media
-element instead.
+The EmbedCab attribute is optional
+and sets whether the CAB files will be embedded inside the MSI,
+the default being to not embed them. 
+
+Either way, WiX will create up to 999 CAB files, 
+each holding a maximum of 200 MB of data. 
+
+You can change that limit with the MaximumUncompressedMediaSize attribute, 
+set to a size in megabytes. 
+
+If a single file is bigger than the maximum,
+it will be placed into its own CAB file with enough space to accommodate it.
+
+If you want to split your installation up into several physical disks—conjure up images 
+of "Please insert disk 2"—you want to use the Media element instead.
 </p>
 
 <h3>The Media element</h3>
 <p>
-The Media element is an older element that was replaced by
-MediaTemplate and if you use one you can't use the other. However, in
-some cases, the Media element is the only thing for the job. For each
-Media element that you add to your WiX markup, a new CAB file will be
-created.
+The Media element is an older element that was replaced by MediaTemplate
+and if you use one you can't use the other. 
+
+However, in some cases, the Media element is the only thing for the job. 
+
+For each Media element that you add to your WiX markup, a new CAB file will be created.
 </p>
 <pre><code>
 <Wix ... >
@@ -488,31 +496,43 @@ EmbedCab="yes" >
 </Wix>
 </code></pre>
 <p>
-Each Media element gets a unique Id attribute to distinguish it in the MSI
-Media table. It must be a positive integer. If the files that you add to your
-installation package don't explicitly state which CAB file they wish to be
-packaged into, they'll default to using a Media element with an Id value of
+Each Media element gets a unique Id attribute to distinguish it in the MSI Media table. 
+
+It must be a positive integer. 
+
+If the files that you add to your installation package 
+don't explicitly state which CAB file they wish to be packaged into,
+they'll default to using a Media element with an Id value 
+
 1. Therefore, your first Media element should always use an Id value of 1.
-The Cabinet attribute sets the name of the CAB file. You won't actually
-see this unless you set EmbedCab to no, in which case the file will be
-shipped alongside the MSI. This is atypical, but might be done to split the
-installation files onto several disks.
-If you do choose to split the installation up into several physical disks (or
-even virtual ISO images), you'll want to add the DiskPrompt and
-VolumeLabel attributes. In
+The Cabinet attribute sets the name of the CAB file.
+
+You won't actually see this unless you set EmbedCab to no, 
+in which case the file will be shipped alongside the MSI.
+
+This is atypical, but might be done to split the installation files onto several disks.
+
+If you do choose to split the installation up into several physical disks 
+(or even virtual ISO images), you'll want to add the DiskPrompt and VolumeLabel attributes. 
+
 </p>
 
 <h3>The Directory element</h3>
 <p>
-So, now we've defined the identity of the product, set up its package
-properties, and told the installer to create a CAB file to package up the
-things that we'll eventually install. Then, how do you decide where your
-product will get installed to on the end user's computer? How do we set
-the default install path, for example, to some folder under Program Files?
-When you want to install to C:\Program Files, you can use a sort of
-shorthand. There are several directory properties provided by Windows
-Installer that will be translated to their true paths at install time. For
-example, ProgramFilesFolder usually translates to C:\Program Files
+So, now we've defined the identity of the product, 
+set up its package properties, 
+and told the installer to create a CAB file to package up the things that we'll eventually install. 
+
+Then, how do you decide where your product will get installed to on the end user's computer? 
+
+How do we set the default install path, for example, to some folder under Program Files?
+
+When you want to install to C:\Program Files, you can use a sort of shorthand.
+
+There are several directory properties provided by Windows Installer 
+that will be translated to their true paths at install time. 
+
+For example, ProgramFilesFolder usually translates to C:\Program Files
 
 The
 following is a list of these built-in directory properties:
@@ -584,7 +604,8 @@ To create a GUID in Visual Studio, go to Tools | Create GUID and copy a new GUID
 
 The component's Id attribute is up to you. 
 
-It will serve as the primary key for the component in the MSI database, so each one must also be unique:
+It will serve as the primary key for the component in the MSI database,
+so each one must also be unique:
 </p>
 <pre><code>
 <Component Id="CMP_InstallMeTXT"
@@ -596,9 +617,11 @@ KeyPath="yes" >
 <Component>
 </code></pre>
 <p>
-To add a component to a directory, you have several options. The first,
-which is the simplest, is to add your Component elements directly inside
-the target Directory element, as given in the following code snippet
+To add a component to a directory, you have several options. 
+
+The first,which is the simplest, 
+is to add your Component elements directly inside the target Directory element,
+as given in the following code snippet
 </p>
 <Directory Id="TARGETDIR"
 Name="SourceDir">
@@ -620,11 +643,14 @@ KeyPath="yes" />
 </code></pre>
 <h3>The File element</h3>
 <p>
-the actual files inside components are declared with File
-elements. The File elements can represent everything from simple text
-files to complex DLLs and executables. Remember, you should only
-place one file into each component. The following example would add a
-file called SomeAssembly.dll to the installation package:
+the actual files inside components are declared with File elements.
+
+The File elements can represent everything 
+from simple text files to complex DLLs and executables. 
+
+Remember, you should only place one file into each component.
+
+The following example would add a file called SomeAssembly.dll to the installation package:
 </p>
 <pre><code>
 <Component ... >
@@ -670,19 +696,27 @@ A feature is a group of components that the user can decide to install all at on
 You'll often see these in an installation dialog as a list of modules, 
 called a feature tree , where each is included or excluded from the installation. 
 
-Every component must be included in a feature. Generally, you should
-group together components that rely on one another or that form a
-complete, self-sufficient unit. That way, if a feature is disabled, you won't
-have orphaned files (files that aren't being used) installed onto the
-computer. In many instances, if your product doesn't have any optional
-parts, you'll only want to create one feature.
+Every component must be included in a feature.
 
-To create a new feature in your WiX file, add a Feature element inside the
-Product element. The following example installs three components under
-the feature MainProduct. Another feature called OptionalTools installs
-another component. Components are included in a feature with the
-ComponentRef element. The Id attribute of ComponentRef targets the Id
-attribute from the corresponding Component element
+Generally, you should group together components that rely on one another
+or that form a complete, self-sufficient unit. 
+
+That way, if a feature is disabled, you won't have orphaned files 
+(files that aren't being used)  installed onto the computer.
+
+In many instances, if your product doesn't have any optional parts, 
+you'll only want to create one feature.
+
+To create a new feature in your WiX file,
+add a Feature element inside the Product element.
+
+The following example installs three components under the feature MainProduct. 
+
+Another feature called OptionalTools installs another component.
+
+Components are included in a feature with the ComponentRef element. 
+
+The Id attribute of ComponentRef targets the Id attribute from the corresponding Component element
 </p>
 <pre><code>
 <Feature Id="MainProduct"
@@ -701,10 +735,11 @@ Level="1">
 
 <h3>Start menu shortcuts</h3>
 <p>
-Having a working installer is good, but wouldn't it be nice to add some
-shortcuts to the Windows Start menu? First, add another Directory
-element that references the Start menu via the built-in ProgramMenuFolder
-property:
+Having a working installer is good, 
+but wouldn't it be nice to add some shortcuts to the Windows Start menu? 
+
+First, add another Directory element that references the Start menu 
+via the built-in ProgramMenuFolder property:
 </p>
 <pre><code>
 <Directory Id="TARGETDIR"
@@ -720,9 +755,10 @@ Name="Awesome Software" />
 </Directory>
 </code></pre>
 <p>
-In the previous code snippet we're adding a new folder to the Start menu
-called Awesome Software. Now, we can use a DirectoryRef element to
-reference our new shortcuts folder, as in the following code snippet:
+we're adding a new folder to the Start menu called Awesome Software. 
+
+Now, we can use a DirectoryRef element to reference our new shortcuts folder,
+as in the following code snippet:
 </p>
 <pre><code>
 <DirectoryRef Id="MyShortcutsDir">
@@ -738,21 +774,33 @@ Target="[MyProgramDir]InstallMe.txt" >
 </DirectoryRef>
 </code></pre>
 <p>
-Two things that should accompany a shortcut are a RemoveFolder element
-and a RegistryValue element. RemoveFolder ensures that the new Start
-menu subdirectory will be removed during an uninstall. It uses an Id
-attribute to uniquely identify a row in the MSI RemoveFile table and an On
-attribute to specify when to remove the folder. You can set On to install,
-uninstall, or both. You can specify a Directory attribute as well to set to
-the Id attribute of a Directory element to remove. Without one, though,
-the element will remove the directory defined by the parent DirectoryRef
-or ComponentGroup element.
-The RegistryValue element is needed simply because every component
-must have a KeyPath item. Shortcuts aren't allowed to be KeyPath items
-as they aren't technically files. By adding a RegistryValue, a new item is
-added to the registry and this is marked as KeyPath. The actual value
-itself serves no other purpose. We will cover writing to the registry in
-more detail later.
+Two things that should accompany a shortcut are 
+a RemoveFolder element 
+and a RegistryValue element. 
+
+RemoveFolder ensures that the new Start menu subdirectory will be removed during an uninstall.
+
+It uses an Id attribute 
+to uniquely identify a row in the MSI RemoveFile table
+and an On attribute to specify when to remove the folder.
+
+You can set On to install,uninstall, or both. 
+
+You can specify a Directory attribute 
+as well to set to the Id attribute of a Directory element to remove.
+
+Without one, though,
+the element will remove the directory defined by the parent DirectoryRef or ComponentGroup element.
+
+The RegistryValue element is needed simply because every component must have a KeyPath item. 
+
+Shortcuts aren't allowed to be KeyPath items as they aren't technically files. 
+
+By adding a RegistryValue, a new item is added to the registry and this is marked as KeyPath. 
+
+The actual value itself serves no other purpose. 
+
+We will cover writing to the registry in more detail later.
 </p>
 <pre><code>
 <DirectoryRef Id="MyShortcutsDir">
@@ -776,24 +824,33 @@ KeyPath="yes" />
 </DirectoryRef>
 </code></pre>
 <p>
-There's actually another reason for using a RegistryValue element as
-KeyPath. The shortcut we're creating is being installed to a directory
-specific to the current user. Windows Installer requires that you always
-use a registry value as the KeyPath item when doing this in order to
-simplify uninstalling the product when multiple users have installed it.
+There's actually another reason for using a RegistryValue element as KeyPath. 
 
-Another type of shortcut to add is one that uninstalls the product. For this,
-add a second Shortcut element to the same component. This shortcut
-will be different in that it will have its Target set to the msiexec.exe
-program, which is located in the System folder. The following example
-uses the predefined System64Folder directory name because it will
-automatically map to either the 64-bit or 32-bit System folder, depending
-on the end user's operating system.
-By setting Target to the path of an executable, you're telling Windows to
-launch that program when the user clicks the shortcut. The msiexec
-program can remove software by using the /x argument followed by the
-ProductCode attribute of the product you want to uninstall. The
-ProductCode attribute is the Id attribute specified in the Product element.
+The shortcut we're creating is being installed to a directory specific to the current user. 
+
+Windows Installer requires that you always use a registry value as the KeyPath item
+when doing this in order to simplify uninstalling the product 
+when multiple users have installed it.
+
+Another type of shortcut to add is one that uninstalls the product.
+
+For this, add a second Shortcut element to the same component.
+
+This shortcut will be different in that 
+it will have its Target set to the msiexec.exe program, 
+which is located in the System folder. 
+
+The following example uses the predefined System64Folder directory name
+because it will automatically map to either the 64-bit or 32-bit System folder,
+depending on the end user's operating system.
+
+By setting Target to the path of an executable,
+you're telling Windows to launch that program when the user clicks the shortcut.
+
+The msiexec program can remove software by using the /x argument 
+followed by the ProductCode attribute of the product you want to uninstall. 
+
+The ProductCode attribute is the Id attribute specified in the Product element.
 </p>
 
 <h3>putting it all together</h3>
@@ -876,6 +933,10 @@ Level="1">
 </Product>
 </Wix>
 </pre></code>
+</div>
+
+<h2>Adding a user interface</h2>
+<div>
 </div>
 
 
