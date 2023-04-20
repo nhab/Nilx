@@ -202,7 +202,7 @@ color:#00FFFF;
 }
 code {
     display: inline-block;
-    overflow-wrap: nowrap;
+    white-space: nowrap;
     text-indent: 1%;
 }
 samp, code {
