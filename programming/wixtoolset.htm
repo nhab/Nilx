@@ -21,9 +21,9 @@
 
 <h2>Overview</h2>
 <div>
-<p>
 <h3>what?</h3> 
 <div>
+<p>
 The WiX Toolset lets developers <b>create installers for Windows</b> Installer( the Windows installation engine).
 
 - it is a set of build tools 
@@ -47,11 +47,12 @@ The WiX Toolset lets developers <b>create installers for Windows</b> Installer( 
     you can create setup bundles that install prerequisites 
     like the .NET Framework and other runtimes along with your own product. 
     Burn lets you download packages or combine them into a single downloadable .exe.
-
+ </p>
 </div>
 
 <h3>3 ways of using <b>WiX v4</b></h3>
 <div>
+   <p>
         1- Visual Studio
         FireGiant has released <b>HeatWave Community Edition</b> to support WiX v4 SDK-style MSBuild projects in Visual Studio. 
         
@@ -77,13 +78,13 @@ The WiX Toolset lets developers <b>create installers for Windows</b> Installer( 
         SDK-style projects, have smart defaults that make for simple .wixproj project authoring.
         For example, here's a minimal .wixproj 
         that builds an MSI from the .wxs source files in the project directory:
+    </p>
     <pre><code>
         <Project Sdk="WixToolset.Sdk/4.0.0">
         </Project>
     </code></pre>
 </div>
 
-</p>
 </div>
 
 <h2>In visual studio</h2>
@@ -160,9 +161,9 @@ Crreate
 </div>
 
 <h2>Concepts</h2>
-<div><p>
-<h3>Burn bundles</h3>
 <div>
+<h3>Burn bundles</h3>
+<div><p>
 - The Bundle element is the top-level element for a Burn bundle. 
    It contains child elements that let you specify 
    the chain of packages to be installed, 
@@ -194,9 +195,11 @@ Crreate
     </Bundle>
 </Wix>
 </code></pre>
-
+    </p>
+    
 <h3>Bundle package chains</h3>
 <div>
+<p>
 - Burn supports the following kinds of packages:
 
 Package	        Description
@@ -212,7 +215,8 @@ MsuPackage	    A Windows update .msu package
     . Include the package element as a child of the Chain element.
     . Include the package element as a child of a PackageGroup element 
       and include that package group in the chain with a PackageGroupRef element as a child of the Chain element.
-<pre><code>
+ </p>
+ <pre><code>
     <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
         <Bundle>
             <Chain>
@@ -243,8 +247,10 @@ MsuPackage	    A Windows update .msu package
     </Wix>
 </code></pre>
 </div>
+    
 <h3>Bootstrapper applications</h3>
 <div>
+<p>
 - Each bundle needs a bootstrapper application to implement the user experience,
   including business logic and UI. 
   
@@ -308,7 +314,9 @@ MsuPackage	    A Windows update .msu package
             <bal:WixDotNetCoreBootstrapperApplicationHost />
         </BootstrapperApplication>
 </code></pre>
+</p>
 </div>
+
 <h3><a href="https://wixtoolset.org/docs/tools/burn/builtin-variables/">Burn built-in variables</a> </h3>
 <div></div>
 
