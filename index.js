@@ -17,6 +17,7 @@ json1+=`{"title":"Software Eng"
             ,{"caption":"Grasp","href":"Topics/softwareEngineering/grasp.htm"}
             ,{"caption":"Class diagram relationships","href":"Topics/softwareEngineering/classdiagramrelations.htm"}
             ,{"caption":"Algorithms and Data structures","href":"programming/algods.htm"}
+            ,{"caption":"leetcode challenges and solutins","href":"programming/leetcode.htm"}
         ]
     }
     `;
