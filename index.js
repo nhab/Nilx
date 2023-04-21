@@ -7,7 +7,7 @@ json1+=`{"title":"Featured resources"
             {"caption":"For proffesionals books","href":"https://www.goalkicker.com/"}
      ]
      }`;
-json1+=`{"title":"Software Eng"
+json1+=`,{"title":"Software Eng"
 ,"topic":
         [
             {"caption":"Solid","href":"https://nhab.github.io/programming/solid.htm"}
