@@ -1,7 +1,12 @@
 var json1=`{
     "topics":[`;
     
-
+json1+=`{"title":"Featured resources"
+,"topic":
+        [
+            {"caption":"For proffesionals books","href":"https://www.goalkicker.com/"}
+     ]
+     }`;
 json1+=`{"title":"Software Eng"
 ,"topic":
         [
