@@ -50,7 +50,7 @@ cl{
 }
 cli{
 	display: inline
-white-space: pre;
+	white-space: pre;
 }
 h2{
 	font-size:2em;
@@ -125,13 +125,15 @@ samp,code {
 	background-color:#000033;
 	color:#eeeeff;
 }
-code {
-	display: inline-block;
-    overflow-wrap:nowrap;
-    text-indent: 1%;
-}
 samp{
 	display: inline;
+}
+
+code {
+    display: inline-block;
+    white-space: nowrap;
+    text-indent: 1%;
+    padding-right:5px;
 }
 pre {
 	white-space: pre-wrap;       /* css-3 */
@@ -199,16 +201,6 @@ color:#00FFFF;
     display: block;
     overflow-x: auto;
     padding: 0.5em;
-}
-code {
-    display: inline-block;
-    white-space: nowrap;
-    text-indent: 1%;
-	padding-right:5px;
-}
-samp, code {
-    background-color: #000033;
-    color: #eeeeff;
 }
 user agent stylesheet
 code {
