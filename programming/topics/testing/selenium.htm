@@ -12,27 +12,50 @@
 	
 <h2>Selenium </h2>
 <div>
-is many things but at its core, it is a toolset for web browser automation that uses the best techniques available to remotely control browser instances and emulate a user’s interaction with the browser.
+<p>
+it is a toolset for web browser automation
+to remotely control browser instances 
+and emulate a user’s interaction with the browser.
 
-It allows users to simulate common activities performed by end-users:
- entering text into fields, selecting drop-down values and checking boxes, and clicking links in documents.
- It also provides many other controls such as mouse movement, arbitrary JavaScript execution, and much more.
+It allows users to <b>simulate</b> common activities performed by end-users:	
+ 	entering text into fields,
+	selecting drop-down values and checking boxes, 
+	and clicking links in documents.
+	
+ It also provides many other controls such as
+	mouse movement, 
+	arbitrary JavaScript execution,
+	and much more.
+</p>
 </div>
 
 <h2>WebDriver</h2> 
 <div>
-WebDriver is an API and protocol that defines a language-neutral interface for controlling the behaviour of web browsers. 
+WebDriver is an API and protocol
+	that defines a language-neutral interface 
+	for controlling the behaviour of web browsers. 
+	
 Each browser is backed by a specific WebDriver implementation, called a driver. 
-The driver is the component responsible for delegating down to the browser, and handles communication to and from Selenium and the browser.
+	
+The driver is the component responsible for 
+	delegating down to the browser, 
+	and handles communication to and from Selenium and the browser.
 
-WebDriver drives a browser natively, as a user would, either locally or on a remote machine using the Selenium server, marks a leap forward in terms of browser automation.
+WebDriver drives a browser natively, as a user would, 
+either locally or on a remote machine using the Selenium server,
+marks a leap forward in terms of browser automation.
 
-Selenium WebDriver refers to both the language bindings and the implementations of the individual browser controlling code. This is commonly referred to as just WebDriver.
+Selenium WebDriver refers to both 
+	the language bindings 
+	and the implementations of the individual browser controlling code. 
+This is commonly referred to as just WebDriver.
 </div>
 
 <h2>Installing</h2>
 <div>
-Before you can start writing Selenium code, you have to install the language bindings libraries for your language of choice, the browser you want to use, and the driver for that browser.
+Before you can start writing Selenium code, 
+	you have to install the language bindings libraries for your language of choice,
+	the browser you want to use, and the driver for that browser.
 
 Download from:<a href='https://www.selenium.dev/downloads/'>selenium.dev/downloads</a>
 First you need to install the <b>Selenium bindings</b> for your automation project. 
@@ -46,7 +69,9 @@ Using .NET CLI
 <pre><code>dotnet add package Selenium.WebDriver</code></pre>
 
 <h3>compatibility</h3>
-Make sure to use the .NET SDK version compatible with relevant <a href='https://www.nuget.org/packages/Selenium.WebDriver'>Selenium package</a>. 
+Make sure to use the .NET SDK version compatible 
+	with relevant <a href='https://www.nuget.org/packages/Selenium.WebDriver'>Selenium package</a>. 
+	
 Check the dependencies section to find out the supported <a href='https://dotnet.microsoft.com/en-us/download/dotnet'>.NET version</a>. 
 </div>
 <h2> get started</h2>
@@ -74,28 +99,42 @@ You may have to <a href='https://docs.microsoft.com/en-us/nuget/reference/nuget-
 (Setting up your system to allow a browser to be automated.)</h3>
 <a href='https://chromedriver.chromium.org/downloads'>Chromium/Chrome</a>
 <h3> Ways to Use Drivers</h3>
+<p>
 1- Driver Management Software:
 	Most machines automatically update the browser, but the driver does not. 
-	To make sure you get the correct driver for your browser, there are many third party libraries to assist you.
+	To make sure you get the correct driver for your browser,
+	there are many third party libraries to assist you.
+	
 	1-1. Import WebDriver Manager Package
+</p>
 	<pre><code>
 	using WebDriverManager;
 	using WebDriverManager.DriverConfigs.Impl;
 	</code></pre>
+	
 	1-2. Use the SetUpDriver() which requires a config class:
-	<pre><code>new DriverManager().SetUpDriver(new ChromeConfig());</code></pre>
+	<pre><code>
+	new DriverManager().SetUpDriver(new ChromeConfig());
+	</code></pre>
+	
 	1-3. Initialize your driver as you normally would:
-	<pre><code>var driver = new ChromeDriver()</code></pre>
+	<pre><code>
+	var driver = new ChromeDriver()
+	</code></pre>
+	
 2- The PATH Environment Variable 
 	This option first requires manually downloading the driver .
 	2-1. <pre><code>echo %path%</code></pre>
-	2-2. If the location to your driver is not already in a directory listed, you can add a new directory to PATH: 
+	2-2. If the location to your driver is not already in a directory listed,
+	you can add a new directory to PATH: 
 	<pre><code>setx PATH "%PATH%;C:\WebDriver\bin"</code></pre>
 
 	2-3. You can test if it has been added correctly by starting the driver:
 	<pre><code>chromedriver.exe</code></pre>
-	If your PATH is configured correctly above, you will see some output relating to the startup of the driver:
+	If your PATH is configured correctly above, 
+	you will see some output relating to the startup of the driver:
 	<code>Starting ChromeDriver 95.0.4638.54 ...</code>
+	
 3- Hard Coded Location
 	Hard Coded Location  and Specifying the location in the code :
 	<pre><code>var driver = new ChromeDriver(@"C:\WebDriver\bin");</code></pre>
@@ -103,9 +142,16 @@ You may have to <a href='https://docs.microsoft.com/en-us/nuget/reference/nuget-
 <h2>Open and close a browser with Selenium</h2>
 <div>
 <h3>Code examples for starting and stopping a session with each browser</h3>
-Once you have a Selenium library installed, and your desired browser driver, you can start and stop a session with a browser.
-Typically, browsers are started with specific options that describe which capabilities the browser must support, and how the browser should behave during the session.to open browser with default options:
+<p>
+Once you have a Selenium library installed, and your desired browser driver,
+	you can start and stop a session with a browser.
+Typically, browsers are started with specific options
+	that describe which capabilities the browser must support
+	,and how the browser should behave during the session.
+	
+to open browser with default options:
 for chrome:
+</p>
 <pre><code>
 var options = new ChromeOptions();
 var driver = new ChromeDriver(options);
@@ -115,10 +161,12 @@ driver.Quit();
 
 <h2>Basic Components</h2>
 <div>
+<p>
 Everything Selenium does is send the browser commands to do something or send requests for information.
 Most of what you’ll do with Selenium is a combination of these basic commands:
 
 1. Start the session
+</p>	
 <pre><code>driver = new ChromeDriver();</code></pre>
 
 2. Take action on browser
@@ -174,7 +222,9 @@ foreach(string window in driver.WindowHandles)
 //Wait for the new tab to finish loading content
 wait.Until(wd => wd.Title == "Selenium documentation");
 </code></pre>
+	
 - Create new window (or) new tab and switch:
+	
 <pre><code>
 // Opens a new tab and switches to new tab
 driver.SwitchTo().NewWindow(WindowType.Tab)
@@ -182,7 +232,9 @@ driver.SwitchTo().NewWindow(WindowType.Tab)
 // Opens a new window and switches to new window
 driver.SwitchTo().NewWindow(WindowType.Window)
 </code></pre>
+	
 - Closing a window or tab 
+	
 <pre><code> 
 //Close the tab or window
 driver.Close();
