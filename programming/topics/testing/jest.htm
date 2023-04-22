@@ -4,20 +4,23 @@ that can be used immidiately after installation no configuration
 </p>
 <b>To Install </b>
   npm install --save-dev jest
+<pre>
 <p>
 Let's get started by writing a test for a hypothetical function that adds two numbers.
 First, create a sum.js file:
-  
+  <code>
 function sum(a, b) {
   return a + b;
-}
+}</code
 module.exports = sum;
 
 Then, create a file named sum.test.js. This will contain our actual test:
-
+<code>
 const sum = require('./sum');
 
 test('adds 1 + 2 to equal 3', () => {
   expect(sum(1, 2)).toBe(3);
 });
+</code>
 </p>
+</pre>
