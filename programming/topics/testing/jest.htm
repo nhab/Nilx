@@ -1,8 +1,10 @@
 <style>
   *{font-size:16px;}
   
-  code{background-color:black;
+  code{
+    background-color:black;
     color:#ffffaa;
+   display:block;
   }
   b{
    display:block;
@@ -161,5 +163,20 @@ test('compiling android goes as expected', () => {
 });
 </code>
 
+<b>Promises</b>
+Return a promise from your test, and Jest will wait for that promise to resolve. 
+If the promise is rejected, the test will fail.
+
+For example,
+let's say that fetchData returns a promise 
+that is supposed to resolve to the string 'peanut butter'.
+We could test it with:
+<code>
+test('the data is peanut butter', () => {
+  return fetchData().then(data => {
+    expect(data).toBe('peanut butter');
+  });
+});
+</code>
 
 </pre>
