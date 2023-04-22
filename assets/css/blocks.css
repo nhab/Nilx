@@ -131,6 +131,7 @@ samp{
 
 code {
    /* display: inline-block;*/
+	white-space:unsset;
     text-indent: 1%;
     padding-right:5px;
 }
