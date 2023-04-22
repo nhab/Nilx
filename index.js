@@ -145,6 +145,7 @@ json1 +=`,{"title":"Testing"
             ,{"caption":"Selenium server","href":"programming/topics/testing/selenium.htm"}
             ,{"caption":"SpecFlow","href":"programming/topics/testing/specflow.htm"}
             ,{"caption":"Moq","href":"programming/topics/testing/moq.htm"}
+            ,{"caption":"jest","href":"programming/topics/testing/jest.htm"}
         ]
     }`;
 
