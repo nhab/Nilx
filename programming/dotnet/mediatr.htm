@@ -13,6 +13,7 @@
 <div>
 <h2>Mediator Pattern<h2>
 <div>
+<p>
 The Mediator is an object that encapsulates how objects interact with each other. 
 
 Instead of having objects take a direct dependency on each other, 
@@ -25,23 +26,32 @@ It enables “loose coupling”, as the dependency graph is minimized and theref
 
 This is very similar to how a message broker works in the “publish/subscribe” pattern. 
 If we wanted to add another handler we could, and the producer wouldn’t have to be modified.
+</p>
 </div>
+	
 <h2>How MediatR facilitates CQRS and Mediator Patterns</h2>
 <div>
+<p>
 You can think of MediatR as an “in-process” Mediator implementation, that helps us build CQRS systems. 
 All communication between the user interface and the data store happens via MediatR.
 
-Since it’s a .NET library that manages interactions within classes on the same process, it’s not an appropriate library to use if we wanted to separate the commands and queries across two systems.
+Since it’s a .NET library that manages interactions within classes on the same process,
+it’s not an appropriate library to use if we wanted to separate the commands and queries across two systems.
 In those circumstances, a better approach would be to a message broker such as Kafka or Azure Service Bus.
 
-However for this sample, we are going to stick with a simple single-process CQRS system, so MediatR fits the bill perfectly.
+However for this sample, we are going to stick with a simple single-process CQRS system,
+so MediatR fits the bill perfectly.
+</p>
 </div>
+	
 <h2>Setting up an ASP.NET Core API with MediatR</h2>
 <div>
 <h3>Project Setup</h3>
-First off, let’s open Visual Studio and create a new ASP.NET Core Web Application, selecting API as the project type.
+<p>
+First off, let’s open Visual Studio and create a new ASP.NET Core Web Application, 
+selecting API as the project type.
  We are going to name it CqrsMediatrExample.
-
+</p>
 <h3>Add Dependencies to project</h3>
 1.the <b>MediatR package</b>:
 <cl>PM> install-package MediatR</cl>
@@ -78,10 +88,13 @@ Just before we move to the controller creation, we are going to modify the <b>la
 }</code></pre>
 
 <h3>Controller</h3>
+<p>
 the controller will send messages to MediatR.
-In the Controllers folder, let’s add an <b>“API Controller – Empty”</b>, with the name <b>ProductsController.cs</b>.
+In the Controllers folder, let’s add an <b>“API Controller – Empty”</b>,
+with the name <b>ProductsController.cs</b>.
 
 We then end up with the following class:
+</p>
 <pre><code>
 [Route("api/products")]
 [ApiController]
@@ -97,14 +110,21 @@ public class ProductsController : ControllerBase
     private readonly IMediator _mediator;
     public ProductsController(IMediator mediator) => _mediator = mediator;
 }</code></pre>
-The IMediatR interface allows us to send messages to MediatR, which then dispatches to the relevant handlers.
-Because we already installed the dependency injection package, the instance will be resolved automatically.
+<p>
+The IMediatR interface allows us to send messages to MediatR, 
+which then dispatches to the relevant handlers.
+	
+Because we already installed the dependency injection package, 
+the instance will be resolved automatically.
 
 ( From the MediatR version 9.0, the IMediator interface is split into two interfaces – ISender and IPublisher.
- So, even though we can still use the IMediator interface to send requests to a handler, if we want to be more strict about that, we can use the ISender interface instead. 
+ So, even though we can still use the IMediator interface to send requests to a handler,
+if we want to be more strict about that, we can use the ISender interface instead. 
 You don’t have to change anything else. 
 This interface contains the Send method to send requests to the handlers. )
+	
 Of course, for the notifications, you should use the IPublisher interface that contains the Publish method:
+</p>
 <pre><code>
 public interface ISender
 {
@@ -122,10 +142,13 @@ public interface IMediator : ISender, IPublisher
 }
 </code></pre>
 <h3>Data Store</h3>
+<p>
 Usually, we’d want to interact with a real database.
- But for this article, let’s create a fake class that encapsulates this responsibility, and simply interacts with some Product values.
+ But for this article, let’s create a fake class that encapsulates this responsibility,
+ and simply interacts with some Product values.
 
 But before we do that, we have to create a simple Product class:
+</p>
 <pre><code>
 public class Product
 {
@@ -133,9 +156,11 @@ public class Product
     public string Name { get; set; }
 }
 </code></pre>
+<p>
 Just as simple as that.
 
 Now, let’s add a new FakeDataStore class, and modify it:
+</p>
 <pre><code>
 public class FakeDataStore
 {
@@ -157,9 +182,11 @@ public class FakeDataStore
     public async Task<IEnumerable<Product>> GetAllProducts() => await Task.FromResult(_products);
 }
 </code></pre>
+<p>
 Here we’re simply interacting with a static list of products, which is enough for our purposes.
 
 Let’s update ConfigureServices in Startup.cs to configure our DataStore as a singleton:
+</p>
 <pre><code>
 services.AddSingleton< FakeDataStore >();
 </code></pre>
@@ -167,6 +194,7 @@ Or in .NET 6, we have to update the Program class:
 <pre><code>
 builder.Services.AddSingleton< FakeDataStore >();
 </code></pre>
+<p>
 Now that our data store is implemented, let’s set up our app for CQRS.
 
 <h3>Separating the Commands and Queries</h3>
@@ -177,11 +205,15 @@ We’ll use these folders throughout the exercise to separate our models.
  As mentioned earlier, we are doing “in-process” CQRS, so this is a simple way to organize that.
 
 In the next section, we are going to talk about the most common usage of MediatR, “Requests”.
-
+</p>
 </div>
 <h2>Requests with MediatR</h2>
 <div>
-MediatR Requests are very simple request-response style messages, where a single request is synchronously handled by a single handler (synchronous from the request point of view, not C# internal async/await). 
+<p>
+MediatR Requests are very simple request-response style messages,
+where a single request is synchronously handled by a single handler 
+(synchronous from the request point of view, not C# internal async/await). 
+
 Good use cases here would be returning something from a database or updating a database.
 
 There are two types of requests in MediatR. One that returns a value, and one that doesn’t.
@@ -193,13 +225,16 @@ First, let’s create a request that returns all the products from our FakeDataS
 
 <b>GetProductsQuery</b>
 Since this is a query, let’s add a class called GetValuesQuery to the “Queries” folder, and implement it:
+</p>
 <pre><code>
 public record GetProductsQuery() : IRequest<IEnumerable<Product>>;
 </code></pre>
+<p>
 Here, we create a record called GetProductsQuery, which implements IRequest<IEnumerable<Product>>. 
 This simply means our request will return a list of products.
 
 Then, in the Handlers folder, we are going to create a new handler class to handle our query:
+</p>
 <pre><code>
 public class GetProductsHandler : IRequestHandler<GetProductsQuery, IEnumerable<Product>>
 {
@@ -209,15 +244,19 @@ public class GetProductsHandler : IRequestHandler<GetProductsQuery, IEnumerable<
         CancellationToken cancellationToken) => await _fakeDataStore.GetAllProducts();
 }
 </pre></code>
+<p>
 A bit is going on here, so let’s break it down a bit.
 
-We create a class called GetProductsHandler, which inherits from IRequestHandler<GetProductsQuery, IEnumerable<Product>>. 
+We create a class called GetProductsHandler, 
+which inherits from IRequestHandler<GetProductsQuery, IEnumerable<Product>>. 
 This means this class will handle GetProductsQuery, in this case, returning the list of products.
 
-In our GetProductsHandler class, we implement a single method called Handle, which returns the values from our FakeDataStore.
+In our GetProductsHandler class, we implement a single method called Handle, 
+which returns the values from our FakeDataStore.
 
 <b>Calling and Testing our Request</b>
 To call our request, we just need to add the GetProducts() action in our ProductsController:
+</p>
 <pre><code>
 [HttpGet]
 public async Task<ActionResult> GetProducts()
@@ -226,9 +265,11 @@ public async Task<ActionResult> GetProducts()
     return Ok(products);
 }
 </pre></code>
+<p>
 That’s how simple it is to send a request to MediatR.
 Notice we’re not taking a dependency on FakeDataStore, or have any idea on how the query is handled.
-This is one of the principles of the Mediator pattern, and we can see it implemented firsthand here with MediatR.
+This is one of the principles of the Mediator pattern,
+and we can see it implemented firsthand here with MediatR.
 
 Now let’s make sure everything is working as expected.
 
@@ -237,10 +278,12 @@ First, let’s hit CTRL+F5 to build and run our app.
 Let’s then fire up Postman and create a new request:
 
 Get https://localhost:5001/api/roducts
-
+</p>
 <h2>MediatR Commands</h2>
 <div>
-To create our first “Command”, let’s add a request that takes a single product and updates our FakeDataStore.
+<p>
+To create our first “Command”, 
+let’s add a request that takes a single product and updates our FakeDataStore.
 
 Inside our “Commands” folder, let’s add a record called AddProductCommand:
 
@@ -249,9 +292,15 @@ So, our record has a single Product property and inherits from the IRequest inte
  Notice this time the IRequest signature doesn’t have a type parameter. 
 This is because we aren’t returning a value.
 
-Take a note that due to the simplicity of this example we are using domain entity (Product) as the return type for our query and as a parameter for the command. In real-world apps, we wouldn’t do that, we would use DTOs to hide a domain entity from the public API. If you want to see how to use DTOs with Web API actions, you can read part 5 and part 6 articles of our .NET Core Web API series.
+Take a note that due to the simplicity of this example we are using domain entity (Product) as the return type 
+for our query and as a parameter for the command. 
+In real-world apps, we wouldn’t do that, 
+we would use DTOs to hide a domain entity from the public API. 
+If you want to see how to use DTOs with Web API actions, 
+you can read part 5 and part 6 articles of our .NET Core Web API series.
 
 Then, in the Handlers folder, we are going to add our handler:
+</p>
 <pre><code>
 public class AddProductHandler : IRequestHandler<AddProductCommand, Unit>
 {
@@ -264,10 +313,17 @@ public class AddProductHandler : IRequestHandler<AddProductCommand, Unit>
         return Unit.Value;
     }
 }</code></pre>
-We create the Handler class, which inherits from the IRequestHandler<AddProductCommand, Unit> interface. This is a similar implementation to our previous GetValuesQuery. We’re simply saying this class will handle the AddProductCommand request and return a void. When using MediatR, instead of void, we use the Unit struct that represents a void type.
+<p>
+We create the Handler class, which inherits from the IRequestHandler<AddProductCommand, Unit> interface.
 
-Then, we implement the Handle(AddProductCommand request, CancellationToken cancellationToken) method, adding our value to our FakeDataStore.
+This is a similar implementation to our previous GetValuesQuery.
 
+We’re simply saying this class will handle the AddProductCommand request and return a void.
+When using MediatR, instead of void, we use the Unit struct that represents a void type.
+
+Then, we implement the Handle(AddProductCommand request, CancellationToken cancellationToken) method, 
+adding our value to our FakeDataStore.
+</p>
 <b>Calling and Testing our Request</b>
 Let’s now call our AddProductCommand by adding the Post method in ProductsController:
 <pre><code>
@@ -278,10 +334,12 @@ public async Task<ActionResult> AddProduct([FromBody]Product product)
     return StatusCode(201);
 }
 </code></pre>
+<p>
 Again very similar to our Get method. 
 But this time, we are setting a value on our AddProductCommand, and we don’t return a value.
 
 To test our command, let’s run our app again and add a new request to Postman:
+</p>
 <cl>
 post https:/localhost:5001/api/products
 body:
@@ -290,23 +348,34 @@ body:
     "name":"test product 4"
 }
 </cl>
+<p>
 To test it actually worked, let’s run our GetAllProducts request again:
 <cl>Get https:/localhost:5001/api/products</cl>
-This proves that our AddProductCommand is working correctly, by sending a message to MediatR with our new value and updating the state.
+This proves that our AddProductCommand is working correctly, 
+by sending a message to MediatR with our new value and updating the state.
 We can then see our Query model (e.g GetAllProducts) has been updated with our new value. 
-While this may seem simple in theory, let’s try to think beyond the fact we’re simply updating an in-memory list of strings.
-We are communicating to a datastore via simple message constructs, without having any idea of how it’s being implemented. The commands and queries could be pointing to different data stores. 
+While this may seem simple in theory,
+let’s try to think beyond the fact we’re simply updating an in-memory list of strings.
+We are communicating to a datastore via simple message constructs, 
+without having any idea of how it’s being implemented. 
+
+The commands and queries could be pointing to different data stores. 
 They don’t know how their request will be handled, and they don’t care. 
 
-At this point, let’s pat ourselves on the back, as we now have a fully-functioning ASP.NET Core API implementing the CQRS + Mediator patterns with MediatR. 
+At this point, let’s pat ourselves on the back, 
+as we now have a fully-functioning ASP.NET Core API implementing the CQRS + Mediator patterns with MediatR. 
+</p>
 </div>
 <h2>Working with Commands that Return a Value</h2>
 <div>
-As you can see, our POST action just returns a 201 status code. But that is not enough. There is a much better way of informing our client that this action succeeded. 
+<p>
+As you can see, our POST action just returns a 201 status code. 
+But that is not enough. There is a much better way of informing our client that this action succeeded. 
 
 But to do that, we have to create GetProductById action.
 
 Of course, before we do that, we have to create a new query record:
+</p>
 <pre><code>
 public record GetProductByIdQuery(int Id) : IRequest<Product>;
 </code></pre>
@@ -325,8 +394,7 @@ public class GetProductByIdHandler : IRequestHandler<GetProductByIdQuery, Produc
         await _fakeDataStore.GetProductById(request.Id);
         
 }</code></pre>
-
-
+<p>
 Wanna join Code Maze Team, help us produce more awesome .NET/C# content and get paid? >> JOIN US! <<
 Now we can add a new action in the controller:
 
@@ -366,27 +434,37 @@ public async Task<ActionResult> AddProduct([FromBody]Product product)
     var productToReturn = await _mediator.Send(new AddProductCommand(product));
     return CreatedAtRoute("GetProductById", new { id = productToReturn.Id }, productToReturn);
 }
-After all of these changes, we can send the post request, but this time, we will find a newly created product in the response body, and also, in the header tab, a Location to fetch that new product:
+
+After all of these changes, we can send the post request, 
+but this time, we will find a newly created product in the response body,
+and also, in the header tab, a Location to fetch that new product:
 
 post https:/localhost:5001/api/products
 
 With all this in mind, you can easily implement the Update and Delete actions.
 
 Now let’s go even further, and in the next section explore another MediatR topic called “Notifications”.
+</p>
 </div>
 <h2>MediatR Notifications</h2>
 <div>
-So we’ve only seen a single request being handled by a single handler. However, what if we want to handle a single request by multiple handlers? 
+<p>
+So we’ve only seen a single request being handled by a single handler.
+However, what if we want to handle a single request by multiple handlers? 
 
-That’s where notifications come in. In these situations, we usually have multiple independent operations that need to occur after some event. 
+That’s where notifications come in. In these situations, 
+we usually have multiple independent operations that need to occur after some event. 
 
 Examples might be:
 
 Sending an email
 Invalidating a cache
-To demonstrate this, we will update the AddProductCommand flow we created previously to publish a notification and have it handled by two handlers.
+To demonstrate this, we will update the AddProductCommand flow we created previously to publish a notification
+and have it handled by two handlers.
 
-Sending an email and invalidating a cache is out of the scope of this article, but to demonstrate the behavior of notifications, let’s instead simply update our fake values list to signify that something was handled.
+Sending an email and invalidating a cache is out of the scope of this article, 
+but to demonstrate the behavior of notifications, 
+let’s instead simply update our fake values list to signify that something was handled.
 
 Updating our FakeDataStore
 Let’s open up our FakeDataStore and add a new method:
@@ -496,13 +574,18 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         return response;
     }
 }
-Update: Please take note that from MediatR version 10, we have to add a where constraint to our code in order to make the class valid:
+Update: Please take note that from MediatR version 10,
+we have to add a where constraint to our code in order to make the class valid:
 
 public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 Let’s explain our code:
 
-We first define a LoggingBehavior class, taking two types of parameters TRequest and TResponse, and implementing the  IPipelineBehavior<TRequest, TResponse> interface. Simply put, this behavior can operate on any request.
+We first define a LoggingBehavior class, taking two types of parameters TRequest and TResponse, 
+and implementing the  IPipelineBehavior<TRequest, TResponse> interface.
+
+Simply put, this behavior can operate on any request.
+
 We then implement the Handle method, logging before and after we call the next() delegate.
 This logging handler can then be applied to any request, and will log output before and after it is handled.
 
@@ -513,31 +596,43 @@ services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 In .NET 6:
 
 builder.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-Notice that we are using the <,> notation to specify the behavior that can be used for any generic type parameters
+Notice that we are using the <,> notation to specify the behavior 
+that can be used for any generic type parameters
 
 Testing our Behavior
 Let’s run our application, this time by using the F5 shortcut to run in Debug mode.
 
 Then let’s open up Postman and run the GetAllProducts request.
 
-If we then open the “Output” window in Visual Studio and select “Show output from: Web Application – ASP.NET Core Web Server“, we see some interesting messages:
+If we then open the “Output” window in Visual Studio
+and select “Show output from: Web Application – ASP.NET Core Web Server“, we see some interesting messages:
 
 Great! This is the logging output before and after our GetProducts query handler was invoked.
 
-The important thing here is we didn’t need to modify our existing requests or handlers. We simply added a new behavior and wired it up.
+The important thing here is we didn’t need to modify our existing requests or handlers. 
+We simply added a new behavior and wired it up.
 
-Just as easily we could add authorization and validation to our entire application, in the same manner, making behaviors a great way to handle cross-cutting concerns simply and concisely.
+Just as easily we could add authorization and validation to our entire application,
+in the same manner, making behaviors a great way to handle cross-cutting concerns simply and concisely.
 
 Conclusion
-In this article, we’ve gone over how MediatR can be used to implement both the CQRS and Mediator patterns in ASP.NET Core. We’ve been through requests and notifications, and how to handle cross-cutting concerns with behaviors.
+In this article, we’ve gone over how MediatR can be used to implement both the CQRS and Mediator patterns in ASP.NET Core.
+We’ve been through requests and notifications, and how to handle cross-cutting concerns with behaviors.
 
-MediatR provides a great starting point for an application that needs to evolve from a simple monolith into a more mature application, by allowing us to separate read and write concerns, and minimizing the dependencies between code. 
+MediatR provides a great starting point for an application that 
+needs to evolve from a simple monolith into a more mature application,
+by allowing us to separate read and write concerns, and minimizing the dependencies between code. 
 
 This puts us in a great position to take several additional possible steps:
 
-Use a different database for the reads (perhaps by extending our ProductAddedNotification to add a second handler to write to a new DB, then modifying GetProductsQuery to read from this DB)
-Split out our reads/writes into separate apps (by modifying the ProductAddedNotification to publish to Kafka/Service Bus, then having a second app read from the message bus)
-We now have our app in a great position to make the above steps if the need arises, without overcomplicating things in the short term.
+Use a different database for the reads (perhaps by extending our ProductAddedNotification
+to add a second handler to write to a new DB, then modifying GetProductsQuery to read from this DB)
+Split out our reads/writes into separate apps 
+(by modifying the ProductAddedNotification to publish to Kafka/Service Bus,
+then having a second app read from the message bus)
+We now have our app in a great position to make the above steps if the need arises,
+without overcomplicating things in the short term.
+</p>
 </div>
 </body>
 </html>
