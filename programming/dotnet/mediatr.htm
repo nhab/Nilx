@@ -19,14 +19,19 @@
 The Mediator is an object that encapsulates how objects interact with each other. 
 
 Instead of having objects take a direct dependency on each other, 
-they instead interact with a “mediator”, who is in charge of sending those interactions to the other party:
+they instead interact with a “mediator”, 
+who is in charge of sending those interactions to the other party:
 
-SomeService sends a message to the Mediator, and the Mediator then invokes multiple services to handle the message.
-There is no direct dependency between any of the blue components.
+SomeService sends a message to the Mediator, 
+and the Mediator then invokes multiple services to handle the message.
 
-It enables “loose coupling”, as the dependency graph is minimized and therefore code is simpler and easier to test.
+
+It enables “loose coupling”,
+as the dependency graph is minimized 
+and therefore code is simpler and easier to test.
 
 This is very similar to how a message broker works in the “publish/subscribe” pattern. 
+	
 If we wanted to add another handler we could, and the producer wouldn’t have to be modified.
 </p>
 </div>
@@ -34,14 +39,17 @@ If we wanted to add another handler we could, and the producer wouldn’t have t
 <h2>How MediatR facilitates CQRS and Mediator Patterns</h2>
 <div>
 <p>
-You can think of MediatR as an “in-process” Mediator implementation, that helps us build CQRS systems. 
+You can think of MediatR as an “in-process” Mediator implementation, 
+that helps us build CQRS systems. 
+
 All communication between the user interface and the data store happens via MediatR.
 
 Since it’s a .NET library that manages interactions within classes on the same process,
 it’s not an appropriate library to use if we wanted to separate the commands and queries across two systems.
+	
 In those circumstances, a better approach would be to a message broker such as Kafka or Azure Service Bus.
 
-However for this sample, we are going to stick with a simple single-process CQRS system,
+However for the sae of simpilicity, we are going to stick with a simple single-process CQRS system,
 so MediatR fits the bill perfectly.
 </p>
 </div>
