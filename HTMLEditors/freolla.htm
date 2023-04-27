@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Froala Editor Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.2.6/css/froala_editor.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.2.6/css/froala_style.min.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.2.6/js/froala_editor.min.js"></script>
+</head>
+<body>
+  <textarea id="myTextarea"></textarea>
+<button onclick="Clicked()">get html</button>
+  <script>
+    var editor = new FroalaEditor('#myTextarea');
+	
+	function Clicked()
+	{
+	var editor = new FroalaEditor('#myTextarea');
+
+// Get the HTML source from the editor
+var html = editor.html.get();
+console.log(html);
+	}
+  </script>
+</body>
+</html>
