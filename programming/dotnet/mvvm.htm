@@ -20,20 +20,23 @@
 <p>    
 - 3 MVVM peaces: 
   Model, View, and View Model.
-- View: 
+    
+    - <b>View:</b> 
   These are all of the UI elements, the pretty face of your application. 
   For WPF, these are all of your XAML files. 
   They may be Windows, User Controls, or Resource Dictionaries. 
 
-- View Model: 
+    - <b>View Model:</b> 
   These are the objects that provide the functionality for each of your views
 
-- Model:
+    - <b>Model:</b>
   provides access to the data and services that your application needs
 
-- Bindings :
-  are declared in the view and link the data of properties in the 'view', back to properties in the 'view model':
-  <pre><code>
+<b>Bindings :</b>
+  are declared in the view and link the data of properties in the 'view',
+    back to properties in the 'view model':
+ </p>
+ <pre><code>
     // binds the textblock to FirstName of ViewModel class
     <TextBlock Text="{Binding Path=FirstName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
   </code></pre>
@@ -48,8 +51,10 @@ public MainWindow()
     InitializeComponent();
 }
   </code></pre>
--  INotifyPropertyChanged Interface:
+<p>
+    -  <b>INotifyPropertyChanged Interface:</b>
     interface has a single event that notifies the bindings that a particular property has changed:
+    </p>
     <pre><code>
         public class ViewModel : INotifyPropertyChanged
         {
@@ -60,8 +65,10 @@ public MainWindow()
             public void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }     
     </code></pre>
-- ViewModelBase class:
+  <p>
+      - <b>ViewModelBase class</b>
    is to make property change notification easier:
+    </p>
    <pre><code>
 public abstract class ViewModelBase : INotifyPropertyChanged
 {
@@ -92,12 +99,12 @@ public class ViewModel : ViewModelBase
 }
 //The INotifyPropertyChanged event raises every time we change the FirstName property.
    </code></pre>
-
+<p>
 - Commands:
    . are objects that implement the <strong>ICommand</strong> interface. 
    . Commands are messages from the View to your View Model.
    . When a control’s event occurs, such as a button click, the <strong>Execute method</strong> on the command is invoked.
-
+</p>
 <pre><code>
 public class DelegateCommand : ICommand
 {
