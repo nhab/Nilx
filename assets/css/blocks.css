@@ -96,8 +96,6 @@ h8{
 	padding-right: 10px;
 	white-space: nowrap;
 }
-
-
 b{
 	font-size:1.3em;
 	font-weight: 900;
@@ -110,7 +108,6 @@ i{
 	font-style:normal !important;
 	color:#007700 !important;
 }
-
 p,div{
 		white-space: inherit;/*pre-line;*/
 		margin-left: 7px;
@@ -196,8 +193,8 @@ color:#00FFFF;
 }
 
 .hljs {
-    color: #fafaff;
-    background: #000033;
+    color: #cccccc;
+    background: #000020;
     display: block;
     overflow-x: auto;
     padding: 0.5em;
