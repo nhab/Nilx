@@ -16,97 +16,83 @@
 <div>
 <pre><code>
 # Comments -----------------------------------------------------------
+  
   #single line comment beging with: #
 
 """ Triple double quote is used for Multiline strings
     and are often used as documentation.
 """
+
 #  Indentation -------------------------------------------------------
 
-# Indentation is significant in Python!
-# Convention is to use four spaces, not tabs.
+# Indentation is important 
+# use 4 spaces to indent, not tabs.
 
 # print function : ----------------------------------------------------------
-
 print("I'm Python. Nice to meet you!")  #  I'm Python. Nice to meet you!
 print("Hello, World", end="!")  #  Hello, World! # ( a newline is default )
-
 # Input function: ----------------------------------------------------------
-# gets input data from console :
-
-input_string_var = input("Enter some data: ") # Returns the data as a string
-
+input_string_var = input("Enter some data: ") #  gets input data from console and Returns the data as a string
 # Varaibles : ---------------------------------------------------------------
-# New varaiable declartion is not needed
-# variable naming Convention is : lower_case_with_underscores :
-
-some_var = 5
+some_var = 5 # New varaiable declartion is not needed
+# variable naming Convention is : lower_case_with_underscores 
 some_var  #  5
-
 # accessing a previously unassigned variable is an exception :
 some_unknown_var  # Raises a NameError
-
-# if --------------------------------------------------------------------
-# if can be used as an expression  :
-"yay!" if 0 > 1 else "nay!"  #  "nay!"
+# If --------------------------------------------------------------------
+"yay!" if 0 > 1 else "nay!"  #  "nay!"# if can be used as an expression 
 
 if some_var > 10:
     print("some_var is totally bigger than 10.")
 elif some_var < 10:    
-    # This elif clause is optional.
-    print("some_var is smaller than 10.")
+    print("some_var is smaller than 10.") # This elif clause is optional.
 else: 
-    # This is optional too.
-    print("some_var is indeed 10.")
-
-
+    print("some_var is indeed 10.")  # This is optional too.
 # for loop ---------------------------------------------------------------
-# For loops iterate over lists
-
-for animal in ["dog", "cat", "mouse"]:
-    # You can use format() to interpolate formatted strings
-    print("{} is a mammal".format(animal))
+for animal in ["dog", "cat", "mouse"]:     # For loops iterate over lists
+    print("{} is a mammal".format(animal)) # You can use format() to interpolate formatted strings
 # prints:
 #    dog is a mammal
 #    cat is a mammal
 #    mouse is a mammal
 
-"range(number)" returns an iterable of numbers
-from zero to the given number
+$ "range(number)"-------------------------
+
+# returns an iterable of numbers
+#from zero to the given number
 
 for i in range(4):
     print(i)
 # prints:
-    0
-    1
-    2
-    3
+#    0
+#    1
+#    2
+#    3
 
-"range(lower, upper)" returns an iterable of numbers
-from the lower number to the upper number
-prints:
-    4
-    5
-    6
-    7
-"""
+"range(lower, upper)" 
+#returns an iterable of numbers
+#from the lower number to the upper number
+#prints:
+#    4
+#    5
+#    6
+#    7
 for i in range(4, 8):
     print(i)
+# range(lower, upper, step) -------------------------------
 
-"""
-"range(lower, upper, step)" returns an iterable of numbers
-from the lower number to the upper number, while incrementing
-by step. If step is not indicated, the default value is 1.
-prints:
-    4
-    6
-"""
+# returns an iterable of numbers
+#from the lower number to the upper number, while incrementing by step. 
+#If step is not indicated, the default value is 1.
 for i in range(4, 8, 2):
     print(i)
+# prints:
+#    4
+#    6
 
-"""
-To loop over a list, and retrieve both the index and the value of each item in the list
-
+#To loop over a list, 
+#and retrieve both the index and the value
+#of each item in the list:
 animals = ["dog", "cat", "mouse"]
 for i, value in enumerate(animals):
     print(i, value)
@@ -117,18 +103,18 @@ for i, value in enumerate(animals):
     
 # while loop -------------------------------------------------------------
 While loops go until a condition is no longer met.
-prints:
-    0
-    1
-    2
-    3
-"""
 x = 0
 while x < 4:
     print(x)
     x += 1  # Shorthand for x = x + 1
+#prints:
+#    0
+#    1
+#    2
+#    3
 
 # Exception handling ------------------------------------------------------------------
+
 # Handle exceptions with a try/except block
 try:
     # Use "raise" to raise an error
@@ -143,12 +129,10 @@ finally:                 # Execute under all circumstances
     print("We can clean up resources here")
 
 # Instead of try/finally to cleanup resources you can use a with statement
-
 # Reading a file -------------------------------------------------------------
 with open("myfile.txt") as f:
     for line in f:
         print(line)
-
 # Writing to a file -------------------------------------------------------------
 contents = {"aa": 12, "bb": 21}
 with open("myfile1.txt", "w+") as file:
@@ -156,7 +140,6 @@ with open("myfile1.txt", "w+") as file:
 
 with open("myfile2.txt", "w+") as file:
     file.write(json.dumps(contents)) # writes an object to a file
-
 # Reading from a file ----------------------------------------------------------
 with open('myfile1.txt', "r+") as file:
     contents = file.read()           # reads a string from a file
@@ -167,9 +150,7 @@ with open('myfile2.txt', "r+") as file:
     contents = json.load(file)       # reads a json object from a file
 print(contents)
 # print: {"aa": 12, "bb": 21}
-
 # numbers : _____________________________________________________________
-
 # Math operators are what you  expect :
 1 + 1   #  2
 8 - 1   #  7
