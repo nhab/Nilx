@@ -4,7 +4,8 @@ var json1=`{
 json1+=`{"title":"Featured resources"
 ,"topic":
         [
-            {"caption":"For proffesionals books","href":"https://www.goalkicker.com/"}
+            {"caption":"For proffesionals books","href":"https://www.goalkicker.com/"},
+            {"caption":"Windows Apps list","href":"https://github.com/Awesome-Windows/Awesome#utilities"}
      ]
      }`;
 json1+=`,{"title":"Software Eng"
