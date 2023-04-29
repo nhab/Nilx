@@ -96,17 +96,18 @@
         </code></pre>
    
 -<b>index.php</b>
-        <pre><code>
-        &lt;?php get_header()?>
-        &lt;div>
-            &lt;?php  while(have_posts()): ?>
-                &lt;h2>&lt;?php the_title() ?> &lt;/h2>
-                &lt;?php the_content(); ?>
-            &lt;?php endwhile;?>
-            
-        &lt;/div>	
-        </code>
-</p>
+ <pre><code>
+ <?php get_header()?>
+   <div>
+        <?php  
+              echo("<h2>"); 
+			  the_title() ;
+			   echo"</h2>";
+               the_content(); 
+	?>
+   </div>	
+ </code>
+</pre>
 </div>
 
 <h2>Minimal plugin sample</h2>
