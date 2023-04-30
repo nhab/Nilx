@@ -12,9 +12,7 @@
 
 <h1>Vue js</h1>
 
-<h2><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Helllo Vue Example:</h2>
+<h2>Helllo Vue Example:</h2>
 <pre><code  class = 'hljs-javascript'>
     <script src="https://unpkg.com/vue@3">< /script>
 
@@ -35,18 +33,16 @@
 
 The script section of the code can be written in ES6 modules syntax:
 <pre><code>
-    < script type="importmap">
+    <script type="importmap">
         {
           "imports": {
             "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
           }
         }
-      < /script>
+      </script>
 </code></pe>
 
-<h2><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Binding</h2>
+<h2>Binding</h2>
 <pre><code>
  < div id="app">
     {{ message }}
@@ -64,41 +60,37 @@ The script section of the code can be written in ES6 modules syntax:
     < /script>
 </code></pre>
 
-<h2><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Two-Way Binding</h2>
+<h2>Two-Way Binding</h2>
 
 <pre><code>
     
-< div id="app">
-    < p>{{ message }}</p>
-    < p><input v-model="message"></p>
-  < /div>
+<div id="app">
+    <p>{{ message }}</p>
+    <p><input v-model="message"></p>
+  </div>
   
-  < script>
+  <script>
   var myObject = new Vue({
       el: '#app',
       data: {message: 'Hello Vue!'}
   })
-  < /script>
+  </script>
   
 </code></pre>
 
-<h2><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />Loop Binding</h2>
+<h2>Loop Binding</h2>
 <div>
 Using the v-for directive to bind an array of Vue objects to an "array" of HTML element:
 <pre><code>
-< div id="app">
-    < ul>
-      < li v-for="x in todos">
+<div id="app">
+    <ul>
+      <li v-for="x in todos">
       {{ x.text }}
-      < /li>
-     < /ul>
-   < /div>
+      </li>
+     </ul>
+   </div>
    
-   < script>
+   <script>
    myObject = new Vue({
        el: '#app',
        data: {
@@ -109,7 +101,7 @@ Using the v-for directive to bind an array of Vue objects to an "array" of HTML 
            ]
        }
    })
-   < /script>
+   </script>
 </code></pre>
 </div>
 </body>
