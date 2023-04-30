@@ -15,6 +15,7 @@
 <h2>Helllo Vue Example:</h2>
 <div>
     <a href='https://codepen.io/nhab/pen/ZEqJoyL' target="_blank">Getting started example</a>
+ Vue 1 example:
 <pre><code  class = 'hljs-javascript'>
     <script src="https://unpkg.com/vue@3">< /script>
 
@@ -43,7 +44,29 @@ The script section of the code can be written in ES6 modules syntax:
         }
       </script>
 </code></pe>
-    </div>
+ vue 2 example:
+  <pre><code>
+  <head>
+ <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <button @click="count++">
+    Count is: {{ count }}
+  </button>
+</div>
+<script>
+ var app=new Vue(
+    {
+	 el:'#app',
+	 data:{
+	    count:0
+	 }
+	})
+</script>
+</body>
+   </code></pre> 
+ </div>
     
 <h2>Binding</h2>
 <pre><code>
