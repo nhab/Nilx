@@ -69,6 +69,30 @@ The script section of the code can be written in ES6 modules syntax:
 </script>
 </body>
    </code></pre> 
+Vue 3 Example:
+<pre><code>
+<head>
+ <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+  <button @click="count++">
+    Count is: {{ count }}
+  </button>
+</div>
+<script>
+   const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        count:0
+      }
+    }
+  }).mount('#app')
+</script>
+</body>
+</code></pre>
  </div>
     
 <h2>Binding</h2>
