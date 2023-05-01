@@ -544,8 +544,7 @@ these models seperated based on their context and few reasons to combine them.
 </p>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Clients</h2>
+<h2>Clients</h2>
 <div><p>
    Clients are the callers of the application layer.
     These could be another application automated service or an application been driven by a user. 
@@ -558,7 +557,8 @@ these models seperated based on their context and few reasons to combine them.
 <h3>Domain Events</h3>
 <p>
  are used to allow aggregates to react to a change in another aggregate without coupling them.
-- For handling processes that do require asynchronous behaviour and aggregates in different sub-domains or microservices,
+- For handling processes that do require asynchronous behaviour
+	and aggregates in different sub-domains or microservices,
  Integration Events can be published using a Message Broker/Event Bus.
 - It is important that Integration Events are published after a transaction completes successfully and 
 that mechanisms are in place to ensure that Integration Events are always published successfully.
