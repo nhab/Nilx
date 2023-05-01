@@ -31,7 +31,6 @@ json1+=`,{"title":"Software Architect"
 ,"topic":
         [
             {"caption":"DDD","href":"programming/design/ddd.htm"}
-            ,{"caption":"DDD research","href":"https://www.google.com/search?q=c%23+ddd+context+maps+domain+event&&oq=c%23+ddd+context+maps+domain+event"}
             ,{"caption":"BDD","href":"programming/architecture/bdd.htm"}
             ,{"caption":"Cleanarchitect","href":"https://youtu.be/dK4Yb6-LxAk"}
             ,{"caption":"Clean code manifesto","href":"programming/cleancode.htm"}
