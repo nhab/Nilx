@@ -47,10 +47,9 @@
       to iteratively refine a conceptual model that addresses particular domain problems.  
   </p>
     </div>
-    <h2 style="display:flex"><input type="button" value="-"
-        style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-        onclick="toggle(this)" />Ubiquitous language</h2>
-    <p>
+    <h2 style="display:flex">Ubiquitous language</h2>
+    <div>
+	<p>
     -  Most of  ambiguities, can be solved with proper naming of classes and methods,
     making them express what an object is and what a method does in the context of the domain.
 
@@ -74,8 +73,10 @@
     - If a product owner is looking at the application code 
       he should recognise the classes, methods, and variables as models, workflows, and actions that actually occur.
     </p>   
+</div>
 	
-    <h2 style="display:flex">Layers</h2>
+<h2 style="display:flex">Layers</h2>
+<div>
     <p>
     layers in DDD are: 
         <b>
@@ -85,6 +86,7 @@
         . Infrrastructure
         </b>
     </p>
+</div>
 	
     <h2 style="display:flex">DDD architecture Layers</h2>
     <div> <p>
@@ -300,13 +302,15 @@
                     <b>In-memory validation</b> — Checking that an object in the memory meets the criteria
                     <b>Creation of a new object</b> — Creating a new (arbitrary) object that meets the criteria
                     <b>Bulk updates</b> — Modifying a bunch of objects that meet the criteria
-                </div>
-                ● Speciﬁcation<T> base class simpliﬁes to create a speciﬁcation class by deﬁning an expression. 
-            </div>
-        ●   <b>Domain Event: </b>A Domain Event is a way of informing other services in a loosely coupled manner, when a domain speciﬁc event occurs.
+              
+                ● Speciﬁcation< T > base class simpliﬁes to create a speciﬁcation class by deﬁning an expression. 
+            
+        ●   <b>Domain Event: </b>A Domain Event is a way of informing other services in a loosely coupled manner,
+	    when a domain speciﬁc event occurs.
 
         ● <b>Factories</b>
-            Since an aggregate should always be in a consistent state it is important that they are constructed in a consistent state to the user.
+            Since an aggregate should always be in a consistent state
+	    it is important that they are constructed in a consistent state to the user.
             Factories provide a way to ensure that new instances of an aggregate always start in a consistent state.
     </p>
 </div>
