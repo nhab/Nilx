@@ -27,7 +27,8 @@
 
 # Indentation is important 
 # use 4 spaces to indent, not tabs.
-
+# ; ------------------------------------------------------------------
+Semicolons are used to separate numerous statements on a single line
 # print function : ----------------------------------------------------------
 print("I'm Python. Nice to meet you!")  #  I'm Python. Nice to meet you!
 print("Hello, World", end="!")  #  Hello, World! # ( a newline is default )
@@ -280,7 +281,10 @@ bool("")  #  False
 bool([])  #  False
 bool({})  #  False
 bool(())  #  False
-# Lists : to store sequences :_______________________________________________
+
+# Lists :_______________________________________________
+
+# are used to store sequences 
 li = []
 # You can start with a prefilled list
 other_li = [4, 5, 6]
@@ -413,8 +417,10 @@ del filled_dict["one"]  # Removes the key "one" from filled dict
 {'a': 1, **{'b': 2}}  #  {'a': 1, 'b': 2}
 {'a': 1, **{'a': 2}}  #  {'a': 2}
 # Sets ----------------------------------------------------------------------
+
+#sets, unlike lists or tuples, cannot have multiple occurrences of the same element and store unordered values.
 empty_set = set()
-# Initialize a set with a bunch of values. Yeah, it looks a bit like a dict. Sorry.
+# Initialize a set with a bunch of values.
 some_set = {1, 1, 2, 2, 3, 4}  # some_set is now {1, 2, 3, 4}
 # Similar to keys of a dictionary, elements of a set have to be immutable.
 invalid_set = {[1], 1}  #  Raises a TypeError: unhashable type: 'list'
