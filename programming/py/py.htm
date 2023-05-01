@@ -612,7 +612,9 @@ list(filter(lambda x: x > 5, [3, 4, 5, 6, 7]))  #  [6, 7]
 {x for x in 'abcddeef' if x not in 'abc'}  #  {'d', 'e', 'f'}
 {x: x**2 for x in range(5)}  #  {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 
-# You can import modules -------------------------------------------
+# import -------------------------------------------
+
+# modules can be imported
 import math
 print(math.sqrt(16))  #  4.0
 
@@ -629,12 +631,11 @@ from math import *
 import math as m
 math.sqrt(16) == m.sqrt(16)  #  True
 
-# Python modules are just ordinary Python files. You
-# can write your own, and import them. The name of the
-# module is the same as the name of the file.
+# Python modules are just ordinary Python files. 
+# You can write your own, and import them. 
+# The name of the module is the same as the name of the file.
 
-# You can find out which functions and attributes
-# are defined in a module.
+# You can find out which functions and attributes are defined in a module:
 import math
 dir(math)
 
@@ -642,7 +643,8 @@ dir(math)
 #  the file math.py will be loaded instead of the built-in Python module.
 # This happens because the local folder has priority over Python's built-in libraries.
 
-# Modules -------------------------------------------------------
+# Modules and classes -------------------------------------------------------
+
 # We use the "class" statement to create a class
 class Human:
 
