@@ -237,6 +237,7 @@ json1 +=`,{"title":"Tech"
            ,{"caption":"azure function concepts","href":"https://www.c-sharpcorner.com/article/what-is-azure-functions/"}
             ,{"caption":"azure pipelines","href":"https://www.javatpoint.com/azure-devops-pipeline"}
             ,{"caption":"cryptography","href":"programming/topics/cryptography.htm"}
+             ,{"caption":"Mermaid","href":"https://mermaid.js.org/syntax/examples.html","title":"lib for creating diagram from text script"}
         ]
     }`;
 
