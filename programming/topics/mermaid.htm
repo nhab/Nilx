@@ -55,6 +55,28 @@ graph LR
 </pre>
 </td></tr></table>
 
+<h2>Basic flowchart 2</h2>
+<table><tr><td>
+<pre>
+graph TB
+    A[Square Rect] -- Link text --> B{Rhombus}
+    B -->C
+    B --> D{Rhombus}
+    D --> E
+    D --> F
+    D --> G
+</pre>
+</td><td>
+<pre class="mermaid">
+graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+</pre>
+</td></tr></table>
+
+
 <h2>Timeline Example</h2>
 <table><tr><td>
 <pre>timeline
