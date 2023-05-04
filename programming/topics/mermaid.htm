@@ -68,11 +68,13 @@ graph TB
 </pre>
 </td><td>
 <pre class="mermaid">
-graph LR
-    A[Square Rect] -- Link text --> B((Circle))
-    A --> C(Round Rect)
+graph TB
+    A[Square Rect] -- Link text --> B{Rhombus}
+    B -->C
     B --> D{Rhombus}
-    C --> D
+    D --> E
+    D --> F
+    D --> G
 </pre>
 </td></tr></table>
 
