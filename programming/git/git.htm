@@ -341,9 +341,15 @@ git rebase -i master
         # x, exec = run command (the rest of the line) using shell
         # d, drop = remove commit
 </code></pre>
+ 
 <h3>local repository and Remote</h3>
 <pre><code>
  $ git -vv # to find the remote branch that your local branch is tracking in git
+ # to get difference between local folder and remote folder,first use fetch then use diff:
+ $ git fetch
+ $ git diff --state origin/master # for summary of differences
+ $ git diff origin/master # for detailed differences
+ 
 #Syncing with remotes
  $ git fetch origin master # Fetches master from origin
  $ git fetch origin        # Fetches all objects from origin 
