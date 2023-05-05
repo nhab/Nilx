@@ -202,6 +202,9 @@ Additionally, it can be used to remove files from both the working directory and
  $ git show HEAD~2       # Two steps before the last commit
  $ git show HEAD:file.js # Shows the version of file.js stored in the last commit
 
+# Merging Commits into a single commit:
+ $ git rebase -i HEAD~n   # For example, if you want to merge the last 3 commits, use `HEAD~3`.
+
 # Viewing the history
  $ git log                                     # Full history (all commits) 
  $ git log --oneline                           # --oneline will limit commit msg to a single line.
