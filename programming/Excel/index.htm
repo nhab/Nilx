@@ -8,15 +8,12 @@
 </head>
 <body>
 <h1>Excel Tutorial </h1>
-<script>
-var objConcepts=BlockGroup("Basic definitions");
-// Block(options)
-// title,body,code,codetype,widt,hei,imageSrc=null,padding="5",imagWidth="100%",parent=document,imagesOnRight=false,codeOnRight=false)
-var options=[];
-var  i=0;
-options[i++]={
-  title:"Ribbons",
-  body:`Are kind of tabbed visual menu which are placed at top of excel just below the menu bar,
+
+<h2>Basic definitions</h2>
+<div>
+<p>
+"Ribbons"
+  Are kind of tabbed visual menu which are placed at top of excel just below the menu bar,
   and contains shortcuts for different tasks in excel.
   Excel selects the ribbon's Home tab when you open it.
   
@@ -31,38 +28,26 @@ options[i++]={
   -You can collapse the ribbon to get extra space on the screen. 
    Right click anywhere on the ribbon, and then click Collapse the Ribbon (or press CTRL + F1)
 
-    `,
-  code:``,
-  codetype:"javascript",
-  parent:objConcepts
-};
-options[i++]={
-  title:"Workbook",
-  body:`: A workbook is another word for your Excel file.
-   When you start Excel, click Blank workbook to create an Excel workbook from scratch.`,
-   parent:objConcepts
-}
-options[i++]={
-  title:"Worksheets",
-  body:`A worksheet is a collection of cells where you keep and manipulate the data. 
-  Each Excel workbook can contain multiple worksheets.`
-  ,parent:objConcepts
-}
-options[i++]={
-title:"Cells,columns,row",
-body:` To select cell C3, click on the box at the intersection of column C and row 3 .
-To select column C, click on the column C header.
-To select row 3, click on the row 3 header.
-To select the range B2:C4, click on cell B2 and drag it to cell C4
 
-To select a range of individual cells, hold down CTRL and click on each cell 
-  that you want to include in the range.
-  `
-  ,parent:objConcepts
-}
-options[i++]={
-  title:"Range",
-  body:`: A range in Excel is a collection of two or more cells.
+"Workbook"
+   A workbook is another word for your Excel file.
+   When you start Excel, click Blank workbook to create an Excel workbook from scratch.
+
+"Worksheets",
+  A worksheet is a collection of cells where you keep and manipulate the data. 
+  Each Excel workbook can contain multiple worksheets.
+  
+"Cells,columns,row"
+	To select cell C3, click on the box at the intersection of column C and row 3 .
+	To select column C, click on the column C header.
+	To select row 3, click on the row 3 header.
+	To select the range B2:C4, click on cell B2 and drag it to cell C4
+
+	To select a range of individual cells, hold down CTRL and click on each cell 
+	that you want to include in the range.
+  
+"Range"
+   A range in Excel is a collection of two or more cells.
    
   To Fill a Range (to copy first cell to other cells):
     1-Enter the value 2 into cell B2
@@ -81,12 +66,10 @@ options[i++]={
   <b>Named range </b>
   Select the range, type the name in the Name box(for example prices) and press Enter.
   now youcan use it : =SUM(Pricess)
-   `
-   ,parent:objConcepts
-}
-options[i++]={
-  title:"Format Cells",
-  body:`By formatting we can show the data differently without changing its value.
+
+
+"Format Cells"
+	By formatting we can show the data differently without changing its value.
   When we format cells in Excel, we change the appearance of a number 
   without changing the number itself.
   
@@ -111,21 +94,18 @@ options[i++]={
 
     Border:
       On the Home tab, in the Font group, add outside borders and change the font color to blue.
-  `
-  ,parent:objConcepts
-}
-options[i++]={
-  title:"Find & select",
-  body:`On the Home tab, in the Editing group, click Find & Select.
+  
+  
+"Find & select"
+  
+  On the Home tab, in the Editing group, click Find & Select.
   By pressing ctrl+F you search for an expression.By ctrl+h you can replace it.  
   Go To Special
     You can use Excel's Go To Special feature to quickly select all cells 
-    with formulas, comments, conditional formatting, constants, data validation, etc.` 
-    ,parent:objConcepts
-  }
-options[i++]={
-  title:"Tables",
-  body:`
+    with formulas, comments, conditional formatting, constants, data validation, etc.
+    
+"Tables"
+
   Insert a Table
     assume we have a data set in cells of a worksheet:
     1. Click any single cell inside the data set.
@@ -153,12 +133,9 @@ options[i++]={
     2. Click any cell in the last row to calculate the Total 
        (Average, Count, Max, Min, Sum etc.) of a column.
      For example, calculate the sum of the Sales column.
-  `
-  ,parent:objConcepts
-}
-options[i++]={
-  title:"Templates",
-  body:`: Instead of creating an Excel workbook from scratch,
+
+Templates"
+	Instead of creating an Excel workbook from scratch,
    you can create a workbook based on a template.
    
   Creating workbook based on a template :
@@ -179,12 +156,8 @@ options[i++]={
     4. Enter a file name.
     5. Select Excel Template (*.xltx) from the drop-down list of 'save as type'.
 
-   `
-   ,parent:objConcepts
-  }
-options[i++]={
-  title:"Data Validation",
-  body:`: Use data validation in Excel to make sure that users enter certain values into a cell.
+"Data Validation",
+ Use data validation in Excel to make sure that users enter certain values into a cell.
   
   Create Data Validation Rule
     1. Select cell C2.
@@ -210,13 +183,10 @@ options[i++]={
     1. Check 'Show error alert after invalid data is entered'.
     2. Enter a title.
     3. Enter an error message.
-  `
-  ,parent:objConcepts
-}
-options[i++]={
-  title:"Keyboard Shortcuts",
-  body:`
-  : Keyboard shortcuts allow you to do things with your keyboard instead
+
+"Keyboard Shortcuts",
+
+   Keyboard shortcuts allow you to do things with your keyboard instead
    of your mouse to increase your speed.
 
   - To select the entire range, press CTRL + a 
@@ -230,12 +200,9 @@ options[i++]={
   - Select cell F2, hold down SHIFT and press ↓ two times.
   - To fill a formula down, press CTRL + d (down)
   Note: in a similar way, you can fill a formula right by pressing CTRL + r (right).
-  `
-  ,parent:objConcepts
-}
-options[i++]={
-  title:"Print",
-  body:`
+  
+"Print"
+  
    To Print a Worksheet
     1. On the File tab, click Print.
     2. To preview the other pages that will be printed,
@@ -263,12 +230,8 @@ options[i++]={
   For example, if you print 6 copies, Collated prints the entire first copy,
    then the entire second copy, etc. Uncollated prints 6 copies of page 1, 6 copies of page 2, etc
 
-    `
-    ,parent:objConcepts
-  }
-options[i++]={
-  title:"Share",
-  body:`
+"Share"
+
   Paste Link
     You can also link the source data in Excel with the destination data in Word. 
     If you change the data in Excel, the data in Word is updated automatically.
@@ -277,13 +240,10 @@ options[i++]={
     2. In Word, on the Home tab, in the Clipboard group, click Paste.
     In Word, click Paste
     3. Click Paste Special.
-  `
-  ,parent:objConcepts
-}
-options[i++]={
-  title:"Protect",
-  body:`Encrypt an Excel file with a password so that it requires a password to open it.
-  Protect
+
+Protect
+	Encrypt an Excel file with a password so that it requires a password to open it.
+	Protect
  
  Encrypt an Excel file with a password so that it requires a password to open it. To password protect an Excel file, execute the following steps.
  
@@ -316,13 +276,11 @@ options[i++]={
  Click Save
  
  It requires a password to open this Excel file now. The password for the downloadable Excel file is "easy".  
-  
-  `
-  ,parent:objConcepts
-}
-options[i++]={
-  title:"Formulas and Functions",
-  body:`A formula is an expression which calculates the value of a cell.
+ 
+ 
+"Formulas and Functions"
+
+A formula is an expression which calculates the value of a cell.
    Functions are predefined formulas and are already available in Excel.
    
    Enter a Formula
@@ -409,27 +367,15 @@ options[i++]={
       Note: instead of using the Insert Function feature, simply type =COUNTIF(A1:C2,">5"). 
       When you arrive at: =COUNTIF( instead of typing A1:C2, simply select the range A1:C2.
 
-   `
-   ,parent:objConcepts
-}
+"External tutorial resources"
+	https://developerpublish.com/microsoft-excel-tutorials/
 
-options[i++]={
-  title:"External tutorial resources",
-  body:`https://developerpublish.com/microsoft-excel-tutorials/
+</p>
+</div>
+<h2>Predefined functions</h2>
+<div></p>
+"Date & Time"
 
-   `
-   ,parent:objConcepts
-}
-
-
- options=RenderBlocks(options);
- 
- var objPredefinedFunctions=BlockGroup("Predefined functions");
-i=0;
-var options2=[];
-options2[i++]={
-  title:"Date & Time",
-  body:`
   - To enter a date in Excel, use the "/" or "-" characters. 
     To enter a time, use the ":" (colon).
     You can also enter a date and a time in one cell using space betwin them.
@@ -463,9 +409,9 @@ options2[i++]={
   ,parent:objPredefinedFunctions
  };
 
-options2[i++]={
-  title:"Text ",
-  body:`
+
+"Text "
+
   Join Strings
     To join strings, use the & operator.
     <pre><code>
@@ -515,19 +461,15 @@ options2[i++]={
   };
 
 
-  
+Lookup & Reference"
 
-options2[i++]={
-  title:"Lookup & Reference",
-  body:`
   Vlookup
     The VLOOKUP (Vertical lookup) function looks for a value(i.e  104)
     in the leftmost column of a table(i.e Id column), and then returns a value in the same row
       from another column you specify(i.e column 3).
     
-    <code><pre>
         =VLOOKUP(A2,$E$4:$G$7,3,FALSE)
-    </pre></code>
+
     Explanation:
     the VLOOKUP function looks for the ID (104) in the leftmost column of the range $E$4:$G$7 
     and returns the value in the same row from the third column (third argument is set to 3).
@@ -535,39 +477,34 @@ options2[i++]={
 
    Hlookup
     In a similar way, you can use the HLOOKUP (Horizontal lookup) function.
-    <code><pre>
+
       =HLOOKUP(A2,$E$4:$H$6,3,FALSE)
-    </pre></code>
+
 
     Match
       The MATCH function returns the position of a value in a given range.
-      <pre><code>
+
       =MATCH(A2,E4:E7,0)
-      </code></pre>
+
       argument to 0 to return the position of the value that is 
       exactly equal to lookup_value (A2) or a #N/A error if not found.
 
     Index
       Returns a the value at given coordination in a two-dimensional range.
-      <pre><code>
+
           =Index(E4:F7,A2,B2)
-        </code></pre>
+
       it returns the intersection of row 3 and column 2 in the range E4:F7.
 
       Choose
         Returns a value from a list of values, based on a position number.
-        <pre><code>
+
           =CHOOSE(3,"car","Boat","plane")
-        </code></pre>
+
         returns plane
-   `   ,
-code:``
-    ,parent:objPredefinedFunctions
-  };
-  
-options2[i++]={
-  title:"Financial",
-  body:`
+
+"Financial"
+
   FV 
     calculates the future value of an investment based on a constant interest rate. 
     You can use FV with either periodic, constant payments, or a single lump sum payment.
@@ -652,14 +589,8 @@ FV
   But, if we make monthly payments of only $1,000.00, we still have debt after 20 years.
 
 
-  
-`   ,codetype:"javascript"
-    ,parent:objPredefinedFunctions
-  };
-  
-options2[i++]={
-  title:"Statistical ",
-  body:`
+"Statistical "
+
   Average
     To calculate the average of a group of numbers, use the AVERAGE function.
     <pre><code>
@@ -696,15 +627,9 @@ options2[i++]={
 
     Small
       To find the second smallest number, use the following SMALL function
-    
-    
-      `   ,codetype:"javascript"
-    ,parent:objPredefinedFunctions
-  };
-  
-options2[i++]={
-  title:"Round ",
-  body:`
+
+"Round "
+
   Round
       The ROUND function in Excel rounds a number to a specified number of digits.
       The ROUND function rounds up or down. 1, 2, 3 and 4 get rounded down.
@@ -721,15 +646,8 @@ options2[i++]={
     The ROUNDDOWN function in Excel always rounds a number down (toward zero).
      1, 2, 3, 4, 5, 6, 7, 8 and 9 get rounded down.
 
+"Formula Errors"
 
-     `   ,codetype:"javascript"
-    ,parent:objPredefinedFunctions
-  };
-
-    
-  options2[i++]={
-      title:"Formula Errors",
-      body:`
       ##### error
         When your cell contains this error code, the column isn't wide enough to display the value.
 
@@ -746,15 +664,9 @@ options2[i++]={
       #REF! error
         Excel displays the #REF! error when a formula refers to a cell that is not valid.
         `   ,
-    codetype:"javascript"
-        ,parent:objPredefinedFunctions
-  };
 
+"Conditional Formatting"
 
-    
-  options2[i++]={
-  title:"Conditional Formatting",
-  body:`
   Conditional formatting in Excel enables you to highlight cells 
   with a certain color, depending on the cell's value.
 
@@ -829,14 +741,8 @@ options2[i++]={
     <img src='https://www.excel-easy.com/data-analysis/images/conditional-formatting/use-a-formula-to-determine-which-cells-to-format.png' />
     <img src='https://www.excel-easy.com/data-analysis/images/conditional-formatting/odd-numbers.png' />
 
-`   ,
-codetype:"javascript"
-    ,parent:objPredefinedFunctions
-  };
+"Charts"
 
-options2[i++]={
-  title:"Charts",
-  body:`
   A simple chart in Excel can say more than a sheet full of numbers. 
 
 <b>Create a Chart :</b>
@@ -878,15 +784,10 @@ options2[i++]={
   4. Click the + button on the right side of the chart 
      and click the check box next to Data Labels.
      
-`   ,
-codetype:"javascript"
-    ,parent:objPredefinedFunctions
-  };
+`
 
+"Pivot Tables"
 
-  options2[i++]={
-  title:"Pivot Tables",
-  body:`
 what is a pivot table?
   You can think of a pivot table as an interactive reprot.
   With very little effort (and no formulas) you can look at the same data
@@ -965,9 +866,8 @@ what is a pivot table?
 
   `};
 
-  options2[i++]={
-  title:" Tables",
-  body:`
+Tables
+
   Tables allow you to analyze your data in Excel quickly and easily.
    Learn how to insert, sort and filter a table, 
    and how to display a total row at the end of a table.
@@ -981,12 +881,8 @@ what is a pivot table?
      but many powerful features like filter,sort and total are now just a click of a button away.
 
 
-  `};
+"What-If Analysis"
 
-  
-  options2[i++]={
-  title:"What-If Analysis",
-  body:`
     allows you to try out different values (scenarios) for formulas. 
     
     Assume you own a book store 
@@ -1043,9 +939,8 @@ what is a pivot table?
     <img src='https://www.excel-easy.com/data-analysis/images/what-if-analysis/goal-seek-result.png' />
     `};
 
-  options2[i++]={
-  title:"Solver",
-  body:`
+"Solver"
+
   <b>Solver</b>
 
     Finds optimal solutions for all kind of decision problems.
@@ -1137,9 +1032,8 @@ Solve the Model
       This solution uses all the resources available.
       `};
 
-  options2[i++]={
-  title:"Analysis ToolPak",
-  body:`
+"Analysis ToolPak"
+
   The Analysis ToolPak is an Excel add-in program that provides data analysis tools
    for financial, statistical and engineering data analysis.
 
@@ -1151,11 +1045,8 @@ Solve the Model
   4. On the Data tab, in the Analysis group, you can now click on Data Analysis.
   5. For example, select Histogram and click OK to create a Histogram in Excel.
 
-  `};
+"VBA"
 
-  options2[i++]={
-  title:"VBA",
-  body:`
   <b>Create a Macro</b>
       With Excel VBA you can automate tasks in Excel by writing so called macros
   
@@ -1192,10 +1083,13 @@ Solve the Model
       5. Close the Visual Basic Editor.
       6. Click the command button on the sheet (make sure Design Mode is deselected).
 
+</p>
       <b>MsgBox</b>
       <pre><code>MsgBox  "Entered value is " & Range("A1").Value  & vbNewLine & "Line 2"</code></pre> 
-      
+   </div>
+  
       <h2>Workbook and Worksheet Object</h2>
+<p>
       <b>Object Hierarchy</b>
         In Excel VBA, an object can contain another object, 
         and that object can contain another object, etc. 
@@ -1211,26 +1105,25 @@ Solve the Model
         The Worksheet object contains other objects, such as the Range object.
 
         We used the following code line:
-        <pre><code>
+   
           Range("A1").Value = "Hello"
-        </code></pre> 
-
+   
         but what we really meant was:
-        <pre><code> 
+   
         Application.Workbooks("create-a-macro").Worksheets(1).Range("A1").Value = "Hello"
-      </code></pre>
+   
       Note: the objects are connected with a dot. 
       Fortunately, we do not have to add a code line this way.
        That is because we placed our command button in create-a-macro.xlsm, on the first worksheet. 
        Be aware that if you want to change things on different worksheets, 
        you have to include the Worksheet object. Read on.
-
+</p>
     <b>Cells</b>
        <pre><code>
         Cells(3, 2).Value = 2
         Range(Cells(1, 1), Cells(4, 1)).Value = 5
      </code></pre> 
-
+<p>
 <b>Collections</b>
       You may have noticed that Workbooks and Worksheets are both plural. 
       That is because they are collections. 
@@ -1242,18 +1135,17 @@ Solve the Model
        in 3 ways:
 
           1. Using the worksheet name.
-            <pre><code>
-              Worksheets("Sales").Range("A1").Value = "Hello"</code></pre> 
+           
+              Worksheets("Sales").Range("A1").Value = "Hello"
 
           2. Using the index number (1 is the first worksheet starting from the left).
 
-            <pre><code>
-              Worksheets(1).Range("A1").Value = "Hello"</code></pre>
+              Worksheets(1).Range("A1").Value = "Hello"
           
 
           3. Using the CodeName.
-            <pre><code>
-              Sheet1.Range("A1").Value = "Hello"</code></pre>
+   
+              Sheet1.Range("A1").Value = "Hello"
 
             To see the CodeName of a worksheet, open the Visual Basic Editor. 
             In the Project Explorer, the first name is the CodeName. 
@@ -1265,46 +1157,49 @@ Solve the Model
              if you reference a worksheet in a different workbook.
 
       -The Add method of the Workbooks collection creates a new workbook:
-          <pre><code>
+          
             Workbooks.Add
             MsgBox Worksheets.Count
-        </code></pre> 
-
+        
+        
   <b>Range Object</b>
       The Range object, is the representation of  cell(s) on your worksheet.
       Properties are something which an object has
       while methods do something .
 
       Setting a cell value:
-      <pre><code>    
+      
         Range("B3").Value = 2
-      </code></pre>
+      
       Setting value to a range:
-      <pre><code>
+      
         Range("A1:A4").Value = 5
-      </pre></code>
+      
       Setting value to 2 ranges:
      
-      <pre><code>
+      
       Range("A1:A2,B3:C4").Value = 10
-      </code></pre>
+      
       <img src='https://www.excel-easy.com/vba/images/range-object/range-example-3.png' />
 
       named range:
       ange("Prices").Value = 15
 
       Declaring a Range object:
+      </p>
         <pre><code>
           Dim example As Range
           Set example = Range("A1:C4")
 
           example.Value = 8
-        </code></pre> 
+        </code></pre>
+   <p> 
    <b>Select</b>
    
     The Select method of a range,simply selects the range.
  
     Code:
+</p>
    <pre><code>
       Dim example As Range
       Set example = Range("A1:C4")
@@ -1427,11 +1322,13 @@ Solve the Model
    <pre><code>
     Range("A3").Value = Application.WorksheetFunction.Average(Range("A1:A2"))
   </code></pre>
+  <p>
   <b>ScreenUpdating</b>
     Sometimes you may find it useful to disable screen updating (to avoid flickering)
      while executing code. 
     As a result, your code will run faster.
     For example, place a command button on your worksheet and add the following code lines:
+  </p>
       <pre><code>
       Dim i As Integer
 
@@ -1464,6 +1361,7 @@ Solve the Model
 
         Application.DisplayAlerts = True
         </code></pre> 
+      <p>
         (changes will lost)
 
         By default,  calculation is set to automatic.
@@ -1484,12 +1382,8 @@ Solve the Model
       click Command Button to insert a command button control.
       
       you can add code to its events and manupulate its properties.
-
-      `};
-
-RenderBlocks(options2);
- 
-  </script>
- <br>
+</div>
 
  </body>
+ 
+    
