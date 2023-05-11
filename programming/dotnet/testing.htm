@@ -31,6 +31,121 @@
 </p> 
 </div>
 	
+	<h2>Comparition</h2>
+	<div>
+		<table>
+<tr>
+<td>
+Functionality
+</td><td>
+NUnit 3.x
+</td><td>
+MSTest v2.x.
+</td><td>
+xUnit.net 2.x
+</td>
+
+</tr><tr>
+<td>
+Marks a test method.
+</td><td>
+	[Test]
+</td><td>
+	[TestMethod]
+</td><td>
+	[Fact]
+</td><td>
+</tr><tr>
+<td>
+Marks a test class.	
+</td><td>
+[TestFixture]
+</td><td>
+[TestClass]
+</td><td>
+	n/a
+</td>
+
+</tr><tr>
+<td>
+Triggered before every test case.
+</td><td>[SetUp]
+</td><td>	[TestInitialize]
+</td><td>	Constructor
+</td>
+
+</tr><tr>
+<td>
+Triggered after every test case.
+</td><td>	[TearDown]	
+</td><td>[TestCleanup]
+</td><td>	IDisposable.Dispose
+</td>
+
+</tr><tr>
+</td><td>One-time triggered method before test cases start.
+</td><td>
+[OneTimeSetUp]
+</td><td>
+[ClassInitialize]
+</td><td>
+IClassFixture< T >
+</td>
+
+</tr><tr>
+<td>
+One-time triggered method after test cases end.
+</td><td>[OneTimeTearDown]
+</td><td>[ClassCleanup]
+</td><td>IClassFixture< T >
+</td>
+</tr><tr>
+<td>
+Ignores a test case.
+</td><td>
+	[Ignore("reason")]
+</td><td>
+	[Ignore]
+</td><td>
+	[Fact(Skip="reason")]
+</td>
+
+</tr><tr>
+<td>
+Sets arbitrary metadata on a test.
+</td><td>
+	[Property]
+	</td><td>
+	[TestProperty]
+	</td><td>
+	[Trait]
+	</td>
+	
+</tr><tr>
+<td>
+Configures a data-driven test.	
+</td><td>
+[Theory]
+</td><td>
+	[DataRow]
+	</td><td>
+	[Theory]
+	</td>
+	
+</tr><tr>
+<td>
+Categorizes the test cases or classes.
+</td><td>
+	[Category("")]
+	</td><td>
+	[TestCategory("")]
+	</td><td>
+	[Trait("Category", "")]
+</td>
+
+</tr>
+</table>
+	</div>
 <h2>NUnit</h2>
 <div>
 <pre><code>
