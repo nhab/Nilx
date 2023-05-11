@@ -30,17 +30,19 @@
 </div>
 
 <h2>Test Methods</h2>
-<div>
+<div><p>
 It's decorated with the [TestMethod] attribute.
 It returns void.
 It cannot have parameters.
-</div>
+	</p></div>
 
 <h2>requirements for a test class </h2>
-<div>
-.The <b>[TestClass]</b> attribute is required on any class that contains unit test methods that you want to <b>run in Test Explorer</b>.
+<div><p>
+.The <b>[TestClass]</b> attribute is required on any class that contains unit test methods 
+that you want to <b>run in Test Explorer</b>.
+
 .Each test method that you want Test Explorer to recognize must have the<b> [TestMethod] attribute</b>.
-</div>
+	</p></div>
 
 <h2>A sample test method</h2>
 <pre><code>
@@ -63,13 +65,15 @@ public void Debit_WithValidAmount_UpdatesBalance()
 </code></pre>
 
 <h2>Build and run the test</h2>
-<div>
+<div><p>
 On the Build menu, choose Build Solution (or press Ctrl + SHIFT + B).
 
-If Test Explorer is not open, open it by choosing Test > Windows > Test Explorer from the top menu bar (or press Ctrl + E, T).
+If Test Explorer is not open, 
+	open it by choosing Test > Windows > Test Explorer from the top menu bar 
+	(or press Ctrl + E, T).
 
 Choose Run All to run the test (or press Ctrl + R, V).    
-</div>
+	</p></div>
 
 <h2>Exception</h2>
 <pre><code>
@@ -87,12 +91,17 @@ public void Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange()
 </code></pre>
 
 <h2>Microsoft fake</h2>
-<div>
-    Microsoft Fakes helps you isolate the code you're testing by replacing other parts of the application with stubs or shims. 
-    The stubs and shims are small pieces of code that are under the control of your tests.
-     By isolating your code for testing, you know that if the test fails, the cause is there and not somewhere else. 
-     Stubs and shims also let you test your code even if other parts of your application aren't working yet.
-</div>
+<div><p>
+Microsoft Fakes helps you isolate the code you're testing 
+by replacing other parts of the application with stubs or shims. 
+    
+The stubs and shims are small pieces of code that are under the control of your tests.
+     
+By isolating your code for testing, you know that if the test fails,
+the cause is there and not somewhere else. 
+    
+Stubs and shims also let you test your code even if other parts of your application aren't working yet.
+</p></div>
 
 <h2>test with stubs</h2>
     <pre><code>
@@ -127,9 +136,13 @@ public void Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange()
     </code></pre>
 
 <h2> Verify parameter values</h2>
-<div>
-You can verify that when your component makes a call to another component, it passes the correct values.
- You can either place an assertion in the stub, or you can store the value and verify it in the main body of the test. For example: 
+<div><p>
+You can verify that when your component makes a call to another component, 
+it passes the correct values.
+
+You can either place an assertion in the stub, 
+or you can store the value and verify it in the main body of the test. For example: 
+</P>
 <pre><code>
     [TestClass]
     class TestMyComponent
@@ -168,9 +181,16 @@ You can verify that when your component makes a call to another component, it pa
 
 <h2> Stubs for different kinds of type members</h2>
 <div>
- <b>Methods</b>
-    As described in the example, methods can be stubbed by attaching a delegate to an instance of the stub class. The name of the stub type is derived from the names of the method and parameters. For example, given the following IMyInterface interface and method MyMethod:
-    
+<b>Methods</b>
+<p>
+As described in the example, 
+methods can be stubbed by attaching a delegate to an instance of the stub class.
+
+The name of the stub type is derived from the names of the method and parameters. 
+	
+For example, given the following IMyInterface interface and method MyMethod:
+	</p>
+<pre><code>
 
     // application under test
     interface IMyInterface
@@ -183,11 +203,18 @@ You can verify that when your component makes a call to another component, it pa
     // unit test code
     var stub = new StubIMyInterface ();
     stub.MyMethodString = (value) => 1;
-    If you do not provide a stub for a function, Fakes generates a function that returns the default value of the return type. For numbers, the default value is 0 and for class types it is null (C#) or Nothing (Visual Basic).
+    </code></pre>
+<p>	
+If you do not provide a stub for a function, 
+Fakes generates a function that returns the default value of the return type. 
+	
+For numbers, the default value is 0 and for class types it is null (C#) or Nothing (Visual Basic).
     
-    Properties
-    Property getters and setters are exposed as separate delegates and can be stubbed separately. For example, consider the Value property of IMyInterface:
-    
+<b>Properties</b>
+Property getters and setters are exposed as separate delegates and can be stubbed separately. 
+For example, consider the Value property of IMyInterface:
+	</p>
+<pre><code>
     // code under test
     interface IMyInterface
     {
@@ -201,11 +228,19 @@ You can verify that when your component makes a call to another component, it pa
     var stub = new StubIMyInterface();
     stub.ValueGet = () => i;
     stub.ValueSet = (value) => i = value;
-    If you do not provide stub methods for either the setter or the getter of a property, Fakes generates a stub that stores values so that the stub property works like a simple variable.
+  </code></pre>
+<p>
+    If you do not provide stub methods for either the setter or the getter of a property, 
+    Fakes generates a stub that stores values so that the stub property works like a simple variable.
     
-    Events
-    Events are exposed as delegate fields. As a result, any stubbed event can be raised simply by invoking the event backing field. Let's consider the following interface to stub:
-    
+<b>Events</b>
+ Events are exposed as delegate fields. 
+	
+As a result, any stubbed event can be raised simply by invoking the event backing field. 
+	
+Let's consider the following interface to stub:
+	</p>
+<pre><code>
     // code under test
     interface IWithEvents
     {
@@ -217,13 +252,17 @@ You can verify that when your component makes a call to another component, it pa
       var withEvents = new StubIWithEvents();
       // raising Changed
       withEvents.ChangedEvent(withEvents, EventArgs.Empty);
+   </code></pre>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> Generic methods</h2>
+<h2>Generic methods</h2>
 <div>
-    It's possible to stub generic methods by providing a delegate for each desired instantiation of the method. For example, given the following interface containing a generic method:
-
+<p>
+It's possible to stub generic methods by providing a delegate for each desired instantiation of the method. 
+	
+ For example, given the following interface containing a generic method:
+	</p>
+	<pre><code>
     // code under test
     interface IGenericMethod
     {
@@ -241,41 +280,62 @@ You can verify that when your component makes a call to another component, it pa
         IGenericMethod target = stub;
         Assert.AreEqual(5, target.GetValue<int>());
     }
+ </code></pre>
     If the code were to call GetValue<T> with any other instantiation, the stub would simply   
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Shims</h2>
+<h2>Shims</h2>
 <div>
-    Shim types are one of two technologies that the Microsoft Fakes Framework uses to let you isolate components under test from the environment.
-     Shims divert calls to specific methods to code that you write as part of your test. 
-     Many methods return different results dependent on external conditions, but a shim is under the control of your test 
-     and can return consistent results at every call. This makes it easier to write the tests.
+<p>
+    Shim types are one of two technologies that the Microsoft Fakes Framework uses 
+    to let you isolate components under test from the environment.
+    
+    Shims divert calls to specific methods to code that you write as part of your test. 
+    
+    Many methods return different results dependent on external conditions, 
+    but a shim is under the control of your test 
+     and can return consistent results at every call. 
+     
+     This makes it easier to write the tests.
 
     Use shims to isolate your code from assemblies that are not part of your solution. 
-    To isolate components of your solution from each other, use stubs.
+   
+   To isolate components of your solution from each other, use stubs.
+</p>
 </div>
 
 <h2>How to use shims</h2>
 <div>
+<p>
 First, add a Fakes assembly:
 
 In Solution Explorer,
 
-For an older .NET Framework Project (non-SDK style), expand your unit test project's References node.
-For an SDK-style project targeting .NET Framework, .NET Core, or .NET 5.0 or later, expand the Dependencies node to find the assembly you would like to fake under Assemblies, Projects, or Packages.
-If you're working in Visual Basic, select Show All Files in the Solution Explorer toolbar to see the References node.
-Select the assembly that contains the class definitions for which you want to create shims. For example, if you want to shim DateTime, select System.dll.
+For an older .NET Framework Project (non-SDK style),
+expand your unit test project's References node.
+
+For an SDK-style project targeting .NET Framework, .NET Core, or .NET 5.0 or later,
+expand the Dependencies node to find the assembly you would like to fake under Assemblies, Projects, or Packages.
+
+If you're working in Visual Basic, 
+select Show All Files in the Solution Explorer toolbar to see the References node.
+Select the assembly that contains the class definitions for which you want to create shims. 
+
+For example, if you want to shim DateTime, select System.dll.
 
 On the shortcut menu, choose Add Fakes Assembly.    
+</p>
 </div>
 
 <h2>Use ShimsContext</h2>
 <div>
-When using shim types in a unit test framework, wrap the test code in a ShimsContext to control the lifetime of your shims.
- Otherwise, the shims would last until the AppDomain shut down. 
- The easiest way to create a ShimsContext is by using the static Create() method as shown in the following code:
+<p>
+When using shim types in a unit test framework, 
+wrap the test code in a ShimsContext to control the lifetime of your shims.
 
+Otherwise, the shims would last until the AppDomain shut down. 
+The easiest way to create a ShimsContext is by using the static Create() method as shown in the following code:
+</p>
 <pre><code>
 //unit test code
 [Test]
@@ -285,12 +345,15 @@ public void Y2kCheckerTest() {
   } // clear all shims
 }    
 </code></pre>
+<p>
 It's critical to properly dispose each shim context. As a rule of thumb, call the ShimsContext.
 Create inside of a using statement to ensure proper clearing of the registered shims. 
 For example, you might register a shim for a test method that replaces the DateTime.
 Now method with a delegate that always returns the first of January 2000. 
-If you forget to clear the registered shim in the test method, the rest of the test run would always return the first of January 2000
+If you forget to clear the registered shim in the test method, 
+the rest of the test run would always return the first of January 2000
  as the DateTime.Now value. This might be surprising and confusing.
+</p>
 </div>
 
 <h2>Write a test with shims</h2>
@@ -327,33 +390,45 @@ public class TestClass1
 }   
 </code>
 </pre>
-
+<p>
 
 Shim class names are made up by prefixing Fakes.Shim to the original type name.
 
 Shims work by inserting detours into the code of the application under test.
- Wherever a call to the original method occurs, the Fakes system performs a detour,
+ 
+Wherever a call to the original method occurs, the Fakes system performs a detour,
 so that instead of calling the real method, your shim code is called.
 
-Notice that detours are created and deleted at run time. You must always create a detour within the life of a ShimsContext. 
-When it is disposed, any shims you created while it was active are removed. The best way to do this is inside a using statement.
+Notice that detours are created and deleted at run time. 
+
+You must always create a detour within the life of a ShimsContext. 
+
+When it is disposed, any shims you created while it was active are removed. 
+
+The best way to do this is inside a using statement.
 
 You might see a build error stating that the Fakes namespace does not exist.
  This error sometimes appears when there are other compilation errors. Fix the other errors and it will vanish.
+</p>
 </div>
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />shims advanced</h2>
+
+<h2>shims advanced</h2>
 <div>
     https://docs.microsoft.com/en-us/visualstudio/test/using-shims-to-isolate-your-application-from-other-assemblies-for-unit-testing?view=vs-2022&tabs=csharp
 </div>
+
 <h2>data-driven unit test</h2>
 <div>
-    set up a unit test method to retrieve values from a data source. 
-    The method is run successively for each row in the data source, which makes it easy to test a variety of input by using a single method.
+<p>
+set up a unit test method to retrieve values from a data source. 
+
+The method is run successively for each row in the data source, 
+which makes it easy to test a variety of input by using a single method.
 
 Creating a data-driven unit test involves the following steps:
 
 Create a data source that contains the values that you use in the test method. 
+
 The data source can be any type that is registered on the machine that runs the test.
 
 Add a private TestContext field and a public TestContext property to the test class.
@@ -361,12 +436,17 @@ Add a private TestContext field and a public TestContext property to the test cl
 Create a unit test method and add a DataSourceAttribute attribute to it.
 
 Use the DataRow indexer property to retrieve the values that you use in a test.
+</p>
 </div>
 
 <h2>Add a TestContext to the test class</h2>
-    <div>
-The unit test framework creates a TestContext object to store the data source information for a data-driven test. 
+ <div>
+ <p>
+The unit test framework creates a TestContext object 
+to store the data source information for a data-driven test. 
+
 The framework then sets this object as the value of the TestContext property that you create.
+</p>
 <pre><code>
 private TestContext testContextInstance;
 public TestContext TestContext
@@ -376,12 +456,16 @@ public TestContext TestContext
 }      
 </code></pre>
 </div>
-<h2><input type="button" value="-" class="toggleButton"  
-        onclick="toggle(this)" /> Write the test method</h2>
+
+<h2>Write the test method</h2>
 <div>
-    The test method for AddIntegers is fairly simple. For each row in the data source, 
-    call AddIntegers with the FirstNumber and SecondNumber column values as parameters, 
-    and verify the return value against Sum column value:
+<p>
+The test method for AddIntegers is fairly simple.
+
+For each row in the data source, 
+call AddIntegers with the FirstNumber and SecondNumber column values as parameters, 
+and verify the return value against Sum column value:
+</p>
 <pre><code>
    [DataSource(@"Provider=Microsoft.SqlServerCe.Client.4.0; Data Source=C:\Data\MathsData.sdf;", "Numbers")]
     [TestMethod()]
@@ -399,15 +483,20 @@ public TestContext TestContext
             new object[] {x, y});
     }    
 </code></pre>
- 
+ <p>
     The Assert method includes a message that displays the x and y values of a failed iteration. 
+    
     By default, the asserted values - expected and actual - are already included in failed test details.
+</p>
 </div>
 
 <h2>Run an inline data-driven test</h2>
 <div>
+<p>
 For inline tests, MSTest uses DataRow to retrieve values from a data source. 
+
 The test in this example runs successively for each data row.
+</p>
 <pre><code>
 [DataTestMethod]
 [DataRow(1, 1, 2)]
@@ -418,9 +507,7 @@ public void AddTests(int x, int y, int expected)
 {
   Assert.AreEqual(expected, x + y);
 }      
-</code></pre>
-  
+</code></pre>  
 </div>
-
 
 </body>
