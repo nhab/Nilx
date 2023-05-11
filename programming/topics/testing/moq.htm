@@ -21,21 +21,30 @@
   are objects that mimic the behavior of real objects in controlled ways.
 </div>      
 <h2>Mock</h2>
-<div>
+<div><p>
 A Mock can be:
   . Instructed, you can tell a mock that if a certain method is called then it can answer with a certain response
+	
   . Verified, verification is something you carry out after your production code has been called. 
+	
     You carry this out to verify that a certain method has been called with specific arguments
+	</p>
 </div>
+	
 <h2>Setup a mock</h2>
 <div>
 To instruct it we use the method Setup() like so:
+<pre><code>
   //we say that for the input parameter 114, charge method will return true,for our mock object
   paymentServiceMock.Setup(p => p.Charge(114)).Returns(true)    
+ </code></pre>
 </div>
+	
 <h2>It.IsAny</h2>
 <div>
-  If you don’t care about the input parameter of the mocked method, you can use It.IsAny.For Example:
+	<p>
+  If you don’t care about the input parameter of the mocked method, you can use It.IsAny.
+		For Example:</p>
   <pre><code>
   //it returns the specified list for any string we pass to GetBooksForCategory method
   bookServiceStub.Setup(x => x.GetBooksForCategory(It.IsAny<string>()))
