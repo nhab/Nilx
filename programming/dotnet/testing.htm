@@ -211,6 +211,176 @@ public class MySetUpClass
 </pre></code>
 </div>
 <!------------------------------------------------------->
+
+<h2>NUnit Assertion</h2>
+<div>
+Classic:
+<pre><Code>
+Assert.AreEqual(28, _actualFuel); // Tests whether the specified values are equal. 
+Assert.AreNotEqual(28, _actualFuel); // Tests whether the specified values are unequal. Same as AreEqual for numeric values.
+Assert.AreSame(_expectedRocket, _actualRocket); // Tests whether the specified objects both refer to the same object
+Assert.AreNotSame(_expectedRocket, _actualRocket); // Tests whether the specified objects refer to different objects
+Assert.IsTrue(_isThereEnoughFuel); // Tests whether the specified condition is true
+Assert.IsFalse(_isThereEnoughFuel); // Tests whether the specified condition is false
+Assert.IsNull(_actualRocket); // Tests whether the specified object is null
+Assert.IsNotNull(_actualRocket); // Tests whether the specified object is non-null
+Assert.IsInstanceOf(_actualRocket, typeof(Falcon9Rocket)); // Tests whether the specified object is an instance of the expected type
+Assert.IsNotInstanceOf(_actualRocket, typeof(Falcon9Rocket)); // Tests whether the specified object is not an instance of type
+StringAssert.AreEqualIgnoringCase(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified strings are equal ignoring their casing
+StringAssert.Contains(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified string contains the specified substring
+StringAssert.DoesNotContain(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified string doesn't contain the specified substring
+StringAssert.StartsWith(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified string begins with the specified substring
+StringAssert.StartsWith(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified string begins with the specified substring
+StringAssert.IsMatch("(281)388-0388", @"(?d{3})?-? *d{3}-? *-?d{4}"); // Tests whether the specified string matches a regular expression
+StringAssert.DoesNotMatch("281)388-0388", @"(?d{3})?-? *d{3}-? *-?d{4}"); // Tests whether the specified string does not match a regular expression
+CollectionAssert.AreEqual(_expectedRockets, _actualRockets); // Tests whether the specified collections have the same elements in the same order and quantity.
+CollectionAssert.AreNotEqual(_expectedRockets, _actualRockets); // Tests whether the specified collections does not have the same elements or the elements are in a different order and quantity.
+CollectionAssert.AreEquivalent(_expectedRockets, _actualRockets); // Tests whether two collections contain the same elements.
+CollectionAssert.AreNotEquivalent(_expectedRockets, _actualRockets); // Tests whether two collections contain different elements.
+CollectionAssert.AllItemsAreInstancesOfType(_expectedRockets, _actualRockets); // Tests whether all elements in the specified collection are instances of the expected type
+CollectionAssert.AllItemsAreNotNull(_expectedRockets); // Tests whether all items in the specified collection are non-null
+CollectionAssert.AllItemsAreUnique(_expectedRockets); // Tests whether all items in the specified collection are unique
+CollectionAssert.Contains(_actualRockets, falcon9); // Tests whether the specified collection contains the specified element
+CollectionAssert.DoesNotContain(_actualRockets, falcon9); // Tests whether the specified collection does not contain the specified element
+CollectionAssert.IsSubsetOf(_expectedRockets, _actualRockets); // Tests whether one collection is a subset of another collection
+CollectionAssert.IsNotSubsetOf(_expectedRockets, _actualRockets); // Tests whether one collection is not a subset of another collection
+Assert.Throws<ArgumentNullException>(() => new Regex(null)); // Tests whether the code specified by delegate throws exact given exception of type T
+</pre></code>
+Constraint Model:
+<pre><code>
+Assert.That(28, Is.EqualTo(_actualFuel)); // Tests whether the specified values are equal. 
+Assert.That(28, Is.Not.EqualTo(_actualFuel)); // Tests whether the specified values are unequal. Same as AreEqual for numeric values.
+Assert.That(_expectedRocket, Is.SameAs(_actualRocket)); // Tests whether the specified objects both refer to the same object
+Assert.That(_expectedRocket, Is.Not.SameAs(_actualRocket)); // Tests whether the specified objects refer to different objects
+Assert.That(_isThereEnoughFuel, Is.True); // Tests whether the specified condition is true
+Assert.That(_isThereEnoughFuel, Is.False); // Tests whether the specified condition is false
+Assert.That(_actualRocket, Is.Null); // Tests whether the specified object is null
+Assert.That(_actualRocket, Is.Not.Null); // Tests whether the specified object is non-null
+Assert.That(_actualRocket, Is.InstanceOf<Falcon9Rocket>()); // Tests whether the specified object is an instance of the expected type
+Assert.That(_actualRocket, Is.Not.InstanceOf<Falcon9Rocket>()); // Tests whether the specified object is not an instance of type
+Assert.That(_actualFuel, Is.GreaterThan(20)); // Tests whether the specified object greater than the specified value
+Assert.That(28, Is.EqualTo(_actualFuel).Within(0.50));
+// Tests whether the specified values are nearly equal within the specified tolerance.
+Assert.That(28, Is.EqualTo(_actualFuel).Within(2).Percent);
+// Tests whether the specified values are nearly equal within the specified % tolerance.
+Assert.That(_actualRocketParts, Has.Exactly(10).Items);
+// Tests whether the specified collection has exactly the stated number of items in it.
+Assert.That(_actualRocketParts, Is.Unique);
+// Tests whether the items in the specified collections are unique.
+Assert.That(_actualRocketParts, Does.Contain(_expectedRocketPart));
+// Tests whether a given items is present in the specified list of items.
+Assert.That(_actualRocketParts, Has.Exactly(1).Matches<RocketPart>(part => part.Name == "Door" && part.Height == "200"));
+// Tests whether the specified collection has exactly the stated item in it.
+</code></pre>
+</div>
+<h2>Advanced attributes</h2>
+<div>
+<code><pre>
+//RepeatAttribute is used on a test method to specify that it should be executed multiple times. 
+//If any repetition fails, the remaining ones are not run and a failure is reported.
+
+[Test]
+[Repeat(10)]
+public void RocketFuelMeassuredCorrectly_When_Flying() { /* ... */ }
+
+
+// The CombinatorialAttribute is used on a test to specify that 
+// NUnit should generate test cases for all possible combinations of the individual data items
+// provided for the parameters of a test.
+[Test, Combinatorial]
+public void CorrectFuelMeassured_When_X_Site([Values(1,2,3)] int x, [Values("A","B")] string s)
+{
+ ...
+}
+//Generated tests:
+//CorrectFuelMeassured_When_X_Site(1, "A")
+//CorrectFuelMeassured_When_X_Site(1, "B")
+//CorrectFuelMeassured_When_X_Site(2, "A")
+
+//The PairwiseAttribute is used on a test to specify that NUnit should generate test cases 
+//in such a way that all possible pairs of values are used.
+[Test, Pairwise]
+public void ValidateLandingSiteOfRover_When_GoingToMars
+ ([Values("a", "b", "c")] string a, [Values("+", "-")] string b, [Values("x", "y")] string c)
+{
+ Debug.WriteLine("{0} {1} {2}", a, b, c);
+}
+
+//The RandomAttribute is used to specify a set of random values to be provided for an individual numeric parameter of a parameterized test method.
+[Test]
+public void GenerateRandomLandingSiteOnMoon([Values(1,2,3)] int x, [Random(-1.0, 1.0, 5)] double d)
+{
+ ...
+}
+
+//The RangeAttribute is used to specify a range of values to be provided for an individual parameter of a parameterized test method. NUnit creates test cases from all possible combinations of the provided on parameters - the combinatorial approach.
+
+[Test]
+public void CalculateJupiterBaseLandingPoint([Values(1,2,3)] int x, [Range(0.2,0.6)] double y)
+{
+ //...
+}
+//Generated tests:
+//CalculateJupiterBaseLandingPoint(1, 0.2)
+//CalculateJupiterBaseLandingPoint(1, 0.4)
+//CalculateJupiterBaseLandingPoint(1, 0.6)
+//...
+
+
+//RetryAttribute is used on a test method to specify that it should be rerun if it fails,
+//up to a maximum number of times.
+
+[Test]
+[Retry(3)]
+public void CalculateJupiterBaseLandingPoint([Values(1,2,3)] int x, [Range(0.2,0.6)] double y)
+{
+ //...
+}
+
+// The TimeoutAttribute is used to specify a timeout value in milliseconds for a test case. 
+//If the test case runs longer than the time specified it is immediately cancelled and reported as a failure, 
+//with a message indicating that the timeout was exceeded.
+
+[Test, Timeout(2000)]
+public void FireRocketToProximaCentauri()
+{
+ ...
+}
+
+</pre></code>
+</div>
+
+<h2>NUnit Examples</h2>
+<div>
+<pre><code>
+using NUnit.Framework;
+using Prime.Services;
+
+namespace Prime.UnitTests.Services
+{
+    [TestFixture]
+    public class PrimeService_IsPrimeShould
+    {
+        private PrimeService _primeService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _primeService = new PrimeService();
+        }
+
+        [Test]
+        public void IsPrime_InputIs1_ReturnFalse()
+        {
+            var result = _primeService.IsPrime(1);
+
+            Assert.IsFalse(result, "1 should not be prime");
+        }
+    }
+}
+</code></pre>
+</div>
+<!-------------------------------------------------------------------->
 <h2>Test Methods ( MSTest projects )</h2>
 <div><p>
 It's decorated with the [TestMethod] attribute.
@@ -692,141 +862,4 @@ public void AddTests(int x, int y, int expected)
 </code></pre>  
 </div>
 
-<h2>Assertion</h2>
-<div>
-Classic:
-<pre><Code>
-Assert.AreEqual(28, _actualFuel); // Tests whether the specified values are equal. 
-Assert.AreNotEqual(28, _actualFuel); // Tests whether the specified values are unequal. Same as AreEqual for numeric values.
-Assert.AreSame(_expectedRocket, _actualRocket); // Tests whether the specified objects both refer to the same object
-Assert.AreNotSame(_expectedRocket, _actualRocket); // Tests whether the specified objects refer to different objects
-Assert.IsTrue(_isThereEnoughFuel); // Tests whether the specified condition is true
-Assert.IsFalse(_isThereEnoughFuel); // Tests whether the specified condition is false
-Assert.IsNull(_actualRocket); // Tests whether the specified object is null
-Assert.IsNotNull(_actualRocket); // Tests whether the specified object is non-null
-Assert.IsInstanceOf(_actualRocket, typeof(Falcon9Rocket)); // Tests whether the specified object is an instance of the expected type
-Assert.IsNotInstanceOf(_actualRocket, typeof(Falcon9Rocket)); // Tests whether the specified object is not an instance of type
-StringAssert.AreEqualIgnoringCase(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified strings are equal ignoring their casing
-StringAssert.Contains(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified string contains the specified substring
-StringAssert.DoesNotContain(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified string doesn't contain the specified substring
-StringAssert.StartsWith(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified string begins with the specified substring
-StringAssert.StartsWith(_expectedBellatrixTitle, "Bellatrix"); // Tests whether the specified string begins with the specified substring
-StringAssert.IsMatch("(281)388-0388", @"(?d{3})?-? *d{3}-? *-?d{4}"); // Tests whether the specified string matches a regular expression
-StringAssert.DoesNotMatch("281)388-0388", @"(?d{3})?-? *d{3}-? *-?d{4}"); // Tests whether the specified string does not match a regular expression
-CollectionAssert.AreEqual(_expectedRockets, _actualRockets); // Tests whether the specified collections have the same elements in the same order and quantity.
-CollectionAssert.AreNotEqual(_expectedRockets, _actualRockets); // Tests whether the specified collections does not have the same elements or the elements are in a different order and quantity.
-CollectionAssert.AreEquivalent(_expectedRockets, _actualRockets); // Tests whether two collections contain the same elements.
-CollectionAssert.AreNotEquivalent(_expectedRockets, _actualRockets); // Tests whether two collections contain different elements.
-CollectionAssert.AllItemsAreInstancesOfType(_expectedRockets, _actualRockets); // Tests whether all elements in the specified collection are instances of the expected type
-CollectionAssert.AllItemsAreNotNull(_expectedRockets); // Tests whether all items in the specified collection are non-null
-CollectionAssert.AllItemsAreUnique(_expectedRockets); // Tests whether all items in the specified collection are unique
-CollectionAssert.Contains(_actualRockets, falcon9); // Tests whether the specified collection contains the specified element
-CollectionAssert.DoesNotContain(_actualRockets, falcon9); // Tests whether the specified collection does not contain the specified element
-CollectionAssert.IsSubsetOf(_expectedRockets, _actualRockets); // Tests whether one collection is a subset of another collection
-CollectionAssert.IsNotSubsetOf(_expectedRockets, _actualRockets); // Tests whether one collection is not a subset of another collection
-Assert.Throws<ArgumentNullException>(() => new Regex(null)); // Tests whether the code specified by delegate throws exact given exception of type T
-</pre></code>
-Constraint Model:
-<pre><code>
-Assert.That(28, Is.EqualTo(_actualFuel)); // Tests whether the specified values are equal. 
-Assert.That(28, Is.Not.EqualTo(_actualFuel)); // Tests whether the specified values are unequal. Same as AreEqual for numeric values.
-Assert.That(_expectedRocket, Is.SameAs(_actualRocket)); // Tests whether the specified objects both refer to the same object
-Assert.That(_expectedRocket, Is.Not.SameAs(_actualRocket)); // Tests whether the specified objects refer to different objects
-Assert.That(_isThereEnoughFuel, Is.True); // Tests whether the specified condition is true
-Assert.That(_isThereEnoughFuel, Is.False); // Tests whether the specified condition is false
-Assert.That(_actualRocket, Is.Null); // Tests whether the specified object is null
-Assert.That(_actualRocket, Is.Not.Null); // Tests whether the specified object is non-null
-Assert.That(_actualRocket, Is.InstanceOf<Falcon9Rocket>()); // Tests whether the specified object is an instance of the expected type
-Assert.That(_actualRocket, Is.Not.InstanceOf<Falcon9Rocket>()); // Tests whether the specified object is not an instance of type
-Assert.That(_actualFuel, Is.GreaterThan(20)); // Tests whether the specified object greater than the specified value
-Assert.That(28, Is.EqualTo(_actualFuel).Within(0.50));
-// Tests whether the specified values are nearly equal within the specified tolerance.
-Assert.That(28, Is.EqualTo(_actualFuel).Within(2).Percent);
-// Tests whether the specified values are nearly equal within the specified % tolerance.
-Assert.That(_actualRocketParts, Has.Exactly(10).Items);
-// Tests whether the specified collection has exactly the stated number of items in it.
-Assert.That(_actualRocketParts, Is.Unique);
-// Tests whether the items in the specified collections are unique.
-Assert.That(_actualRocketParts, Does.Contain(_expectedRocketPart));
-// Tests whether a given items is present in the specified list of items.
-Assert.That(_actualRocketParts, Has.Exactly(1).Matches<RocketPart>(part => part.Name == "Door" && part.Height == "200"));
-// Tests whether the specified collection has exactly the stated item in it.
-</code></pre>
-</div>
-<h2>Advanced attributes</h2>
-<div>
-<code><pre>
-//RepeatAttribute is used on a test method to specify that it should be executed multiple times. 
-//If any repetition fails, the remaining ones are not run and a failure is reported.
-
-[Test]
-[Repeat(10)]
-public void RocketFuelMeassuredCorrectly_When_Flying() { /* ... */ }
-
-
-// The CombinatorialAttribute is used on a test to specify that 
-// NUnit should generate test cases for all possible combinations of the individual data items
-// provided for the parameters of a test.
-[Test, Combinatorial]
-public void CorrectFuelMeassured_When_X_Site([Values(1,2,3)] int x, [Values("A","B")] string s)
-{
- ...
-}
-//Generated tests:
-//CorrectFuelMeassured_When_X_Site(1, "A")
-//CorrectFuelMeassured_When_X_Site(1, "B")
-//CorrectFuelMeassured_When_X_Site(2, "A")
-
-//The PairwiseAttribute is used on a test to specify that NUnit should generate test cases 
-//in such a way that all possible pairs of values are used.
-[Test, Pairwise]
-public void ValidateLandingSiteOfRover_When_GoingToMars
- ([Values("a", "b", "c")] string a, [Values("+", "-")] string b, [Values("x", "y")] string c)
-{
- Debug.WriteLine("{0} {1} {2}", a, b, c);
-}
-
-//The RandomAttribute is used to specify a set of random values to be provided for an individual numeric parameter of a parameterized test method.
-[Test]
-public void GenerateRandomLandingSiteOnMoon([Values(1,2,3)] int x, [Random(-1.0, 1.0, 5)] double d)
-{
- ...
-}
-
-//The RangeAttribute is used to specify a range of values to be provided for an individual parameter of a parameterized test method. NUnit creates test cases from all possible combinations of the provided on parameters - the combinatorial approach.
-
-[Test]
-public void CalculateJupiterBaseLandingPoint([Values(1,2,3)] int x, [Range(0.2,0.6)] double y)
-{
- //...
-}
-//Generated tests:
-//CalculateJupiterBaseLandingPoint(1, 0.2)
-//CalculateJupiterBaseLandingPoint(1, 0.4)
-//CalculateJupiterBaseLandingPoint(1, 0.6)
-//...
-
-
-//RetryAttribute is used on a test method to specify that it should be rerun if it fails,
-//up to a maximum number of times.
-
-[Test]
-[Retry(3)]
-public void CalculateJupiterBaseLandingPoint([Values(1,2,3)] int x, [Range(0.2,0.6)] double y)
-{
- //...
-}
-
-// The TimeoutAttribute is used to specify a timeout value in milliseconds for a test case. 
-//If the test case runs longer than the time specified it is immediately cancelled and reported as a failure, 
-//with a message indicating that the timeout was exceeded.
-
-[Test, Timeout(2000)]
-public void FireRocketToProximaCentauri()
-{
- ...
-}
-
-</pre></code>
-</div>
 </body>
