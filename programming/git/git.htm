@@ -73,28 +73,34 @@
  
 <b>Clone</b>makes a copy of the target repository or clone it as local copy 
  
-<b>Fetch</b>just "downloads" the changes from the remote to your local repository without merging it to the current local branch(git pull does)
+<b>Fetch</b>just "downloads" the changes from the remote to your local repository 
+ without merging it to the current local branch(git pull does)
  
 <b>Merge</b> combine another branch into current branch .
  
 <b>Pull</b> is used to receive data from  remote server to your working directory. 
  
-<b>Pull Request</b> announces all the team members that they need to review the code and merge it into the master branch.
+<b>Pull Request</b> announces all the team members that they need to review the code 
+ and merge it into the master branch.
  
 <b>Push</b>is an act of transfer (overwrite)commits from your local repository to a remote repository.
  
-<b>Rebase</b>is moving or combining a sequence of commits to a new base commit(base,the first commit after getting the branch for the first time).
+ <b>Rebase</b>is moving or <b>combining a sequence of commits</b> to a new base commit
  
 From a content perception, rebasing is a technique of changing the base of your branch from one commit to another
  
-<b>Stashing</b>if you don't want to make a commit of half-done work,The git stash command saves your work in stash are and enables you to switch branch without committing the current branch.
+<b>Stashing</b>if you don't want to make a commit of half-done work,
+ The git stash command saves your work in stash are and enables you to switch branch without committing the current branch.
  
-<b>Tag</b>is used to mark a commit stage as important. We can tag a commit for future reference. Primarily, it is used to mark a projects initial point like v1.1. There are two types of tags.
+<b>Tag</b>is used to mark a commit stage as important.
+ We can tag a commit for future reference.
+ Primarily, it is used to mark a projects initial point like v1.1. There are two types of tags.
 1.Light-weighted tag 2.Annotated tag
  
 <b>Upstream And Downstream</b>
 The term upstream and downstream is a reference of the repository. 
-Generally, upstream is where you cloned the repository from (the origin) and downstream is any project that integrates your work with other works. 
+Generally, upstream is where you cloned the repository from (the origin) 
+ and downstream is any project that integrates your work with other works. 
 However, these terms are not restricted to Git repositories.
  
 <b>Revert</b>It is an undo type command,bu not completely. is used to revert some commit.  
@@ -102,13 +108,18 @@ However, these terms are not restricted to Git repositories.
 <b>Reset</b>stands for undoing changes. The git reset command is used to reset the changes. 
 The git reset command has three core forms of invocation. These forms are as follows: 1.Soft 2.Hard 3.Mixed
  
-<b>Ignore</b>used to specify intentionally untracked files that Git should ignore. It doesn't affect the Files that already tracked by Git.
+<b>Ignore</b>used to specify intentionally untracked files that Git should ignore. 
+ It doesn't affect the Files that already tracked by Git.
 
 <b>Diff</b> It is used to show changes between commits, commit, and working tree, etc.
 
-<b>Flow</b> is a branching model for Git, developed by Vincent Driessen. It is very well organized to collaborate and scale the development team. Git flow is a collection of Git commands. It accomplishes many repository operations with just single commands.
+<b>Flow</b> is a branching model for Git, developed by Vincent Driessen.
+ It is very well organized to collaborate and scale the development team. 
+ Git flow is a collection of Git commands. It accomplishes many repository operations with just single commands.
 
-<b>Squash</b>is used to squash previous commits into one. Git squash is an excellent technique to group-specific changes before forwarding them to others. You can merge several commits into a single commit with the powerful interactive rebase command.
+<b>Squash</b>is used to squash previous commits into one.
+ Git squash is an excellent technique to group-specific changes before forwarding them to others.
+ You can merge several commits into a single commit with the powerful interactive rebase command.
 
 <b>Rm</b>stands for remove. It is used to remove individual files or a collection of files. 
 The key function of git rm is to remove tracked files from the Git index. 
@@ -203,7 +214,7 @@ Additionally, it can be used to remove files from both the working directory and
  $ git show HEAD:file.js # Shows the version of file.js stored in the last commit
 
 # Merging Commits into a single commit:
- $ git rebase -i HEAD~n   # For example, if you want to merge the last 3 commits, use `HEAD~3`.
+ $ git rebase -i HEAD~n   # For example, if you want to merge the last n commits, use `HEAD~3`.
 
 # Viewing the history
  $ git log                                     # Full history (all commits) 
