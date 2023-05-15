@@ -135,7 +135,7 @@ classDiagram
     ProductRegistry ..> RegistryOperation
     RegistryOperation ..> RegistryItem
     ProductManagerService ..> CommonApiService
-    ProductManagerService --o RepoVersion
+    ProductManagerService -----o RepoVersion
     class RepoVersion{
         <<DTO>>
         +string Module
