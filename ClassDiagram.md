@@ -131,7 +131,7 @@ classDiagram
     ProductManagerService --o CoreCollection
     ProductManagerService --o ParameterToolCollection
     ProductManagerService --o OpeningsTransferCollection
-    ProductCollection ...> ProductRegistry
+    ProductCollection ..> ProductRegistry
     ProductRegistry ..> RegistryOperation
     RegistryOperation ..> RegistryItem
     ProductManagerService ..> CommonApiService
