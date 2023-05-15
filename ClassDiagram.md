@@ -1,4 +1,6 @@
 ```mermaid
+classDiagram
+
     %% MAIN SERVICES
     class CommonApiService{
         <<Service>>
