@@ -413,7 +413,9 @@ json1+=`,{ "title":"Temp Desktop"
             ,{"caption":"Delivery manager vs project manager","href":"http://itsadeliverything.com/delivery-manager-a-new-role-for-an-agile-world"}
             ,{"caption":"Free Cloud Hosting Services & Tools","href":"https://iwantmyname.com/services/developer/"}
             ,{"caption":"Canadian Statup visa","href":"https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa/designated-organizations.html"}
+            ,{"caption":"Writing custom Apps for cofluence and jira","href":"https://developer.atlassian.com/platform/forge/build-a-custom-ui-app-in-confluence/"}
             ,{"caption":"freelancing site 4 all nations","href":"https://insolvo.com/"}
+            
         ]
     }`;
     
