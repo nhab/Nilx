@@ -12,6 +12,7 @@
 <div>
  <p>
  https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-7.0
+ https://www.tutorialspoint.com/wpf/index.htm
  https://riptutorial.com/wpf/awesome-learning/tutorial
  https://riptutorial.com/wpf/awesome-learning/course
  https://github.com/Carlos487/awesome-wpf
@@ -23,6 +24,68 @@
  </div>
  
  <h2>Tutorial</h2>
+ <p>
+ <b>Dependency properties</b>
+  is a property:
+
+	- whose value depends on the external sources, such as 
+	 animation, data binding, styles, or visual tree inheritance
+
+	- also has the built-in feature of providing notification when
+     the property has changed, data binding and styling.
+
+	- when you set a value of a Dependency Property it is not stored in a field of your object,
+	 but in a dictionary of keys and values provided by the base class DependencyObject. 
+
+ <b>Advantages of a Dependency Property</b>
+
+	- Less memory consumption
+		The Dependency Property stores the property only when it is altered or modified.
+		Hence a huge amount of memory for fields are free.
+
+	- Property value inheritance
+		It means that if no value is set for the property 
+		then it will return to the inheritance tree up to where it gets the value.
+	
+	- Change notification and Data Bindings
+		Whenever a property changes its value 
+		it provides notification in the Dependency Property 
+		using INotifyPropertyChange and also helps in data binding.
+	
+	- Participation in animation, styles and templates
+		A Dependency Property can animate, set styles using style setters
+		 and even provide templates for the control.
+	
+	- CallBacks
+		Whenever a property is changed you can have a callback invoked.
+
+	- Resources
+		You can define a Resource for the definition of a Dependency Property in XAML.
+
+	- Overriding Metadata
+		You can define certain behaviours of a Dependency Property using PropertyMetaData.
+		Thus, overriding a metadata from a derived property 
+		will not require you to redefine or re-implement the entire property definition.
+ <b>Eample</b>
+ </p>
+ <pre><code>
+ <Window x:Class="WpfApplication1.DependencyPropertyDemo" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:WpfApplication1" Title="DependencyPropertyDemo" Height="350" Width="525">  
+    <Window.Resources>  
+        <ResourceDictionary>  
+            <local:CarDependencyProperty x:Key="CarDependency"></local:CarDependencyProperty>  
+        </ResourceDictionary>  
+    </Window.Resources>  
+    <Grid>  
+        <Grid.RowDefinitions>  
+            <RowDefinition />  
+            <RowDefinition />  
+        </Grid.RowDefinitions>  
+        <Label Content="Enter Car:" Grid.Row="0" VerticalAlignment="Center" />  
+        <TextBox Text="{Binding Path=MyCar, Source={StaticResource CarDependency }}" Name="MyTextCar" Height="25" Width="150" />  
+        <Button Name="MyButton" Content="Click Me!" Height="25" Click="MyButton_Click" Width="150" Grid.Row="1" />  
+    </Grid>  
+</Window> 
+ </code></pre>
  <p>
  
  </p>
