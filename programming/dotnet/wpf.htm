@@ -24,7 +24,7 @@
  </div>
  
  <h2>Tutorial</h2>
-<div>
+ <div>
  <p>
  <b>Dependency properties</b>
   is a property:
@@ -67,7 +67,7 @@
 		You can define certain behaviours of a Dependency Property using PropertyMetaData.
 		Thus, overriding a metadata from a derived property 
 		will not require you to redefine or re-implement the entire property definition.
- <b>Eample</b>
+ <b>Example</b>
  </p>
  <pre><code>
  <Window x:Class="WpfApplication1.DependencyPropertyDemo" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:WpfApplication1" Title="DependencyPropertyDemo" Height="350" Width="525">  
@@ -85,7 +85,37 @@
         <TextBox Text="{Binding Path=MyCar, Source={StaticResource CarDependency }}" Name="MyTextCar" Height="25" Width="150" />  
         <Button Name="MyButton" Content="Click Me!" Height="25" Click="MyButton_Click" Width="150" Grid.Row="1" />  
     </Grid>  
-</Window> 
+</Window>
+
+Code behind:
+
+namespace WpfApplication1 {  
+    /// <summary>  
+    /// Interaction logic for DependencyPropertyDemo.xaml  
+    /// </summary>  
+    public partial class DependencyPropertyDemo: Window {  
+        public DependencyPropertyDemo() {  
+            InitializeComponent();  
+        }  
+        private void MyButton_Click(object sender, RoutedEventArgs e) {  
+            CarDependencyProperty dpSample = TryFindResource("CarDependency") as CarDependencyProperty;  
+            MessageBox.Show(dpSample.MyCar);  
+        }  
+    }  
+    public class CarDependencyProperty: DependencyObject {  
+        //Register Dependency Property  
+        public static readonly DependencyProperty CarDependency = DependencyProperty.Register("MyProperty", typeof(string), typeof(CarDependencyProperty));  
+        public string MyCar {  
+            get {  
+                return (string) GetValue(CarDependency);  
+            }  
+            set {  
+                SetValue(CarDependency, value);  
+            }  
+        }  
+    }  
+}  
+ 
  </code></pre>
  <p>
  
