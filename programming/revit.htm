@@ -23,148 +23,168 @@
  <h2>Revit Fundemental concepts</h2>
  <div>
  <p>
- <b> Revit</b>
-Revit is a design and documentation platform 
-that supports the design, drawings, and schedules 
- required for <b> building information modeling (BIM)</b>. 
- 
- BIM delivers information about project design, scope, quantities, and phases when you need it.
+ <b>Revit</b>
+	Revit is a design and documentation platform 
+	that supports the design, drawings, and schedules 
+	required for <b> building information modeling (BIM)</b>. 
 
-<b>Parametric Modeling Relationships</b>
-Parametric modeling refers to the relationships among all elements in a project 
-that enable the coordination and change management that Revit provides. 
+	BIM delivers information about project design, scope, quantities, and phases when you need it.
 
-These relationships are created either automatically by the software or by you as you work.
-
-<b>Element Behavior in Revit</b>
-Revit uses 3 types of elements in projects: 
-  model elements:
-, datum elements
-, and view-specific elements. 
+<b>Types of Elements</b>
+	1- model elements
+	2- datum elements
+	3- view-specific elements. 
 
 <b>Model elements</b>
-Elements in Revit are also referred to as families. 
-The family contains the geometric definition of the element 
-and the parameters used by the element. 
+	- Elements in Revit are also referred to as families. 
+	- The family contains the geometric definition of the element 
+	   and the parameters used by the element. 
 
-Each instance of an element is defined and controlled by the family.
-Model elements represent the actual 3D geometry of the building. They display in relevant views of the model.
+	- Each instance of an element is defined and controlled by the family.
+	- Model elements represent the actual 3D geometry of the building. 
+	 They display in relevant views of the model.
 
 Examples:
-	- Hosts like                           : Walls, Ceilings, Floor and roofs
-	- Model components like   : doors,Windows,Stairs,Furniture
-	- Structured elements like: Beams,Structural columns,Structural walls, Isolated footings,3D rebar
-	- MEP Elements like            : Pipes , Ducts,Sprinklers,Air terminals
+	- Hosts elements, like     : Walls, Ceilings, Floor and roofs
+	- Model components, like   : doors,Windows,Stairs,Furniture
+	- Structured elements like : Beams,Structural columns,Structural walls, Isolated footings,3D rebar
+	- MEP Elements like        : Pipes , Ducts,Sprinklers,Air terminals
 	- other: slabs, and ramps,Sinks, boilers, ducts, sprinklers, and electrical panels
 
-There are 2 types of model elements:
-	- Hosts (or host elements) are generally built in place at the construction site.
-	Example : Walls and ceilings,Structural walls and roofs
-	- Model components are all the other types of elements in the building model.
+Types of model elements:
+	1- Hosts (or host elements) are generally built in place at the construction site.
+		Example : Walls and ceilings,Structural walls and roofs
+	2- Model components are all the other types of elements in the building model.
+
 <b>Datum elements</b>
- help to define project context. 
- examples:
- grids, levels, and reference planes are datum elements.
+	 help to define project context. 
+	 examples:
+	 grids, levels, and reference planes are datum elements.
 
 <b>View-specific elements</b>
- display only in the views in which they are placed. 
- They help to describe or document the model. 
- example:
- dimensions 
-There are 2 types of view-specific elements:
+	 display only in the views in which they are placed. 
+	 They help to describe or document the model. 
+	 example:
+	 dimensions 
 
-Annotation elements are 2D components that document the model and maintain scale on paper. 
-For example, dimensions, tags, and keynotes are annotation elements.
-Details are 2D items that provide details about the building model in a particular view.
- Examples include detail lines, filled regions, and 2D detail components.
+Types of view-specific elements:
+	 <b>Annotation elements</b> are 2D components that document the model and maintain scale on paper. 
+		For example, dimensions, tags, and keynotes are annotation elements.
+	 <b>Details</b> are 2D items that provide details about the building model in a particular view.
+ 		Examples include detail lines, filled regions, and 2D detail components.
+
 <b>Element Properties</b>
-Each element you place in a drawing is an instance of a family type. 
-Elements have 2 sets of properties that control their appearance and behavior: 
-type properties 
-and instance properties.
+	Each element you place in a drawing is an instance of a family type. 
+	Elements have 2 sets of properties that control their appearance and behavior: 
+	type properties 
+	and instance properties.
 
 <b>Type Properties</b>
-The same set of type properties is common to all elements in a family,
- and each property has the same value for all instances of a particular family type.
+	The same set of type properties is common to all elements in a family,
+	 and each property has the same value for all instances of a particular family type.
 
-For example, all elements that belong to the Desk family have a Width property, 
-but its value varies according to family type.
- Thus every instance of the 60 x 30-inch family type (1525 x 762 mm) within the Desk family has a Width value of 60 inches (1525 mm), 
- while every instance of the 72 x 36-inch family type (1830 x 915 mm) has a Width value of 72 inches (1830 mm).
+	For example, all elements that belong to the Desk family have a Width property, 
+	but its value varies according to family type.
+	 Thus every instance of the 60 x 30-inch family type (1525 x 762 mm) within the Desk family has a Width value of 60 inches (1525 mm), 
+	 while every instance of the 72 x 36-inch family type (1830 x 915 mm) has a Width value of 72 inches (1830 mm).
 
-Changing the value of a type property affects all current and future instances of that family type.
+	Changing the value of a type property affects all current and future instances of that family type.
 
 <b>Instance Properties</b>
-A common set of instance properties also applies to all elements that belong to a particular family type,
- but the values of these properties may vary according to the location of an element in a building or project.
+	A common set of instance properties also applies to all elements that belong to a particular family type,
+	 but the values of these properties may vary according to the location of an element in a building or project.
 
-For example, the dimensions of a window are type properties, while its elevation from the level is an instance property. 
-Similarly, cross-sectional dimensions of a beam are type properties, while beam length is an instance property.
+	For example, the dimensions of a window are type properties, while its elevation from the level is an instance property. 
+	Similarly, cross-sectional dimensions of a beam are type properties, while beam length is an instance property.
 
-Changing the value of an instance property affects only the elements in your selection set, 
-or the element that you are about to place. 
-For example, if you select a beam, and change one of its instance property values on the Properties palette,
- only that beam is affected. If you select a tool for placing beams,
- and change one of its instance property values, 
- the new value applies to all beams you place with that tool.
+	Changing the value of an instance property affects only the elements in your selection set, 
+	or the element that you are about to place. 
+	For example, if you select a beam, and change one of its instance property values on the Properties palette,
+	 only that beam is affected. If you select a tool for placing beams,
+	 and change one of its instance property values, 
+	 the new value applies to all beams you place with that tool.
  
 <b> Project:</b>
- In Revit, the project is the single database of information for your design—the building
-information model. The project file contains all information for the building design, from geometry to
-construction data. This information includes components used to design the model, views of the
-project, and drawings of the design. By using a single project file, Revit makes it easy for you to alter
-the design and have changes reflected in all associated areas (plan views, elevation views, section
-views, schedules, and so forth). Having only one file to track also makes it easier to manage the
-project.
+	 In Revit, the project is the single database of information for your design—the building
+	information model. The project file contains all information for the building design, from geometry to
+	construction data. This information includes components used to design the model, views of the
+	project, and drawings of the design. By using a single project file, Revit makes it easy for you to alter
+	the design and have changes reflected in all associated areas (plan views, elevation views, section
+	views, schedules, and so forth). Having only one file to track also makes it easier to manage the
+	project.
 
 <b>Level:</b>
- Levels are infinite horizontal planes that act as a reference for level-hosted elements, such as
-roofs, floors, and ceilings. Most often, you use levels to define a vertical height or story within a
-building. You create a level for each known story or other needed reference of the building; for
-example, first floor, top of wall, or bottom of foundation. To place levels, you must be in a section or
-elevation view.
+	 Levels are infinite horizontal planes that act as a reference for level-hosted elements, such as
+	roofs, floors, and ceilings. Most often, you use levels to define a vertical height or story within a
+	building. You create a level for each known story or other needed reference of the building; for
+	example, first floor, top of wall, or bottom of foundation. To place levels, you must be in a section or
+	elevation view.
 
 <b>Element: </b>
-When creating a project, you add Revit parametric building elements to the design. Revit
-classifies elements by categories, families, and types.
+	When creating a project, you add Revit parametric building elements to the design. Revit
+	classifies elements by categories, families, and types.
 
 <b>Category:</b>
- A category is a group of elements that you use to model or document a building design.
-For example, categories of model elements include walls and beams. Categories of annotation
-elements include tags and text notes.
+	 A category is a group of elements that you use to model or document a building design.
+	For example, categories of model elements include walls and beams. Categories of annotation
+	elements include tags and text notes.
 
 <b>Family:</b>
- Families are classes of elements in a category. A family groups elements with a common set
-of parameters (properties), identical use, and similar graphical representation. Different elements in a
-family may have different values for some or all properties, but the set of properties—their names and
-meaning -- is the same. For example, 6-panel colonial doors could be considered one family,
-although the doors that compose the family come in different sizes and materials.
+	 Families are classes of elements in a category. A family groups elements with a common set
+	of parameters (properties), identical use, and similar graphical representation. Different elements in a
+	family may have different values for some or all properties, but the set of properties—their names and
+	meaning -- is the same. For example, 6-panel colonial doors could be considered one family,
+	although the doors that compose the family come in different sizes and materials.
 
 <b>families Types</b>:
- Loadable families 
-	can be loaded into a project and created from family templates. 
-	You can determine the set of properties and the graphical representation of the family.
- System families 
-	include walls, dimensions, ceilings, roofs, floors, and levels. 
-	They are not available for loading or creating as separate files.
-	 Revit predefines the set of properties and the graphical representation of system families.
-	 You can use the predefined types to generate new types that belong to this family within the project.
-		For example, the behavior of a wall is predefined in the system. However,
-		you can create different types of walls with different compositions.
-	 System families can be transferred between projects.
- In-place families are custom families that you create in the context of a project.
-   Create an in-place family when your project needs unique geometry 
-   that you do not expect to reuse or geometry that must maintain one of more relationships to other project geometry.
-	 Because in-place families are intended for limited use in a project, each in-place family contains only a single type. \
-	You can create multiple in-place families in your projects, and you can place copies of the same in-place family element in your projects. 
-	Unlike system and standard component families, you cannot duplicate in-place family types to create multiple types.
+	 Loadable families 
+		can be loaded into a project and created from family templates. 
+		You can determine the set of properties and the graphical representation of the family.
+	 System families 
+		include walls, dimensions, ceilings, roofs, floors, and levels. 
+		They are not available for loading or creating as separate files.
+		 Revit predefines the set of properties and the graphical representation of system families.
+		 You can use the predefined types to generate new types that belong to this family within the project.
+			For example, the behavior of a wall is predefined in the system. However,
+			you can create different types of walls with different compositions.
+		 System families can be transferred between projects.
+	 In-place families are custom families that you create in the context of a project.
+	   Create an in-place family when your project needs unique geometry 
+	   that you do not expect to reuse or geometry that must maintain one of more relationships to other project geometry.
+		 Because in-place families are intended for limited use in a project, each in-place family contains only a single type. \
+		You can create multiple in-place families in your projects, and you can place copies of the same in-place family element in your projects. 
+		Unlike system and standard component families, you cannot duplicate in-place family types to create multiple types.
 
-Type: Each family can have several types.
- A type can be a specific size of a family, such as a 30‖ X42‖ title block or a 32" x 84" door. 
- A type can also be a style, such as default aligned or default angular style for dimensions.
+	Type: Each family can have several types.
+	 A type can be a specific size of a family, such as a 30‖ X42‖ title block or a 32" x 84" door. 
+	 A type can also be a style, such as default aligned or default angular style for dimensions.
 
-Instance: Instances are the actual items (individual elements) that are placed in the project and have
-specific locations in the building (model instances) or on a drawing sheet (annotation instances).
+	Instance: Instances are the actual items (individual elements) that are placed in the project and have
+	specific locations in the building (model instances) or on a drawing sheet (annotation instances).
+<b>Elavations</b>
+	- elevations are views that show the vertical faces of a building or object. 
+	- They are typically used to show the exterior faces of a building,
+	 but can also be used to show the interior faces of a room or space. 
+	
+Elevation levels: 
+	 are used to define the height of a building or object above a reference point.
+	 They can be edited in the Properties palette or directly in the level tag
+
+Elevation base: 
+	 is the datum that Revit uses to display the elevation of a level. 
+	 It can be set to either the project base point or the survey point
+
+Display of levels: 
+	 The display of levels in Revit is controlled in a similar way to grids. 
+	 Use 2D and 3D extents to adjust how datums are displayed in the views of your Revit project
+
+Interior elevations:
+	 Interior elevations are views that show the vertical faces of a room or space. 
+	 They are typically used to show details such as finishes, cabinetry, and fixtures
+
+Drafting standards:
+	 Drafting standards for interior elevations vary depending on the firm and the project. 
+	 They are typically drawn to scale, with the limits of the ceiling, floor, and adjacent walls shown with a dark outline
 
 <b>Revit menu(Ribbons)</b>
 Revit consist of these ribons:
