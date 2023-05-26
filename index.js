@@ -331,7 +331,7 @@ json1+=`,{"title":"General"
             {"caption":"Immigration","href":"Topics/immi/immi.htm"}
             ,{"caption":"German","href":"languages/german/german.htm"}
             ,{"caption":"Linux","href":"Topics/linux.htm"}
-            ,{"caption":"Windows","href":"Topics/windowsuser.htm"}
+            ,{"caption":"Windows & Registry","href":"Topics/windowsuser.htm"}
             ,{"caption":"Bash script","href":"Topics/bash.htm"}
             ,{"caption":"Biochemistry","href":"Topics/biochemistry.htm"}
             ,{"caption":"network","href":"Topics/network.htm"}
