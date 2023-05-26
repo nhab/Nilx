@@ -10,7 +10,7 @@
     <button onclick='toggleAll(this);'>-</button>
 <div>
 <p>
- Add <b>Hibernte</b> to shutdown button :
+- Add <b>Hibernte</b> to shutdown button :
  
   1- On the taskbar, type control panel, and select it.
   2- Select <b>System and Security</b>.
@@ -20,10 +20,16 @@
   6-Select Save changes.
 
  
- Temporarily <b>swith off windows security</b> :
+- Temporarily <b>swith off windows security</b> :
  
   Start > "Windows Security" > under Virus & threat protection settings > select Manage settings > Switch Real-time protection to Off.
  
+- To make horizontal space to desktop icons,Change <b>IconSpacing</b> in the registry:
+    Computer\HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
+    
+   - The default value is –1125 for both entries, while the range can be between –480(less space) to –2730(maximum space).
+    -  For vertical spacing, Change <b>VerticalSpacing</b>s entry.
+- To resize Destop icons, use Ctrl+Shift+1 to 4
 </p>
 </div>
 </body>
