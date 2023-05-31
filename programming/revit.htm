@@ -447,19 +447,75 @@ or
     }
 </code></pre>
 
-	<b>reading revit documnet object passed to xaml window, using FilteredElementCollector</b>
-	<pre><code>
-	data = new ObservableCollection<ElementsInDataGrid>();
-	ICollection<Element> walls = new FilteredElementCollector(Doc, Doc.ActiveView.Id)
-	.OfCategory(BuiltInCategory.OST_Walls).ToElements();
+<b>Reading revit documnet object passed to wpf, using FilteredElementCollector</b>
+	
+<pre><code>
+data = new ObservableCollection<ElementsInDataGrid>();
+ICollection<Element> walls = new FilteredElementCollector(Doc, Doc.ActiveView.Id)
+.OfCategory(BuiltInCategory.OST_Walls).ToElements();
 
-	foreach (Element wall in walls)
-	{
-	    string id = wall.Id.ToString();
-	    data.Add(new ElementsInDataGrid("Wall", id));
-	}
-        ElementsDataGrid.ItemsSource = data;
-	</code></pre>
+foreach (Element wall in walls)
+{
+    string id = wall.Id.ToString();
+    data.Add(new ElementsInDataGrid("Wall", id));
+}
+ElementsDataGrid.ItemsSource = data;
+</code></pre>
+<b>Editing revit document  from wpf</b>
+It is only possible trough ExternalEventHandler class 
+(or writing code directly inside the execute method of the command object)
+<pre><code>
+public class ExternalEventDeleteHandler: IExternalEventHandler
+    {
+        private Document _doc1;
+        public ElementId _elementId { get; set; }
+        public MyWindow theWindow;
+      
+        public void Execute(UIApplication uiapp)
+        {
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+            if (null == uidoc ||_elementId==null) return; // no document, nothing to do
+
+            Document doc = uidoc.Document;
+            using (Transaction tx = new Transaction(doc))
+            {
+                tx.Start("MyEvent");
+                uiapp.ActiveUIDocument.Document.Delete(_elementId);
+                tx.Commit();
+            }
+            uidoc.UpdateAllOpenViews();
+
+            theWindow.RefreshDataGridData();
+        }
+        public string GetName()
+        {
+            return "delete event Handler";
+        }
+      
+    }
+</code></pre>
+In yor xaml code behind:
+<pre><code>
+ private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button button = sender as Button;
+                string IdString = button.Tag.ToString();
+
+                int id = int.Parse(IdString);
+                ElementId elementId = new ElementId(id);
+                _externalEventHandlerDelete._elementId = elementId;
+                _externalEventHandlerDelete.theWindow = this;
+                 _DeleteExternalevent.Raise();
+                RefreshDataGridData();
+            } catch (Exception ex)
+            {
+                TaskDialog.Show("Revit", ex.Message);
+            }
+
+        }
+</code></pre>
 </div>
 
 	
