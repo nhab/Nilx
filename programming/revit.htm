@@ -346,14 +346,16 @@ The Customize menu is displayed by clicking the Customize button.
 	Browse → “C:\Program Files\Autodesk\Revit 2019 “ → Add “RevitAPI” & “RevitAPIUI” → Select “RevitAPI“ & “RevitAPIUI“ → Properties → Copy Local → False
 	
 3- Add Namespaces
+	<pre><code>
 	using Autodesk.Revit.Attributes;
 	using Autodesk.Revit.DB;
 	using Autodesk.Revit.UI;
-	
+	</code></pre>
 4- Implement IExternalCommand
-	public class Class1:IExternalCommand 
+	<pre><code>	public class Class1:IExternalCommand</code></pre> 
 
 5-	Execute Method
+	<pre><code>
 	public class class1:IExternalCommand 
 	{
 		public Result Execute(...)
@@ -362,7 +364,7 @@ The Customize menu is displayed by clicking the Customize button.
 			return Result.Succeed;
 		}
 	}
-	
+	</code></pre>
 6-Build → Build Solution
 
 7- Create “.Addin” file
@@ -385,12 +387,17 @@ The Customize menu is displayed by clicking the Customize button.
 		  C:\Users\junha\source\repos\MyFirstRevitPlugin\MyFirstRevitPlugin\bin\Debug\MyFirstRevitPlugin.dll
 		</Assembly>
 		<AddInId>502fe383-2648-4e98-adf8-5e6047f9dc34</AddInId>
-		<VendorId>AECTechy</VendorId>
-		<VendorDescription>AECTechy</VendorDescription>
+		<VendorId>someVendor</VendorId>
+		<VendorDescription>some vendor</VendorDescription>
 	  </AddIn>
 	</RevitAddIns>
-	</code></pre>
+	</pre></code>
 <p>
+	you can also copy and edit manifest file (.addin) from :
+<a href="https://help.autodesk.com/view/RVT/2023/ENU/?guid=Revit_API_Revit_API_Developers_Guide_Appendices_Hello_World_for_VB_NET_Create_a_addin_manifest_file_html">link1</a>
+or
+	<a href="https://thebuildingcoder.typepad.com/blog/2010/04/addin-manifest-and-guidize.html">link2</a>
+	
 	Replace the <Assembly> portion with your directory output from Step 9
 	Set “Copy to Output Directory” property of the .Addin file to “Copy if newer”.
 
@@ -406,9 +413,10 @@ The Customize menu is displayed by clicking the Customize button.
 11-Run your first addin!
 	Run Revit 2019 → Load the Addin → Add-ins tab→ External tools → Run “Hello World!”
 </p>
+	
 <h3>Working with wpf forms</h3>
 <div>
-	<p>
+<p>
 <b>To add wpf form to your project</b>
 	-add this to your .csproj file to be abll to add wpf form to your project
 </p>
@@ -418,11 +426,41 @@ The Customize menu is displayed by clicking the Customize button.
 <p>
 <b>Adding Content to the wpf form window</b>
 	-Add System.Xaml refrence to the project to be able add Content to the wpf form window
-<b>Adding manifest file (.addin)</b>
-	-copy and edit manifest file (.addin) from :
-<a href="https://help.autodesk.com/view/RVT/2023/ENU/?guid=Revit_API_Revit_API_Developers_Guide_Appendices_Hello_World_for_VB_NET_Create_a_addin_manifest_file_html">link1</a>
-or
-	<a href="https://thebuildingcoder.typepad.com/blog/2010/04/addin-manifest-and-guidize.html">link2</a>
-	</p>
+
+</p>
+<b>Adding a Command to call the xaml window</b>
+<pre><code>
+ [Transaction(TransactionMode.Manual)]
+    public class MyCommand : IExternalCommand
+    {
+        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
+        {
+         
+            UIApplication uiApp = commandData.Application;
+            Document doc = uiApp.ActiveUIDocument.Document;
+            MyWindow win2 = new MyWindow(doc);
+            win2.Show();
+           
+            return Result.Succeeded;
+        }
+
+    }
+</code></pre>
+
+	<b>reading revit documnet object passed to xaml window, using FilteredElementCollector</b>
+	<pre><code>
+	data = new ObservableCollection<ElementsInDataGrid>();
+	ICollection<Element> walls = new FilteredElementCollector(Doc, Doc.ActiveView.Id)
+	.OfCategory(BuiltInCategory.OST_Walls).ToElements();
+
+	foreach (Element wall in walls)
+	{
+	    string id = wall.Id.ToString();
+	    data.Add(new ElementsInDataGrid("Wall", id));
+	}
+        ElementsDataGrid.ItemsSource = data;
+	</code></pre>
 </div>
+
+	
 </div>
