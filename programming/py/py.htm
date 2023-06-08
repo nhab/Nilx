@@ -15,33 +15,33 @@
 <h2>Syntax</h2>
 <div>
 <pre><code>
-# Comments -----------------------------------------------------------
-  
+# --- Comments ----
   #single line comment beging with: #
 
-""" Triple double quote is used for Multiline strings
+  """ Triple double quote is used for Multiline strings
     and are often used as documentation.
-"""
+  """
 
-#  Indentation -------------------------------------------------------
+# --- Indentation ---
 
-# Indentation is important 
-# use 4 spaces to indent, not tabs.
-# ; ------------------------------------------------------------------
-Semicolons are used to separate numerous statements on a single line
-# print function : ----------------------------------------------------------
-print("I'm Python. Nice to meet you!")  #  I'm Python. Nice to meet you!
-print("Hello, World", end="!")  #  Hello, World! # ( a newline is default )
-# Input function: ----------------------------------------------------------
-input_string_var = input("Enter some data: ") #  gets input data from console and Returns the data as a string
-# Varaibles : ---------------------------------------------------------------
-some_var = 5 # New varaiable declartion is not needed
-# variable naming Convention is : lower_case_with_underscores 
-some_var  #  5
-# accessing a previously unassigned variable is an exception :
-some_unknown_var  # Raises a NameError
-# If --------------------------------------------------------------------
-"yay!" if 0 > 1 else "nay!"  #  "nay!"# if can be used as an expression 
+- Indentation is important 
+- use 4 spaces to indent, not tabs.
+# --- semicolone; ---
+- Semicolons are used to separate numerous statements on a single line
+- but are not neccessary in single line statements
+# --- print function ---
+ print("I'm Python. Nice to meet you!") 
+ print("Hello, World", end="!")  #  Hello, World! # ( a newline is default )
+# --- Input function ---
+ input_string_var = input("Enter some data: ") #  gets input and Returns the data as a string
+# --- Varaibles ---
+ some_var = 5 # New varaiable declartion is not needed
+# variable naming Convention is <b>lower_case_with_underscores</b> 
+ some_var  #  5
+# accessing a previously unassigned variable is an exception
+some_unknown_var # Raises a NameError
+# --- If ---
+"yay!" if 0 > 1 else "nay!"  #  "nay!" if can be used as an expression 
 
 if some_var > 10:
     print("some_var is totally bigger than 10.")
@@ -49,7 +49,7 @@ elif some_var < 10:
     print("some_var is smaller than 10.") # This elif clause is optional.
 else: 
     print("some_var is indeed 10.")  # This is optional too.
-# for loop ---------------------------------------------------------------
+# --- for loop ---
 for animal in ["dog", "cat", "mouse"]:     # For loops iterate over lists
     print("{} is a mammal".format(animal)) # You can use format() to interpolate formatted strings
 # prints:
@@ -57,10 +57,8 @@ for animal in ["dog", "cat", "mouse"]:     # For loops iterate over lists
 #    cat is a mammal
 #    mouse is a mammal
 
-$ "range(number)"-------------------------
-
-# returns an iterable of numbers
-#from zero to the given number
+# --- range(number) ---
+- returns an iterable of numbers from 0 to the given number
 
 for i in range(4):
     print(i)
@@ -69,10 +67,8 @@ for i in range(4):
 #    1
 #    2
 #    3
-
-"range(lower, upper)" 
-#returns an iterable of numbers
-#from the lower number to the upper number
+# --- range(lower, upper) --- 
+# returns an iterable of numbers from the lower number to the upper number
 #prints:
 #    4
 #    5
@@ -80,20 +76,17 @@ for i in range(4):
 #    7
 for i in range(4, 8):
     print(i)
-# range(lower, upper, step) -------------------------------
-
-# returns an iterable of numbers
-#from the lower number to the upper number, while incrementing by step. 
-#If step is not indicated, the default value is 1.
+# --- range(lower, upper, step) ----
+ - returns an iterable of numbers from the lower number to the upper number, while incrementing by step. 
+   If step is not indicated, the default value is 1.
 for i in range(4, 8, 2):
     print(i)
 # prints:
 #    4
 #    6
 
-#To loop over a list, 
-#and retrieve both the index and the value
-#of each item in the list:
+# --- loop over a list ---
+# to loop and retrieve both the index and the value of each item in the list:
 animals = ["dog", "cat", "mouse"]
 for i, value in enumerate(animals):
     print(i, value)
@@ -101,7 +94,8 @@ for i, value in enumerate(animals):
 #    0 dog
 #    1 cat
 #    2 mouse
-# while loop -------------------------------------------------------------
+
+# --- while loop ---
 x = 0
 while x < 4:     # it go until a condition is no longer met
     print(x)
@@ -111,7 +105,7 @@ while x < 4:     # it go until a condition is no longer met
 #    1
 #    2
 #    3
-# Exception handling ----------------------------------------------------
+# --- Exception handling ---
 try:
     # Use "raise" to raise an error
     raise IndexError("This is an index error")
