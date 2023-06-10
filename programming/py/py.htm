@@ -85,8 +85,8 @@ elif some_var < 10:
 else: 
     print("some_var is indeed 10.")       # This is optional too.
 </code></pre>
-<table><tr>
-<td><pre><code>
+
+<table><tr><td><pre><code>
 # === for loop ==
 for animal in ["dog", "cat", "mouse"]:     
     print("{} is a mammal".format(animal)) # You can use format() to interpolate formatted strings
@@ -95,64 +95,70 @@ for animal in ["dog", "cat", "mouse"]:
 #    dog is a mammal
 #    cat is a mammal
 #    mouse is a mammal
-</pre></td>
-</tr></table>
-<pre><code>
-# === range(number) ===
+</pre></td></tr></table>
 
-- returns an iterable of numbers from 0 to the given number
-</code></pre>
-<table><tr>
-<td><pre><code>
+<table><tr><td><pre><code>
+# === range(number) ===
+# returns an iterable of numbers from 0 to the given number
+
 for i in range(4):
     print(i)
-</code></pre></td>
-<td>
+</code></pre></td><td><pre><code>
 #    0
 #    1
 #    2
 #    3
-</td>
-</tr></table>
-<pre><code>
+</code></pre></td></tr></table>
+
+<table><tr><td><pre><code>
 # --- range(lower, upper) --- 
  # returns an iterable of numbers from the lower number to the upper number
 
 for i in range(4, 8):
     print(i)
-
+</code></pre></td><td><pre><code>
 #    4
 #    5
 #    6
 #    7
+</code></pre></td></tr></table>
 
+<table><tr><td><pre><code>
 # --- range(lower, upper, step) ----
- - Returns an iterable of numbers from the lower number to the upper number, while incrementing by step. 
-   If step is not indicated, the default value is 1.
+# - Returns an iterable of numbers from the lower number to the upper number, while incrementing by step. 
+#   If step is not indicated, the default value is 1.
 for i in range(4, 8, 2):
     print(i)
+</code></pre></td><td><pre><code>
 #    4
 #    6
+</code></pre></td></tr></table>
 
+<table><tr><td><pre><code>
 # --- loop over a list ---
 
  # to loop and retrieve both the index and the value of each item in the list:
 animals = ["dog", "cat", "mouse"]
 for i, value in enumerate(animals):
     print(i, value)
+</code></pre></td><td><pre><code>    
 #    0 dog
 #    1 cat
 #    2 mouse
+</code></pre></td></tr></table>
 
+<table><tr><td><pre><code>
 # --- while loop ---
 x = 0
 while x < 4:               
     print(x)
     x += 1  # Shorthand for x = x + 1
+</code></pre></td><td><pre><code>    
 #    0
 #    1
 #    2
 #    3
+</code></pre></td></tr></table>
 
 # --- Exception handling ---
 try:
