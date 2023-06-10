@@ -16,39 +16,49 @@
 <div>
 <pre><code>
 # --- Comments ----
-  #single line comment beging with: #
+  
+  - single line comment beging with: #
 
-  """ Triple double quote is used for Multiline strings
+  - """ Triple double quote is used for Multiline strings
     and are often used as documentation.
   """
 
 # --- Indentation ---
 
-- Indentation is important 
+- Indentation acts like { in c#
 - use 4 spaces to indent, not tabs.
+
 # --- semicolone; ---
-- Semicolons are used to separate numerous statements on a single line
-- but are not neccessary in single line statements
+- Is used to separate numerous statements on a single line
+  but are not neccessary in single line statements
+
 # --- print function ---
  print("I'm Python. Nice to meet you!") 
- print("Hello, World", end="!")  #  Hello, World! # ( a newline is default )
+ print("Hello, World", end="!")              #  Hello, World! # ( a newline is default )
+
 # --- Input function ---
  input_string_var = input("Enter some data: ") #  gets input and Returns the data as a string
+
 # --- Varaibles ---
- some_var = 5 # New varaiable declartion is not needed
-# variable naming Convention is <b>lower_case_with_underscores</b> 
- some_var  #  5
+ some_var = 5                            # New varaiable declartion is not needed
+
+ # variable naming Convention is <b>lower_case_with_underscores</b> 
+
+some_var  #  5
+
 # accessing a previously unassigned variable is an exception
 some_unknown_var # Raises a NameError
+
 # --- If ---
-"yay!" if 0 > 1 else "nay!"  #  "nay!" if can be used as an expression 
+"yay!" if 0 > 1 else "nay!"               #  "nay!" if can be used as an expression 
 
 if some_var > 10:
     print("some_var is totally bigger than 10.")
 elif some_var < 10:    
     print("some_var is smaller than 10.") # This elif clause is optional.
 else: 
-    print("some_var is indeed 10.")  # This is optional too.
+    print("some_var is indeed 10.")       # This is optional too.
+
 # --- for loop ---
 for animal in ["dog", "cat", "mouse"]:     # For loops iterate over lists
     print("{} is a mammal".format(animal)) # You can use format() to interpolate formatted strings
@@ -58,6 +68,7 @@ for animal in ["dog", "cat", "mouse"]:     # For loops iterate over lists
 #    mouse is a mammal
 
 # --- range(number) ---
+
 - returns an iterable of numbers from 0 to the given number
 
 for i in range(4):
@@ -67,15 +78,18 @@ for i in range(4):
 #    1
 #    2
 #    3
+
 # --- range(lower, upper) --- 
-# returns an iterable of numbers from the lower number to the upper number
+ # returns an iterable of numbers from the lower number to the upper number
 #prints:
 #    4
 #    5
 #    6
 #    7
+
 for i in range(4, 8):
     print(i)
+    
 # --- range(lower, upper, step) ----
  - returns an iterable of numbers from the lower number to the upper number, while incrementing by step. 
    If step is not indicated, the default value is 1.
@@ -97,7 +111,7 @@ for i, value in enumerate(animals):
 
 # --- while loop ---
 x = 0
-while x < 4:     # it go until a condition is no longer met
+while x < 4:                  # it go until a condition is no longer met
     print(x)
     x += 1  # Shorthand for x = x + 1
 #prints:
@@ -105,17 +119,18 @@ while x < 4:     # it go until a condition is no longer met
 #    1
 #    2
 #    3
+
 # --- Exception handling ---
 try:
     # Use "raise" to raise an error
     raise IndexError("This is an index error")
 except IndexError as e:
-    pass                 # Pass is just a no-op. Usually you would do recovery here.
+    pass                        # Pass is just a no-op. Usually you would do recovery here.
 except (TypeError, NameError):
-    pass                 # Multiple exceptions can be handled together, if required.
-else:                    # Optional clause to the try/except block. Must follow all except blocks
-    print("All good!")   # Runs only if the code in try raises no exceptions
-finally:                 # Execute under all circumstances
+    pass                        # Multiple exceptions can be handled together, if required.
+else:                           # Optional clause to the try/except block. Must follow all except blocks
+    print("All good!")          # Runs only if the code in try raises no exceptions
+finally:                        # Execute under all circumstances
     print("We can clean up resources here")
 
 # Instead of try/finally to cleanup resources you can use a with statement
@@ -124,6 +139,7 @@ finally:                 # Execute under all circumstances
 with open("myfile.txt") as f:
     for line in f:
         print(line)
+        
 # Writing to a file -------------------------------------------------------------
 contents = {"aa": 12, "bb": 21}
 with open("myfile1.txt", "w+") as file:
@@ -131,6 +147,7 @@ with open("myfile1.txt", "w+") as file:
 
 with open("myfile2.txt", "w+") as file:
     file.write(json.dumps(contents)) # writes an object to a file
+    
 # Reading from a file ----------------------------------------------------------
 with open('myfile1.txt', "r+") as file:
     contents = file.read()           # reads a string from a file
@@ -150,6 +167,7 @@ print(contents)
 35 / 5  #  7.0
 
 # Integer division rounds down for both positive and negative numbers :
+
 5 // 3       #  1
 -5 // 3      #  -2
 5.0 // 3.0   #  1.0 # works on floats too
@@ -169,6 +187,7 @@ print(contents)
 # Enforce precedence with parentheses :
 1 + 3 * 2    #  7
 (1 + 3) * 2  #  8
+
 # Booleans _____________________________________________________________
 
 # Boolean values are primitives (Note: the capitalization) :
@@ -256,7 +275,7 @@ len("This is a string")  #  16
 
 # You can also format using f-strings or formatted string literals (in Python 3.6+)
 name = "Reiko"
-f"She said her name is {name}." #  "She said her name is Reiko"
+f"She said her name is {name}."            #  "She said her name is Reiko"
 
 # You can basically put any Python expression inside the braces and it will be output in the string.
 f"{name} is {len(name)} characters long." #  "Reiko is 5 characters long."
