@@ -6,9 +6,9 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 <style>
- table{border-collapse:collapse;margin: 0;padding: 0;}
- tr{margin: 0;padding: 0;}
- td{border:1 solid #00aaaa;margin: 0;padding: 0; }
+ table{border-collapse:collapse;m}
+ pre,table,tr,td{margin: 0;padding: 0;}
+ td{border:1 solid #00aaaa;}
 </style>
 </head>
 <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
@@ -84,11 +84,10 @@ elif some_var < 10:
     print("some_var is smaller than 10.") # This elif clause is optional.
 else: 
     print("some_var is indeed 10.")       # This is optional too.
-
-# === for loop ==
 </code></pre>
 <table><tr>
 <td><pre><code>
+# === for loop ==
 for animal in ["dog", "cat", "mouse"]:     
     print("{} is a mammal".format(animal)) # You can use format() to interpolate formatted strings
 </code></pre></td>
