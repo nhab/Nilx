@@ -164,8 +164,7 @@ while x < 4:
 <h3>Exception handling</h3>
 <pre><code>
 try:
-    # Use "raise" to raise an error
-    raise IndexError("This is an index error")
+    raise IndexError("This is an index error")  # Use "raise" to raise an error
 except IndexError as e:
     pass                        # Pass is just a no-op. Usually you would do recovery here.
 except (TypeError, NameError):
