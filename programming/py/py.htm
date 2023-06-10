@@ -97,17 +97,6 @@ else:
     print("some_var is indeed 10.")       # This is optional too.
 </code></pre>
 
-<h3>for loop</h3>
-<table><tr><td><pre><code>
-for animal in ["dog", "cat", "mouse"]:     
-    print("{} is a mammal".format(animal)) # You can use format() to interpolate formatted strings
-</code></pre></td>
-<td><pre>
-#    dog is a mammal
-#    cat is a mammal
-#    mouse is a mammal
-</pre></td></tr></table>
-
 <h3> range(number) </h3>
 
 <table><tr><td><pre><code>
@@ -146,16 +135,26 @@ for i in range(4, 8, 2):
 #    6
 </code></pre></td></tr></table>
 
-<h3>loop over a list</h3>
+<h3>for loop</h3>
+<table><tr><td><pre><code>
+for animal in ["dog", "cat", "mouse"]:     
+    print("{} is a mammal".format(animal)) # You can use format() to interpolate formatted strings
+</code></pre></td>
+<td><pre>
+    dog is a mammal
+    cat is a mammal
+    mouse is a mammal
+</pre></td></tr></table>
+or
 <table><tr><td><pre><code>
  # to loop and retrieve both the index and the value of each item in the list:
 animals = ["dog", "cat", "mouse"]
 for i, value in enumerate(animals):
     print(i, value)
 </code></pre></td><td><pre><code>    
-#    0 dog
-#    1 cat
-#    2 mouse
+    0 dog
+    1 cat
+    2 mouse
 </code></pre></td></tr></table>
 
 <h3>while loop </h3>
@@ -165,10 +164,10 @@ while x < 4:
     print(x)
     x += 1  # Shorthand for x = x + 1
 </code></pre></td><td><pre><code>    
-#    0
-#    1
-#    2
-#    3
+    0
+    1
+    2
+    3
 </code></pre></td></tr></table>
 
 <h3>Exception handling</h3>
