@@ -41,7 +41,20 @@
  - create a "test.py" file with this content:<cli>print("hi")</cli>
    run this ommand : <cli>py test.py</cli>
    it will prints 'hi" on screen
- 
+ - importing from external packages:
+   . First install the package.for example: <cli>$ pip install -U Flask</cli> 
+   . Then use it :
+   <code>
+    from flask import Flask
+
+    app = Flask(__name__)
+
+    @app.route("/")
+    def hello():
+        return "Hello, World!"
+    $ flask run
+      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ </code>
 </pre>
 </div>
  
