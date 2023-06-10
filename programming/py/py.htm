@@ -13,7 +13,7 @@
 </head>
 <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
  <button onclick="toggleAll(this);" >-</button>   
-<h2>References</h2>
+<h3>References</h3>
 <div>
  <pre>
  Base : https://www.python.org/
@@ -22,7 +22,7 @@
  Tutorial : https://docs.python.org/3.11/tutorial/
  </pre>
 </div>
- <h2>common tasks</h2>
+ <h3>common tasks</h3>
  <div>
  <pre> 
  <br>
@@ -40,6 +40,7 @@
  </div>
 <h2>Syntax</h2>
 <div>
+ <h3>Basics:comment,indentaation,print,input,variables,if</h3>
 <pre><code>
 # === Comments ===
   
@@ -86,8 +87,8 @@ else:
     print("some_var is indeed 10.")       # This is optional too.
 </code></pre>
 
+<h3>for loop</h3>
 <table><tr><td><pre><code>
-# === for loop ==
 for animal in ["dog", "cat", "mouse"]:     
     print("{} is a mammal".format(animal)) # You can use format() to interpolate formatted strings
 </code></pre></td>
@@ -97,8 +98,9 @@ for animal in ["dog", "cat", "mouse"]:
 #    mouse is a mammal
 </pre></td></tr></table>
 
+<h3> range(number) </h3>
+
 <table><tr><td><pre><code>
-# === range(number) ===
 # returns an iterable of numbers from 0 to the given number
 
 for i in range(4):
@@ -110,8 +112,8 @@ for i in range(4):
 #    3
 </code></pre></td></tr></table>
 
-<table><tr><td><pre><code>
-# --- range(lower, upper) --- 
+<h3>range(lower, upper)</h3>
+<table><tr><td><pre><code> 
  # returns an iterable of numbers from the lower number to the upper number
 
 for i in range(4, 8):
@@ -123,8 +125,8 @@ for i in range(4, 8):
 #    7
 </code></pre></td></tr></table>
 
+<h3> range(lower, upper, step) </h3>
 <table><tr><td><pre><code>
-# --- range(lower, upper, step) ----
 # - Returns an iterable of numbers from the lower number to the upper number, while incrementing by step. 
 #   If step is not indicated, the default value is 1.
 for i in range(4, 8, 2):
@@ -134,9 +136,8 @@ for i in range(4, 8, 2):
 #    6
 </code></pre></td></tr></table>
 
+<h3>loop over a list</h3>
 <table><tr><td><pre><code>
-# --- loop over a list ---
-
  # to loop and retrieve both the index and the value of each item in the list:
 animals = ["dog", "cat", "mouse"]
 for i, value in enumerate(animals):
@@ -147,7 +148,7 @@ for i, value in enumerate(animals):
 #    2 mouse
 </code></pre></td></tr></table>
 
-<h2>while loop </h2>
+<h3>while loop </h3>
 <table><tr><td><pre><code>
 x = 0
 while x < 4:               
@@ -160,7 +161,7 @@ while x < 4:
 #    3
 </code></pre></td></tr></table>
 
-<h2>Exception handling</h2>
+<h3>Exception handling</h3>
 <pre><code>
 try:
     # Use "raise" to raise an error
@@ -177,7 +178,7 @@ finally:                        # Execute under all circumstances
 # Instead of try/finally to cleanup resources you can use a with statement
 </code></pre>
 
-<h2>Files</h2>
+<h3>Files</h3>
 
 <pre><code>
 # === Reading a file ===
@@ -288,7 +289,7 @@ bool(-6)    #  True
 # 1 < 2 < 3  #  True
 # 2 < 3 < 2  #  False
 </code></pre>
-<h2>  'is' vs. '=='   :</h2>
+<h3>  'is' vs. '=='   :</h3>
 <pre><code>
 # is checks if two variables refer to the same object, 
 # but == checks if the objects pointed to have the same values:
@@ -302,7 +303,7 @@ var2 is var1            # False, var1 and var2 do not refer to the same object
 var2 == var1            # True, var1's and var2's objects are equal
 </code></pre>
 
-<h2> Strings </h2>
+<h3> Strings </h3>
 
 <pre><code>
 
