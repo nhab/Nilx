@@ -4,13 +4,11 @@ function toggle(el)
 	{
 		el.value='+';
 		el.parentElement.nextElementSibling.style.display='none';
-		//el.parentElement.nextElementSibling.style.max-height= 1px;
 	}
 	else
 	{
 		el.value='-';
 		el.parentElement.nextElementSibling.style.display='block';
-		//el.parentElement.nextElementSibling.style.max-height=10000px;
 	}
 }
 
@@ -22,7 +20,7 @@ function toggleAll(btn)
 		btn.value="-";
 	var elements = document.getElementsByTagName('input');
 
-	for (var i = 0; i < elements.length; i++) {
+for (var i = 0; i < elements.length;i++) {
 		if	(elements[i].type="button")	
 			toggle(elements[i]);
 	}
@@ -45,6 +43,7 @@ function AddToggleButtons()
 		childDiv.prepend(para);
 	}
 }
+
 function AddToggleButtonsToH2andH3()
 {
 	for(j=2;j<=3;j++)
@@ -80,3 +79,25 @@ function ReplaceLtGt()
         $("code").eq(i).text( s)
     }
 }
+
+//n can be 3 or 4
+function AddToggleButtonsToH(n)
+{
+	for(j=2;j<=n;j++)
+	{
+		var childDivs = document.getElementsByTagName('h'+j.toString());
+
+		for( i=0; i< childDivs.length; i++ )
+		{
+			var childDiv = childDivs[i];
+
+			const para = document.createElement("input");
+			para.setAttribute("value","-");
+			para.setAttribute("type","button");
+			para.setAttribute("onclick","toggle(this)");
+			para.setAttribute("class","toggleButton");
+			childDiv.prepend(para);
+		}
+	}
+}
+
