@@ -7,7 +7,7 @@
 <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 <style>
  table{border-collapse:collapse;m}
- pre,table,tr,td{margin: 0;padding: 0;}
+ pre,table,tr,td{margin: 0;padding: 0;border:1px solid #8888;}
  td{border:1 solid #00aaaa;}
 </style>
 </head>
@@ -159,7 +159,7 @@ while x < 4:
 #    2
 #    3
 </code></pre></td></tr></table>
-
+<pre><code>
 # --- Exception handling ---
 try:
     # Use "raise" to raise an error
@@ -174,7 +174,9 @@ finally:                        # Execute under all circumstances
     print("We can clean up resources here")
 
 # Instead of try/finally to cleanup resources you can use a with statement
+</code></pre>
 
+<pre><code>
 # === Reading a file ===
 with open("myfile.txt") as f:
     for line in f:
@@ -198,7 +200,9 @@ with open('myfile2.txt', "r+") as file:
     contents = json.load(file)       # reads a json object from a file
 print(contents)
 # print: {"aa": 12, "bb": 21}
+</code></pre>
 
+<pre><code>
 # === numbers : ===
 # Math operators are what you  expect :
 1 + 1   #  2
@@ -227,7 +231,8 @@ print(contents)
 # Enforce precedence with parentheses :
 1 + 3 * 2    #  7
 (1 + 3) * 2  #  8
-
+</code></pre>
+<pre><code>
 # === Booleans ===
 
 # Boolean values are primitives (Note: the capitalization) :
@@ -292,7 +297,8 @@ var2 == var1            # True, var1's and var2's objects are equal
 var2 = [1, 2, 3, 4]     # Points var2 at a new list, [1, 2, 3, 4]
 var2 is var1            # False, var1 and var2 do not refer to the same object
 var2 == var1            # True, var1's and var2's objects are equal
-
+</code></pre>
+<pre><code>
 # === Strings ===
 
 # Strings are created with " or '
@@ -319,7 +325,8 @@ f"She said her name is {name}."            #  "She said her name is Reiko"
 
 # You can basically put any Python expression inside the braces and it will be output in the string.
 f"{name} is {len(name)} characters long." #  "Reiko is 5 characters long."
-
+</code></pre>
+<pre><code>
 # === None ===
 # None is an object
 # so don't use the "==" symbol to compare objects to None
@@ -334,7 +341,8 @@ bool("")  #  False
 bool([])  #  False
 bool({})  #  False
 bool(())  #  False
-
+</code></pre>
+<pre><code>
 # === Lists ===
 
 # are used to store sequences 
@@ -405,7 +413,8 @@ li.extend(other_li)  # Now li is [1, 2, 3, 4, 5, 6]
 len(li)  #  6
 
 #Lists : to store sequences  []"
-
+</code></pre>
+<pre><code>
 # === Tuples ===
 
 # are like lists but are immutable.
