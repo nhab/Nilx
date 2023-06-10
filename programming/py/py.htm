@@ -147,8 +147,8 @@ for i, value in enumerate(animals):
 #    2 mouse
 </code></pre></td></tr></table>
 
+<h2>while loop </h2>
 <table><tr><td><pre><code>
-# --- while loop ---
 x = 0
 while x < 4:               
     print(x)
@@ -159,8 +159,9 @@ while x < 4:
 #    2
 #    3
 </code></pre></td></tr></table>
+
+<h2>Exception handling</h2>
 <pre><code>
-# --- Exception handling ---
 try:
     # Use "raise" to raise an error
     raise IndexError("This is an index error")
@@ -175,6 +176,8 @@ finally:                        # Execute under all circumstances
 
 # Instead of try/finally to cleanup resources you can use a with statement
 </code></pre>
+
+<h2>Files</h2>
 
 <pre><code>
 # === Reading a file ===
@@ -284,9 +287,9 @@ bool(-6)    #  True
 # Chaining can be used for checking wheter a value is in a range :
 # 1 < 2 < 3  #  True
 # 2 < 3 < 2  #  False
-
-#  'is' vs. '=='   :
-
+</code></pre>
+<h2>  'is' vs. '=='   :</h2>
+<pre><code>
 # is checks if two variables refer to the same object, 
 # but == checks if the objects pointed to have the same values:
 
@@ -298,8 +301,10 @@ var2 = [1, 2, 3, 4]     # Points var2 at a new list, [1, 2, 3, 4]
 var2 is var1            # False, var1 and var2 do not refer to the same object
 var2 == var1            # True, var1's and var2's objects are equal
 </code></pre>
+
+<h2> Strings </h2>
+
 <pre><code>
-# === Strings ===
 
 # Strings are created with " or '
 "This is a string."
