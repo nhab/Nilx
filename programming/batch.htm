@@ -1,0 +1,229 @@
+<h2>Reference</h2>
+<p>
+https://www.tutorialspoint.com/batch_script/
+</p>
+<h2>Commands</h2>
+<pre>
+-A <b>batch file is</b> a text file containing commands with extention is .bat or .cmd
+- list of commands
+ ver					returns the os versio
+ Rem					Is used to show comments in batch  file
+ @echo off  			Hides the commands itslef and shows only the output
+	echo "current date and time is"
+	echo %DATE%  %Time%
+	echo "current path :"
+	echo %PATH% 
+ assoc					associates an extension with a file type
+	assoc 				Displays all the file extensions 
+	assoc | find “.ext” Displays only those file extensions which have the extension ext.
+		assoc | find “.doc” > C:\listsdoc.txt
+ cd						changes to a different directory
+	Rem 				Changing to the parent directory
+	cd..\.. 			change to the parent of the parent directory
+ md mydir   			makes the "mydir" directory in the current directory
+ rd mydir				removes mydir directory
+ cls 					clears the screen.
+ copy 					copies files from one location to the other.
+ move src dest			moves src file(s) to dest
+ ren src dest			renames the src file to dest file
+ del					deletes files and not directories.
+ dir					lists the contents of a directory.
+ exit					exits the terminal console
+ PAUSE					prompts the user and waits for a line of input to be entered.
+ prompt 				change or reset the command prompt.
+	prompt myprompt$G   outputs:  myprompt>
+start notepad.exe		starts notepad
+TYPE [filename]			prints the content of a file or files to the output.
+vol						displays volume label of the drive
+attrib					Displays or sets the attributes of the files in the current directory
+	Rem Adds the "Read-only" attribute to the file.
+	attrib +r C:\tp\lists.txt
+CHOICE /c [Options] /m [Message] shows a message and a list of options
+	choice /c ABC /m "What is your option A , B or C"
+COMP [sourceA] [sourceB]  compares 2 files based on the file size.
+EXPAND [cabinetfilename]  extracts files from compressed .cab cabinet files.
+FIND [text] [destination] searches for a string in files or input, outputting matching lines.
+	FIND "Application" C:\tp\lists.txt
+ipconfig				displays Windows IP Configuration
+More [filename]			displays the contents of a file or files, one screen at a time.
+NET [variant]			Provides various network services. <a href='https://www.tutorialspoint.com/batch_script/batch_script_network.htm'>full description</a>
+	net accounts
+	net computer
+	net config
+	net continue
+	net file
+	net group
+	net help
+	net helpmsg
+	net localgroup
+	net name
+	net pause
+	net print
+	net send
+	net session
+	net share
+	net start
+	net statistics
+	net stop
+	net time
+	net use
+	net user		display the current accounts
+	net view
+PING [address]		sends ICMP/IP "echo" packets over the network to the designated address.
+SHUTDOWN			shuts down a computer, or logs off the current user.
+Sort [filename]		output the sorted content of the given text file 
+Taskkill /im [taskname]  ends one or more tasks.
+	Taskkill /im mspaint.exe
+Xcopy [source][destination] copies files and directories in a more advanced way.
+Tree				displays a tree of all subdirectories of the current directory to any level of recursion or depth.
+FC 					lists the actual differences between two files.
+DISKPART			shows and configures the properties of disk partitions.
+TITLE				sets the title displayed in the console window.
+set					Displays the list of environment variables on the current system.
+</pre>
+<h2>Variables</h2>
+<p>
+- Types of variables:
+	 1- is for parameters which can be passed when the batch file is called 
+		The arguments can be called from the batch files through the variables %1, %2, %3, and so on.
+	 2- Via the set command.
+		set /A variable-name=value
+			@echo off
+			set message=Hello World 
+			echo %message%
+			rem /A is used for numberic variables:
+				@echo off 
+				SET /A a = 5 
+				SET /A b = 10 
+				SET /A c = %a% + %b% 
+				echo %c%
+			Rem The output of the above program would be 15.
+
+- By default, variables are global to your entire command prompt session. 
+Call the SETLOCAL command to make variables local to the scope of your script.
+	@echo off 
+	set globalvar = 5
+	SETLOCAL
+	set var = 13145
+	set /A var = %var% + 5
+	echo %var%
+	echo %globalvar%
+	ENDLOCAL
+</p>
+<h2>Arrays</h2>
+<p>
+@echo off 
+set list=1 2 3 4 
+(for %%a in (%list%) do ( 
+   echo %%a 
+))
+set list[1]=5
+echo %list[1]%
+
+</p>
+<h2>Decision Making</h2>
+<p>
+- if example:
+@echo off 
+SET /A a = 5 
+SET /A b = 10 
+SET /A c = %a% + %b% 
+if %c%==15 echo "The value of variable c is 15" 
+if %c%==b echo "Impossible!"
+
+- if /else example:
+@echo off 
+SET /A a = 5 
+SET /A b = 10
+SET /A c = %a% + %b% 
+if %c%==15 (echo "The value of variable c is 15") else (echo "Unknown value") 
+if %c%==10 (echo "The value of variable c is 10") else (echo "Unknown value")
+
+-  "if defined",  is used to test for the existence of a variable. 
+-  "if exists ",  is used to test for the existence of a file. 
+</p>
+<h2>function</h2>
+<p>
+- function defenition syntax:
+	:function_name 
+	Do_something 
+	EXIT /B 0
+
+
+- function definition example:
+	:Display 
+	SET /A index=2 
+	echo The value of index is %index% 
+	EXIT /B 0
+
+-vcalling a function:
+	call :function_name
+
+- Functions with Parameters
+	syntax:
+		Call :function_name parameter1, parameter2… parametern
+	
+	Example:
+		@echo off
+		SETLOCAL
+		CALL :Display 5 , 10
+		EXIT /B %ERRORLEVEL%
+		:Display
+		echo The value of parameter 1 is %~1
+		echo The value of parameter 2 is %~2
+		EXIT /B 0
+- FUNCTIONs returning value
+	The return values are set in the function using
+	 the set command and the tilde(~) character 
+	 along with the positional number of the parameter.
+	 
+	 Example:
+		@echo off
+		SETLOCAL
+		CALL :SetValueFunction value1,value2
+		echo %value1%
+		echo %value2%
+		EXIT /B %ERRORLEVEL%
+		:SetValue
+		set "%~1 = 5"
+		set "%~2 = 10"
+		EXIT /B 0
+-<a href='https://www.tutorialspoint.com/batch_script/batch_script_functions.htm'>Other function operations</a>
+</p>
+
+<h2>Aliases</h2>
+<p>
+- Aliases means creating shortcuts or keywords for existing commands. 
+	for example:
+		doskey dw = dir /w
+- Syntax
+	DOSKEY [options] [macroname=[text]]
+- example
+	@echo off
+	doskey cd = cd/test
+	doskey d = dir
+- Deleting an Alias example:
+	doskey d = dir
+	d=
+- Replacing an Alias
+	 d = dir /w
+</p>
+<h2>Registry operations</h2>
+<p>
+https://www.tutorialspoint.com/batch_script/batch_script_registry.htm
+</p>
+<h2>Debugging</h2>
+<p>
+https://www.tutorialspoint.com/batch_script/batch_script_debugging.htm
+</p>
+
+
+
+
+
+
+
+
+
+
+
