@@ -13,12 +13,17 @@
 </head>
 <body onload='AddToggleButtonsToH2andH3();ReplaceLtGt();hljs.highlightAll();'>
 
-<button onclick="toggleAll(this);" >-</button>   
+<button onclick="toggleAll(this);" >-</button> 
+  
 <h2>References</h2>
+<div>
 <p>
 https://www.tutorialspoint.com/batch_script/
 </p>
+</div>
+
 <h2>Commands</h2>
+<div>
 <pre>
 -A <b>batch file is</b> a text file containing commands with extention is .bat or .cmd
 - list of commands
@@ -97,7 +102,10 @@ DISKPART			shows and configures the properties of disk partitions.
 TITLE				sets the title displayed in the console window.
 set					Displays the list of environment variables on the current system.
 </pre>
+</div>
+
 <h2>Variables</h2>
+<div>
 <p>
 - Types of variables:
 	 1- is for parameters which can be passed when the batch file is called 
@@ -126,7 +134,10 @@ Call the SETLOCAL command to make variables local to the scope of your script.
 	echo %globalvar%
 	ENDLOCAL
 </p>
+</div>
+
 <h2>Arrays</h2>
+<div>
 <p>
 @echo off 
 set list=1 2 3 4 
@@ -137,7 +148,10 @@ set list[1]=5
 echo %list[1]%
 
 </p>
+</div>
+
 <h2>Decision Making</h2>
+<div>
 <p>
 - if example:
 @echo off 
@@ -158,7 +172,10 @@ if %c%==10 (echo "The value of variable c is 10") else (echo "Unknown value")
 -  "if defined",  is used to test for the existence of a variable. 
 -  "if exists ",  is used to test for the existence of a file. 
 </p>
+</div>
+
 <h2>function</h2>
+</div>
 <p>
 - function defenition syntax:
 	:function_name 
@@ -206,8 +223,10 @@ if %c%==10 (echo "The value of variable c is 10") else (echo "Unknown value")
 		EXIT /B 0
 -<a href='https://www.tutorialspoint.com/batch_script/batch_script_functions.htm'>Other function operations</a>
 </p>
+</div>
 
 <h2>Aliases</h2>
+<div>
 <p>
 - Aliases means creating shortcuts or keywords for existing commands. 
 	for example:
@@ -224,6 +243,7 @@ if %c%==10 (echo "The value of variable c is 10") else (echo "Unknown value")
 - Replacing an Alias
 	 d = dir /w
 </p>
+</div>
 <h2>Registry operations</h2>
 <p>
 https://www.tutorialspoint.com/batch_script/batch_script_registry.htm
