@@ -333,7 +333,7 @@ json1+=`,{"title":"General"
             ,{"caption":"Linux","href":"Topics/linux.htm"}
             ,{"caption":"Windows & Registry","href":"Topics/windowsuser.htm"}
             ,{"caption":"Bash script","href":"Topics/bash.htm"}
-            ,{"caption":"Batch script","href":"Topics/batch.htm"}
+            ,{"caption":"Batch script","href":"Programming/batch.htm"}
             ,{"caption":"Biochemistry","href":"Topics/biochemistry.htm"}
             ,{"caption":"network","href":"Topics/network.htm"}
             ,{"caption":"scada","href":"Topics/scada.htm"}
