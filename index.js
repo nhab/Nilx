@@ -283,7 +283,7 @@ json1 +=`,{ "title":"Python"
         [
             {"caption":"Python","href":"programming/py/py.htm"}
             ,{"caption":"Django","href":"https://www.djangoproject.com/"}
-            ,{"caption":"Django REST","href":"#","tooltip":"Django REST framework is a flexible toolkit for building Web APIs."}
+            ,{"caption":"Django REST","href":"#","tooltip":"Django REST framework is a toolkit for building Web APIs."}
         ]
     }`;
 
@@ -333,9 +333,11 @@ json1+=`,{"title":"General"
             ,{"caption":"Linux","href":"Topics/linux.htm"}
             ,{"caption":"Windows & Registry","href":"Topics/windowsuser.htm"}
             ,{"caption":"Bash script","href":"Topics/bash.htm"}
+            ,{"caption":"Batch script","href":"Topics/batch.htm"}
             ,{"caption":"Biochemistry","href":"Topics/biochemistry.htm"}
             ,{"caption":"network","href":"Topics/network.htm"}
             ,{"caption":"scada","href":"Topics/scada.htm"}
+        
         ]
     }`;
 json1+=`,{"title":"Mental skills"
