@@ -334,7 +334,7 @@ json1+=`,{"title":"General"
             ,{"caption":"Windows & Registry","href":"Topics/windowsuser.htm"}
             ,{"caption":"Bash script","href":"Topics/bash.htm"}
             ,{"caption":"Batch script","href":"programming/batch.htm"}
-            ,{"caption":"PowerShell script","href":"https://www.tutorialspoint.com/powershell/powershell_scripting.htm"}
+            ,{"caption":"powershell script","href":"programming/powershell.htm"}
             ,{"caption":"Biochemistry","href":"Topics/biochemistry.htm"}
             ,{"caption":"network","href":"Topics/network.htm"}
             ,{"caption":"scada","href":"Topics/scada.htm"}
