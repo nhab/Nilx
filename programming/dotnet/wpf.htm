@@ -153,6 +153,24 @@
         </li>
     </ul>
     <p>
+    <b>Data binding</b>
+    is automatic acceccing the data in the UI eleemnts 
+    from/ into an application's managed objects( DataContext property of the window ).
+    </p>
+    <pre><code>
+        <Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="SDKSample.DataBindingWindow">
+   
+        <!-- Bind the TextBox to the data source (TextBox.Text to Person.Name) -->
+        <TextBox Name="personNameTextBox" Text="{Binding Path=Name}" />
+   
+        </Window>
+    </code></pre>
+    <p>
+    - The WPF data binding engine provides more than just binding, 
+    it provides validation, sorting, filtering, and grouping.
 
     <b>Dependency properties</b>is a property:
 
