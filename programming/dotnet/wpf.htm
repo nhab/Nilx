@@ -30,8 +30,24 @@
  <h2>Tutorial</h2>
  <div>
  <p>
- <b>Dependency properties</b>
-  is a property:
+  
+    <b>XAML is</b> 
+    - an XML-based markup language that implements an application's appearance declaratively. Y   
+    - Typically used to define windows, dialog boxes, pages, and user controls,
+       and to fill them with controls, shapes, and graphics.
+    <pre><code>
+        <Window
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            Title="Window with Button"
+            Width="250" Height="100">
+
+        <!-- Add button to window -->
+        <Button Name="button">Click Me!</Button>
+
+        </Window>
+    </code></pre>
+    
+    <b>Dependency properties</b>is a property:
 
 	- whose value depends on the external sources, such as 
 	 animation, data binding, styles, or visual tree inheritance
