@@ -116,6 +116,31 @@
         </li>
         </ul>
 
+    <b>Layout</b>
+    is location and sizes of User interface element.
+    
+    - The cornerstone of the layout system is relative positioning, 
+    which increases the ability to adapt to changing window and display conditions.
+    
+    - The layout system also manages the negotiation between controls to determine the layout.
+
+    - The layout system is exposed to child controls through base WPF classes.
+
+    -For common layouts such as grids, stacking, and docking, WPF includes several layout controls:
+    <ul>
+        <li><p><a href="/en-us/dotnet/api/system.windows.controls.canvas" class="no-loc" data-linktype="absolute-path">Canvas</a>: Child controls provide their own layout.</p>
+        </li>
+        <li><p><a href="/en-us/dotnet/api/system.windows.controls.dockpanel" class="no-loc" data-linktype="absolute-path">DockPanel</a>: Child controls are aligned to the edges of the panel.</p>
+        </li>
+        <li><p><a href="/en-us/dotnet/api/system.windows.controls.grid" class="no-loc" data-linktype="absolute-path">Grid</a>: Child controls are positioned by rows and columns.</p>
+        </li>
+        <li><p><a href="/en-us/dotnet/api/system.windows.controls.stackpanel" class="no-loc" data-linktype="absolute-path">StackPanel</a>: Child controls are stacked either vertically or horizontally.</p>
+        </li>
+        <li><p><a href="/en-us/dotnet/api/system.windows.controls.virtualizingstackpanel" class="no-loc" data-linktype="absolute-path">VirtualizingStackPanel</a>: Child controls are virtualized and arranged on a single line that is either horizontally or vertically oriented.</p>
+        </li>
+        <li><p><a href="/en-us/dotnet/api/system.windows.controls.wrappanel" class="no-loc" data-linktype="absolute-path">WrapPanel</a>: Child controls are positioned in left-to-right order and wrapped to the next line when there isn't enough space on the current line.</p>
+        </li>
+    </ul>
     <b>Dependency properties</b>is a property:
 
 	- whose value depends on the external sources, such as 
