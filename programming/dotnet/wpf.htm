@@ -42,11 +42,76 @@
             Width="250" Height="100">
 
         <!-- Add button to window -->
-        <Button Name="button">Click Me!</Button>
+        <Button Name="button"  Click="button_Click">Click Me!</Button>
 
         </Window>
     </code></pre>
+    <b>Code behind is</b>
+    The main behavior of an application 
+    that implements the functionality that responds to user interactions. 
+    For example clicking a menu or button, 
+    and calling business logic and data access logic in response
+    <pre><code>
+        using System.Windows;
+
+        namespace SDKSample
+        {
+            public partial class AWindow : Window
+            {
+                public AWindow()
+                {
+                    // InitializeComponent call is required to merge the UI
+                    // that is defined in markup with this class, including  
+                    // setting properties and registering event handlers
+                    InitializeComponent();
+                }
+        
+                void button_Click(object sender, RoutedEventArgs e)
+                {
+                    // Show message box when button is clicked.
+                    MessageBox.Show("Hello, Windows Presentation Foundation!");
+                }
+            }
+        }       
+    </code></pre>
+    <b>Control</b>
+    is an umbrella term that applies to a category of WPF classes
+     that have the following characteristics:
     
+        . Hosted in either a window or a page.
+        . Have a user interface.
+        . Implement some behavior.
+
+    <b>WPF Controls (by function):</b>
+    <ul>
+        <li><p><strong>Buttons</strong>: <a href="/en-us/dotnet/api/system.windows.controls.button" class="no-loc" data-linktype="absolute-path">Button</a> and <a href="/en-us/dotnet/api/system.windows.controls.primitives.repeatbutton" class="no-loc" data-linktype="absolute-path">RepeatButton</a>.</p>
+        </li>
+        <li><p><strong>Data Display</strong>: <a href="/en-us/dotnet/api/system.windows.controls.datagrid" class="no-loc" data-linktype="absolute-path">DataGrid</a>, <a href="/en-us/dotnet/api/system.windows.controls.listview" class="no-loc" data-linktype="absolute-path">ListView</a>, and <a href="/en-us/dotnet/api/system.windows.controls.treeview" class="no-loc" data-linktype="absolute-path">TreeView</a>.</p>
+        </li>
+        <li><p><strong>Date Display and Selection</strong>: <a href="/en-us/dotnet/api/system.windows.controls.calendar" class="no-loc" data-linktype="absolute-path">Calendar</a> and <a href="/en-us/dotnet/api/system.windows.controls.datepicker" class="no-loc" data-linktype="absolute-path">DatePicker</a>.</p>
+        </li>
+        <li><p><strong>Dialog Boxes</strong>: <a href="/en-us/dotnet/api/microsoft.win32.openfiledialog" class="no-loc" data-linktype="absolute-path">OpenFileDialog</a>, <a href="/en-us/dotnet/api/system.windows.controls.printdialog" class="no-loc" data-linktype="absolute-path">PrintDialog</a>, and <a href="/en-us/dotnet/api/microsoft.win32.savefiledialog" class="no-loc" data-linktype="absolute-path">SaveFileDialog</a>.</p>
+        </li>
+        <li><p><strong>Digital Ink</strong>: <a href="/en-us/dotnet/api/system.windows.controls.inkcanvas" class="no-loc" data-linktype="absolute-path">InkCanvas</a> and <a href="/en-us/dotnet/api/system.windows.controls.inkpresenter" class="no-loc" data-linktype="absolute-path">InkPresenter</a>.</p>
+        </li>
+        <li><p><strong>Documents</strong>: <a href="/en-us/dotnet/api/system.windows.controls.documentviewer" class="no-loc" data-linktype="absolute-path">DocumentViewer</a>, <a href="/en-us/dotnet/api/system.windows.controls.flowdocumentpageviewer" class="no-loc" data-linktype="absolute-path">FlowDocumentPageViewer</a>, <a href="/en-us/dotnet/api/system.windows.controls.flowdocumentreader" class="no-loc" data-linktype="absolute-path">FlowDocumentReader</a>, <a href="/en-us/dotnet/api/system.windows.controls.flowdocumentscrollviewer" class="no-loc" data-linktype="absolute-path">FlowDocumentScrollViewer</a>, and <a href="/en-us/dotnet/api/system.windows.controls.stickynotecontrol" class="no-loc" data-linktype="absolute-path">StickyNoteControl</a>.</p>
+        </li>
+        <li><p><strong>Input</strong>: <a href="/en-us/dotnet/api/system.windows.controls.textbox" class="no-loc" data-linktype="absolute-path">TextBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.richtextbox" class="no-loc" data-linktype="absolute-path">RichTextBox</a>, and <a href="/en-us/dotnet/api/system.windows.controls.passwordbox" class="no-loc" data-linktype="absolute-path">PasswordBox</a>.</p>
+        </li>
+        <li><p><strong>Layout</strong>: <a href="/en-us/dotnet/api/system.windows.controls.border" class="no-loc" data-linktype="absolute-path">Border</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.bulletdecorator" class="no-loc" data-linktype="absolute-path">BulletDecorator</a>, <a href="/en-us/dotnet/api/system.windows.controls.canvas" class="no-loc" data-linktype="absolute-path">Canvas</a>, <a href="/en-us/dotnet/api/system.windows.controls.dockpanel" class="no-loc" data-linktype="absolute-path">DockPanel</a>, <a href="/en-us/dotnet/api/system.windows.controls.expander" class="no-loc" data-linktype="absolute-path">Expander</a>, <a href="/en-us/dotnet/api/system.windows.controls.grid" class="no-loc" data-linktype="absolute-path">Grid</a>, <a href="/en-us/dotnet/api/system.windows.controls.gridview" class="no-loc" data-linktype="absolute-path">GridView</a>, <a href="/en-us/dotnet/api/system.windows.controls.gridsplitter" class="no-loc" data-linktype="absolute-path">GridSplitter</a>, <a href="/en-us/dotnet/api/system.windows.controls.groupbox" class="no-loc" data-linktype="absolute-path">GroupBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.panel" class="no-loc" data-linktype="absolute-path">Panel</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.resizegrip" class="no-loc" data-linktype="absolute-path">ResizeGrip</a>, <a href="/en-us/dotnet/api/system.windows.controls.separator" class="no-loc" data-linktype="absolute-path">Separator</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.scrollbar" class="no-loc" data-linktype="absolute-path">ScrollBar</a>, <a href="/en-us/dotnet/api/system.windows.controls.scrollviewer" class="no-loc" data-linktype="absolute-path">ScrollViewer</a>, <a href="/en-us/dotnet/api/system.windows.controls.stackpanel" class="no-loc" data-linktype="absolute-path">StackPanel</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.thumb" class="no-loc" data-linktype="absolute-path">Thumb</a>, <a href="/en-us/dotnet/api/system.windows.controls.viewbox" class="no-loc" data-linktype="absolute-path">Viewbox</a>, <a href="/en-us/dotnet/api/system.windows.controls.virtualizingstackpanel" class="no-loc" data-linktype="absolute-path">VirtualizingStackPanel</a>, <a href="/en-us/dotnet/api/system.windows.window" class="no-loc" data-linktype="absolute-path">Window</a>, and <a href="/en-us/dotnet/api/system.windows.controls.wrappanel" class="no-loc" data-linktype="absolute-path">WrapPanel</a>.</p>
+        </li>
+        <li><p><strong>Media</strong>: <a href="/en-us/dotnet/api/system.windows.controls.image" class="no-loc" data-linktype="absolute-path">Image</a>, <a href="/en-us/dotnet/api/system.windows.controls.mediaelement" class="no-loc" data-linktype="absolute-path">MediaElement</a>, and <a href="/en-us/dotnet/api/system.windows.controls.soundplayeraction" class="no-loc" data-linktype="absolute-path">SoundPlayerAction</a>.</p>
+        </li>
+        <li><p><strong>Menus</strong>: <a href="/en-us/dotnet/api/system.windows.controls.contextmenu" class="no-loc" data-linktype="absolute-path">ContextMenu</a>, <a href="/en-us/dotnet/api/system.windows.controls.menu" class="no-loc" data-linktype="absolute-path">Menu</a>, and <a href="/en-us/dotnet/api/system.windows.controls.toolbar" class="no-loc" data-linktype="absolute-path">ToolBar</a>.</p>
+        </li>
+        <li><p><strong>Navigation</strong>: <a href="/en-us/dotnet/api/system.windows.controls.frame" class="no-loc" data-linktype="absolute-path">Frame</a>, <a href="/en-us/dotnet/api/system.windows.documents.hyperlink" class="no-loc" data-linktype="absolute-path">Hyperlink</a>, <a href="/en-us/dotnet/api/system.windows.controls.page" class="no-loc" data-linktype="absolute-path">Page</a>, <a href="/en-us/dotnet/api/system.windows.navigation.navigationwindow" class="no-loc" data-linktype="absolute-path">NavigationWindow</a>, and <a href="/en-us/dotnet/api/system.windows.controls.tabcontrol" class="no-loc" data-linktype="absolute-path">TabControl</a>.</p>
+        </li>
+        <li><p><strong>Selection</strong>: <a href="/en-us/dotnet/api/system.windows.controls.checkbox" class="no-loc" data-linktype="absolute-path">CheckBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.combobox" class="no-loc" data-linktype="absolute-path">ComboBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.listbox" class="no-loc" data-linktype="absolute-path">ListBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.radiobutton" class="no-loc" data-linktype="absolute-path">RadioButton</a>, and <a href="/en-us/dotnet/api/system.windows.controls.slider" class="no-loc" data-linktype="absolute-path">Slider</a>.</p>
+        </li>
+        <li><p><strong>User Information</strong>: <a href="/en-us/dotnet/api/system.windows.controls.accesstext" class="no-loc" data-linktype="absolute-path">AccessText</a>, <a href="/en-us/dotnet/api/system.windows.controls.label" class="no-loc" data-linktype="absolute-path">Label</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.popup" class="no-loc" data-linktype="absolute-path">Popup</a>, <a href="/en-us/dotnet/api/system.windows.controls.progressbar" class="no-loc" data-linktype="absolute-path">ProgressBar</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.statusbar" class="no-loc" data-linktype="absolute-path">StatusBar</a>, <a href="/en-us/dotnet/api/system.windows.controls.textblock" class="no-loc" data-linktype="absolute-path">TextBlock</a>, and <a href="/en-us/dotnet/api/system.windows.controls.tooltip" class="no-loc" data-linktype="absolute-path">ToolTip</a>.</p>
+        </li>
+        </ul>
+        
     <b>Dependency properties</b>is a property:
 
 	- whose value depends on the external sources, such as 
