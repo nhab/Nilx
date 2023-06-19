@@ -47,16 +47,103 @@ Revit (Videos):
 </p>
 <h3>Elements</h3>
 <p>
-<b>Types of Elements</b>
-	1- model elements
-	2- datum elements
-	3- view-specific elements. 
+<b>Level:</b>
+	- Levels are infinite horizontal planes that act as a reference for level-hosted elements,
+	such as roofs, floors, and ceilings. 
+	
+	- Most often, you use levels to define a <b>vertical height or story</b> within a building.
+ 
+	You create a level for each known story or other needed reference of the building; 
+	for example, first floor, top of wall, or bottom of foundation. 
+	
+<b>Element:</b>
+	- When creating a project, you add Revit parametric building elements to the design. 
+<b>Elements classification:</b> 
+	- categories, families, and types.
+	
+<b>Category:</b>
+	- A category is a group of elements that you use to model or document a building design.
+	For example, 
+	categories of model elements include walls and beams. 
+	Categories of annotation elements include tags and text notes.
 
-<b>Model elements</b>
-	- Elements in Revit are also referred to as families. 
-	- The family contains the geometric definition of the element 
-	   and the parameters used by the element. 
+<b>Family:</b>
+	- Families are classes of elements in a category. 
+	- A family groups elements with a common set of parameters (properties), identical use, 
+	  and similar graphical representation. 
+	- Different elements in a family may have different values for some or all properties,
+	 but the set of properties—their names and meaning -- is the same. 
+	 
+	 For example, 6-panel colonial doors could be considered one family,
+	 although the doors that compose the family come in different sizes and materials.
 
+	- There are 3 kinds of families:
+		 Loadable families can be loaded into a project and created from family templates. 
+		You can determine the set of properties and the graphical representation of the family.
+
+		 System families include walls, dimensions, ceilings, roofs, floors, and levels.
+		 They are not available for loading or creating as separate files.
+			 Revit predefines the set of properties and the graphical representation of
+			system families.
+
+			 You can use the predefined types to generate new types that belong to this family within
+			the project. For example, the behavior of a wall is predefined in the system. However,
+			you can create different types of walls with different compositions.
+
+			 System families can be transferred between projects.
+
+		 In-place families are custom families that you create in the context of a project.
+		 Create an in-place family when your project needs unique geometry 
+		 that you do not expect to reuse or geometry that must maintain one of more relationships to other project geometry.
+
+			 Because in-place families are intended for limited use in a project, each in-place family
+			contains only a single type. You can create multiple in-place families in your projects,
+			and you can place copies of the same in-place family element in your projects. Unlike
+			system and standard component families, you cannot duplicate in-place family types to
+			create multiple types.
+
+<b>Type</b>
+Each family can have several types. 
+A type can be a specific size of a family, such as a 30‖ X 42‖ title block or a 32" x 84" door. 
+A type can also be a style, such as default aligned or default angular style for dimensions.
+
+<b>Instance:</b>
+ Instances are the actual items (individual elements) that are placed in the project and have
+specific locations in the building (model instances) or on a drawing sheet (annotation instances).
+
+
+<b>kinds of Elements In revit</b>
+	1- Model elements:
+		the actual 3D geometry of the building. 
+		They display in relevant views of the model.
+		For example, walls, windows, doors, and roofs are model elements.
+
+		There are 2 types of model elements:
+			1-1. Hosts (or host elements):
+			     are generally built in place at the construction site. 
+			     For example,walls and roofs are hosts.
+
+			1-2. Model components are all the other types of elements in the building model. 
+			     For example, windows, doors, and cabinets are model components
+
+	2- datum elements:
+		help to define project context. 
+		For example, grids, levels, and reference planes 
+	
+	3- view-specific elements:
+		display only in the views in which they are placed. 
+		They help to describe or document the model. 
+		For example, dimensions, tags, and 2D detail components are view specific elements
+
+		There are 2 types of view-specific elements:
+			3-1. Annotation elements are 2D components that document the model and maintain scale on paper.
+			 For example, dimensions, tags, and keynotes are annotation elements.
+			
+			3-2. Details are 2D items that provide details about the building model in a particular view.
+			Examples include detail lines, filled regions, and 2D detail components.
+		
+
+<b>Types of Model elements</b>
 	- Each instance of an element is defined and controlled by the family.
 	- Model elements represent the actual 3D geometry of the building. 
 	 They display in relevant views of the model.
