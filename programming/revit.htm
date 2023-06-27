@@ -53,9 +53,36 @@ Revit (Videos):
 	
  <i class='markerGreen'>Category:</i>
 	- A category is a group of elements that you use to model or document a building design.
-	For example, 
-	categories of model elements include walls and beams. 
-	Categories of annotation elements include tags and text notes.
+	<i class='markerYellow'>Categories of Elements In revit</i>
+		1- <i class='markerPink'>Model elements:</i>
+		the actual 3D geometry of the building. 
+		They are displayed in relevant views of the model.
+		For example, walls, windows, doors, and roofs are model elements.
+
+		There are 2 types of model elements:
+			1-1. Hosts (or host elements):
+			     are generally built in place at the construction site. 
+			     For example, walls and roofs are hosts.
+
+			1-2. Model components are all the other types of elements in the building model. 
+			     For example, windows, doors, and cabinets are model components
+
+		2-<i class='markerPink'> datum elements:</i>
+		help to define project context. 
+		For example, grids, levels, and reference planes 
+	
+		3-<i class='markerPink'> view-specific elements:</i>
+		display only in the views in which they are placed. 
+		They help to describe or document the model. 
+		For example, dimensions, tags, and 2D detail components are view-specific elements
+
+		There are 2 types of view-specific elements:
+			3-1. Annotation elements are 2D components that document the model and maintain scale on paper.
+			 For example, dimensions, tags, and keynotes are annotation elements.
+			
+			3-2. Details are 2D items that provide details about the building model in a particular view.
+			Examples include detail lines, filled regions, and 2D detail components.
+		
 
  <i class='markerGreen'>Family:</i>
 	- Families are classes of elements in a category. 
@@ -100,38 +127,6 @@ A type can also be a style, such as default aligned or default angular style for
  <i class='markerGreen'>Instance:</i>
  Instances are the actual items (individual elements) that are placed in the project and have
 specific locations in the building (model instances) or on a drawing sheet (annotation instances).
-
-
-<b>Categories of Elements In revit</b>
-	1- <i class='markerGreen'>Model elements:</i>
-		the actual 3D geometry of the building. 
-		They are displayed in relevant views of the model.
-		For example, walls, windows, doors, and roofs are model elements.
-
-		There are 2 types of model elements:
-			1-1. Hosts (or host elements):
-			     are generally built in place at the construction site. 
-			     For example, walls and roofs are hosts.
-
-			1-2. Model components are all the other types of elements in the building model. 
-			     For example, windows, doors, and cabinets are model components
-
-	2-<i class='markerGreen'> datum elements:</i>
-		help to define project context. 
-		For example, grids, levels, and reference planes 
-	
-	3-<i class='markerGreen'> view-specific elements:</i>
-		display only in the views in which they are placed. 
-		They help to describe or document the model. 
-		For example, dimensions, tags, and 2D detail components are view-specific elements
-
-		There are 2 types of view-specific elements:
-			3-1. Annotation elements are 2D components that document the model and maintain scale on paper.
-			 For example, dimensions, tags, and keynotes are annotation elements.
-			
-			3-2. Details are 2D items that provide details about the building model in a particular view.
-			Examples include detail lines, filled regions, and 2D detail components.
-		
 
 <b>Types of Model elements</b>
 	- Each instance of an element is defined and controlled by the family.
