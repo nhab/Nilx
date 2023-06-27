@@ -47,15 +47,6 @@ Revit (Videos):
 </p>
 <h3>Elements</h3>
 <p>
-<b>Level:</b>
-	- Levels are infinite horizontal planes that act as a reference for level-hosted elements,
-	such as roofs, floors, and ceilings. 
-	
-	- Most often, you use levels to define a <b>vertical height or story</b> within a building.
- 
-	You create a level for each known story or other needed reference of the building; 
-	for example, the first floor, the top of the wall, or the bottom of the foundation. 
-	
 <b>Element:</b>
 	- When creating a project, you add Revit parametric building elements to the design. 
 <b>Elements classification:</b> 
@@ -121,7 +112,7 @@ specific locations in the building (model instances) or on a drawing sheet (anno
 		There are 2 types of model elements:
 			1-1. Hosts (or host elements):
 			     are generally built in place at the construction site. 
-			     For example,walls and roofs are hosts.
+			     For example, walls and roofs are hosts.
 
 			1-2. Model components are all the other types of elements in the building model. 
 			     For example, windows, doors, and cabinets are model components
@@ -157,7 +148,7 @@ Examples:
 
 Types of model elements:
 	1- Hosts (or host elements) are generally built in place at the construction site.
-		Example : Walls and ceilings,Structural walls and roofs
+		Example: Walls and ceilings, Structural walls and roofs
 	2- Model components are all the other types of elements in the building model.
 
 <b>Datum elements</b>
@@ -167,8 +158,12 @@ Types of model elements:
 	 	(Annotation elements that organize the plans)
 	 , <a href="https://lazybim.com/dimensions-in-revit/" target="_blank">levels</a>
 		 (finite horizontal planes that act as a reference for level-hosted elements, such as roofs, floors, and ceilings.)
+
+	- Most often, you create a level for each known story or other needed reference of the building; 
+	for example, the first floor, the top of the wall, or the bottom of the foundation. 
+
 	 , and <a href="https://www.youtube.com/watch?v=-jDwkqbajlo"  target="_blank">reference planes</a>
-	 	(a 2-dimensional surface to draw 2d lines as guidlines to define the geometry of a family).
+	 	(a 2-dimensional surface to draw 2d lines as guidelines to define the geometry of a family).
 
 <b>View-specific elements</b>
 	 display only in the views in which they are placed. 
@@ -300,18 +295,18 @@ Drafting standards:
 Revit consists of these ribbons:
 	
 	- Architechture Ribbon:
-		Modify, Wall, Door, Window, Component,column, Roof,Ceiling, Floor,Curtain System, Curtain Grdi
-		Mullion, Railing,Ramp, Stair 
+		Modify, Wall, Door, Window, Component, column, Roof, Ceiling, Floor, Curtain System, Curtain Grdi
+		Mullion, Railing, Ramp, Stair 
 	
 	- Structure Ribbon
-		Modify, Beam, Wall, Column, Floor, Truss, Brace, Beam system, Isolated, Wall, Slab, Rebar,Area, Path, Fabric Area, fabric sheet, Cover
+		Modify, Beam, Wall, Column, Floor, Truss, Brace, Beam system, Isolated, Wall, Slab, Rebar, Area, Path, Fabric Area, fabric sheet, Cover
 		
 	- Systems Ribbons
-		Modify, Duct,Duct placeholder, Flex duct, Air terminal, Mechanical equipment,pipe, pipe placeholder, parallel pipes, pumping fixture,spirinkler
+		Modify, Duct, Duct placeholder, Flex duct, Air terminal, Mechanical equipment, pipe, pipe placeholder, parallel pipes, pumping fixture,spirinkler
 		Wire, Cable Tray,
 	
 	-Insert Ribbon
-		Modify, Link revit, link IFC, Link CAD DWF Markup
+		Modify, Link Revit, link IFC, Link CAD DWF Markup
 		
 <b>The View Cube</b>
 You can click and drag the ViewCube to reorient the view of a model to a custom viewpoint
@@ -441,11 +436,11 @@ The Customize menu is displayed by clicking the Customize button.
 <p>
 <b>Hello World Sample plugin .net framework 4.7</b>
 
-1- Create new project:
+1- Create a new project:
 	Run Visual Studio Community 2019 → File → New → Project → Class Library (.NET Framework)
 	
 2- Add References:
-	Right click “References“ under Solution Explorer → Add Reference → 
+	Right-click “References“ under Solution Explorer → Add Reference → 
 	Browse → “C:\Program Files\Autodesk\Revit 2019 “ → Add “RevitAPI” & “RevitAPIUI” → Select “RevitAPI“ & “RevitAPIUI“ → Properties → Copy Local → False
 	
 3- Add Namespaces
