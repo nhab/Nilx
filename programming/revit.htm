@@ -54,7 +54,12 @@ Revit (Videos):
 	1- <i class='markerPink'>Model elements:</i>
 	the actual 3D geometry of the building. 
 	They are displayed in relevant views of the model.
-	For example, walls, windows, doors, and roofs are model elements.
+	Examples:
+	- Hosts elements, like     : Walls, Ceilings, Floors, and roofs
+	- Model components, like   : doors, Windows, Stairs, Furniture
+	- Structured elements like : Beams, Structural columns, Structural walls, Isolated footings,3D rebar
+	- MEP Elements like        : Pipes, Ducts, Sprinklers, Air terminals
+	- other: slabs, and ramps, Sinks, boilers, ducts, sprinklers, and electrical panels
 
 	There are 2 types of model elements:
 		1-1. Hosts (or host elements):
@@ -63,15 +68,27 @@ Revit (Videos):
 
 		1-2. Model components are all the other types of elements in the building model. 
 		     For example, windows, doors, and cabinets are model components
-
+	
 	2-<i class='markerPink'> datum elements:</i>
 	help to define project context. 
 	For example, grids, levels, and reference planes 
-	
+		
+	 <a href="https://www.youtube.com/watch?v=89pfB-T8zNc" target="_blank">grids</a>
+	 	(Annotation elements that organize the plans)
+	 , <a href="https://lazybim.com/dimensions-in-revit/" target="_blank">levels</a>
+		 (finite horizontal planes that act as a reference for level-hosted elements, such as roofs, floors, and ceilings.)
+
+	- Most often, you create a level for each known story or other needed reference of the building; 
+	for example, the first floor, the top of the wall, or the bottom of the foundation. 
+
+	 , and <a href="https://www.youtube.com/watch?v=-jDwkqbajlo"  target="_blank">reference planes</a>
+	 	(a 2-dimensional surface to draw 2d lines as guidelines to define the geometry of a family).
+
 	3-<i class='markerPink'> view-specific elements:</i>
 	display only in the views in which they are placed. 
 	They help to describe or document the model. 
 	For example, dimensions, tags, and 2D detail components are view-specific elements
+	 dimensions ( Dimensions are system-based families, which means that they are customizable. Aligned; Linear; Angular; Radial; Diameter; Arc Length;...)
 
 	There are 2 types of view-specific elements:
 		3-1. <i>Annotation elements</i> are 2D components that document the model and maintain scale on paper.
@@ -79,7 +96,9 @@ Revit (Videos):
 		
 		3-2. <i>Details</i> are 2D items that provide details about the building model in a particular view.
 		Examples include detail lines, filled regions, and 2D detail components.
-		
+		<b>Types of Model elements</b>
+	- Each instance of an element is defined and controlled by the family.
+	- Model elements represent the actual 3D geometry of the building. 
 
  <i class='markerGreen'>Family:</i>
 	- Families are classes of elements in a category. 
@@ -124,50 +143,6 @@ A type can also be a style, such as default aligned or default angular style for
  <i class='markerGreen'>Instance:</i>
  Instances are the actual items (individual elements) that are placed in the project and have
 specific locations in the building (model instances) or on a drawing sheet (annotation instances).
-
-<b>Types of Model elements</b>
-	- Each instance of an element is defined and controlled by the family.
-	- Model elements represent the actual 3D geometry of the building. 
-	 They display in relevant views of the model.
-
-Examples:
-	- Hosts elements, like     : Walls, Ceilings, Floor and roofs
-	- Model components, like   : doors,Windows,Stairs,Furniture
-	- Structured elements like : Beams,Structural columns,Structural walls, Isolated footings,3D rebar
-	- MEP Elements like        : Pipes , Ducts,Sprinklers,Air terminals
-	- other: slabs, and ramps,Sinks, boilers, ducts, sprinklers, and electrical panels
-
-Types of model elements:
-	1- Hosts (or host elements) are generally built in place at the construction site.
-		Example: Walls and ceilings, Structural walls and roofs
-	2- Model components are all the other types of elements in the building model.
-
-<b>Datum elements</b>
-	 help to define project context. 
-	 examples:
-	 <a href="https://www.youtube.com/watch?v=89pfB-T8zNc" target="_blank">grids</a>
-	 	(Annotation elements that organize the plans)
-	 , <a href="https://lazybim.com/dimensions-in-revit/" target="_blank">levels</a>
-		 (finite horizontal planes that act as a reference for level-hosted elements, such as roofs, floors, and ceilings.)
-
-	- Most often, you create a level for each known story or other needed reference of the building; 
-	for example, the first floor, the top of the wall, or the bottom of the foundation. 
-
-	 , and <a href="https://www.youtube.com/watch?v=-jDwkqbajlo"  target="_blank">reference planes</a>
-	 	(a 2-dimensional surface to draw 2d lines as guidelines to define the geometry of a family).
-
-<b>View-specific elements</b>
-	 display only in the views in which they are placed. 
-	 They help to describe or document the model. 
-	 example:
-	 dimensions ( Dimensions are system-based families, which means that they are customizable. Aligned; Linear; Angular; Radial; Diameter; Arc Length;...)
-
-Types of view-specific elements:
-	 <b>Annotation elements</b> are 2D components that document the model and maintain scale on paper. 
-		For example, dimensions, tags, and keynotes are annotation elements.
-	 <b>Details</b> are 2D items that provide details about the building model in a particular view.
- 		Examples include detail lines, filled regions, and 2D detail components.
-
 
 <b>Element Properties</b>
 	Each element you place in a drawing is an instance of a family type. 
