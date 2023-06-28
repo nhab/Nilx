@@ -56,19 +56,13 @@ Revit (Videos):
 	They are displayed in relevant views of the model.
 	Examples:
 	- Hosts elements, like     : Walls, Ceilings, Floors, and roofs
+	(Host elements, contain or support other elements. )
 	- Model components, like   : doors, Windows, Stairs, Furniture
+	(all other eleemnts which are not host elements)
 	- Structured elements like : Beams, Structural columns, Structural walls, Isolated footings,3D rebar
 	- MEP Elements like        : Pipes, Ducts, Sprinklers, Air terminals
 	- other: slabs, and ramps, Sinks, boilers, ducts, sprinklers, and electrical panels
 
-	There are 2 types of model elements:
-		1-1. Hosts (or host elements):
-		     are generally built in place at the construction site. 
-		     For example, walls and roofs are hosts.
-
-		1-2. Model components are all the other types of elements in the building model. 
-		     For example, windows, doors, and cabinets are model components
-	
 	2-<i class='markerPink'> datum elements:</i>
 	help to define project context. 
 	For example, grids, levels, and reference planes 
@@ -367,7 +361,8 @@ The Customize menu is displayed by clicking the Customize button.
 	
 2- Add References:
 	Right-click “References“ under Solution Explorer → Add Reference → 
-	Browse → “C:\Program Files\Autodesk\Revit 2019 “ → Add “RevitAPI” & “RevitAPIUI” → Select “RevitAPI“ & “RevitAPIUI“ → Properties → Copy Local → False
+	Browse → “C:\Program Files\Autodesk\Revit 2019 “ → Add “RevitAPI” & “RevitAPIUI” → Select “RevitAPI“ & “RevitAPIUI“ 
+	→ Properties → Copy Local → False
 	
 3- Add Namespaces
 	<pre><code>
