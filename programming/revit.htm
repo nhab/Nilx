@@ -412,27 +412,25 @@ Modeling and analyzing systems to generate layouts, size pipes, and perform calc
 <p>
 <b>Hello World Sample plugin .net framework 4.7</b>
 
-1- Create a new project:
+1- <i class="markerGreen">Create a new project:</i>
 	Visual Studio  → File → New → Project → Class Library (.NET Framework)
 	
-2- Add References:
+2- <i class="markerGreen">Add References:</i>
 	Right-click “References“ under Solution Explorer → Add Reference → 
-	Browse → “C:\Program Files\Autodesk\Revit 2019 “ → Add “RevitAPI” & “RevitAPIUI” → Select “RevitAPI“ & “RevitAPIUI“ 
+	Browse → “C:\Program Files\Autodesk\Revit 2019 “
+	→ Add “RevitAPI” & “RevitAPIUI” → Select “RevitAPI“ & “RevitAPIUI“ 
 	→ Properties → Copy Local → False
 	
-3- Add a new calsss and Implement IExternalCommand
+3- Add a <i class="markerGreen">new calsss</i> and <i class="markerGreen">Implement IExternalCommand</i>
 	<pre><code>	public class Class1:IExternalCommand</code></pre> 
 
-4- Add Namespaces
-	<pre><code>
+4- Add <i class="markerGreen">The execute method</i>
+</p>
+<pre><code>
 	using Autodesk.Revit.Attributes;
 	using Autodesk.Revit.DB;
 	using Autodesk.Revit.UI;
-	</code></pre>
 
-5-	Execute Method
-</p>
-	<pre><code>
 	public class class1:IExternalCommand 
 	{
 		public Result Execute(...)
@@ -443,14 +441,14 @@ Modeling and analyzing systems to generate layouts, size pipes, and perform calc
 	}
 	</code></pre>
 <p>
-6-Build → Build Solution
+6-<i class="markerGreen">Build Solution</i>
 
-7- Create “.Addin” file
-	Right click “MyFirstRevitPlugin” file → Add → New item → Application Manifest File → File name “MyFirstRevitPlugin.addin”
+7-<i class="markerGreen">Create “.Addin” file (manifest)</i> 
+	Right click “MyFirstRevitPlugin” file 
+	→ Add → New item → Application Manifest File
+	→ File name “MyFirstRevitPlugin.addin”
 	
-8- Configure “.Addin” file & Re-build
-
-9-Configure ".Addin" file and Re-build 
+8-<i class="markerGreen">Configure “.Addin” file & Re-build</i> 
 </p>
 	<pre><code>
 	<?xml version="1.0" encoding="utf-8"?>
@@ -479,7 +477,7 @@ or
 	Replace the <Assembly> portion with your directory output from Step 9
 	Set “Copy to Output Directory” property of the .Addin file to “Copy if newer”.
 
-10- Copy addin file to Revit addin directory
+10- <i class="markerGreen">Copy addin file to Revit addin directory</i>
 	 if you installed Revit with default folder location:
 	 All users
 	C:\Program Files\Autodesk\Revit 2019\AddIns
@@ -488,8 +486,9 @@ or
 	Go to directory from Step 9 → Copy “MyFirstRevitPlugin.addin”
 	→ Paste into ” C:\Users\<Your User Name>\AppData\Roaming\Autodesk\Revit\Addins\2019″
 	
-11-Run your first addin!
-	Run Revit 2019 → Load the Addin → Add-ins tab→ External tools → Run “Hello World!”
+11-<i class="markerGreen">Run your first addin!</i>
+	Run Revit 2019 → Load the Addin → Add-ins tab
+	→ External tools → Run “Hello World!”
 </p>
 	
 <h3>Working with wpf forms</h3>
