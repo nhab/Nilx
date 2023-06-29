@@ -420,14 +420,15 @@ Modeling and analyzing systems to generate layouts, size pipes, and perform calc
 	Browse → “C:\Program Files\Autodesk\Revit 2019 “ → Add “RevitAPI” & “RevitAPIUI” → Select “RevitAPI“ & “RevitAPIUI“ 
 	→ Properties → Copy Local → False
 	
-3- Add Namespaces
+3- Add a new calsss and Implement IExternalCommand
+	<pre><code>	public class Class1:IExternalCommand</code></pre> 
+
+4- Add Namespaces
 	<pre><code>
 	using Autodesk.Revit.Attributes;
 	using Autodesk.Revit.DB;
 	using Autodesk.Revit.UI;
 	</code></pre>
-4- Implement IExternalCommand
-	<pre><code>	public class Class1:IExternalCommand</code></pre> 
 
 5-	Execute Method
 </p>
