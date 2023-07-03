@@ -3,10 +3,13 @@
 <meta name='viewport' content='width=device-width, initial-scale=1' />
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
 <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<!--script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/dark.min.css">
+
+
 <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+<body onload='AddToggleButtons();hljs.highlightAll();'>
  <button onclick="toggleAll(this);" >-</button>
  <h2>References</h2>
 <div>
@@ -451,7 +454,8 @@ Modeling and analyzing systems to generate layouts, size pipes, and perform calc
 	
 8-<i class="markerGreen">Configure “.Addin” file & Re-build</i> 
 </p>
-	<pre style="background-color:black">
+	<pre> <!--style="background-color:black"-->
+	<code class="language-html">
 	<?xml version="1.0" encoding="utf-8"?>
 	<RevitAddIns>
 	  <AddIn Type="Command">
@@ -468,6 +472,7 @@ Modeling and analyzing systems to generate layouts, size pipes, and perform calc
 		<VendorDescription>some vendor</VendorDescription>
 	  </AddIn>
 	</RevitAddIns>
+	</code>code>
 	</pre>
 <p>
 	you can also copy and edit the manifest file (.addin) from :
@@ -479,12 +484,12 @@ or
 	Set “Copy to Output Directory” property of the .Addin file to “Copy if newer”.
 
 10- <i class="markerGreen">Copy addin file to Revit addin directory</i>
-	 if you installed Revit with default folder location:
+	 if you installed Revit with the default folder location:
 	 All users
 	C:\Program Files\Autodesk\Revit 2019\AddIns
 	Individual user
 	C:\Users\<Your User Name>\AppData\Roaming\Autodesk\Revit\Addins\2019
-	Go to directory from Step 9 → Copy “MyFirstRevitPlugin.addin”
+	Go to the directory from Step 9 → Copy “MyFirstRevitPlugin.addin”
 	→ Paste into ” C:\Users\<Your User Name>\AppData\Roaming\Autodesk\Revit\Addins\2019″
 	
 11-<i class="markerGreen">Run your first addin!</i>
