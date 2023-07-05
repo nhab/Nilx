@@ -1,3 +1,4 @@
+
 <head>
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -5,11 +6,9 @@
 <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/dark.min.css">
-
-
 <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body onload='AddToggleButtons();hljs.highlightAll();'>
+<body onload='AddToggleButtonsToH2andH3();ReplaceLtGt();hljs.highlightAll();'>
  <button onclick="toggleAll(this);" >-</button>
  <h2>References</h2>
 <div>
@@ -414,9 +413,10 @@ Modeling and analyzing systems to generate layouts, size pipes, and perform calc
 
 <h2>Revit API</h2>
 <div>
-<p>
-<b>Hello World Sample plugin .net framework 4.7</b>
 
+<h3>Hello World Sample plugin .net framework 4.7</h3>
+<div>
+<p>
 1- <i class="markerGreen">Create a new project:</i>
 	Visual Studio  → File → New → Project → Class Library (.NET Framework)
 	
@@ -456,26 +456,26 @@ Modeling and analyzing systems to generate layouts, size pipes, and perform calc
 	
 8-<i class="markerGreen">Configure “.Addin” file & Re-build</i> 
 </p>
-	<pre> <!--style="background-color:black"-->
-	<code class="language-html">
-	&lt;?xml version="1.0" encoding="utf-8"?>
-	&lt;RevitAddIns>
-	  &lt;AddIn Type="Command">
-		&lt;Name>MyFirstRevitPlugin &lt;/Name>
-		&lt;FullClassName>MyFirstRevitPlugin.Class1 &lt;/FullClassName>
-		&lt;Text> Hello World Text &lt;/Text>
-		&lt;Description> Hello World Description &lt;/Description>
-		&lt;VisibilityMode>AlwaysVisible &lt;/VisibilityMode>
-		&lt;Assembly>
-		  C:\Users\junha\source\repos\MyFirstRevitPlugin\MyFirstRevitPlugin\bin\Debug\MyFirstRevitPlugin.dll
-		&lt;/Assembly>
-		&lt;AddInId>502fe383-2648-4e98-adf8-5e6047f9dc34&lt;/AddInId>
-		&lt;VendorId>someVendor&lt;/VendorId>
-		&lt;VendorDescription>some vendor &lt;/VendorDescription>
-	  &lt;/AddIn>
-	&lt;/RevitAddIns>
-	</code>
-	</pre>
+<pre> <!--style="background-color:black"-->
+<code class="language-html">
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;RevitAddIns>
+	&lt;AddIn Type="Command">
+	&lt;Name>MyFirstRevitPlugin &lt;/Name>
+	&lt;FullClassName>MyFirstRevitPlugin.Class1 &lt;/FullClassName>
+	&lt;Text> Hello World Text &lt;/Text>
+	&lt;Description> Hello World Description &lt;/Description>
+	&lt;VisibilityMode>AlwaysVisible &lt;/VisibilityMode>
+	&lt;Assembly>
+		C:\Users\junha\source\repos\MyFirstRevitPlugin\MyFirstRevitPlugin\bin\Debug\MyFirstRevitPlugin.dll
+	&lt;/Assembly>
+	&lt;AddInId>502fe383-2648-4e98-adf8-5e6047f9dc34&lt;/AddInId>
+	&lt;VendorId>someVendor&lt;/VendorId>
+	&lt;VendorDescription>some vendor &lt;/VendorDescription>
+	&lt;/AddIn>
+&lt;/RevitAddIns>
+</code>
+</pre>
 <p>
 	you can also copy and edit the manifest file (.addin) from :
 <a href="https://help.autodesk.com/view/RVT/2023/ENU/?guid=Revit_API_Revit_API_Developers_Guide_Appendices_Hello_World_for_VB_NET_Create_a_addin_manifest_file_html">link1</a>
@@ -498,7 +498,7 @@ or
 	Run Revit 2019 → Load the Addin → Add-ins tab
 	→ External tools → Run “Hello World!”
 </p>
-	
+</div>
 <h3>Working with wpf forms</h3>
 <div>
 <p>
@@ -603,5 +603,4 @@ In yor xaml code behind:
 </code></pre>
 </div>
 
-	
 </div>
