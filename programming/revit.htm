@@ -433,42 +433,45 @@ Modeling and analyzing systems to generate layouts, size pipes, and perform calc
 4- Add <i class="markerGreen">The execute method</i>
 </p>
 <pre><code>
-	using Autodesk.Revit.Attributes;
-	using Autodesk.Revit.DB;
-	using Autodesk.Revit.UI;
+using Autodesk.Revit.Attributes;
+using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 
-	public class class1:IExternalCommand 
+namespace RevitAddinHello
+{
+	[Transaction(TransactionMode.Manual)]	
+	public class Class1:IExternalCommand 
 	{
-		public Result Execute(...)
+	
+		public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
 		{
 			TaskDialog.Show("Title", "Hello World!");
-			return Result.Succeed;
+			return Result.Succeeded;
 		}
 	}
-	</code></pre>
+}
+</code></pre>
 <p>
 6-<i class="markerGreen">Build Solution</i>
 
 7-<i class="markerGreen">Create “.Addin” file (manifest)</i> 
-	Right-click “MyFirstRevitPlugin”  
+	Right-click “RevitAddinHello”  project
 	→ Add → New item → Application Manifest File
-	→ File name “MyFirstRevitPlugin.addin”
+	→ File name “RevitAddinHello.addin”
 	
 8-<i class="markerGreen">Configure “.Addin” file & Re-build</i> 
 </p>
-<pre> <!--style="background-color:black"-->
+<pre>
 <code class="language-html">
 &lt;?xml version="1.0" encoding="utf-8"?>
 &lt;RevitAddIns>
 	&lt;AddIn Type="Command">
-	&lt;Name>MyFirstRevitPlugin &lt;/Name>
-	&lt;FullClassName>MyFirstRevitPlugin.Class1 &lt;/FullClassName>
+	&lt;Name>RevitAddinHello &lt;/Name>
+	&lt;FullClassName>RevitAddinHello.Class1 &lt;/FullClassName>
 	&lt;Text> Hello World Text &lt;/Text>
 	&lt;Description> Hello World Description &lt;/Description>
 	&lt;VisibilityMode>AlwaysVisible &lt;/VisibilityMode>
-	&lt;Assembly>
-		C:\Users\junha\source\repos\MyFirstRevitPlugin\MyFirstRevitPlugin\bin\Debug\MyFirstRevitPlugin.dll
-	&lt;/Assembly>
+	&lt;Assembly>RevitAddinHello.dll&lt;/Assembly>
 	&lt;AddInId>502fe383-2648-4e98-adf8-5e6047f9dc34&lt;/AddInId>
 	&lt;VendorId>someVendor&lt;/VendorId>
 	&lt;VendorDescription>some vendor &lt;/VendorDescription>
