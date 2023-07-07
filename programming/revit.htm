@@ -515,7 +515,8 @@ or
 </div>
 
 <h3>Get Selected Elements of the document</h3>
-In Execute method of the command class (which implements  IExternalCommand) : 
+In Execute method of the command class (which implements  IExternalCommand)
+or wherer you have access to your revit document  : 
 <pre><code>
 ... 
 	public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
@@ -541,7 +542,10 @@ In Execute method of the command class (which implements  IExternalCommand) :
 <div>
 <p>
 <b>To add wpf form to your project</b>
-	-Replace ProjectTypeGuids in the ProperyGroup of the .csproj file to be able to add wpf form to your project:
+You can use a template or boilerplate project as the starting point 
+or you can do it manaully:
+
+-Replace ProjectTypeGuids in the ProperyGroup of the .csproj file to be able to add wpf form to your project:
 </p>
 <pre><code>
 <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -551,8 +555,8 @@ This wil change your project type to C# + WPF
 <b>Adding Content to the wpf form window</b>
 	-Add System.Xaml refrence to the project to be able add Content to the wpf form window
 
-</p>
 <b>Adding a Command to call the xaml window</b>
+</p>
 <pre><code>
  [Transaction(TransactionMode.Manual)]
     public class MyCommand : IExternalCommand
@@ -570,9 +574,10 @@ This wil change your project type to C# + WPF
 
     }
 </code></pre>
-
+<p>
 <b>Reading revit documnet object passed to wpf xaml form`s code background,
-	 using FilteredElementCollector</b>
+	 using FilteredElementCollector() (which is in Autodesk.Revit.DB namespace)</b>
+</p>
 	
 <pre><code>
 data = new ObservableCollection<ElementsInDataGrid>();
