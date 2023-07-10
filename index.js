@@ -32,8 +32,8 @@ json1+=`,{"title":"Software Architect"
         [
             {"caption":"DDD","href":"programming/design/ddd.htm"}
             ,{"caption":"BDD","href":"programming/architecture/bdd.htm"}
-            ,{"caption":"Cleanarchitect","href":"https://youtu.be/dK4Yb6-LxAk"}
-            ,{"caption":"Clean code manifesto","href":"programming/cleancode.htm"}
+            ,{"caption":"Clean Architecture","href":"programming/architecture/cleanArchitecture.htm"}
+            ,{"caption":"Clean code Manifesto","href":"programming/cleancode.htm"}
             ,{"caption":"Abp Steps","href":"programming/design/abpsteps.htm"}
             ,{"caption":"DDD =>microservice","href":"https://www.infoq.com/presentations/microservices-ddd-bounded-contexts/"}
             ,{"caption":"Eventsoucing and CQRS","href":"programming/architecture/eventsourcing.htm"}
