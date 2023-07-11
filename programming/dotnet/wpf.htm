@@ -1,68 +1,101 @@
 <head>
-<meta charset='UTF-8' />
-<meta name='viewport' content='width=device-width, initial-scale=1' />
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
-<script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
-<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/dark.min.css"
+    />
+    <script src="../../../Blocks/blocks.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
-<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
- <button onclick="toggleAll(this);" >-</button>
- <h2>References:</h2>
-<div>
- <p>
-  Texts:  
- <a  target='_blank' href='https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-7.0'
- >microsof wpf</a>
- <a  target='_blank' href='https://www.tutorialspoint.com/wpf/index.htm'
- >tutorialspoint wpf</a>
- <a  target='_blank' href='https://riptutorial.com/wpf/awesome-learning/tutorial'>Awesome</a>
- <a  target='_blank' href='https://riptutorial.com/wpf/awesome-learning/course'>Awsome course</a>
- <a  target='_blank' href='https://github.com/Carlos487/awesome-wpf'>Carlos`s awesome</a>
- videos:
- <a  target='_blank' href='https://riptutorial.com/wpf/awesome-learning/youtube'>Awsome</a>
- <a  target='_blank' href='https://www.youtube.com/playlist?list=PLrW43fNmjaQVYF4zgsD0oL9Iv6u23PI6M'
- >play list</a>
- <a  target='_blank' href='https://www.youtube.com/watch?v=PzP8mw7JUzI'>video</a>
- </p>
- </div>
- <h2>Playground</h2>
- <div>
-<p>
-    To test your wpf xaml,using comand line ( and vscode):
-    1.<cl>dontnet new wpf</cl>
-    2.Edit your Generated MainWindow.xaml by <cl>code .</cl>
-    3.<cl>dotnet run</cl> 
-</p>
- </div>
- <h2>Tutorial</h2>
- <div>
-    <p>
-  
-    <b>XAML is</b> 
-    - an XML-based markup language that implements an application's appearance declaratively. Y   
-    - Typically used to define windows, dialog boxes, pages, and user controls,
-       and to fill them with controls, shapes, and graphics.
-    </p>
-    <pre><code>
-        <Window
+<body onload="AddToggleButtons();hljs.highlightAll();">
+    <button onclick="toggleAll(this);">-</button>
+    <h2>References:</h2>
+    <div>
+        <p>
+            Texts:
+            <a
+                target="_blank"
+                href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-7.0"
+                >microsof wpf</a
+            >
+            <a
+                target="_blank"
+                href="https://www.tutorialspoint.com/wpf/index.htm"
+                >tutorialspoint wpf</a
+            >
+            <a
+                target="_blank"
+                href="https://riptutorial.com/wpf/awesome-learning/tutorial"
+                >Awesome</a
+            >
+            <a
+                target="_blank"
+                href="https://riptutorial.com/wpf/awesome-learning/course"
+                >Awsome course</a
+            >
+            <a target="_blank" href="https://github.com/Carlos487/awesome-wpf"
+                >Carlos`s awesome</a
+            >
+            videos:
+            <a
+                target="_blank"
+                href="https://riptutorial.com/wpf/awesome-learning/youtube"
+                >Awsome</a
+            >
+            <a
+                target="_blank"
+                href="https://www.youtube.com/playlist?list=PLrW43fNmjaQVYF4zgsD0oL9Iv6u23PI6M"
+                >play list</a
+            >
+            <a
+                target="_blank"
+                href="https://www.youtube.com/watch?v=PzP8mw7JUzI"
+                >video</a
+            >
+        </p>
+    </div>
+    <h2>Playground</h2>
+    <div>
+        <p>
+            To test your wpf xaml,using comand line ( and vscode): 1.<cl
+                >dontnet new wpf</cl
+            >
+            2.Edit your Generated MainWindow.xaml by <cl>code .</cl> 3.<cl
+                >dotnet run</cl
+            >
+        </p>
+    </div>
+    <h2>Tutorial</h2>
+    <div>
+        <p>
+            <b>XAML is</b>
+            - an XML-based markup language that implements an application's
+            appearance declaratively. Y - Typically used to define windows,
+            dialog boxes, pages, and user controls, and to fill them with
+            controls, shapes, and graphics.
+        </p>
+        <pre><code class="language-html hljs language-xml">&lt;Window
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             Title="Window with Button"
             Width="250" Height="100">
-
-        <!-- Add button to window -->
-        <Button Name="button"  Click="button_Click">Click Me!</Button>
-
-        </Window>
+        &lt;Button Name="button"  Click="button_Click">Click Me! &lt;/Button>
+ &lt;/Window>
     </code></pre>
-    <p>
-    <b>Code behind is</b>
-    The main behavior of an application 
-    that implements the functionality that responds to user interactions. 
-    For example clicking a menu or button, 
-    and calling business logic and data access logic in response
-    </p>
-    <pre><code>
+        <p>
+            <b>Code behind is</b>
+            The main behavior of an application that implements the
+            functionality that responds to user interactions. For example
+            clicking a menu or button, and calling business logic and data
+            access logic in response
+        </p>
+        <pre><code>
         using System.Windows;
 
         namespace SDKSample
@@ -85,253 +118,715 @@
             }
         }       
     </code></pre>
-    <p>
-    <b>Control</b>
-    is an umbrella term that applies to a category of WPF classes
-     that have the following characteristics:
-    
-        . Hosted in either a window or a page.
-        . Have a user interface.
-        . Implement some behavior.
+        <p>
+            <b>Control</b>
+            is an umbrella term that applies to a category of WPF classes that
+            have the following characteristics: . Hosted in either a window or a
+            page. . Have a user interface. . Implement some behavior.
 
-    <b>WPF Controls (by function):</b>
-
-    </p>
-    <ul>
-        <li><p><strong>Buttons</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.button" class="no-loc" data-linktype="absolute-path">Button</a> and <a href="/en-us/dotnet/api/system.windows.controls.primitives.repeatbutton" class="no-loc" data-linktype="absolute-path">RepeatButton</a>.</p>
-        </li>
-        <li><p><strong>Data Display</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.datagrid" class="no-loc" data-linktype="absolute-path">DataGrid</a>, <a href="/en-us/dotnet/api/system.windows.controls.listview" class="no-loc" data-linktype="absolute-path">ListView</a>, and <a href="/en-us/dotnet/api/system.windows.controls.treeview" class="no-loc" data-linktype="absolute-path">TreeView</a>.</p>
-        </li>
-        <li><p><strong>Date Display and Selection</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.calendar" class="no-loc" data-linktype="absolute-path">Calendar</a> and <a href="/en-us/dotnet/api/system.windows.controls.datepicker" class="no-loc" data-linktype="absolute-path">DatePicker</a>.</p>
-        </li>
-        <li><p><strong>Dialog Boxes</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.win32.openfiledialog" class="no-loc" data-linktype="absolute-path">OpenFileDialog</a>, <a href="/en-us/dotnet/api/system.windows.controls.printdialog" class="no-loc" data-linktype="absolute-path">PrintDialog</a>, and <a href="/en-us/dotnet/api/microsoft.win32.savefiledialog" class="no-loc" data-linktype="absolute-path">SaveFileDialog</a>.</p>
-        </li>
-        <li><p><strong>Digital Ink</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.inkcanvas" class="no-loc" data-linktype="absolute-path">InkCanvas</a> and <a href="/en-us/dotnet/api/system.windows.controls.inkpresenter" class="no-loc" data-linktype="absolute-path">InkPresenter</a>.</p>
-        </li>
-        <li><p><strong>Documents</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.documentviewer" class="no-loc" data-linktype="absolute-path">DocumentViewer</a>, <a href="/en-us/dotnet/api/system.windows.controls.flowdocumentpageviewer" class="no-loc" data-linktype="absolute-path">FlowDocumentPageViewer</a>, <a href="/en-us/dotnet/api/system.windows.controls.flowdocumentreader" class="no-loc" data-linktype="absolute-path">FlowDocumentReader</a>, <a href="/en-us/dotnet/api/system.windows.controls.flowdocumentscrollviewer" class="no-loc" data-linktype="absolute-path">FlowDocumentScrollViewer</a>, and <a href="/en-us/dotnet/api/system.windows.controls.stickynotecontrol" class="no-loc" data-linktype="absolute-path">StickyNoteControl</a>.</p>
-        </li>
-        <li><p><strong>Input</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.textbox" class="no-loc" data-linktype="absolute-path">TextBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.richtextbox" class="no-loc" data-linktype="absolute-path">RichTextBox</a>, and <a href="/en-us/dotnet/api/system.windows.controls.passwordbox" class="no-loc" data-linktype="absolute-path">PasswordBox</a>.</p>
-        </li>
-        <li><p><strong>Layout</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.border" class="no-loc" data-linktype="absolute-path">Border</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.bulletdecorator" class="no-loc" data-linktype="absolute-path">BulletDecorator</a>, <a href="/en-us/dotnet/api/system.windows.controls.canvas" class="no-loc" data-linktype="absolute-path">Canvas</a>, <a href="/en-us/dotnet/api/system.windows.controls.dockpanel" class="no-loc" data-linktype="absolute-path">DockPanel</a>, <a href="/en-us/dotnet/api/system.windows.controls.expander" class="no-loc" data-linktype="absolute-path">Expander</a>, <a href="/en-us/dotnet/api/system.windows.controls.grid" class="no-loc" data-linktype="absolute-path">Grid</a>, <a href="/en-us/dotnet/api/system.windows.controls.gridview" class="no-loc" data-linktype="absolute-path">GridView</a>, <a href="/en-us/dotnet/api/system.windows.controls.gridsplitter" class="no-loc" data-linktype="absolute-path">GridSplitter</a>, <a href="/en-us/dotnet/api/system.windows.controls.groupbox" class="no-loc" data-linktype="absolute-path">GroupBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.panel" class="no-loc" data-linktype="absolute-path">Panel</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.resizegrip" class="no-loc" data-linktype="absolute-path">ResizeGrip</a>, <a href="/en-us/dotnet/api/system.windows.controls.separator" class="no-loc" data-linktype="absolute-path">Separator</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.scrollbar" class="no-loc" data-linktype="absolute-path">ScrollBar</a>, <a href="/en-us/dotnet/api/system.windows.controls.scrollviewer" class="no-loc" data-linktype="absolute-path">ScrollViewer</a>, <a href="/en-us/dotnet/api/system.windows.controls.stackpanel" class="no-loc" data-linktype="absolute-path">StackPanel</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.thumb" class="no-loc" data-linktype="absolute-path">Thumb</a>, <a href="/en-us/dotnet/api/system.windows.controls.viewbox" class="no-loc" data-linktype="absolute-path">Viewbox</a>, <a href="/en-us/dotnet/api/system.windows.controls.virtualizingstackpanel" class="no-loc" data-linktype="absolute-path">VirtualizingStackPanel</a>, <a href="/en-us/dotnet/api/system.windows.window" class="no-loc" data-linktype="absolute-path">Window</a>, and <a href="/en-us/dotnet/api/system.windows.controls.wrappanel" class="no-loc" data-linktype="absolute-path">WrapPanel</a>.</p>
-        </li>
-        <li><p><strong>Media</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.image" class="no-loc" data-linktype="absolute-path">Image</a>, <a href="/en-us/dotnet/api/system.windows.controls.mediaelement" class="no-loc" data-linktype="absolute-path">MediaElement</a>, and <a href="/en-us/dotnet/api/system.windows.controls.soundplayeraction" class="no-loc" data-linktype="absolute-path">SoundPlayerAction</a>.</p>
-        </li>
-        <li><p><strong>Menus</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contextmenu" class="no-loc" data-linktype="absolute-path">ContextMenu</a>, <a href="/en-us/dotnet/api/system.windows.controls.menu" class="no-loc" data-linktype="absolute-path">Menu</a>, and <a href="/en-us/dotnet/api/system.windows.controls.toolbar" class="no-loc" data-linktype="absolute-path">ToolBar</a>.</p>
-        </li>
-        <li><p><strong>Navigation</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.frame" class="no-loc" data-linktype="absolute-path">Frame</a>, <a href="/en-us/dotnet/api/system.windows.documents.hyperlink" class="no-loc" data-linktype="absolute-path">Hyperlink</a>, <a href="/en-us/dotnet/api/system.windows.controls.page" class="no-loc" data-linktype="absolute-path">Page</a>, <a href="/en-us/dotnet/api/system.windows.navigation.navigationwindow" class="no-loc" data-linktype="absolute-path">NavigationWindow</a>, and <a href="/en-us/dotnet/api/system.windows.controls.tabcontrol" class="no-loc" data-linktype="absolute-path">TabControl</a>.</p>
-        </li>
-        <li><p><strong>Selection</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.checkbox" class="no-loc" data-linktype="absolute-path">CheckBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.combobox" class="no-loc" data-linktype="absolute-path">ComboBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.listbox" class="no-loc" data-linktype="absolute-path">ListBox</a>, <a href="/en-us/dotnet/api/system.windows.controls.radiobutton" class="no-loc" data-linktype="absolute-path">RadioButton</a>, and <a href="/en-us/dotnet/api/system.windows.controls.slider" class="no-loc" data-linktype="absolute-path">Slider</a>.</p>
-        </li>
-        <li><p><strong>User Information</strong>: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.accesstext" class="no-loc" data-linktype="absolute-path">AccessText</a>, <a href="/en-us/dotnet/api/system.windows.controls.label" class="no-loc" data-linktype="absolute-path">Label</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.popup" class="no-loc" data-linktype="absolute-path">Popup</a>, <a href="/en-us/dotnet/api/system.windows.controls.progressbar" class="no-loc" data-linktype="absolute-path">ProgressBar</a>, <a href="/en-us/dotnet/api/system.windows.controls.primitives.statusbar" class="no-loc" data-linktype="absolute-path">StatusBar</a>, <a href="/en-us/dotnet/api/system.windows.controls.textblock" class="no-loc" data-linktype="absolute-path">TextBlock</a>, and <a href="/en-us/dotnet/api/system.windows.controls.tooltip" class="no-loc" data-linktype="absolute-path">ToolTip</a>.</p>
-        </li>
+            <b>WPF Controls (by function):</b>
+        </p>
+        <ul>
+            <li>
+                <p>
+                    <strong>Buttons</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.button"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Button</a
+                    >
+                    and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.primitives.repeatbutton"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >RepeatButton</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Data Display</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.datagrid"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >DataGrid</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.listview"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ListView</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.treeview"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >TreeView</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Date Display and Selection</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.calendar"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Calendar</a
+                    >
+                    and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.datepicker"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >DatePicker</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Dialog Boxes</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.win32.openfiledialog"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >OpenFileDialog</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.printdialog"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >PrintDialog</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/microsoft.win32.savefiledialog"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >SaveFileDialog</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Digital Ink</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.inkcanvas"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >InkCanvas</a
+                    >
+                    and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.inkpresenter"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >InkPresenter</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Documents</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.documentviewer"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >DocumentViewer</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.flowdocumentpageviewer"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >FlowDocumentPageViewer</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.flowdocumentreader"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >FlowDocumentReader</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.flowdocumentscrollviewer"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >FlowDocumentScrollViewer</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.stickynotecontrol"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >StickyNoteControl</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Input</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.textbox"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >TextBox</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.richtextbox"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >RichTextBox</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.passwordbox"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >PasswordBox</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Layout</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.border"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Border</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.primitives.bulletdecorator"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >BulletDecorator</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.canvas"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Canvas</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.dockpanel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >DockPanel</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.expander"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Expander</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.grid"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Grid</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.gridview"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >GridView</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.gridsplitter"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >GridSplitter</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.groupbox"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >GroupBox</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.panel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Panel</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.primitives.resizegrip"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ResizeGrip</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.separator"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Separator</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.primitives.scrollbar"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ScrollBar</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.scrollviewer"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ScrollViewer</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.stackpanel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >StackPanel</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.primitives.thumb"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Thumb</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.viewbox"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Viewbox</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.virtualizingstackpanel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >VirtualizingStackPanel</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.window"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Window</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.wrappanel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >WrapPanel</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Media</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.image"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Image</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.mediaelement"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >MediaElement</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.soundplayeraction"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >SoundPlayerAction</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Menus</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contextmenu"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ContextMenu</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.menu"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Menu</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.toolbar"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ToolBar</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Navigation</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.frame"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Frame</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.documents.hyperlink"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Hyperlink</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.page"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Page</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.navigation.navigationwindow"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >NavigationWindow</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.tabcontrol"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >TabControl</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Selection</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.checkbox"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >CheckBox</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.combobox"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ComboBox</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.listbox"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ListBox</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.radiobutton"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >RadioButton</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.slider"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Slider</a
+                    >.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>User Information</strong>:
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.accesstext"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >AccessText</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.label"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Label</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.primitives.popup"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Popup</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.progressbar"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ProgressBar</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.primitives.statusbar"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >StatusBar</a
+                    >,
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.textblock"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >TextBlock</a
+                    >, and
+                    <a
+                        href="/en-us/dotnet/api/system.windows.controls.tooltip"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >ToolTip</a
+                    >.
+                </p>
+            </li>
         </ul>
-    <p>
-    <b>Layout</b>
-    is location and sizes of User interface element.
-    
-    - The cornerstone of the layout system is relative positioning, 
-      which increases the ability to adapt to changing window and display conditions.
-    
-    - The layout system also manages the negotiation between controls to determine the layout.
-
-    - The layout system is exposed to child controls through base WPF classes.
-
-    -For common layouts such as grids, stacking, and docking, WPF includes several layout controls:
-    </p>
-    <ul>
-        <li><p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas" class="no-loc" data-linktype="absolute-path">Canvas</a>: Child controls provide their own layout.</p>
-        </li>
-        <li><p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.dockpanel" class="no-loc" data-linktype="absolute-path">DockPanel</a>: Child controls are aligned to the edges of the panel.</p>
-        </li>
-        <li><p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.grid" class="no-loc" data-linktype="absolute-path">Grid</a>: Child controls are positioned by rows and columns.</p>
-        </li>
-        <li><p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.stackpanel" class="no-loc" data-linktype="absolute-path">StackPanel</a>: Child controls are stacked either vertically or horizontally.</p>
-        </li>
-        <li><p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.virtualizingstackpanel" class="no-loc" data-linktype="absolute-path">VirtualizingStackPanel</a>: Child controls are virtualized and arranged on a single line that is either horizontally or vertically oriented.</p>
-        </li>
-        <li><p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.wrappanel" class="no-loc" data-linktype="absolute-path">WrapPanel</a>: Child controls are positioned in left-to-right order and wrapped to the next line when there isn't enough space on the current line.</p>
-        </li>
-    </ul>
-    <p>
-    <b>Data binding</b>
-    is automatic acceccing the data in the UI eleemnts 
-    from/ into an application's managed objects( DataContext property of the window ).
-    </p>
-    <pre><code>
-        <Window
+        <p>
+            <b>Layout</b>
+            is location and sizes of User interface element. - The cornerstone
+            of the layout system is relative positioning, which increases the
+            ability to adapt to changing window and display conditions. - The
+            layout system also manages the negotiation between controls to
+            determine the layout. - The layout system is exposed to child
+            controls through base WPF classes. -For common layouts such as
+            grids, stacking, and docking, WPF includes several layout controls:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Canvas</a
+                    >: Child controls provide their own layout.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.dockpanel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >DockPanel</a
+                    >: Child controls are aligned to the edges of the panel.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.grid"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >Grid</a
+                    >: Child controls are positioned by rows and columns.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.stackpanel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >StackPanel</a
+                    >: Child controls are stacked either vertically or
+                    horizontally.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.virtualizingstackpanel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >VirtualizingStackPanel</a
+                    >: Child controls are virtualized and arranged on a single
+                    line that is either horizontally or vertically oriented.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a
+                        href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.wrappanel"
+                        class="no-loc"
+                        data-linktype="absolute-path"
+                        >WrapPanel</a
+                    >: Child controls are positioned in left-to-right order and
+                    wrapped to the next line when there isn't enough space on
+                    the current line.
+                </p>
+            </li>
+        </ul>
+        <p>
+            <b>Data binding</b>
+            is automatic acceccing the data in the UI eleemnts from/ into an
+            application's managed objects( DataContext property of the window ).
+        </p>
+        <pre><code>
+        &lt;Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="SDKSample.DataBindingWindow">
    
-        <!-- Bind the TextBox to the data source (TextBox.Text to Person.Name) -->
-        <TextBox Name="personNameTextBox" Text="{Binding Path=Name}" />
+        &lt;!-- Bind the TextBox to the data source (TextBox.Text to Person.Name) -->
+        &lt;TextBox Name="personNameTextBox" Text="{Binding Path=Name}" />
    
-        </Window>
+        &lt;/Window>
     </code></pre>
-    <p>
-    - The WPF data binding engine provides more than just binding, 
-    it provides validation, sorting, filtering, and grouping.
-<b>Templates</b>
-Sometimes the default appearance of a control may conflict with the overall appearance of an application.
-In this case, you can use a <a href='https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.controltemplate?view=windowsdesktop-7.0'
->ControlTemplate</a> to change the appearance of the control's user interface 
-without changing its content and behavior.
-</p>
-<pre><code>
-    <Style TargetType="Button">
-        <!--Set to true to not get any properties from the themes.-->
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Template">
-          <Setter.Value>
-            <ControlTemplate TargetType="Button">
-              <Grid>
-                <Ellipse Fill="{TemplateBinding Background}"/>
-                <ContentPresenter HorizontalAlignment="Center"
+        <p>
+            - The WPF data binding engine provides more than just binding, it
+            provides validation, sorting, filtering, and grouping.
+            <b>Templates</b>
+            Sometimes the default appearance of a control may conflict with the
+            overall appearance of an application. In this case, you can use a
+            <a
+                href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.controltemplate?view=windowsdesktop-7.0"
+                >ControlTemplate</a
+            >
+            to change the appearance of the control's user interface without
+            changing its content and behavior.
+        </p>
+        <pre><code>
+    &lt;Style TargetType="Button">
+        &lt;!--Set to true to not get any properties from the themes.-->
+        &lt;Setter Property="OverridesDefaultStyle" Value="True"/>
+        &lt;Setter Property="Template">
+          &lt;Setter.Value>
+            &lt;ControlTemplate TargetType="Button">
+              &lt;Grid>
+                &lt;Ellipse Fill="{TemplateBinding Background}"/>
+                &lt;ContentPresenter HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
-              </Grid>
-            </ControlTemplate>
-          </Setter.Value>
-        </Setter>
-      </Style>
+              &lt;/Grid>
+            &lt;/ControlTemplate>
+          &lt;/Setter.Value>
+        &lt;/Setter>
+      &lt;/Style>
 </code></pre>
-<p>
+        <p>
+            <b>Data templates</b>
+            Whereas a control template lets you specify the appearance of a
+            control, a data template lets you specify the appearance of a
+            control's content.
 
-<b>Data templates</b>
-Whereas a control template lets you specify the appearance of a control, 
-a data template lets you specify the appearance of a control's content.
-
-<a href='https://learn.microsoft.com/en-us/dotnet/api/system.windows.datatemplate?view=windowsdesktop-7.0'
->Data templates</a> are frequently used to enhance how bound data is displayed.
-<a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/data-templating-overview?view=netdesktop-7.0"
->Data Templating overview</a>
-<b>Styles</b>
-enable developers and designers to standardize on a particular appearance for their product.
-
-The following example creates a style that sets the background color for every Button on the window to Orange:
-</p>
-<pre><code>
-    <Window
+            <a
+                href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.datatemplate?view=windowsdesktop-7.0"
+                >Data templates</a
+            >
+            are frequently used to enhance how bound data is displayed.
+            <a
+                href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/data-templating-overview?view=netdesktop-7.0"
+                >Data Templating overview</a
+            >
+            <b>Styles</b>
+            enable developers and designers to standardize on a particular
+            appearance for their product. The following example creates a style
+            that sets the background color for every Button on the window to
+            Orange:
+        </p>
+        <pre><code>
+    &lt;Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="SDKSample.StyleWindow"
     Title="Styles">
 
-    <Window.Resources>
-        <!-- Style that will be applied to all buttons for this window -->
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Orange" />
-            <Setter Property="BorderBrush" Value="Crimson" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Margin" Value="5" />
-        </Style>
-    </Window.Resources>
-    <StackPanel>
+    &lt;Window.Resources>
+        &lt;!-- Style that will be applied to all buttons for this window -->
+        &lt;Style TargetType="{x:Type Button}">
+            &lt;Setter Property="Background" Value="Orange" />
+            &lt;Setter Property="BorderBrush" Value="Crimson" />
+            &lt;Setter Property="FontSize" Value="20" />
+            &lt;Setter Property="FontWeight" Value="Bold" />
+            &lt;Setter Property="Margin" Value="5" />
+        &lt;/Style>
+    &lt;/Window.Resources>
+    &lt;StackPanel>
 
-        <!-- This button will have the style applied to it -->
-        <Button>Click Me!</Button>
+        &lt;!-- This button will have the style applied to it -->
+        &lt;Button>Click Me!&lt;/Button>
 
-        <!-- This label will not have the style applied to it -->
-        <Label>Don't Click Me!</Label>
+        &lt;!-- This label will not have the style applied to it -->
+        &lt;Label>Don't Click Me!&lt;/Label>
 
-        <!-- This button will have the style applied to it -->
-        <Button>Click Me!</Button>
+        &lt;!-- This button will have the style applied to it -->
+        &lt;Button>Click Me!&lt;/Button>
         
-    </StackPanel>
-</Window>
+    &lt;/StackPanel>
+&lt;/Window>
 </code></pre>
-<p>
-
-<b>Resources</b>
-encapsulate style templates in a single location.
-
-The following example defines a common background color that is shared by a Button and a Label:
-</p>
-<pre><code>
-<Window
+        <p>
+            <b>Resources</b>
+            encapsulate style templates in a single location. The following
+            example defines a common background color that is shared by a Button
+            and a Label:
+        </p>
+        <pre><code>
+&lt;Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="SDKSample.ResourcesWindow"
     Title="Resources Window">
 
-  <!-- Define window-scoped background color resource -->
-  <Window.Resources>
-    <SolidColorBrush x:Key="defaultBackground" Color="Red" />
-  </Window.Resources>
+  &lt;!-- Define window-scoped background color resource -->
+  &lt;Window.Resources>
+    &lt;SolidColorBrush x:Key="defaultBackground" Color="Red" />
+  &lt;/Window.Resources>
 
-  <!-- Button background is defined by window-scoped resource -->
-  <Button Background="{StaticResource defaultBackground}">One Button</Button>
+  &lt;!-- Button background is defined by window-scoped resource -->
+  &lt;Button Background="{StaticResource defaultBackground}">One Button&lt;/Button>
 
-  <!-- Label background is defined by window-scoped resource -->
-  <Label Background="{StaticResource defaultBackground}">One Label</Label>
-</Window>
+  &lt;!-- Label background is defined by window-scoped resource -->
+  &lt;Label Background="{StaticResource defaultBackground}">One Label&lt;/Label>
+&lt;/Window>
+ </code></pre>
+        <p>
+            <b>Custom controls</b>
+            - A custom control derives from UserControl and is composed of one
+            or more other controls.
+
+            <b>Dependency properties</b>is a property: - whose value depends on
+            the external sources, such as animation, data binding, styles, or
+            visual tree inheritance - also has the built-in feature of providing
+            notification when the property has changed, data binding and
+            styling. - when you set a value of a Dependency Property it is not
+            stored in a field of your object, but in a dictionary of keys and
+            values provided by the base class DependencyObject.
+
+            <b>Advantages of a Dependency Property</b>
+
+            - Less memory consumption The Dependency Property stores the
+            property only when it is altered or modified. Hence a huge amount of
+            memory for fields are free. - Property value inheritance It means
+            that if no value is set for the property then it will return to the
+            inheritance tree up to where it gets the value. - Change
+            notification and Data Bindings Whenever a property changes its value
+            it provides notification in the Dependency Property using
+            INotifyPropertyChange and also helps in data binding. -
+            Participation in animation, styles and templates A Dependency
+            Property can animate, set styles using style setters and even
+            provide templates for the control. - CallBacks Whenever a property
+            is changed you can have a callback invoked. - Resources You can
+            define a Resource for the definition of a Dependency Property in
+            XAML. - Overriding Metadata You can define certain behaviours of a
+            Dependency Property using PropertyMetaData. Thus, overriding a
+            metadata from a derived property will not require you to redefine or
+            re-implement the entire property definition.
+            <b>Example</b>
+        </p>
+        <pre><code>
+ &lt;Window x:Class="WpfApplication1.DependencyPropertyDemo" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:WpfApplication1" Title="DependencyPropertyDemo" Height="350" Width="525">  
+    &lt;Window.Resources>  
+        &lt;ResourceDictionary>  
+            &lt;local:CarDependencyProperty x:Key="CarDependency">&lt;/local:CarDependencyProperty>  
+        &lt;/ResourceDictionary>  
+    &lt;/Window.Resources>  
+    &lt;Grid>  
+        &lt;Grid.RowDefinitions>  
+            &lt;RowDefinition />  
+            &lt;RowDefinition />  
+        &lt;/Grid.RowDefinitions>  
+        &lt;Label Content="Enter Car:" Grid.Row="0" VerticalAlignment="Center" />  
+        &lt;TextBox Text="{Binding Path=MyCar, Source={StaticResource CarDependency }}" Name="MyTextCar" Height="25" Width="150" />  
+        &lt;Button Name="MyButton" Content="Click Me!" Height="25" Click="MyButton_Click" Width="150" Grid.Row="1" />  
+    &lt;/Grid>  
+&lt;/Window>
 </code></pre>
-<p>
-<b>Custom controls</b>
-- A custom control derives from UserControl and is composed of one or more other controls.
-
-<b>Dependency properties</b>is a property:
-
-	- whose value depends on the external sources, such as 
-	 animation, data binding, styles, or visual tree inheritance
-
-	- also has the built-in feature of providing notification when
-     the property has changed, data binding and styling.
-
-	- when you set a value of a Dependency Property it is not stored in a field of your object,
-	 but in a dictionary of keys and values provided by the base class DependencyObject. 
-
- <b>Advantages of a Dependency Property</b>
-
-	- Less memory consumption
-		The Dependency Property stores the property only when it is altered or modified.
-		Hence a huge amount of memory for fields are free.
-
-	- Property value inheritance
-		It means that if no value is set for the property 
-		then it will return to the inheritance tree up to where it gets the value.
-	
-	- Change notification and Data Bindings
-		Whenever a property changes its value 
-		it provides notification in the Dependency Property 
-		using INotifyPropertyChange and also helps in data binding.
-	
-	- Participation in animation, styles and templates
-		A Dependency Property can animate, set styles using style setters
-		 and even provide templates for the control.
-	
-	- CallBacks
-		Whenever a property is changed you can have a callback invoked.
-
-	- Resources
-		You can define a Resource for the definition of a Dependency Property in XAML.
-
-	- Overriding Metadata
-		You can define certain behaviours of a Dependency Property using PropertyMetaData.
-		Thus, overriding a metadata from a derived property 
-		will not require you to redefine or re-implement the entire property definition.
- <b>Example</b>
- </p>
- <pre><code>
- <Window x:Class="WpfApplication1.DependencyPropertyDemo" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:WpfApplication1" Title="DependencyPropertyDemo" Height="350" Width="525">  
-    <Window.Resources>  
-        <ResourceDictionary>  
-            <local:CarDependencyProperty x:Key="CarDependency"></local:CarDependencyProperty>  
-        </ResourceDictionary>  
-    </Window.Resources>  
-    <Grid>  
-        <Grid.RowDefinitions>  
-            <RowDefinition />  
-            <RowDefinition />  
-        </Grid.RowDefinitions>  
-        <Label Content="Enter Car:" Grid.Row="0" VerticalAlignment="Center" />  
-        <TextBox Text="{Binding Path=MyCar, Source={StaticResource CarDependency }}" Name="MyTextCar" Height="25" Width="150" />  
-        <Button Name="MyButton" Content="Click Me!" Height="25" Click="MyButton_Click" Width="150" Grid.Row="1" />  
-    </Grid>  
-</Window>
-</code></pre>
-Code behind:
-<pre><code>
+        Code behind:
+        <pre><code>
 namespace WpfApplication1 {  
     /// <summary>  
     /// Interaction logic for DependencyPropertyDemo.xaml  
@@ -360,7 +855,6 @@ namespace WpfApplication1 {
 }  
  
  </code></pre>
- <p>
- 
- </p>
-</div>
+        <p></p>
+    </div>
+</body>
