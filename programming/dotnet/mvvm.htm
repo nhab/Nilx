@@ -1,17 +1,15 @@
 <head>
-<meta charset='UTF-8' />
-<meta name='viewport' content='width=device-width, initial-scale=1' />
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
-<script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
-<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
-
- <script></script>
-</head>
-<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
-<button onclick='toggleAll(this);'>-</button>
-
-<h2>References</h2>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+    <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/dark.min.css">
+    <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+    </head>
+    <body onload='AddToggleButtonsToH2andH3();ReplaceLtGt();hljs.highlightAll();'>
+     <button onclick="toggleAll(this);" >-</button>
+     <h2>References</h2>
 <div>
 <p>
     <a href="https://caliburnmicro.com/">caliburn micro</a>
@@ -42,9 +40,10 @@
   - link the data of properties in the 'view',
     back to properties in the 'view model':
  </p>
- <pre><code>
-    // binds the textblock to FirstName of ViewModel class
-    <TextBlock Text="{Binding Path=FirstName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+ Binds the textblock to FirstName of ViewModel class
+ <pre><code class="language-html">
+   
+    &lt;TextBlock Text="{Binding Path=FirstName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
   </code></pre>
   of course you should set the DataContext of your view to the viewModel,first:
   <pre><code>
