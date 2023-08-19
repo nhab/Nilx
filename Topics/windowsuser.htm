@@ -71,7 +71,7 @@ HKEY_CURRENT_USER
 HKEY_LOCAL_MACHINE
 HKEY_USERS
 HKEY_CURRENT_CONFIG  
-  </p>
+</p>
   <h3>Sample</h3>
   <div>
   A simple REG file that adds value to a specific key in the registry. 
@@ -81,9 +81,11 @@ HKEY_CURRENT_CONFIG
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters]"CrashOnCtrlScroll"=dword:00000001
   </code></pre>
   </div>
- <h3>The syntax for REG Files</h3> 
-  <div>
-   RegistryEditorVersion
+  
+<h3>The syntax for REG Files</h3> 
+<div>
+<p>
+RegistryEditorVersion
 Blank line
 [RegistryPath1]
 
@@ -93,8 +95,7 @@ Blank line
 [RegistryPath2]
 
 "DataItemName3"="DataType3:DataValue3"
-  </code></pre>
-   <p>
+ 
 where:
 
 RegistryEditorVersion is either "Windows Registry Editor Version 5.00" for Windows 2000, Windows XP, and Windows Server 2003, 
@@ -130,8 +131,8 @@ DataTypex is the data type for the registry value and immediately follows the eq
    do not include the data type value or colon. In this case,
    Regedit.exe assumes REG_SZ for the data type. 
    The following table lists the typical registry data types:
-
-   </p>
+</p>
+ 
    <h3>Adding a New Registry Entry:</h3>
    <p>
 To add a new registry entry, you can create a new .reg file with the following format:
@@ -157,8 +158,6 @@ Replace KeyToUpdate with the actual key path and ValueToUpdate with the name of 
 <p>
  To delete a registry entry, you need to add a minus sign (-) before the value name. Here's an example:
 
-plaintext
-Copy code
 Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\KeyToDelete]
