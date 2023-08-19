@@ -201,6 +201,16 @@ This will delete the value named "ValueToDelete" under the specified key.
 </p>   
 </div>
 
-
 </div>
+
+<h2>Useful Operations</h2>
+   <div>
+      <h3>Diabling Caps Lock on keyboard</h3>
+      <pre><code>
+Windows Registry Editor Version 5.00
+
+[Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard]
+"ScanCode Map"=REG_DWORD:00 00 00 00 00 00 00 00 02 00 00 00 00 00 3A 00 00 00 00 00
+      </code></pre>
+   </div>
 </body>
