@@ -8,14 +8,14 @@
 <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
 <body onload='AddToggleButtonsToH2andH3();ReplaceLtGt();hljs.highlightAll();'>
- <button onclick="toggleAll(this);" >-</button>
- <h2>References</h2>
+<button onclick="toggleAll(this);" >-</button>
+<h2>References</h2>
 <div> 
- <p>
+   <p>
 <a href="https://support.microsoft.com/en-us/topic/how-to-add-modify-or-delete-registry-subkeys-and-values-by-using-a-reg-file-9c7f37cf-a5e9-e1cd-c4fa-2a26218a1a23"
-  >Microsoft tutorial on how to add/remove/edit the Registry</a> 
+   >Microsoft tutorial on how to add/remove/edit the Registry</a> 
 <a href="https://www.lifewire.com/what-is-a-registry-hive-2625986">Hives</a>
- </p>
+   </p>
 </div>
 
 <h2>Tips</h2>
@@ -23,51 +23,51 @@
 <h3>Add <b>Hibernte</b> to shutdown button :</h3>
 <div>
 <p>
-  1- On the taskbar, type "control panel", and select it.
-  2- Select <b>System and Security</b>.
-  3- In the Power Options section, select <b>Change what the power buttons do</b>.
-  4- Select Change settings that are currently unavailable.
-  5- In the Shutdown settings section, select Hibernate.
-  6-Select Save changes.
+   1- On the taskbar, type "control panel", and select it.
+   2- Select <b>System and Security</b>.
+   3- In the Power Options section, select <b>Change what the power buttons do</b>.
+   4- Select Change settings that are currently unavailable.
+   5- In the Shutdown settings section, select Hibernate.
+   6-Select Save changes.
 </p>
 </div>
-    
+      
 <h3>Temporarily <b>swith off windows security :</b></h3>
 <div>
-    Start > "Windows Security" > under Virus & threat protection settings > select Manage settings > Switch Real-time protection to Off.
+      Start > "Windows Security" > under Virus & threat protection settings > select Manage settings > Switch Real-time protection to Off.
 </div>
-    
+      
 <h3>To make horizontal space to desktop icons,Change <b>IconSpacing</b> in the registry:</h3>
 <div>
 <p>
-    Computer\HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
-    
-    - The default value is –1125 for both entries, while the range can be between –480(less space) to –2730(maximum space).
-    - For vertical spacing, Change <b>VerticalSpacing</b>s entry.
+      Computer\HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
+      
+      - The default value is –1125 for both entries, while the range can be between –480(less space) to –2730(maximum space).
+      - For vertical spacing, Change <b>VerticalSpacing</b>s entry.
 </p>
 </div>
-    
+      
 <h3>To resize Desktop icons</h3>
 <div>
-     use Ctrl+Shift+1 to 4
+      use Ctrl+Shift+1 to 4
 </div>
-    <h3></h3>
+   
 </div>
- 
- <h2>REG files</h2>
- <div>
-  <h3>Spec></h3>
-  <p>
+    
+<h2>REG files</h2>
+<div>
+<h3>Spec></h3>
+<p>
 - REG files are text files with the .reg file extension.
 - These files can contain hives, keys, and values
 - A registry <b>hive</b> is like a folder that organizes the various keys and values that make up the Windows Registry
 - A hive in the Windows Registry is the name given to a major section of the registry that contains registry keys,
-  registry subkeys, and registry values.
+registry subkeys, and registry values.
 - All keys that are considered hives begin with "HKEY" and are at the root, 
-  or the top of the hierarchy in the registry,
-  which is why they're also sometimes called root keys or core system hives.
+or the top of the hierarchy in the registry,
+which is why they're also sometimes called root keys or core system hives.
 -n Registry Editor, the hives are the set of registry keys 
-  that appear as folders on the left-hand side of the screen when all other keys have been minimized.
+that appear as folders on the left-hand side of the screen when all other keys have been minimized.
 
 Here is a list of the common registry hives in Windows:
 
@@ -77,16 +77,15 @@ HKEY_LOCAL_MACHINE
 HKEY_USERS
 HKEY_CURRENT_CONFIG  
 </p>
-  <h3>Sample</h3>
-  <div>
-  A simple REG file that adds value to a specific key in the registry. 
-  In this case, the goal is to add the data necessary for the classic fake Blue Screen of Death:
-  <pre><code>
-   Windows Registry Editor Version 5.00
+<h3>Sample</h3>
+<p>
+A simple REG file that adds value to a specific key in the registry. 
+In this case, the goal is to add the data necessary for the classic fake Blue Screen of Death:
+
+Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters]"CrashOnCtrlScroll"=dword:00000001
-  </code></pre>
-  </div>
-  
+</p>
+   
 <h3>The syntax for REG Files</h3> 
 <p>
 RegistryEditorVersion
@@ -99,13 +98,13 @@ Blank line
 [RegistryPath2]
 
 "DataItemName3"="DataType3:DataValue3"
- 
+   
 where:
 
 RegistryEditorVersion is either "Windows Registry Editor Version 5.00" for Windows 2000, Windows XP, and Windows Server 2003, 
    or "REGEDIT4" for Windows 98 and Windows NT 4.0. The "REGEDIT4" header also works on Windows 2000-based, Windows XP-based, and Windows Server 2003-based computers.
 
- This identifies the start of a new registry path. 
+   This identifies the start of a new registry path. 
    Each key or subkey is a new registry path. 
    If you have several keys in your .reg file, 
    blank lines can help you to examine and to troubleshoot the contents.
@@ -136,7 +135,7 @@ DataTypex is the data type for the registry value and immediately follows the eq
    Regedit.exe assumes REG_SZ for the data type. 
    The following table lists the typical registry data types:
 </p>
- 
+   
 <h3>Adding a New Registry Entry:</h3>
 <p>
 To add a new registry entry, you can create a new .reg file with the following format:
@@ -146,7 +145,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\NewKey]
 "NewValue"="NewData"
 This example adds a new key named "NewKey" under HKEY_LOCAL_MACHINE\SOFTWARE with a string value named "NewValue" and assigns it the data "NewData".
- </p>
+</p>
 
 <h3>Editing an Existing Registry Entry:</h3>
 <p>
@@ -160,8 +159,9 @@ Replace KeyToUpdate with the actual key path and ValueToUpdate with the name of 
 </p>
 
 <h3>Deleting a Registry Entry:</h3>
+<div>
 <p>
- To delete a registry entry, you need to add a minus sign (-) before the value name. Here's an example:
+To delete a registry entry, you need to add a minus sign (-) before the value name. Here's an example:
 
 Windows Registry Editor Version 5.00
 
@@ -169,12 +169,13 @@ Windows Registry Editor Version 5.00
 "-"="ValueToDelete"
 This will delete the value named "ValueToDelete" under the specified key.
    
-</p>
+</p>   
+</div>
 
 <h3>Deletion example 2</h3>
 <p>
-    To delete a registry key with a .reg file,
-    put a hyphen (-) in front of the KEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Providers\Client Side Rendering Print Provider﻿
+   To delete a registry key with a .reg file,
+   put a hyphen (-) in front of the KEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Providers\Client Side Rendering Print Provider﻿
 
 example
 
