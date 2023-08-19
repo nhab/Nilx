@@ -10,10 +10,12 @@
 <body onload='AddToggleButtonsToH2andH3();ReplaceLtGt();hljs.highlightAll();'>
  <button onclick="toggleAll(this);" >-</button>
  <h2>References</h2>
-<div></div>
- <a href="https://support.microsoft.com/en-us/topic/how-to-add-modify-or-delete-registry-subkeys-and-values-by-using-a-reg-file-9c7f37cf-a5e9-e1cd-c4fa-2a26218a1a23"
+<div> 
+<a href="https://support.microsoft.com/en-us/topic/how-to-add-modify-or-delete-registry-subkeys-and-values-by-using-a-reg-file-9c7f37cf-a5e9-e1cd-c4fa-2a26218a1a23"
   >Microsoft tutorial on how to add/remove/edit the Registry</a> 
 <a href="https://www.lifewire.com/what-is-a-registry-hive-2625986">Hives</a>
+</div>
+
 <h2>Tips</h2>
 <div>
 <h3>Add <b>Hibernte</b> to shutdown button :</h3>
@@ -83,7 +85,6 @@ HKEY_CURRENT_CONFIG
   </div>
   
 <h3>The syntax for REG Files</h3> 
-<div>
 <p>
 RegistryEditorVersion
 Blank line
@@ -133,8 +134,8 @@ DataTypex is the data type for the registry value and immediately follows the eq
    The following table lists the typical registry data types:
 </p>
  
-   <h3>Adding a New Registry Entry:</h3>
-   <p>
+<h3>Adding a New Registry Entry:</h3>
+<p>
 To add a new registry entry, you can create a new .reg file with the following format:
 
 Windows Registry Editor Version 5.00
@@ -145,7 +146,7 @@ This example adds a new key named "NewKey" under HKEY_LOCAL_MACHINE\SOFTWARE wit
  </p>
 
 <h3>Editing an Existing Registry Entry:</h3>
-   <p>
+<p>
 To edit an existing registry entry, you'll modify the value data of the entry. Create a .reg file like this:
 
 Windows Registry Editor Version 5.00
@@ -154,6 +155,7 @@ Windows Registry Editor Version 5.00
 "ValueToUpdate"="NewUpdatedData"
 Replace KeyToUpdate with the actual key path and ValueToUpdate with the name of the value you want to update.
 </p>
+
 <h3>Deleting a Registry Entry:</h3>
 <p>
  To delete a registry entry, you need to add a minus sign (-) before the value name. Here's an example:
@@ -166,15 +168,14 @@ This will delete the value named "ValueToDelete" under the specified key.
    
 </p>
 
-  <h3>Deletion example 2</h3>
-   <p>
+<h3>Deletion example 2</h3>
+<p>
     To delete a registry key with a .reg file,
     put a hyphen (-) in front of the KEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Providers\Client Side Rendering Print Provider﻿
 
 example
 
 -HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Providers\Client Side Rendering Print Provider﻿
-   </p>
-  </div>
- </div>
+</p>
+</div>
 </body>
