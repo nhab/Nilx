@@ -77,19 +77,22 @@ HKEY_LOCAL_MACHINE
 HKEY_USERS
 HKEY_CURRENT_CONFIG  
 </p>
+   
 <h3>Sample</h3>
+<div>
 <p>
 A simple REG file that adds value to a specific key in the registry. 
 In this case, the goal is to add the data necessary for the classic fake Blue Screen of Death:
+</p>
 <pre><code>
 Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters]"CrashOnCtrlScroll"=dword:00000001
 </code></pre>
-</p>
+</div> 
    
 <h3>The syntax for REG Files</h3> 
-<p>
-   <pre><code>
+<div>
+<pre><code>
 RegistryEditorVersion
 Blank line
 [RegistryPath1]
@@ -101,6 +104,7 @@ Blank line
 
 "DataItemName3"="DataType3:DataValue3"
    </code></pre>
+<p>
 where:
 
 RegistryEditorVersion is either "Windows Registry Editor Version 5.00" for Windows 2000, Windows XP, and Windows Server 2003, 
@@ -114,9 +118,11 @@ RegistryEditorVersion is either "Windows Registry Editor Version 5.00" for Windo
 RegistryPathx is the path of the subkey that holds the first value you are importing.
    Enclose the path in square brackets, and separate each level of the hierarchy by a backslash. 
    For example:
+</p>
 <pre><code>
 [HKEY_LOCAL_ MACHINE\SOFTWARE\Policies\Microsoft\Windows\System] 
 </code></pre>
+   <p>
    A .reg file can contain several registry paths.
    If the bottom of the hierarchy in the path statement does not exist in the registry,
    a new subkey is created. 
@@ -138,56 +144,59 @@ DataTypex is the data type for the registry value and immediately follows the eq
    Regedit.exe assumes REG_SZ for the data type. 
    The following table lists the typical registry data types:
 </p>
+</div>
    
 <h3>Adding a New Registry Entry:</h3>
+<div>
 <p>
 To add a new registry entry, you can create a new .reg file with the following format:
-
-Windows Registry Editor Version 5.00
+</p>
 <pre><code>
+Windows Registry Editor Version 5.00
+
 [HKEY_LOCAL_MACHINE\SOFTWARE\NewKey]
 "NewValue"="NewData"
 </code></pre>
+<p>
 This example adds a new key named "NewKey" under HKEY_LOCAL_MACHINE\SOFTWARE with a string value named "NewValue" and assigns it the data "NewData".
 </p>
-
+</div>
+   
 <h3>Editing an Existing Registry Entry:</h3>
+<div>
 <p>
-To edit an existing registry entry, you'll modify the value data of the entry. Create a .reg file like this:
+To edit an existing registry entry, you'll modify the value data of the entry.
+   Create a .reg file like this:
+</p>
 <pre><code>
 Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\KeyToUpdate]
 "ValueToUpdate"="NewUpdatedData"
 </code></pre>
-Replace KeyToUpdate with the actual key path and ValueToUpdate with the name of the value you want to update.
+<p>
+Replace KeyToUpdate with the actual key path and ValueToUpdate 
+   with the name of the value you want to update.
 </p>
-
+</div>
+   
 <h3>Deleting a Registry Entry:</h3>
 <div>
 <p>
 To delete a registry entry, you need to add a minus sign (-) before the value name. 
    Here's an example:
+</p>
 <pre><code>
 Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\KeyToDelete]
 "-"="ValueToDelete"
 </code></pre>
+<p>
 This will delete the value named "ValueToDelete" under the specified key.
-   
 </p>   
 </div>
 
-<h3>Deletion example 2</h3>
-<p>
-   To delete a registry key with a .reg file,
-   put a hyphen (-) in front of the KEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Providers\Client Side Rendering Print Provider﻿
 
-example
-<pre><code>
- -HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Providers\Client Side Rendering Print Provider﻿
-</code></pre>
-</p>
 </div>
 </body>
