@@ -11,6 +11,8 @@
  <button onclick="toggleAll(this);" >-</button>
  <h2>References</h2>
 <div></div>
+ <a href="https://support.microsoft.com/en-us/topic/how-to-add-modify-or-delete-registry-subkeys-and-values-by-using-a-reg-file-9c7f37cf-a5e9-e1cd-c4fa-2a26218a1a23"
+  >Microsoft tutorial on how to add/remove/edit the Registry</a> 
 <a href="https://www.lifewire.com/what-is-a-registry-hive-2625986">Hives</a>
 <h2>Tips</h2>
 <div>
@@ -81,11 +83,55 @@ HKEY_CURRENT_CONFIG
   </div>
  <h3>The syntax for REG Files</h3> 
   <div>
-   <pre><code>
-Windows Registry Editor Version 5.00
-[\\]
-"Value name"=:
-   </code></pre>
+   RegistryEditorVersion
+Blank line
+[RegistryPath1]
+
+"DataItemName1"="DataType1:DataValue1"
+DataItemName2"="DataType2:DataValue2"
+Blank line
+[RegistryPath2]
+
+"DataItemName3"="DataType3:DataValue3"
+  </code></pre>
+   <p>
+where:
+
+RegistryEditorVersion is either "Windows Registry Editor Version 5.00" for Windows 2000, Windows XP, and Windows Server 2003, 
+   or "REGEDIT4" for Windows 98 and Windows NT 4.0. The "REGEDIT4" header also works on Windows 2000-based, Windows XP-based, and Windows Server 2003-based computers.
+
+ This identifies the start of a new registry path. 
+   Each key or subkey is a new registry path. 
+   If you have several keys in your .reg file, 
+   blank lines can help you to examine and to troubleshoot the contents.
+
+RegistryPathx is the path of the subkey that holds the first value you are importing.
+   Enclose the path in square brackets, and separate each level of the hierarchy by a backslash. 
+   For example:
+
+[HKEY_LOCAL_ MACHINE\SOFTWARE\Policies\Microsoft\Windows\System] 
+   A .reg file can contain several registry paths.
+   If the bottom of the hierarchy in the path statement does not exist in the registry,
+   a new subkey is created. 
+   The contents of the registry files are sent to the registry in the order you enter them. 
+   Therefore, if you want to create a new subkey with another subkey below it,
+   you must enter the lines in the correct order.
+
+DataItemNamex is the name of the data item that you want to import. 
+   If a data item in your file does not exist in the registry, 
+   the .reg file adds it (with the value of the data item).
+   If a data item does exist, the value in your .reg file overwrites the existing value.
+   Quotation marks enclose the name of the data item. 
+   An equal sign (=) immediately follows the name of the data item.
+
+DataTypex is the data type for the registry value and immediately follows the equal sign.
+   For all the data types other than REG_SZ (a string value),
+   a colon immediately follows the data type. If the data type is REG_SZ , 
+   do not include the data type value or colon. In this case,
+   Regedit.exe assumes REG_SZ for the data type. 
+   The following table lists the typical registry data types:
+
+   </p>
   </div>
  </div>
 </body>
