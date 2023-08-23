@@ -1,34 +1,35 @@
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+<style>
+ table{border-collapse:collapse;width: 100%;}
+ pre,table,tr,td{margin: 0;padding: 0;border:1px solid #8888;}
+ td{border:1 solid #00aaaa;}
+</style>
+</head>
+<body onload='AddToggleButtonsToH2andH3();ReplaceLtGt();hljs.highlightAll();'>
 
-<html>
-    <head> 
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-        <script src='/nhab/assets/js/blocks.js'></script>
-        <link rel="stylesheet" href="/nhab/libs/highlight/androidstudio2.css">
-        <script src="/nhab/libs/highlight/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad()</script>
-    </head>
-    <body>
-  <h2><button onclick="toggleAll(this);" >-</button>
-    <input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" /> Bootstrap 5 </h2>   
+<button onclick="toggleAll(this);" >-</button>  
+<h2>Bootstrap 5 </h2>   
 <div>
  <pre><code>
  # is mobile-first:
 < meta name="viewport" content="width=device-width, initial-scale=1" > #zoom level 1
 
-# Bootstrap requires container
+# Bootstrap requires a container
 # containers type:
-# 1.The .container class provides a responsive fixed width container
-# 2.The .container-fluid class provides a full width container, spanning the entire width of the viewport
+# 1. The .container class provides a responsive fixed-width container
+# 2. The .container-fluid class provides a full-width container, spanning the entire width of the viewport
 
 # grid system
 # Bootstrap's grid system is built with flexbox and allows up to 12 columns across the page
-# it divides screen width into 12 columns. 
-# you can define griding of a page for 6 types of screens,all in one place.
-# they are:
+# It divides the screen width into 12 columns. 
+# You can define griding of a page for 6 types of screens, all in one place.
+# They are:
     .col-     #(extra small devices - screen width less than 576px)
     .col-sm-  #(small devices - screen width equal to or greater than 576px)
     .col-md-  #(medium devices - screen width equal to or greater than 768px)
