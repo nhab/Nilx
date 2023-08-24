@@ -1,17 +1,15 @@
-<html>
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src='/nhab/assets/js/blocks.js'></script>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/dark.min.css">
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body>
-<button onclick="toggleAll(this);" >-</button>
-	<h2 style="display:flex">
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />
-
-references</h2>
+<body onload='AddToggleButtonsToH2andH3();ReplaceLtGt();hljs.highlightAll();'>
+ <button onclick="toggleAll(this);" >-</button>
+ <h2>References</h2>
 <div>
  <a href='https://www.youtube.com/c/JohannesMilke'>mike on youtube</a>
  <a href='https://docs.flutter.dev/'>main doc</a>
