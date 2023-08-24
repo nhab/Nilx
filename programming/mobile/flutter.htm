@@ -10,7 +10,7 @@
 <body onload='AddToggleButtonsToH2andH3();ReplaceLtGt();hljs.highlightAll();'>
  <button onclick="toggleAll(this);" >-</button>
  <h2>References</h2>
-<div>
+<div><p>
  <a href='https://www.youtube.com/c/JohannesMilke'>mike on youtube</a>
  <a href='https://docs.flutter.dev/'>main doc</a>
  <a href="https://vrgl.ir/k2MRA">recources</a>
@@ -20,13 +20,11 @@
 <a href='https://dzone.com/articles/flutter-tutorial-for-developers-step-by-step-guide'>dzone</a>
 <a href='https://www.tangolearn.com/how-to-learn-flutter-the-best-way'>TangoLearn</a>
 <a href='https://www.agiratech.com/flutter-top-7-learning-resources-for-beginners'>7 resource</a>
-
+</p>
 </div>
-	<h2 style="display:flex">
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />
-Installation</h2>
-<div>
+
+<h2 style="display:flex">Installation</h2>
+<div><p>
 1.Installing Android studio and android sdk:
 The proxy must be set in the settings of Android studio to download android sdk:
  setting> Appearance & Behavior ->System Settings -> Http Proxy  
@@ -37,29 +35,25 @@ The proxy must be set in the settings of Android studio to download android sdk:
  <a href='https://dazhyarco.net/%D9%86%D8%B5%D8%A8-%D8%A7%D9%86%D8%AF%D8%B1%D9%88%DB%8C%D8%AF-%D8%A7%D8%B3%D8%AA%D9%88%D8%AF%DB%8C%D9%88/'>..</a>
  2. android sdk path must be introduced to the flutter:
  flutter config --android-sdk <path-to-your-android-sdk-path>
+</p>
 </div>
 
-<h2 style="display:flex">
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />
-			Project Structure</h2>
-<div>
+<h2 style="display:flex">Project Structure</h2>
+<div><p>
 	lib/ - just as pub (Dart’s package manager), all the code will be here
 	pubspec.yml - stores a list of packages that are required to run the application, just like package.json does it.
 			You should remember that in Flutter projects you cannot use pub directly, but instead,
 			you will use the Flutter command: flutter pub get <package_name>
 	test/ -  To run unit tests via flutter test
 	ios/ & android/ - the code specific for each platform
+</p>
 </div>
 
-<h2 style="display:flex">
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />
-			Everything is built on Widgets</h2>
-<div>
+<h2 style="display:flex">Everything is built on Widgets</h2>
+<div><p>
 	UI elements, styles, themes, and even state is managed in specific Widgets.
-	First widget example: 
-	<code>
+	First widget example: </p>
+	<pre><code>
 	import 'package:flutter/widgets.dart'; // basic set of widgets
 	
 	// When Dart is running the application, it calls to the main() function
@@ -67,15 +61,12 @@ The proxy must be set in the settings of Android studio to download android sdk:
 	Text( // this is a widget, it renders the given text 
 		'Hello, World!!!', textDirection: TextDirection.ltr, ),
 	);
-	</code>
+	</code></pre>
 </div>
 
-<h2 style="display:flex">
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />
-			Directionality,Center,TextStyle and Container Widgets</h2>
+<h2 style="display:flex">Directionality,Center,TextStyle and Container Widgets</h2>
 <div>
-<code>
+<pre><code>
 import 'package:flutter/widgets.dart';
 
 main() => runApp(
@@ -95,21 +86,19 @@ main() => runApp(
     ),
   ),
 );
-</code>
+</code></pre>
 </div>
-<h2 style="display:flex">
-    <input type="button" value="-"
-			class="toggleButton"  onclick="toggle(this)" />
-			Creating  widgets</h2>
-<div>
 	
+<h2 style="display:flex">Creating  widgets</h2>
+<div>
+	<p>
 	Widgets are Dart classes, that can be declared with properties.
 	“Stateless” doesn’t mean they don’t have a state at all. 
 	But changing those properties in a stateless widget won’t affect what has already been rendered.
 	Updating properties of a stateful widget will trigger life cycle hooks and render its content using the new state.
 
-	Creating a stateless widget example:
-	<code>
+	Creating a stateless widget example:</p>
+	<pre><code>
 	import 'package:flutter/widgets.dart';
 
 	main() => runApp(
@@ -130,9 +119,9 @@ main() => runApp(
 		return Text('Hello!');
 	}
 	}
-	</code>
+	</code></pre>
 	An example of the widget with an argument:
-	<code>
+	<pre><code>
 	// …
 
 	class MyStatelessWidget extends StatelessWidget {
@@ -145,9 +134,9 @@ main() => runApp(
 		return Text('Hello, $name!');
 	}
 	}
-	</code>
+	</code></pre>
 	An example of the big blue button widget :
-	<code>
+	<pre><code>
 		import 'package:flutter/widgets.dart';
 
 		main() => runApp(
@@ -181,12 +170,13 @@ main() => runApp(
 			);
 		  }
 		}		
-	</code>	
+	</code>	</pre>
+	<p>
 	Statefull widgets require an extra class to store the state of the widget. 
 	Moreover, the visual part of the widget becomes its state.
 	
-	An Example of the StatefulWidget class:
-	<code>
+	An Example of the StatefulWidget class:</p>
+	<pre><code>
 	// …
 
 	class Counter extends StatefulWidget {
@@ -197,9 +187,9 @@ main() => runApp(
 	// The result of the function is an object, that must be
 	// of the type State<Counter> (where Counter is the name of our widget)
 	}
-	</code>
+	</code></pre>
 	counter widget example:
-	<code>
+	<pre><code>
 		// …
 
 	class _CounterState extends State<Counter> {//In the Dart language all names that begin with an underscore are private
@@ -242,11 +232,11 @@ main() => runApp(
 		);
 	}
 	}
-	</code>
+	</code></pre>
 	
 	
-	Using composition of widgets for counter application by using  Column() and Row() widgets:
-	<code>
+	Using the composition of widgets for counter application by using  Column() and Row() widgets:
+	<pre><code>
 		import 'package:flutter/widgets.dart';
 
 		main() => runApp(App());
@@ -363,7 +353,7 @@ main() => runApp(
 			);
 		  }
 		}
-	</code>
+	</code></pre>
 </div>
 </body>
 </html>
