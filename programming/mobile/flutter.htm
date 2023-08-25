@@ -93,18 +93,18 @@ First widget example:
 import 'package:flutter/material.dart';//definition for Stateless Widget
 
 void main() {
-runApp(const GeeksForGeeks());
+	runApp(const MyClass());
 }
 
 class MyClass extends StatelessWidget {
-const MyClass({Key? key}) : super(key: key);
-
-@override
-Widget build(BuildContext context) {
-	return const MaterialApp(
-	home: Center(child: Text('Hello World')),
-	);
-}
+	const MyClass({Key? key}) : super(key: key);
+	
+	@override
+	Widget build(BuildContext context) {
+		return const MaterialApp(
+		home: Center(child: Text('Hello World')),
+		);
+	}
 }
 </code></pre>
 </div>
