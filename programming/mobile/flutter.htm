@@ -25,27 +25,60 @@
 
 <h2 style="display:flex">Installation</h2>
 <div><p>
-1.Installing Android studio and android sdk:
-The proxy must be set in the settings of Android studio to download android sdk:
+1. Installing Android Studio and Android SDK:
+The proxy must be set in the settings of Android Studio to download Android SDK:
  setting> Appearance & Behavior ->System Settings -> Http Proxy  
  Tick HTTP
  Tick Manual proxy configuration
  Host name = fodev.org
  Port number= 8118
  <a href='https://dazhyarco.net/%D9%86%D8%B5%D8%A8-%D8%A7%D9%86%D8%AF%D8%B1%D9%88%DB%8C%D8%AF-%D8%A7%D8%B3%D8%AA%D9%88%D8%AF%DB%8C%D9%88/'>..</a>
- 2. android sdk path must be introduced to the flutter:
+ 2. Android sdk path must be introduced to the flutter:
  flutter config --android-sdk <path-to-your-android-sdk-path>
 </p>
 </div>
+<h2>command-line tool</h2>
+<div>
+<p>		
+The Flutter command-line tool is how developers (or IDEs on behalf of developers) interact with Flutter.
+For Dart related commands, you can use the Dart command-line tool.
 
+Here’s how you might use the flutter tool to create, analyze, test, and run an app:
+</p>
+<pre><code>
+ flutter create my_app
+ cd my_app
+ flutter analyze
+ flutter test
+ flutter run lib/main.dart	
+</code></pre>
+
+To run pub commands using the Flutter tool:
+<pre><code>
+ flutter pub get
+ flutter pub outdated
+ flutter pub upgrade	
+</code></pre>
+
+To view all commands that Flutter supports:
+<pre><code>
+ flutter --help --verbose
+</code></pre>	
+To get the current version of the Flutter SDK, including its framework, engine, and tools:
+<pre><code>
+flutter --version
+</code></pre>		
+</p>
+</div>
+	
 <h2 style="display:flex">Project Structure</h2>
 <div><p>
-	lib/ - just as pub (Dart’s package manager), all the code will be here
-	pubspec.yml - stores a list of packages that are required to run the application, just like package.json does it.
-			You should remember that in Flutter projects you cannot use pub directly, but instead,
-			you will use the Flutter command: flutter pub get <package_name>
-	test/ -  To run unit tests via flutter test
-	ios/ & android/ - the code specific for each platform
+lib/ - just as pub (Dart’s package manager), all the code will be here
+pubspec.yml - stores a list of packages that are required to run the application, just like package.json does it.
+		You should remember that in Flutter projects you cannot use pub directly, but instead,
+		you will use the Flutter command: flutter pub get <package_name>
+test/ -  To run unit tests via flutter test
+ios/ & android/ - the code specific for each platform
 </p>
 </div>
 
