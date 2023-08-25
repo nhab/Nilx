@@ -1,10 +1,10 @@
 var json1=`{
     "topics":[`;
     
-json1+=`{"title":"Featured resources"
+json1+=`{"title": "Featured resources"
 ,"topic":
         [
-            {"caption":"For proffesionals books","href":"https://www.goalkicker.com/"},
+            {"caption":"For professionals books","href":"https://www.goalkicker.com/"},
             {"caption":"Windows Apps list","href":"https://github.com/Awesome-Windows/Awesome#utilities"}
      ]
      }`;
@@ -36,9 +36,9 @@ json1+=`,{"title":"Software Architect"
             ,{"caption":"Clean code Manifesto","href":"programming/cleancode.htm"}
             ,{"caption":"Abp Steps","href":"programming/design/abpsteps.htm"}
             ,{"caption":"DDD =>microservice","href":"https://www.infoq.com/presentations/microservices-ddd-bounded-contexts/"}
-            ,{"caption":"Eventsoucing and CQRS","href":"programming/architecture/eventsourcing.htm"}
-            ,{"caption":"Event driven Architecture<","href":"https://ably.com/blog/introduction-event-driven-architecture"}
-            ,{"caption":"Event driven with kafka","href":"https://www.google.com/search?q=event-driven+architecture+kafka+c%2523"}
+            ,{"caption":"Event sourcing and CQRS","href":"programming/architecture/eventsourcing.htm"}
+            ,{"caption":"Event-driven Architecture<","href":"https://ably.com/blog/introduction-event-driven-architecture"}
+            ,{"caption":"Event-driven with kafka","href":"https://www.google.com/search?q=event-driven+architecture+kafka+c%2523"}
             ,{"caption":"Kafka","href":"programming/architecture/kafka.htm"}
             ,{"caption":"Business Architecture (Togaf)","href":"Topics/Management/togaf.htm"}
         ]
@@ -185,7 +185,7 @@ json1 +=`,{ "title":"JavaScript"
             ,{"caption":"redux","href":"https://youtu.be/wZVzeob4ywc"}
             ,{"caption":"React / jsx online test","href":"https://www.google.com/search?q=React+%2F+jsx+online+test&oq=React+%2F+jsx+online+test"}
             ,{"caption":"Next.js","href":"https://snipcart.com/blog/react-ecommerce-tutorial"}
-            ,{"caption":"React native","href":"/programming/reactnative.htm"}
+            ,{"caption":"React native","href":"/programming/mobile/reactnative.htm"}
             ,{"caption":"Jade","href":"programming/jade.htm"}
             ,{"caption":"webpack","href":"programming/webpack.htm'"}
             ,{"caption":"Node.js<","href":"programming/NodeJS.htm"}
