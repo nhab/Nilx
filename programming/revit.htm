@@ -538,6 +538,7 @@ or wherer you have access to your revit document  :
 	}
 ...
 </code></pre>
+		
 <h3>Working with wpf forms</h3>
 <div>
 <p>
@@ -550,7 +551,7 @@ or you can do it manaully:
 <pre><code>
 <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
 </code></pre>
-This wil change your project type to C# + WPF 
+This will change your project type to C# + WPF 
 <p>
 <b>Adding Content to the wpf form window</b>
 	-Add System.Xaml refrence to the project to be able add Content to the wpf form window
@@ -575,7 +576,7 @@ This wil change your project type to C# + WPF
     }
 </code></pre>
 <p>
-<b>Reading revit documnet object passed to wpf xaml form`s code background,
+<b>Reading Revit document object passed to wpf xaml form`s code background,
 	 using FilteredElementCollector() (which is in Autodesk.Revit.DB namespace)</b>
 </p>
 	
@@ -591,8 +592,8 @@ foreach (Element wall in walls)
 }
 ElementsDataGrid.ItemsSource = data;
 </code></pre>
-<b>Editing revit document  from wpf</b>
-It is only possible trough ExternalEventHandler class 
+<b>Editing Revit document  from wpf</b>
+It is only possible through ExternalEventHandler class 
 (or writing code directly inside the execute method of the command object)
 <pre><code>
 public class ExternalEventDeleteHandler: IExternalEventHandler
@@ -624,7 +625,7 @@ public class ExternalEventDeleteHandler: IExternalEventHandler
       
     }
 </code></pre>
-In yor xaml code behind:
+In your XAML code behind:
 <pre><code>
  private void DeleteButton_Click(object sender, EventArgs e)
         {
@@ -648,4 +649,18 @@ In yor xaml code behind:
 </code></pre>
 </div>
 
+</div>
+
+<h2>Revit API Namespace</h2>
+<div>
+<h3>Autodesk.Revit.ApplicationServices Namespace</h3>
+<p>
+<b>Public class Application</b>
+Represents the Autodesk Revit Application, providing access to documents,
+	options and other application-wide data and settings.
+<b>Public class ControlledApplication</b>
+	Represents the Autodesk Revit Application with no access to documents.
+	It provides options and other application-wide data 
+	and settings for external applications OnStartup/OnShutdown.
+</p>		
 </div>
