@@ -43,7 +43,7 @@ The proxy must be set in the settings of Android Studio to download Android SDK:
 The Flutter command-line tool is how developers (or IDEs on behalf of developers) interact with Flutter.
 For Dart related commands, you can use the Dart command-line tool.
 
-Here’s how you might use the flutter tool to create, analyze, test, and run an app:
+Here’s how you might use the Flutter tool to create, analyze, test, and run an app:
 </p>
 <pre><code>
  flutter create my_app
@@ -52,8 +52,10 @@ Here’s how you might use the flutter tool to create, analyze, test, and run an
  flutter test
  flutter run lib/main.dart	
 </code></pre>
-
+<p>
 To run pub commands using the Flutter tool:
+(pub is Dart’s package manager)
+</p>
 <pre><code>
  flutter pub get
  flutter pub outdated
@@ -71,7 +73,7 @@ flutter --version
 </p>
 </div>
 	
-<h2 style="display:flex">Project Structure</h2>
+<h2 style="display:flex">Project Folder/File Structure</h2>
 <div><p>
 lib/ - just as pub (Dart’s package manager), all the code will be here
 pubspec.yml - stores a list of packages that are required to run the application, just like package.json does it.
@@ -84,17 +86,27 @@ ios/ & android/ - the code specific for each platform
 
 <h2 style="display:flex">Everything is built on Widgets</h2>
 <div><p>
-	UI elements, styles, themes, and even state is managed in specific Widgets.
-	First widget example: </p>
-	<pre><code>
-	import 'package:flutter/widgets.dart'; // basic set of widgets
-	
-	// When Dart is running the application, it calls to the main() function
-	main() => runApp( /
-	Text( // this is a widget, it renders the given text 
-		'Hello, World!!!', textDirection: TextDirection.ltr, ),
+UI elements, styles, themes, and even state is managed in specific Widgets.
+First widget example: 
+</p>
+<pre><code>
+import 'package:flutter/material.dart';//definition for Stateless Widget
+
+void main() {
+runApp(const GeeksForGeeks());
+}
+
+class MyClass extends StatelessWidget {
+const MyClass({Key? key}) : super(key: key);
+
+@override
+Widget build(BuildContext context) {
+	return const MaterialApp(
+	home: Center(child: Text('Hello World')),
 	);
-	</code></pre>
+}
+}
+</code></pre>
 </div>
 
 <h2 style="display:flex">Directionality,Center,TextStyle and Container Widgets</h2>
