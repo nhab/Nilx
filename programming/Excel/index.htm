@@ -1099,18 +1099,14 @@ Solve the Model
 <div>
 <p>
     <b>Object Hierarchy</b>
-    In Excel VBA, an object can contain another object, 
-    and that object can contain another object, etc. 
+  
+    The root of all objects is Excel itself. 
+    We call it the <b>Application object</b>. 
     
-    In other words, Excel VBA programming involves working with an object hierarchy. 
-    
-    The mother of all objects is Excel itself. 
-    We call it the Application object. 
-    The application object contains other objects. 
-    For example, the Workbook object (Excel file). 
-    This can be any workbook you have created. 
-    The Workbook object contains other objects, such as the Worksheet object. 
-    The Worksheet object contains other objects, such as the Range object.
+    The application object contains other objects, like,
+    The <b>>Workbook object</b which contains other objects, 
+    such as the <b>Worksheet objec</b>t. 
+    The Worksheet object contains other objects, such as the <b>Range object</b>.
 
     We used the following code line:
 
@@ -1120,7 +1116,7 @@ Solve the Model
 
     Application.Workbooks("create-a-macro").Worksheets(1).Range("A1").Value = "Hello"
 
-    Note: the objects are connected with a dot. 
+    Note: The objects are connected with a dot. 
     Fortunately, we do not have to add a code line this way.
     That is because we placed our command button in create-a-macro.xlsm, on the first worksheet. 
     Be aware that if you want to change things on different worksheets, 
