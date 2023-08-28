@@ -393,93 +393,90 @@ A formula is an expression which calculates the value of a cell.
     -YEAR(),MONTH and DAY functions:
     To get the year of a date, use :
         <pre><code> YEAR(A1)</code></pre>
-
+<p>
     -DATE():
     To add a number of years, months and/or days, use the DATE functio:
     (    if A1 is 6/23/2016 the result will be 9/1/2020)
+</p>
     <pre><code>
     =DATE( YEAR(A1)+4, MONTH(A1)+2,DAY(A1)+9s)
     </code></pre>
-
+<p>
     -NOW():
     Current Date & Time
 
-    -return hour,minute or secon of a date:
+    -return hour, minute or second of a date:
+</p>
     <pre><code> Hour(A1), Minute(A1), Second(A1)
     </code></pre>
-
-    -TIME() :
-    to add a number of hourse,minutes and second
-
-    `,
-    codetype:"javascript"
-    ,parent:objPredefinedFunctions
-    };
-
+<p>
+  -TIME() :
+    to add a number of hours,minutes, and second
 
 "Text "
-
     Join Strings
-    To join strings, use the & operator.
+    To join strings, use the & operator.    
+</p>
     <pre><code>
     =A1 & "" & B1
     or
     =CONCATENATE (A1 ,B1)
     </code></pre>
-
+<p>
     Left
         To extract the leftmost characters from a string 
-        <code><pre>
+</p>
+<code><pre>
         =LEFT(A1,4)
-        </pre></code>
-        
+</pre></code>
+<p>      
     Right
         To extract the rightmost characters from a string, use the RIGHT function.
-        <code><pre>
-        =RIGHT(A1,4)
-        </pre></code>
-
+</p>  
+<code><pre>
+ =RIGHT(A1,4)
+</pre></code>
+<p>
     Mid
         To extract a substring, starting in the middle of a string, use the MID function.
-        <code><pre>
+</p>
+    <code><pre>
         =MID(A1,5,3)s
-        </pre></code>  
-
+    </pre></code>  
+<p>
     Len
         To get the length of a string, use the LEN function.
-        <code><pre>
+</p>    
+    <code><pre>
         =LEN(A1)
-        </pre></code>
-    
+    </pre></code>
+ <p> 
     Find
         To find the position of a substring in a string, use the FIND function.
+ </p>  
         <code><pre>
         =FIND("am",A1)
         </pre></code> 
-
+<p>
     Substitute
         To replace existing text with new text in a string, use the SUBSTITUTE function.
+</p>
         <code><pre>
             =SUBSTITUTE(A1,"Tim","John")
         </pre></code>     
-        `
-    ,codetype:"javascript"
-    ,parent:objPredefinedFunctions
-    };
-
-
-Lookup & Reference"
+<p>
+  Lookup & Reference"
 
     Vlookup
     The VLOOKUP (Vertical lookup) function looks for a value(i.e  104)
     in the leftmost column of a table(i.e Id column), and then returns a value in the same row
         from another column you specify(i.e column 3).
-    
+
         =VLOOKUP(A2,$E$4:$G$7,3,FALSE)
 
     Explanation:
-    the VLOOKUP function looks for the ID (104) in the leftmost column of the range $E$4:$G$7 
-    and returns the value in the same row from the third column (third argument is set to 3).
+    The VLOOKUP function looks for the ID (104) in the leftmost column of the range $E$4:$G$7 
+    and returns the value in the same row from the third column (the third argument is set to 3).
     The fourth argument is set to FALSE to return an exact match or a #N/A error if not found.
 
     Hlookup
@@ -497,7 +494,7 @@ Lookup & Reference"
         exactly equal to lookup_value (A2) or a #N/A error if not found.
 
     Index
-        Returns a the value at given coordination in a two-dimensional range.
+        Returns the value at given coordination in a two-dimensional range.
 
             =Index(E4:F7,A2,B2)
 
@@ -515,10 +512,12 @@ Lookup & Reference"
     FV 
     calculates the future value of an investment based on a constant interest rate. 
     You can use FV with either periodic, constant payments, or a single lump sum payment.
+</p>
     <pre><code>
         =FV(interest_rate,totper,payment,[present_value],[type])
     </code></pre>
-    arguments:
+<p>
+arguments:
 
 Rate    Required. The interest rate per period.
 
@@ -600,17 +599,19 @@ FV
 
     Average
     To calculate the average of a group of numbers, use the AVERAGE function.
+</p>
     <pre><code>
         =AVERAGE(A1:O1)
     </code></pre>
-
+<p>
     Averageif
     To average cells based on one criteria, use the AVERAGEIF function. 
     For example, to calculate the average excluding zeros.
+</p>
     <pre><code>
         =averageif(a1:o1,"<>0")
     </code></pre>
-
+<p>
     Median
     To find the median (or middle number), use the MEDIAN function.
 
@@ -628,10 +629,11 @@ FV
 
     Large
     To find the third largest number, use the following LARGE function :
+    </p>
     <pre><code>
         =LARGE(A1:O1,3)
     </code></pre>
-
+<p>
     Small
         To find the second smallest number, use the following SMALL function
 
@@ -670,7 +672,7 @@ FV
 
         #REF! error
         Excel displays the #REF! error when a formula refers to a cell that is not valid.
-        `   ,
+       
 
 "Conditional Formatting"
 
@@ -696,7 +698,7 @@ FV
     <img src='https://www.excel-easy.com/data-analysis/images/conditional-formatting/conditional-formatting-result.png' />
 
 
-    Note: you can also use this category (see step 3) to highlight cells that are 
+    Note: You can also use this category (see step 3) to highlight cells that are 
             less than a value,
             between two values,
             equal to a value, 
@@ -796,7 +798,7 @@ FV
 "Pivot Tables"
 
 what is a pivot table?
-    You can think of a pivot table as an interactive reprot.
+    You can think of a pivot table as an interactive report.
     With very little effort (and no formulas) you can look at the same data
     from many different perspectives 
     by dragging fields from one axes to the other. 
@@ -806,8 +808,8 @@ what is a pivot table?
     filter data to include or exclude categories, and even build charts.
     <img src='https://www.exceltip.com/wp-content/uploads/2019/08/25.gif' />
 <b>Insert a Pivot Table:</b>
-    assume Our data set consists of 213 records and 6 fields. 
-    Order ID, Product, Category, Amount, Date and Country:
+    Assume our data set consists of 213 records and 6 fields. 
+    Order ID, Product, Category, Amount, Date, and Country:
 
     <img src='https://www.excel-easy.com/data-analysis/images/pivot-tables/pivot-table-data.png'/>
 
@@ -836,16 +838,16 @@ what is a pivot table?
 <b>Sort</b>
     To get Banana at the top of the list, sort the pivot table.
     1. Click any cell inside the Sum of Amount column.
-    2. Right click and click on Sort, Sort Largest to Smallest.
+    2. Right-click and click on Sort, Sort Largest to Smallest.
     
 <b>Filter</b>
     Because we added the Country field to the Filters area,
-    we can filter this pivot table by Country.
+    We can filter this pivot table by Country.
     For example, which products do we export the most to France?
 
     1. Click the filter drop-down and select France.
 
-    Note: you can use the standard filter (triangle next to Row Labels)
+    Note: You can use the standard filter (triangle next to Row Labels)
     to only show the amounts of specific products.
 
 <b>Change Summary Calculation</b>
@@ -853,7 +855,7 @@ what is a pivot table?
     To change the type of calculation that you want to use, execute the following steps.
 
     1. Click any cell inside the Sum of Amount column.
-    2. Right click and click on Value Field Settings.
+    2. Right-click and click on Value Field Settings.
     3. Choose the type of calculation you want to use. For example, click Count and then ok.
     Result. 16 out of the 28 orders to France were 'Apple' orders.
 
@@ -871,8 +873,6 @@ what is a pivot table?
     4. Category field to the Filters area.
 <img src='https://www.excel-easy.com/data-analysis/images/pivot-tables/two-dimensional-pivot-table.png' />
 
-    `};
-
 Tables
 
     Tables allow you to analyze your data in Excel quickly and easily.
@@ -883,10 +883,9 @@ Tables
     1. Click any single cell inside the data set.
     2. On the Insert tab, in the Tables group, click Table.
     3. Excel automatically selects the data for you. Check 'My table has headers' and click on OK.
-    4.Result. Excel creates a nicely formatted table for you.
+    4. Result. Excel creates a nicely formatted table for you.
         This may still seem like a normal data range to you 
-        but many powerful features like filter,sort and total are now just a click of a button away.
-
+        but many powerful features like filter, sort and total are now just a click of a button away.
 
 "What-If Analysis"
 
@@ -929,13 +928,13 @@ Tables
 
 <b>Goal Seek</b>
     What if you want to know
-        how many books you need to sell for the highest price,
+        How many books you need to sell for the highest price,
         to obtain a total profit of exactly $4700? 
         You can use Excel's Goal Seek feature to find the answer.
 
     1. On the Data tab, in the Forecast group, click What-If Analysis.
     The Goal Seek dialog box appears.
-    2.click goal seek.
+    2. click goal seek.
     3. Select cell D10.
     4. Click in the 'To value' box and type 4700.
     5. Click in the 'By changing cell' box and select cell C4.
@@ -950,7 +949,7 @@ Tables
 
     <b>Solver</b>
 
-    Finds optimal solutions for all kind of decision problems.
+    Finds optimal solutions for all kinds of decision problems.
     
     <b>Load the Solver Add-in</b>
 
@@ -970,12 +969,12 @@ Tables
 
     a. What are the decisions to be made?
         For this problem, we need Excel to find out how much to order of each product 
-        (bicycles, mopeds and child seats).
+        (bicycles, mopeds, and child seats).
     
     b. What are the constraints on these decisions? 
-        The constrains here are that the amount of capital and storage used by the products 
+        The constraints here are that the amount of capital and storage used by the products 
         cannot exceed the limited amount of capital and storage (resources) available. 
-        For example, each bicycle uses 300 units of capital and 0.5 unit of storage.
+        For example, each bicycle uses 300 units of capital and 0.5 units of storage.
     
     c. What is the overall measure of performance for these decisions? 
         The overall measure of performance is the total profit of the three products, 
