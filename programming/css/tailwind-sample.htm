@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html>
 <head>
@@ -243,4 +244,251 @@ Auto Rows Class
 </div> 
 
 </body>
+=======
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+<h1 class="text-3xl font-bold underline">
+Spacing
+</h1>
+
+<div class= "m-4 border-2 border-green-800 bg-green-600 w-16 h-16">
+m-4 margin all sides
+</div>
+
+<div class="p-4 border-2 border-black">
+p-0 paddaing on all-sides
+</div>
+<!---------------------------------------->
+<h1 class="text-3xl font-bold underline">
+Space Between
+</h1> 
+<div class="mx-4 space-y-4">
+space-y
+<div class="bg-green-400 h-16 rounded-lg  border-2 border-green-800">
+1
+</div>
+
+<div class="bg-green-400 h-16 rounded-lg border-2 border-green-800">
+2
+</div>
+
+<div class="bg-green-400 h-16 rounded-lg border-2 border-green-800">
+3
+</div>
+
+<div class="bg-green-400 h-16 rounded-lg  border-2 border-green-800">
+4
+</div>
+
+<div class="space-y-4">
+<div class="w-96 bg-green-200 shadow rounded">
+w-96
+</div>
+<div class="w-80 bg-green-100 shadow rounded">
+w-80
+</div>
+</div> 
+
+<div class="ml-48 flex space-x-4">
+        <div class="bg-green-400 w-20 h-16 rounded-lg">1</div>
+        <div class="bg-green-400 w-20 h-16 rounded-lg">2</div>
+        <div class="bg-green-400 w-20 h-16 rounded-lg">3</div>
+        <div class="bg-green-400 w-20 h-16 rounded-lg">4</div>
+    </div>
+</div>
+
+<h1 class="text-3xl font-bold underline">
+Containers
+</h1>
+<div class="sm border-2 border-black">
+min-width=640px
+</div>
+
+<div class="md border-2 border-black">
+min-width=720px
+
+lg	1024px
+xl	1280px
+2xl	1536px
+</div>
+
+<h1 class="text-3xl font-bold underline">
+Alignment
+</h1>
+flex justify-start flex-row
+<div id="main" class="flex justify-start flex-row"> 
+<div class="bg-green-700 w-24 h-12">1</div> 
+<div class="bg-green-600 w-24 h-12">2</div> 
+<div class="bg-green-500 w-24 h-12">3</div> 
+<div class="bg-green-400 w-24 h-12">4</div> 
+</div> 
+  
+ Justify Items
+<div id="main" class="grid justify-items-auto grid-cols-2"> 
+<div class="bg-green-500 rounded-lg m-4 h-12">1</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">2</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">3</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">4</div>
+<div class="bg-green-500 rounded-lg m-4 h-12">5</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">6</div>
+</div> 
+
+Justify Self
+<div id="main" class="grid justify-items-stretch grid-cols-2"> 
+<div class="justify-self-end bg-green-500 
+	rounded-lg m-4 h-12">1</div> 
+<div class="justify-self-center bg-green-500 rounded-lg m-4 h-12">2</div> 
+<div class="justify-self-start bg-green-500 rounded-lg m-4 h-12">3</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">4</div>
+</div> 
+
+align content
+<div id="main" class="ml-24 h-48 w-2/3 flex flex-wrap content-center bg-green-200 border-solid border-4 border-green-900"> 
+<div class="bg-green-900 w-24 h-12">1</div> 
+<div class="bg-green-800 w-24 h-12">2</div> 
+<div class="bg-green-700 w-24 h-12">3</div> 
+<div class="bg-green-600 w-24 h-12">4</div> 
+<div class="bg-green-500 w-24 h-12">5</div> 
+<div class="bg-green-400 w-24 h-12">6</div> 
+</div> 
+
+Align Items Class ( items-end)
+<div id="main" class="p-2 justify-around ml-32 h-26 w-2/3 flex items-end bg-green-200 border-solid border-4 border-green-900"> 
+<div class="bg-green-900 rounded-lg py-4 w-32">1</div> 
+<div class="bg-green-800 rounded-lg py-12 w-32">2</div> 
+<div class="bg-green-700 rounded-lg py-8 w-32">3</div> 
+</div> 
+
+Align Self Class 
+<div id="main" class="p-2 justify-around ml-32 h-48 w-2/3 flex items-stretch bg-green-200 border-solid border-4 border-green-900">
+<div class="self-start bg-green-900 rounded-lg w-32">1- self start</div>
+<div class="self-auto bg-green-800 rounded-lg  w-32">2- self-auto</div>
+<div class="self-end  bg-green-700 rounded-lg w-32">3- self-end </div>
+</div>
+
+Text Alignment 
+<div class="mx-24 bg-green-200">
+<p class="p-4 text-left">
+	Left
+</p>
+<p class="p-4 text-center">
+	center
+</p>
+ <p class="p-4 text-justify">
+	justify justify justify justify justify justify justify justify justify justify justify justify justify justify justify justify
+</p>
+
+<h1 class="text-3xl font-bold underline">
+Grid
+</h1>
+<pre>
+Grid Template Columns:
+
+grid-cols-1: Each row concedes only one column.
+grid-cols-2:  Each row concedes only two columns.
+grid-cols-3:  Each row concedes only three columns.
+grid-cols-4:  Each row concedes only four columns.
+grid-cols-5:  Each row concedes only five columns.
+grid-cols-6:  Each row concedes six columns.
+grid-cols-7: Each row concedes seven-columns.
+grid-cols-8: Each row concedes eight columns.
+grid-cols-9: Each row concedes nine columns.
+grid-cols-10: Each row concedes ten columns.
+grid-cols-11: Each row concedes eleven columns.
+grid-cols-12: Each row concedes twelve columns.
+grid-cols-none: Does not follow the grid-column property.
+</pre>
+grid-cols
+
+<div id="main" class="grid grid-cols-3 gap-1 justify-evenly"> 
+<div class="bg-green-700 w-26 h-12">1</div> 
+<div class="bg-green-500 w-26 h-12">2</div> 
+<div class="bg-green-300 w-26 h-12">3</div> 
+<div class="col-span-2 bg-green-700 w-26 h-12">col-span-2</div> 
+<div class="bg-green-500 w-26 h-12">5</div> 
+<div class="bg-green-300 w-26 h-12">6</div> 
+</div> 
+
+<pre>
+Grid Template Rows:
+
+grid-rows-1: Each row concedes only one row.
+grid-rows-2: Each row concedes only two rows.
+grid-rows-3: Each row concedes only three rows.
+grid-rows-4: Each row concedes only four rows.
+grid-rows-5: Each row concedes only five rows.
+grid-rows-6: Each row concedes six rows.
+grid-rows-none: Does not follow the grid-row propert
+</pre>
+grid grid-rows-3 
+<div id="main" class="grid grid-rows-3 grid-flow-col"> 
+<div class="bg-green-500 rounded-lg m-4 h-12">1</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">2</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">3</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">4</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">5</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">6</div> 
+</div> 
+
+grid grid-rows-2
+<div id="main" class="grid grid-rows-2 grid-flow-col"> 
+<div class="bg-green-500 rounded-lg m-4 h-12">1</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">2</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">3</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">4</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">5</div> 
+<div class="bg-green-500 rounded-lg m-4 h-12">6</div> 
+</div>
+
+grid-row-3 grid-flow-col gap-1
+<div id="main" class="m-8 grid grid-row-3 grid-flow-col gap-1"> 
+<div class="bg-green-300 rounded-lg">1</div> 
+<div class="bg-green-300 rounded-lg">2</div> 
+<div class="bg-green-300 rounded-lg">3</div> 
+<div class="bg-green-500 row-span-2 rounded-lg">4- row-span-2</div> 
+<div class="bg-green-300 rounded-lg">5</div> 
+<div class="bg-green-500 row-span-3 rounded-lg">6- row-span-3</div> 
+</div> 
+
+Auto Columns
+<div class ="m-8 p-8 grid bg-green-600 grid-rows-2 grid-flow-col gap-4 auto-cols-auto"> 
+<div class = "p-4 bg-green-200">
+	HyperText Markup language
+</div> 
+<div class = "p-4 bg-green-200">
+	Cascading Style Sheet
+</div> 
+<div class = "p-4 bg-green-200">
+	LiveScript Become JavaScript
+</div> 
+<div class = "p-4 bg-green-200">
+	Bootstrap become replacement of CSS
+</div> 
+
+Auto Rows Class
+<div class ="m-8 p-8 grid bg-green-600 grid-cols-2 
+		 grid-flow-row gap-4 auto-rows-auto">
+<div class = "p-4 bg-green-200">
+	LiveScript Become JavaScript
+</div> 
+<div class = "p-4 bg-green-200">
+	HyperText Markup language	  
+</div>  
+<div class = "p-4 bg-green-200">
+	Bootstratp become replacement of CSS
+</div> 
+<div class = "p-4 bg-green-200">
+	Cascading Style Sheet
+</div> 
+</div> 
+
+</body>
+>>>>>>> d8d577cbd963a070fad43a0d47e15694d3fe5796
 </html>
