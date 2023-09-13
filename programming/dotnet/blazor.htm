@@ -16,28 +16,38 @@
     <a href="https://www.grapecity.com/blogs/how-to-add-blazor-ui-controls-to-your-web-application">creating and using components</a>
     <a href="https://blog.logrocket.com/testing-in-blazor-a-tutorial/">tutorial</a>
 </div>
-<h2What is Blazor?</h2>
+<h2>What is Blazor?</h2>
 <div>
 <p>
-Blazor is a framework for building rich, interactive client-side web UI using C# instead of JavaScript,
+Blazor is a framework for building interactive client-side web UI 
+using C# instead of JavaScript,
 sharing server-side and client-side app logic written in .NET.
- The numerous advantages of Blazor include integration with modern hosting platforms, such as 
- Docker, and building hybrid desktop and mobile apps.  
+
+It integrates with modern hosting platforms, such as Docker, 
+and building hybrid desktop and mobile apps.  
 </p>  
 </div>
 
 <h2>Creating a Blazor Server Application</h2>
  <div>
 <p>
- 1-create boierplate project: In Visual Studio - > select Create a new project - > Type 'Blazor' and choose Blazor Server App.
-2-Once the project is created and configured, it by default contains two Blazor components named Counterand FetchData.
+ 1-<b>create boierplate project:</b>
+Visual Studio -> Create a new project -> Type 'Blazor' and choose Blazor Server App.
 
-Blazor Component and how to create
-A Blazor component is a self-contained part of UI typically defined in a .razor file using Razor syntax.
+2-Thw created project contains 2 Blazor <b>components</b> named:
+ Counterand 
+ FetchData
+</p>
+<h3>Blazor Component and how to create</h3>
+<p>
+A Blazor component is a self-contained part of UI 
+typically defined in a .razor file using Razor syntax.
+
 It defines UI event handlers, binds to input data, and maintains its state and rendering logic. 
 
-To add a component to the project, right-click on the Pages folder and choose Add → Razor Component.
-In the Add New Item dialog, provide the name EmployeeCard and click Add .the default code would be:
+To add a component to the project, 
+right-click on the Pages folder > choose Add > Razor Component.
+In the Add New Item dialog> provide the name EmployeeCard > click Add .the default code would be:
  </p>
  <pre><code>
     <h3>EmployeeCard</h3>
@@ -45,11 +55,15 @@ In the Add New Item dialog, provide the name EmployeeCard and click Add .the def
     }
  </code></pre>
  <p>
- The generated code has two parts. The upper part of the Blazor component represents the HTML template. 
-A single div tag with the component's name represents the template in this case. 
-In the lower part of the Blazor component, we have a @code directive, which wraps the C# code for our Blazor component.
+ The generated code has 2 parts:
+  - The upper part of the Blazor component represents the HTML template. 
+  A single div tag with the component's name represents the template in this case. 
 
-The Blazor Server App includes Bootstrap by default, so we will use the Bootstrap card and 
+  -In the lower part of the Blazor component, we have a @code directive,
+   which wraps the C# code for our Blazor component.
+
+The Blazor Server App includes Bootstrap by default, 
+so we will use the Bootstrap card and 
 other HTML tags, i.e., img, H5, H6, etc., to define the component. 
 The markup below defines the EmployeeCard component template:
 </p>
@@ -70,7 +84,7 @@ The markup below defines the EmployeeCard component template:
     < /div> 
 </code></pre>
 <p>
-Step 2: Define Parameters to Reuse the Blazor Component
+<b>Step 2: Define Parameters to Reuse the Blazor Component</b>
 Parameters are defined as variables using the C# code in the @code section of the template.
  They are passed to the HTML elements using the @ symbol as depicted in the code below. 
  These parameters are placeholders for the actual values passed when consuming the component and binding it to data.
@@ -94,17 +108,21 @@ Parameters are defined as variables using the C# code in the @code section of th
 </code></pre>
 <p>
 we can replace these parameter instead of constant values in htm template part of the file.
+<b>Step 3: Fetch and Display Employee Details</b>
 
-Step 3: Fetch and Display Employee Details
 The template is now ready to display the employee details. 
 We can either add the component to a new razor component or 
 add the route directives to the component itself to consume the EmpoyeeCard component. 
-In this case, we will add a new Razor component by right-clicking on the Pages folder and choosing Add → Razor Component. 
+In this case, we will add a new Razor component by right-clicking on the Pages folder 
+and choosing Add → Razor Component. 
+
 Name the new component to be EmployeeCardDemo and add the route attribute to navigate to this page 
 and view the EmployeeCard component in action.
 
-We can add a Blazor component within another component, using an HTML tag with the component's name. 
-In our case, <EmployeeCard></EmployeeCard> can be used to place our Blazor component within the EmployeeCardDemo Blazor Component.
+We can add a Blazor component within another component,
+ using an HTML tag with the component's name. 
+
+In our case, < EmployeeCard>< /EmployeeCard> can be used to place our Blazor component within the EmployeeCardDemo Blazor Component.
 
 Next, we have not hard-coded any values in the component template.
  Instead, we have used parameters as placeholders for actual values; 
@@ -229,9 +247,11 @@ Step 4: Execute the Application to Observe the Results
 <div>
 <p>
 After understanding how to create and consume Blazor Components from scratch,
-we will now see how we can work with advanced Blazor controls provided by third-party vendors, i.e., pre-defined Blazor components.
-From the NuGet Package Manager menu, choose Manage NuGet Packages for Solution, search for C1.blazor.Grid which
-is ComponentOne Blazor grid control.  
+we will now see how we can work with advanced Blazor controls provided by third-party vendors,
+ i.e., pre-defined Blazor components.
+
+From the NuGet Package Manager menu, choose Manage NuGet Packages for Solution, 
+search for C1.blazor.Grid which is ComponentOne Blazor grid control.  
 </p>  
 </div>
 
