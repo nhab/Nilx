@@ -1,36 +1,34 @@
 <head>
-<meta charset='UTF-8' />
-<meta name='viewport' content='width=device-width, initial-scale=1' />
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
-<script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
-<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+    <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/dark.min.css">
+    <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
 </head>
-<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
- <button onclick="toggleAll(this);" >-</button>
-	
+<body onload='AddToggleButtonsToH(7);ReplaceLtGt();hljs.highlightAll();'>
+<button onclick="toggleAll(this);" >-</button>
+   
 
-<h2 style="display:flex"><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" />References</h2>
+<h2>References</h2>
 <div>
     <a href="https://www.grapecity.com/blogs/how-to-add-blazor-ui-controls-to-your-web-application">creating and using components</a>
     <a href="https://blog.logrocket.com/testing-in-blazor-a-tutorial/">tutorial</a>
 </div>
-<h2 style="display:flex"><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />What is Blazor?</h2>
+<h2What is Blazor?</h2>
 <div>
+<p>
 Blazor is a framework for building rich, interactive client-side web UI using C# instead of JavaScript,
 sharing server-side and client-side app logic written in .NET.
  The numerous advantages of Blazor include integration with modern hosting platforms, such as 
- Docker, and building hybrid desktop and mobile apps.    
+ Docker, and building hybrid desktop and mobile apps.  
+</p>  
 </div>
 
-<h2 style="display:flex"><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" />Creating a Blazor Server Application</h2>
+<h2>Creating a Blazor Server Application</h2>
  <div>
+<p>
  1-create boierplate project: In Visual Studio - > select Create a new project - > Type 'Blazor' and choose Blazor Server App.
 2-Once the project is created and configured, it by default contains two Blazor components named Counterand FetchData.
 
@@ -38,21 +36,23 @@ Blazor Component and how to create
 A Blazor component is a self-contained part of UI typically defined in a .razor file using Razor syntax.
 It defines UI event handlers, binds to input data, and maintains its state and rendering logic. 
 
-to add a component to the project, right-click on the Pages folder and choose Add → Razor Component.
- In the Add New Item dialog, provide the name EmployeeCard and click Add .the default code would be:
+To add a component to the project, right-click on the Pages folder and choose Add → Razor Component.
+In the Add New Item dialog, provide the name EmployeeCard and click Add .the default code would be:
+ </p>
  <pre><code>
     <h3>EmployeeCard</h3>
     @code{
     }
  </code></pre>
-
+ <p>
  The generated code has two parts. The upper part of the Blazor component represents the HTML template. 
-A single <div> tag with the component's name represents the template in this case. 
+A single div tag with the component's name represents the template in this case. 
 In the lower part of the Blazor component, we have a @code directive, which wraps the C# code for our Blazor component.
 
 The Blazor Server App includes Bootstrap by default, so we will use the Bootstrap card and 
 other HTML tags, i.e., img, H5, H6, etc., to define the component. 
 The markup below defines the EmployeeCard component template:
+</p>
 <pre><code>
     < div class="card m-2">
         < div class="card-body">
@@ -69,39 +69,53 @@ The markup below defines the EmployeeCard component template:
         < /div>
     < /div> 
 </code></pre>
-
+<p>
 Step 2: Define Parameters to Reuse the Blazor Component
 Parameters are defined as variables using the C# code in the @code section of the template.
  They are passed to the HTML elements using the @ symbol as depicted in the code below. 
  These parameters are placeholders for the actual values passed when consuming the component and binding it to data.
-
+</p>
 <pre><code>
-    @code {
- 
-        [Parameter]
-        public string Name { get; set; }
-     
-        [Parameter]
-        public string Title { get; set; }
-     
-        [Parameter]
-        public string ThumbnailUrl { get; set; }
-     
-        [Parameter]
-        public DateTime HireDate { get; set; }
-     
-    }    
+@code {
+
+    [Parameter]
+    public string Name { get; set; }
+    
+    [Parameter]
+    public string Title { get; set; }
+    
+    [Parameter]
+    public string ThumbnailUrl { get; set; }
+    
+    [Parameter]
+    public DateTime HireDate { get; set; }
+    
+}    
 </code></pre>
+<p>
 we can replace these parameter instead of constant values in htm template part of the file.
 
 Step 3: Fetch and Display Employee Details
-The template is now ready to display the employee details. We can either add the component to a new razor component or add the route directives to the component itself to consume the EmpoyeeCard component. In this case, we will add a new Razor component by right-clicking on the Pages folder and choosing Add → Razor Component. Name the new component to be EmployeeCardDemo and add the route attribute to navigate to this page and view the EmployeeCard component in action.
+The template is now ready to display the employee details. 
+We can either add the component to a new razor component or 
+add the route directives to the component itself to consume the EmpoyeeCard component. 
+In this case, we will add a new Razor component by right-clicking on the Pages folder and choosing Add → Razor Component. 
+Name the new component to be EmployeeCardDemo and add the route attribute to navigate to this page 
+and view the EmployeeCard component in action.
 
-We can add a Blazor component within another component, using an HTML tag with the component's name. In our case, <EmployeeCard></EmployeeCard> can be used to place our Blazor component within the EmployeeCardDemo Blazor Component.
+We can add a Blazor component within another component, using an HTML tag with the component's name. 
+In our case, <EmployeeCard></EmployeeCard> can be used to place our Blazor component within the EmployeeCardDemo Blazor Component.
 
-Next, we have not hard-coded any values in the component template. Instead, we have used parameters as placeholders for actual values; hence using the template will generate an empty component on the page. When using the component to display the employee details, we must assign values to the parameters. To accomplish the same, we will be fetching data from an XML file to create a list of employee details. We will then create a component for each employee and assign the employee details from the list to display each employee's details.
+Next, we have not hard-coded any values in the component template.
+ Instead, we have used parameters as placeholders for actual values; 
+ hence using the template will generate an empty component on the page.
+When using the component to display the employee details, we must assign values to the parameters.
+To accomplish the same, we will be fetching data from an XML file to create a list of employee details. 
+We will then create a component for each employee and assign the employee details from the list to display each employee's details.
 
-The code below showcases adding the route attributes to the new razor component (EmployeeCardDemo.razor), fetching the XML data to create an employee details list, and creating multiple components for displaying details of each employee:
+The code below showcases adding the route attributes to the new razor component (EmployeeCardDemo.razor),
+ fetching the XML data to create an employee details list, and creating multiple components for displaying details of each employee:
+</p>
 <pre><code>
 @page "/employeecarddemo"
  
@@ -209,18 +223,16 @@ Finally let's add the razor component route to NavMenu.razor (Shared → NavMenu
 </code></pre>
   
 Step 4: Execute the Application to Observe the Results
- </div>
+</div>
 
-
-
- <h2 style="display:flex"><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" />Adding Blazor Controls from NuGet</h2>
+ <h2>Adding Blazor Controls from NuGet</h2>
 <div>
+<p>
 After understanding how to create and consume Blazor Components from scratch,
- we will now see how we can work with advanced Blazor controls provided by third-party vendors, i.e., pre-defined Blazor components.
- From the NuGet Package Manager menu, choose Manage NuGet Packages for Solution, search for C1.blazor.Grid which
- is  ComponentOne Blazor grid control.    
+we will now see how we can work with advanced Blazor controls provided by third-party vendors, i.e., pre-defined Blazor components.
+From the NuGet Package Manager menu, choose Manage NuGet Packages for Solution, search for C1.blazor.Grid which
+is ComponentOne Blazor grid control.  
+</p>  
 </div>
 
 
