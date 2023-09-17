@@ -15,17 +15,73 @@
 <div>
     <a href="https://www.grapecity.com/blogs/how-to-add-blazor-ui-controls-to-your-web-application">creating and using components</a>
     <a href="https://blog.logrocket.com/testing-in-blazor-a-tutorial/">tutorial</a>
+    <a href="https://www.pragimtech.com/blog/blazor/create-asp.net-core-rest-api/">pragimtech</a>
 </div>
-<h2>What is Blazor?</h2>
+<h2>What is ?</h2>
 <div>
 <p>
-Blazor is a framework for building interactive client-side web UI 
+- Blazor is a Single Page Application framework for building interactive client-side web UI 
 using C# instead of JavaScript,
 sharing server-side and client-side app logic written in .NET.
 
 It integrates with modern hosting platforms, such as Docker, 
 and building hybrid desktop and mobile apps.  
+- The name Blazor is a combination/mutation of the words Browser and Razor (the .NET HTML view generating engine).
+<b>What is WebAssembly ?</b>
+- An improvement to JavaScript
+- A new language: 
+WebAssembly code defines an AST (Abstract Syntax Tree) represented in a binary format. 
+You can author and debug in a text format so it’s readable.
+- Compile Target: 
+A way for other languages to get first-class binary support across the entire web platform stack.
+
+<b>Blazor hosting models</b>
+Blazor currently has two hosting models:
+  1- server-side Blazor 
+    Blazor server-side pre-renders HTML content before it is sent to the client's browser. 
+  2- Web Assembly : 
+    Web Assembly runs on the client, inside the browser, so it can be deployed as static files. 
+    it can be run as a Progressive Web App
 </p>  
+</div>
+<h2>Blazor project structure</h2>
+<div>
+    Program.cs 
+    
+    App.razor : the root component of the application
+    
+    wwwroot/index.html:is the root page in a Blazor WebAssembly project and is implemented as an html page.
+    
+    Startup.cs
+        This file is present only in the Blazor Server project. 
+        As the name implies it contains the applications's startup logic. 
+         MainLayout component (MainLayout.razor)
+   
+    NavMenu component (NavMenu.razor)
+    
+    _Imports.razor
+        This is like the _ViewImports.cshtml file in an asp.net core MVC project. 
+        This file contains the common namespaces so we do not have to include them in every razor component.
+    
+    wwwroot   : contains the static files like images, stylesheets etc. 
+    
+    Pages       :
+        This folder contains the _Host razor page and the routable components that make up the Blazor app.
+        The components have the .razor extension.
+
+        Index component (Index.razor) – Rendered when we navigate to the root application URL.
+        Counter component (Counter.razor) – Rendered when we navigate to the path /counter.
+        FetchData component (FetchData.razor) – Rendered when we navigate to the path /fetchdata.
+        Error component (Error.razor) – Rendered when an unhandled exception occurs in the blazor app.
+    
+        Shared folder :it contains the shared components  
+    
+    Pages/_Host.cshtml
+        This is the root page of the application and is specified by calling MapFallbackToPage("/_Host") method. 
+        It is implemented as a razor page.
+    
+    appsettings.json (Blazor Server)
+        Just like an asp.net core mvc project, a blazor project also uses this file to store the Configuration settings.  
 </div>
 
 <h2>Creating a Blazor Server Application</h2>
@@ -253,6 +309,97 @@ we will now see how we can work with advanced Blazor controls provided by third-
 From the NuGet Package Manager menu, choose Manage NuGet Packages for Solution, 
 search for C1.blazor.Grid which is ComponentOne Blazor grid control.  
 </p>  
+
+<h2>Blazor component example</h2>
+<div>
+    <pre><code>
+        @page "/counter"
+        <h1>Counter</h1>
+        <p>Current count: @currentCount</p>
+        <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+        @code 
+        {
+            private int currentCount = 0;
+            private void IncrementCount()
+            {
+                currentCount++;
+            }
+        }       
+    </code></pre>
+    <p>
+    <b>Nesting razor component</b> 
+    A component can also be nested inside another component using HTML syntax.
+     For example, use < Counter /> to nest the Counter component in the Index component.
+    <b>split component HTML and C# code </b>
+        Partial files approach
+        Base class approach
+    <b>Examples</b> 
+    <b>Both the HTML markup and C# code are in a single file</b> 
+</p>
+    <pre><code>
+        // Counter.razor
+        @page "/counter"        
+        < h1>Counter< /h1>       
+        < p>Current count: @currentCount< /p>      
+        < button class="btn btn-primary" @onclick="IncrementCount">Click me< /button>      
+        @code {
+            private int currentCount = 0;
+        
+            private void IncrementCount()
+            {
+                currentCount++;
+            }
+        }   
+    </code></pre>
+    <b>Partial files approach</b>
+    <pre><code>
+    // Counter.razor
+    @page "/counter"
+    < h1>Counter< /h1>
+    < p>Current count: @currentCount< /p>
+    < button class="btn btn-primary" @onclick="IncrementCount">Click me< /button>
+
+    // CounterBase.cs
+
+    public class CounterBase : ComponentBase
+    {
+        protected int currentCount = 0;
+
+        protected void IncrementCount()
+        {
+            currentCount++;
+        }
+    }
+
+
+// EmployeeList.razor
+@page "/"
+@inherits EmployeeListBase
+
+< h3>Employee List< /h3>
+
+< div class="card-deck">
+    @foreach (var employee in Employees)
+    {
+    < div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
+        < div class="card-header">
+            < h3>@employee.FirstName @employee.LastName< /h3>
+        < /div>
+        < img class="card-img-top imageThumbnail" src="@employee.PhotoPath" />
+        < div class="card-footer text-center">
+            < a href="#" class="btn btn-primary m-1">View< /a>
+
+            < a href="#" class="btn btn-primary m-1">Edit< /a>
+
+            < a href="#" class="btn btn-danger m-1">Delete< /a>
+        < /div>
+    < /div>
+    }
+< /div>
+ </code></pre>
+
+
+</div>
 </div>
 
 
