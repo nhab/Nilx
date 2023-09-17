@@ -17,3 +17,227 @@
 <div>
 for using razor string variable in javascript ,you should enclose it in "
 </div>
+<h2>razor</h2>
+<div><p>
+  - Razor supports C# 
+  - It uses the @ symbol to transition from HTML to C#. 
+  - When an @ symbol is followed by a Razor reserved keyword, it transitions into Razor-specific markup.
+    Otherwise, it transitions into plain HTML.
+
+  - To escape an @ symbol in Razor markup, use a second @ symbol:
+  </p>
+  <pre><code>
+     < p>@@Username< /p>    
+  </code></pre>
+<p>
+
+  -<b>Implicit Razor expressions</b>
+  Implicit Razor expressions start with @ followed by C# code:
+  </p>
+  <pre><code>
+    < p>@DateTime.Now< /p>
+    < p>@DateTime.IsLeapYear(2016)< /p>
+  </code></pre>
+  <p>
+ - Implicit expressions cannot contain C# generics, as the characters inside the brackets (< >) are interpreted as an HTML tag. 
+
+ -<b>Explicit Razor expressions</b>
+ Explicit Razor expressions consist of an @ symbol with balanced parenthesis. 
+ - Example 1:
+ </p>
+ <pre><code>
+    < p>Last week this time: @(DateTime.Now - TimeSpan.FromDays(7))< /p>
+ </code></pre>
+
+- Exaample 2:
+<pre><code>
+    @{
+      var joe = new Person("Joe", 33);
+    }
+
+    < p>Age@(joe.Age)< /p>  
+</code></pre>
+  -Explicit expressions can be used to render output from generic methods in .cshtml files.
+  <pre><code>
+      < p >@(GenericMethod< int >())< /p >
+  </code></pre>
+
+-<b>Expression encoding</b>
+<pre><code>@("< span >Hello World< /span >")   // Encodes to : &lt;span&gt;Hello World&lt;/span&gt;</code></pre>
+
+- <b>HtmlHelper.Raw</b> output isn't encoded but rendered as HTML markup.
+<pre><code>
+@Html.Raw("< span >Hello World< /span >")  //< span >Hello World< /span >  
+</code></pre>
+<p>
+
+-<b>Razor code blocks</b>
+Razor code blocks start with @ and are enclosed by {}.
+</p>
+<pre><code>
+  @{
+    var quote = "The future depends on what you do today. - Mahatma Gandhi";
+}
+< p>@quote< /p>
+// renders: < p>The future depends on what you do today. - Mahatma Gandhi< /p>
+
+</code></pre>
+- In code blocks, declare local functions with markup to serve as templating methods:
+<pre><code>
+  @{
+    void RenderName(string name)
+    {
+        <p>Name: <strong>@name</strong></p>
+    }
+
+    RenderName("Mahatma Gandhi");
+    RenderName("Martin Luther King, Jr.");
+}
+
+// Renders: 
+< p>Name: < strong>Mahatma Gandhi< /strong>< /p>
+< p>Name: < strong>Martin Luther King, Jr.< /strong>< /p>
+</code></pre>
+<p>
+-<b>Implicit transitions</b>
+  The default language in a code block is C#, but the Razor Page can transition back to HTML:
+  </p>
+  <pre><code>
+  @{
+    var inCSharp = true;
+    <p>Now in HTML, was in C# @inCSharp</p>
+}    
+  </code></pre>
+<p>
+
+-Explicit delimited transition
+To define a subsection of a code block that should render HTML, surround the characters for rendering with the Razor < text> tag:
+</p>
+<pre><code>
+@for (var i = 0; i < people.Length; i++)
+{
+    var person = people[i];
+    <text>Name: @person.Name</text>
+}  
+</code></pre>
+<p>
+-<b>Explicit line transition</b>
+To render the rest of an entire line as HTML inside a code block, use @: syntax:
+</p>
+<pre><code>
+@for (var i = 0; i < people.Length; i++)
+{
+    var person = people[i];
+    @:Name: @person.Name
+}  
+</code></pre>
+<p>
+  <b>Conditionals @if, else if, else, and @switch</b>
+  <pre><code>
+    @if (value % 2 == 0)
+    {
+        <p>The value was even.</p>
+    }
+    else if (value >= 1337)
+    {
+        <p>The value is large.</p>
+    }
+    else
+    {
+        <p>The value is odd and small.</p>
+    }
+
+    @switch (value)
+    {
+        case 1:
+            <p>The value is 1!</p>
+            break;
+        case 1337:
+            <p>Your number is 1337!</p>
+            break;
+        default:
+            <p>Your number wasn't 1 or 1337.</p>
+            break;
+    }
+  </code></pre>
+  <b>Looping @for, @foreach, @while, and @do while</b>
+  <pre><code>
+    @{
+        var people = new Person[]
+        {
+              new Person("Weston", 33),
+              new Person("Johnathon", 41),
+              ...
+        };
+
+        @for (var i = 0; i < people.Length; i++)
+        {
+            var person = people[i];
+            <p>Name: @person.Name</p>
+            <p>Age: @person.Age</p>
+        }
+
+        @foreach (var person in people)
+        {
+            <p>Name: @person.Name</p>
+            <p>Age: @person.Age</p>
+        }
+
+        @{ var i = 0; }
+        @while (i < people.Length)
+        {
+            var person = people[i];
+            <p>Name: @person.Name</p>
+            <p>Age: @person.Age</p>
+
+            i++;
+        }
+
+        @{ var i = 0; }
+        @do
+        {
+            var person = people[i];
+            <p>Name: @person.Name</p>
+            <p>Age: @person.Age</p>
+
+            i++;
+        } while (i < people.Length);
+    }
+  </code></pre>
+  <p>
+    <b>@using</b>
+    In Razor,like C#, a using statement is used to ensure an object is disposed.
+</p>
+<pre><code>
+  @using (Html.BeginForm())
+{
+    < div>
+        Email: < input type="email" id="Email" value="">
+        < button>Register< /button>
+    < /div>
+}
+</code></pre>
+<b>@try, catch, finally</b>
+<pre><code>
+  @try
+  {
+      throw new InvalidOperationException("You did something invalid.");
+  }
+  catch (Exception ex)
+  {
+      <p>The exception message: @ex.Message</p>
+  }
+  finally
+  {
+      <p>The finally statement.</p>
+  }
+</code></pre>
+<p>
+  @inherits
+  @inherits TypeNameOfClassToInheritFrom
+
+  @inject
+The @inject directive enables the Razor Page to inject a service from the service container into a view.
+
+</p>
+</div>
