@@ -5,7 +5,7 @@
 <div id="result"></div>
 
 <script>
-  document.write("Refrences:<a href='https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem'>web storage</a>")
+
 // Check browser support
 if (typeof(Storage) !== "undefined") {
   // Store
@@ -17,11 +17,12 @@ if (typeof(Storage) !== "undefined") {
 }
 
 if( localStorage.hits ) {
-            localStorage.hits = Number(localStorage.hits) +1;
-         } else {
-            localStorage.hits = 1;
-         }
-         document.write("Total Hits :" + localStorage.hits );
+  localStorage.hits = Number(localStorage.hits) +1;
+} else {
+  localStorage.hits = 1;
+}
+document.write("Total Hits :" + localStorage.hits );
+document.write("<br>Refrences:<a href='https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem'>web storage</a><br>")
 </script>
 
 </body>
