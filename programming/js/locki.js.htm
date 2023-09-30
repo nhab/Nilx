@@ -1,0 +1,29 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lokijs/1.5.12/lokijs.min.js" 
+integrity="sha512-aSbdfyDpBetjOHWSkZDhdg+wTgQvG/6inTOzFVHJ/0Z6h3Bx2vLGVzp+/902uDdr8S9f4GultmcefJh9/Ymi0Q==" crossorigin="anonymous"
+ referrerpolicy="no-referrer"></script>
+<script>
+var db = new loki('sandbox.db');
+
+// Add a collection to the database
+var items = db.addCollection('items');
+
+// Add some documents to the collection
+items.insert({ name : 'mjolnir', owner: 'thor', maker: 'dwarves' });
+items.insert({ name : 'gungnir', owner: 'odin', maker: 'elves' });
+items.insert({ name : 'tyrfing', owner: 'Svafrlami', maker: 'dwarves' });
+items.insert({ name : 'draupnir', owner: 'odin', maker: 'elves' });
+
+// Find and update an existing document
+var tyrfing = items.findOne({'name': 'tyrfing'});
+tyrfing.owner = 'arngrim';
+items.update(tyrfing);
+
+document.write('<h2>Items:</h2>');
+
+  items.find().forEach(function(item) {
+    document.write( '<p>Name: ' + item.name + ', Owner: ' + item.owner + ', Maker: ' + item.maker + '</p>');
+  });
+
+</script>
+
+</script>
