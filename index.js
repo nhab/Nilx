@@ -195,6 +195,7 @@ json1 +=`,{ "title":"JavaScript"
             ,{"caption":"AngularJS","href":"programming/Angular/AngularJS.htm"}
             ,{"caption":"Typescript","href":"https://www.javatpoint.com/typescript-installation"}
             ,{"caption":"LocalStorage","href":"programming/js/LocalStorage.htm"}
+            ,{"caption":"Locki.Js local database","href":"programming/js/locki.js.htm"}
         ]
     }`;
 
