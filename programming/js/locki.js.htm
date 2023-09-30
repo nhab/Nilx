@@ -25,5 +25,33 @@ document.write('<h2>Items:</h2>');
   });
 
 </script>
-
-</script>
+<br>
+<a href="https://github.com/techfort/LokiJS/blob/master/tutorials/Query%20Examples.md">Query Examples</a>
+<pre>
+  Creating a Database     : const db = new loki('example.db');
+  Creating a Collection   : const users = db.addCollection('users', { indices: ['email'] });
+  Inserting to collwction :
+                            users.insert({
+                              name: 'John Doe',
+                              email: 'john@example.com',
+                              age: 25,
+                            });
+  Querying Data         : const result = users.find({ age: { $gte: 21 } });            
+  Retrieve Data         : const database = locki.getAll();
+  Convert to JSON       : const jsonData = JSON.stringify(database);
+  Save to File          : const blob = new Blob([jsonData], { type: 'application/json' });
+                          const a = document.createElement('a');
+                          a.href = URL.createObjectURL(blob);
+                          a.download = 'lockiData.json';
+                          a.click();
+  Updating Documents    :  users.findAndUpdate({ name: 'John Doe' }, (user) => {user.age += 1;  });
+  Removing Documents    : users.findAndRemove({ name: 'John Doe' });
+  Save to file          : db.saveDatabase();
+  // Load from file     : const loadedDB = new loki('example.db');
+                          loadedDB.loadDatabase({}, () => {
+                            const loadedUsers = loadedDB.getCollection('users');
+                            console.log(loadedUsers.data);
+                          });
+                          
+  
+</pre>
