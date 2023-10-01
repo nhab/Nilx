@@ -1,6 +1,9 @@
+<head>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lokijs/1.5.12/lokijs.min.js" 
 integrity="sha512-aSbdfyDpBetjOHWSkZDhdg+wTgQvG/6inTOzFVHJ/0Z6h3Bx2vLGVzp+/902uDdr8S9f4GultmcefJh9/Ymi0Q==" crossorigin="anonymous"
- referrerpolicy="no-referrer"></script>
+ referrerpolicy="no-referrer"></script></head>
+ <body>
 <script>
 var db = new loki('sandbox.db');
 
@@ -47,7 +50,7 @@ document.write('<h2>Items:</h2>');
   Updating Documents    :  users.findAndUpdate({ name: 'John Doe' }, (user) => {user.age += 1;  });
   Removing Documents    : users.findAndRemove({ name: 'John Doe' });
   Save to file          : db.saveDatabase();
-  // Load from file     : const loadedDB = new loki('example.db');
+  Load from file        : const loadedDB = new loki('example.db');
                           loadedDB.loadDatabase({}, () => {
                             const loadedUsers = loadedDB.getCollection('users');
                             console.log(loadedUsers.data);
@@ -55,3 +58,4 @@ document.write('<h2>Items:</h2>');
                           
   
 </pre>
+</body>

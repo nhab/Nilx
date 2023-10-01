@@ -224,8 +224,7 @@ json1 +=`,{ "title":"Databases"
             {"caption":"sql server","href":"programming/db/sqlserver.htm"}
             ,{"caption":"t-sql","href":"programming/db/tsql.htm"}
             ,{"caption":"sql joins","href":"programming/db/joins.htm"}
-            ,{"caption":"Sqlite","href":"programming/db/Sqlite.htm"}
-            ,{"caption":"sqlite-php web ","href":"http://www.sqlitetutorial.net/sqlite-php/"}
+            ,{"caption":"Sqlite /php sqlite","href":"programming/db/Sqlite.htm"}
             ,{"caption":"Redis","href":"programming/redis.htm"}
             ,{"caption":"MongoDB","href":"programming/mongodb.htm"}
             ,{"caption":"MySql commands","href":"programming/db/mysqlcommands.htm"}
