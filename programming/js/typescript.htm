@@ -16,3 +16,60 @@
         <a href="https://www.javatpoint.com/typescript-installation">Installation</a>
         </pre>
     </div>
+<h2>Installing using node.js npm</h2>
+<div>
+<p>
+Make sure node.js and npm are installed
+$node -v                     // Make sure node.js is installed
+$ npm -v                     // Make sure npm is installed
+$ npm install typescript -g  // Install as a global module  
+$ tsc -v                     // Make sure Typescript is installed
+</p>
+</div>
+
+<h2>Hello world!</h2>
+<div>
+add following code in vscode and save the file as hello.ts:
+<pre><code>
+let message: string = 'Hello World';
+console.log(message);
+</code></pre>
+<p>
+- press (ctl+`) and type tsc hello.ts 
+- This will compile and create a new helloworld.js JavaScript file.
+- If you have Node.js installed, you can run node helloworld.js.
+</p>
+</div>
+<h2>tsconfig.json</h2>
+<div>
+<pre><code>
+    {
+        "compilerOptions": {
+          "target": "es5",
+          "module": "commonjs",
+          "outDir": "out"
+        }
+      }      
+</code></pre>
+ the outDir make and out folder for generated js files 
+</div>
+<h2>Debugging</h2>
+<div>
+    <p>
+    VS Code has built-in support for TypeScript debugging.    
+    VS Code relies on source maps for the debugger to map between the original TypeScript source code and the running JavaScript. You can create source maps during the build by setting "sourceMap": true in your tsconfig.json.
+</p>
+<pre><code>
+    {
+      "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "outDir": "out",
+        "sourceMap": true
+      }
+    }
+</code></pre>    
+</div>
+
+
+
