@@ -193,7 +193,7 @@ json1 +=`,{ "title":"JavaScript"
             ,{"caption":"ExpressJS main source","href":"https://expressjs.com/en/4x/api.html"}
             ,{"caption":"Angular","href":"programming/Angular/Angular.htm"}
             ,{"caption":"AngularJS","href":"programming/Angular/AngularJS.htm"}
-            ,{"caption":"Typescript","href":"https://www.javatpoint.com/typescript-installation"}
+            ,{"caption":"Typescript","href":"programming/js/typescript.htm"}
             ,{"caption":"LocalStorage","href":"programming/js/LocalStorage.htm"}
             ,{"caption":"Locki.Js local database","href":"programming/js/locki.js.htm"}
         ]
