@@ -76,7 +76,235 @@ console.log(message);
 With helloworld.ts open in the editor, press F5
 The debugger will start a session, run your code,
  and display the "Hello World" message in the Debug console panel.
+
+if debugging the code generates error with a message "tsc.ps1 is not digitally signed"
+you can run these powershell command as administrator:
 </p> 
+<ore><code>
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+</code></ore>
+</div>
+<h2>Language features</h2>
+<div>
+ <pre><code>
+
+//Static Typing:
+//TypeScript adds static typing to JavaScript, allowing you to define variable types during development.
+
+let num: number = 5;
+
+//Interfaces:
+//Define the structure of objects and classes.
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+function greet(person: Person): string {
+  return `Hello, ${person.name}!`;
+}
+
+// Classes:
+//Object-oriented programming with class-based syntax.
+
+class Animal {
+  constructor(public name: string) {}
+
+  makeSound() {
+    console.log("Some generic sound");
+  }
+}
+
+const dog = new Animal("Dog");
+
+// Inheritance:
+// Extend classes to create hierarchical relationships.
+
+class Dog extends Animal {
+  makeSound() {
+    console.log("Bark!");
+  }
+}
+
+const myDog = new Dog("Buddy");
+
+// Generics:
+// Write reusable and flexible code with generics.
+
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let result = identity<string>("Hello");
+
+// Enums:
+// Create named constant values.
+
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+
+let playerDirection: Direction = Direction.Right;
+
+// Union and Intersection Types:
+// Combine types for flexibility.
+
+type StringOrNumber = string | number;
+
+let item: StringOrNumber = "text";
+
+// Type Assertion:
+// Explicitly specify a type.
+
+let value: any = "Hello, TypeScript!";
+let length: number = (value as string).length;
+
+// Type Inference:
+// TypeScript infers types based on values.
+
+let x = 10; // TypeScript infers x as number
+
+// Modules:
+// Organize code into reusable and maintainable files.
+
+// math.ts
+export function add(a: number, b: number): number {
+  return a + b;
+}
+
+// app.ts
+import { add } from './math';
+
+
+// Type Guards:
+// Check and narrow down types at runtime.
+
+function isNumber(value: any): value is number {
+  return typeof value === 'number';
+}
+
+let result: number | string = 5;
+
+if (isNumber(result)) {
+  // result is now treated as a number
+  console.log(result + 10);
+}
+
+// Decorators:
+// Add metadata and modify classes/methods at design time.
+
+function log(target: any, key: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  descriptor.value = function (...args: any[]) {
+    console.log(`Calling ${key} with`, args);
+    const result = originalMethod.apply(this, args);
+    console.log(`Result is`, result);
+    return result;
+  };
+}
+
+class Example {
+  @log
+  add(a: number, b: number): number {
+    return a + b;
+  }
+
+// Intersection Types:
+// Combine multiple types into one.
+
+type Admin = {
+  name: string;
+  privileges: string[];
+};
+
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+
+type AdminEmployee = Admin & Employee;
+
+let adminEmployee: AdminEmployee = {
+  name: "John",
+  privileges: ["create", "edit"],
+  startDate: new Date(),
+};
+
+// Mapped Types:
+// Dynamically create new types based on existing ones.
+
+type Flags = {
+  option1: boolean;
+  option2: boolean;
+};
+
+type NullableFlags = { [K in keyof Flags]: boolean | null };
+
+let nullableFlags: NullableFlags = {
+  option1: true,
+  option2: null,
+};
+
+// Tuple Types:
+// Represent an array with a fixed number of elements and each element can have its own type.
+
+let coordinate: [number, number] = [10, 20];
+
+// String Literal Types:
+// Specify exact string values.
+
+type Direction = "up" | "down" | "left" | "right";
+
+let playerDirection: Direction = "right";
+
+// Readonly Properties:
+// Ensure that properties cannot be modified after initialization.
+
+interface Point {
+  readonly x: number;
+  readonly y: number;
+}
+
+let point: Point = { x: 10, y: 20 };
+// point.x = 5; // Error: Cannot assign to 'x' because it is a read-only property.
+
+// Optional Chaining:
+// Handle potentially undefined properties without causing runtime errors.
+
+let user = {
+  address: {
+    city: "New York",
+  },
+};
+
+let cityName = user?.address?.city;
+
+// Nullish Coalescing:
+// Provide a default value only when a variable is null or undefined.
+
+let defaultValue = user.address?.city ?? "Default City";
+Declaration Merging:
+Combine multiple declarations into a single one.
+
+interface Car {
+  brand: string;
+  speed: number;
+}
+
+interface Car {
+  model: string;
+}
+
+let myCar: Car = {
+  brand: "Toyota",
+  speed: 120,
+  model: "Camry",
+};
+ </code></pre>
 </div>
 
 
