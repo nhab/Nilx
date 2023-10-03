@@ -287,8 +287,9 @@ let cityName = user?.address?.city;
 // Provide a default value only when a variable is null or undefined.
 
 let defaultValue = user.address?.city ?? "Default City";
-Declaration Merging:
-Combine multiple declarations into a single one.
+
+// Declaration Merging:
+// Combine multiple declarations into a single one.
 
 interface Car {
   brand: string;
@@ -304,6 +305,167 @@ let myCar: Car = {
   speed: 120,
   model: "Camry",
 };
+
+//Namespace:
+//Organize your code into logical containers.
+
+namespace Geometry {
+  export class Circle {
+    // implementation
+  }
+}
+
+const myCircle = new Geometry.Circle();
+
+// Triple-Slash Directives:
+// Reference external files and dependencies.
+
+/// < reference path="path/to/dependency.ts" / >
+
+//Type Aliases:
+//Create a shorthand for complex types.
+
+type Point = { x: number; y: number };
+
+function calculateDistance(point1: Point, point2: Point): number {
+  // implementation
+}
+
+// Index Signatures:
+// Define types for dynamic properties.
+
+interface Dictionary {
+  [key: string]: number;
+}
+
+let ages: Dictionary = {
+  John: 25,
+  Jane: 30,
+};
+
+// Async/Await:
+// Simplify asynchronous code with async/await.
+
+async function fetchData(): Promise<string> {
+  let response = await fetch("https://example.com/api/data");
+  let data = await response.text();
+  return data;
+}
+
+// Type Predicates:
+// Refine types within conditional statements.
+
+function isString(value: any): value is string {
+  return typeof value === "string";
+}
+
+let result: any = "Hello, TypeScript!";
+
+if (isString(result)) {
+  // 'result' is now inferred as string
+  console.log(result.length);
+}
+
+// Non-Nullable Types:
+// Avoid null or undefined values.
+
+let name: string | null = fetchName();
+let length = name!.length; // Assuming 'name' is not null or undefined
+
+// String Templates:
+// Use template strings for more readable and flexible strings.
+
+let name = "John";
+let greeting = `Hello, ${name}!`;
+
+// File Watching:
+// Enable automatic compilation on file changes.
+
+bash
+Copy code
+tsc --watch
+TypeScript Compiler Options:
+Fine-tune compiler settings using tsconfig.json.
+
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    // other options
+  }
+}
+
+// Mixins:
+// Combine multiple classes into a single class.
+class Printable {
+  print() {
+    console.log(this);
+  }
+}
+
+class Loggable {
+  log() {
+    console.log("Logging...");
+  }
+}
+
+type PrintableLoggable = Printable & Loggable;
+
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+  baseCtors.forEach(baseCtor => {
+    Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+      derivedCtor.prototype[name] = baseCtor.prototype[name];
+    });
+  });
+}
+
+class MyClass implements PrintableLoggable {
+  // implementation
+}
+
+applyMixins(MyClass, [Printable, Loggable]);
+
+// Never Type:
+// Indicate that a function will never return.
+
+function throwError(message: string): never {
+  throw new Error(message);
+}
+
+
+// Mapped Types with readonly:
+// Make all properties of a type readonly.
+
+type Immutable<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
+let data: Immutable<{ name: string; age: number }> = {
+  name: "John",
+  age: 30,
+};
+
+// data.name = "Jane"; // Error: Cannot assign to 'name' because it is a read-only property.
+
+// TypeScript and React:
+// TypeScript integrates seamlessly with React for strongly typed components.
+
+interface Props {
+  name: string;
+  age: number;
+}
+
+const MyComponent: React.FC< Props> = ({ name, age }) => {
+  // implementation
+};
+
+// Conditional Types:
+// Create types that depend on a condition.
+
+type IsString< T> = T extends string ? true : false;
+
+let isStringType: IsString< "Hello"> = true;
  </code></pre>
 </div>
 
