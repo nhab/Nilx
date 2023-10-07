@@ -1,21 +1,17 @@
-<head>
-<meta charset='UTF-8' />
-<meta name='viewport' content='width=device-width, initial-scale=1' />
-<link rel='stylesheet' href='/nhab/assets/css/blocks.css'>
-<script src='/nhab/assets/js/blocks.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
-<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
-<link rel='stylesheet' href='/nhab/libs/highlight/androidstudio2.css'>
-<!--- 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/androidstudio.min.css'-->
-<!--github-dark.min.css-->
 
-<!--script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/3024.min.css'></script-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-dark.min.css" integrity="sha512-3e6qtecCEv4ZXH4PYXK1qbqfFI/Lb1BuPFK19tSi9I1p0BFjEHVATQ1QkbX1ehDFyu60chdPHpIDvXMnwm7muQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!--script>hljs.initHighlightingOnLoad();</script-->
-    <script></script>
+
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+    <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>    
+    <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css" integrity="sha512-RwXJS3k4Z0IK6TGoL3pgQlA9g2THFhKL7z9TYWdAI8u6xK0AUuMWieJuWgTRayywC9A94ifUj1RzjDa1NIlUIg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
-<button onclick='toggleAll(this);'>-</button>
+<body onload='AddToggleButtonsToH(7);ReplaceLtGt();hljs.highlightAll();'>
+<button onclick="toggleAll(this);" >-</button>
+
 <script>
 function ReplaceLtGt()
 {
@@ -34,41 +30,41 @@ function ReplaceLtGt()
 </script>
 <h2>Definition</h2>
 <div>
-    CSS Describes how HTML elements are to be displayed
+CSS Describes how HTML elements are to be displayed
 </div>
 
 <h2 >Resources</h2>
 <div>
-    <a href="https://htmlcheatsheet.com/css/">htmlcheatsheet/css</a>
-    <a href="https://css-tricks.com/snippets/css/">Css-tricks Sample Code snippets</a>
-    <a href="https://www.w3schools.co/cssref">w3school css reference</a>
-    <a href="https://www.google.com/search?num=100&ei=7A55W-OcGqSRrgSi3YawCQ&q=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net&oq=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net"> [your question] site:https://jsfiddle.net"</a>
+    <a href="https://htmlcheatsheet.com/css/">html cheat sheet/css</a><br>
+    <a href="https://css-tricks.com/snippets/css/">Css-tricks Sample Code snippets</a><br>
+    <a href="https://www.w3schools.co/cssref">w3school css reference</a><br>
+    <a href="https://www.google.com/search?num=100&ei=7A55W-OcGqSRrgSi3YawCQ&q=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net&oq=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net"> [your question] site:https://jsfiddle.net"</a><br>
     <a href="https://www.google.com/search?num=100&q=divs+side+by+side+site%3Ahttps%3A%2F%2Fcodepen.io&oq=divs+side+by+side+site%3Ahttps%3A%2F%2Fcodepen.io">  [your question] site:https://codepen.io</a>
 </div>
 
 <h2 id="terms-and-concepts">Selecting elements</h2>
 <div> 
-   <h3 id="selectors">Selectors</h3>
-        <h4 id="the-element-selector">The element Selector</h4>
-        selects HTML elements based on the element name.
-        Example:
-        <pre><code>
-            p {
-                text-align: center;
-                color: red;
-            }
-        </code></pre>
-        <a href="selector.htm">Other Selector Types</a>
-    </p>
-   
-   <h3 id="rule-set">Rule-set</h3>
-   <p>
-       The following line is a rule-set:
-        <pre><code>
-            h1      { color  : blue  ;   font-size : 12px>;  }
-        </code></pre>
-        So the rule-set is a combination of a selector and a declaration block (a set of prperty:value)
-   </p>
+<h3 id="selectors">Selectors</h3>
+<h4 id="the-element-selector">The element Selector</h4>
+selects HTML elements based on the element name.
+Example:
+<pre><code>
+    p {
+        text-align: center;
+        color: red;
+    }
+</code></pre>
+<a href="selector.htm">Other Selector Types</a>
+</p>
+
+<h3 id="rule-set">Rule-set</h3>
+<p>
+    The following line is a rule-set:
+    <pre><code>
+        h1      { color  : blue  ;   font-size : 12px>;  }
+    </code></pre>
+    So the rule-set is a combination of a selector and a declaration block (a set of prperty:value)
+</p>
 
    <h3 id="combinator">Combinator</h3>
    <p>
@@ -149,7 +145,7 @@ function ReplaceLtGt()
    </code></pre>
 
 <h2>Layout systems</h2>
-<div>
+<div><p>
     From older to younger:
   - <b>tables</b>, 
   -  <b>floats</b>, 
@@ -162,23 +158,27 @@ and left out a lot of important functionality (vertical centering, for instance)
     (Flexbox and Grid actually work very well together). 
     
   -  <b>Grid</b> is the very first CSS module created specifically to solve the layout problems .
+</p>
 </div>
+
 <h2>grid layout</h2>
 <div>
-   <pre><code>
-        container {
-            display: grid;
-            grid-template-columns: 100px 200px;
-            grid-template-rows: 100px 50px;
-            grid-column-gap: 25px;
-            grid-row-gap: 25px;
-          }
-    </code></pre>
-   <img src="pics\gridLayout.png">
-   <a href="https://flaviocopes.com/css-grid/">Read more</a>
-  </div> 
+<pre><code>
+    container {
+        display: grid;
+        grid-template-columns: 100px 200px;
+        grid-template-rows: 100px 50px;
+        grid-column-gap: 25px;
+        grid-row-gap: 25px;
+        }
+</code></pre>
+<img src="pics\gridLayout.png">
+<a href="https://flaviocopes.com/css-grid/">Read more</a>
+</div> 
+
 <h2>FlexBox</h2>
 <div>
+<p>
     flexbox is a one-dimensional layout model. It will control the layout based on a row or on a column, but not together at the same time.
 
     The main goal of flexbox is to allow items to fill the whole space offered by their container, depending on some rules you set.
@@ -189,15 +189,16 @@ and left out a lot of important functionality (vertical centering, for instance)
     Floats
     clearfix hacks
     display: table hacks
-    <h3>ENABLE FLEXBOX</h3>
-    <p>
-            A flexbox layout is applied to a container, by setting
+</p>
+<h3>ENABLE FLEXBOX</h3>
+<p>
+    A flexbox layout is applied to a container, by setting
 
-            display: flex;
-            or  
-            display: inline-flex;
+    display: flex;
+    or  
+    display: inline-flex;
 
-            the content inside the container will be aligned using flexbox. 
+    the content inside the container will be aligned using flexbox. 
 
 Menu bar example (nav bar example):
 <pre><code>
@@ -227,17 +228,17 @@ nav > ol>li{padding: 5px;list-style-type: none; }
 &lt;/nav>    
 &lt;/body>
 </code></pre>
-            
-    </p>
     <a href="https://flaviocopes.com/flexbox/">read more</a>
     <a href="https://flexbox.help/">see in action</a>
 </div>
+
 <h2 >Display</h2>
-   <div> this  is the most important CSS property for <b>controlling layout</b>
+<div> 
+<p>this  is the most important CSS property for <b>controlling layout</b>
      - The display property specifies if/how an element is displayed.
      - Every HTML element has a default display value depending on what type of element it is.
      - The default display value for most elements is block or inline.
-        
+ </p>       
         <h4 >Block-level Elements ( display: block;)</h4>
         <p> always starts on a new line and takes up the full width available
         .like div ,h1 to h6,p;form and more.
@@ -260,26 +261,28 @@ nav > ol>li{padding: 5px;list-style-type: none; }
             }
         </code></pre>
         <p>other values
-        | value | Description
-        |----|----
-        |flex        |         Displays an element as an block-level flex container. New in CSS3<br>|inline-flex |        Displays an element as an inline-level flex container. New in CSS3<br>|inline-table|         The element is displayed as an inline-level table
-        |run-in         |        Displays an element as either block or inline, depending on context
+        | value            | Description
+        |------------------|---------------
+        |flex              |    Displays an element as an block-level flex container. New in CSS3<br>|inline-flex |        Displays an element as an inline-level flex container. New in CSS3<br>|inline-table|         The element is displayed as an inline-level table
+        |run-in            |    Displays an element as either block or inline, depending on context
         |list-item         |    Let the element behave like a <li> element
         |table             |    Let the element behave like a <table> element<br>|table-caption     |    Let the element behave like a <caption> element<br>|table-column-group|     Let the element behave like a <colgroup> element<br>|table-header-group |    Let the element behave like a <thead> element<br>|table-footer-group |    Let the element behave like a <tfoot> element<br>|table-row-group|     Let the element behave like a <tbody> element<br>|table-cell     |        Let the element behave like a <td> element<br>|table-column     |    Let the element behave like a <col> element<br>|table-row         |    Let the element behave like a <tr> element
-        |none             |    The element will not be displayed at all (has no effect on layout)<br>|initial         |    Sets this property to its default value.<br>|inherit        |         Inherits this property from its parent element. Read about inherit</p>
+        |none              |    The element will not be displayed at all (has no effect on layout)<br>|initial         |    Sets this property to its default value.<br>|inherit        |         Inherits this property from its parent element. Read about inherit</p>
         <p>Default value:     inline</p>
         <p>##position</p>
-        <pre><code class="lang-css">            position>: static; /*default;are not affected by the top, bottom, left, and right properties.
-                        //is not positioned in any special way;*/>
-                    position>: relative; /*is positioned relative to its normal position.*/>
-                    position>: fixed; /*it always stays in the same place even if the page is scrolled.*/>
-                    position>: absolute;/*is positioned relative to the nearest positioned ancestor */>
-                            /*/(instead of positioned relative to the viewport, like fixed).*/>
-        </code></pre>
+    <pre><code class="lang-css">     
+                position>: static; /*default;are not affected by the top, bottom, left, and right properties.
+                    //is not positioned in any special way;*/>
+                position>: relative; /*is positioned relative to its normal position.*/>
+                position>: fixed; /*it always stays in the same place even if the page is scrolled.*/>
+                position>: absolute;/*is positioned relative to the nearest positioned ancestor */>
+                        /*/(instead of positioned relative to the viewport, like fixed).*/>
+    </code></pre>
     </div>
    
 <h2 id="z-index">z-index</h2>
-<div>:which element should be placed in front of, or behind, the others.
+<div>
+<p>which element should be placed in front of, or behind, the others.
    example:
     img {position: absolute;}//makes the image be uder the content</p>
    <h3 id="margins">Margins</h3>
@@ -296,9 +299,9 @@ nav > ol>li{padding: 5px;list-style-type: none; }
 
 <h2>Float</h2>
 <div> 
-       float: puts the element in the left or right of its container(parent);
+ <p>   float: puts the element in the left or right of its container(parent);
        (should be used with clear property in many senarios)
-   <p>Example</p>
+  Example</p>
    <pre><code class="lang-css"> #sidebar> {
     float>: right;            
     }
@@ -473,6 +476,7 @@ nav > ol>li{padding: 5px;list-style-type: none; }
    <div>
    <p>  Ordered lists aren't the only elements that can be automatically numbered. 
        Thanks to the various counter-related properties, any element can be.
+    </p>
        <pre> 
             < body>
             < section></ section>
@@ -484,7 +488,7 @@ nav > ol>li{padding: 5px;list-style-type: none; }
             section        { counter-increment : my-awesome-counter;   }
             section:before { content           : counter(my-awesome-counter); }
         </pre>
-        Each < section > will respectively start with "1", "2", "3", or "4".
+    <p>Each < section > will respectively start with "1", "2", "3", or "4".
         To work with CSS counters we will use the following properties:
    </p>
    <table>
@@ -559,7 +563,7 @@ nav > ol>li{padding: 5px;list-style-type: none; }
 
  <h2>Variables</h2>
  <div>
-        
+    <p>
         A CSS Variable is defined with a special syntax, prepending two dashes to a name (--variable-name), then a colon and a value.
         Like this:
         
@@ -580,6 +584,7 @@ nav > ol>li{padding: 5px;list-style-type: none; }
           --default-color: red;
           --default-background: #fff;
         }
+    </p>
     <a href="https://flaviocopes.com/css-variables/">Read more..</a>
 </div>  
 
@@ -609,7 +614,7 @@ nav > ol>li{padding: 5px;list-style-type: none; }
  <h2>border/outline/devider</h2>
  <div>
         border-style
-        <code>
+        <pre><code>
             dotted - Defines a dotted border
             dashed - Defines a dashed border
             solid - Defines a solid border
@@ -621,12 +626,13 @@ nav > ol>li{padding: 5px;list-style-type: none; }
             none - Defines no border
             hidden - Defines a hidden border
             </code>
-    
+        </pre>
+        <p>   
         border-width: 5px;
         border-color: green;
     
         border-collapse
-        <p>
+
            Is used for table elements(or table like elements trough display: table or display: inline-table).  
             may have 2 values:
             border-collapse:seperate; /* borders of  cells are seperate;so it could be space between cells */
@@ -682,9 +688,10 @@ nav > ol>li{padding: 5px;list-style-type: none; }
 </div>
 
 <h2 id="outline">outline</h2>
-<div>s a line that is drawn around elements (outside the borders) to make the element &quot;stand out&quot;.
+<div>
+<p>Is a line that is drawn around elements (outside the borders) to make the element &quot;stand out&quot;.
        However, the outline property is different from the border property:
-            
+</p>          
         <pre><code> The outline is NOT a part of dimensions of an element ; 
         total width and height of the element is not affected by the width of the outline.
         </code></pre>
@@ -695,14 +702,13 @@ nav > ol>li{padding: 5px;list-style-type: none; }
         </code></pre>
         <h3 >outline-offset</h3>
         <p>adds space between an outline and the edge or border of an element.
-        Example
+        Example</p>
         <pre><code class="lang-css">div> {
             border>: 1px> solid black;
             outline>: 1px> solid red;
             outline-offset>: 15px>;
         }
         </code></pre>
-        </p>
 </div>
  
 <h2 id="colors">Colors</h2>
