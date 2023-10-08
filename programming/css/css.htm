@@ -28,24 +28,21 @@ function ReplaceLtGt()
     }
 }
 </script>
-<h2>Definition</h2>
-<div>
-CSS Describes how HTML elements are to be displayed
-</div>
-
+<h2>Definition: CSS Describes how HTML elements are to be displayed</h2>
+<div></div>
 <h2 >Resources</h2>
-<div>
-    <a href="https://htmlcheatsheet.com/css/">html cheat sheet/css</a><br>
-    <a href="https://css-tricks.com/snippets/css/">Css-tricks Sample Code snippets</a><br>
-    <a href="https://www.w3schools.co/cssref">w3school css reference</a><br>
-    <a href="https://www.google.com/search?num=100&ei=7A55W-OcGqSRrgSi3YawCQ&q=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net&oq=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net"> [your question] site:https://jsfiddle.net"</a><br>
-    <a href="https://www.google.com/search?num=100&q=divs+side+by+side+site%3Ahttps%3A%2F%2Fcodepen.io&oq=divs+side+by+side+site%3Ahttps%3A%2F%2Fcodepen.io">  [your question] site:https://codepen.io</a>
+<div><a href="https://htmlcheatsheet.com/css/">html cheat sheet/css</a><br>
+<a href="https://css-tricks.com/snippets/css/">Css-tricks Sample Code snippets</a><br>
+<a href="https://www.w3schools.co/cssref">w3school css reference</a><br>
+<a href="https://www.google.com/search?num=100&ei=7A55W-OcGqSRrgSi3YawCQ&q=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net&oq=css+centering+site%3Ahttps%3A%2F%2Fjsfiddle.net"> [your question] site:https://jsfiddle.net"</a><br>
+<a href="https://www.google.com/search?num=100&q=divs+side+by+side+site%3Ahttps%3A%2F%2Fcodepen.io&oq=divs+side+by+side+site%3Ahttps%3A%2F%2Fcodepen.io">  [your question] site:https://codepen.io</a>
 </div>
 
 <h2 id="terms-and-concepts">Selecting elements</h2>
 <div> 
 <h3 id="selectors">Selectors</h3>
 <h4 id="the-element-selector">The element Selector</h4>
+<div>
 selects HTML elements based on the element name.
 Example:
 <pre><code>
@@ -55,9 +52,10 @@ Example:
     }
 </code></pre>
 <a href="selector.htm">Other Selector Types</a>
-</p>
+</div>
 
 <h3 id="rule-set">Rule-set</h3>
+<div>
 <p>
     The following line is a rule-set:
     <pre><code>
@@ -65,84 +63,97 @@ Example:
     </code></pre>
     So the rule-set is a combination of a selector and a declaration block (a set of prperty:value)
 </p>
-
-   <h3 id="combinator">Combinator</h3>
-   <p>
-        <pre><code>
-        /*The following example selects all &lt;p&gt; elements inside &lt;div&gt; elements:*/
-        div p {
-            background-color>: yellow;
-        }
-        </code></pre>
-        So the combinator explains the relationship between the selectors.
-   </p>
-
-   <h3 >Pseudo-classes</h3>
-   <p>
-       defines a special state of an element
-        (for example on  mouse  over it or when got focus or  visited links)</p>
-        <b>syntax</b>
-        <pre><code class="lang-css">selector:pseudo-class {
-            property : value;
-        }
-        </code></pre>
-        <b>Example:</b>
-        <pre><code class="lang-css">/* unvisited link */>
-        a:link {
-            color: #FF0000;
-        }
-
-        /* visited link */>
-        a:visited {
-            color: #00FF00;
-        }
-
-        /* mouse over link */>
-        a:hover {
-            color: #FF00FF;
-        }
-        </code></pre>
-    </p>
-
-   <h3 >pseudo-element</h3>
-   
-       to style <b>specified parts</b> of an element.
-            <b>Syntax (double colon) :</b>
-        <pre><code >selector::pseudo-element {
-            property:value;
-        }
-        </code></pre>
-        <b>Example :</b>
-        <pre><code >    p.intro::first-letter {
-                color     : #ff0000;
-                font-size : 200%;
-            }
-        </code></pre>
-
-   
-   <pre><code class="lang-css">::first-line
-   ::first-letter
-   ::before 
-   ::after
-   ::selection 
-   :matches the portion of an element that is selected by a user.
-   :X ::selection {   color: red;  background: yellow;}
-   </code></pre>
 </div>
+
+<h3 id="combinator">Combinator</h3>
+<div>
+<p>
+    <pre><code>
+    /*The following example selects all &lt;p&gt; elements inside &lt;div&gt; elements:*/
+    div p {
+        background-color>: yellow;
+    }
+    </code></pre>
+    So the combinator explains the relationship between the selectors.
+</p>
+</div>
+
+<h3 >Pseudo-classes</h3>
+<div>
+<p>
+    defines a special state of an element
+    (for example on  mouse  over it or when got focus or  visited links)</p>
+    <b>syntax</b>
+    <pre><code class="lang-css">selector:pseudo-class {
+        property : value;
+    }
+    </code></pre>
+    <b>Example:</b>
+    <pre><code class="lang-css">/* unvisited link */>
+    a:link {
+        color: #FF0000;
+    }
+
+    /* visited link */>
+    a:visited {
+        color: #00FF00;
+    }
+
+    /* mouse over link */>
+    a:hover {
+        color: #FF00FF;
+    }
+    </code></pre>
+</p>
+</div>
+
+<h3 >pseudo-element</h3>
+<div>
+    to style <b>specified parts</b> of an element.
+        <b>Syntax (double colon) :</b>
+    <pre><code >selector::pseudo-element {
+        property:value;
+    }
+    </code></pre>
+    <b>Example :</b>
+    <pre><code >    p.intro::first-letter {
+            color     : #ff0000;
+            font-size : 200%;
+        }
+    </code></pre>
+
+
+<pre><code class="lang-css">::first-line
+::first-letter
+::before 
+::after
+::selection 
+:matches the portion of an element that is selected by a user.
+:X ::selection {   color: red;  background: yellow;}
+</code></pre>
+</div>
+</div>
+
 <h2>Boxing</h2>
 <div>
 <h3 id="padding">padding</h3>
+<div>
 <p>distance between borders  and <b>neighbouring</b> objects.</p>
+</div>
+
 <h3 id="margin">margin</h3>
+<div>
 <p>distance between borders and <b>internal</b> objects.</p>
 <img src="pics\margin-padding.gif">
 </div>
+</div>
+
 <h2>Positions</h2>
-<pre><code class="lang-css">        right  : 0px;/*the distance of the element from right is 0px*/
-           left   : 0px;/*the distance of the element from left is 0px*/
-           top    : 0px;/*the distance of the element from the top is 0px*/
-           bottom : 0px;/*the distance of the element from the bottom is 0px*/
-   </code></pre>
+<pre><code class="lang-css">right  : 0px;/*the distance of the element from right is 0px*/
+left   : 0px;/*the distance of the element from left is 0px*/
+top    : 0px;/*the distance of the element from the top is 0px*/
+bottom : 0px;/*the distance of the element from the bottom is 0px*/
+</code></pre>
 
 <h2>Layout systems</h2>
 <div><p>
@@ -190,17 +201,20 @@ and left out a lot of important functionality (vertical centering, for instance)
     clearfix hacks
     display: table hacks
 </p>
+
 <h3>ENABLE FLEXBOX</h3>
+<div>
 <p>
-    A flexbox layout is applied to a container, by setting
+A flexbox layout is applied to a container, by setting
 
-    display: flex;
-    or  
-    display: inline-flex;
+display: flex;
+or  
+display: inline-flex;
 
-    the content inside the container will be aligned using flexbox. 
+the content inside the container will be aligned using flexbox. 
 
 Menu bar example (nav bar example):
+</p>
 <pre><code>
 &lt;head>
 &lt;cript crossorigin src="https://unpkg.com/react@18/umd/react.development.js">< /script>
@@ -231,54 +245,64 @@ nav > ol>li{padding: 5px;list-style-type: none; }
     <a href="https://flaviocopes.com/flexbox/">read more</a>
     <a href="https://flexbox.help/">see in action</a>
 </div>
+</div>
 
 <h2 >Display</h2>
 <div> 
-<p>this  is the most important CSS property for <b>controlling layout</b>
+<p>This  is the most important CSS property for <b>controlling layout</b>
      - The display property specifies if/how an element is displayed.
      - Every HTML element has a default display value depending on what type of element it is.
      - The default display value for most elements is block or inline.
  </p>       
-        <h4 >Block-level Elements ( display: block;)</h4>
-        <p> always starts on a new line and takes up the full width available
-        .like div ,h1 to h6,p;form and more.
-        </p>
-        <h4 id="inline-elements-display-inline-">Inline Elements (  display: inline;)</h4>
-        An inline element does not start on a new line and only takes up as much width as necessary.
-        
-        <h4 id="inline-block">inline-block</h4>
-        <p> Displays an element as an inline-level block container
-        . The inside of this block is formatted as block-level box, 
-        and the element itself is formatted as an inline-level box.
-        -this,acts as a floating box inside the page
-        Example:</p>
-        <pre><code class="lang-css">    .floating-box> {
-                display>: inline-block;
-                width>: 150px>;
-                height>: 75px>;
-                margin>: 10px>;
-                border>: 3px> solid #73AD21>;
-            }
-        </code></pre>
-        <p>other values
-        | value            | Description
-        |------------------|---------------
-        |flex              |    Displays an element as an block-level flex container. New in CSS3<br>|inline-flex |        Displays an element as an inline-level flex container. New in CSS3<br>|inline-table|         The element is displayed as an inline-level table
-        |run-in            |    Displays an element as either block or inline, depending on context
-        |list-item         |    Let the element behave like a <li> element
-        |table             |    Let the element behave like a <table> element<br>|table-caption     |    Let the element behave like a <caption> element<br>|table-column-group|     Let the element behave like a <colgroup> element<br>|table-header-group |    Let the element behave like a <thead> element<br>|table-footer-group |    Let the element behave like a <tfoot> element<br>|table-row-group|     Let the element behave like a <tbody> element<br>|table-cell     |        Let the element behave like a <td> element<br>|table-column     |    Let the element behave like a <col> element<br>|table-row         |    Let the element behave like a <tr> element
-        |none              |    The element will not be displayed at all (has no effect on layout)<br>|initial         |    Sets this property to its default value.<br>|inherit        |         Inherits this property from its parent element. Read about inherit</p>
-        <p>Default value:     inline</p>
-        <p>##position</p>
-    <pre><code class="lang-css">     
-                position>: static; /*default;are not affected by the top, bottom, left, and right properties.
-                    //is not positioned in any special way;*/>
-                position>: relative; /*is positioned relative to its normal position.*/>
-                position>: fixed; /*it always stays in the same place even if the page is scrolled.*/>
-                position>: absolute;/*is positioned relative to the nearest positioned ancestor */>
-                        /*/(instead of positioned relative to the viewport, like fixed).*/>
-    </code></pre>
-    </div>
+<h3>Block-level Elements ( display: block;)</h3>
+<div>
+<p> always starts on a new line and takes up the full width available
+.like div ,h1 to h6,p;form and more.
+</p>
+</div>
+
+<h3 id="inline-elements-display-inline-">Inline Elements (  display: inline;)</h3>
+<div>
+An inline element does not start on a new line and only takes up as much width as necessary.
+</div>
+
+<h3 id="inline-block">inline-block</h3>
+<div>
+<p> Displays an element as an inline-level block container
+. The inside of this block is formatted as block-level box, 
+and the element itself is formatted as an inline-level box.
+-this,acts as a floating box inside the page
+Example:</p>
+<pre><code class="lang-css">    .floating-box> {
+        display>: inline-block;
+        width>: 150px>;
+        height>: 75px>;
+        margin>: 10px>;
+        border>: 3px> solid #73AD21>;
+    }
+</code></pre>
+<p>other values
+| value            | Description
+|------------------|---------------
+|flex              |    Displays an element as an block-level flex container. New in CSS3< br>|inline-flex |        Displays an element as an inline-level flex container. New in CSS3< br>|inline-table|         The element is displayed as an inline-level table
+|run-in            |    Displays an element as either block or inline, depending on context
+|list-item         |    Let the element behave like a < li> element
+|table             |    Let the element behave like a < table> element< br>|table-caption     |    Let the element behave like a < caption> element< br>|table-column-group|     Let the element behave like a < colgroup> element< br>|table-header-group |    Let the element behave like a < thead> element|table-footer-group |    Let the element behave like a < tfoot> element|table-row-group|     Let the element behave like a < tbody> element|table-cell     |        Let the element behave like a < td> element|table-column     |    Let the element behave like a < col> element|table-row         |    Let the element behave like a < tr> element
+|none              |    The element will not be displayed at all (has no effect on layout)< br>|initial         |    Sets this property to its default value.< br>|inherit        |         Inherits this property from its parent element. Read about inherit
+
+<b>Default value:     inline</b>
+<b>position</b>
+</p>
+<pre><code class="lang-css">     
+            position>: static; /*default;are not affected by the top, bottom, left, and right properties.
+                //is not positioned in any special way;*/>
+            position>: relative; /*is positioned relative to its normal position.*/>
+            position>: fixed; /*it always stays in the same place even if the page is scrolled.*/>
+            position>: absolute;/*is positioned relative to the nearest positioned ancestor */>
+                    /*/(instead of positioned relative to the viewport, like fixed).*/>
+</code></pre>
+</div>
+</div>
    
 <h2 id="z-index">z-index</h2>
 <div>
@@ -300,30 +324,34 @@ nav > ol>li{padding: 5px;list-style-type: none; }
 <h2>Float</h2>
 <div> 
  <p>   float: puts the element in the left or right of its container(parent);
-       (should be used with clear property in many senarios)
-  Example</p>
-   <pre><code class="lang-css"> #sidebar> {
-    float>: right;            
-    }
-   </code></pre>
+(should be used with clear property in many senarios)
+Example</p>
+<pre><code class="lang-css"> #sidebar> {
+float>: right;            
+}
+</code></pre>
 
-   <h3 id="clear">clear</h3>
-   <pre>
-    Elements after a floating element will flow around it.
-    To avoid this, use the clear property.
-   </pre>
-   <b>Clear Values:</b>
-    <br>Clear: none - Allows floating elements on both sides. This is default
-    <br>Clear: left - No floating elements allowed on the left side
-    <br>Clear: right- No floating elements allowed on the right side
-    <br>Clear: both - No floating elements allowed on either the left or the right side
+<h3 id="clear">clear</h3>
+<div>
+<pre>
+Elements after a floating element will flow around it.
+To avoid this, use the clear property.
+</pre>
+<b>Clear Values:</b>
+<br>Clear: none - Allows floating elements on both sides. This is default
+<br>Clear: left - No floating elements allowed on the left side
+<br>Clear: right- No floating elements allowed on the right side
+<br>Clear: both - No floating elements allowed on either the left or the right side
+</div>
 
-   <h3 id="margin-auto-">margin: auto;</h3>
-   <pre><code>it> place the> element> at> the> center of> its container.
-   </code></pre>
-   </div>
+<h3 id="margin-auto-">margin: auto;</h3>
+<div>
+<pre><code>it> place the> element> at> the> center of> its container.
+</code></pre>
+</div>
+</div>
 
-   <h2 id="dimentions-size">Dimentions /size</h2>
+<h2 id="dimentions-size">Dimentions /size</h2>
 <div>
    <pre><code class="lang-css">height>: 200px>;
    width>: 50%>;
@@ -473,51 +501,51 @@ nav > ol>li{padding: 5px;list-style-type: none; }
 </div>
    
 <h2>Counters</h2>
-   <div>
-   <p>  Ordered lists aren't the only elements that can be automatically numbered. 
-       Thanks to the various counter-related properties, any element can be.
-    </p>
-       <pre> 
-            < body>
-            < section></ section>
-            < section></ section>
-            < section></ section>
-            < section></ section>
-            < / body >
-            body           { counter-reset     : my-awesome-counter;  }
-            section        { counter-increment : my-awesome-counter;   }
-            section:before { content           : counter(my-awesome-counter); }
-        </pre>
-    <p>Each < section > will respectively start with "1", "2", "3", or "4".
-        To work with CSS counters we will use the following properties:
-   </p>
-   <table>
-        <thead>
-        <tr>
-        <th>function</th>
-        <th>description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        <td>counter-reset</td>
-        <td>Creates or resets a counter</td>
-        </tr>
-        <tr>
-        <td>counter-increment</td>
-        <td>Increments a counter value</td>
-        </tr>
-        <tr>
-        <td>content</td>
-        <td>Inserts generated content</td>
-        </tr>
-        <tr>
-        <td>counter() or counters()</td>
-        <td>Adds the value of a counter to an element</td>
-        </tr>
-        </tbody>
-   </table>
-   </div>
+<div>
+<p>  Ordered lists aren't the only elements that can be automatically numbered. 
+    Thanks to the various counter-related properties, any element can be.
+</p>
+    <pre> 
+        < body>
+        < section></ section>
+        < section></ section>
+        < section></ section>
+        < section></ section>
+        < / body >
+        body           { counter-reset     : my-awesome-counter;  }
+        section        { counter-increment : my-awesome-counter;   }
+        section:before { content           : counter(my-awesome-counter); }
+    </pre>
+<p>Each < section > will respectively start with "1", "2", "3", or "4".
+    To work with CSS counters we will use the following properties:
+</p>
+<table>
+    <thead>
+    <tr>
+    <th>function</th>
+    <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>counter-reset</td>
+    <td>Creates or resets a counter</td>
+    </tr>
+    <tr>
+    <td>counter-increment</td>
+    <td>Increments a counter value</td>
+    </tr>
+    <tr>
+    <td>content</td>
+    <td>Inserts generated content</td>
+    </tr>
+    <tr>
+    <td>counter() or counters()</td>
+    <td>Adds the value of a counter to an element</td>
+    </tr>
+    </tbody>
+</table>
+</div>
 
 <h2>CSS Functions</h2>
 <div>
@@ -994,6 +1022,48 @@ nav > ol>li{padding: 5px;list-style-type: none; }
        column>-span
        column>-width
    </code></pre>
+</div>
+
+<h2>Alignment</h2>
+<div>
+Using Flexbox
+<pre><code>
+    .container {
+        display: flex;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
+        }   
+</code></pre>
+<style>
+.flexcontainer111 {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+}    
+</style>
+<div class="flexcontainer111">text</div>
+Using Grid
+<pre><code>
+.container112 {
+    display: grid;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+}    
+</code></pre>
+<style>.gridcontainer112 {
+    display: grid;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+}</style>
+<div class="gridcontainer112">text</div>
 </div>
 
 <h2 id="images-painting">Images /painting</h2>
@@ -1715,6 +1785,7 @@ nav > ol>li{padding: 5px;list-style-type: none; }
 
 <h2 >Debugging CSS</h2>
 <div>
+    <p>>
 <b>Test Locally:</b>
     Copy the code to your local machine and test it there before uploading to the server.
     
@@ -1738,6 +1809,7 @@ Press f12 and see web tools of the web browser.
 Sometimes an error in CSS file causes other class  not to work. 
 for example an unclosed class  (a missing } ) makes all classes after it not to work.
 Other times,error in the link tag in the html file,causes the class to not work.exaclty follow This syntax:
+</p>
 <pre><code> &lt;link rel="stylesheet" type="text/css" href="main.css" /></code></pre>
 <b>css Validators and debuggers</b>
 <p>
