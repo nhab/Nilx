@@ -5,6 +5,17 @@
     <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
     <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+    <style>
+        ul {
+            padding: 20px;
+        }
+
+        ul li {
+            background: #ebedf0;
+            color: darkblue;
+            margin: 5px;
+        }
+    </style>
 </head>
 <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
     <button onclick='toggleAll(this);'>-</button>
@@ -16,1479 +27,895 @@
 <p>
     <a href="https://wixtoolset.org/docs/intro/">Main</a>
     <a href="https://github.com/wixtoolset/">on github</a>
+<p><a href="https://www.pdfdrive.com/wix-36-a-developers-guide-to-windows-installer-xml-e159351823.html">WiX 3.6: A Developer's Guide to Windows Installer XML</a></p>
+<p><a href="https://learn.microsoft.com/en-us/windows/win32/msi/roadmap-to-windows-installer-documentation">Windows Installer Documentation</a></p>
+<p><a href="https://stackoverflow.com/questions/471424/wix-tricks-and-tips" data-card-appearance="inline">https://stackoverflow.com/questions/471424/wix-tricks-and-tips</a></p>
+<p><a href="https://wixtoolset.org/docs/v3/howtos/">How tos</a></p>
 </p>
 </div>
 
-<h2>Overview</h2>
+
+<h2>Introduction to the Wix toolset</h2>
 <div>
-<h3>what?</h3> 
+<h3>What is the Wix toolset?</h3>
 <div>
-<p>
-The WiX Toolset creates Windows installation packages from XML source code.
-It lets developers create <b>installers for Windows Installer</b> ( the Windows installation engine).
-To check current version of windows Installer ( msiexec.exe) type:
-    <code> msiexec /? </code>
-    
-    -<b>benifits of installers</b>:
-        . All of your executable files can be packaged into one convenient bundle, 
-        simplifying deployment Your software is automatically registered with Programs and Features
-
-        . Windows takes care of uninstalling all of the components that make up your product 
-            when the user chooses to do so
-
-        . If files for your software are accidently removed, 
-        they can be replaced by right-clicking on the MSI file and selecting Repair
-
-        . You can create different versions of your installer
-        and detect which version has been installed
-
-        . You can create patches to update only specific areas of your application
-
-        . If something goes wrong while installing your software, 
-        the end user's computer can be rolled back to a previous state
-
-        . You can create Wizard-style dialogs to guide the user through the installation
-
-    - <b>Toolset</b>
-    It was originally a <b>set of build tools</b> that build Windows Installer packages 
-    using the same build concepts as the rest of your product:
-    source code is compiled and then linked to create executables;
-    in this case 
-     &emsp;       .exe setup bundles, 
-     &emsp;       .msi installation packages, 
-     &emsp;       .msm merge modules, 
-     &emsp;       and .msp patches. 
-    
-- WiX includes several extensions that offer functionality beyond that of Windows Installer.
-    For example, 
-    &emsp; WiX can install IIS web sites
-    &emsp; , create SQL Server databases
-    &emsp; , and register exceptions in the Windows Firewall
-    &emsp; , among others.
-
-    - With <b>burn.exe</b>, the WiX bootstrapper, 
-    you can create setup bundles that install prerequisites 
-    like the .NET Framework and other runtimes along with your own product. 
-    Burn lets you download packages or combine them into a single downloadable .exe.
-    
-    - <b>Votive</b> :
-    The WiX toolset provides files that update Visual Studio 
-    to provide new WiX IntelliSense and project templates.
-    There are 7 new project templates:
-    <pre>
-     &emsp; . Setup Project       : Creates a Windows Installer package from one or more WiX source files.
-                It create a new .wxs (WiX source file) for you to add XML markup to
-     &emsp; . Merge Module Project: Creates a merge module (MSM) file
-     &emsp; . Setup Library Project: Creates a .wixlib library
-     &emsp; . Bootstrapper Project : Creates a prerequisite bootstrapper
-     &emsp; . C# Custom Action Project: Creates a .NET custom action in C#
-     &emsp; . C++ Custom Action Project: Creates an unmanaged C++ custom action
-     &emsp; . VB Custom Action Project: Creates a VB.NET custom action
-     </pre>
- </p>
+<ul>
+<li>Wix compiles <strong>simple XML elements in a .wxs file</strong> and builds <strong>Windows Installer packages)</strong>.</li>
+<li>The wxs file, has a hieratical structure of element of types: installer/packages/folders/files/&hellip; .</li>
+</ul>
 </div>
 
-<h3>3 ways of using <b>WiX v4</b></h3>
+<h3>Installing Wix</h3>
 <div>
-   <p>
-        1- Visual Studio
-        <b>HeatWave Community Edition</b>is released by FireGiant to support WiX v4 SDK-style MSBuild projects in Visual Studio. 
-        
-        HeatWave supports:
-
-        &emsp; . Conversion of WiX v3 projects and authoring
-        &emsp; . Building of WiX v4 SDK-style projects
-        &emsp; . Project and item templates
-        &emsp; . Property pages to control how the project builds
-        HeatWave Community Edition is available free of charge.
-
-    2- Command-line .NET tool
-        For example, 
-        the build command lets you build MSI packages, bundles, and other package types.
-
-        To install the <b>Wix.exe</b> .NET tool:  (The wix.exe tool requires the .NET SDK, version 6 or later)
-        <cl>dotnet tool install --global wix --version 4.0.0</cl>
-        
-        To verify Wix.exe was successfully installed:
-        <cl>wix --version</cl>
-
-    3- MSBuild on the command line and CI/CD build systems( like GitHub Actions )
-        SDK-style projects, have smart defaults that make for simple .wixproj project authoring.
-        For example, here's a minimal .wixproj 
-        that builds an MSI from the .wxs source files in the project directory:
-    </p>
-    <pre><code>
-        <Project Sdk="WixToolset.Sdk/4.0.0">
-        </Project>
-    </code></pre>
+<ul>
+<li>download from <a href="http://wixtoolset.org/,">http://wixtoolset.org/,</a>6. and <strong>the .NET 4.0</strong> platform.</li>
+</ul>
 </div>
 
-</div>
-
-<h2>In visual studio</h2>
+<h3>Visual Studio package</h3>
 <div>
-<p>
-download:
-    http://www.wixtoolset.org
-    https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm
-    https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2022Extension
-
-Setup:
-    After completing the installation, open Visual Studio and go to 
-        File | New | Project | Windows Installer XML.
-
-Create
-    . Select the Setup Project template from the list of available project types. 
-    . The version of .NET that's displayed has no bearing on the project
-        since it's comprised of XML mark-up and not .NET code. 
-    . Give the project a name and click on OK
-    
-    The project will initially include a file named <b>Product.wxs</b>  (WiX source), 
-    which contains the skeleton markup you'll need to create an installer:
-</p>
- <pre><code>
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-     <Product Id="*"
-        Name="My Software"
-        Language="1033"
-        Version="1.0.0.0"
-        Manufacturer="My Company"
-        UpgradeCode="889e2707-5235-4d97-b178-cf0cb55d8ab8"
-     >
-        <Package InstallerVersion="200"
-            Compressed="yes"
-            InstallScope="perMachine"
-            />
-        <MajorUpgrade DowngradeErrorMessage="A newer version of
-        [ProductName] is already installed." 
-        />
-        
-        <MediaTemplate />
-
-        <Feature Id="ProductFeature"
-            Title="MyFirstWixProject" Level="1">
-            <ComponentGroupRef Id="ProductComponents" />
-        </Feature>
-      </Product>
-     
-      <Fragment>
-        <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="ProgramFilesFolder">
-               <Directory Id="INSTALLFOLDER"
-                Name="My Software" />
-            </Directory>
-        </Directory>
-     </Fragment>
-     <Fragment>
-     <ComponentGroup Id="ProductComponents"
-     Directory="INSTALLFOLDER">
-     <!-- TODO: Remove the comments around this Component
-     element and the ComponentRef below in order to add
-     resources to this installer. -->
-     <!-- <Component Id="ProductComponent"> -->
-     <!-- TODO: Insert files, registry keys, and other
-     resources here. -->
-     <!-- </Component> -->
-     </ComponentGroup>
-     </Fragment>
-    </Wix>
-</code></pre>
-<p>
- - WiX 3.9 supports Visual Studio 2013
- 
-- Even the most minimal installer must have the following XML elements:
-   &emsp; .   An XML declaration
-   &emsp; .   A Wix element that serves as the root element in your XML document
-   &emsp; .   A Product element that is a child to the Wix element,
-   &emsp;     but all other elements are children to it
-   &emsp; .   A Package element
-   &emsp; .   A Media or MediaTemplate element
-   &emsp; .   At least one Directory element with at least one child Component element
-   &emsp; .   A Feature element
-</p>
+<ul>
+<li>VS provides WiX project templates (and IntelliSense )
+<ul>
+<li>To start creating your own MSI installer, select the <strong>Setup template Project</strong>, from<strong> Visual Studio&gt; New project .. &gt;Setup Projec</strong></li>
+<li>This will create a project with a single .<strong>wxs </strong>(WiX source) file.</li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
 <h2>Concepts</h2>
 <div>
-<h3>Burn bundles</h3>
+<h3><strong>XML files in general</strong></h3>
 <div>
- <p>
-     - The <b>Bundle element</b> is the top-level element for a Burn bundle. 
-    -  It contains child elements that let you specify 
-   &emsp;&emsp; the chain of packages to be installed 
-   &emsp;&emsp; ,the bootstrapper application that provides the user experience
-   &emsp;&emsp; ,custom and built-in variables 
-   &emsp;&emsp; ,system searches 
-   &emsp;&emsp; ,and all the other goodies that let you define a bundle.
-</P>
-<pre><code>
-    <Wix
-    xmlns="http://wixtoolset.org/schemas/v4/wxs"
-    xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
-
-    <Bundle
-        Name="$(BundleName)"
-        Version="$(Version)"
-        UpgradeCode="$(UpgradeCode)"
-        Compressed="no"
-        SplashScreenSourceFile="splashscreen.bmp">
-
-        <BootstrapperApplication>
-            <bal:WixStandardBootstrapperApplication
-                LicenseUrl=""
-                Theme="hyperlinkLicense" />
-        </BootstrapperApplication>
-
-        <Chain>
-            <PackageGroupRef Id="BundlePackages" />
-        </Chain>
-    </Bundle>
-</Wix>
-</code></pre>
-    
-<h3>Bundle package chains</h3>
-<div>
-
-    - Burn supports the following kinds of <b>packages</b>:
- <pre>
-Package	        Description
--------------------------------------------------------
-BundlePackage	Another Burn bundle .exe
-ExePackage	    An executable .exe installer
-MsiPackage	    A Windows Installer .msi package
-MspPackage	    A Windows Installer .msp patch package
-MsuPackage	    A Windows update .msu package
-    </pre>
-    <p>
-- To include a package in a bundle's chain of packages:
-
-    . Include the package element as a child of the Chain element.
-    . Include the package element as a child of a PackageGroup element 
-      and include that package group in the chain with a PackageGroupRef element as a child of the Chain element.
- </p>
- <pre><code>
-    <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-        <Bundle>
-            <Chain>
-                <PackageGroupRef Id="BundlePackages" />
-    
-                <ExePackage
-                    DetectCondition="DetectedSomethingVariable"
-                    UninstallArguments="-uninstall"
-                    SourceFile="EndOfChain.exe" />
-            </Chain>
-        </Bundle>
-    
-        <Fragment>
-            <PackageGroup Id="BundlePackages">
-                <PackageGroupRef Id="PrereqPackages" />
-                <MsiPackage Id="PackageA" SourceFile="PackageA.msi" />
-                <MsiPackage Id="PackageB" SourceFile="PackageB.msi" />
-            </PackageGroup>
-        </Fragment>
-    
-        <Fragment>
-            <PackageGroup Id="PrereqPackages">
-                <MsiPackage SourceFile="Prereqs.msi">
-                    <MsiProperty Name="PREREQSONLY" Value="1" />
-                </MsiPackage>
-            </PackageGroup>
-        </Fragment>
-    </Wix>
-</code></pre>
-</div>
-    
-<h3>Bootstrapper applications</h3>
-<div>
-<p>
-- Each bundle needs a bootstrapper application to implement the user experience,
-  including business logic and UI. 
-  
-- WiX includes two BAs:
-    .<b>WixStandardBootstrapperApplication (WixStdBA) </b> 
-      provides a simple, wizard-like UI and typical BA behavior.
-      
-      The UI is provided by XML files that let you change the appearance 
-      without needing to change the code of the BA. 
-      
-      WixStdBA is written in C++, so has no additional system requirements.
-    .<b>WixInternalUIBootstrapperApplication (WixIUIBA) </b>
-     provides typical BA behavior and defers the UI to the UI defined in the primary MSI package. 
-     
-     WixIUIBA is useful when you have a complex UI defined in an MSI package and don't want to convert it to a BA.
-
-- Here's how you might add a built-in BA to a bundle:
-</p>
-<pre><code>
-    <Wix
-    xmlns="http://wixtoolset.org/schemas/v4/wxs"
-    xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
-
-    <Bundle>
-
-        <BootstrapperApplication>
-            <bal:WixStandardBootstrapperApplication
-                LicenseUrl=""
-                Theme="hyperlinkLicense" />
-        </BootstrapperApplication>
-</code></pre>
-<p>
-- You can also create an entirely custom bootstrapper application,
- either in native code or managed code. 
- Here's how you might reference a custom native-code BA:
-</p>
-<pre><code>
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-    <Bundle>
-        <BootstrapperApplication>
-            <BootstrapperApplicationDll
-                Id="MyStandardBootstrapperApplication"
-                SourceFile="bobstdba.dll" />
-            <PayloadGroupRef
-                Id="MyStandardBootstrapperApplicationPayloads" />
-        </BootstrapperApplication>
-</code></pre>
-- Here's how you might reference a custom managed-code BA written in .NET 6:
-<pre><code>
-<Wix
-    xmlns="http://wixtoolset.org/schemas/v4/wxs"
-    xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
-
-    <Bundle>
-        <BootstrapperApplication>
-            <Payload SourceFile="MyBA.EarliestCoreMBA.deps.json" />
-            <Payload SourceFile="MyBA.EarliestCoreMBA.dll"
-                bal:BAFactoryAssembly="yes" />
-            <Payload SourceFile="MyBA.EarliestCoreMBA.runtimeconfig.json" />
-            <Payload SourceFile="mbanative.dll" />
-            <Payload SourceFile="WixToolset.Mba.Core.dll" />
-            <bal:WixDotNetCoreBootstrapperApplicationHost />
-        </BootstrapperApplication>
-</code></pre>
+<ul>
+<li>The document must begin and end with the same<strong> root element</strong></li>
+<li>All elements must have a<strong> matching closing tag or be closed themselves</strong></li>
+<li>XML tags are <strong>case sensitive</strong></li>
+<li>XML<strong> attributes should be quoted</strong></li>
+</ul>
 </div>
 
-<h3><a href="https://wixtoolset.org/docs/tools/burn/builtin-variables/">Burn built-in variables</a> </h3>
-<div></div>
+<h3>GUID</h3>
+<ul>
+<li>GUID is a Unique combination of alphanumerical characters in 4 parts of 8charachters are separated by dash(-) .</li>
+<li>WiX can accept a GUID with or without curly brackets around it,
+<ul>
+<li>as <strong>01234567-89ABCDEF-0123-456789ABCDEF </strong>or<strong> {01234567-89AB-CDEF-0123-456789ABCDEF}</strong></li>
+</ul>
+</li>
+<li>Visual Studio 2010 provides a way to create a GUID.:
+<ul>
+<li>Menu &gt; Tools &gt;Create GUID&gt; copy a new GUID using Registry Format.</li>
+</ul>
+</li>
+</ul>
 
-<h3><a href="https://wixtoolset.org/docs/tools/burn/searches/">Burn system searches</a></h3>
-<div></div>
+<h3>Variables</h3>
+<div>
+<ul>
+<li>We can define variables and use them. for example:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;?define ProductName = "ParameterTool" ?&gt;</p>
+<ul>
+<li>then we can use it</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Product Id="{244821B7-10EC-43E0-9A07-24A72273E490} Name="$(var.ProductName) "&gt;</p>
+</div>
 
-<h3><a href="https://wixtoolset.org/docs/tools/burn/wixstdba/">WixStandardBootstrapperApplication</a></h3>
-<div></div>
+<h3>Minimal .wsx file</h3>
+<ul>
+<li>should have:
+<ul>
+<li>An <strong>XML declaration</strong></li>
+<li>A <strong>Wix element </strong>that serves as the root element in your XML document</li>
+<li>A<strong> Product element</strong> that is a child of the Wix element, but all other elements are children to it</li>
+<li>A <strong>Package element </strong></li>
+<li>A<strong> Media or MediaTemplate element</strong></li>
+<li>At least one <strong>Directory element </strong>with at least one child Component element</li>
+<li>A <strong>Feature element</strong></li>
+</ul>
+</li>
+</ul>
 
+<h3>Custom properties</h3>
+<div>
+<ul>
+<li>Custom properties <strong>hold your install time data</strong>.</li>
+<li>A <strong>Property element</strong> only needs two attributes: Id and Value</li>
+<li><strong>Example</strong>: The following example<strong> creates a new property </strong>called myProperty and sets its value to the string my value.</li>
+</ul>
+<p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Property Id="myProperty" Value="my value" /&gt;</p>
+<ul>
+<li>In the next example, we'll create a property called myProperty that has a value of 0.
+<ul>
+<li>A Condition element that follows checks the value to see if it's equal to 1.</li>
+<li>Notice that I'm using the square bracket notation in the Message attribute to reference myProperty:</li>
+<li>The Message attribute is used to show a modal window to the user. In this case, they'll see Value of myProperty is 0. Should be 1.</li>
+</ul>
+</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Property Id="myProperty" Value="0" /&gt;o&nbsp;&nbsp;&nbsp; &lt;Condition Message="Value of myProperty is [myProperty]. Should be 1"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;![CDATA[Installed OR myProperty = "1"]]&gt;o&nbsp;&nbsp;&nbsp; &lt;/Condition&gt;</p>
+<ul>
+<li>In XML, The data which can be interpreted as markup, is expressed using <strong>![CDATA[]] .</strong></li>
+</ul>
+<p>inside the bracket of CDATA, &lt; or &gt; characters can be used freely without interpreted as markup</p>
+<ul>
+<li>&ldquo;<strong>Installed&rdquo; is a predefined property</strong> and is true when the product is already installed locally</li>
+</ul>
+</div>
+
+<h3>Implied properties</h3>
+<div>
+<ul>
+<li>They are certain properties that<strong> don't need to be set with a Property element. </strong>They're set for you.</li>
+<li>First, there are those that are created when you set attributes on the <strong>Product element</strong>.</li>
+<li>So, for example, the following code snippet:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Product Id="3E786878-358D-43AD-82D1-1435ADF9F6EA"o&nbsp;&nbsp;&nbsp; 
+    Name="Awesome Software"o&nbsp;&nbsp;&nbsp; Language="1033"o&nbsp;&nbsp;&nbsp; Version="1.0.0.0"o&nbsp;&nbsp;&nbsp; 
+    Manufacturer="Awesome Company"o&nbsp;&nbsp;&nbsp; UpgradeCode="B414C827-8D81-4B4A-B3B6-o&nbsp;&nbsp;&nbsp; 338C06DE3A11"&gt;
+</p>
+<ul>
+<li>creates the following properties:
+<ul>
+<li><strong>ProductCode, ProductName, ProductLanguage, ProductVersion, Manufacturer, UpgradeCode</strong></li>
+</ul>
+</li>
+<li>You can use these properties just as you would those you create yourself.</li>
+<li>They're available to you in all phases of the install.</li>
+<li>They<strong> can be accessed in the attributes and inner text of other elements just like normal.</strong></li>
+<li>Another set of implied properties are <strong>directories</strong>.</li>
+</ul>
+</div>
+
+<h3>Cited properties</strong></h3>
+<div>
+<ul>
+<li>Most of<strong> the properties that are built into Windows Installer</strong> aren't implied. You have to set them explicitly with a Property element</li>
+<li>They're different from the properties that you'll create yourself, in that:
+<ul>
+<li><strong>the Id attribute must match the predefined name </strong></li>
+<li>and they're generally used to toggle various Windows Installer settings.</li>
+</ul>
+</li>
+<li>You can find them <a href="http://msdn.microsoft.com/en-us/library/aa370905%28v=VS.85%29.aspx">here</a>.</li>
+<li>The following are a few <strong>examples </strong>of how these properties would be set:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Icon Id="myIcon" SourceFile="..\myIcon.ico" &gt;o&nbsp;&nbsp;&nbsp; &lt;Property Id="ARPPRODUCTICON" Value="myIcon" &gt;o&nbsp;&nbsp;&nbsp; &lt;Property Id="ARPCOMMENTS" Value="(c) Amazing Software" &gt;o&nbsp;&nbsp;&nbsp; &lt;Property Id="ARPNOREPAIR" Value="1" &gt;o&nbsp;&nbsp;&nbsp; &lt;Property Id="ARPCONTACT" Value="Nick Ramirez" &gt;o&nbsp;&nbsp;&nbsp; &lt;Property Id="ARPHELPLINK" Value="http:/www.MYURL.com/AmazingSoftware/support.html"&gt;o&nbsp;&nbsp;&nbsp; &lt;Property Id="ARPREADME" Value="http:/www.MYURL.com/AmazingSoftware/readme.html" /&gt;</p>
+<ul>
+<li>As you can see, <strong>setting a built-in property is just like setting your own custom properties </strong>except that the Id value must use the predefined name.</li>
+<li>One other built-in property that you should know about is <strong>ALLUSERS</strong>.
+<ul>
+<li>You can set it to a 1, 2, or an empty string (""). A 1 means that the install will be performed in the per-machine context.</li>
+<li>This means that its components will be installed to folders accessible to anyone that uses the system.</li>
+<li>Setting ALLUSERS to an empty string tells the installer to use the per-user context, meaning that its components will be installed only for the current user.</li>
+<li>A value of 2 means that the installer will sometimes be in the user context and sometimes in the machine context, epending on whether or not the user who initiated it has administrator rights.</li>
+<li>However, even this rule varies based upon the operating system.</li>
+<li>In general, you should set ALLUSERS to 1, the per-machine context. Setting it to the per-user context can only be done if you're certain that no registry keys or files will be installed to machine-level locations. This is rarely the case.</li>
+<li>A value of 2 usually causes scenarios that are too complex to plan for. So, it's best to avoid it. The following example sets the ALLUSERS property to 1:</li>
+</ul>
+</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Property Id="ALLUSERS" Value="1" /&gt;</p>
+<ul>
+<li>The reason that this property is important is that during an upgrade, you'll want to find out if a previous version of the software is already installed.</li>
+<li>For that, the ALLUSERS property must be set to the same value as it was originally.</li>
+<li>Otherwise, the installer may look in the wrong place and fail to detect the software, even if it's there.</li>
+<li>So, keep it consistent. Always set it to the same value, preferably 1.</li>
+<li>One thing to note is that you can also set the <strong>InstallScope </strong>attribute on the Package element to either <strong>perMachine </strong>or <strong>perUser</strong>.</li>
+<li>This will have the same effect as setting the ALLUSERS property directly.</li>
+<li>If you do, you should remove any Property element that sets it.</li>
+</ul>
+</div>
+</div>
+
+<h2>WiX XML Elements</h2>
+<div>
+<h3>The Wix element and the XML declaration</h3>
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"&gt;
+    &lt;/Wix&gt;</p>
+<ul>
+<li>The <strong>xmlns</strong>, or XML namespace, just brings the core WiX elements into the local scope of your document</li>
+</ul>
 <h3>The Product element</h3>
-<div>
-<p>
-This is where you define the characteristics of the software you're installing:
-its name, language, version, and manufacturer. 
-
-The end user will be able to see these properties by 
-right-clicking on your MSI file,
-selecting Properties,
-and viewing the Summary tab. 
-
-Most of the time,
-these values will stay the same from one build of your project to the next.
-
-The exception is when you want to increment the software's version
-to indicate that it's an upgrade of a previous installation. 
-
-In that case, you need to only change the Version attribute, and sometimes the Id attribute.
-</p>
-<pre><code>
-<Wix ... >
-<Product Id="3E786878-358D-43AD-82D1-1435ADF9F6EA"
-Name="Awesome Software"
-Language="1033"
-Version="1.0.0.0"
-Manufacturer="Awesome Company"
-UpgradeCode="B414C827-8D81-4B4A-B3B6-
-338C06DE3A11">
-</Product>
-</Wix>
-</code></pre>
-</div>
-
-</div>
-
+<ul>
+<li>This is where you define the characteristics of <strong>the software </strong>you're installing, using following attributes:
+<ul>
+<li><strong>name</strong></li>
+<li><strong>language: is the id of the </strong><a href="http://msdn.microsoft.com/en-us/goglobal/bb964664.aspx"><strong>language </strong></a><strong>in messages. </strong></li>
+<li><strong>version</strong>,</li>
+<li><strong>manufacturer: </strong>Name of your company</li>
+<li>: this GUID will identify your product across releases.
+<ul>
+<li>(It remains constant for a product , even among different product versions)</li>
+</ul>
+</li>
+<li><strong>Id </strong>:represents a Unique GUID , the <strong>ProductCode </strong>of the software.
+<ul>
+<li>You can either hardcode The ID, like the below sample</li>
+<li>or just put an asterisk, That WiX will pick a new GUID for you each time you compile the project.</li>
+</ul>
+</li>
+<li>Example:</li>
+</ul>
+</li>
+</ul>
+<p>&lt;Wix ... &gt;
+    &nbsp; &lt;Product Id="{244821B7-10EC-43E0-9A07-24A72273E490}"
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Name="$(var.ProductName) $(var.ProductVersion)"
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Language="1033"
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Version="$(var.ProductAssemblyVersion)"
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Manufacturer="$(var.Company)"
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     UpgradeCode="{28853BD5-2B30-4774-B721-CF28F87B7FAE}" &gt;
+    &nbsp; &lt;/Product&gt;
+       &lt;/Wix&gt;</p>
+<ul>
+<li>"1033" for language value stands for "English-United States"</li>
+<li><strong>UpgradeCode</strong>: will identify your product across releases.
+     It remains constant for a product line, even among different product versions</li>
+</ul>
 <h3>The Package element</h3>
-<div>
-<p>
-Once you've defined your Product element, the next step is to nest a
-Package element inside. An example is shown as follows:
+<ul>
+<li>The next step after defining the Product element, is to nest a Package elements inside it.</li>
+<li><strong>The Package element </strong>describes the installer itself.</li>
+<li>Package means the MSI file.</li>
+<li>Example:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &nbsp;&lt;Wix ... &gt;
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Product ... &gt;
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Package InstallerVersion="301"
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compressed="yes"
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InstallScope="perMachine"
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manufacturer="Awesome Company"
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Description="Installs Awesome Software"
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Keywords="Practice,Installer,MSI"
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments="(c) 2012 Awesome Company" &gt;
+    o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;Product&gt;
+    o&nbsp;&nbsp;&nbsp; &lt;/Wix&gt;</p>
+<ul>
+<li><strong>Attributes</strong>:
+<ul>
+<li>Only<strong> Compressed attribute</strong> is really required. Setting Compressed to yes, <strong>Means to package all of the MSI's resources into CAB files. </strong>
+<ul>
+<li>Later, you'll define these CAB files with Media elements or a MediaTemplate element.</li>
+</ul>
+</li>
+<li>The <strong>InstallScope attribute </strong>can be set to either :
+<ul>
+<li><strong>perMachine: </strong>means that your software will be installed in the "All Users" context, meaning that all users will be able to access your application. As such, the person performing the installation will need elevated privileges on a UAC enabled system such as Windows 7 to continue the installation.</li>
+<li><strong>perUser:</strong> means that it will be installed only for the current user.</li>
+</ul>
+</li>
+<li><strong>The "InstallPrivileges</strong>" attribute of the "Package" element can be set to "elevated" to require administrator privileges during installation.</li>
+</ul>
+</li>
+</ul>
+<p>Here is an example of how to use the "InstallPrivileges" attribute in the "Package" element:</p>
+<pre><code>&lt;Package InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine"/&gt;</code></pre>
 </p>
-<pre><code>
-<Wix ... >
-<Product ... >
-<Package InstallerVersion="301"
-Compressed="yes"
-InstallScope="perMachine"
-Manufacturer="Awesome Company"
-Description="Installs Awesome Software"
-Keywords="Practice,Installer,MSI"
-Comments="(c) 2012 Awesome Company" >
-<Product>
-</Wix>
-</code></pre>
-Of the attributes shown in this example, only Compressed is really required.
-
-By setting Compressed to yes, 
-you're telling the installer to package all of the MSI's resources into CAB files. 
-
-Technically, an Id attribute is also required, but by omitting it you're letting WiX create one for you.
-</div>
-
 <h3>The MediaTemplate element</h3>
-<p>
-The files that you intend to install are compressed into CAB files and shipped along with the installer.
-
-You decide whether to embed them inside the MSI or provide them visibly alongside it.
-
-In WiX 3.6, a single MediaTemplate element handles all the details for you, 
-intelligently splitting your files into the prescribed number of CAB files.
-
-Add it after the Package element, as shown in the following code snippet
-</p>
-<pre><code>
-<Wix …>
-<Product … >
-<Package … />
-<MediaTemplate EmbedCab="yes" >
-<Product>
-</Wix>
-</code></pre>
-<p>
-The EmbedCab attribute is optional
-and sets whether the CAB files will be embedded inside the MSI,
-the default being to not embed them. 
-
-Either way, WiX will create up to 999 CAB files, 
-each holding a maximum of 200 MB of data. 
-
-You can change that limit with the MaximumUncompressedMediaSize attribute, 
-set to a size in megabytes. 
-
-If a single file is bigger than the maximum,
-it will be placed into its own CAB file with enough space to accommodate it.
-
-If you want to split your installation up into several physical disks—conjure up images 
-of "Please insert disk 2"—you want to use the Media element instead.
-</p>
-
+<ul>
+<li>It <strong>decides whether to embed the content files inside the MSI or provide them visibly alongside it, in cab files.</strong>
+<ul>
+<li>Example:</li>
+</ul>
+</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Wix ...&gt;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&lt;Product ... &gt;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;Package ... /&gt;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MediaTemplate EmbedCab="yes" &gt;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &lt;Product&gt;o&nbsp;&nbsp;&nbsp; &lt;/Wix&gt;</p>
+<ul>
+<li>The <strong>EmbedCab attribute</strong> sets whether the CAB files will be embedded inside the MSI, or not embed.</li>
+<li><strong>MaximumCabinetSizeForLargeFileSplitting attribute:</strong>
+<ul>
+<li>Maximum size of cabinet files in megabytes for large files. .</li>
+<li>This attribute is used for packaging files that are larger than MaximumUncompressedMediaSize into smaller cabinets.</li>
+<li>If cabinet size exceed this value, then setting this attribute will cause the file to be split into multiple cabinets of this maximum size.</li>
+<li>For simply controlling cabinet size without file splitting use MaximumUncompressedMediaSize attribute.</li>
+<li>Setting this attribute will disable smart cabbing feature for this Fragment / Product. Setting WIX_MCSLFS environment variable can be used to override this value.</li>
+<li>Minimum allowed value of this attribute is 20 MB. Maximum allowed value and the Default value of this attribute is 2048 MB (2 GB).</li>
+</ul>
+</li>
+<li><strong>MaximumUncompressedMediaSize :</strong>
+<ul>
+<li>Size of uncompressed files in each cabinet, in megabytes.</li>
+<li>WIX_MUMS environment variable can be used to override this value.</li>
+<li>Default value is 200 MB<strong>.</strong></li>
+</ul>
+</li>
+<li><strong>VolumeLabel:</strong>
+<ul>
+<li>The label attributed to the volume.</li>
+<li>This is the volume label returned by the GetVolumeInformation function.</li>
+<li>If the SourceDir property refers to a removable (floppy or CD-ROM) volume,</li>
+</ul>
+</li>
+</ul>
+<p>then this volume label is used to verify that the proper disk is in the drive before attempting to install files.</p>
+<ul>
+<li>The entry in this column must match the volume label of the physical media.</li>
+</ul>
 <h3>The Media element</h3>
-<p>
-The Media element is an older element that was replaced by MediaTemplate
-and if you use one you can't use the other. 
-
-However, in some cases, the Media element is the only thing for the job. 
-
-For each Media element that you add to your WiX markup, a new CAB file will be created.
-</p>
-<pre><code>
-<Wix ... >
-<Product ... >
-<Package ... />
-<Media Id="1"
-Cabinet="media1.cab"
-EmbedCab="yes" >
-<Product>
-</Wix>
-</code></pre>
-<p>
-Each Media element gets a unique Id attribute to distinguish it in the MSI Media table. 
-
-It must be a positive integer. 
-
-If the files that you add to your installation package 
-don't explicitly state which CAB file they wish to be packaged into,
-they'll default to using a Media element with an Id value 
-
-1. Therefore, your first Media element should always use an Id value of 1.
-The Cabinet attribute sets the name of the CAB file.
-
-You won't actually see this unless you set EmbedCab to no, 
-in which case the file will be shipped alongside the MSI.
-
-This is atypical, but might be done to split the installation files onto several disks.
-
-If you do choose to split the installation up into several physical disks 
-(or even virtual ISO images), you'll want to add the DiskPrompt and VolumeLabel attributes. 
-
-</p>
+<ul>
+<li>The Media element is an older element that was replaced by MediaTemplate and if you use one you can't use the other.
+<ul>
+<li>However, in some cases, the Media element is the only thing for the job.</li>
+<li><strong>For each Media element</strong> that you add to your WiX markup, <strong>a new CAB file will be created.</strong></li>
+<li>Example :</li>
+</ul>
+</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Wix ... &gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;Product ... &gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Package ... /&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Media Id="1"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cabinet="media1.cab"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EmbedCab="yes" &gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;Product&gt;o&nbsp;&nbsp;&nbsp; &lt;/Wix&gt;</p>
+<ul>
+<li>Each Media element gets a unique Id attribute to distinguish it in the MSI Media table.</li>
+<li>The <strong>Cabinet attribute </strong>sets the name of the CAB file. You won't see this unless you set EmbedCab to no.</li>
+<li>use the <strong>DiskPrompt </strong>and<strong> VolumeLabel attributes </strong>If you do choose to split the installation up into several physical disks (or even virtual ISO images) to label the prompts.</li>
+<li>The <strong>Property </strong>element will be used as the text in the message box the end user sees, prompting them to insert the next disk.</li>
+<li>The text in the DiskPrompt attribute is combined with the text in the property's value, switched with [1], to change the message for each subsequent disk.<br /> Make sure you give this property an Id value of DiskPrompt So that Windows will know when the correct disk is inserted,</li>
+<li>the VolumeLabel attribute must match the "Volume Label" of the actual disk
+<ul>
+<li>Once you've built your project, include the MSI file and the first CAB file on the first disk. The second CAB file should then be written to a second disk.</li>
+<li><strong>Adding a file to a media: </strong>
+<ul>
+<li>Although we haven't described the File element yet, it's used to add a file to the installation package.</li>
+<li>To include one in a specific CAB file, add the DiskId attribute, and set to the Id attribute of the corresponding Media element.</li>
+<li>The following example includes a text file called myFile.txt in the media2.cab file:</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;File Id="fileTXT"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Name="myFile.txt"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Source="myFile.txt"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;KeyPath="yes"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;DiskId="2" /&gt;</p>
 
 <h3>The Directory element</h3>
-<p>
-So, now we've defined the identity of the product, 
-set up its package properties, 
-and told the installer to create a CAB file to package up the things that we'll eventually install. 
-
-Then, how do you decide where your product will get installed to on the end user's computer? 
-
-How do we set the default install path, for example, to some folder under Program Files?
-
-When you want to install to C:\Program Files, you can use a sort of shorthand.
-
-There are several directory properties provided by Windows Installer 
-that will be translated to their true paths at install time. 
-
-For example, ProgramFilesFolder usually translates to C:\Program Files
-
-The
-following is a list of these built-in directory properties:
-</p>
-<pre>
-Directory property      Actual path
-AdminToolsFolder        Full path to directory containing administrative tools
-AppDataFolder           Full path to roaming folder for current user
-CommonAppDataFolder     Full path to application data for all users
-CommonFiles64Folder     Full path to the 64-bit Common Files folder
-CommonFilesFolder       Full path to the Common Files folder for current user
-DesktopFolder           Full path to the Desktop folder
-FavoritesFolder         Full path to the Favorites folder for current user
-FontsFolder             Full path to the Fonts folder
-LocalAppDataFolder      Full path to folder containing local (non-roaming) applications
-MyPicturesFolder        Full path to the Pictures folder
-NetHoodFolder           Full path to the NetHood folder
-PersonalFolder          Full path to the Documents folder for current user
-PrintHoodFolder         Full path to the PrintHood folder
-ProgramFiles64Folder    Full path to the 64-bit Program Files folder
-ProgramFilesFolder      Full path to 32-bit Program Files folder
-ProgramMenuFolder       Full path to Program Menu folder
-RecentFolder            Full path to Recent folder
-SendToFolder            Full path to the SendTo folder for current user
-StartMenuFolder         Full path to the Start Menu folder
-StartupFolder           Full path to the Startup folder
-System16Folder          Full path to the 16-bit system DLLs folder
-System64Folder          Full path to the System64 folder
-SystemFolder            Full path to the System folder for current user
-TempFolder              Full path to the Temp folder
-TemplateFolder          Full path to the Template folder for current user
-WindowsFolder           Full path to the Windows folder
-</pre>
-
-<h3>The Component element</h3>
-<p>
-Once you've mapped out the directories that you want to target or create during the installation, 
-the next step is to copy files into them.
-
-To really explain things, we'll need something to install. 
-
-So let's create a simple text file and add it to our project's directory. 
-We'll call it InstallMe.txt.
-
-For our purposes, it doesn't really matter what's in the text file. 
-
-We just need something for testing.
-
-Windows Installer expects every file to be wrapped up in a component before it's installed.
-
-It doesn't matter what type of file it is either. 
-
-Each gets its own Component element.
-
-Components, which always have a unique GUID, allow Windows to track
-every file that gets installed on the end user's computer. 
-
-During an installation, this information is stored away in the registry. 
-
-This lets Windows find every piece of your product
-during an uninstall so that your software can be completely removed. 
-
-It also uses it to replace missing files during a repair, 
-which you can trigger by right-clicking on an MSI file and selecting Repair.
-
-Each Component element gets a unique GUID via its Guid attribute.
-
-To create a GUID in Visual Studio, go to Tools | Create GUID and copy a new GUID using the registry format. 
-
-The component's Id attribute is up to you. 
-
-It will serve as the primary key for the component in the MSI database,
-so each one must also be unique:
-</p>
-<pre><code>
-<Component Id="CMP_InstallMeTXT"
-Guid="E8A58B7B-F031-4548-9BDD-
-7A6796C8460D">
-<File Id="FILE_MyProgramDir_InstallMeTXT"
-Source="InstallMe.txt"
-KeyPath="yes" >
-<Component>
-</code></pre>
-<p>
-To add a component to a directory, you have several options. 
-
-The first,which is the simplest, 
-is to add your Component elements directly inside the target Directory element,
-as given in the following code snippet
-</p>
-<Directory Id="TARGETDIR"
-Name="SourceDir">
-<Directory Id="ProgramFilesFolder">
-<Directory Id="MyProgramDir"
-Name="Install Practice">
-<Component Id="CMP_InstallMeTXT"
-Guid="E8A58B7B-F031-4548-9BDD-
-7A6796C8460D">
-<File Id="FILE_MyProgramDir_InstallMeTXT"
-Source="InstallMe.txt"
-KeyPath="yes" />
-</Component>
-</Directory>
-</Directory>
-</Directory>
-<pre><code>
-
-</code></pre>
-<h3>The File element</h3>
-<p>
-the actual files inside components are declared with File elements.
-
-The File elements can represent everything 
-from simple text files to complex DLLs and executables. 
-
-Remember, you should only place one file into each component.
-
-The following example would add a file called SomeAssembly.dll to the installation package:
-</p>
-<pre><code>
-<Component ... >
-<File Id="FILE_MyProgramDir_SomeAssemblyDLL"
-Name="Some Assembly.dll"
-Source="SomeAssembly.dll"
-KeyPath="yes" >
-<Component>
-</code></pre>
-<p>
-A File element should always get the Source attribute. 
-
-Source defines the path to the file during compilation. 
-
-Id, Name, and KeyPath are optional. 
-The Id attribute becomes the primary key for a row in the MSI database. 
-
-It should be something unique,
-but you might consider starting it with FILE to make it clear that it refers to a File element.
-
-If not set, the Id value will match the filename. 
-
-Name gives you a chance to change the name of the file once it's been copied to the end user's computer.
-
-By default, it will use the name in the Source attribute.
-
-To mark a file as important 
-(and that it should be replaced if it goes missing), set it as the KeyPath file for the component.
-
-Since you should only ever place one file inside a component, 
-in almost all cases that file should be the KeyPath file. 
-
-If not set, the first file in the component will be the KeyPath file automatically.
-</p>
-
-<h3>The Feature element</h3>
-<p>
-After you've defined your components and the directories that they'll be copied into,
-the next step is to define features. 
-
-A feature is a group of components that the user can decide to install all at once.
-
-You'll often see these in an installation dialog as a list of modules, 
-called a feature tree , where each is included or excluded from the installation. 
-
-Every component must be included in a feature.
-
-Generally, you should group together components that rely on one another
-or that form a complete, self-sufficient unit. 
-
-That way, if a feature is disabled, you won't have orphaned files 
-(files that aren't being used)  installed onto the computer.
-
-In many instances, if your product doesn't have any optional parts, 
-you'll only want to create one feature.
-
-To create a new feature in your WiX file,
-add a Feature element inside the Product element.
-
-The following example installs three components under the feature MainProduct. 
-
-Another feature called OptionalTools installs another component.
-
-Components are included in a feature with the ComponentRef element. 
-
-The Id attribute of ComponentRef targets the Id attribute from the corresponding Component element
-</p>
-<pre><code>
-<Feature Id="MainProduct"
-Title="Main Product"
-Level="1">
-<ComponentRef Id="CMP_MyAppEXE" />
-<ComponentRef Id="CMP_ReadMeTXT" />
-<ComponentRef Id="CMP_StartMenuShortcuts" >
-<Feature>
-<Feature Id="OptionalTools"
-Title="Optional Tools"
-Level="1">
-<ComponentRef Id="CMP_ToolsEXE" >
-<Feature>
-</code></pre>
-
-<h3>Start menu shortcuts</h3>
-<p>
-Having a working installer is good, 
-but wouldn't it be nice to add some shortcuts to the Windows Start menu? 
-
-First, add another Directory element that references the Start menu 
-via the built-in ProgramMenuFolder property:
-</p>
-<pre><code>
-<Directory Id="TARGETDIR"
-Name="SourceDir">
-<Directory Id="ProgramFilesFolder">
-<Directory Id="MyProgramDir"
-Name="Awesome Software" >
-<Directory>
-<Directory Id="ProgramMenuFolder">
-<Directory Id="MyShortcutsDir"
-Name="Awesome Software" />
-</Directory>
-</Directory>
-</code></pre>
-<p>
-we're adding a new folder to the Start menu called Awesome Software. 
-
-Now, we can use a DirectoryRef element to reference our new shortcuts folder,
-as in the following code snippet:
-</p>
-<pre><code>
-<DirectoryRef Id="MyShortcutsDir">
-<Component Id="CMP_DocumentationShortcut"
-Guid="33741C82-30BF-41AF-8246-
-44A5DCFCF953">
-<Shortcut Id="DocumentationStartMenuShortcut"
-Name="Awesome Software Documentation"
-Description="Read Awesome Software
-Documentation"
-Target="[MyProgramDir]InstallMe.txt" >
-<Component>
-</DirectoryRef>
-</code></pre>
-<p>
-Two things that should accompany a shortcut are 
-a RemoveFolder element 
-and a RegistryValue element. 
-
-RemoveFolder ensures that the new Start menu subdirectory will be removed during an uninstall.
-
-It uses an Id attribute 
-to uniquely identify a row in the MSI RemoveFile table
-and an On attribute to specify when to remove the folder.
-
-You can set On to install,uninstall, or both. 
-
-You can specify a Directory attribute 
-as well to set to the Id attribute of a Directory element to remove.
-
-Without one, though,
-the element will remove the directory defined by the parent DirectoryRef or ComponentGroup element.
-
-The RegistryValue element is needed simply because every component must have a KeyPath item. 
-
-Shortcuts aren't allowed to be KeyPath items as they aren't technically files. 
-
-By adding a RegistryValue, a new item is added to the registry and this is marked as KeyPath. 
-
-The actual value itself serves no other purpose. 
-
-We will cover writing to the registry in more detail later.
-</p>
-<pre><code>
-<DirectoryRef Id="MyShortcutsDir">
-<Component Id="CMP_DocumentationShortcut"
-Guid="33741C82-30BF-41AF-8246-
-44A5DCFCF953">
-<Shortcut Id="DocumentationStartMenuShortcut"
-Name="Awesome Software Documentation"
-Description="Read Awesome Software
-Documentation"
-Target="[MyProgramDir]InstallMe.txt" />
-<RemoveFolder Id="RemoveMyShortcutsDir"
-On="uninstall" />
-<RegistryValue Root="HKCU"
-Key="Software\Microsoft\AwesomeSoftware"
-Name="installed"
-Type="integer"
-Value="1"
-KeyPath="yes" />
-</Component>
-</DirectoryRef>
-</code></pre>
-<p>
-There's actually another reason for using a RegistryValue element as KeyPath. 
-
-The shortcut we're creating is being installed to a directory specific to the current user. 
-
-Windows Installer requires that you always use a registry value as the KeyPath item
-when doing this in order to simplify uninstalling the product 
-when multiple users have installed it.
-
-Another type of shortcut to add is one that uninstalls the product.
-
-For this, add a second Shortcut element to the same component.
-
-This shortcut will be different in that 
-it will have its Target set to the msiexec.exe program, 
-which is located in the System folder. 
-
-The following example uses the predefined System64Folder directory name
-because it will automatically map to either the 64-bit or 32-bit System folder,
-depending on the end user's operating system.
-
-By setting Target to the path of an executable,
-you're telling Windows to launch that program when the user clicks the shortcut.
-
-The msiexec program can remove software by using the /x argument 
-followed by the ProductCode attribute of the product you want to uninstall. 
-
-The ProductCode attribute is the Id attribute specified in the Product element.
-</p>
-
-<h3>putting it all together</h3>
-The entire .wxs file:
-<pre><code>
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-<Product Id="3E786878-358D-43AD-82D1-1435ADF9F6EA"
-Name="Awesome Software"
-Language="1033"
-Version="1.0.0.0"
-Manufacturer="Awesome Company"
-UpgradeCode="B414C827-8D81-4B4A-B3B6-
-338C06DE3A11">
-<Package InstallerVersion="301"
-Compressed="yes"
-InstallScope="perMachine"
-Manufacturer="Awesome Company"
-Description="Installs Awesome Software"
-Keywords="Practice,Installer,MSI"
-Comments="(c) 2012 Awesome Company" >
-<MediaTemplate EmbedCab="yes" >
-<!--Directory structure-->
-<Directory Id="TARGETDIR"
-Name="SourceDir">
-<Directory Id="ProgramFilesFolder">
-<Directory Id="MyProgramDir"
-Name="Awesome Software" >
-<Directory Id="ProgramMenuFolder">
-<Directory Id="MyShortcutsDir"
-Name="Awesome Software" >
-</Directory>
-</Directory>
-</Directory>
-<!--Components-->
-<DirectoryRef Id="MyProgramDir">
-<Component Id="CMP_InstallMeTXT"
-Guid="E8A58B7B-F031-4548-9BDD-
-7A6796C8460D">
-<File Id="FILE_InstallMeTXT"
-Source="InstallMe.txt"
-KeyPath="yes" >
-<Component>
-</DirectoryRef>
-<!--Start Menu Shortcuts-->
-<DirectoryRef Id="MyShortcutsDir">
-<Component Id="CMP_DocumentationShortcut"
-Guid="33741C82-30BF-41AF-8246-
-44A5DCFCF953">
-<Shortcut Id="DocumentationStartMenuShortcut"
-Name="Awesome Software
-Documentation"
-Description="Read Awesome Software
-Documentation"
-Target="[MyProgramDir]InstallMe.txt"
-/>
-<Shortcut Id="UninstallShortcut"
-Name="Uninstall Awesome Software"
-Description="Uninstalls Awesome
-Software"
-Target="[System64Folder]msiexec.exe"
-Arguments="x [ProductCode]" >
-<RemoveFolder Id="RemoveMyShortcutsDir"
-On="uninstall" />
-<RegistryValue Root="HKCU"
-Key="Software\Microsoft\AwesomeSoftware"
-Name="installed"
-Type="integer"
-Value="1"
-KeyPath="yes" >
-<Component>
-</DirectoryRef>
-<!--Features-->
-<Feature Id="ProductFeature"
-Title="Main Product"
-Level="1">
-<ComponentRef Id="CMP_InstallMeTXT" >
-<ComponentRef Id="CMP_DocumentationShortcut" >
-</Feature>
-</Product>
-</Wix>
-</pre></code>
+<ul>
+<li>The Directory element Shows <strong>where the product will be installed</strong> on the hard drive of the user.</li>
+<li>When you want to install to<strong> C:\Program Files</strong>, you can use a shorthand of <strong>ProgramFilesFolder </strong></li>
+<li>following are some of these built-in directory properties:</li>
+</ul>
+<table data-table-width="760" data-layout="default" data-local-id="c7cc492c-3873-4515-a337-c50edcd094e9">
+<tbody>
+<tr>
+<td>
+<p><strong>Directory property</strong></p>
+</td>
+<td>
+<p>Actual path</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>AdminToolsFolder</p>
+</td>
+<td>
+<p>Full path to the directory containing administrative tools</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>AppDataFolder</p>
+</td>
+<td>
+<p>Full path to roaming folder for the current user</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CommonAppDataFolder</p>
+</td>
+<td>
+<p>Full path to application data for all users</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CommonFiles64Folder</p>
+</td>
+<td>
+<p>Full path to the 64-bit Common Files folder</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CommonFilesFolder</p>
+</td>
+<td>
+<p>Full path to the Common Files folder for current user</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>DesktopFolder</p>
+</td>
+<td>
+<p>Full path to the Desktop folder</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>LocalAppDataFolder</p>
+</td>
+<td>
+<p>Full path to folder containing local (non-roaming) applications</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ProgramFiles64Folder</p>
+</td>
+<td>
+<p>Full path to the 64-bit Program Files folder</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ProgramFilesFolder</p>
+</td>
+<td>
+<p>Full path to 32-bit Program Files folder</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ProgramMenuFolder</p>
+</td>
+<td>
+<p>Full path to Program Menu folder</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>StartMenuFolder</p>
+</td>
+<td>
+<p>Full path to the Start Menu folder</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>StartupFolder</p>
+</td>
+<td>
+<p>Full path to the Startup folder</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>WindowsFolder</p>
+</td>
+<td>
+<p>Full path to the Windows folder</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The full listing is <a href="https://learn.microsoft.com/en-us/windows/win32/msi/property-reference?redirectedfrom=MSDN">here</a>.</p>
+<ul>
+<li>The easiest way to add your own directories is to nest them inside one of the predefined ones</li>
+<li>For example, to create a new directory called Install Practice inside the Program Files folder, you could add it as a child to ProgramFilesFolder.</li>
+<li>To define your directory structure in WiX, use Directory elements:</li>
+</ul>
+<p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Wix ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;Product ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Package ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MediaTemplate ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory Id="TARGETDIR"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name="SourceDir"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory Id="ProgramFilesFolder"&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory Id="MyProgramDir"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name="Install Practice" &gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Directory&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Directory&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;/Product&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Wix&gt;</p>
+<ul>
+<li>you must start your Directory elements hierarchy with a Directory element with an <strong>Id attribute of TARGETDIR </strong>and a<strong> Name value of SourceDir</strong>.</li>
+<li>By default, Windows Installer sets TARGETDIR to the local hard drive with the freest space&mdash;in most cases, the C: drive.</li>
+<li>You can set TARGETDIR to another drive letter during installation.
+<ul>
+<li>You might, for example, set it with a VolumeSelectCombo user interface control.</li>
+</ul>
+</li>
+<li>When creating your own directory, you must provide the Name attribute. This sets the name of the new folder.</li>
+</ul>
+<h3><strong>The Component element</strong></h3>
+<ul>
+<li>Windows Installer expects every file to be wrapped up in a component before it's installed</li>
+<li><em>File elements</em> inside<em> component elements, </em><strong><em>copy files into Target directory</em></strong><em> specified in Directory element.</em></li>
+<li>During an installation, this information is stored away in the registry.
+<ul>
+<li>This lets Windows find every piece of your product during an uninstall so that your software can be completely removed.</li>
+<li>It also uses it to replace missing files during a repair, which you can trigger by right-clicking on an MSI file and selecting Repair.</li>
+</ul>
+</li>
+<li>Example :</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Directory Id="TARGETDIR" Name="SourceDir"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;Directory Id="ProgramFilesFolder"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory Id="MyProgramDir" Name="Install Practice"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Component Id="CMP_InstallMeTXT" Guid="E8A58B7B-F031-4548-9BDD7A6796C8460D"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;File Id="FILE_MyProgramDir_InstallMeTXT" Source="InstallMe.txt" KeyPath="yes" /&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Component&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Directory&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;/Directory&gt;o&nbsp;&nbsp;&nbsp; &lt;/Directory&gt;</p>
+<ul>
+<li>Here, it's the InstallMe.txt file located in the current directory (which is the same directory as your WiX source file).</li>
+</ul>
+<ul>
+<li>You can specify a relative or absolute path with the Source attribute.</li>
+</ul>
+<h3><strong>DirectoryRef element</strong></h3>
+<ul>
+<li>To add a component to a directory, Another approach for specifying directories is to use a DirectoryRef element .</li>
+<li>Using this approach, separates the markup that defines your directories from the markup that adds files to those directories.</li>
+<li>Example:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Directory Id="TARGETDIR" Name="SourceDir"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory Id="ProgramFilesFolder"&gt;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory Id="MyProgramDir"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name="Install Practice" &gt;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Directory&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;DirectoryRef Id="MyProgramDir"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Component ...&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;File ... /&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Component&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/DirectoryRef&gt;</p>
+<h3><strong>The ComponentGroup element</strong></h3>
+<ul>
+<li>A third option is to group your components inside of a ComponentGroup and use its <strong>Directory attribute</strong> to set the target directory.
+<ul>
+<li>Example:</li>
+</ul>
+</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;ComponentGroup Id="ProductComponents"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory="MyProgramDir"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;Component ...&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;File ... &gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;Component&gt;&lt;/ComponentGroup&gt;</p>
+<h3><strong>The File element</strong></h3>
+<ul>
+<li>The File element inside the component <strong>references the file that's going to be installed</strong></li>
+<li>you should only place one file into each component.</li>
+<li>Example:</li>
+</ul>
+<p>&lt;Component ... &gt;&nbsp; &lt;File Id="FILE_MyProgramDir_SomeAssemblyDLL"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Name="Some Assembly.dll"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Source="SomeAssembly.dll"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; KeyPath="yes"&gt;&lt;Component&gt;</p>
+<ul>
+<li>The File elements can represent everything from simple text files to complex DLLs and executables.</li>
+<li><strong>Attributes</strong>
+<ul>
+<li>The mandatory <strong>&ldquo;source&rdquo; attribute </strong>defines the path to the file during compilation.</li>
+<li><strong>Id, Name </strong>are optional</li>
+<li><strong>KeyPath</strong> is to mark a file as important (and that it should be replaced if it goes missing)</li>
+<li>Since you should only ever place one file inside a component, in almost all cases that file should be the KeyPath file.
+<ul>
+<li>If not set, the first file in the component will be the KeyPath file automatically.</li>
+</ul>
+</li>
+<li><strong>Hidden</strong>: Set to yes to have the file's Hidden flag set. The file won't be visible unless the user sets the directory's options to show hidden files.</li>
+<li><strong>ReadOnly</strong>: Set to yes to have the file's Read-only flag set. The user will be able to read the file, but not modify it unless they change the file's properties.</li>
+<li><strong>Vital</strong>: Set to no to continue even if this file isn't installed successfully</li>
+</ul>
+</li>
+</ul>
+<h3><strong>The Feature element</strong></h3>
+<ul>
+<li><strong><em>Is used to group components that the user can decide to install all at once</em></strong><em>.</em></li>
+<li>For <strong>example</strong>, it can have two features: Main Product and Optional Tools</li>
+<li>Every component must be included in a feature</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Feature Id="MainProduct" Title="Main Product" Level="1"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;ComponentRef Id="CMP_MyAppEXE" /&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;ComponentRef Id="CMP_ReadMeTXT" /&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;ComponentRef Id="CMP_StartMenuShortcuts" &gt;o&nbsp;&nbsp;&nbsp; &lt;Feature&gt;o&nbsp;&nbsp;&nbsp; &nbsp;o&nbsp;&nbsp;&nbsp; &lt;Feature Id="OptionalTools" Title="Optional Tools" Level="1"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;ComponentRef Id="CMP_ToolsEXE" &gt;o&nbsp;&nbsp;&nbsp; &lt;Feature&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<ul>
+<li>Setting the Feature element's<strong> Level attribute</strong> to 1 means that that feature will be included in the installation by default,
+<ul>
+<li>The end user will still be able to remove it through the user interface or via the command line.</li>
+<li>If, on the other hand, the Level is set to 0, that feature will be removed from the feature tree and the user won't be able to install it.</li>
+</ul>
+</li>
+<li>If you wanted to, you could create a more complex tree with features nested inside features</li>
+</ul>
+<h3><strong>Start menu shortcuts</strong></h3>
+<ul>
+<li>we can use a DirectoryRef element to reference our new shortcuts folder, as in the following code snippet:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;DirectoryRef Id="MyShortcutsDir"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;Component Id="CMP_DocumentationShortcut"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guid="33741C82-30BF-41AF-8246-44A5DCFCF953"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Shortcut Id="DocumentationStartMenuShortcut"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name="Awesome Software Documentation"&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Description="Read Awesome Software Documentation"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target="[MyProgramDir]InstallMe.txt" &gt;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;Component&gt;o&nbsp;&nbsp;&nbsp; &lt;/DirectoryRef&gt;</p>
+<ul>
+<li>The<strong><em> Target attribute</em></strong> defines the path on the end user's machine to the actual file being linked.</li>
+<li>Two things that should accompany a shortcut are a <strong><em>RemoveFolder </em></strong>element and a <strong><em>RegistryValue </em></strong></li>
+<li><strong><em>RemoveFolder </em></strong>ensures that the new Start menu subdirectory will be removed during an uninstall.
+<ul>
+<li>It uses an<strong> Id attribute </strong>to uniquely identify a row in the MSI RemoveFile table and an<strong> <em>On attribute</em></strong> to specify when to remove the folder.</li>
+<li>You can set On to install, uninstall, or both.</li>
+</ul>
+</li>
+<li>You can specify a <strong>Directory attribute </strong>as well to set to the Id attribute of a Directory element to remove.
+<ul>
+<li>Without one, though, the element will remove the directory defined by the parent DirectoryRef or ComponentGroup element.</li>
+</ul>
+</li>
+<li>Each<strong> Shortcut element</strong> has a unique identifier set with the Id attribute.
+<ul>
+<li>The<strong> Name attribute</strong> defines the user-friendly name that gets displayed.</li>
+<li><strong>Description</strong> is set to a string that describes the shortcut and will appear when the user moves their mouse over the shortcut link.</li>
+<li>The <strong>Target attribute</strong> defines the path on the end user's machine to the actual file being linked to.</li>
+<li>For that reason, you'll often want to use properties that update as they're changed, instead of hardcoded values.</li>
+</ul>
+</li>
+<li><em>The </em><strong><em>RegistryValue element</em></strong> is needed simply because every component must have a KeyPath item.
+<ul>
+<li>Shortcuts aren't allowed to be KeyPath items as they aren't technically files.</li>
+<li>By adding a RegistryValue, a new item is added to the registry and this is marked as KeyPath</li>
+</ul>
+</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;DirectoryRef Id="MyShortcutsDir"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&lt;Component Id="CMP_DocumentationShortcut" Guid="33741C82-30BF-41AF-8246-44A5DCFCF953"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Shortcut Id="DocumentationStartMenuShortcut" Name="Awesome Software Documentation" Description="Read Awesome Software Documentation"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target="[MyProgramDir]InstallMe.txt" /&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;RemoveFolder Id="RemoveMyShortcutsDir"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On="uninstall" /&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;RegistryValue Root="HKCU"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key="Software\Microsoft\AwesomeSoftware"&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name="installed"&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type="integer"&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value="1"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeyPath="yes" /&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;/Component&gt;o&nbsp;&nbsp;&nbsp; &lt;/DirectoryRef&gt;</p>
+<ul>
+<li>Another type of shortcut to add is one that uninstalls the product. For this, add a second Shortcut element to the same component</li>
+</ul>
+<h3><strong>The Fragment element</strong></h3>
+<ul>
+<li>You can split your elements up into multiple .wxs files for the better organization using fragment element</li>
+<li>The Fragment element doesn't need any attributes. It's simply a container.</li>
+<li>Example:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;Fragment&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ComponentGroup Id="MyComponentGroup"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory="INSTALLLOCATION"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Component Id="CMP_MyProgramEXE"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guid="E8A58B7B-F031-4548-9BDD-7A6796C8460D"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;File Id="FILE_MyProgramEXE"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source="MyProgram.exe"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeyPath="yes" &gt;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Component&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Component Id="CMP_AnotherFileDLL"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guid="E9D74961-DF9B-4130-8FBC-1669A6DD288E"&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;File Id="FILE_AnotherFileDLL"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source="AnotherFile.dll"&nbsp;&nbsp; o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeyPath="yes" &gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Component&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ComponentGroup&gt;o&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;/Fragment&gt;o&nbsp;&nbsp;&nbsp; &lt;/Wix&gt;</p>
+<ul>
+<li>Including different .wsx files in the main .wsx file:
+<ul>
+<li>Now, the markup for the components is contained within a separate file.<br /> We can use <em>ComponentGroup </em>to group them.<br /> To include this group in Product.wxs, reference it with a <strong><em>ComponentGroupRef </em></strong>element in one of your Feature elements, as shown:</li>
+</ul>
+</li>
+</ul>
+<p>&sect;&nbsp; &lt;Feature Id="ProductFeature"&nbsp;&nbsp;&nbsp;&nbsp; &sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title="Main Product"&nbsp;&nbsp;&nbsp;&nbsp; &sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Level="1"&gt;&sect;&nbsp; &nbsp;&nbsp;&nbsp;&lt;ComponentGroupRef Id="MyComponentGroup" &gt;&lt;Feature&gt;</p>
+<ul>
+<li>Although the ComponentGroup element is optional, it allows us to reference our fragment back in our main source file.</li>
+</ul>
+<h3><strong>The CopyFile element</strong></h3>
+<ul>
+<li>The CopyFile element can copy a file that you're installing and place it in another directory.
+<ul>
+<li>To move the file<strong><em> Delete attribute</em></strong> of the <em>copyFile </em>element should be set to <strong><em>yes</em></strong>.</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<p>&lt;Directory Id="TARGETDIR" Name="SourceDir"&gt;&nbsp; &lt;Directory Id="ProgramFilesFolder"&gt;&nbsp;&nbsp;&nbsp; &lt;Directory Id="MyProgramDir" Name="Awesome Software"&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Directory Id="CopiedFiles" Name="Copied Files" /&gt;&nbsp;&nbsp;&nbsp; &lt;/Directory&gt;&nbsp; &lt;/Directory&gt;&lt;/Directory&gt;&nbsp;&lt;DirectoryRef Id="MyProgramDir"&gt;&nbsp; &lt;Component Id="CMP_InstallMeTXT" Guid="E8A58B7B-F031-4548-9BDD7A6796C8460D"&gt;&nbsp;&nbsp;&nbsp; &lt;File Id="FILE_InstallMeTXT" Source="InstallMe.txt" KeyPath="yes"&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CopyFile Id="Copy_InstallMeTXT" DestinationDirectory="CopiedFiles" DestinationName="InstallMeCOPY.txt" /&gt;&nbsp;&nbsp;&nbsp; &lt;/File&gt;&nbsp; &lt;/Component&gt;&lt;/DirectoryRef&gt;</p>
+<ul>
+<li>If you don't want to hardcode the destination directory, you can use the <strong>DestinationProperty attribute</strong> instead of <strong>DestinationDirectory </strong>to reference a directory at install time</li>
+</ul>
+<h3>Copying existing files</h3>
+<ul>
+<li>For this, you'll <strong>nest the CopyFile element inside its own Component element </strong>and not inside a File element.</li>
+<li>Example</li>
+</ul>
+<p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!--Directory structure--&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Directory Id="TARGETDIR" Name="SourceDir"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;Directory Id="ProgramFilesFolder"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory Id="MyProgramDir" Name="Awesome Software"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory Id="CopiedFiles" Name="Copied Files" /&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Directory&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;/Directory&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;Directory Id="DesktopFolder" /&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Directory&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!--Components--&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;DirectoryRef Id="MyProgramDir"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;Component Id="CMP_CopyTestTXT" Guid="E25E8584-D009-43bE-99E9-A46D58105DD0" KeyPath="yes"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;CopyFile Id="CopyTest" DestinationDirectory="CopiedFiles" DestinationName="TESTCopy.txt" SourceDirectory="DesktopFolder" SourceName="TEST.txt" /&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;/Component&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/DirectoryRef&gt;</p>
+<h3><strong>Adding assembly files to the GAC</strong></h3>
+<ul>
+<li>The Global Assembly Cache (GAC) is a central repository in Windows where you can store .NET assembly files so that they can be shared by multiple applications.</li>
+<li>You can add a .NET assembly to it with WiX <strong>by setting the File element's Assembly attribute to &ldquo;.net</strong>.&rdquo;</li>
+<li>The following example installs an assembly file to the GAC:</li>
+</ul>
+<p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;DirectoryRef Id="MyProgramDir"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;Component Id="CMP_MyAssembly" Guid="4D98D593-F4E0-479B-A7DA80BBB78B54CB"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;File Id="File_MyAssembly" Assembly=".net" Source="MyAssembly.dll" KeyPath="yes" &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;Component&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/DirectoryRef&gt;</p>
+<h3>Installing 64-bit files</h3>
+<ol>
+<li>open Properties for the WiX project <strong>&gt; </strong>and, on the Tools Settings tab <strong>&gt; </strong>In the Compiler parameters &gt; add &ndash;arch x64</li>
+<li>Next, change the <strong>Directory element</strong> that is referencing ProgramFilesFolder to instead reference<strong> ProgramFiles64Folder</strong>, given as follows:</li>
+</ol>
+<p>&lt;Directory Id="TARGETDIR" Name="SourceDir"&gt;&nbsp; &lt;Directory Id="ProgramFiles64Folder"&gt;&nbsp;&nbsp;&nbsp; &lt;Directory Id="INSTALLFOLDER" Name="My Software" &gt;&nbsp; &lt;Directory&gt;&lt;/Directory&gt;</p>
+<h3><strong>The PermissionEx Element </strong></h3>
+<h3>The <strong>User Element : </strong></h3>
+<h3><br /> <strong>Setting file permissions</strong></h3>
+<ul>
+<li>To set the permissions for a file that you're installing,<strong> nest a PermissionEx element inside the corresponding File element</strong>
+<ul>
+<li>Example:</li>
+</ul>
+</li>
+</ul>
+<p>&lt;Component Id="CMP_InstallMeTXT"&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guid="E8A58B7B-F031-4548-9BDD-7A6796C8460D"&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!--Creates new user--&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;util:User Id="MyNewUser"&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CreateUser="yes"&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name="nickramirez"&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password="password"&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PasswordNeverExpires="yes"&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RemoveOnUninstall="yes"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UpdateIfExists="yes" /&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;File Id="FILE_InstallMeTXT" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source="InstallMe.txt" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeyPath="yes"&gt;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--Sets file permissions for user--&gt;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;util:PermissionEx User="Joewatson"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GenericAll="yes" /&gt;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/File&gt;&lt;/Component&gt;</p>
+<ul>
+<li>Reference<strong>dll </strong>in your project:
+<ul>
+<li>Go to Add Reference in Solution Explorer and select the WiXUtilExtension assembly.</li>
+<li>Next, add the following namespace to your Wix element:</li>
+</ul>
+</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"o&nbsp;&nbsp;&nbsp; xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"&gt;</p>
+<h3><strong>AppSearch Element : </strong></h3>
+<h3><br /> <strong>searching the computer</strong></h3>
+<ul>
+<li>Windows Installer lets you <strong>search the computer </strong>during an install for specific files, directories, and settings</li>
+<li>The AppSearch action uses file signatures to search for existing versions of products.</li>
+<li>The AppSearch action may use this information to determine where upgrades are to be installed.</li>
+<li>The AppSearch action can also be used to set a property to the existing value of an registry or .ini file entry.</li>
+<li>There are five types of searches:<br /> <strong>DirectorySearch</strong>: This searches for the existence or path of a directory<br /> <strong>FileSearch</strong>: This searches for a specific file<br /> <strong>ComponentSearch</strong>: This searches for a file by its component GUID<br /> <strong>RegistrySearch</strong>: This searches the Windows Registry for a key<br /> <strong>IniFileSearch</strong>: This searches inside INI files for configuration settings
+<ul>
+<li>Example:</li>
+</ul>
+</li>
+</ul>
+<p>&sect;&nbsp; &lt;Property Id="README_FILE"&gt;&sect;&nbsp; &lt;DirectorySearch Path="C:\Program Files(x86)\Notepad++"&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Depth="0"&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssignToProperty="no"&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Id="NppSearch"&gt;&sect;&nbsp; &lt;FileSearch Name="readme.txt"Id="readmeFileSearch" &gt;&sect;&nbsp; &lt;DirectorySearch&gt;&sect;&nbsp; &lt;/Property&gt;</p>
+<h3>How To: Check the Version Number of a File During Installation</h3>
+<ul>
+<li>Installers often need to look up the version number of a file on disk during the installation process.</li>
+<li>The check is often used in advance of a conditional statement later in install,</li>
+</ul>
+<p>such as to block the user from installing if a file is missing, or to display custom installation UI depending on whether the file version is high enough.</p>
+<ul>
+<li>This how to demonstrates verifying the version of a file on disk, then using the resulting property to block the application's installation if the file version is lower than expected.</li>
+</ul>
+<h4>Step 1: Determine the version of the file</h4>
+<p>File versions are determined using the <a href="https://wixtoolset.org/docs/v3/xsd/wix/property/">Property</a>, <a href="https://wixtoolset.org/docs/v3/xsd/wix/directorysearch/">DirectorySearch</a> and <a href="https://wixtoolset.org/docs/v3/xsd/wix/filesearch/">FileSearch</a> elements.</p>
+<p>The following snippet looks for the user32.dll file in the machine's System32 directory and checks to see if it is at least version 6.0.6001.1751.</p>
+<p>&lt;Property Id="USER32VERSION"&gt;&nbsp; &lt;DirectorySearch Id="SystemFolderDriverVersion" Path="[SystemFolder]"&gt;&nbsp;&nbsp;&nbsp; &lt;FileSearch Name="user32.dll" MinVersion="6.0.6001.1750"/&gt;&nbsp; &lt;/DirectorySearch&gt;&lt;/Property&gt;</p>
+<ul>
+<li>Searching for a file is accomplished by describing the directories to search, and then specifying the file to look up in that directory.</li>
+<li>The Property element defines the Id for the results of the file search.</li>
+<li>This Id is used later in the WiX project, for example in conditions.</li>
+<li>The DirectorySearch element is used to build the directory hierarchy to search for the file.</li>
+<li>In this case it is given a unique Id, and the path is set to the Windows Installer defined <a href="http://msdn.microsoft.com/library/aa372055.aspx">SystemFolder</a> property which points to the user's <strong>Windows\System32</strong></li>
+<li>The FileSearch element specifies the name of the file to look for in the parent DirectorySearch folder.</li>
+<li>The MinVersion attribute specifies the minimum version of the file to find.</li>
+<li>If the file is found successfully the USER32VERSION property will be set to the full path to the user32.dll file.</li>
+<li><strong>Important:</strong> When doing a locale-neutral search for a file, <strong>you must set the MinVersion property to one revision number lower than the actual version you want to search for</strong>.</li>
+<li>In this example, while we want to find file version 6.0.6001.1751, the MinVersion is set to 6.0.6001.1750.</li>
+<li>This is because of a quirk in how the Windows Installer matches file versions.</li>
+<li><a href="http://msdn.microsoft.com/library/aa371853.aspx">More information</a> is available in the Windows Installer documentation.</li>
+</ul>
+<h3><strong>The Condition Element: </strong></h3>
+<h3>Launch conditions</h3>
+<ul>
+<li>The MSI database for an installer has a table called <strong>LaunchCondition </strong>
+<ul>
+<li><strong>LaunchCondition </strong>table lists rules that the end user must comply with in order to install the software.</li>
+<li>Each rule is called a launch condition.</li>
+</ul>
+</li>
+<li>To add one, place a Condition element <strong>inside </strong>the <strong>Product element.</strong></li>
+<li>The following example shows a launch condition that checks the value of a property. I</li>
+</ul>
+<p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;?xml version="1.0" encoding="UTF-8"?&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Wix ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;Product ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&lt;Package ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MediaTemplate ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Property Id="MyProperty" Value="3" &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Condition Message="MyProperty must be set to 2"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;![CDATA[Installed OR MyProperty = 2]]&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Condition&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&lt;/Product&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Wix&gt;</p>
+<h3><br /> <strong>Feature conditions and component conditions </strong></h3>
+<ul>
+<li>they are child elements to Feature and Component elements, respectively</li>
+<li>Both <strong>prevent a specific feature or component from being installed if a condition isn't satisfied.</strong></li>
+<li>Example:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;Property Id="MyProperty" Value="some value" /&gt;o&nbsp;&nbsp;&nbsp; &lt;Feature Id="MainFeature"o&nbsp;&nbsp;&nbsp; Title="Main Feature"o&nbsp;&nbsp;&nbsp; Level="1"&gt;o&nbsp;&nbsp;&nbsp; &lt;ComponentRef Id="CMP_InstallMeTXT" /&gt;o&nbsp;&nbsp;&nbsp; &lt;Condition Level="2"&gt;o&nbsp;&nbsp;&nbsp; &lt;![CDATA[MyProperty = "some value"]]&gt;o&nbsp;&nbsp;&nbsp; &lt;/Condition&gt;o&nbsp;&nbsp;&nbsp; &lt;/Feature&gt;</p>
+<h3>The UIREef Element:</h3>
+<h3><br /> Adding a user interface</h3>
+<ul>
+<li>All WiX's<strong> built-in dialog sequences, are stored in an assembly called WixUIExtension.dll</strong></li>
+<li>You can add a reference to this file with Visual Studio's Add a Reference screen.</li>
+<li><strong>WixUI_Minimal</strong></li>
+</ul>
+<p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;UIRef Id="WixUI_Minimal" /&gt;</p>
+<ul>
+<li>This will insert the Minimal dialog set into your installation sequence that shows a license agreement and an Install button.</li>
+</ul>
 </div>
 
-<h2>Adding a user interface</h2>
+<h2> Tools and concepts</h2>
 <div>
-<p>
-    There is WiX's built-in dialog you can use in sequences.
+<h3>Viewing the MSI database using Orca.exe</h3>
+<ul>
+<li>MSI file is really a sort of relational database and can be viewed using orca.exe</li>
+<li>msi is part of <a href="http://msdn.microsoft.com/en-us/windows/bb980924.aspx">Windows SDK</a></li>
+</ul>
+<h3>Turning logging on during installation</h3>
+<ul>
+<li>If you get into trouble with your installer, it may help to run it with logging turned on.</li>
+<li>To do so, install your package from a command prompt using msiexec with the arguments /l*v, and the name of a file to write the log to.</li>
+<li>For example, if you had an installer called myInstaller.msi, you could use this command to write a log during the installation to a file called myLog.txt:</li>
+</ul>
+<p>msiexec i myInstaller.msi l*v myLog.txt</p>
+<ul>
+<li>It works for uninstalls too. Simply use the /x argument instead of /i.</li>
+</ul>
+<h3>Installation Sequence</h3>
+<ul>
+<li>there are two tables in the MSI database, <strong>InstallUISequence </strong>and <strong>InstallExecuteSequence</strong>, that contain the order of<strong> installation events</strong>
+<ul>
+<li>For example, AppSearch always happens before launch conditions.</li>
+</ul>
+</li>
+</ul>
+<h3>InstallUISequence</h3>
+<ul>
+<li>The InstallUISequence is both the name of a database table in the MSI package and a way of referring to the first half of the installation.</li>
+<li>During this time, we can show a graphical user interface and execute tasks that don't alter the user's computer, such as using AppSearch and evaluating launch conditions</li>
+</ul>
+<h3>InstallExecuteSequence</h3>
+<ul>
+<li>During this phase, changes are made to the computer such as laying down files, updating the registry, and adding a new entry in Programs and Features.</li>
+<li>This part of the installation is called the server-side</li>
+<li>and the InstallUISequence table is called the client-side, which is a way of conceptualizing that the two are run in different sessions and with different privileges.</li>
+<li>The client-side runs as the user who launched the MSI while the server-side is run as the <strong>LocalSystem </strong></li>
+</ul>
+<h3>Execute standard actions</h3>
+<ul>
+<li><strong>The InstallValidate action </strong>uses the total calculated by the costing phase to verify that there's enough disk space available, and whether any running processes have a lock on files</li>
+<li><strong>The InstallInitialize action</strong> marks the beginning of the "deferred" stage of the Execute sequence</li>
+<li><strong>The ProcessComponents action </strong>makes note of the components that are in your installer and stores their GUIDs in the registry.It tracks which file is the keypath for each component</li>
+<li>During uninstallation, <strong>UnpublishFeatures </strong>removes component-to-feature mappings in the registry and discards information about which features were selected.</li>
+<li>The <strong>RemoveRegistryValues action </strong>looks at the MSI's Registry and RemoveRegistry tables to find registry items to remove during an uninstall</li>
+<li>The <strong>RemoveShortcuts action </strong>removes any shortcuts during uninstallation that your installer created.</li>
+<li>During uninstallation, the <strong>RemoveFiles action</strong> deletes files and folders that were copied to the system</li>
+<li>The <strong>InstallFiles action</strong> uses information from the Directory and File tables to copy files and folders into their appropriate locations.</li>
+<li>During installation, <strong>CreateShortcuts </strong>adds shortcuts as specified in the Shortcut table.</li>
+<li>You can use the WiX elements RegistryKey and RegistryValue to write to the registry. The <strong>WriteRegistryValues action</strong> does the work.</li>
+<li>The <strong>RegisterUser action</strong> records to the registry who the user was who initiated the installation.</li>
+<li>The<strong> RegisterProduct action</strong> registers your product with Programs and Features and stores a copy of the MSI package in the Windows Installer Cache, found at %WINDIR%\Installer</li>
+<li>The<strong> InstallFinalize action</strong> marks the end of the rollback-protected stage called the deferred phase. I</li>
+</ul>
+<h3>Immediate versus deferred</h3>
+<ul>
+<li>There are reasons for <strong>separating the installation into two parts. </strong></li>
+<li>The biggest is to have an obvious time during which the end user should expect changes to be made to the system.</li>
+<li>During the UI phase , they can safely fill information into the UI's dialogs without the fear that their computer will be altered.</li>
+<li>Typically, it isn't until they click a button labeled Install that changes begin to take effect.</li>
+<li>Therefore, the standard actions only make system changes during the second half, during the Execute sequence.</li>
+<li>By keeping all system changes in one area, Windows Installer is able to offer something else: rollback protection if an error occurs.</li>
+<li>It works in the following way: no changes to the system are made when the Execute phase starts.</li>
+<li>At first, the installer reads what actions are in the InstallExecuteSequence table and prepares itself by storing a script of what's to be done.</li>
+<li>All actions between InstallInitialize and InstallFinalize are included.</li>
+<li>This initial phase, when the script is prepared but the rollback protection hasn't started yet, is called the Execute sequence's immediate phase.</li>
+<li>Once things actually start happening, it's called the deferred stage.</li>
+<li>If an error occurs, the installer will use the script it created to roll back the actions that had taken place up to that point.</li>
+<li>Only the deferred stage has rollback protection.</li>
+<li>The UI sequence does not have this feature and so actions that alter the system should never take place there.</li>
+</ul>
+<h3>Custom actions</h3>
+<ul>
+<li>custom actions is making your own actions and scheduling them appropriately</li>
+<li>Any custom action that changes the system, should happen during the deferred stage of the Execute sequence,
+<ul>
+<li>whether it involves changing files, setting up databases, or adjusting user rights,</li>
+<li>Otherwise, you're free to place them where you like during either the UI or the Execute sequence.</li>
+</ul>
+</li>
+<li>Custom actions are declared with the<strong> CustomAction element. </strong></li>
+<li>Use its <strong>Execute attribute to define how it should run</strong>,</li>
+<li>use its<strong> Return attribute</strong> to tell how its return status should be treated.</li>
+<li>For example, this would declare a custom action called MyAction that runs during the deferred stage and is checked for success upon completion:</li>
+</ul>
+<p>&lt;CustomAction Id="MyAction" Execute="deferred"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Return="check" ... /&gt;</p>
+<ul>
+<li>There are 7 specific<strong> types of custom actions</strong> that add their own necessary attributes,Including:
+<ul>
+<li>Setting a Windows Installer property</li>
+</ul>
+</li>
+</ul>
+<p>&sect;&nbsp; &lt;CustomAction&sect;&nbsp; Id="rememberInstallDir"&sect;&nbsp; Property="ARPINSTALLLOCATION"&sect;&nbsp; Value="[INSTALLLOCATION]" /&gt;</p>
+<ul>
+<li>Setting the location of a directory</li>
+</ul>
+<p>&sect;&nbsp; &lt;CustomAction Id="SetAppDataDir"&sect;&nbsp; Directory="DataDir"&sect;&nbsp; Value="[CommonAppDataFolder]MyProduct"&sect;&nbsp; /&gt;</p>
+<ul>
+<li>Running embedded VBScript or JScript code</li>
+</ul>
+<p>&sect;&nbsp; &lt;CustomAction Id="testVBScript" Script="vbscript"&sect;&nbsp; Execute="immediate" &gt;&sect;&nbsp; &lt;![CDATA[&sect;&nbsp; msgbox "this is embedded code..."&sect;&nbsp; msgbox "MyProperty: " &amp;&sect;&nbsp; Session.Property("MyProperty")&sect;&nbsp; ]]&gt;&sect;&nbsp; &lt;/CustomAction&gt;&sect;&nbsp; &nbsp;&sect;&nbsp; &nbsp;&sect;&nbsp; &lt;InstallUISequence&gt;&sect;&nbsp; &lt;Custom Action="testVBScript"&sect;&nbsp; After="LaunchConditions" &gt;&sect;&nbsp; &lt;InstallUISequence&gt;</p>
+<ul>
+<li>Calling an external VBScript or JScript file
+<ul>
+<li>Let's say we have a file called myScript.vbs that contains a function called myFunction:</li>
+</ul>
+</li>
+</ul>
+<p>&sect;&nbsp; Function myFunction()&sect;&nbsp; &nbsp;&nbsp;If Session.Property("MY_PROPERTY") = "1" Then&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;msgbox "Property is 1. Returning success!"&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;myFunction = 1&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Exit Function&sect;&nbsp; &nbsp;&nbsp;End If&sect;&nbsp; &nbsp;&nbsp;msgbox "Property not 1. Returning failure."&sect;&nbsp; &nbsp;&nbsp;myFunction = 3&sect;&nbsp; &nbsp;&nbsp;Exit Function&sect;&nbsp; End Function&sect;&nbsp; &lt;Binary Id="myScriptVBS" SourceFile=".\myScript.vbs"/&gt;&sect;&nbsp; &nbsp;&sect;&nbsp; &lt;CustomAction&sect;&nbsp; Id="myScript_CA"&sect;&nbsp; BinaryKey="myScriptVBS"&sect;&nbsp; VBScriptCall="myFunction"&sect;&nbsp; Execute="immediate"&sect;&nbsp; Return="check" /&gt;</p>
+<ul>
+<li>Calling a method from a dynamic-link library
+<ul>
+<li>Create a new C# Custom Action Project and you'll get a source file that references the Microsoft.Deployment.WindowsInstaller namespace.</li>
+</ul>
+</li>
+</ul>
+<p>&sect;&nbsp; myCustomActions.cs&sect;&nbsp; using System;&sect;&nbsp; using Microsoft.Deployment.WindowsInstaller;&sect;&nbsp; namespace myLibrary&sect;&nbsp; {&sect;&nbsp; &nbsp;&nbsp;public class CustomActions&sect;&nbsp; &nbsp;&nbsp;{&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[CustomAction]&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;public static ActionResult MyFunction(Session session)&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string myProperty = session["myProperty"];&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ActionResult.Success;&sect;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;}&sect;&nbsp; &nbsp;&nbsp;}&sect;&nbsp; }</p>
+<ul>
+<li>In wsx file:</li>
+</ul>
+<p>&sect;&nbsp; &lt;Binary Id="myCustomActionsDLL"&sect;&nbsp; SourceFile=".\myCustomActions.CA.dll" /&gt;&sect;&nbsp; &nbsp;&sect;&nbsp; Then&sect;&nbsp; &lt;CustomAction&sect;&nbsp; Id="CA_myCustomAction"&sect;&nbsp; BinaryKey="myCustomActionsDLL"&sect;&nbsp; DllEntry="MyFunction"&sect;&nbsp; Execute="immediate"&sect;&nbsp; Return="check" /&gt;&sect;&nbsp; &nbsp;&sect;&nbsp; Then, schedule it to run:&sect;&nbsp; &nbsp;&sect;&nbsp; &lt;InstallUISequence&gt;&sect;&nbsp; &lt;Custom Action="CA_myCustomAction"&sect;&nbsp; After="CostFinalize" &gt;&sect;&nbsp; &lt;InstallUISequence&gt;</p>
+<ul>
+<ul>
+<ul>
+<li>&nbsp;</li>
+</ul>
+</ul>
+</ul>
+<ul>
+<li>Deployment Tools Foundation (DTF). DTF is a library that allows you to write .NET code that can interact with the lower-level Windows Installer technology.</li>
+<li>It provides a number of useful classes under the Microsoft.Deployment.WindowsInstaller namespace</li>
+</ul>
+<ul>
+<li>Running an executable</li>
+</ul>
+<p>&sect;&nbsp; &lt;Binary&sect;&nbsp; Id="myProgramEXE"&sect;&nbsp; SourceFile="$(sys.SOURCEFILEDIR)myProgram.exe" &gt;&sect;&nbsp; &nbsp;&sect;&nbsp; &lt;CustomAction&sect;&nbsp; Id="myProgramEXE_CA"&sect;&nbsp; BinaryKey="myProgramEXE"&sect;&nbsp; Impersonate="yes"&sect;&nbsp; Execute="deferred"&sect;&nbsp; ExeCommand=""&sect;&nbsp; Return="check" &gt;</p>
+<ul>
+<li>Sending an error that stops the installation</li>
+</ul>
+<ul>
+<li>To add our custom action to the Execute sequence, we'll use the <strong>InstallExecuteSequence </strong>element and the Custom element.</li>
+</ul>
+<p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;?xml version="1.0" encoding="UTF-8"?&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;Product ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Package ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Media ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CustomAction Id="MyAction" Execute="deferred"&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return="check" ... &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;InstallExecuteSequence&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Custom Action="MyAction"&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After="InstallInitialize" &gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/InstallExecuteSequence&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;/Product&gt;&lt;/Wix&gt;</p>
+<h3>Rollback custom actions</h3>
+<p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CustomAction Id="systemChangingCA" Execute="deferred"&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Script="vbscript"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; msgbox "Imagine this changes the system in some&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; way"&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CustomAction&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CustomAction Id="myRollbackCA" Execute="rollback"&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Script="vbscript"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; msgbox "Imagine this undoes the changes"&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CustomAction&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CustomAction Id="causeError" Execute="deferred"&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Script="vbscript"&gt;&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Err.Raise 507&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CustomAction&gt;</p>
+<ul>
+<li>We'll schedule these during the Execute sequence:</li>
+</ul>
+<p>o&nbsp;&nbsp;&nbsp; &lt;InstallExecuteSequence&gt;o&nbsp;&nbsp;&nbsp; &lt;Custom Action="myRollbackCA"o&nbsp;&nbsp;&nbsp; Before="systemChangingCA" &gt;o&nbsp;&nbsp;&nbsp; &lt;Custom Action="systemChangingCA"o&nbsp;&nbsp;&nbsp; After="InstallInitialize" &gt;o&nbsp;&nbsp;&nbsp; &lt;Custom Action="causeError"o&nbsp;&nbsp;&nbsp; After="systemChangingCA" &gt;o&nbsp;&nbsp;&nbsp; &lt;InstallExecuteSequence&gt;</p>
 
-All of them are stored in an assembly called WixUIExtension.dll. 
-
-You can add a reference to this file with Visual Studio's Add a Reference screen.
-
-The file exists in WiX's Program Files folder.
- You may have to navigate to
-C:\Program Files (x86)\WiX Toolset v3.6\bin
-
-Once you've added the new reference,
- add the following line to your WiX source file.
- 
-It doesn't matter exactly where, as long as it's a child to the Product element:
-</p>
-<cl><UIRef Id="WixUI_Minimal" /></cl>
-<p>
-This will insert the Minimal dialog set into your installation sequence.
-
-It shows a single dialog screen containing a license agreement and an Install button.
-
-Feel free to try any of the other dialog sets.
-
-Just replace WixUI_Minimal, with one of the other names in the UIRef element.
-
-WixUI_Advanced and WixUI_InstallDir require some further setup to really work properly.
-
-You can try out the following attributes:
-</p>
-<pre>
-     WixUI_Advanced
-    WixUI_FeatureTree
-    WixUI_InstallDir
-    WixUI_Mondo   
-</pre>
-</div>
-
-<h2>Viewing the MSI database</h2>
-<div>
-<p>
-an MSI file is really a sort of relational database.
-
-WiX does all the work of creating tables,
- inserting rows, and matching up keys in this database. 
- 
-However, as we progress through the rest of the book, 
-I encourage you to explore how it looks behind the scenes. 
-
-For example, we discussed the File and Component elements. 
-
-Sure enough, there are two tables called File 
-and Component in the MSI package that contain the definitions you've set with your XML markup. 
-
-To get inside the installer, you'll need a tool called Orca.
-</p>
-<h3>Orca.exe</h3>
-<p>
-Once you've compiled your project in Visual Studio,
- you'll have a working MSI package that can be installed by double-clicking on it.
- 
- If you'd like to see the database inside, install the MSI viewer, Orca.exe. 
- 
- Orca is provided as part of the Windows SDK and despite the icon of a whale on the shortcut, 
-it stands for One Really Cool App. 
-
-You can find versions of the SDK at Microsoft's Windows Development Center website:
-
-http://msdn.microsoft.com/en-us/windows/bb980924.aspx
-
-After you've installed the SDK (specifically, the .NET tools that are included), 
-you can find the installer for Orca—Orca.msi—in the Microsoft
-SDKs folder in Program Files. 
-
-On my machine, it can be found in
-C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin.
-Install Orca and then right-click on your MSI file and select Edit with Orca
-
-Orca lets you view the database structure of your installer. 
-
-This can be a big help in troubleshooting problems 
-or just to get a better idea about how different elements work together. 
-
-The following is a screenshot of the Component database:
-
-If you wanted to, you could edit your MSI package directly with Orca. 
-
-This is helpful when learning or trying out different concepts.
-
-You'll need to know exactly which tables and rows to modify. 
-
-Sometimes, though, you'll be able to just change a single value and check its effect.
-</p>
-</div>
-
-<h2>Turning logging on during installation</h2>
-<div>
-<p>
-If you get into trouble with your installer,
- it may help to run it with logging turned on. 
- 
-To do so, install your package from a command prompt using
-msiexec with the arguments /l*v,
-and the name of a file to write the log to. 
-
-For example, if you had an installer called myInstaller.msi, 
-you could use this command to write a log during the installation to a file called myLog.txt:
-
-msiexec i myInstaller.msi l*v myLog.txt
-
-Every event that occurs during installation will be recorded here. 
-
-It works for uninstalls too. 
-
-Simply use the /x argument instead of /i. 
-
-The log can be pretty helpful, but also very verbose. 
-
-If your installer fails midway through, you might try searching the log for the text return value 3. 
-
-This indicates that an action returned a status of failure. 
-
-Often, you'll also see a specific MSI error code. 
-
-You can find its meaning by searching for that number in the MSI SDK Documentation help file that comes with WiX.
-
-- You can also turn on logging for all MSI packages by editing the
-
-HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer
-
-key in the Windows Registry. 
-
-This should be used with care though so as not to use too much disk space.
-</p>
-</div>
-
-<h2>The Fragment element</h2>
-<div>
-<p>
-Up to this point, we've been adding all of our WiX elements to the Product.wxs file.
-
-When your installer packages hundreds of files,
- you'll find that having all of your code in one place makes reading it difficult.
-
-You can split your elements up into multiple .wxs files
- for better organization and readability. 
-
-Whereas your main source file, Product.wxs,
-nests everything inside a Product element,
- your additional .wxs files will use Fragment elements as their roots.
-
-The Fragment element doesn't need any attributes. 
-
-It's simply a container.
-
-You can place just about anything inside of it, 
-such as all of your Directory elements or all of your Component elements.
-
-For the next example, add a new WiX source file to your project 
-and place the following markup inside it. 
-
-Here, we're using the same ComponentGroup that we discussed earlier.
-
-You can call the file Components.wxs, and it should look something like the following code snippet:
-</p>
-<pre><code>
-    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-        <Fragment>
-        <ComponentGroup Id="MyComponentGroup"
-        Directory="INSTALLLOCATION">
-        <Component Id="CMP_MyProgramEXE"
-        Guid="E8A58B7B-F031-4548-9BDD-
-        7A6796C8460D">
-        <File Id="FILE_MyProgramEXE"
-        Source="MyProgram.exe"
-        KeyPath="yes" >
-        <Component>
-        <Component Id="CMP_AnotherFileDLL"
-        Guid="E9D74961-DF9B-4130-8FBC-
-        1669A6DD288E">
-        <File Id="FILE_AnotherFileDLL"
-        Source="AnotherFile.dll"
-        KeyPath="yes" >
-        <Component>
-        </ComponentGroup>
-        </Fragment>
-        </Wix>
-        
-</code></pre>
-<p>
-    Now, the markup for the components is contained within a separate file.
-    We've used ComponentGroup to group them, 
-    but of course, that's optional.
-
-    To include this group in Product.wxs, 
-    reference it with a ComponentGroupRef element in one of your Feature elements
-    , as shown:
-</p>
-<pre><code>
-    <Feature Id="ProductFeature"
-    Title="Main Product"
-    Level="1">
-    <ComponentGroupRef Id="MyComponentGroup" >
-    <Feature>
-</code></pre>
-<p>
-Although the ComponentGroup element is optional, 
-it allows us to reference our fragment back in our main source file. 
-
-Referencing any single element from a fragment like this
- will pull all of the elements in the fragment into the scope of your project.
- 
-For components, this doesn't make much difference 
-since you still have to reference all of them—
-or at least a ComponentGroup element of them—inside a Feature element.
-
-However, it makes more of a difference for other elements.
-
-For example, properties, which are variables that you can use to store data, 
-are represented by Property elements 
-and could be stored in a separate file within a Fragment element. 
-
-Then, by referencing just one of them in your main source file with a PropertyRef element, 
-you'd pull all of them into your project.
-
-With fragments, it's all or nothing. Referencing one element in the fragment references them all.
-
-Other elements that don't have a corresponding Ref counterpart need a little more help. 
-
-For example, there's no reference element for the Media element. 
-
-There's no such thing as a "MediaRef". 
-
-However, if you included a Property element in the same fragment as your Media elements, 
-you could pull them in too by referencing that property with PropertyRef.
-
-The Media.wxs file would look like the following code snippet:
-</p>
-<pre><code>
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Fragment>
-    <Property Id="MediaProperty"
-    Value="1" >
-    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes"
-    >
-    <Media Id="2" Cabinet="media2.cab" EmbedCab="yes"
-    >
-<Media Id="3" Cabinet="media3.cab" EmbedCab="yes"
->
-</Fragment>
-</Wix>
-
-</code></pre>
-<p>
-To reference the Media elements in your project, 
-reference the property that's with them.
-
-This is done by adding the following code to Product.wxs:
-</p>
-<pre><code>
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="3E786878-358D-43AD-82D1-1435ADF9F6EA"
-    Name="Awesome Software"
-    Language="1033"
-    Version="1.0.0.0"
-    Manufacturer="Awesome Company"
-    UpgradeCode="B414C827-8D81-4B4A-B3B6-
-    338C06DE3A11">
-    <Package InstallerVersion="301"
-    Compressed="yes" />
-    <PropertyRef Id="MediaProperty" />
-    <Directory Id="TARGETDIR"
-    Name="SourceDir">
-    <Directory Id="ProgramFilesFolder">
-    <Directory Id="MyProgramDir"
-    Name="Awesome Software" >
-    <Directory>
-    </Directory>
-    <DirectoryRef Id="MyProgramDir">
-    <Component Id="CMP_InstallMeTXT"
-    Guid="E8A58B7B-F031-4548-9BDD-
-    7A6796C8460D">
-    <File Id="FILE_InstallMeTXT"
-    Source="InstallMe.txt"
-    KeyPath="yes" >
-    <Component>
-    </DirectoryRef>
-    <Feature Id="ProductFeature"
-    Title="Main Product"
-    Level="1">
-    <ComponentRef Id="CMP_InstallMeTXT" >
-    <Feature>
-    </Product>
-    </Wix>
-</code></pre>
-<p>
-Fragments are a great way of splitting up your code to make it more manageable.
-
-As we've seen, it's easy to pull them into the scope of your project. 
-
-You could even pull one fragment into another and then pull that one into your main source file. 
-
-WiX will take care of running the validity checks to make sure that everything links together properly.
-
-Note that it's possible to have more than one Fragment element in the same source file. 
-
-In that case, you must use a reference element for each one.
-
-They're sort of like islands. They're isolated from one another.
-
-However, it's often simpler to stick to one fragment per file. The following file defines two fragments:
-</p>
-<pre><code>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Fragment>
-        <Property Id="MediaProperty"
-        Value="1" >
-        <Media Id="1"
-        Cabinet="media1.cab"
-        EmbedCab="yes" >
-        </Fragment>
-        <Fragment>
-        <Property Id="MediaProperty2"
-        Value="1" >
-        <Media Id="2"
-        Cabinet="media2.cab"
-        EmbedCab="yes" >
-    </Fragment>
-</Wix>  
-</code></pre>
-<p>
-Referencing the MediaProperty property with PropertyRef will only pull in
-the elements in the first fragment. To get those in the second fragment,
-you'd have to also reference the MediaProperty2 property.
-The Fragment element is so helpful that the WiX team has employed its
-use for an even bigger type of project organization: .wixlib files. These
-are separate projects that by default contain a single fragment and
-compile into a WiX library (.wixlib) that can be added as a reference in
-your main WiX project. This allows other teams to handle their own WiX
-code and send it to you already compiled. To try it out, create a new
-project in your solution using the Setup Library Project template.
-The contents of this type of project aren't anything you haven't seen
-before. It's simply a fragment. You'll start off with the following markup:
-</p>
-<pre><code>
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Fragment>
-    <!-- TODO: Put your code here. -->
-    </Fragment>
-    </Wix>   
-</code></pre>
-<p>
-You can add properties, components, and anything else
- you'd ordinarily be able to add to a fragment. 
-
-When it's compiled, you'll have a .wixlib file that can be added as a reference
- in your main WiX project. 
- 
-Use the Add Reference option in your Solution Explorer window. 
-
-Like other fragments,
- you'll be able to reference the .wixlib file's contents by using a reference element such as PropertyRef.
- 
-This is a great tool that allows multiple teams to work on the installer 
-without stepping on one another's toes.
-
-In the past, installation developers often used merge modules (.msm)
- to separate installation code.
- 
- Merge modules, much like WiX libraries, contain compiled installer code 
- and offer a way of splitting up large projects.
- 
- WiX libraries, which are easier to author, can serve as a replacement for merge modules.
-
-WiX does provide an XML element called Merge for importing a merge module into your project. 
-
-You'd probably only need to use this to install a third-party component.
-
-However, even for dependencies such as Microsoft's Visual C++ Runtime,
- you may be able to avoid using a merge module and use an executable installer instead. 
- 
-An installer for the Visual C++ Runtime is available
- and by using WiX's new bootstrapper technology,
- Burn , it can be installed as a prerequisite before your ownsoftware is installed.
-
-    
-</p>
-</div>
-
-<h2>WiX v4</h2>
-<div>
-<p>
-- WiX v4 doesn't have to be installed on every dev machine and build image like WiX v3. 
-  Instead, WiX v4 follows the modern .NET model of using NuGet to deliver tools.
-
-- WiX v4 MSBuild projects are SDK-style projects; 
-  MSBuild and NuGet work together to bring down the WiX v4 MSBuild SDK NuGet package.
-
-- Both .NET Framework MSBuild and dotnet build are supported.
-
-- To build packages from the command line, 
-  WiX v4 is available as a .NET tool, which is also a NuGet package.
-
-- WiX extensions are delivered as NuGet packages, 
-  which are usable from both MSBuild projects via PackageReference and the WiX .NET tool.
-
-- For command-line afficionados, 
-  most executables have been merged into a single wix.exe tool with commands.
-  
-  For example, in WiX v3, 
-  you might build by calling Candle.exe one or more times to compile your authoring 
-  and then calling Light.exe to link and bind the compiled authoring into an .msi package. 
-  
-  In WiX v4 using wix.exe, that's one command: wix build -o product.msi product.wxs.
-</p>
-
-<h3>Convert WiX authoring from the command line</h3>
-<div>
-<p>
-- By default, wix convert converts the files in place, 
-  overwriting the original files. 
-  
-  You can add the <b>--dry-run</b> switch 
-   to have <b>wix convert report</b> on what changes it would make without actually making them.
-
-- To convert WiX v3 authoring to WiX v4 from the command line, 
-    first install the WiX .NET tool. 
-    
-    Then you can run <b>wix convert</b>
-- To convert an individual WiX source file:
-    <b>wix convert path\to\file.wxs</b> .
-
-- To convert all WiX source files in a specified directory:
-    <b>wix convert path\to\*.wxs</b> .
-
-- To convert all WiX source,
-   include, and localization files in a specified directory:
-   <b>wix convert path\to\*.wx?</b> .
-
-- To convert all WiX source, 
-  include, and localization files in a specified directory tree: 
-  <b>wix convert --recurse path\to\*.wx?</b> .
- </p>
-</div>
-
-<h3>Convert WiX projects and authoring from Visual Studio</h3>
-<div>
-<p>
-- <b>FireGiant's HeatWave Community Edition</b> includes support for 
-     converting WiX v3 authoring (like using wix convert) 
-     and converting WiX v3 .wixproj MSBuild projects to SDK-style WiX v4 projects.
-</p>
 </div>
 </div>
 
-<h2>MSBuild</h2>
-<div>
- <a href="https://wixtoolset.org/docs/tools/msbuild/">MSBuild</a>   
-</div>
 
-<h2>Wix.exe command-line reference</h2>
-<div>
-    <a href="https://wixtoolset.org/docs/tools/wixexe/">wix.exe reference</a>
-</div>
-
-<h2>WiX extensions and custom actions</h2>
-<div>
-    <a href="https://wixtoolset.org/docs/tools/wixext/">WiX extensions and custom actions</a>
-    <a href="https://wixtoolset.org/docs/tools/wixext/wixui/">WixUI dialog library</a>
-    <a href="https://wixtoolset.org/docs/tools/wixext/util/">Utility custom actions</a>
-    <a href="https://wixtoolset.org/docs/tools/wixext/quietexec/">Quiet execution custom actions</a>
-    <a href="https://wixtoolset.org/docs/tools/wixext/wininfo/">Windows information custom actions</a>
-    <a href="https://wixtoolset.org/docs/tools/wixext/dotnet/">Detecting and installing .NET</a>
-    <a href="https://wixtoolset.org/docs/tools/wixext/vs/">Visual Studio detection properties and custom actions</a>
-    <a href="https://wixtoolset.org/docs/tools/wixext/directx/">DirectX custom action</a>
-</div>
-
-<h2>Deployment Tools Foundation</h2>
-<div>
-<p>
-    Deployment Tools Foundation is a rich set of .NET class libraries and related resources
-     that together bring the Windows deployment platform technologies into the .NET world.
-     including:
-     &emsp;   Working with MSI Databases
-     &emsp;   Working with Cabinet Files
-     &emsp;   Working with Install Packages
-     &emsp;   Managed Custom Actions
-</p>
-     <a href="https://wixtoolset.org/docs/tools/dtf/">Deployment tools</a>
-</div>
-
-<h2>Preprocessors</h2>
-<div>
-<p>
-    The WiX preprocessor lets you 
-    use variables in your WiX authoring,
-     share fragments of WiX authoring, 
-     and conditionally include or exclude XML elements based on conditional expressions. 
-</p>
-    <a href="https://wixtoolset.org/docs/tools/preprocessor/">Preprocessors</a>
-</div>
-
-<h2>Signing packages and bundles</h2>
-<div>
-- Windows Installer packages can be signed directly by signing tools like Signtool.exe.
-- However, you can also sign cabinets that are external to the .msi file 
-  and include those signatures in the .msi so Windows Installer can verify that the cabinets haven't been tampered with.
-
-    <a href="https://wixtoolset.org/docs/tools/signing/">Details</a>
-</div>
-
-<h2>Windows Installer patches</h2>
-<div>
-- Windows Installer patching allows you to update an installed product without a full upgrade. 
-- Patches contain the differences between an older version of a package (called the target) and the newer version (the update).
-- Because they contain only the differences, patches are typically smaller than the full update package and typically install more quickly.
-<a href="https://wixtoolset.org/docs/tools/patches/">Description</a>
-</div>
-
-<h2>Code Pages</h2>
-<div>
-When it was first developed and introduced, Windows Installer was available for Windows 95 and Windows 98. 
-While the 90s were a great decade, those 16-bit versions of Windows came with some significant limitations.
- One of them is lack of support for Unicode. 
- Windows Installer inherited that limitation 
- and uses code pages to support characters outside of the traditional 7-bit ASCII we know and love.
- <a href="https://wixtoolset.org/docs/tools/codepage/">More Description</a>
-</div>
-
-<h2>Heat harvesting</h2>
-<div>
-    <a href="https://wixtoolset.org/docs/tools/heat/">Details</a>
-</div>
-
-<h2>WiX managed SDK</h2>
-<div>
-    <a href="WiX managed SDK">Api</a>
-</div>
-
-<h2>Schema reference</h2>
-<div>
-    https://wixtoolset.org/docs/schema/
-</div>
-
-<h2>Development</h2>
-<div>
-    So you want to hack on the WiX Toolset? Excellent! WiX development happens on GitHub, so you'll need an account there. 
-    You'll need to create a fork of the Git repository for WiX v4 on GitHub and clone it to your development machine.
-    <a href="https://wixtoolset.org/docs/development/">details</a>
-</div>
-
-</body>
