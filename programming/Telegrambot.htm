@@ -19,8 +19,82 @@
     <a href='https://core.telegram.org/bots'>Offical bot Developer guide</a>
 </div>
 
-<h2>. </h2>
-<b>Create a bot:</b> goto telegram >bot father>
+<h2>Introduction</h2>
 <div>
-...
+    - Telegram bots can host Mini Apps built with JavaScript. 
+    - <b>Create a bot:</b> goto telegram >bot father>
+</div>
+
+<h2>Features</h2>
+<div>
+
+<h3>Inputs</h3>
+<div>
+<p>
+Users can send messages of all types to bots, including text, files, locations, stickers, voice messages ,
+but these are special input types:
+-<b>Commands :</b> are keywords that are highlighted in messages and can be selected from a list after typing /.
+Some mandetory Commands in all bots are:
+/start - begins the interaction with the user, like sending an introductory message. This command can also be used to pass additional parameters to the bot (see Deep Linking).
+/help - returns a help message, like a short text about what your bot can do and a list of commands.
+/settings - (if applicable) shows the bot's settings for this user and suggests commands to edit them.
+
+-<b>Keyboards:</b> replace the user's keyboard with predefined answer options.
+  . They can display a special keyboard with predefined reply option
+-<b>Buttons:</b> that are shown next to messages from the bot.
+
+</p>
+</div>
+
+</div>
+
+<h2>A simple bot sample code</h2>
+<div>
+    <pre><code>
+using System;
+using Telegram.Bot;
+using Telegram.Bot.Args;
+
+class Program
+{
+    private static TelegramBotClient botClient;
+
+    static void Main()
+    {
+        botClient = new TelegramBotClient("YOUR_BOT_TOKEN");
+
+        botClient.OnMessage += Bot_OnMessage;
+
+        botClient.StartReceiving();
+
+        Console.WriteLine("Bot is listening. Press any key to exit.");
+        Console.ReadKey();
+
+        botClient.StopReceiving();
+    }
+
+    private static async void Bot_OnMessage(object sender, MessageEventArgs e)
+    {
+        if (e.Message.Text != null)
+        {
+            Console.WriteLine($"Received a message from {e.Message.Chat.Id}: {e.Message.Text}");
+
+            // Echo the received message back to the sender
+            await botClient.SendTextMessageAsync(
+                chatId: e.Message.Chat.Id,
+                text: $"You said: {e.Message.Text}"
+            );
+        }
+    }
+}
+
+    </code></pre>
+</div>
+
+<h2></h2>
+<div>
+</div>
+
+<h2></h2>
+<div>
 </div>
