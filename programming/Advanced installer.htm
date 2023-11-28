@@ -1,0 +1,121 @@
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+    <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+    <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+    <style>
+        ul {
+            padding: 20px;
+        }
+
+        ul li {
+            background: #ebedf0;
+            color: darkblue;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+
+<button onclick='toggleAll(this);'>-</button>
+
+<h1>Advanced Installer</h1>
+
+<h2>References</h2>
+<div>
+    <a href='https://www.advancedinstaller.com/user-guide/tutorial-create-simple-msi-installer.html'>Manual</a>
+</div>
+
+<h2>Top Menu</h2>
+<div>
+first of all ,a project is needed to create an installer.
+<h3>Create project</h3>
+<div>
+ Top Menu > File > New > Install project
+</div>
+
+<h3>Build</h3>
+<div>
+<p>
+To Create the msi installer ,the project must be built:
+
+Top Menu > Project build
+</p>
+</div>
+
+<h3>Install / UnInstall</h3>
+<div>
+    <p>
+- To execute built Installer, press <b>Run</b> button 
+- To remove the installed file either from the “Programs and Features” in the Control Panel 
+or from within the Advanced Installer application itself:
+ press the [ Run ] button again without modifying anything > the Setup wizard will appear> Select [ Remove ] in the second screen and wait until the uninstall process is complete.
+</p>
+</div>
+</div>
+
+<h2>Left Menus</h2>
+<div>
+<h3></h3>
+<h3>Package Defenition</h3>
+<div>
+<h4>Specify compreesed files size</h4>
+<div
+>Builds > Configurations> compression > Achive installation files into CAB files> Multiple VOLUMES >customize Cab archives number and size
+</div>
+
+<h4>per user vs permachine</h4>
+<div>
+install parameters > Intallation type
+(the execution level can also be selected in the same page)
+</div>
+
+<h4>Installation Folders and install parameters</h4>
+<div>
+<p>
+<b>Installation Folder</b>    
+Install Parameters > Installation Folder
+
+</p>
+</div>
+</div>
+
+<h3>Resource</h3>
+<div>
+<h4>Add files (Copy) to a folder</h4>
+<div><p>
+files and folders > right click the list > Add folder > select distination folder > ..
+right click the list again>add files..> d select the file to be added
+(- first make a propery for the destination folder :
+  . left menu > propertiees > right click on list >add new property>name the folder and insert its path to the "value ")
+
+</p>
+</div>
+
+<h4>Creating shourtcuts</h4>
+“Files and Folders”>select the file form list of files > click on the [ New Shortcut ] toolbar button
+<div>
+
+<h4>Adding registry keys and values </h4>
+<div><p>
+ Let's suppose that your application needs two registry entries.
+  These are located in the "Software\[Manufacturer]\[ProductName]\Settings" key.
+
+  “Registry” >  In the tree, select the "Software\[Manufacturer]\[ProductName]" key >  [ New Key ]
+</p></div>
+
+</div>
+
+<h3>Product information</h3>
+<div>
+    <h4> Change product version</h4>
+    <div><p>
+-       “Product Details” > “Product Version” 
+- Upgrade automatically: When building, saving or selecting another page, you will be asked to generate a new Product Code. Answer “Generate new” if you want the new package to automatically upgrade the previous version of the story, if found on the target computer. If you answer “Keep existing”, the two versions will be prevented from being installed simultaneously on the same computer.
+</p></div>
+</div>
+
+</div>
