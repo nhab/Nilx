@@ -13,14 +13,13 @@
 <h1>Advanced Installer</h1>
 
 <h2>References</h2>
-<div>
+<div><p>
     <a href='https://www.advancedinstaller.com/user-guide/tutorial-create-simple-msi-installer.html'>Manual</a>
     <a href='https://www.advancedinstaller.com/user-guide/tutorials.html'>tutorials</a>
-</div>
+  </p></div>
 <h2>Routine for creating a setup</h2>
 <div>
-  <p>
-   - Project > New > Generiuc Templates > Proffessional > tick the checkbox "Use wizrd"
+<p>- Project > New > Generiuc Templates > Proffessional > tick the checkbox "Use wizrd"
    - enter product Name and your organization
    - sect distribution type: MSI
    - set the project path and also output folder path 
@@ -28,10 +27,9 @@
    - Create shortcuts for the product 
    - configure Installation  UI ode and theme
    - Add license agreement
-   -Finish
+
 
    Now you can Preview and chnge the product information from left menu
-
   </p>
 </div>
 <h2>Top Menu</h2>
@@ -78,63 +76,54 @@ Top Menu > Project build
 
 <h2>Left Menus</h2>
 <div>
-<h3></h3>
 <h3>Package Defenition</h3>
-<div>
-<h4>Specify compreesed files size</h4>
-<div>
-Builds > Configurations> compression > Achive installation files into CAB files> Multiple VOLUMES >customize Cab archives number and size
-</div>
+<div><p>
+<b>Builds>Configuration: Specify compreesed files size</b>
+Builds > Configurations> compression > Archive > Achive installation files into CAB files>
+ Multiple VOLUMES >customize Cab archives number and size
 
-<h4>per user vs permachine</h4>
-<div>
+<b>per user vs permachine</b>
 install parameters > Intallation type
 (the execution level can also be selected in the same page)
-</div>
 
-<h4>Installation Folders and install parameters</h4>
-<div>
-<p>
+<b>Installation Folders and install parameters</b>
 <b>Installation Folder</b>    
 Install Parameters > Installation Folder
 
 </p>
 </div>
-</div>
 
 <h3>Resource</h3>
 <div>
-<h4>Add files (Copy) to a folder</h4>
-<div><p>
+<p>
+<b>Add files (Copy) to a folder</b>
 files and folders > right click the list > Add folder > select distination folder > ..
 right click the list again>add files..> d select the file to be added
 (- first make a propery for the destination folder :
   . left menu > propertiees > right click on list >add new property>name the folder and insert its path to the "value ")
 
+<b>Creating shourtcuts</b>
+“Files and Folders”>select the file form list of files > click on the [ New Shortcut ] toolbar button
+
+<b>Adding registry keys and values </b>
+Let's suppose that your application needs two registry entries.
+These are located in the "Software\[Manufacturer]\[ProductName]\Settings" key.
+
+“Registry” >  In the tree, select the "Software\[Manufacturer]\[ProductName]" key >  [ New Key ]
 </p>
 </div>
 
-<h4>Creating shourtcuts</h4>
-“Files and Folders”>select the file form list of files > click on the [ New Shortcut ] toolbar button
-<div>
-
-<h4>Adding registry keys and values </h4>
-<div><p>
- Let's suppose that your application needs two registry entries.
-  These are located in the "Software\[Manufacturer]\[ProductName]\Settings" key.
-
-  “Registry” >  In the tree, select the "Software\[Manufacturer]\[ProductName]" key >  [ New Key ]
-</p></div>
-
-</div>
-
 <h3>Product information</h3>
-<div>
-    <h4> Change product version</h4>
-    <div><p>
--       “Product Details” > “Product Version” 
-- Upgrade automatically: When building, saving or selecting another page, you will be asked to generate a new Product Code. Answer “Generate new” if you want the new package to automatically upgrade the previous version of the story, if found on the target computer. If you answer “Keep existing”, the two versions will be prevented from being installed simultaneously on the same computer.
-</p></div>
+<div><p>
+<b> Change product version</b>
+
+- “Product Details” > “Product Version” 
+- Upgrade automatically: When building, saving or selecting another page, you will be asked to generate a new Product Code.
+ Answer “Generate new” if you want the new package to automatically upgrade the previous version of the story,
+  if found on the target computer.
+  If you answer “Keep existing”, the two versions will be prevented from being installed simultaneously on the same computer.
+</p>
+</div>
 </div>
 
 </div>
