@@ -81,6 +81,7 @@ json1 +=`,{"title":"C# .Net"
             ,{"caption":"Prometheus","href":"programming/dotnet/prometheus.htm"}
             ,{"caption":"Easy caching","href":"programming/dotnet/easycaching.htm"}
             ,{"caption":"Wix Toolset","href":"programming/wixtoolset.htm"}
+            ,{"caption":"Advanced Installer","href":"programming/Advancedinstaller.htm"}
         ]
 }`; 
 
