@@ -5,21 +5,9 @@
     <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
     <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
-    <style>
-        ul {
-            padding: 20px;
-        }
-
-        ul li {
-            background: #ebedf0;
-            color: darkblue;
-            margin: 5px;
-        }
-    </style>
 </head>
 
 <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
-
 <button onclick='toggleAll(this);'>-</button>
 
 <h1>Advanced Installer</h1>
@@ -31,30 +19,44 @@
 
 <h2>Top Menu</h2>
 <div>
-first of all ,a project is needed to create an installer.
-<h3>Create project</h3>
-<div>
- Top Menu > File > New > Install project
-</div>
 
-<h3>Build</h3>
+<h3>File Menu</h3>
 <div>
 <p>
-To Create the msi installer ,the project must be built:
-
-Top Menu > Project build
+<b>Create project</b>:
+Before anything else, An "Advanced installer" project is needed to be created:
+Top Menu > File > New > Install project
 </p>
 </div>
 
-<h3>Install / UnInstall</h3>
+<h3>Project menu</h3>
 <div>
-    <p>
-- To execute built Installer, press <b>Run</b> button 
-- To remove the installed file either from the “Programs and Features” in the Control Panel 
-or from within the Advanced Installer application itself:
- press the [ Run ] button again without modifying anything > the Setup wizard will appear> Select [ Remove ] in the second screen and wait until the uninstall process is complete.
+<p>
+<b>Build</b>: To Create the msi installer ,the project must be built:
+Top Menu > Project build
+
+<b>Run: Install / UnInstall</b>
+- To build the project, press <b>Run</b> button 
+- To remove the installed file press the Run button <b>2 times</b>.
+( either from the “Programs and Features” of windows  or from within the Advanced Installer application itself )
+<b>Run In VM</b>
+<b>Run in sandbox</b>
+<b>Run in Docker</b>
+<b>Open output Folder</b>
+<b>options</b>
+- Type : the type of the project :Professional, Enterprise, or Architect(The most featured option)
+- Path : project root path 
+
+<b>Find</b>: finds instances of an expression in the whole project.
 </p>
 </div>
+
+ <h3>Properties</h3>
+ <div><p>
+ - folders can be named as properties.
+ - there is a bunch of common properties listed in this tab.
+</p></div>
+</p>
 </div>
 
 <h2>Left Menus</h2>
@@ -63,8 +65,8 @@ or from within the Advanced Installer application itself:
 <h3>Package Defenition</h3>
 <div>
 <h4>Specify compreesed files size</h4>
-<div
->Builds > Configurations> compression > Achive installation files into CAB files> Multiple VOLUMES >customize Cab archives number and size
+<div>
+Builds > Configurations> compression > Achive installation files into CAB files> Multiple VOLUMES >customize Cab archives number and size
 </div>
 
 <h4>per user vs permachine</h4>
