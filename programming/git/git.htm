@@ -218,51 +218,20 @@ $ git reset HEAD -p               # You can use the -p option flag to specify th
 
 # Committing the staged files :
 
-# opens a text editor to write a message,then commit
- $ git commit                               
- 
-# Opens the default editor to type a long message
- $ git commit                              
- 
-# commit changes with a message
- $ git commit -m "your commit message here"
 
-# Stores the current contents into local repository
- $ git commit -m "Added x()  to a.cs" 
+ $ git commit                                 # opens a text editor to write a message,then commit (stroes in repositiory)
+ $ git commit -m "your commit message here"   # commit changes with a message 
+ $ git commit -a -m"your commit message here" # commit changes (and skip the staging area) 
+ $ git commit -am 'Message'                   # Removes from staging area only 
+ $ git show _commit-id_                       # view a specific commit 
+ $ git show HEAD                              # Shows the last commit 
+ $ git show HEAD~2                            # Two steps before the last commit 
+ $ git show HEAD:file.js                      # Shows the version of file.js stored in the last commit 
 
-# commit changes (and skip the staging area) 
- $ git commit -a -m"your commit message here" 
+$ git rebase -i HEAD~n                        # merges the last n commits into a single commit( use `HEAD~3` for example).
 
-# Removes from staging area only 
- $ git commit -am 'Message'                 
 
-# see a specific commit 
- $ git show _commit-id_                     
-
-# Viewing a commit 
-
-# Shows the given commit 
- $ git show 921a2ff     
-
-# Shows the last commit 
- $ git show HEAD         
-
-# Two steps before the last commit 
- $ git show HEAD~2       
-
-# Shows the version of file.js stored in the last commit 
- $ git show HEAD:file.js 
-
-# Merging Commits into a single commit: -----------------------------------------------------------------------
-
-# For example, if you want to merge the last n commits, use `HEAD~3`.
-$ git rebase -i HEAD~n   
-
-# Viewing the history  -----------------------------------------------------------------------
-
-# Full history (all commits) 
- $ git log                   
-
+ $ git log                                    # view all commits history 
  $ git log --oneline                           # --oneline will limit commit msg to a single line.
  $ git log --reverse                           # Lists the commits from the oldest to the newest
  $ git log --stat                              # Shows the listof modified files
@@ -271,92 +240,68 @@ $ git rebase -i HEAD~n
  $ git log hash1..hash2                        # Range of commits
  $ git log --pretty=format:”%an committed %H”  # Formatting the log output
  $ git log file.txt                            # Shows the commits that touched file.txt
- $ git log --stat file.txt    # Shows statistics (the number of changes) for file.txt 
- $ git log --patch file.txt   # Shows the patches (changes) applied to file.tx t  
- $ git log -p                 # shows the commit's history including all files and their changes
+ $ git log --stat file.txt                     # Shows statistics (the number of changes) for file.txt 
+ $ git log --patch file.txt                    # Shows the patches (changes) applied to file.tx t  
+ $ git log -p                                  # shows the commit's history including all files and their changes
  $ git log --graph --oneline                   # show the commit log as a graph. 
  $ git log --graph --oneline --all             # show the commit log as a graph of all branches
 
 # Comparing commits
- $ git diff HEAD~2 HEAD          # Shows the changes between two commits 
- $ git diff HEAD~2 HEAD file.txt # Changes to file.txt only
+
+ $ git diff HEAD~2 HEAD                        # Shows the changes between two commits 
+ $ git diff HEAD~2 HEAD file.txt               # Changes to file.txt only
 
 # Checking out a commit 
- $ git checkout dad47ed # Checks out the given commit 
- $ git checkout master  # Checks out the master branch
 
-# Finding a bad commit
-  $ git bisect start 
-  $ git bisect bad          # Marks the current commit as a bad commit
-  $ git bisect good ca49180 # Marks the given commit as a good commit
-  $ git bisect reset        # Terminates the bisect session
+$ git checkout dad47ed                        # Checks out the given commit 
+ $ git checkout master                        # Checks out the master branch
 
-# Finding contributors 
-  $ git shortlog
+
+ $ git bisect start                          # Finding a bad commit
+ $ git bisect bad                            # Marks the current commit as a bad commit
+ $ git bisect good ca49180                   # Marks the given commit as a good commit
+ $ git bisect reset                          # Terminates the bisect session
+
+ $ git shortlog                              # Finding contributors 
 
 # Finding the author of lines
  $ git blame file.txt # Shows the author of each line in file.txt
 
 # Tagging
- $ git tag v1.0         # Tags the last commit as v1.0 
- $ git tag v1.0 5e7a828 # Tags an earlier commit 
- $ git tag              # Lists all the tags
- $ git tag -d v1.0      # Deletes the given tag
+ $ git tag v1.0                 # Tags the last commit as v1.0 
+ $ git tag v1.0 5e7a828         # Tags an earlier commit 
+ $ git tag                      # Lists all the tags
+ $ git tag -d v1.0              # Deletes the given tag
 
 # Amending the last commit -----------------------------------------------------------------------
   
 #Undo a commit and redo (simple scenario, forget to change sth)
- $ git commit --amend  #allows to modify and add changes to the most recent commit
+ $ git commit --amend             # allows to modify and add changes to the most recent commit
  $ git commit -m 'initial commit'
  edit file
  $ git commit -a --amend
 
- # rollback the last commit:.reverts the latest commit by using the head alias .
- git revert HEAD           
+ git revert HEAD           # rollback the last commit:.reverts the latest commit by using the head alias .
+ git revert comit_id_here   # rollback an old commit using its commit id (opens the editor to add commit message)
 
- # rollback an old commit using its commit id (opens the editor to add commit message)
- git revert comit_id_here   
 
-// Squashing all commitssince you branched, into a single commit
-git rebase -i master
+ git rebase -i master        # Squashing all commitssince you branched, into a single commit
 
 # Managing branches -----------------------------------------------------------------------
 
-# creates a new branch(By default, you have one branch)Git won't switch to it automatically 
- git branch branch_name    
 
-# switch to a newly created branch.
- git checkout branch_name  
-
-# list branches:shows all branches and highlight the current branch in green. 
- git branch            
-
-# create a branch and switch to it immediately,In a single command. 
- git checkout -b branch_name 
- 
-# delete a branch. 
- git branch -d branch_name 
-
-# Merges the branch you are currently in with the branch_name.  
- git merge branch_name     
-
-# abort a conflicting merge.If you want to throw a merge away and start over 
- git merge --abort   
- 
-# Creates a new branch called bugfix  
- $ git branch bugfix     
-
-# Switches to the bugfix branch 
- $ git checkout bugfix   
-
-# Same as the above  
- $ git switch bugfix     
-
-# Creates and switches 
- $ git switch -C bugfix  
-
-# Deletes the bugfix branch 
- $ git branch -d bugfix  
+git branch branch_name            # creates a new branch(By default, you have one branch)Git won't switch to it automatically 
+git checkout branch_name          # switch to a newly created branch.
+git branch                        # list branches:shows all branches and highlight the current branch in green. 
+git checkout -b branch_name       # create a branch and switch to it immediately,In a single command. 
+git branch -d branch_name         # delete a branch. 
+git merge branch_name             # Merges the branch you are currently in with the branch_name.  
+git merge --abort                 # abort a conflicting merge.If you want to throw a merge away and start over 
+$ git branch bugfix               # Creates a new branch called bugfix  
+$ git checkout bugfix             # Switches to the bugfix branch 
+$ git switch bugfix               # Same as the above  
+$ git switch -C bugfix            # Creates and switches 
+$ git branch -d bugfix            # Deletes the bugfix branch 
 
 # Comparing branches 
    $ git log master..bugfix     # Lists the commits in the bugfix branch not in master 
