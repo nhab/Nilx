@@ -10,6 +10,14 @@
 .hljs-comment{
   color:#eeffee;
   background-color: #115511;
+  font-size: 16px;
+}
+.hljs-built_in, .hljs-keyword , .hljs-string{
+  font-size: 12px;
+}
+
+code{
+  font-size: 12px;
 }
 </style>
 </head>
@@ -160,14 +168,14 @@ Additionally, it can be used to remove files from both the working directory and
  
 # working directory  -----------------------------------------------------------------------
 
-# to remove saved credential in windows goto  "Windows Credentials" in "control panel" 
+# Removes saved credential  (saved in windows goto  "Windows Credentials" in "control panel" )
  $ git init        # mark the current folder as a git repository
  rmdir /s .git     # undo git init in windows   
  
 # 'Current directory' to/from 'staging'  -----------------------------------------------------------------------
  
 # getting an Existing Repository
-  $ git clone https:/github.com/libgit2/libgit2   
+ $ git clone https:/github.com/libgit2/libgit2   
 
 # Staging files:
 
