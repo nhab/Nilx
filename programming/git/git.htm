@@ -147,14 +147,15 @@ Additionally, it can be used to remove files from both the working directory and
 # Showing help -----------------------------------------------------------------------
  $ git help -a    or   $ git help -g                  
   
-# showing differences between the working copy(index/repo) and the current HEAD commit
+# working copy(index/repo) and the latest commited,differnce
  $ git status     ( $ git status -s   # Short status)
 
 # Searching for "variableName" in all files of java type
  $ git <b>grep</b> 'variableName' -- '*.java'    
  
 # config  -----------------------------------------------------------------------
-# git configuration info. including username and email
+
+# git configuration info
  $ git config -l                                
 
 # setting user name
@@ -163,102 +164,52 @@ Additionally, it can be used to remove files from both the working directory and
 # setups the email used in commits.   
  $ git config --global user.email "me@fab.com" 
  
-#stores credentials in the cache to be remembered
+# stores credentials in the cache to be remembered
  $ git config --global credential.helper cache 
  
 # working directory  -----------------------------------------------------------------------
 
-# Removes saved credential  (saved in windows goto  "Windows Credentials" in "control panel" )
- $ git init        # mark the current folder as a git repository
+$ git init         # mark the current folder as a git repository
  rmdir /s .git     # undo git init in windows   
  
 # 'Current directory' to/from 'staging'  -----------------------------------------------------------------------
  
-# getting an Existing Repository
- $ git clone https:/github.com/libgit2/libgit2   
+$ git clone https:/github.com/libgit2/libgit2   # getting a Repository
 
 # Staging files:
 
-# Stages multiple files
-  $ git add file1.js file2.js  
 
-# To add all files to the staging area/index  
-  $ git add .                 
-
-# will add the file to the staging area.  
-  $ git add filename_here                         
-
-# add all files in project to the staging area  
-  $ git add .                                    
-
-# add only certain files to the staging area  
-  $ git add fil*                                  
-
-# opens a prompt and asks if you want to stage changes
-  $ git add -p              
+$ git add file1.js file2.js  # Stages multiple files
+$ git add .                  # add all files to the staging area/index 
+$ git add fil*               # add only certain files to the staging area  
+$ git add -p                 # opens a prompt and asks if you want to stage changes
 
 # Unstaging files (undoing git add):
 
-# Copies the last version of file.js from repo to index
-  $ git restore --staged file.js 
-
-# Restoring an earlier version of a file
-  $ git restore --source=HEAD~2 file.js 
+$ git restore --staged file.js          # Copies the last version of file.js from repo to the working directory
+$ git restore --source=HEAD~2 file.js   # Restoring an earlier version of a file
  
-# Diff :( Viewing the staged/unstaged changes)
-
-# see changes made before committing them using "diff"(unstaged changes )
-  $ git diff        
-
-# to only see changes on a specific file.  
-  $ git diff all_checks.py  
-
-# git diff shows only unstaged changes by default.  
-  $ git diff --staged     
-
-# Same as the above
-  $ git diff --cached 
+$ git diff                        # view the difference betwween comittted and before commited
+$ git diff all_checks.py          # view changes on a specific file.  
+$ git diff --staged               # git diff shows only unstaged changes by default.  
+$ git diff --cached               # Same as the above
   
-# Removing files:
+$ git rm filename                 # removes tracked files from the current working tree
+$ git rm file1.js                 # Removes from working directory and staging area   
+$ git rm --cached file1.js        # Removes from staging area only  
 
-# removes tracked files from the current working tree
-  $ git rm filename     
+$ git mv file1.js file1.txt       # Renaming or moving files
+$ git mv oldfile newfile          # Renames files.it stages the changes, then it expects a commit message.  
 
-# Removes from working directory and staging area   
-  $ git rm file1.js            
+$ git restore file.js             # Copies file.js from index to working directory 
+$ git restore file1.js file2.js   # Restores multiple files in working directory  
+$ git restore .                   # Discards all local changes (except untracked files) 
 
-# Removes from staging area only  
-  $ git rm --cached file1.js   
+$ git clean -fd                   # Removes all untracked files
+$ git checkout filename           # Revert unstaged changes:
 
-# Renaming or moving  files
-
-# Renaming or moving files
-  $ git mv file1.js file1.txt 
-
-# renames files.it stages the changes, then it expects a commit message.  
-  $ git mv oldfile newfile  
-
-# Discarding local changes
-
-# Copies file.js from index to working directory 
-  $ git restore file.js           
-
-# Restores multiple files in working directory  
-  $ git restore file1.js file2.js 
-
-# Discards all local changes (except untracked files) 
-  $ git restore .                
-
-# Removes all untracked files
-  $ git clean -fd                
- 
-# Revert unstaged changes:
- $ git checkout filename
- 
-# revert staged changes:
-# You can use the -p option flag to specify the changes you want to reset.
-  $ git reset HEAD filename
-  $ git reset HEAD -p 
+$ git reset HEAD filename         # revert staged changes:
+$ git reset HEAD -p               # You can use the -p option flag to specify the changes you want to reset.
   
 # ignore files:
   # Create a .gitignore file and commit it.
