@@ -2,9 +2,16 @@
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1' />
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/ir-black.min.css'>
 <script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+<style>
+.hljs-comment{
+  color:#eeffee;
+  background-color: #115511;
+}
+</style>
 </head>
 <body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
  <button onclick="toggleAll(this);" >-</button>
@@ -152,6 +159,7 @@ Additionally, it can be used to remove files from both the working directory and
  $ git config --global credential.helper cache 
  
 # working directory  -----------------------------------------------------------------------
+
 # to remove saved credential in windows goto  "Windows Credentials" in "control panel" 
  $ git init        # mark the current folder as a git repository
  rmdir /s .git     # undo git init in windows   
