@@ -126,63 +126,115 @@ The key function of git rm is to remove tracked files from the Git index.
 Additionally, it can be used to remove files from both the working directory and staging index.
 </>
 </div>
-<h2>Basic commands:</h2>
+<h2>Commands:</h2>
 <div>
-<h3>Inquery</h3>
-<pre><code>
- $ git --version                                    # show the version of installed git in OS
- $ git help -a                                       # shows a list of all commands and a line of descritions 
- $ git help -g                                       # shows a list (and guids) of git concepts . 
- $ git status  #shows differences between the index(working copy/repo) and the current HEAD commit
- $ git status -s   # Short status
- $ git <b>grep</b> 'variableName' -- '*.java'    # Search for "variableName" in all java files
-  </code></pre>
-  <h3>config</h3>
-  <pre><code>
- $ git config -l                                # returns git configuration info. including username and email
- $ git config --global user.name "Fabio"            # configures user name
- $ git config --global user.email "me@fab.com" # setups the email used in commits.
- $ git config --global credential.helper cache #stores credentials in the cache to be remembered
- # to remove saved credential in windows goto  "Windows Credentials" in "control panel" 
+<pre><code class="python">
+# Showing help -----------------------------------------------------------------------
+ $ git help -a    or   $ git help -g                  
+  
+# showing differences between the working copy(index/repo) and the current HEAD commit
+ $ git status     ( $ git status -s   # Short status)
+
+# Searching for "variableName" in all files of java type
+ $ git <b>grep</b> 'variableName' -- '*.java'    
+ 
+# config  -----------------------------------------------------------------------
+# git configuration info. including username and email
+ $ git config -l                                
+
+# setting user name
+ $ git config --global user.name "Fabio"       
+
+# setups the email used in commits.   
+ $ git config --global user.email "me@fab.com" 
+ 
+#stores credentials in the cache to be remembered
+ $ git config --global credential.helper cache 
+ 
+# working directory  -----------------------------------------------------------------------
+# to remove saved credential in windows goto  "Windows Credentials" in "control panel" 
  $ git init        # mark the current folder as a git repository
  rmdir /s .git     # undo git init in windows   
-  </code></pre>
- <h3>Between "Current directory" and "staging"</h3>
- <pre><code>
-  $ git clone https:/github.com/libgit2/libgit2   # getting an Existing Repository
+ 
+# 'Current directory' to/from 'staging'  -----------------------------------------------------------------------
+ 
+# getting an Existing Repository
+  $ git clone https:/github.com/libgit2/libgit2   
 
 # Staging files:
-  $ git add file1.js file2.js    # Stages multiple files
-  $ git add .                    # To add all files to the staging area/index
-  $ git add filename_here                         # will add the file to the staging area.
-  $ git add .                                     # add all files in project to the staging area
-  $ git add fil*                                  # add only certain files to the staging area
-  $ git add -p              # opens a prompt and asks if you want to stage changes
+
+# Stages multiple files
+  $ git add file1.js file2.js  
+
+# To add all files to the staging area/index  
+  $ git add .                 
+
+# will add the file to the staging area.  
+  $ git add filename_here                         
+
+# add all files in project to the staging area  
+  $ git add .                                    
+
+# add only certain files to the staging area  
+  $ git add fil*                                  
+
+# opens a prompt and asks if you want to stage changes
+  $ git add -p              
 
 # Unstaging files (undoing git add):
-  $ git restore --staged file.js # Copies the last version of file.js from repo to index
-  $ git restore --source=HEAD~2 file.js #Restoring an earlier version of a file
+
+# Copies the last version of file.js from repo to index
+  $ git restore --staged file.js 
+
+# Restoring an earlier version of a file
+  $ git restore --source=HEAD~2 file.js 
  
 # Diff :( Viewing the staged/unstaged changes)
-  $ git diff        # see changes made before committing them using "diff"(unstaged changes )
-  $ git diff all_checks.py  # to only see changes on a specific file.
-  $ git diff --staged       # git diff shows only unstaged changes by default.
-  $ git diff --cached # Same as the above
+
+# see changes made before committing them using "diff"(unstaged changes )
+  $ git diff        
+
+# to only see changes on a specific file.  
+  $ git diff all_checks.py  
+
+# git diff shows only unstaged changes by default.  
+  $ git diff --staged     
+
+# Same as the above
+  $ git diff --cached 
   
 # Removing files:
-  $ git rm filename     # removes tracked files from the current working tree
-  $ git rm file1.js            # Removes from working directory and staging area 
-  $ git rm --cached file1.js   # Removes from staging area only
+
+# removes tracked files from the current working tree
+  $ git rm filename     
+
+# Removes from working directory and staging area   
+  $ git rm file1.js            
+
+# Removes from staging area only  
+  $ git rm --cached file1.js   
 
 # Renaming or moving  files
-  $ git mv file1.js file1.txt  # Renaming or moving files
-  $ git mv oldfile newfile  # renames files.it stages the changes, then it expects a commit message.
+
+# Renaming or moving files
+  $ git mv file1.js file1.txt 
+
+# renames files.it stages the changes, then it expects a commit message.  
+  $ git mv oldfile newfile  
 
 # Discarding local changes
-  $ git restore file.js           # Copies file.js from index to working directory 
-  $ git restore file1.js file2.js # Restores multiple files in working directory
-  $ git restore .                 # Discards all local changes (except untracked files) 
-  $ git clean -fd                 # Removes all untracked files
+
+# Copies file.js from index to working directory 
+  $ git restore file.js           
+
+# Restores multiple files in working directory  
+  $ git restore file1.js file2.js 
+
+# Discards all local changes (except untracked files) 
+  $ git restore .                
+
+# Removes all untracked files
+  $ git clean -fd                
  
 # Revert unstaged changes:
  $ git checkout filename
@@ -194,30 +246,56 @@ Additionally, it can be used to remove files from both the working directory and
   
 # ignore files:
   # Create a .gitignore file and commit it.
-</code></pre>
 
- <h3>Staging and repository</h3>
- <pre><code class="python">
+# Staging and repository  -----------------------------------------------------------------------
+
 # Committing the staged files :
- $ git commit                               # opens a text editor to write a message,then commit
- $ git commit                               # Opens the default editor to type a long message
- $ git commit -m "your commit message here" # commit changes with a message
- $ git commit -m "Added x()  to a.cs" # Stores the current contents into local repository
- $ git commit -a -m"your commit message here" # commit changes (and skip the staging area)
- $ git commit -am “Message”                 # Removes from staging area only
- $ git show _commit-id_                     # see a specific commit
+
+# opens a text editor to write a message,then commit
+ $ git commit                               
+ 
+# Opens the default editor to type a long message
+ $ git commit                              
+ 
+# commit changes with a message
+ $ git commit -m "your commit message here"
+
+# Stores the current contents into local repository
+ $ git commit -m "Added x()  to a.cs" 
+
+# commit changes (and skip the staging area) 
+ $ git commit -a -m"your commit message here" 
+
+# Removes from staging area only 
+ $ git commit -am 'Message'                 
+
+# see a specific commit 
+ $ git show _commit-id_                     
 
 # Viewing a commit 
- $ git show 921a2ff      # Shows the given commit 
- $ git show HEAD         # Shows the last commit
- $ git show HEAD~2       # Two steps before the last commit
- $ git show HEAD:file.js # Shows the version of file.js stored in the last commit
 
-# Merging Commits into a single commit:
- $ git rebase -i HEAD~n   # For example, if you want to merge the last n commits, use `HEAD~3`.
+# Shows the given commit 
+ $ git show 921a2ff     
 
-# Viewing the history
- $ git log                                     # Full history (all commits) 
+# Shows the last commit 
+ $ git show HEAD         
+
+# Two steps before the last commit 
+ $ git show HEAD~2       
+
+# Shows the version of file.js stored in the last commit 
+ $ git show HEAD:file.js 
+
+# Merging Commits into a single commit: -----------------------------------------------------------------------
+
+# For example, if you want to merge the last n commits, use `HEAD~3`.
+$ git rebase -i HEAD~n   
+
+# Viewing the history  -----------------------------------------------------------------------
+
+# Full history (all commits) 
+ $ git log                   
+
  $ git log --oneline                           # --oneline will limit commit msg to a single line.
  $ git log --reverse                           # Lists the commits from the oldest to the newest
  $ git log --stat                              # Shows the listof modified files
@@ -258,39 +336,60 @@ Additionally, it can be used to remove files from both the working directory and
  $ git tag              # Lists all the tags
  $ git tag -d v1.0      # Deletes the given tag
 
-# Amending the last commit
-   #Undo a commit and redo (simple scenario, forget to change sth)
+# Amending the last commit -----------------------------------------------------------------------
+  
+#Undo a commit and redo (simple scenario, forget to change sth)
  $ git commit --amend  #allows to modify and add changes to the most recent commit
  $ git commit -m 'initial commit'
  edit file
  $ git commit -a --amend
 
-//!!Note!!: fixing up a local commit with amend is great and you can push it to a shared repository after you have fixed it.
-// But you should avoid amending commits that have already been made public.
+ # rollback the last commit:.reverts the latest commit by using the head alias .
+ git revert HEAD           
 
- git revert HEAD             # rollback the last commit:.reverts the latest commit by using the head alias .
- git revert comit_id_here    # rollback an old commit using its commit id (opens the editor to add commit message)
+ # rollback an old commit using its commit id (opens the editor to add commit message)
+ git revert comit_id_here   
 
 // Squashing all commitssince you branched, into a single commit
 git rebase -i master
 
-</code></pre>
+# Managing branches -----------------------------------------------------------------------
 
-<h3>Managing branches</h3>
-<pre><code>
- git branch branch_name    # creates a new branch(By default, you have one branch)Git won't switch to it automatically 
- git checkout branch_name  # switch to a newly created branch.
- git branch            # list branches:shows all branches and highlight the current branch in green.
- git checkout -b branch_name # create a branch and switch to it immediately,In a single command.
- git branch -d branch_name # delete a branch.
- git merge branch_name     # Merges the branch you are currently in with the branch_name. 
- git merge --abort   # abort a conflicting merge.If you want to throw a merge away and start over
+# creates a new branch(By default, you have one branch)Git won't switch to it automatically 
+ git branch branch_name    
+
+# switch to a newly created branch.
+ git checkout branch_name  
+
+# list branches:shows all branches and highlight the current branch in green. 
+ git branch            
+
+# create a branch and switch to it immediately,In a single command. 
+ git checkout -b branch_name 
  
- $ git branch bugfix     # Creates a new branch called bugfix 
- $ git checkout bugfix   # Switches to the bugfix branch
- $ git switch bugfix     # Same as the above 
- $ git switch -C bugfix  # Creates and switches
- $ git branch -d bugfix  # Deletes the bugfix branch
+# delete a branch. 
+ git branch -d branch_name 
+
+# Merges the branch you are currently in with the branch_name.  
+ git merge branch_name     
+
+# abort a conflicting merge.If you want to throw a merge away and start over 
+ git merge --abort   
+ 
+# Creates a new branch called bugfix  
+ $ git branch bugfix     
+
+# Switches to the bugfix branch 
+ $ git checkout bugfix   
+
+# Same as the above  
+ $ git switch bugfix     
+
+# Creates and switches 
+ $ git switch -C bugfix  
+
+# Deletes the bugfix branch 
+ $ git branch -d bugfix  
 
 # Comparing branches 
    $ git log master..bugfix     # Lists the commits in the bugfix branch not in master 
@@ -386,9 +485,9 @@ git rebase -i master
 
 </code></pre>
  </div>
- <h2><input type="button" value="-" class="toggleButton" 
-    onclick="toggle(this)" />GIT in visual studio </h2>
+ <h2>GIT in visual studio </h2>
 <div>
+<p>
 git have 2 user interface in visual studio:
 1-Visual Studio Git :new 
 2-Visual Studio Team Explorer:can access to the Work Items hub. 
@@ -396,7 +495,8 @@ git have 2 user interface in visual studio:
 You can exercise Git features from either interface interchangeably.
 
 In the link below, there is a side-by-side comparison for cloning a repository.   
-    <a href="https://docs.microsoft.com/en-us/azure/devops/repos/git/gitquickstart?view=azure-devops&tabs=visual-studio-2019">"Visual Studio Git" and "Visual Studio Team Explorer" comparision</a>
+</p>  
+<a href="https://docs.microsoft.com/en-us/azure/devops/repos/git/gitquickstart?view=azure-devops&tabs=visual-studio-2019">"Visual Studio Git" and "Visual Studio Team Explorer" comparision</a>
 </div>
 
 </body>
