@@ -362,10 +362,9 @@ $ git branch -d bugfix            # Deletes the bugfix branch
         # f, fixup = like "squash", but discard this commit's log message
         # x, exec = run command (the rest of the line) using shell
         # d, drop = remove commit
-</code></pre>
- 
-<h3>local repository and Remote</h3>
-<pre><code>
+
+# local repository and Remote -----------------------------------------------------------------------
+
  $ git -vv # to find the remote branch that your local branch is tracking in git
  # to get difference between local folder and remote folder,first use fetch then use diff:
  $ git fetch
@@ -373,27 +372,28 @@ $ git branch -d bugfix            # Deletes the bugfix branch
  $ git diff origin/master # for detailed differences
  
 #Syncing with remotes
- $ git fetch origin master # Fetches master from origin
- $ git fetch origin        # Fetches all objects from origin 
- $ git fetch # (=“git fetch origin”).downloads the changes from a remote repo but will not perform a merge on local branch as git pull.
- $ git pull                # (Fetch + merge)retrieve the latest changes made to the remote repository
- $ git push -u origin branch_name #pushs a new branch to a remote repo.-u to create the branch upstream
- $ git push    #(=“git push origin master”)update (and merges) repository from local repository
- $ git push origin master  # Pushes master to origin
+
+ $ git fetch origin master        # Fetches master from origin
+ $ git fetch origin               # Fetches all objects from origin 
+ $ git fetch                      # (=“git fetch origin”).downloads the changes from a remote repo but will not perform a merge on local branch as git pull.
+ $ git pull                       # (Fetch + merge)retrieve the latest changes made to the remote repository
+ $ git push -u origin branch_name # pushs a new branch to a remote repo.-u to create the branch upstream
+ $ git push                       #(=“git push origin master”)update (and merges) repository from local repository
+ $ git push origin master         # Pushes master to origin
 
 #Managing remotes
- $ git remote                       # Shows remote repos
- $ git remote add upstream url      # Adds a new remote called upstream 
- $ git remote rm upstream           # Remotes upstream
- $ git add remote https://repo_here # adds a remote repository to local repository 
- $ git remote -v                    # see all remote repositories(urls) for local repository
- $ git remote show origin           # get more info about a remote repo.Just obtain origin name by running the git remote -v command.
- $ git branch -r                    # shows the name of all remote branches that Git is tracking for the current repository
- $ git log origin/main    # check the current commits log of a remote repo.
- $ git merge origin/main  # merge a remote repo with local repo(If the remote repository has changes).
- $ git remote update      # get the contents of remote branches without automatically merging.
- $ git push --delete origin branch_name_here      #remove a remote branch.
- $ git push -f       #force a push request: This is usually fine for pull request branches because nobody else should have cloned them.But this isn't something that you want to do with public repos.
+ $ git remote                                 # Shows remote repos
+ $ git remote add upstream url                # Adds a new remote called upstream 
+ $ git remote rm upstream                     # Remotes upstream
+ $ git add remote https://repo_here           # adds a remote repository to local repository 
+ $ git remote -v                              # see all remote repositories(urls) for local repository
+ $ git remote show origin                     # get more info about a remote repo.Just obtain origin name by running the git remote -v command.
+ $ git branch -r                              # shows the name of all remote branches that Git is tracking for the current repository
+ $ git log origin/main                        # check the current commits log of a remote repo.
+ $ git merge origin/main                      # merge a remote repo with local repo(If the remote repository has changes).
+ $ git remote update                          # get the contents of remote branches without automatically merging.
+ $ git push --delete origin branch_name_here  # remove a remote branch.
+ $ git push -f                                # force a push request: This is usually fine for pull request branches because nobody else should have cloned them.But this isn't something that you want to do with public repos.
 
 </code></pre>
  </div>
