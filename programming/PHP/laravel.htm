@@ -1,18 +1,30 @@
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/nhab/assets/css/blocks.css">	
-	<script src='/nhab/assets/js/blocks.js'></script>
-	<link rel="stylesheet"     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 
-	<script>hljs.initHighlightingOnLoad()</script>
-</head>
-<body>
-<button onclick="toggleAll(this);" >-</button>
-<h2 style="display:flex"><input type="button" value="-"
-			style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-			onclick="toggle(this)" />References</h2>
+<head>
+	<meta charset='UTF-8' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/ir-black.min.css'>
+	<script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+	<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+	<style>
+	.hljs-comment{
+	  color:#eeffee;
+	  background-color: #115511;
+	  font-size: 16px;
+	}
+	.hljs-built_in, .hljs-keyword , .hljs-string{
+	  font-size: 12px;
+	}
+	
+	code{
+	  font-size: 12px;
+	}
+	</style>
+	</head>
+	<body onload='AddToggleButtons();ReplaceLtGt();hljs.highlightAll();'>
+	 <button onclick="toggleAll(this);" >-</button>
+<h2>References:</h2>
 <div>
 	<a href="https://www.codecheef.org/article/create-your-first-laravel-9-crud-application-step-by-step">first laravel-9 crud application step by step</a>
 	<a href="https://www.tutorialspoint.com/laravel/laravel_overview.htm">overview</a>
