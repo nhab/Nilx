@@ -31,39 +31,37 @@
 </div>
 <h2>laravel</h2>
 <div>
-<p><b>Installation</b></p>	
-
-<code>composer create-project laravel/laravel –-prefer-dist</code>
+		
 <p>
-<b>Complete installation and creating first boilerplate project:
-1.create basic project:
-</p>
-</b><code>composer create-project --prefer-dist laravel/laravel my-blog
-</code>
-<p>
-2.create database:
-	Go to http://localhost/phpmyadmin/
-	and Create a new Database by clicking on new (shown below in red)
-	Name it my_blog and click Create
-3. set configurations:
-	3.1. Open your file explorer and navigate to my-blog folder
-	3.2. Open the .env file in your code editor
-	3.3. Change the following in the file:-
-	APP_NAME key to name of your blog i.e. “My Blog”
-	DB_DATABASE key to database name i.e. my_blog
+<b>Features</b>
+- Routing controllers.
+- Configuration management.
+- Testability.
+- Authentication and authorization of users.
+- Modularity.
+- ORM (Object Relational Mapper) features.
+- Provides a template engine.
+- Building schemas.
+- E-mailing facilities.
 
-<b>starting laravel service</b>
+<b>Installation</b>
+- Laravel implements a composer for managing dependencies within it.
+- so to install laravel you should first instll composer.
+- <a href'https://getcomposer.org/download/'>get composer</a> and install it.
+</p>	
+<pre><code>composer global require "laravel/installer"</code></pre>
+<p>
+When the installation is done, a new command of laravel will start a fresh installation in the directory you have provided.
 </p>
-<code>php artisan servecode
-</code>
-<br>
-this will run the project at 
-<br>
-<code>http://localhost:8000</code>
+<pre><code>laravel new nirectory_name</code></pre>
+<p>To create project</p>
+<pre><code>composer create-project laravel/laravel –-prefer-dist</code></pre>
+<p>To run laravel on http://localhost:8080</p>
+<pre><code>php artisan serve</code></pre>
 <p>
 <b>BasicRouting</b>
-	routing is meant to route your request to an appropriate controller. 
-	The routes of the application can be defined in app/Http/routes.php file.
+	- routing means to route your request to an appropriate controller. 
+	- The routes of the application can be defined in app/Http/routes.php file.
 	Here is the general route syntax for each of the possible request.
 </p>
 <pre><code>
@@ -97,7 +95,63 @@ this will run the project at
 		echo "Name: ".$name;
 	});
 </code></pre>
-	
+<p><b>Creatinbg controllers</b></p>
+<pre><code>php artisan make:controller <controller-name> --plain</code></pre>
+<p>The controller body will be:</p>
+<pre><code>
+< ?php
+
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class AdminController extends Controller
+{
+//
+}	
+</code></pre>
+<p>To call the controller:</p>
+<pre><code>Route::get('base URI','controller@method');
+
+	or 
+
+	Route::get('profile', 'AdminController@show')->middleware('auth');
+</code></pre>
+<b>Views</b>
+for example:
+<pre><code>
+<!-- resources/views/greeting.blade.php -->
+
+< h1>Hello, !< /h1>	
+</code></pre>
+<p>Rendering views</p>
+<pre><code>
+	// in a Laravel controller
+	return view('greeting', ['name' => 'Alex']);	
+</code></pre>
+<p>Using layouts(template)
+	for example:
+</p>
+<pre><code>
+<!-- Stored in resources/views/layouts/app.blade.php -->
+
+< html>
+    < head>
+        < title>App Name - @yield('title')</title>
+    < /head>
+    < body>
+        @section('sidebar')
+            This is the master sidebar.
+        @show
+
+        < div class="container">
+            @yield('content')
+        < /div>
+    < /body>
+< /html>	
+</code></pre>
+<a href='https://www.w3schools.in/laravel/views'>continue reading</a>
 </div>
 </body>
 </html>
