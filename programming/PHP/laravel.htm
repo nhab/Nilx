@@ -29,17 +29,18 @@
 	<a href="https://www.codecheef.org/article/create-your-first-laravel-9-crud-application-step-by-step">first laravel-9 crud application step by step</a>
 	<a href="https://www.tutorialspoint.com/laravel/laravel_overview.htm">overview</a>
 </div>
-<h2>
-<input type="button" value="-"
-        class="toggleButton"  onclick="toggle(this)" />laravel</h2>
+<h2>laravel</h2>
 <div>
-<b>Installation</b>
-<code>composer create-project laravel/laravel –-prefer-dist</code>
+<p><b>Installation</b></p>	
 
+<code>composer create-project laravel/laravel –-prefer-dist</code>
+<p>
 <b>Complete installation and creating first boilerplate project:
 1.create basic project:
+</p>
 </b><code>composer create-project --prefer-dist laravel/laravel my-blog
 </code>
+<p>
 2.create database:
 	Go to http://localhost/phpmyadmin/
 	and Create a new Database by clicking on new (shown below in red)
@@ -52,16 +53,19 @@
 	DB_DATABASE key to database name i.e. my_blog
 
 <b>starting laravel service</b>
+</p>
 <code>php artisan servecode
 </code>
+<br>
 this will run the project at 
+<br>
 <code>http://localhost:8000</code>
-
-
+<p>
 <b>BasicRouting</b>
 	routing is meant to route your request to an appropriate controller. 
 	The routes of the application can be defined in app/Http/routes.php file.
 	Here is the general route syntax for each of the possible request.
+</p>
 <pre><code>
 	Route::get('/', function () {
 		return 'Hello World';
