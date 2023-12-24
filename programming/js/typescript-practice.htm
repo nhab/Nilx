@@ -37,11 +37,13 @@ th, td {
 th {
       background-color: #f2f2f2;
  }
-code{font-size:18px;}
+
   </style>
 </head>
 <body>
-
+<script>
+hljs.highlightAll();
+</script>
 <table>
   <tr>
     <th>Concept</th>
@@ -49,7 +51,7 @@ code{font-size:18px;}
     <th>Example</th>
   </tr>
 <tr><td>
-1. Variables</td><td>	Declare variables using let and const.	</td><td><pre><code> const name: string = "John"; 
+1. Variables</td><td>	Declare variables using let and const.	</td><td><pre><code class="hljs-typescript"> const name: string = "John"; 
 let age: number = 25;</code></pre>
 </td></tr><tr><td>
 2. Types</td><td>	Specify variable types.	</td><td><pre><code>let count: number = 10; 
@@ -88,10 +90,23 @@ let names: Array<string> = ["Alice", "Bob"];</code></pre>
 let chosenColor: Color = Color.Red;</code></pre>
 </td></tr><tr><td>
 
-9. Union Types</td><td>	Accept multiple types for a variable.</td><td>	<pre><code> let id: string</code></pre>
+9. Union Types</td><td>	Accept multiple types for a variable.</td><td>	<pre><code>  /* If 'padding' is a string, then 'padding' is appended to the left side.
+ * If 'padding' is a number, then that number of spaces is added to the left side.
+ */
+ function padLeft(value: string, padding: string | number) {//..}</code></pre>
 </td></tr><tr><td>
 10. Type Assertion</td><td>	Override inferred types.</td><td>	<pre><code> let length: any = "123"; 
-let strLength: number = (length as string).length;</code></pre>
+let strLength: number = (length as string).length;
+
+// Another example
+interface Employee { 
+    name: string; 
+    code: number; 
+} 
+
+let employee = < Employee > { }; 
+employee.name = "John"; // OK
+employee.code = 123; // OK</code></pre>
 </td></tr><tr><td>
 11. Generics</td><td>	Write flexible, reusable functions and classes.</td><td>	<pre><code> function identity<T>(arg: T): T { return arg; } 
 let result: number = identity<number>(5);</code></pre>
