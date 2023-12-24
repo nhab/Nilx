@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/ir-black.min.css'>
+<script src='https://cdn.jsdelivr.net/gh/nhab/blocks@latest/blocks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.3.min.js'></script>
+<style>
+.hljs-comment{
+  color:#eeffee;
+  background-color: #115511;
+  font-size: 16px;
+}
+.hljs-built_in, .hljs-keyword , .hljs-string{
+  font-size: 12px;
+}
+
+code{
+  font-size: 12px;
+}
+table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+}
+
+th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      min-width:300px;
+}
+
+th {
+      background-color: #f2f2f2;
+ }
+code{font-size:18px;}
+  </style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>Concept</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+<tr><td>
+1. Variables</td><td>	Declare variables using let and const.	</td><td><pre><code> const name: string = "John"; 
+let age: number = 25;</code></pre>
+</td></tr><tr><td>
+2. Types</td><td>	Specify variable types.	</td><td><pre><code>let count: number = 10; 
+let isDone: boolean = false; 
+let greeting: string = "Hello";</code></pre>
+</td></tr><tr><td>
+3. Interfaces</td><td>	Define object shapes and contracts.</td><td>	<pre><code>interface Person {
+   name: string;
+    age: number; 
+    } 
+    let person: Person = { name: "Alice", age: 30 };</code></pre>
+</td></tr><tr><td>
+4. Classes</td><td>	Create reusable blueprints for objects.	</td><td><pre><code> class Dog {
+   breed: string; 
+   constructor(breed: string) {
+      this.breed = breed;
+       } 
+   bark() { 
+   console.log("Woof!");
+    } } 
+    const myDog = new Dog("Labrador"); 
+    myDog.bark();</code></pre>
+</td></tr><tr><td>
+5. Functions</td><td>	Declare functions with types.</td><td>	<pre><code> function add(a: number, b: number): 
+number { return a + b; } 
+let result: number = add(2, 3);</code></pre>
+</td></tr><tr><td>
+6. Arrays</td><td>	Declare and manipulate arrays.</td><td>	<pre><code> 
+let numbers: number[] = [1, 2, 3]; 
+let names: Array<string> = ["Alice", "Bob"];</code></pre>
+</td></tr><tr><td>
+7. Tuples</td><td>	Represent fixed-size arrays with mixed types.</td><td>	<pre><code> let person: [string, number] = ["Alice", 30];</code></pre>
+</td></tr>
+<tr><td>
+8. Enums</td><td>	Create named constant values.</td><td>	<pre><code> enum Color { Red, Green, Blue } 
+let chosenColor: Color = Color.Red;</code></pre>
+</td></tr><tr><td>
+
+9. Union Types</td><td>	Accept multiple types for a variable.</td><td>	<pre><code> let id: string</code></pre>
+</td></tr><tr><td>
+10. Type Assertion</td><td>	Override inferred types.</td><td>	<pre><code> let length: any = "123"; 
+let strLength: number = (length as string).length;</code></pre>
+</td></tr><tr><td>
+11. Generics</td><td>	Write flexible, reusable functions and classes.</td><td>	<pre><code> function identity<T>(arg: T): T { return arg; } 
+let result: number = identity<number>(5);</code></pre>
+</td></tr><tr><td>
+12. Decorators</td><td>	Modify class declarations.</td><td>	<pre><code> function log(target: any, key: string) {
+   console.log(`${key} was called`); 
+   } 
+   class MyClass { 
+    @log greet() { 
+      console.log("Hello!"); 
+      } }</code></pre>
+</td></tr><tr><td>
+13. Modules</td><td>	Organize code into reusable units.</td><td>	<pre><code> // math.ts export function add(a: number, b: number): number { return a + b; } // main.ts import { add } from "./math"; let result: number = add(2, 3);</code></pre>
+</td></tr><tr><td>
+14. Type Inference	</td><td>Let TypeScript guess the variable type.</td><td>	<pre><code> let x = 10; // TypeScript infers x as number</code></pre>
+</td></tr><tr><td>
+15. Literal Types</td><td>	Specify exact values as types.</td><td>	```<pre><code> let gender: "male"</code></pre>
+</td></tr><tr>
+
+<td>
+16. Intersection Types</td><td>	Combine multiple types into one.</td><td>	<pre><code> interface Car { speed: number; } 
+interface MusicPlayer { play(): void; } 
+type SmartCar = Car & MusicPlayer;
+ let myCar: SmartCar;</code></pre>
+</td></tr><tr><td>
+17. Optional Properties	</td><td>Make object properties optional.</td><td>	<pre><code> interface Person { name: string; age?: number; } 
+let person: Person = { name: "Bob" };</code></pre>
+</td></tr><tr><td>
+18. Nullish Coalescing	</td><td>Provide a default value for null or undefined.</td><td>	```<pre><code> let username: string</code></pre>
+</td></tr><tr><td>
+19. keyof </td><td>	Access object keys as types.</td><td>	<pre><code> interface Person { name: string; age: number; } 
+let key: keyof Person = "name";</code></pre>
+</td></tr><tr><td>
+20. Readonly Properties</td><td>	Ensure properties cannot be modified.</td><td>	<pre><code> interface Point { readonly x: number; readonly y: number; } 
+let point: Point = { x: 1, y: 2 }; 
+point.x = 5; // Error</code></pre>
+</td></tr><tr><td>
+21. Type Guards</td><td>	Narrow down types based on conditions.	</td><td><pre><code> function isString(value: any): value is string { 
+return typeof value === "string"; } 
+if (isString(input)) { // input is now treated as string }</code></pre>
+</td></tr><tr><td>
+22. Abstract Classes</td><td>	Provide a blueprint with some implementation.	</td><td><pre><code> abstract class Shape { 
+abstract area(): number; }
+
+ class Circle extends Shape { 
+ radius: number; area(): number { return Math.PI * this.radius ** 2; } }</code></pre>
+</td></tr><tr><td>
+23. Namespace</td><td>	Organize code into named containers.	</td><td><pre><code> namespace Geometry { 
+export function area(radius: number): number { return Math.PI * radius ** 2; } } 
+let circleArea = Geometry.area(5);</code></pre>
+</td></tr><tr><td>
+24. Triple-Slash Directives</td><td>	Reference external declaration files.</td><td>	<pre><code> /// < reference path="typings.d.ts" / ></code></pre>
+</td></tr><tr><td>
+25. Mixins	</td><td>Combine multiple classes into one.</td><td>	<pre><code> function applyMixins(derivedCtor: any, baseCtors: any[]) {
+   baseCtors.forEach(baseCtor => { Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => { derivedCtor.prototype[name] = baseCtor.prototype[name]; }); }); }</code></pre>
+</td></tr><tr><td>
+26. Promises	</td><td>Handle asynchronous operations.	</td><td><pre><code> function fetchData(): Promise<string> { 
+return new Promise(resolve => resolve("Data fetched")); 
+} 
+fetchData().then(data => console.log(data));</code></pre>
+</td></tr><tr><td>
+27. async/await	</td><td>Simplify asynchronous code.	</td><td><pre><code> async function fetchData(): Promise<string> { 
+return "Data fetched";
+ } 
+ let data: string = await fetchData();</code></pre>
+</td></tr><tr><td>
+28. ReadonlyArray</td><td>	Ensure immutability for arrays.</td><td>	<pre><code> let numbers: ReadonlyArray<number> = [1, 2, 3]; 
+numbers[0] = 4; // Error</code></pre>
+</td></tr><tr><td>
+29. Omit</td><td>	Exclude specific properties from a type.</td><td>	<pre><code> interface Person { name: string; age: number; address: string; } 
+type PersonWithoutAddress = Omit<Person, "address">;</code></pre>
+</td></tr><tr><td>
+30. Record</td><td>	Create a type with string keys.</td><td>	<pre><code> type Ages = Record<string, number>;
+ let ages: Ages = { "Alice": 25, "Bob": 30 };</code></pre>
+</td></tr><tr><td>
+31. Partial	</td><td>Make all properties of a type optional.</td><td>	<pre><code> interface Person { name: string; age: number; } 
+type PartialPerson = Partial<Person>; let partialPerson: PartialPerson = { name: "Alice" };</code></pre>
+</td></tr><tr><td>
+32. ReturnType</td><td>	Get the return type of a function.</td><td>	<pre><code> function greet(): string { return "Hello!"; } 
+type Greeting = ReturnType<typeof greet>;</code></pre>
+</td></tr><tr><td>
+33. keyof and Lookup Types</td><td>	Access nested properties dynamically.</td><td>	<pre><code> interface Person { name: string; address: { city: string; }; } let cityName: Person["address"]["city"] = "New York";</code></pre>
+</td></tr><tr><td>
+34. Template Literal Types</td><td>	Create string literal types.</td><td>	```<pre><code> type Greeting<T> = `Hello,</code></pre>
+</td></tr>
+</table>
+</body>

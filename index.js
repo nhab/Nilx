@@ -196,6 +196,7 @@ json1 +=`,{ "title":"JavaScript"
             ,{"caption":"Angular","href":"programming/Angular/Angular.htm"}
             ,{"caption":"AngularJS","href":"programming/Angular/AngularJS.htm"}
             ,{"caption":"Typescript","href":"programming/js/typescript.htm"}
+            ,{"caption":"Typescript practice","href":"programming/js/typescript-practice.htm"}
             ,{"caption":"LocalStorage","href":"programming/js/LocalStorage.htm"}
             ,{"caption":"Locki.Js local database","href":"programming/js/locki.js.htm"}
         ]
