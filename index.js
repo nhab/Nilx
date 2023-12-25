@@ -322,7 +322,8 @@ json1 +=`,{ "title":"Online bussniess"
 json1 +=`,{ "title":"Digital marketing"
     ,"topic":
             [
-                {"caption":"ahrefs.com","href":"digitalmarketing/ahrefs.htm"}             
+                {"caption":"ahrefs.com","href":"digitalmarketing/ahrefs.htm"}      
+                ,{"caption":"youtube formula summary","href":"digitalmarketing/youtubeformula-summary.htm"} 
             ]
         }`;    
 json1 +=`,{ "title":"Trading"
@@ -374,6 +375,7 @@ json1+=`,{ "title":"Own Business"
             ,{"caption":"Choosing a Hosting","href":"Topics/ownbusiness/ChoosingHosting.htm"}
             ,{"caption":"Seo","href":"Topics/ownbusiness/seo.htm"}
             ,{"caption":"Funnel","href":"Topics/ownbusiness/digitalmarketingfunnels.png"}
+            
         ]
     }`;
 json1+=`,{"title":"Desktop tools"
