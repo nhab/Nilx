@@ -111,19 +111,32 @@ employee.code = 123; // OK</code></pre>
 11. Generics</td><td>	Write flexible, reusable functions and classes.</td><td>	<pre><code> function identity<T>(arg: T): T { return arg; } 
 let result: number = identity<number>(5);</code></pre>
 </td></tr><tr><td>
-12. Decorators</td><td>	Modify class declarations.</td><td>	<pre><code> function log(target: any, key: string) {
+12. Decorators</td><td>	Add functionality to a method</td><td>	<pre><code> // definition of the decorator
+function log(target: any, key: string) {
    console.log(`${key} was called`); 
-   } 
-   class MyClass { 
+} 
+class MyClass { 
+  // usage of the decorator @log :
     @log greet() { 
       console.log("Hello!"); 
-      } }</code></pre>
+   } 
+}</code></pre>
 </td></tr><tr><td>
-13. Modules</td><td>	Organize code into reusable units.</td><td>	<pre><code> // math.ts export function add(a: number, b: number): number { return a + b; } // main.ts import { add } from "./math"; let result: number = add(2, 3);</code></pre>
+13. Modules</td><td>Organize code into reusable units.</td><td>	<pre><code>// math.ts 
+export function add(a: number, b: number): number {
+   return a + b;
+} 
+// main.ts 
+import { add } from "./math"; 
+let result: numbear = add(2, 3);</code></pre>
 </td></tr><tr><td>
-14. Type Inference	</td><td>Let TypeScript guess the variable type.</td><td>	<pre><code> let x = 10; // TypeScript infers x as number</code></pre>
+14. Type Inference	</td><td>Let TypeScript guess the variable type.</td><td>	<pre><code> let x = 10; // TypeScript infers x as number
+
+//Example 2
+let x = [0, 1, null];
+//let x: (number | null)[]</code></pre>
 </td></tr><tr><td>
-15. Literal Types</td><td>	Specify exact values as types.</td><td>	```<pre><code> let gender: "male"</code></pre>
+15. Literal Types</td><td>	Specify exact values as types.</td><td>	```<pre><code> let gender: "male" | "female"</code></pre>
 </td></tr><tr>
 
 <td>
@@ -135,16 +148,25 @@ type SmartCar = Car & MusicPlayer;
 17. Optional Properties	</td><td>Make object properties optional.</td><td>	<pre><code> interface Person { name: string; age?: number; } 
 let person: Person = { name: "Bob" };</code></pre>
 </td></tr><tr><td>
-18. Nullish Coalescing	</td><td>Provide a default value for null or undefined.</td><td>	```<pre><code> let username: string</code></pre>
+18. Nullish Coalescing	</td><td>Provide a default value for null or undefined.</td><td>	<pre><code>const foo = null ?? 'default string';
+console.log(foo);
+// Expected output: "default string"
+
+const baz = 0 ?? 42;
+console.log(baz);
+// Expected output: 0</code></pre>
 </td></tr><tr><td>
-19. keyof </td><td>	Access object keys as types.</td><td>	<pre><code> interface Person { name: string; age: number; } 
-let key: keyof Person = "name";</code></pre>
+19. keyof </td><td>The keyof operator takes an object type and produces a string or numeric literal union of its keys.</td><td>	<pre><code>type Staff = {
+ name: string;
+ salary: number;
+} 
+type staffKeys = keyof Staff; // "name" | "salary"</code></pre>
 </td></tr><tr><td>
-20. Readonly Properties</td><td>	Ensure properties cannot be modified.</td><td>	<pre><code> interface Point { readonly x: number; readonly y: number; } 
+20. Readonly Properties</td><td>Ensure properties cannot be modified.</td><td>	<pre><code>interface Point { readonly x: number; readonly y: number; } 
 let point: Point = { x: 1, y: 2 }; 
 point.x = 5; // Error</code></pre>
 </td></tr><tr><td>
-21. Type Guards</td><td>	Narrow down types based on conditions.	</td><td><pre><code> function isString(value: any): value is string { 
+21. Type Guards</td><td>	Narrow down types based on conditions.	<br>For instance, if you have a variable that could be a string or a number, you can use a type guard to check if the variable is a string. If the type guard check passes, TypeScript will then allow you to use the variable as a string within the scope of the type guard check.</td><td><pre><code> function isString(value: any): value is string { 
 return typeof value === "string"; } 
 if (isString(input)) { // input is now treated as string }</code></pre>
 </td></tr><tr><td>
