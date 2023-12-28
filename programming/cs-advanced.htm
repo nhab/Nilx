@@ -46,6 +46,7 @@ public static class StringHelper
   <h2>Anonymous Types</h2>
   <div>
 An anonymous type is a simple class created by the compiler on the fly to store a set of values
+<pre>
 <code>
 var dude = new { Name = "Bob", Age = 23 };
 
@@ -55,12 +56,15 @@ var dude = new { Name = "Bob", Age = 23 };
     var a2 = a1 with { E = 10 };
     a2.Dump();
 </code>    
-  </div>
- <h2>Record</h2>
+</pre>
+</div>
+<h2>Record</h2>
  <div>
+  <p>
  new in C# 9.0
 - defines a reference type that provides built-in functionality for encapsulating data.
 Defining a record
+</p>
 <pre><code>
 new Point (2, 3).Dump();
 
@@ -75,15 +79,20 @@ record Point
   public double Y { get; init; }    
 }
 </code></pre>
+<p>
 - Record types have a compiler-generated ToString method 
 that displays the names and values of public properties and fields.
+
 - A record can inherit from another record.
   However, a record can't inherit from a class, and a class can't inherit from a record.
+
 - For two record variables to be equal, the run-time type must be equal. 
 The types of the containing variables might be different.
+
 <b>Dynamic Type</b>
 is to avoid compile-time type checking.
 The dynamic type changes its type at the run time based on the value present on the right-hand side
+</p>
 <pre><code>
     dynamic value = 123;
 </code></pre>
@@ -116,6 +125,7 @@ unsafe static void BlueFilter (int [,] bitmap)
 </div>
 <h2>Regx Parsing</h2>
 <div>
+<p>
 Pattern The string pattern that has to be used for the lookup. 
 The common options in here are Singleline and Multiline. They are changing the
 behaviour of pattern-elements like the dot (.) which won't cover a NewLine (\n) in
@@ -124,6 +134,7 @@ Timeout [Optional] Where patterns are getting more complex the lookup can consum
  This is the
 passed timeout for the lookup just as known from network-programming.
 <b>Single match</b>
+</p>
 <pre><code>
  using System.Text.RegularExpressions;
 string pattern = ":(.*?):";
@@ -138,8 +149,9 @@ string found = mLookup.Groups[1].Value;
 Result:
 found = "text in here" 
 </code></pre>
-    <b>Multiple matches</b>
-    <pre><code>
+
+<b>Multiple matches</b>
+<pre><code>
   using System.Text.RegularExpressions;
   List<string> found = new List<string>();
   string pattern = ":(.*?):";
@@ -155,15 +167,17 @@ found = "text in here"
   found = new List<string>() { "text in here", "another one", "third one", "fourth" }  
 </code></pre>
 
-  </div>
+</div>
 
 <h2>ToString()</h2>
-  <div>
+<div>
+<p>
     The ToString() method is present on all reference object types.
     This is due to all reference types being derived from Object which has the ToString() method on it.
     The ToString() method on the object base class returns the type name.
     The fragment below will print out "User" to the console.
-    <pre><code>
+</p>    
+<pre><code>
 public class User
 {
 public string Name { get; set; }
@@ -193,10 +207,11 @@ string.Format("{{I am in brackets!}} {0}", outsidetext);
 //Outputs "{I am in brackets!} I am outside of bracket"
 </code></pre>
 </div>
+
 <h2>Formatting</h2>
-  <div>
-    <b>Numeric formats</b>
-    <pre><code>
+<div>
+<b>Numeric formats</b>
+<pre><code>
   // Integral types as hex
   string.Format("Hexadecimal: byte2: {0:x2}; byte4: {0:X4}; char: {1:x2}", 123, (int)'A');
   // Integers with thousand separators
@@ -211,8 +226,8 @@ string.Format("{{I am in brackets!}} {0}", outsidetext);
   Integer, leading zeroes: 01;
   Decimal, fixed precision: 0.120; as percents: 12.00%
 </code></pre>
-    <b>custom number format</b>
-    <pre><code>
+<b>custom number format</b>
+<pre><code>
   // invariantResult is "1,234,567.89"
   var invarianResult = string.Format(CultureInfo.InvariantCulture, "{0:#,###,##}", 1234567.89);
   // NumberFormatInfo is one of classes that implement IFormatProvider
@@ -224,8 +239,9 @@ string.Format("{{I am in brackets!}} {0}", outsidetext);
   // customResult is "1_GS_234_GS_567_NS_89"
   var customResult = string.Format(customProvider, "{0:#,###.##}", 1234567.89);  
 </code></pre>
-    <b>String formatting</b>
-    <pre><code class="csharp">
+
+<b>String formatting</b>
+<pre><code class="csharp">
 // float with two decimal places
 String.Format("{0:0.00}", 123.4567);      // "123.46"
 String.Format("{0:0.00}", 123.4);         // "123.40"
@@ -237,7 +253,8 @@ string lastname = "Doe";
 Console.WriteLine($"Hello {name} {lastname}!");//Hello John Doe!
 
 </code></pre>
-    <b>Formatting using ToString</b>
+
+<b>Formatting using ToString</b>
     <pre><code>
  // Integer to formatted string:
   int intValue = 10;
@@ -254,7 +271,8 @@ Console.WriteLine($"Hello {name} {lastname}!");//Hello John Doe!
   string dateOnlyString = currentDate.ToString("dd-MM-yyyy"); // "21-07-2016"
   string dateWithMonthInWords = currentDate.ToString("dd-MMMM-yyyy HH:mm:ss"); // "21-July-2016 19:23:15"
 </code></pre>
-    <b>Create a custom format provider</b>
+
+<b>Create a custom format provider</b>
     <pre><code>
   public class CustomFormat : IFormatProvider, ICustomFormatter
   {
@@ -278,7 +296,8 @@ Console.WriteLine($"Hello {name} {lastname}!");//Hello John Doe!
   //Usage:
     String.Format(new CustomFormat(), "-> {0:Reverse} <-", "Hello World");//Output:    -> dlroW olleH <-
 </code></pre>
-    <b>Format dates in strings</b>
+
+<b>Format dates in strings</b>
     <pre><code>
   var date = new DateTime(2015, 11, 11);
   var str = $"It's {date:MMMM d, yyyy}, make a wish!";
@@ -292,7 +311,8 @@ Console.WriteLine($"Hello {name} {lastname}!");//Hello John Doe!
   str = "It's " + str + ", make a wish!";
   Console.WriteLine(str);// Output:  It's November 11, 2015, make a wish!
 </code></pre>
-    <b>Align left/ right, pad with spaces</b>
+
+<b>Align left/ right, pad with spaces</b>
     <pre><code>
   string.Format("LEFT: string: ->{0,-5}<- int: ->{1,-5}<-", "abc", 123);
   string.Format("RIGHT: string: ->{0,5}<- int: ->{1,5}<-", "abc", 123);
@@ -300,9 +320,10 @@ Console.WriteLine($"Hello {name} {lastname}!");//Hello John Doe!
   LEFT: string: ->abc <- int: ->123 <-
   RIGHT: string: -> abc<- int: -> 123<-  
 </code></pre>
-    <b>Padding with Format Specifiers</b>
+
+<b>Padding with Format Specifiers</b>
     You can also use existing formatting specifiers in conjunction with padding.
-    <pre><code>
+<pre><code>
 var number = 42;
 var str = $"The answer to life, the universe and everything is ${number, 5:f1}";
 //str is "The answer to life, the universe and everything is 42.1 ";
@@ -311,22 +332,22 @@ var str = $"The answer to life, the universe and everything is ${number, 5:f1}";
 </div>
 
 <h2>Strings</h2>
-  <div>
-    <b>Expressions</b>
-    <pre><code>
+<div>
+<b>Expressions</b>
+<pre><code>
   var StrWithMathExpression = $"1 + 2 = {1 + 2}"; // -> "1 + 2 = 3"
   string world = "world";
   var StrWithFunctionCall = $"Hello, {world.ToUpper()}!"; // -> "Hello, WORLD!"
 </code></pre>
-    <b>Splitting a String by another string</b>
-    <pre><code>
+<b>Splitting a String by another string</b>
+<pre><code>
   string str = "this--is--a--complete--sentence";
   string[] tokens = str.Split(new[] { "--" }, StringSplitOptions.None);
  // Result:
 //  [ "this", "is", "a", "complete", "sentence" ] 
 </code></pre>
-    <b>Splitting a String by specific character</b>
-    <pre><code>
+<b>Splitting a String by specific character</b>
+<pre><code>
   string helloWorld = "hello world, how is it going?";
   string[] parts1 = helloWorld.Split(',');
   //parts1: ["hello world", " how is it going?"]
