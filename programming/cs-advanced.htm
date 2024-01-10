@@ -13,7 +13,11 @@
 <body onload='AddToggleButtonsToH(7);ReplaceLtGt();hljs.highlightAll();'>
 
 <button onclick="toggleAll(this);" >-</button>
-
+<style>
+  p{
+    font-size:16px !important;
+  }
+</style>
 <h2>Resources</h2>
   <div>
     <a href='https://learn.microsoft.com/en-us/dotnet/csharp/'>Microsoft C# Reference and other resources</a>
@@ -43,11 +47,10 @@ public static class StringHelper
 }
 </code></pre>    
 </div>  
+
 <h2>Anonymous Types</h2>
 <div>
-  <p>
 An anonymous type is a simple class created by the compiler on the fly to store a set of values
-</p>
 <pre>
 <code>
 var dude = new { Name = "Bob", Age = 23 };
@@ -60,13 +63,40 @@ var dude = new { Name = "Bob", Age = 23 };
 </code>    
 </pre>
 </div>
+
 <h2>Record</h2>
  <div>
-  <p>
- new in C# 9.0
+<p>
+- new in C# 9.0
+
 - defines a reference type that provides built-in functionality for encapsulating data.
-Defining a record
+
+- Consider using a record in place of a class or struct in the following scenarios:
+
+- Value equality:
+  For records, value equality means that two variables of a record type are equal
+  if the types match and all property and field values match. 
+   For other reference types such as classes, equality means reference equality. 
+
+-A record's ToString method creates a formatted string that shows
+   an object's type name and the names and values of all its public properties.
+- Immutability (not changable,readonly after instanciation):
+
+- use a record in place of a class or struct,if :
+  You want to define a data model that depends on value equality.
+  You want to define a type for which objects are immutable.
+  
+- Record types have a compiler-generated ToString method 
+  that displays the names and values of public properties and fields.
+  
+- A record can inherit from another record.
+    However, a record can't inherit from a class, and a class can't inherit from a record.
+  
+- For two record variables to be equal, the run-time type must be equal. 
+  The types of the containing variables might be different.
+  
 </p>
+Defining a record:
 <pre><code>
 new Point (2, 3).Dump();
 
@@ -82,23 +112,18 @@ record Point
 }
 </code></pre>
 <p>
-- Record types have a compiler-generated ToString method 
-that displays the names and values of public properties and fields.
 
-- A record can inherit from another record.
-  However, a record can't inherit from a class, and a class can't inherit from a record.
-
-- For two record variables to be equal, the run-time type must be equal. 
-The types of the containing variables might be different.
-
-<b>Dynamic Type</b>
-is to avoid compile-time type checking.
-The dynamic type changes its type at the run time based on the value present on the right-hand side
+<h2>Dynamic Type</h2>
+<p>
+- Is to avoid compile-time type checking.
+- The dynamic type changes its type at the run time based on the value present on the right-hand side
+</p>
 </p>
 <pre><code>
     dynamic value = 123;
 </code></pre>
- </div>
+</div>
+
 <h2>Unsafe code (using pointers)</h2>
 <div>
 <pre><code>
