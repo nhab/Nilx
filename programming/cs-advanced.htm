@@ -23,7 +23,7 @@
 
 <h2>Extension Method Chaining</h2>
 <div>
-      Extension methods, like instance methods, provide a tidy way to chain functions:
+Extension methods, like instance methods, provide a tidy way to chain functions:
 <pre><code>
 string x = "sausage".Pluralize().Capitalize();
 x.Dump();
@@ -42,10 +42,12 @@ public static class StringHelper
   public static string Capitalize (this string s) => s.ToUpper();
 }
 </code></pre>    
-  </div>  
-  <h2>Anonymous Types</h2>
-  <div>
+</div>  
+<h2>Anonymous Types</h2>
+<div>
+  <p>
 An anonymous type is a simple class created by the compiler on the fly to store a set of values
+</p>
 <pre>
 <code>
 var dude = new { Name = "Bob", Age = 23 };
