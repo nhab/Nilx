@@ -410,9 +410,11 @@ s = s.Replace("World", "Universe"); // s = "Hello Universe"
 //This method can also be used to remove part of a string, using the String.Empty field:
 s = s.Replace("ell", String.Empty); // s = "Ho World"
 </code></pre>
+<pre>
 <b>Changing the case of characters within a String</b>
 System.String.ToLowerInvariant is used to return a String object converted to lowercase.
 System.String.ToUpperInvariant is used to return a String object converted to uppercase
+</pre>
 <pre><code>
 string s = "My String";
 s = s.ToLowerInvariant(); // "my string"
@@ -464,19 +466,24 @@ sb.Append('k', 2000);
 //add a single character many times.
 
 </code></pre>
+<pre>
     <b>Interpolated Verbatim Strings</b>
     Verbatim strings can be combined with the new String interpolation features found in C#6.
-    <pre><code>
+  </pre>
+  
+<pre><code>
 Console.WriteLine($@"Testing \n 1 2 {5 - 2}
 New line");
 //Output:
 //Testing \n 1 2 3
 //New line
 </code></pre>
+<pre>
   As expected from a verbatim string, the backslashes are ignored as escape characters.
   And as expected from an interpolated string, any expression inside curly braces is evaluated
   before being inserted into the string at that position
   <b>Escaping </b>
+</pre>  
   <pre><code>
 //Double Quotes:
 //Double Quotes inside verbatim strings can be escaped by using 2 sequential double quotes "" to represent one
@@ -666,7 +673,7 @@ string inputString = String.Join(delimiter, stringArray);
 
 <h2>Operators</h2>
 <div>
-
+<pre>
   <b>Implicit Cast and Explicit Cast Operators</b>
   C# allows user-defined types to control assignment and casting through the use of <strong>the explicit and
     implicit</strong> keywords.
@@ -675,6 +682,7 @@ string inputString = String.Join(delimiter, stringArray);
   The method cannot take any more arguments, nor can it be an instance method. It can, however, access any private
   members of type it is defined within.
   An example of both an implicit and explicit cast:
+</pre>
   <pre><code>
 public class BinaryImage
 {
@@ -689,14 +697,17 @@ public static explicit operator bool[](BinaryImage im)
 }
 }
 </code></pre>
-  Allowing the following cast syntax:
+
+ Allowing the following cast syntax:
   <pre><code>
 var binaryImage = new BinaryImage();
 ColorImage colorImage = binaryImage; // implicit cast, note the lack of type
 bool[] pixels = (bool[])binaryImage; // explicit cast, defining the type
 </code></pre>
-  The cast operators can work both ways, going from your type and going to your type:
-  <pre><code>
+
+The cast operators can work both ways, going from your type and going to your type:
+
+<pre><code>
 public class BinaryImage
 {
 public static explicit operator ColorImage(BinaryImage im)
@@ -710,9 +721,10 @@ public static explicit operator BinaryImage(ColorImage cm)
 }
 }
 </code></pre>
-  Finally, the as keyword, which can be involved in casting within a type hierarchy, is not valid in this situation.
-  Even
-  after defining either an explicit or implicit cast, you cannot do:
+<pre>
+  Finally, the as keyword, 
+  which can be involved in casting within a type hierarchy, is not valid in this situation.
+  Even after defining either an explicit or implicit cast, you cannot do:
   <cl>ColorImage cm = myBinaryImage as ColorImage;</cl>
   It will generate a compilation error.
 
@@ -721,6 +733,7 @@ public static explicit operator BinaryImage(ColorImage cm)
   Syntax:
   <cl>condition ? expression_if_true : expression_if_false;</cl>
   Example:
+</pre>
   <pre><code>
 string name = "Frank";
 Console.WriteLine(name == "Frank" ? "The name is Frank" : "The name is not Frank");  
@@ -750,10 +763,12 @@ int i = x;            // Run-time error
 int j = y;            // Compile-time error
 </code></pre>
 
-  <b>Overloadable Operators</b>
-  <b>Operator Overloading </b>
+<pre>
+<b>Overloadable Operators</b>
+<b>Operator Overloading </b>
   An operator is overloaded by declaring an operator function:
-  <code><pre>
+</pre>  
+<code><pre>
 //Example1 :
 Note B = new Note (2);
 Note CSharp = B + 2;
@@ -831,8 +846,9 @@ class Student : IEquatable< Student>
   }
 }
 </code></pre>
-  <b>explicit operator</b>
-  <pre><code>
+
+<b>explicit operator</b>
+<pre><code>
 internal class Explicit
 {
   public static explicit operator int (Explicit a)
@@ -861,6 +877,7 @@ int integer = (int)obj1; // explicit conversion
 //but:
 int integer = obj1; // WON'T WORK - explicit cast required
 </code></pre>
+<pre>
   <b>Short-circuiting Operators</b>
   The short-circuiting boolean operators will only evaluate the second operand if
   the first operand can not determine the overall result of the expression.
@@ -872,12 +889,15 @@ int integer = obj1; // WON'T WORK - explicit cast required
   This is useful in many scenarios, for example imagine that you want to check whereas your
   list has more than three elements but you also have to check if list has been initialized to not run into
   NullReferenceException. You can achieve this as below:
-  <pre><code>
+</pre>  
+<pre><code>
 bool hasMoreThanThreeElements = myList != null && mList.Count > 3;
 mList.Count > 3 will not be checked untill myList != null is met.
 </code></pre>
-  <strong>Logical AND</strong>
+<prre>
+ <strong>Logical AND</strong>
   && is the short-circuiting counterpart of the standard boolean AND (&) operator.
+</prre>  
   <pre><code>
 var x = true;
 var y = false;
@@ -886,8 +906,10 @@ x && y // Returns false (y is evaluated).
 y && x // Returns false (x is not evaluated).
 y && y // Returns false (right y is not evaluated).
 </code></pre>
+<pre>
   <strong>Logical OR</strong>
   || is the short-circuiting counterpart of the standard boolean OR (|) operator.
+</pre>  
   <pre><code>
 var x = true;
 var y = false;
@@ -905,9 +927,11 @@ Action1();
 else
 Action2();
 </code></pre>
+<pre>
   <b>Indexers</b>
   is a special type of property that to be accessed like an array for its internal collection
   Example:
+</pre>  
   <pre><code>
 class StringDataStore
 {
@@ -933,11 +957,13 @@ class StringDataStore
   }
 }
 </code></pre>
+<pre>
   <b>default Operator</b>
   <cl>Value Type (where T : struct)</cl>
   The built-in primitive data types, such as char, int, and float, as well as user-defined types declared with struct,
   or enum. Their default value is new T() :
-  <pre><code>
+</pre>  
+<pre><code>
 default(int) // 0
 default(DateTime) // 0001-01-01 12:00:00 AM
 default(char) // '\0' This is the "null character", not a zero or a line break.
@@ -954,9 +980,13 @@ default(MyClass) // null
 default(IDisposable) // null
 default(dynamic) // null 
 </code></pre>
-  <b>sizeof</b>
+<pre>
+
+<b>sizeof</b>
   Returns an int holding the size of a type* in bytes.
-  <pre><code>
+</pre>  
+
+<pre><code>
 sizeof(bool) // Returns 1.
 sizeof(byte) // Returns 1.
 sizeof(sbyte) // Returns 1.
@@ -971,27 +1001,33 @@ sizeof(ulong) // Returns 8.
 sizeof(double) // Returns 8.
 sizeof(decimal) // Returns 16.  
 </code></pre>
+<pre>
   <b>Null-Conditional Operator</b>
   Introduced in C# 6.0, the Null Conditional Operator <b>?.</b> will immediately return null
   if the expression on its lefthand side evaluates to null, instead of throwing a NullReferenceException.
   If its left-hand side evaluates to a nonnull value, it is treated just like a normal . operator.
   Note that because it might return null, its return type is always a nullable type.
   That means that for a struct or primitive type, it is wrapped into a <b>Nullable<T>.</b>
-  <pre><code>
+</pre>    
+
+<pre><code>
 var bar = Foo.GetBar()?.Value; // will return null if GetBar() returns null
 var baz = Foo.GetBar()?.IntegerValue; // baz will be of type Nullable<int>, i.e. int?  
 </code></pre>
+<pre>
   This comes handy when firing events.
   Normally you would have to wrap the event call in an if statement checking for null and raise the event afterwards,
   which introduces the possibility of a race condition.
   Using the Null conditional operator this can be fixed in the following way:
-  <pre><code> 
+</pre>
+
+<pre><code> 
 event EventHandler<string> RaiseMe;
 RaiseMe?.Invoke("Event raised"); 
 </code></pre>
 
-  Nullable types also work well with the null-conditional operator
-  <pre><code>    
+Nullable types also work well with the null-conditional operator
+<pre><code>    
 System.Text.StringBuilder sb = null;
 int? length = sb?.ToString().Length;
 length.Dump();
@@ -1001,14 +1037,19 @@ length.Dump();
 int length2 = sb?.ToString().Length ?? 0;  // Evaluates to 0 if sb is null
 length2.Dump();
 </code></pre>
+<pre>
   <b>Null-Coalescing Operator</b>
   The Null-Coalescing operator ?? will return the left-hand side when not null.
   If it is null, it will return the right-hand side.
 
   Parameter Details
-  possibleNullObject The value to test for null value. If non null, this value is returned. Must be a nullable type.
-  defaultValue The value returned if possibleNullObject is null. Must be the same type as possibleNullObject.
-  <pre><code>
+  possibleNullObject The value to test for null value. 
+  If non null, this value is returned. Must be a nullable type.
+  defaultValue The value returned if possibleNullObject is null. 
+  Must be the same type as possibleNullObject.
+</pre>
+  
+<pre><code>
 object foo = null;
 object bar = new object();
 var c = foo ?? bar;
@@ -1019,15 +1060,18 @@ var config = RetrieveConfigOnMachine() ??
 RetrieveConfigFromService() ??
 new DefaultConfiguration();
 </code></pre>
+<pre>
   <b>Basic usage</b>
   Using the null-coalescing operator (??) allows you to specify a default value for a nullable type if the left-hand
   operand is null.
-  <pre><code>
+</pre>  
+<pre><code>
 string testString = null;
 Console.WriteLine("The specified string is - " + (testString ?? "not provided"));  
 </code></pre>
-  This is logically equivalent to:
-  <pre><code>
+This is logically equivalent to:
+
+<pre><code>
 string testString = null;
 if (testString == null)
 {
@@ -1038,16 +1082,20 @@ else
 Console.WriteLine("The specified string is - " + testString);
 } 
 </code></pre>
-  or using the ternary operator (?:) operator:
-  <pre><code>
+
+or using the ternary operator (?:) operator:
+<pre><code>
 string testString = null;
 Console.WriteLine("The specified string is - " + (testString == null ? "not provided" :testString));  
 </code></pre>
+<pre>
   <b>Null fall-through and chaining</b>
   left-hand operand must be nullable, while the right-hand operand may or may not be.
   The result will be typed accordingly.
   Non-nullable:
-  <pre><code>
+</pre>  
+
+<pre><code>
 int? a = null;
 int b = 3;
 var output = a ?? b;
@@ -1065,8 +1113,10 @@ int? b = null;
 var output = a ?? b;
 //output will be of type int? and equal to b, or null.
 </code></pre>
+<pre>
   Multiple Coalescing:
   Coalescing can also be done in chains:
+</pre>  
   <pre><code>
 int? a = null;
 int? b = null;
@@ -1079,23 +1129,29 @@ Console.WriteLine($"value :{output}");
 //Type :System.Int32
 //value :3
 </code></pre>
-  <b>Lambda operator</b>
-  The => operator has the same precedence as the assignment operator = and is right-associative.
-  It is used to declare lambda expressions and also it is widely used with LINQ Queries:
-  <pre><code>
+<pre>
+ <b>Lambda operator</b>
+The => operator has the same precedence as the assignment operator = and is right-associative.
+ It is used to declare lambda expressions and also it is widely used with LINQ Queries:
+</pre>
+<pre><code>
 string[] words = { "cherry", "apple", "blueberry" };
 int shortestWordLength = words.Min((string w) => w.Length); //5
 </code></pre>
-
-  When used in LINQ extensions or queries the type of the objects can usually be skipped as it is inferred by the
-  compiler:
+<pre>
+ When used in LINQ extensions 
+ or queries the type of the objects 
+ can usually be skipped as it is inferred by the compiler:
+</pre>  
   <pre><code>
 int shortestWordLength = words.Min(w => w.Length); //also compiles with the same result  
 </code></pre>
+<pre>
   The general form of lambda operator is the following:
   <cl>(input parameters) => expression</cl>
   The parameters of the lambda expression are specified before => operator,
   and the actual expression/statement/block to be executed is to the right of the operator:
+</pre>
   <pre><code>
 // expression
 (int x, string s) => s.Length > x
@@ -1109,7 +1165,7 @@ x += " says Hello!";
 Console.WriteLine(x);
 }</code></pre>
   This operator can be used to easily define delegates, without writing an explicit method:
-  <pre><code>
+  <pre><code>    
 delegate void TestDelegate(string s);
 TestDelegate myDelegate = s => Console.WriteLine(s + " World");
 myDelegate("Hello");
@@ -1122,20 +1178,25 @@ delegate void TestDelegate(string s);
 TestDelegate myDelegate = MyMethod;
 myDelegate("Hello");
 </code></pre>
+<pre>
   <b>Null coalescing operator with method calls</b>
   The null coalescing operator makes it easy to ensure that a method that may return null will fall back to a default
   value.
   Without the null coalescing operator:
-  <pre><code>
+</pre>  
+<pre><code>
 string name = GetName();
 if (name == null)
 name = "Unknown!";
 </code></pre>
+<pre>
   With the null coalescing operator:
   <cl>string name = GetName() ?? "Unknown!";</cl>
 
   <b>Class Member Operators: Null Conditional Member Access</b>
-  <pre><code>
+</pre>
+
+ <pre><code>
 var zipcode = myEmployee?.Address?.ZipCode;
 //returns null if the left operand is null.
 //the above is the equivalent of:
@@ -1143,21 +1204,28 @@ var zipcode = (string)null;
 if (myEmployee != null && myEmployee.Address != null)
 zipcode = myEmployee.Address.ZipCode;
 </code></pre>
+<pre>
   <b> Use existing or create new</b>
-  A common usage scenario that this feature really helps with is when you are looking for an object in a collection
+  A common usage scenario that this feature really helps with is 
+  when you are looking for an object in a collection
   and need to create a new one if it does not already exist.
-  <pre><code>
+</pre>
+
+<pre><code>
 IEnumerable<MyClass> myList = GetMyList();
 var item = myList.SingleOrDefault(x => x.Id == 2) ?? new MyClass { Id = 2 }; 
 </code></pre>
+
   <b>Lazy properties initialization with null coalescing operator</b>
-  <pre><code>
+
+<pre><code>
 private List<FooBar> _fooBars;
   public List<FooBar> FooBars
   {
   get { return _fooBars ?? (_fooBars = new List<FooBar>()); }
   }
 </code></pre>
+<pre>
   The first time the property .FooBars is accessed the _fooBars variable will evaluate as null,
   thus falling through to the assignment statement assigns and evaluates to the resulting value.
   <strong>Thread safety</strong>
@@ -1165,23 +1233,31 @@ private List<FooBar> _fooBars;
   For thread-safe laziness, use the Lazy<T> class built into the .NET Framework.
     <strong>C# 6 Syntactic Sugar using expression bodies</strong>
     Note that since C# 6, this syntax can be simplified using expression body for the property:
-    <pre><code>
+</pre>    
+
+<pre><code>
 private List<FooBar> _fooBars;
 public List<FooBar> FooBars => _fooBars ?? ( _fooBars = new List<FooBar>() );
 // Subsequent accesses to the property will yield the value stored in the _fooBars variable.
 </code></pre>
+
+<pre>
     <b>Example in the MVVM pattern</b>
     This is often used when implementing commands in the MVVM pattern. Instead of initializing the commands
     eagerly with the construction of a viewmodel, commands are lazily initialized using this pattern as follows:
-    <pre><code>
+</pre>    
+
+<pre><code>
 private ICommand _actionCommand = null;
 public ICommand ActionCommand =>
 _actionCommand ?? ( _actionCommand = new DelegateCommand( DoAction ) ); 
 </code></pre>
 
+<pre>
     <b>Class Member Operators: Null Conditional Indexing</b>
     The ?. operator is syntactic sugar to avoid verbose null checks. It's also known as the Safe navigation operator.
-    <pre><code>
+</pre>    
+<pre><code>
 //Example 1:
 public class Person
 {
@@ -1219,8 +1295,10 @@ int? spouseAge = person?.Spouse?.Age;
 // spouseDisplayName will be "N/A" if person, Spouse, or Name is null
 var spouseDisplayName = person?.Spouse?.Name ?? "N/A";
 </code></pre>
-    <b>The Null-Conditional Index</b>
-    <pre><code>
+
+<b>The Null-Conditional Index</b>
+
+<pre><code>
 // Similarly to the ?. operator, the null-conditional index operator checks for null values
 // when indexing into a collection that may be null.
 string item = collection?[index];
@@ -1231,8 +1309,10 @@ if(collection != null)
 item = collection[index];
 }
 </code></pre>
-    <b>Avoiding NullReferenceExceptions</b>
-    <pre><code>
+
+<b>Avoiding NullReferenceExceptions</b>
+
+<pre><code>
 var person = new Person
 {
 Address = null;
@@ -1254,9 +1334,12 @@ var person = new Person
 // of throwing a NullReferenceException
 var countryName = person?.Address?.State?.Country?.Name;
 </code></pre>
+<pre>
     <b>Null-conditional Operator can be used with Extension Method</b>
     Extension Method can work on null references, but you can use ?. to null-check anyway.
-    <pre><code>
+  </pre>
+
+<pre><code>
 public class Person
 {
   public string Name {get; set;}
@@ -1272,20 +1355,28 @@ public static class PersonExtensions
 Person person = null;
 int nameLength = person.GetNameLength(); // returns -1
 </code></pre>
-    Using ?. the method will not be triggered for null references, and the type is int?:
 
+<pre>
+    Using ?. the method will not be triggered for null references, and the type is int?:
 
     <b>typeof</b>
     Gets System.Type object for a type.
-    <pre><code class="csharp">
+  </pre>
+
+<pre><code class="csharp">
 System.Type type = typeof(Point); //System.Drawing.Point
 System.Type type = typeof(IDisposable); //System.IDisposable
 System.Type type = typeof(Colors); //System.Drawing.Color
 System.Type type = typeof(List<>); //System.Collections.Generic.List`1[T]
 </code></pre>
-    To get the run-time type, use GetType method to obtain the System.Type of the current instance.
-    Operator typeof takes a type name as parameter, which is specified at compile time.
-    <pre><code>
+
+<pre>
+To get the run-time type, use GetType method to obtain the System.
+Type of the current instance.
+Operator typeof takes a type name as parameter, which is specified at compile time.
+</pre>
+
+<pre><code>
 public class Animal {}
 public class Dog : Animal {}
 var animal = new Dog();
@@ -1293,22 +1384,30 @@ Assert.IsTrue(animal.GetType() == typeof(Animal)); // fail, animal is typeof(Dog
 Assert.IsTrue(animal.GetType() == typeof(Dog)); // pass, animal is typeof(Dog)
 Assert.IsTrue(animal is Animal); // pass, animal implements Animal
 </code></pre>
-    <b>nameof Operator</b>
-    Returns a string that represents the unqualified name of a variable, type, or member.
-    <pre><code>
+
+<pre>
+<b>nameof Operator</b>
+Returns a string that represents the unqualified name of a variable, type, or member.
+</pre>
+
+<pre><code>
 int counter = 10;
 nameof(counter); // Returns "counter"
 Client client = new Client();  
 nameof(client.Address.PostalCode)); // Returns "PostalCode"
+</code></pre>
+
+<pre>
 The nameof operator was introduced in C# 6.0. 
 It is evaluated at compile-time and the returned string value is inserted inline by the compiler,
 so it can be used in most cases where the constant string can be used 
 (e.g., the case labels in a switch statement, attributes, etc...). 
 It can be useful in cases like raising & logging exceptions, attributes, MVC Action links, etc...
-//=================================
-// Raising PropertyChanged event
+</pre>
 
 <pre><code>
+  //=================================
+// Raising PropertyChanged event
 public class Person : INotifyPropertyChanged
 {
   private string _address;
@@ -1358,9 +1457,9 @@ public class SomeClass<TItem>
 }
 </code></pre>
 
-    </code></pre>
-    <b>Class Member Operators: Aggregate Object Indexing</b>
-    <pre><code>
+<b>Class Member Operators: Aggregate Object Indexing</b>
+
+<pre><code>
 var letters = "letters".ToCharArray();
 char letter = letters[1];
 Console.WriteLine("Second Letter is {0}",letter);
@@ -1369,8 +1468,10 @@ Console.WriteLine("Second Letter is {0}",letter);
 //NB: Array Indexing starts at 0; i.e. the first letter would be given by letters[0].
 </code></pre>
 </div>
+
 <h2>GetHashCode</h2>
 <div>
+<pre>  
   <b>Writing a good GetHashCode override</b>
   GetHashCode has major performance effects on Dictionary<> and HashTable.
     Good GetHashCode Methods
@@ -1386,25 +1487,30 @@ Console.WriteLine("Second Letter is {0}",letter);
     items may not be found in a List,Dictionary, or similar.
     A good method to implement GetHashCode is to use one prime number as a starting value, and add the hashcodes
     of the fields of the type multiplied by other prime numbers to that:
-    <pre><code>
+</pre>    
+
+<pre><code>
 public override int GetHashCode()
 {
-unchecked // Overflow is fine, just wrap
-{
-int hash = 3049; // Start value (prime number).
-// Suitable nullity checks etc, of course :)
-hash = hash * 5039 + field1.GetHashCode();
-hash = hash * 883 + field2.GetHashCode();
-hash = hash * 9719 + field3.GetHashCode();
-return hash;
-}
+  unchecked // Overflow is fine, just wrap
+  {
+    int hash = 3049; // Start value (prime number).
+    // Suitable nullity checks etc, of course :)
+    hash = hash * 5039 + field1.GetHashCode();
+    hash = hash * 883 + field2.GetHashCode();
+    hash = hash * 9719 + field3.GetHashCode();
+    return hash;
+  }
 }</code></pre>
+<pre>
 Only the fields which are used in the Equals-method should be used for the hash function.
 If you have a need to treat the same type in different ways for Dictionary/HashTables, you can use
 IEqualityComparer.
 
 <b>Override Equals and GetHashCode on custom types</b>
 For a class Person like:
+</pre>
+
 <pre><code>
 public class Person
 {
@@ -1437,26 +1543,28 @@ var person1 = new Person { Name = "Jon", Age = 20, Clothes = "some clothes" };
 var person2 = new Person { Name = "Jon", Age = 20, Clothes = "some other clothes" };
 bool result = person1.Equals(person2); // result is true
 Also using LINQ to make different queries on persons will check both Equals and GetHashCode:
-var persons = new List<Person>
+var persons = new List< Person >
 {
   new Person{ Name = "Jon", Age = 20, Clothes = "some clothes"},
   new Person{ Name = "Dave", Age = 20, Clothes = "some other clothes"},
   new Person{ Name = "Jon", Age = 20, Clothes = ""}
 };
 var distinctPersons = persons.Distinct().ToList();//distinctPersons has Count = 2
-
 </code></pre>
-
+<pre>
     <b>Equals and GetHashCode in IEqualityComparator</b>
     For given type Person:
-    <pre><code>
+  </pre>    
+  
+
+<pre><code>
 public class Person
 {
   public string Name { get; set; }
   public int Age { get; set; }
   public string Clothes { get; set; }
 }
-List<Person> persons = new List<Person>
+List< Person> persons = new List< Person>
 {
   new Person{ Name = "Jon", Age = 20, Clothes = "some clothes"},
   new Person{ Name = "Dave", Age = 20, Clothes = "some other clothes"},
@@ -1464,7 +1572,7 @@ List<Person> persons = new List<Person>
 };
 var distinctPersons = persons.Distinct().ToList();// distinctPersons has Count = 3
 But defining Equals and GetHashCode into an IEqualityComparator :
-public class PersonComparator : IEqualityComparer<Person>
+public class PersonComparator : IEqualityComparer< Person>
 {
 public bool Equals(Person x, Person y)
 {
@@ -1475,9 +1583,10 @@ public int GetHashCode(Person obj) { return obj.Name.GetHashCode() * obj.Age; }
 }
 var distinctPersons = persons.Distinct(new PersonComparator()).ToList();// distinctPersons has Count = 2
 </code></pre>
-    Note that for this query, two objects have been considered equal if both the Equals returned true and the
-    GetHashCode have returned the same hash code for the two persons.
-
+<pre>
+Note that for this query, two objects have been considered equal if both the Equals returned true and the
+GetHashCode have returned the same hash code for the two persons.
+</pre>
 
 </div>
 <h2>Generics</h2>
@@ -1493,6 +1602,7 @@ var distinctPersons = persons.Distinct(new PersonComparator()).ToList();// disti
                        //(generic methods can also be defined in a none-generic class)
   }
   </code></pre>
+<pre>
   T is called type parameter, which can be used as
   a type of fields, properties, method parameters, return types,and delegates in <strong> the DataStore class</strong>.
   <b> Instanciation:</b>
@@ -1524,7 +1634,10 @@ var distinctPersons = persons.Distinct(new PersonComparator()).ToList();// disti
   All delegate instances have multicast capability.
 
   Example:
-  <pre><code>
+</pre>
+
+
+<pre><code>
   // All delegate instances have multicast capability:
 
   SomeDelegate d = SomeMethod1;
@@ -1541,8 +1654,9 @@ var distinctPersons = persons.Distinct(new PersonComparator()).ToList();// disti
   void SomeMethod2() => "SomeMethod2".Dump();
 
   delegate void SomeDelegate();
-  </code></pre>
+</code></pre>
 </div>
+
 <h2>Access modifiers</h2>
 <div>
  <pre><code>
@@ -1605,8 +1719,10 @@ using (var dialog = new OpenFileDialog())
 }
 </code></pre> 
 </div>
+
 <h2>yield return</h2>
 <div>
+<pre>  
   if you want a collection that you can use "foreach" on, but gathering the items into the collection is
     expensive for some reason
     (like querying them out of a database), AND you will often not need the entire collection,
@@ -1616,7 +1732,9 @@ using (var dialog = new OpenFileDialog())
     t first sight, yield return is a .NET sugar to return an IEnumerable.
 
     Without yield, all the items of the collection are created at once:
-    <pre><code>
+</pre>    
+
+<pre><code>
   class SomeData
   {
       public SomeData() { }
@@ -1645,12 +1763,15 @@ using (var dialog = new OpenFileDialog())
         }
     }
   </code></pre>
+<pre>
   The advantage of using yield is that if the function consuming your data simply needs the first item of the
   collection,
   the rest of the items won't be created.
   The yield operator allows the creation of items as it is demanded. That's a good reason to use it.
   <b>yield break</b>
-  <pre><code>
+</pre>  
+  
+<pre><code>
     // The yield break statement indicates that the iterator block should exit early,
     // without returning more elements:
 
@@ -1667,13 +1788,17 @@ using (var dialog = new OpenFileDialog())
 
         yield return "Three";
     }
-  </code></pre>
+</code></pre>
 </div>
+
 <h2>yield break</h2>
 <div>
+<pre>
   The yield break statement indicates that the iterator block should exit early,
                 without returning more elements:
-                <pre><code>
+</pre>       
+
+<pre><code>
   foreach (string s in Foo (true))
     Console.WriteLine (s);
 
@@ -1687,9 +1812,13 @@ using (var dialog = new OpenFileDialog())
 
     yield return "Three";
   }
-  </code></pre>
+</code></pre>
+
+<pre>  
 <b>Multiple yield Statements</b>
 Multiple yield statements are permitted:
+</pre>
+
 <pre><code>
    foreach (string s in Foo())
     Console.WriteLine (s);         // Prints "One","Two","Three"
@@ -1700,7 +1829,9 @@ Multiple yield statements are permitted:
     yield return "Two";
     yield return "Three";
   }
-  </code></pre>
+  
+</code></pre>
+
 Example 2
 <pre><code>
       IEnumerable<string> Foo()
@@ -1711,16 +1842,19 @@ Example 2
           yield return "Two";
           yield return "Three";
           }
-  </code></pre>
+</code></pre>
+
 <b>Null</b>
 <pre><code>
       int? x = null;
       int y = x ?? 5;
       Console.WriteLine (y);  // 5    
   </code></pre>
-<b>Extension Methods</b>
+<pre>
+  <b>Extension Methods</b>
 Extension methods allow an existing type to be extended with new methods without altering
 the definition of the original type:
+</pre>
 <pre><code>
   Console.WriteLine ("Perth".IsCapitalized());
   // Equivalent to:
@@ -1747,9 +1881,12 @@ the definition of the original type:
   }
   </code></pre>
 </div>
+
 <h2>object oriented </h2>
+
 <div>
-  <h3>Inheritence</h3>
+<h3>Inheritence</h3>
+<pre>
   <strong>What is difference between virtual and override in C#?</stong>
 
     The virtual keyword is used to modify a method, property, indexer, or event declared in the base class
@@ -1758,7 +1895,9 @@ the definition of the original type:
     base class into a derived class.
   
     <b>Polymorphism</b>:
-    <pre><code>
+</pre>
+
+<pre><code>
     // A variable of type x can refer to an object that subclasses x.
   
       // The Display method below accepts an Asset. This means means we can pass it any subtype:
@@ -1784,9 +1923,11 @@ the definition of the original type:
       {
         public decimal Mortgage;
       }
-    </code></pre>
-                  <b>Reference Conversions - Upcasting</b>
-                  <pre><code>
+</code></pre>
+
+<b>Reference Conversions - Upcasting</b>
+
+<pre><code>
     // An upcast creates a base class reference from a subclass reference:
   
     Stock msft = new Stock();
@@ -1811,8 +1952,9 @@ the definition of the original type:
       public decimal Mortgage;
     }
     </code></pre>
-                  <b>Virtual Function Members</b>
-                  <pre><code>
+                  
+    <b>Virtual Function Members</b>
+    <pre><code>
     // A function marked as virtual can be overridden by subclasses wanting to provide a
     // specialized implementation:
   
@@ -1837,9 +1979,11 @@ the definition of the original type:
       // We won't override Liability here, because the default implementation will do.
     }
     </code></pre>
+
     <b>Covariant returns</b>
 
     From C# 9, we can override a method such that it returns a more derived (subclased) type:
+
     <pre><code>
     House mansion1 = new House { Name = "McMansion", Mortgage = 250000 };
     House mansion2 = mansion1.Clone();
@@ -1858,10 +2002,12 @@ the definition of the original type:
       public override House Clone() => new House { Name = Name, Mortgage = Mortgage };
     }
     </code></pre>
+  <pre>
     <b>Abstract Classes & Members</b>
 
     A class declared as abstract can never be instantiated. Instead, only its concrete subclasses
     can be instantiated. Abstract classes are able to define abstract members.
+  </pre>
     <pre><code>
     new Stock { SharesOwned = 200, CurrentPrice = 123.45M }.NetValue.Dump();
 
@@ -1879,9 +2025,11 @@ the definition of the original type:
       public override decimal NetValue => CurrentPrice * SharesOwned; 
     }
     </pre></code>
+  <pre>
     <b>Sealing Functions & Classes</b>
     An overridden function member may seal its implementation with the sealed keyword to prevent it
     from being overridden by further subclasses:
+  </pre>    
     <pre><code>
     House mansion = new House { Name="McMansion", Mortgage=250000 };
     Console.WriteLine (mansion.Liability);      // 250000
@@ -1902,10 +2050,11 @@ the definition of the original type:
 
     public sealed class Stock : Asset { /* ... */ }
     </code></pre>
-
+  <pre>
     <b>Overloading and Resolution</b>
     When calling an overload method, the method with the most specific
     parameter type match has precedence, based on the *compile-time* variable type:
+  </pre>    
     <pre><code>
     void Main()
     {
@@ -1934,6 +2083,7 @@ the definition of the original type:
     }
     </code></pre>  
   </div>
+
 <h2>Boxing & Unboxing</h2>
   <div>
    Boxing is the act of casting a value-type instance to a reference-type instance; unboxing is the reverse.
@@ -1943,6 +2093,7 @@ the definition of the original type:
     int y = (int)obj;         // Unbox the int    
  </code></pre>  
   </div>
+
 <h2>DateTime</h2>
   <div>
     <h3>Format DateTime</h3>
@@ -1989,8 +2140,9 @@ the definition of the original type:
   var zone = String.Format("{0:z zz zzz}", dt); // "+0 +00 +00:00" time zone
  // You can use also date separator / (slash) and time sepatator : (colon)
 </code></pre>
-    <h3>AddDays(Double)</h3>
-    <pre><code>
+   
+<h3>AddDays(Double)</h3>
+ <pre><code>
 DateTime.AddDays(Double)
 Add days into a dateTime object.
 DateTime today = DateTime.Now;
@@ -2004,8 +2156,9 @@ DateTime answer = today.AddDays(-3);
 Console.WriteLine("Today: {0:dddd}", today);
 Console.WriteLine("-3 days from today: {0:dddd}", answer);
 </code></pre>
-    <h3>AddHours(Double)</h3>
-    <pre><code>
+
+ <h3>AddHours(Double)</h3>
+<pre><code>
 // DateTime.AddHours(Double)
 double[] hours = {.08333, .16667, .25, .33333, .5, .66667, 1, 2,
 29, 30, 31, 90, 365};
@@ -2013,15 +2166,17 @@ DateTime dateValue = new DateTime(2009, 3, 1, 12, 0, 0);
 foreach (double hour in hours)
   Console.WriteLine("{0} + {1} hour(s) = {2}", dateValue, hour,dateValue.AddHours(hour));
 </code></pre>
-    <h3>Parse(String)</h3>
-    <pre><code>
+    
+<h3>Parse(String)</h3>
+ <pre><code>
 // Converts the string representation of a date and time to its DateTime equivalent
 var dateTime = DateTime.Parse("14:23 22 Jul 2016");
 Console.WriteLine(dateTime.ToString());
 </code>
 </pre>
-    <h3>TryParse(String, DateTime)</h3>
-    <pre><code>
+    
+<h3>TryParse(String, DateTime)</h3>
+<pre><code>
   // Converts the specified string representation of a date and time to its DateTime equivalent and
   returns a value that indicates whether the conversion succeeded
   string[] dateTimeStrings = new []{
@@ -2037,8 +2192,9 @@ Console.WriteLine(dateTime.ToString());
     Console.WriteLine(result);
   }
 </code></pre>
-    <h3>AddMilliseconds(Double)</h3>
-    <pre><code>
+
+<h3>AddMilliseconds(Double)</h3>
+<pre><code>
     string dateFormat = "MM/dd/yyyy hh:mm:ss.fffffff";
     DateTime date1 = new DateTime(2010, 9, 8, 16, 0, 0);
     Console.WriteLine("Original date: {0} ({1:N0} ticks)\n",
@@ -2055,9 +2211,10 @@ Console.WriteLine(dateTime.ToString());
     date3.ToString(dateFormat), date3.Ticks);
     Console.WriteLine("Difference between dates: {0} ({1:N0} ticks)",
     date3 - date1, date3.Ticks - date1.Ticks);
-   </code></pre>
-    <h3>Compare(DateTime t1, DateTime t2 )</h3>
-    <pre><code>  
+</code></pre>
+
+<h3>Compare(DateTime t1, DateTime t2 )</h3>
+<pre><code>  
     DateTime date1 = new DateTime(2009, 8, 1, 0, 0, 0);
     DateTime date2 = new DateTime(2009, 8, 1, 12, 0, 0);
     int result = DateTime.Compare(date1, date2);
@@ -2069,9 +2226,10 @@ Console.WriteLine(dateTime.ToString());
     else
       relationship="is later than" ;
     Console.WriteLine("{0} {1} {2}", date1, relationship, date2); 
-    </code></pre>
-    <h3>DaysInMonth(Int32, Int32)</h3>
-    <pre><code>      
+</code></pre>
+
+<h3>DaysInMonth(Int32, Int32)</h3>
+<pre><code>      
    const int July=7; 
    const int Feb=2; 
 
@@ -2084,10 +2242,11 @@ Console.WriteLine(dateTime.ToString());
   // daysInFebLeap gets 29 because the year 1996 was a leap year. 
   int daysInFebLeap=System.DateTime.DaysInMonth(1996, Feb); 
   Console.WriteLine(daysInFebLeap); 
-    </code></pre>
-    <h3>AddYears(Int32)</h3>
+</code></pre>
+
+<h3>AddYears(Int32)</h3>
     Add years on the dateTime object
-    <pre><code class="csharp">   
+<pre><code class="csharp">   
     baseDate = new DateTime(2000, 2, 29); 
     Console.WriteLine("Base Date: {0:d}\n", baseDate); 
     // Show dates of previous fifteen years. 
@@ -2099,7 +2258,9 @@ Console.WriteLine(dateTime.ToString());
     for (int ctr = 1; ctr <= 15; ctr++) 
       Console.WriteLine("{0,2} year(s) from now: {1:d}", ctr, baseDate.AddYears(ctr));
     </code></pre>
-    <h3>Pure functions warning when dealing with DateTime</h3>
+
+  <h3>Pure functions warning when dealing with DateTime</h3>
+<pre>
     pure function is:
     1. The function always evaluates the same result value given the same argument value(s).
     The function result value cannot depend on any hidden information
@@ -2113,23 +2274,29 @@ Console.WriteLine(dateTime.ToString());
     One I have seen that bites many junior developers is working with DateTime class methods.
     A lot of these are pure and if you are unaware of these you can be in for a suprise.
     An example:
-    <pre><code>
+</pre>    
+  <pre><code>
      DateTime sample=new DateTime(2016, 12, 25); 
      sample.AddDays(1); 
      Console.WriteLine(sample.ToShortDateString()); 
-     </code></pre>
+  </code></pre>
+<pre>
     Given the example above one may expect the result printed to console to be '26/12/2016'
     but in reality you end up with the same date.
     This is because AddDays is a pure method and does not affect the original date.
     To get the expected output you would have to modify the AddDays call to the following:
     <cl>sample=sample.AddDays(1);</cl>
+</pre>
 
-    <h3>TryParseExact(String, String, IFormatProvider, D ateTimeStyles, DateTime) </h3>
+<h3>TryParseExact(String, String, IFormatProvider, D ateTimeStyles, DateTime) </h3>
+<pre>
     - DateTime.Converts the specified string representation of a date and time
     to its DateTime equivalent using the specified format,culture-specific format information, and style.
     - The format of the string representation must match the specified format exactly.
     - The method returns a value that indicates whether the conversion succeeded.
     For Example
+</pre>    
+
     <pre><code>
     CultureInfo enUS=new CultureInfo("en-US"); 
     string dateString; System.DateTime dateValue;
@@ -2201,19 +2368,24 @@ Console.WriteLine(dateTime.ToString());
     Converted '2008-06-11T16:11:20.0904778Z' to 6/11/2008 9:11:20 AM (Local).
     Converted '2008-06-11T16:11:20.0904778Z' to 6/11/2008 4:11:20 PM (Utc).
 </code></pre>
-    <h3>Add(TimeSpan)</h3>
-    <pre><code>
+
+<h3>Add(TimeSpan)</h3>
+ <pre><code>
     DateTime.Add(TimeSpan)
     // Calculate what day of the week is 36 days from this instant. 
     System.DateTime today=System.DateTime.Now; 
     System.TimeSpan duration=new System.TimeSpan(36, 0, 0, 0);
      System.DateTime answer=today.Add(duration); 
      System.Console.WriteLine("{0:dddd}", answer); 
-     </code></pre>
-    <h3>Parse and TryParse with culture info</h3>
+ </code></pre>
+
+<h3>Parse and TryParse with culture info</h3>
+<pre>
     You might want to use it when parsing DateTimes from different cultures (languages),
     following example parses Dutch date.
-    <pre><code>
+  </pre>
+
+  <pre><code>
   DateTime dateResult; 
     var dutchDateString="31 oktober 1999 04:20" ;
     var dutchCulture=CultureInfo.CreateSpecificCulture("nl-NL");
@@ -2221,7 +2393,9 @@ Console.WriteLine(dateTime.ToString());
       //Example of Parse: 
     DateTime.Parse(dutchDateString, dutchCulture) // output {31/10/1999 04:20:00}  
     </code></pre>
+
     <h3> DateTime as initializer in for-loop</h3>
+    
     <pre><code>
     // This iterates through a range between two DateTimes 
     // with the given iterator (any of the Add methods)
@@ -2238,7 +2412,8 @@ Console.WriteLine(dateTime.ToString());
       
 </code></pre>
 
-    <h3> DateTime.ParseExact(String, String, IFormatProvider)</h3>
+<h3> DateTime.ParseExact(String, String, IFormatProvider)</h3>
+<pre>
     Converts the specified string representation of a date and time to its DateTime equivalent using the specified
     format
     and culture-specific format information.
@@ -2247,31 +2422,39 @@ Console.WriteLine(dateTime.ToString());
     <b>Convert a specific format string to equivalent DateTime </b>
     Let's say we have a culture-specific DateTime string
     08-07-2016 11:30:12 PM as MM-dd-yyyy hh:mm:ss tt format and we want it to convert to equivalent DateTime object
-    <pre><code>
+</pre>    
+
+<pre><code>
  string str="08-07-2016 11:30:12 PM" ; 
  DateTime date=DateTime.ParseExact(str, "MM-dd-yyyy hh:mm:ss tt" , CultureInfo.CurrentCulture);
 </code></pre>
-    <b>Convert a date time string to equivalent DateTime object without any specific culture format</b>
+
+<pre>
+<b>Convert a date time string to equivalent DateTime object without any specific culture format</b>
     Let's say we have a DateTime string in dd-MM-yy hh:mm:ss tt format
     and we want it to convert to equivalent DateTime object, without any specific culture information
-    <code>
+<code>
 string str="17-06-16 11:30:12 PM" ; 
 DateTime date=DateTime.ParseExact(str, "dd-MM-yy hh:mm:ss tt" ,CultureInfo.InvariantCulture);   
 </code>
+
+<pre>
     <b>Convert a date time string to equivalent DateTime object
       without any specific culture format with different format </b>
 
     Let's say we have a Date string , example like '23-12-2016' or '12/23/2016'
     and we want it to convert to equivalent DateTime object,
     without any specific culture information
-
+</pre>
+<pre><code>
     string date='23-12-2016' or date=12/23/2016';
     string[] formats=new string[] {"dd-MM-yyyy","MM/dd/yyyy"}; // even can add more possible formats.
     DateTime date=DateTime.ParseExact(date,formats, CultureInfo.InvariantCulture,DateTimeStyles.None);
     //NOTE : System.Globalization needs to be added for CultureInfo Class
+</code></pre>
 
-    <h3>DateTime ToString, ToShortDateString,ToLongDateString and ToString formatted</h3>
-    <pre><code>
+<h3>DateTime ToString, ToShortDateString,ToLongDateString and ToString formatted</h3>
+<pre><code>
  using System; public class Program { 
     public static void Main() {
       var date=new DateTime(2016,12,31); 
@@ -2284,6 +2467,7 @@ DateTime date=DateTime.ParseExact(str, "dd-MM-yy hh:mm:ss tt" ,CultureInfo.Invar
    }
   </code></pre>
     <h3>Current Date</h3>
+    <pre>
     To get the current date you use the DateTime.Today property.
     This returns a DateTime object with today's date.
     When this is then converted .ToString() it is done so in your system's locality by default.
@@ -2292,7 +2476,8 @@ DateTime date=DateTime.ParseExact(str, "dd-MM-yy hh:mm:ss tt" ,CultureInfo.Invar
     Console.WriteLine(DateTime.Today);
 
     Writes today's date, in your local format to the console.
-  </div>
+  </pre>
+ </div>
 <h2>Arrays</h2>
   <div>
   <pre><code>
@@ -2343,6 +2528,7 @@ int[] intArray = Enumerable.Repeat(100, 5).ToArray();
 string[] strArray = Enumerable.Repeat("C#", 5).ToArray();
 
 </code></pre>
+
 <h3>Multidimensional Arrays</h3>
 <pre><code>
 int[, , , ,] arr5d; // five-dimensional array
@@ -2351,12 +2537,14 @@ int[,] arr2d = new int[3,2]{    {1, 2},  {3, 4}, {5, 6}   };
 // or 
 int[,] arr2d = {     {1, 2},   {3, 4},  {5, 6}    };
 </code></pre>
+
 <h3>Jagged Arrays: An Array of Array</h3>
 <pre><code>
 int[][] jArray = new int[2][]; 
 jArray[0] = new int[3]{1, 2, 3};
 jArray[1] = new int[4]{4, 5, 6, 7 };
 </code></pre>
+
 <h3>Copying arrays</h3>
 <b>Array.Copy() </b>:
 <pre><code>
@@ -2367,6 +2555,7 @@ Array.Copy(sourceArray, destinationArray, 3);// destinationArray will have 11,12
 CopyTo() 
 <pre><code>
 //beginning at index 0 of the source and the specified index in the destination:
+
 var sourceArray = new int[] { 11, 12, 7 };
 var destinationArray = new int[6];
 sourceArray.CopyTo(destinationArray, 2);
@@ -2380,6 +2569,7 @@ var destinationArray = (int)sourceArray.Clone();
 </code></pre>
 Both CopyTo and Clone perform shallow copy.
 <b>shallow copy</b> means the contents contains references to the same object as the elements in the original array.
+
 <h3>Comparing arrays for equality</h3>
 <pre><code>
 //SequenceEqual() :
@@ -2388,6 +2578,7 @@ int[] arr2 = { 3, 5, 7 };
 bool result = arr1.SequenceEqual(arr2);
 Console.WriteLine("Arrays equal? {0}", result);//prints: Arrays equal? True
 </code></pre>
+
 <h3>Multi-dimensional arrays</h3>
 <pre><code>
   int[,] arr = new int[10, 10];
@@ -2447,13 +2638,17 @@ Output:
 int[] sequence = Enumerable.Range(1, 100).ToArray();
 int[] squares = Enumerable.Range(2, 10).Select(  x => x * x ).ToArray();// 4 9 16 25 36 49 64 81 100 121
 </code></pre>
-<h3>Arrays as IEnumerable<> instances</h3>
+
+h3>Arrays as IEnumerable<> instances</h3>
+<p>
 - All arrays implement the non-generic <strong>IList</strong> interface.
 (and hence non-generic <strong>ICollection</strong> and <strong>IEnumerable</strong> base interfaces).
 - one-dimensional arrays implement the <strong>IList<></strong> and <strong>IReadOnlyList<></strong> generic interfaces.
 (and their base interfaces) for the type of data that they contain.
 This means that they can be treated as generic enumerable types
 and passed in to a variety of methods without needing to first convert them to a non-array form.
+</p>
+
 <pre><code>
 int[] arr1 = { 3, 5, 7 };
 IEnumerable<int> enumerableIntegers = arr1; //Allowed because arrays implement IEnumerable<T>
@@ -2461,9 +2656,13 @@ List<int> listOfIntegers = new List<int>();
 listOfIntegers.AddRange(arr1); //You can pass in a reference to an array to populate a List.
 // the listOfIntegers will contain a List<int> containing the values 3, 5, and 7.
 </code></pre>
- The IEnumerable<> support means arrays can be queried with LINQ, for example:
- <pre><code>arr1.Select(i => 10 * i)</code></pre> 
+
+The IEnumerable<> support means arrays can be queried with LINQ, for example:
+
+<pre><code>arr1.Select(i => 10 * i)</code></pre> 
 </div>
+
+
 <h2>O(n) Algorithm, for circular rotation of an array</h2>
 <div>
 <h3>Example of a generic method that rotates an array by a given shift</h3>
@@ -2502,14 +2701,17 @@ listOfIntegers.AddRange(arr1); //You can pass in a reference to an array to popu
   }
 </code></pre>
 </div>
+
 <h2>Enum</h2>
 <div>
 <h3>Enum basics</h3>
+<p>
 - A type to define a set of named integral constants that may be assigned to a variable.
 - An enum is a type that only allows a set of finite options,and each option corresponds to a number.
   By default, those numbers are increasing in the order the values are declared, starting from <b>zero</b>.
   
   For example:
+</p>  
 <pre><code>
 public enum Day
 {
@@ -2541,9 +2743,13 @@ This is useful when Invoking to native code, mapping to data sources, and simila
 In general, the default int should be used, because most developers expect an enum to be an int.
 */
 </code></pre>
+
 <h3>Enum as flags</h3>
+<p>
 The <b>Flags</b> Attribute can be applied to an enum 
 changing the behaviour of the ToString() to match the nature of the enum:
+</p>
+
 <pre><code>
  [Flags]
   enum MyEnum
@@ -2559,6 +2765,7 @@ changing the behaviour of the ToString() to match the nature of the enum:
   var twoFlags = MyEnum.FlagA | MyEnum.FlagB; 
   Console.WriteLine(twoFlags);// output : "FlagA, FlagB".
 </code></pre>
+<p>
 - Because Flags Attribute relies on the enumeration constants to be powers of two (or their combinations)
 and enum values are ultimately numeric values, you are limited by the size of the underlying numeric type.
 
@@ -2570,6 +2777,8 @@ which allows you to specify 64 distinct (non-combined) flag enum constants.
 - Those will wrap around without a warning and result in two or more enum members of the same value.
   Therefore, if an enum is meant to accomodate a bitset of more than 32 flags,
   you need to specify a bigger type explicitely:
+</p>
+
 <pre><code>
   public enum BigEnum : ulong
   {
@@ -2599,8 +2808,10 @@ which allows you to specify 64 distinct (non-combined) flag enum constants.
     All = Option1 | Option2 | Option3,
   }  
  </code></pre>
+<p>
 - Starting with C# 7.0, binary literals can be used too.
 - To check if the value of enum variable has a certain flag set,the HasFlag method can be used:
+</p>
 <pre><code>
 [Flags]
 enum MyEnum
@@ -2641,11 +2852,15 @@ foreach(MyEnum flagToCheck in Enum.GetValues(typeof(MyEnum)))
   Enum has One
   Enum has Two*/   
 </code></pre>
+
 <h3>Using << notation for flags </h3>
+<p>
 The left-shift operator (<<) can be used in flag enum declarations 
 to ensure that each flag has exactly one 1 in binary representation, as flags should. 
         
 This also helps to improve readability of large enums with plenty of flags in them. 
+</p>
+
 <pre><code>
 [Flags] 
 public enum MyEnum {
@@ -2653,9 +2868,11 @@ public enum MyEnum {
   Flag5=1 << 4, ... Flag31=1 << 30 
 } 
 </code></pre>          
+<p>
 It is obvious now that MyEnum contains proper flags only 
 and not any messy stuff like Flag30=1073741822 (or 111111111111111111111111111110 in binary) which is inappropriate. 
-  
+</p>
+
 <h3>Test flags-style enum values with bitwise logic </h3>
  A flags-style enum value needs to be tested with bitwise logic because it may not match any single value. 
  <pre><code>
@@ -2664,16 +2881,20 @@ and not any messy stuff like Flag30=1073741822 (or 11111111111111111111111111111
    Option1=1, Option2=2, Option3=4,Option2And3=Option2 | Option3; Default=Option1 | Option3, 
 } 
  </code></pre>
-
+<p>
 The Default value is actually a combination of two others merged with a bitwise OR. 
 Therefore to test for the presence of a flag we need to use a bitwise AND.
+</p>
+
 <pre><code>
 var value=FlagsEnum.Default; 
 bool isOption2And3Set=(value & FlagsEnum.Option2And3)==FlagsEnum.Option2And3; 
 Assert.True(isOption2And3Set);  
 </code></pre>
+
 <h3> Add and remove values from flagged enum </h3>
 This code is to add and remove a value from a flagged enum-instance: 
+
 <pre><code>
 [Flags] 
 public  enum MyEnum { Flag1=1 << 0, Flag2=1 << 1, Flag3=1 << 2 } 
@@ -2682,7 +2903,8 @@ var value=MyEnum.Flag1; // set additional value value
           |=MyEnum.Flag3; //value is now Flag1, Flag2, Flag3 // remove
           flag value &=~MyEnum.Flag2; //value is now Flag1, Flag3   
 </code></pre>
- <h3>Enum to string and back public enum</h3>
+
+<h3>Enum to string and back public enum</h3>
  <pre><code>
   DayOfWeek { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday } // Enum to string string
   thursday=DayOfWeek.Thursday.ToString(); // "Thursday" 
@@ -2700,12 +2922,16 @@ var value=MyEnum.Flag1; // set additional value value
   caturday=(DayOfWeek)Enum.Parse(typeof(DayOfWeek), "Caturady" ); // Thows ArgumentException // All names of an
   enum type as strings string[] weekdays=Enum.GetNames(typeof(DayOfWeek)); 
  </code></pre>
+
 <h3>Enums can have unexpected values </h3>
+<p>
  Since an enum can be cast to and from its underlying integral type,
   the value may fall outside the range of values given in the definition of the enum type. 
   
   Although the below enum type DaysOfWeek only has 7 defined values, it can still hold any int value. 
-  <pre><code>
+</p> 
+
+<pre><code>
 public enum DaysOfWeek {
    Monday=1, Tuesday=2,Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=7 
 } 
@@ -2718,9 +2944,13 @@ s=DaysOfWeek.Sunday; s++;
 Console.WriteLine(Enum.IsDefined(typeof(DaysOfWeek),d)); 
 // prints False 
 </code></pre>  
+
 <h3> Default value for enum==ZERO </h3>
+<p>
 The default value for an enum is zero. 
 If an enum does not define an item with a value of zero, its default value will be zero. 
+</p>
+
 <pre><code>
 public class Program { enum EnumExample { one=1, two=2 } 
 public void Main() { 
@@ -2730,13 +2960,17 @@ public void Main() {
   else Console.WriteLine("Unknown"); } } 
   Example: https://dotnetfiddle.net/l5Rwie  
 </code></pre>
+
 <h3>Adding additional description information to an enum value </h3>
+<p>
 In some cases you might want to add an additional description to an enum value,
 for instance when the enum value itself is less readable than what you might want to display to the user.
 
 In such cases you can use the  <cle>System.ComponentModel.DescriptionAttribute class</cle> 
 
 For example:
+</p>
+
 <pre><code>
 public enum PossibleResults {
           [Description("Success")] 
@@ -2747,6 +2981,7 @@ public enum PossibleResults {
           AccessDenied=3 
         } 
 </code></pre>
+
 Now, if you would like to return the description of a specific enum value you can do the following: 
 <pre><code>
 public static string GetDescriptionAttribute(PossibleResults result) {
@@ -2772,7 +3007,7 @@ static class EnumExtensions {
 </code></pre>
 
 And then easily used like this:
- <pre><code>Console.WriteLine(result.GetDescription()); </code></pre>         
+<pre><code>Console.WriteLine(result.GetDescription()); </code></pre>         
           
 <h3>  Get all the members values of an enum</h3>  
 <pre><code>
@@ -2782,8 +3017,10 @@ foreach(MyEnum e in Enum.GetValues(typeof(MyEnum)))
 </code></pre>   
 
 <h3>Bitwise Manipulation using enums </h3>
+<p>
 - The FlagsAttribute should be used whenever the enumerable represents a collection of flags, rather than a single value. 
 - The numeric value assigned to each enum value helps when manipulating enums using bitwise operators.
+</p>
 <pre><code>
  //Example 1 : With [Flags] 
  [Flags] 
@@ -2815,9 +3052,11 @@ var item5 = tuple.Item5; // Invalid
 </code></pre>
 
 <h3>Creating tuples</h3>
+<p>
 Tuples are created using generic types Tuple< T1>-Tuple< T1,T2,T3,T4,T5,T6,T7,T8>. 
 Each of the types represents a tuple containing 1 to 8 elements. 
 Elements can be of different types.
+</p>
 <pre><code>
 // tuple with 4 elements
 var tuple = new Tuple<string, int, bool, MyClass>("foo", 123, true, new MyClass());
@@ -2856,9 +3095,12 @@ foreach (var element in list) {
 // Or to reverse the sort use:
 //  list.Sort((a, b) => b.Item2.CompareTo(a.Item2));
   </code></pre>
+
 <h3>Return multiple values from a method</h3>
+<p>
 Tuples can be used to return multiple values from a method without using out parameters. 
 In the following example AddMultiply is used to return two values (sum, product).
+</p>
 <pre><code>
   void Write()
   {
@@ -2873,10 +3115,13 @@ In the following example AddMultiply is used to return two values (sum, product)
   Output:
   53
   700</code></pre>
+<p>
 Now C# 7.0 offers an alternative way to return multiple values from methods 
 using value tuples More info about ValueTuple struct.
-  </div>
-  <h2>Tuple literals</h2>
+</p>
+</div>
+
+<h2>Tuple literals</h2>
   <div>
   <pre><code>
   var bob = ("Bob", 23);    // Allow compiler to infer the element types
@@ -2884,16 +3129,23 @@ using value tuples More info about ValueTuple struct.
   Console.WriteLine (bob.Item2);   // 23
   </code></pre>  
   </div>
-  <h2>Guid</h2>
-  <div>
+
+<h2>Guid</h2>
+<div>
+<p>
     GUID (or UUID) is an acronym for 'Globally Unique Identifier' (or 'Universally Unique Identifier').
     It is a 128-bit integer number used to identify resources.
-    <h3>Getting the string representation of a Guid</h3>
+</p>    
+
+<h3>Getting the string representation of a Guid</h3>
+<p>
     A string representation of a Guid can be obtained by using the built in ToString method
     <cl>string myGuidString = myGuid.ToString();</cl>
     Depending on your needs you can also format the Guid,
     by adding a format type argument to the ToString call.
-    <pre><code>var guid = new Guid("7febf16f-651b-43b0-a5e3-0da8da49e90d");
+</p>    
+  
+<pre><code>var guid = new Guid("7febf16f-651b-43b0-a5e3-0da8da49e90d");
     // None "7febf16f651b43b0a5e30da8da49e90d"
     Console.WriteLine(guid.ToString("N"));
     // Hyphens "7febf16f-651b-43b0-a5e3-0da8da49e90d"
@@ -2904,6 +3156,7 @@ using value tuples More info about ValueTuple struct.
     Console.WriteLine(guid.ToString("P"));
     // Hex "{0x7febf16f,0x651b,0x43b0{0xa5,0xe3,0x0d,0xa8,0xda,0x49,0xe9,0x0d}}"
     Console.WriteLine(guid.ToString("X"));</code></pre>
+
     <h3>Creating a Guid</h3>
     These are the most common ways to create an instance of Guid:
     <pre><code>
@@ -2920,12 +3173,15 @@ using value tuples More info about ValueTuple struct.
     Guid g3 = Guid.Parse("0b214de7-8958-4956-8eed-28f9ba2c47c6");      
     </code></pre>
  
-    <h3>Declaring a nullable GUID</h3>
+<h3>Declaring a nullable GUID</h3>
+<p>
     Like other value types, GUID also has a nullable type which can take null value.
     <cl>Guid? myGuidVar = null;</cl>
     This is particularly useful when retrieving data from the data base
     when there is a possibility that value from a table is NULL.
+</p>    
 </div>
+
 <h2>BigInteger</h2>
 <div>
 <h3>Calculate the First 1,000-Digit Fibonacci Number</h3>
@@ -2950,7 +3206,7 @@ using value tuples More info about ValueTuple struct.
   </div>
 
 <h2>collections</h2>
-  <div>
+<div>
   <h3>Collection Initializers</h3>
 
   Initialize a collection type with values
@@ -2963,8 +3219,10 @@ using value tuples More info about ValueTuple struct.
   temp.Add("bar");
   var stringList = temp;
   </code></pre>
+  <p>
   - Note that the intialization is done atomically using a temporary variable,to avoid race conditions.
   - For types that offer multiple parameters in their Add() method, enclose the comma-separated arguments in curly braces:
+  </p>
   <pre><code>
     var numberDictionary = new Dictionary < int,string > 
     {
@@ -2976,7 +3234,7 @@ using value tuples More info about ValueTuple struct.
           2,
           "Two"
       },
-  };
+    };
 
   //This is equivalent to:
   var temp = new Dictionary<int, string>();
@@ -2984,12 +3242,15 @@ using value tuples More info about ValueTuple struct.
   temp.Add(2, "Two");
   var numberDictionarynumberDictionary = temp;
   </code></pre>
-  <h3>Index Initializers</h3>
+
+<h3>Index Initializers</h3>
+<p>
   Starting with C# 6, 
   collections with indexers can be initialized by specifying the index to assign in square brackets,
   followed by an equals sign, followed by the value to assign.
   Dictionary Initialization
   An example of this syntax using a Dictionary:
+</p>  
   <pre><code>
   var dict = new Dictionary < string,int > {
         ["key1"] = 1,
@@ -3017,7 +3278,7 @@ using value tuples More info about ValueTuple struct.
   dict.Add("key2", 50);
   </code></pre>
   example2:
-  <pre><code>
+<pre><code>
   public class IndexableClass {
     public int this[int index] {
       set {
@@ -3034,12 +3295,15 @@ using value tuples More info about ValueTuple struct.
   10 was assigned to index 0
   20 was assigned to index 1
   */
-    </code></pre>
-  <h3>Collection initializers in custom classes</h3>
+</code></pre>
+
+<h3>Collection initializers in custom classes</h3>
+<p>
   To make a class support collection initializers, 
   it must implement IEnumerable interface and have at least one Add method. 
   Since C# 6, any collection implementing IEnumerable can be extended with custom Add methods using extension methods.
-  <pre><code>
+</p>  
+<pre><code>
   class Program
   {
     static void Main()
@@ -3079,7 +3343,8 @@ using value tuples More info about ValueTuple struct.
           @this.Add(value.ToString());
   }
   </code></pre>
-  <h3>Using collection initializer inside object initializer</h3>
+
+<h3>Using collection initializer inside object initializer</h3>
   <pre><code>
     public class Tag {
       public IList < string > Synonyms {
@@ -3110,10 +3375,11 @@ Tag t = new Tag {
       };
   // This works because collection initializers are just syntatic sugar over calls to Add(). There's no new list being created
     // here, the compiler is just generating calls to Add() on the exiting object
-  </code></pre>
-  <h3>Collection Initializers with Parameter Arrays</h3>
+</code></pre>
+
+<h3>Collection Initializers with Parameter Arrays</h3>
   You can mix normal parameters and parameter arrays:
-  <pre><code>
+ <pre><code>
   public class LotteryTicket : IEnumerable{
       public int[] LuckyNumbers;
       public string UserName;
@@ -3129,7 +3395,8 @@ Tag t = new Tag {
       {"John Cena", 25446, 83356, 65536, 23783, 24567, 89337}
     }
   </code></pre>
-    <h3>HashSet< T>
+
+  <h3>HashSet< T>
     </h3>
     This is a collection of unique items, with O(1) lookup.
     <pre><code>
@@ -3142,11 +3409,14 @@ Tag t = new Tag {
 
     //HashSet.Contains uses a hash table, so that lookups are extremely fast
    </code></pre>
-    <h3>Dictionary< TKey, TValue>
-    </h3>
+
+<h3>Dictionary< TKey, TValue></h3>
+<p>
     <b>Dictionary< TKey, TValue></TKey></b> is a map. 
     For a given key there can be one value in the dictionary
-    <pre><code>
+</p>
+
+<pre><code>
       using System.Collections.Generic;
       var people = new Dictionary < string, int > {
               {  "John",   30     },
@@ -3181,10 +3451,11 @@ Tag t = new Tag {
               {"Jack",    40              },
               {"Jack",    40              }
      }; // throws ArgumentException since "Jack" already exists 
-    </code></pre>
-      <h3>SortedSet< T>
-      </h3>
-      <pre><code>
+</code></pre>
+
+<h3>SortedSet< T> </h3>
+    
+<pre><code>
       // create an empty set
       var mySet = new SortedSet<int>();
 
@@ -3201,9 +3472,12 @@ Tag t = new Tag {
       // output:
       // 1
       // 2
-    </code></pre>
-      <h3>T[ ] (Array of T)</h3>
-      <pre><code>
+   
+</code></pre>
+
+<h3>T[ ] (Array of T)</h3>
+
+<pre><code>
       var myArray = new [] {
         "one",
         "two"
@@ -3226,12 +3500,16 @@ Tag t = new Tag {
     // output:
     // something else
     // two
-    </code></pre>
-      <h3>List< T>
-      </h3>
+
+  </code></pre>
+
+<h3>List< T>      </h3>
+<p>
       List< T> is a list of a given type. 
       Items can be added, inserted, removed and addressed by index.
-    <pre><code>
+</p>      
+
+<pre><code>
     using System.Collections.Generic;
     var list = new List<int>() { 1, 2, 3, 4, 5 };
     list.Add(6);
@@ -3239,13 +3517,18 @@ Tag t = new Tag {
     list.RemoveAt(3);
     Console.WriteLine(list.Count); // 5
     Console.WriteLine(list[3]); // 5
-    </code></pre>
+</code></pre>
+<p>
 - List< T> can be thought of as an array that you can resize.
 - Enumerating over the collection in order is quick, as is access to individual elements via their index.
 - To access elements based on some aspect of their value, 
   or some other key, a Dictionary< T> will provide faster lookup.
+</p>
+
 <h3>Stack < T> </h3>
+
 elements are stored with "first in, last out" order.
+
 <pre><code>
 // Initialize a stack object of integers
 var stack = new Stack<int>();
@@ -3264,11 +3547,15 @@ Console.WriteLine(stack.Pop()); // prints 8
 Console.WriteLine(stack.Pop()); // prints 5
 Console.WriteLine(stack.Pop()); // prints 3 
 </code></pre>
+
 <h3>LinkedList< T></h3> 
+<p>
 Note that LinkedList< T> represents the doubly linked list.
 So, it's simply collection of nodes and each node
 contains an element of type T.
 Each node is linked to the preceding node and the following node
+</p>
+
 <pre><code>
   // initialize a LinkedList of integers
   LinkedList list = new LinkedList<int>();
@@ -3313,6 +3600,7 @@ Console.WriteLine(queue.Dequeue()); // prints 9
     Console.WriteLine(i);
   }// output: 01234
 </code></pre>
+
 <h3>Do - While Loop</h3>
 <pre><code>
   int[] numbers = new int[] { 6, 7, 8, 10 };
@@ -3325,13 +3613,17 @@ Console.WriteLine(queue.Dequeue()); // prints 9
   } while (sum <= 10 && i < numbers.Length);
   System.Console.WriteLine(sum); // 13
 </code></pre>
+
 <h3>Foreach Loop</h3>
+<p>
 - will iterate over any object of a class that implements <b>IEnumerable</b> 
 - Such objects include some built-in ones, but not limit to: 
   <cl>List< T >, T[] (arrays of any type), Dictionary< TKey, TSource>, </cl>
   as well as interfaces like IQueryable and ICollection, etc.
+</p>
+
 <pre><code>
-  var list = new List<string>();
+  var list = new List< string>();
   list.Add("Ion");
   list.Add("Andrei");
   foreach(var name in list)
@@ -3340,7 +3632,7 @@ Console.WriteLine(queue.Dequeue()); // prints 9
   }
     
   //is equivalent to:
-  var list = new List<string>();
+  var list = new List< string>();
   list.Add("Ion");
   list.Add("Andrei");
   IEnumerator enumerator;
@@ -3358,7 +3650,8 @@ Console.WriteLine(queue.Dequeue()); // prints 9
     if (enumerator != null)
       enumerator.Dispose();
   }
-  </code></pre>
+</code></pre>
+
 <h3>Foreach Method</h3>
 <pre><code>
 list.ForEach(item => item.DoSomething());
@@ -3369,15 +3662,19 @@ list.ForEach(Console.WriteLine);
 // using an array
 Array.ForEach(myArray, Console.WriteLine); 
 </code></pre>
+
 <h3>Linq Parallel Foreach</h3>
+<p>
 Just like Linq Foreach, except this one does the job in a parallel manner. 
 Meaning that
 all the items in the collection will run the given action <strog>at the same time</strog>, simultaneously.    
+</p>
 <pre><code>
 collection.AsParallel().ForAll(item => item.DoSomething());
 /// or
 collection.AsParallel().ForAll(item => DoSomething(item));
 </code></pre>
+
   <h3>continue</h3>
   Instead of breaking completely the loop, it will simply skip the current iteration. 
   
@@ -3409,8 +3706,10 @@ collection.AsParallel().ForAll(item => DoSomething(item));
 <div>
   
 <h3>Creating Iterators Using Yield</h3>
+<p>
 - Iterators produce enumerators. 
 - an iterator is a producer of an enumerator:
+</p>
 <pre><code>
 foreach (int fib in Fibs(6))
   Console.Write (fib + "  ");
@@ -3425,7 +3724,8 @@ IEnumerable< int > Fibs (int fibCount)
     curFib = newFib;
   }
 }    
-</code></pre>   
+</code></pre> 
+<p>  
 - enumerators are produced by defining methods, properties or indexers that contain yield statements.
 
 - Most methods will return control to their caller through normal return statements,
@@ -3441,6 +3741,8 @@ which disposes all state local to that method.
   - <b>yield break</b>, which functions similarly to a normal return statement - this signifies the end of the sequence.
   Normal return statements themselves are illegal within an iterator block.
 This example below demonstrates an iterator method that can be used to generate the Fibonacci sequence:
+</p>
+
 <pre><code>
 IEnumerable<int> Fibonacci(int count)
   {
@@ -3467,13 +3769,17 @@ IEnumerable<int> Fibonacci(int count)
   }
   // Output: 1 1 2 3 5 8 13 21
 </code></pre>
+
 <h3>Simple Numeric Iterator Example</h3>
+<p>
     A common use-case for iterators is to perform some operation over a collection of numbers.
     The example below demonstrates how each element within an array of numbers can be individually printed out to the console.
     This is possible because arrays implement the IEnumerable interface, 
     allowing clients to obtain an iterator for the array using the GetEnumerator() method. 
     This method returns an enumerator, which is a read-only, forward-only cursor over each number in the array.
-    <pre><code>
+</p>    
+
+<pre><code>
       int[] numbers = { 1, 2, 3, 4, 5 };
       IEnumerator iterator = numbers.GetEnumerator();
       while (iterator.MoveNext())
@@ -3494,6 +3800,7 @@ IEnumerable<int> Fibonacci(int count)
 
 <h2>IEnumerable</h2>
  <div> 
+<p>
   - IEnumerable is the base interface for all non-generic collections like ArrayList that can be enumerated.
   - IEnumerator< T> is the base interface for all generic enumerators like List< >.
   - IEnumerable is an interface which implements the method GetEnumerator.
@@ -3505,8 +3812,9 @@ IEnumerable<int> Fibonacci(int count)
     - Other than iterating over a standard collection, examples include:
       . Using ranges of numbers based on a function rather than a collection of objects
       . Implementing different iteration algorithms over collections, like DFS or BFS on a graph collection
+</p>
 
-    <pre><code>    
+<pre><code>    
 public static void Main(string[] args)
   {
     foreach (var coffee in new CoffeeCollection())
@@ -3549,12 +3857,16 @@ public static void Main(string[] args)
       public void Reset()
       {
         currentIndex = 0;
-      }</code></pre>
+      }
+</code></pre>
+
 <h3>IEnumerable< int></int></h3>
+<p>
 - In its most basic form, an object that implements IEnumerable represents a series of objects.
 - The objects in  question can be iterated using the c# foreach keyword.
 - In the example below, the object sequenceOfNumbers implements IEnumerable. It represents a series of integers.
 - The foreach loop iterates through each in turn.
+</p>
 <pre><code>
   int AddNumbers(IEnumerable<int> sequenceOfNumbers) {
     int returnValue = 0;
@@ -3571,6 +3883,7 @@ public static void Main(string[] args)
 <div>
 
 <h3>Passing by reference using ref keyword</h3>
+<p>
   - arguments can be passed to parameters either by value or by reference.
   - Passing by reference enables function to change the value of the parameters 
     and have that change persist in the calling environment.
@@ -3578,6 +3891,7 @@ public static void Main(string[] args)
   - The difference between ref and out is that :
      out means that the passed parameter has to be assigned before the function ends.
     in contrast parameters passed with ref can be changed or left unchanged
+</p>    
 <pre><code>
   using System;
   class Program
@@ -3624,6 +3938,7 @@ public static void Main(string[] args)
   Inside CalleeOut a: 7
   Inside Main -After CalleeOut: a = 7 */
 </code></pre>  
+
 <h3>Changing values elsewhere</h3>
 <pre><code>
   public static void Main(string[] args)
@@ -3642,7 +3957,7 @@ public static void Main(string[] args)
     // okay, we now print the list
     PrintPrintingList(printingList);
   }
-  private static void PrintPrintingList(List<Student> students)
+  private static void PrintPrintingList(List< Student> students)
   {
     foreach (Student student in students)
     {
@@ -3650,6 +3965,7 @@ public static void Main(string[] args)
     }
   }
 </code></pre>
+<p>
 You'll notice that even though the printingList list was made before the corrections to student names after the
 typos, the PrintPrintingList method still prints out the corrected names:
 Scott Duke
@@ -3658,6 +3974,7 @@ Craig Brett
 This is because both lists hold a list of references to the same students. SO changing the underlying student object
 propogates to usages by either list.
 Here's what the student class would look like.
+</p>
 <pre><code>
   public class Student
   {
@@ -3670,6 +3987,7 @@ Here's what the student class would look like.
     }
   }
 </code></pre>
+
 <h3>ref vs out parameters</h3>
 <pre><code>
   class Program
@@ -3719,21 +4037,24 @@ Here's what the student class would look like.
   Inside CalleeOut a: 25
   Inside Main -After CalleeOut: a = 25
 </code></pre>
+
 <h3>Assignment</h3>
 <pre><code>
-  var a = new List<int>();
+  var a = new List< int>();
     var b = a;
     a.Add(5);
     Console.WriteLine(a.Count); // prints 1
     Console.WriteLine(b.Count); // prints 1 as well
 
-    Assigning to a variable of a List<int> does not create a copy of the List<int>. Instead, it copies the reference to
-    the List<int>. We call types that behave this way reference types.
+    Assigning to a variable of a List< int> does not create a copy of the List< int>. Instead, it copies the reference to
+    the List< int>. We call types that behave this way reference types.
 </code></pre>
+
 <h3>Difference with method parameters ref and out</h3>
-There are two possible ways to pass a value type by reference: ref and out. The difference is that by passing it with
+<p>There are two possible ways to pass a value type by reference: ref and out. The difference is that by passing it with
 ref the value must be initialized but not when passing it with out. Using out ensures that the variable has a value
 after the method call:
+</p>
 <pre><code>
   public void ByRef(ref int value)
   {
@@ -3783,9 +4104,13 @@ after the method call:
   } //CS0177: The out parameter 'value' must be assigned before control leaves the current method
 </code></pre>
 This is because if condition does not hold, value goes unassigned.
+
 <h3>Passing by reference</h3>
-If you want the Value Types vs Reference Types in methods example to work properly, use the ref keyword in your
-method signature for the parameter you want to pass by reference, as well as when you call the method.
+<p>
+If you want the Value Types vs Reference Types in methods example to work properly,
+use the ref keyword in your method signature for the parameter you want to pass by reference,
+ as well as when you call the method.
+</p>
 <pre><code>
   public static void Main(string[] args)
   {
@@ -3799,33 +4124,45 @@ method signature for the parameter you want to pass by reference, as well as whe
     number += number;
   }
 </code></pre>
-Making these changes would make the number update as expected, meaning the console output for number would
-be 8.
-
+<p>
+Making these changes would make the number update as expected, 
+meaning the console output for number would be 8.
+</p>
 </div> 
+
 <h2>Built-in Types</h2>
+
 <div>
 <h3>Conversion of boxed value types</h3>
-  Boxed value types can only be unboxed into their original Type, even if a conversion of the two Types is valid, e.g.:
+<p>
+  Boxed value types can only be unboxed into their original Type,
+   even if a conversion of the two Types is valid, e.g.:
+<p>   
 <pre><code>
   object boxedInt = (int)1; // int boxed in an object
   long unboxedInt1 = (long)boxedInt; // invalid cast
   This can be avoided by first unboxing into the original Type, e.g.:
   long unboxedInt2 = (long)(int)boxedInt; // valid
 </code></pre>  
+
 <h3>Comparisons with boxed value types</h3>
+<p>  
+  If value types are assigned to variables of type object
+  they are boxed - the value is stored in an instance of a System.Object. 
+  This can lead to unintended consequences when comparing values with ==, e.g.:
+</p>
 <pre><code>
-  If value types are assigned to variables of type object they are boxed - the value is stored in an instance of a
-  System.Object. This can lead to unintended consequences when comparing values with ==, e.g.:
   object left = (int)1; // int in an object box
   object right = (int)1; // int in an object box
   var comparison1 = left == right; // false
-  This can be avoided by using the overloaded Equals method, which will give the expected result.
+
+  // This can be avoided by using the overloaded Equals method, which will give the expected result.
   var comparison2 = left.Equals(right); // true
-  Alternatively, the same could be done by unboxing the left and right variables so that the int values are
-  compared:
+  //Alternatively, the same could be done by unboxing the left and right variables so that the int values are
+  //compared:
   var comparison3 = (int)left == (int)right; // true
 </code></pre>
+
 <h3>Immutable reference type - string</h3>
 <pre><code>
   // assign string from a string literal
@@ -3843,6 +4180,7 @@ be 8.
     }
   }
 </code></pre>
+
 <h3>Value type - char</h3>
 <pre><code>// single character s
   char c = 's';
@@ -3869,8 +4207,8 @@ be 8.
   question mark (?) after the type.
   int a; //This is now 0.
   int? b; //This is now null.</code></pre>
-<h3>Value type - ushort, uint, ulong (unsigned 16 bit,
-  32 bit, 64 bit integers)</h3>
+
+<h3>Value type - ushort, uint, ulong (unsigned 16 bit,32 bit, 64 bit integers)</h3>
 <pre><code>
   // assigning an unsigned short to its minimum value
   ushort s = 0;
@@ -3891,6 +4229,7 @@ be 8.
   uint a; //This is now 0.
   uint? b; //This is now null.
 </code></pre>
+
 <h3>Value type - bool</h3>
 <pre><code>// default value of boolean is false
   bool b;
@@ -3908,8 +4247,9 @@ be 8.
 <h2>Aliases of built-in types</h2>
 <div>
 <h3>Built-In Types Table</h3>
-The following table shows the keywords for built-in C# types, which are aliases of predefined types in the System
-namespaces.
+<p>
+The following table shows the keywords for built-in C# types, 
+which are aliases of predefined types in the System namespaces.
 C# Type .NET Framework Type
 bool System.Boolean
 byte System.Byte
@@ -3926,9 +4266,10 @@ object System.Object
 short System.Int16
 ushort System.UInt16
 string System.String
-The C# type keywords and their aliases are interchangeable. For example, you can declare an integer variable by
+The C# type keywords and their aliases are interchangeable. 
+For example, you can declare an integer variable by
 using either of the following declarations:
-
+</p>
 <pre><code>int number = 123;
 System.Int32 number = 123;</code></pre>
 
@@ -3944,8 +4285,10 @@ System.Int32 number = 123;</code></pre>
   Conversely, dynamic has dynamic type checking, opting for runtime errors, instead of compile-time errors.
   dynamic val = "foo";
   Console.WriteLine(val.Id); // compiles, but throws runtime error</code></pre>
+
 <h3>Creating an anonymous type</h3>
-<pre><code>Since anonymous types are not named, variables of those types must be implicitly typed (var).
+ Since anonymous types are not named, variables of those types must be implicitly typed (var).
+<pre><code>
   var anon = new { Foo = 1, Bar = 2 };
   // anon.Foo == 1
   // anon.Bar == 2
@@ -3965,9 +4308,12 @@ System.Int32 number = 123;</code></pre>
   // compiler error - Invalid anonymous type member declarator.
   var anon5 = new { Description = foo.Length <= 10 ? "short string" : "long string" };
   // OK</code></pre>
+
 <h3>Anonymous type equality</h3>
-<pre><code>Anonymous type equality is given by the Equals instance method. Two objects are equal if they have the same type
+<p>Anonymous type equality is given by the Equals instance method. Two objects are equal if they have the same type
   and equal values (through a.Prop.Equals(b.Prop)) for every property.
+</p>
+<pre><code>
   var anon = new { Foo = 1, Bar = 2 };
   var anon2 = new { Foo = 1, Bar = 2 };
   var anon3 = new { Foo = 5, Bar = 10 };
@@ -3986,8 +4332,13 @@ System.Int32 number = 123;</code></pre>
   // anon and anon3 have diferent types (Bar and Foo appear in different orders)
   // anon and anon4 have different types (property names are different)
 </code></pre>
+
 <h3>Generic methods with anonymous types</h3>
-<pre><code>Generic methods allow the use of anonymous types through type inference.
+
+<p>
+  >Generic methods allow the use of anonymous types through type inference.
+</p>
+<pre><code
   void Log<T>(T obj) {
   // ...
   }
@@ -3999,10 +4350,14 @@ System.Int32 number = 123;</code></pre>
   new { Amount = 15, Id = 2 }
   };
   var idsByAmount = products.OrderBy(x => x.Amount).Select(x => x.Id);
-  // idsByAmount: 0, 2, 1</code></pre>
+  // idsByAmount: 0, 2, 1
+</code></pre>
+
 <h3>generic types with anonymous types</h3>
-<pre><code>Using generic constructors would require the anonymous types to be named, which is not possible. Alternatively,
+<p>Using generic constructors would require the anonymous types to be named, which is not possible. Alternatively,
   generic methods may be used to allow type inference to occur.
+</p>
+<pre><code>
   var anon = new { Foo = 1, Bar = 2 };
   var anon2 = new { Foo = 5, Bar = 10 };
   List<T> CreateList<T>(params T[] items) {
@@ -4012,7 +4367,8 @@ System.Int32 number = 123;</code></pre>
   In the case of List<T>, implicitly typed arrays may be converted to a List<T> through the ToList LINQ method:
   var list2 = new[] {anon, anon2}.ToList();</code></pre>
 <h3>Implicitly typed arrays</h3>
-<pre><code>Arrays of anonymous types may be created with implicit typing.
+Arrays of anonymous types may be created with implicit typing.
+<pre><code>
   var arr = new[] {
     new { Id = 0 },
     new { Id = 1 }
@@ -4044,6 +4400,7 @@ System.Int32 number = 123;</code></pre>
   // 123234
   Console.WriteLine(foo.ToUpper()):
   // NOW A STRING</code></pre>
+
 <h3>Returning dynamic</h3>
 <pre><code>using System;
   public static void Main()
@@ -4086,9 +4443,9 @@ if (a is StringBuilder)
     return $"StringBuilder - Capacity: {sb.Capacity}, MaxCapacity: {sb.MaxCapacity}, Value:
     {sb.ToString()}";
   }
-  private string DebugToStringInternal(List<string> list)
+  private string DebugToStringInternal(List< string> list)
   {
-    return $"List<string> - Count: {list.Count}, Value: {Environment.NewLine + "\t" +
+    return $"List< string> - Count: {list.Count}, Value: {Environment.NewLine + "\t" +
     string.Join(Environment.NewLine + "\t", list.ToArray())}";
   }
   }
@@ -4115,10 +4472,11 @@ if (a is StringBuilder)
   }
   }</code></pre>
 
-
+<p>
   The advantage to the dynamic, is adding a new Type to handle just requires adding an overload of
-  DebugToStringInternal of the new type. Also eliminates the need to manually cast it to the type as well.
-
+  DebugToStringInternal of the new type.
+  Also eliminates the need to manually cast it to the type as well.
+</p>
 
 </div>
 
@@ -4241,13 +4599,14 @@ if (a is StringBuilder)
       return new JsExpression("(" + this + " == " + other + ")");
     }
   }
-  If we wanted to create a JsExpression representing a comparison of two JavaScript values, we could do something
-  like this:
+
+  // If we wanted to create a JsExpression representing a comparison of two JavaScript values, we could do something
+  // like this:
   JsExpression intExpression = new JsExpression("-1");
   JsExpression doubleExpression = new JsExpression("-1.0");
   Console.WriteLine(intExpression.IsEqualTo(doubleExpression)); // (-1 == -1.0)
-  But we can add some explicit conversion operators to JsExpression, to allow a simple conversion when using explicit
-  casting.
+  // But we can add some explicit conversion operators to JsExpression, to allow a simple conversion when using explicit
+  // casting.
   public static explicit operator JsExpression(int value)
   {
     return new JsExpression(value.ToString());
@@ -4260,7 +4619,9 @@ if (a is StringBuilder)
   JsExpression intExpression = (JsExpression)(-1);
   JsExpression doubleExpression = (JsExpression)(-1.0);
   Console.WriteLine(intExpression.IsEqualTo(doubleExpression)); // (-1 == -1.0)
-  Or, we could change these operators to implicit to make the syntax much simpler.
+
+  // Or, we could change these operators to implicit to make the syntax much simpler.
+
   public static implicit operator JsExpression(int value)
   {
     return new JsExpression(value.ToString());
@@ -4275,7 +4636,8 @@ if (a is StringBuilder)
 </code></pre>
 <h3>LINQ Casting operations</h3>
 <pre><code>
-  Suppose you have types like the following:
+  //Suppose you have types like the following:
+
   interface IThing { }
   class Thing : IThing { }
   LINQ allows you to create a projection that changes the compile-time generic type of an IEnumerable<> via the
@@ -4294,17 +4656,20 @@ if (a is StringBuilder)
   double[] doubles = new[]{1,2,3}.Select(i => (double)i).ToArray();
 </code></pre>
 <h3>Explicit Casting</h3>
-<pre><code>If you know that a value is of a specific type, you can explicitly cast it to that type in order to use it in a context
+If you know that a value is of a specific type, you can explicitly cast it to that type in order to use it in a context
   where that type is needed.
+<pre><code>
   object value = -1;
   int number = (int) value;
   Console.WriteLine(Math.Abs(number));
   If we tried passing value directly to Math.Abs(), we would get a compile-time exception because Math.Abs()
   doesn't have an overload that takes an object as a parameter.
   If value could not be cast to an int, then the second line in this example would throw an InvalidCastException</code></pre>
-<h3>Safe Explicit Casting (`as` operator)</h3>
-<pre><code>If you aren't sure whether a value is of the type you think it is, you can safely cast it using the as operator. If the
+
+  <h3>Safe Explicit Casting (`as` operator)</h3>
+If you aren't sure whether a value is of the type you think it is, you can safely cast it using the as operator. If the
   value is not of that type, the resulting value will be null.
+  <pre><code>
   object value = "-1";
   int? number = value as int?;
   if(number != null)
@@ -4312,21 +4677,30 @@ if (a is StringBuilder)
   Console.WriteLine(Math.Abs(number.Value));
   }
 </code></pre>
-Note that null values have no type, so the as keyword will safely yield null when casting any null value.
+<p>
+Note that null values have no type, 
+so the as keyword will safely yield null when casting any null value.
+</p>
 <h3>Implicit Casting</h3>
-A value will automatically be cast to the appropriate type if the compiler knows that it can always be converted to
-that type.
+<p>
+A value will automatically be cast to the appropriate type if the compiler knows 
+that it can always be converted to that type.
+</p>
 <pre><code>int number = -1;
 object value = number;
 Console.WriteLine(value);
-In this example, we didn't need to use the typical explicit casting syntax because the compiler knows all ints can be
-cast to objects. In fact, we could avoid creating variables and pass -1 directly as the argument of
+
+// In this example, we didn't need to use the typical explicit casting syntax because the compiler knows all ints can be
+// cast to objects. In fact, we could avoid creating variables and pass -1 directly as the argument of
+
 Console.WriteLine() that expects an object.
 Console.WriteLine(-1);</code></pre>
 
 <h3>Explicit Numeric Conversions</h3>
+<p>
 Explicit casting operators can be used to perform conversions of numeric types, even though they don't extend or
   implement one another.
+</p>
 <pre><code>
   double value = -1.1;
   int number = (int) value;
@@ -4375,19 +4749,24 @@ Explicit casting operators can be used to perform conversions of numeric types, 
 <h3>Get the value of a nullable type</h3>
 Given following nullable int
 <pre><code>int? i = 10;</code></pre>
+<p>
 In case default value is needed, you can assign one using null coalescing operator, 
 GetValueOrDefault method or check if nullable int HasValue before assignment.
+</p>
 <pre><code>int j = i ?? 0;
 int j = i.GetValueOrDefault(0);
 int j = i.HasValue ? i.Value : 0;</code></pre>
-
+<p>
 The following usage is always unsafe. 
 If i is null at runtime, a System.InvalidOperationException will be thrown.
 At design time, if a value is not set, you'll get a Use of unassigned local variable 'i' error.
+</p>
 int j = i.Value;
 <h3>Getting a default value from a nullable</h3>
+<p>
 The .GetValueOrDefault() method returns a value even if the .HasValue property is false 
 (unlike the Value property, which throws an exception).
+</p>
 <pre><code>
   class Program
   {
@@ -4423,10 +4802,10 @@ The .GetValueOrDefault() method returns a value even if the .HasValue property i
   null</code></pre>
 
 <h3>Effective usage of underlying Nullable< T >argument</h3>
-<pre><code>
   Any nullable type is a generic type.And any nullable type is a value type.
   There are some tricks which allow to effectively use the result of the Nullable.GetUnderlyingType method when
   creating code related to reflection/code-generation purposes:
+<pre><code>
   public static class TypesHelper
   {
     public static bool IsNullable(this Type type)
@@ -4515,17 +4894,21 @@ The .GetValueOrDefault() method returns a value even if the .HasValue property i
 
 <h2>Constructors and Finalizers</h2>
 <div>
+<p>
   Constructors are methods in a class that are invoked when an instance of that class is created. Their main
   responsibility is to leave the new object in a useful and consistent state.
   Destructors/Finalizers are methods in a class that are invoked when an instance of that is destroyed. In C# they are
   rarely explicitely written/used.
+</p>  
 <h3>Static constructor</h3>
+<p>
 - A static constructor is called the first time any member of a type is initialized, 
   a static class member is called or a static method. 
 - The static constructor is thread safe. 
 - A static constructor is commonly used to:
   . Initialize static state, that is state which is shared across different instances of the same class.
   . Create a singleton
+</p>  
 <pre><code>
   {
   // * A static constructor is executed only once,
@@ -4552,8 +4935,10 @@ Output:
 Animal initialized
 Animal created
 Animal created</code></pre>
+<p>
 If the first call is to a static method, the static constructor is invoked without the instance constructor. This is OK,
 because the static method can't access instance state anyways.
+</p>
 <pre><code>
   Animal.Yawn();
   This will output:
@@ -4578,6 +4963,7 @@ because the static method can't access instance state anyways.
       // Put custom constructor code here
     }
   }</code></pre>
+<p>
   Because the constructor is private, no new instances of SingletonClass can be made by consuming code. 
   The only way to access the single instance of SingletonClass is by using the static property SingletonClass.Instance.
   The Instance property is assigned by a static constructor that the C# compiler generates. 
@@ -4592,6 +4978,8 @@ because the static method can't access instance state anyways.
   of a method referencing Instance. 
   This is a performance optimization.
   See the Singleton Implementations page for other ways to implement the singleton pattern.
+</p>
+
 <h3>Default Constructor</h3>
 When a type is defined without a constructor:
 <pre><code>
@@ -4660,14 +5048,17 @@ When a type is defined without a constructor:
     }
   }
   var dog = new Animal(); // dog.Name will be set to "Dog" by default.
-  var cat = new Animal("Cat"); // cat.Name is "Cat", the empty constructor is not called.</code></pre>
+  var cat = new Animal("Cat"); // cat.Name is "Cat", the empty constructor is not called.
+</code></pre>
 
 <h3>Calling the base class constructor</h3>
+<p>
 A constructor of a base class is called before a constructor of a derived class is executed. For example, if Mammal
 extends Animal, then the code contained in the constructor of Animal is called first when creating an instance of a
 Mammal.
 If a derived class doesn't explicitly specify which constructor of the base class should be called, the compiler
 assumes the parameterless constructor.
+</p>
 <pre><code>public class Animal
   {
     public Animal() { Console.WriteLine("An unknown animal gets born."); }
@@ -4680,11 +5071,12 @@ assumes the parameterless constructor.
       Console.WriteLine(name + " is a mammal.");
     }
   }
-  In this case, instantiating a Mammal by calling new Mammal("George the Cat") will print
-  An unknown animal gets born.
-  George the Cat is a mammal.
-  Calling a different constructor of the base class is done by placing : base(args) between the constructor's
-  signature and its body:
+  // In this case, instantiating a Mammal by calling new Mammal("George the Cat") will print
+  // An unknown animal gets born.
+  // George the Cat is a mammal.
+  // Calling a different constructor of the base class is done by placing : base(args) between the constructor's
+  // signature and its body:
+
   public class Mammal : Animal
   {
     public Mammal(string name) : base(name)
@@ -4698,9 +5090,11 @@ assumes the parameterless constructor.
 </code></pre>
 
 <h3>Finalizers on derived classes</h3>
+<p>
 When an object graph is finalized, the order is the reverse of the construction.
  E.g. the super-type is finalized before
 the base-type as the following code demonstrates
+</p>
 <pre><code>class TheBaseClass
   {
     ~TheBaseClass()
@@ -4725,9 +5119,11 @@ the base-type as the following code demonstrates
   //Base class finalized</code></pre>
 
 <h3>Exceptions in static constructors</h3>
+<p>
 If a static constructor throws an exception, it is never retried.
- The type is unusable for the lifetime of the
-AppDomain. Any further usages of the type will raise a TypeInitializationException wrapped around the original exception.
+ The type is unusable for the lifetime of the AppDomain. 
+ Any further usages of the type will raise a TypeInitializationException wrapped around the original exception.
+</p>
 <pre><code>public class Animal
   {
     static Animal()
@@ -4753,8 +5149,8 @@ AppDomain. Any further usages of the type will raise a TypeInitializationExcepti
   {
     Console.WriteLine(e.ToString());
   }
-  This will output:
-  Static ctor
+  //This will output:
+  // Static ctor
   System.TypeInitializationException: The type initializer for 'Animal' threw an exception. --->
   System.Exception: Exception of type 'System.Exception' was thrown.
   [...]
@@ -4829,8 +5225,11 @@ Shall the property value's assignment be executed before or after the class' con
 </code></pre>
 
 <h3>Generic Static Constructors</h3>
-If the type on which the static constructor is declared is generic, the static constructor will be called once for each
+<p>
+If the type on which the static constructor is declared is generic,
+ the static constructor will be called once for each
   unique combination of generic arguments.
+</p>
 <pre><code>
   class Animal<T>
   {
@@ -5088,10 +5487,12 @@ using System.Runtime.CompilerServices;
   and will fail to compile without it.</code></pre>
 
 <h3>Explicit interface implementation</h3>
+<p>
 Explicit interface implementation is necessary when you implement multiple interfaces who define a common
 method, but different implementations are required depending on which interface is being used to call the method
 (note that you don't need explicit implementations if multiple interfaces share the same method and a common
 implementation is possible).
+<p>
 <pre><code>
   interface IChauffeur
   {
@@ -5143,6 +5544,7 @@ implementation is possible).
   }
  
 </code></pre>
+<p>
   Similarly, using an explicit interface implementation without declaring that interface on the class causes an error,
   too.
   Hint:
@@ -5152,9 +5554,9 @@ implementation is possible).
   Programmers expect the contract to be the same regardless of the context of the type and explicit implementation
   should not expose different behavior when called. So unlike the example above, IGolfPlayer.Drive and Drive
   should do the same thing when possible.
-
+<p>
 <h3>Interface Basics</h3>
-<pre><code>An Interface's function known as a "contract" of functionality. It means that it declares properties and methods but
+<p>An Interface's function known as a "contract" of functionality. It means that it declares properties and methods but
   it doesn't implement them.
   So unlike classes Interfaces:
   Can't be instantiated
@@ -5162,6 +5564,8 @@ implementation is possible).
   Can only contain methods *(Properties and Events are methods internally)
   Inheriting an interface is called "Implementing"
   You can inherit from 1 class, but you can "Implement" multiple Interfaces
+</p>
+<pre><code>
   public interface ICanDoThis
   {
     void TheThingICanDo();
@@ -5208,9 +5612,10 @@ implementation is possible).
       this.Content = str;
     }
   }
-  The problem proposed is that both contain some concept of "Text" but the property names differ.And you can't
-  create create a abstract base class because they have a mandatory inheritance to 2 different classes.An interface
-  can alleviate that
+  //The problem proposed is that both contain some concept of "Text" but the property names differ.And you can't
+  //create create a abstract base class because they have a mandatory inheritance to 2 different classes.An interface
+  //can alleviate that
+
   public interface ITextControl
   {
     void SetText(string str);
@@ -5251,14 +5656,15 @@ implementation is possible).
   }
   </code></pre>
 
-<h3>IComparable<T> as an Example of Implementing
-  an Interface</h3>
+<h3>IComparable<T> as an Example of Implementing  an Interface</h3>
+<p>
   Interfaces can seem abstract until you seem them in practice. 
   The IComparable and IComparable< T> are great
   examples of why interfaces can be helpful to us.
   Let's say that in a program for a online store, we have a variety of items you can buy. 
   Each item has a name, an ID
   number, and a price.
+</p>
 <pre><code>
   public class Item {
     public string name; // though public variables are generally bad practice,
@@ -5266,12 +5672,20 @@ implementation is possible).
     public decimal price; // of a property.
     // body omitted for brevity
   }
-  We have our Items stored inside of a List< Item>, and in our program somewhere, we want to sort our list by ID
-  number from smallest to largest. Instead of writing our own sorting algorithm, we can instead use the Sort()
-  method that List<T> already has. However, as our Item class is right now, there is no way for the List<T> to
-  understand what order to sort the list. Here is where the IComparable interface comes in.
-  To correctly implement the CompareTo method, CompareTo should return a positive number if the parameter is "less
-  than" the current one, zero if they are equal, and a negative number if the parameter is "greater than".
+  </code></pre>
+  <p>
+  We have our Items stored inside of a List< Item>, and in our program somewhere, 
+  we want to sort our list by ID  number from smallest to largest. 
+  Instead of writing our own sorting algorithm, we can instead use the Sort()
+  method that List<T> already has. 
+   However, as our Item class is right now, there is no way for the List< T> to
+  understand what order to sort the list. 
+  Here is where the IComparable interface comes in.
+  To correctly implement the CompareTo method, 
+  CompareTo should return a positive number if the parameter is "less than" the current one,
+   zero if they are equal, and a negative number if the parameter is "greater than".
+  </p>
+  <pre><code>
   Item apple = new Item();
   apple.idNumber = 15;
   Item banana = new Item();
@@ -5294,13 +5708,17 @@ implementation is possible).
   // rest of code omitted for brevity
   }
 </code></pre>
- 
-  On a surface level, the CompareTo method in our item simply returns the difference in their ID numbers, but what
-  does the above do in practice?
-  Now, when we call Sort() on a List< Item> object, the List will automatically call the Item's CompareTo method
-  when it needs to determine what order to put objects in. Furthermore, besides List<T>, any other objects that
+ <pre>
+  On a surface level, the CompareTo method in our item simply returns the difference in their ID numbers, 
+  but what  does the above do in practice?
+  Now, when we call Sort() on a List< Item> object,
+   the List will automatically call the Item's CompareTo method
+  when it needs to determine what order to put objects in. 
+  Furthermore, besides List<T>, any other objects that
   need the ability to compare two objects will work with the Item because we have defined the ability for two
   different Items to be compared with one another.
+</pre>
+
 <h3>Implementing multiple interfaces</h3>
 <pre><code>public interface IAnimal
   {
@@ -5324,10 +5742,15 @@ implementation is possible).
   }</code></pre>
 
 <h3>Why we use interfaces</h3>
-An interface is a definition of a contract between the user of the interface and the class that implement it. One way
-to think of an interface is as a declaration that an object can perform certain functions.
-Let's say that we define an interface IShape to represent different type of shapes, we expect a shape to have an
-area, so we will define a method to force the interface implementations to return their area :
+<pre>
+An interface is a definition of a contract between the user of the interface and the class that implement it. 
+ One way to think of an interface is as a declaration that 
+ an object can perform certain functions.
+
+Let's say that we define an interface IShape to represent different type of shapes, 
+we expect a shape to have an area, 
+so we will define a method to force the interface implementations to return their area :
+</pre>
 <pre><code>
   public interface IShape
   {
@@ -5381,8 +5804,10 @@ area, so we will define a method to force the interface implementations to retur
 </code></pre>
 
 <h3>"Hiding" members with Explicit Implementation</h3>
+<pre>
 Don't you hate it when interfaces pollute you class with too many members you don't even care about? Well I got a
 solution! Explicit Implementations
+</pre>
 <pre><code>
   public interface IMessageService {
     void OnMessageRecieve();
@@ -5420,7 +5845,7 @@ string IMessageService.Result { get; set; }
 int IMessageService.Encoding { get; set; }
 }
 
-So now you have implemented the members as required and they won't expose any members in as public.
+// So now you have implemented the members as required and they won't expose any members in as public.
 var obj = new MyObjectWithMessages();
 /* error member does not exist on type MyObjectWithMessages.
 * We've succesfully made it "private" */
@@ -5437,10 +5862,13 @@ object to the interface and you good to go.
 <div>
 
 <h3>Static Classes</h3>
-<pre><code>The "static" keyword when referring to a class has three effects:
+<pre>
+  The "static" keyword when referring to a class has three effects:
   1. You cannot create an instance of a static class (this even removes the default constructor)
   2. All properties and methods in the class must be static as well.
   3. A static class is a sealed class, meaning it cannot be inherited.
+</pre>
+<pre><code>
   public static class Foo
   {
     //Notice there is no constructor as this cannot be an instance
@@ -5500,9 +5928,11 @@ object to the interface and you good to go.
 </code></pre>
 
 <h3>Static keyword</h3>
+<pre>
 The static keyword means 2 things:
 1. This value does not change from object to object but rather changes on a class as a whole
 2. Static properties and methods don't require an instance.
+</pre>
 <pre><code>public class Foo
   {
     public Foo{
@@ -5539,11 +5969,13 @@ The static keyword means 2 things:
   private readonly static Singleton instance = new Singleton();
   private Singleton() { }
   public static Singleton Instance => instance;
-  }
+  }</code></pre>
+  <pre>
   This implementation is thread-safe because in this case instance object is initialized in the static constructor. The
   CLR already ensures that all static constructors are executed thread-safe.
   Mutating instance is not a thread-safe operation, therefore the readonly attribute guarantees immutability after
-  initialization.</code></pre>
+  initialization.
+</pre>
 
 <h3>Lazy, thread-safe Singleton (using Lazy<T>)</h3>
 <pre><code>.Net 4.0 type Lazy guarantees thread-safe object initialization, so this type could be used to make Singletons.
@@ -5568,12 +6000,14 @@ The static keyword means 2 things:
     }
   }</code></pre>
 
-<h3>Lazy, thread-safe Singleton (using Double
-  Checked Locking)</h3>
-<pre><code>This thread-safe version of a singleton was necessary in the early versions of .NET where static initialization was
+<h3>Lazy, thread-safe Singleton (using Double  Checked Locking)</h3>
+<pre>
+  This thread-safe version of a singleton was necessary in the early versions of .NET where static initialization was
   not guaranteed to be thread-safe. In more modern versions of the framework a statically initialized singleton is
 
   usually preferred because it is very easy to make implementation mistakes in the following pattern.
+</pre>
+<pre><code>
   public sealed class ThreadSafeSingleton
   {
     private static volatile ThreadSafeSingleton instance;
@@ -5600,20 +6034,23 @@ The static keyword means 2 things:
     }
   }
 </code></pre>
+<pre>
 Notice that the if (instance == null) check is done twice: once before the lock is acquired, and once afterwards.
 This implementation would still be thread-safe even without the first null check. However, that would mean that a
 lock would be acquired every time the instance is requested, and that would cause performance to suffer. The first
 null check is added so that the lock is not acquired unless it's necessary. The second null check makes sure that
 only the first thread to acquire the lock then creates the instance. The other threads will find the instance to be
 populated and skip ahead.
-<h3>Lazy, thread safe singleton (for .NET 3.5 or
-  older, alternate implementation)</h3>
-<pre><code>Because in .NET 3.5 and older you don't have Lazy<T> class you use the following pattern:
+</pre>
+<h3>Lazy, thread safe singleton (for .NET 3.5 or  older, alternate implementation)</h3>
+<pre>
+  Because in .NET 3.5 and older you don't have Lazy<T> class you use the following pattern:
 
     This is inspired from Jon Skeet's blog post.
     Because the Nested class is nested and private the instantiation of the singleton instance will not be triggered by
     accessing other members of the Sigleton class (such as a public readonly property, for example).
-
+</pre>
+<pre><code>
     public class Singleton
     {
       private Singleton() // prevents public instantiation
@@ -5644,9 +6081,11 @@ populated and skip ahead.
 <div>
 
 <h3>Dependency Injection C# and ASP.NET with Unity</h3>
+<pre>
 First why we should use depedency injection in our code ? 
 We want to decouple other components from other classes in our program. 
 For example we have class AnimalController which have code like this :
+</pre>
 <pre><code>
   public class AnimalController()
   {
@@ -5655,8 +6094,10 @@ For example we have class AnimalController which have code like this :
       Console.WriteLine("");
     } 
   }</code></pre>
+  <pre>
   We look at this code and we think everything is ok but now our AnimalController is reliant on object
-  _SantaAndHisReindeer. Automatically my Controller is bad to testing and reusability of my code will be very hard.
+  _SantaAndHisReindeer.
+  Automatically my Controller is bad to testing and reusability of my code will be very hard.
   Very good explanation why we should use Depedency Injection and interfaces here.
   If we want Unity to handle DI, the road to achieve this is very simple :) With NuGet( package manager) we can easily
   import unity to our code.
@@ -5665,46 +6106,45 @@ For example we have class AnimalController which have code like this :
   Now two files with nice comments will be created.
   in App-Data folder UnityConfig.cs and UnityMvcActivator.cs
   UnityConfig - in RegisterTypes method, we can see type that will be injection in our constructors.
+  </pre>
   <pre><code>
     namespace Vegan.WebUi.App_Start
     {
       public class UnityConfig
       {
         #region Unity Container
-        private static Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() =>
+        private static Lazy< IUnityContainer> container = new Lazy< IUnityContainer>(() =>
         {
           var container = new UnityContainer();
           RegisterTypes(container);
           return container;
         });
-        /// <summary>
+        /// < summary>
         /// Gets the configured Unity container.
-        /// </summary>
+        /// < /summary>
         public static IUnityContainer GetConfiguredContainer()
         {
           return container.Value;
         }
         #endregion
-        /// <summary>Registers the type mappings with the Unity container.</summary>
-        /// <param name="container">The unity container to configure.</param>
-        /// <remarks>There is no need to register concrete types such as controllers or API controllers
+        /// < summary>Registers the type mappings with the Unity container.< /summary>
+        /// < param name="container">The unity container to configure.< /param>
+        /// < remarks>There is no need to register concrete types such as controllers or API controllers
         (unless you want to
-    /// change the defaults), as Unity allows resolving a concrete type even if it was not previously
-    registered.</remarks>
+    /// change the defaults), as Unity allows resolving a concrete type even if it was not previously   registered.< /remarks>
     public static void RegisterTypes(IUnityContainer container)
         {
           // NOTE: To load from web.config uncomment the line below. Make sure to add a
           Microsoft.Practices.Unity.Configuration to the using statements.
           // container.LoadConfiguration();
           // TODO: Register your types here
-          // container.RegisterType<IProductRepository, ProductRepository>();
-          container.RegisterType<ISanta, SantaAndHisReindeer>();
+          // container.RegisterType< IProductRepository, ProductRepository>();
+          container.RegisterType< ISanta, SantaAndHisReindeer>();
         }
       }
     } 
   </code></pre>
-  UnityMvcActivator - > also with nice comments which say that this class integrates Unity with ASP.NET
-  MVC
+  UnityMvcActivator - > also with nice comments which say that this class integrates Unity with ASP.NET MVC
 <pre><code>void Main()
   {
   }
@@ -5749,9 +6189,11 @@ For example we have class AnimalController which have code like this :
     _SantAndHisReindeer = SantaAndHisReindeer;
   }
   }</code></pre>
+  <pre>
   There is one final thing we must do before running our application.
   In Global.asax.cs we must add new line: UnityWebActivator.Start() which will start, configure Unity and register our
   types.
+</pre>
  <pre><code>namespace Vegan.WebUi
   {
     public class MvcApplication : System.Web.HttpApplication
@@ -5810,11 +6252,11 @@ For example we have class AnimalController which have code like this :
   {
     private CompositionContainer _container;
     [ImportMany]
-    private IEnumerable<Lazy<ILogger, ILoggerMetaData>> _loggers;
+    private IEnumerable< Lazy< ILogger, ILoggerMetaData>> _loggers;
     private static void Main()
     {
       ComposeLoggers();
-      Lazy<ILogger, ILoggerMetaData> loggerNameAndLoggerMapping = _ loggers.First((n) =>
+      Lazy< ILogger, ILoggerMetaData> loggerNameAndLoggerMapping = _ loggers.First((n) =>
       ((n.Metadata.Name.ToUpper() == "Console"));
       ILogger logger = loggerNameAndLoggerMapping.Value
     var user = new User(logger);
@@ -5846,38 +6288,26 @@ For example we have class AnimalController which have code like this :
       }
     }
   }
-
 </code></pre>
-<h3></h3>
-<pre><code></code></pre>
-
-<h3></h3>
-<pre><code></code></pre>
-
-<h3></h3>
-<pre><code></code></pre>
-
-<h3></h3>
-<pre><code></code></pre>
-
-<h3></h3>
-<pre><code></code></pre>
-
-<h3></h3>
-<pre><code></code></pre>
 </div>
 
 <h2>Partial class and methods</h2>
 <div>
- Partial classes provides us an option to split classes into multiple parts and in multiple source files. All parts are
-combined into one single class during compile time. All parts should contain the keyword partial,should be of the
-same accessibility. All parts should be present in the same assembly for it to be included during compile time. 
+  <pre>
+ Partial classes provides us an option to split classes into multiple parts and in multiple source files.
+ All parts are combined into one single class during compile time. 
+ All parts should contain the keyword partial,should be of the same accessibility. 
+ All parts should be present in the same assembly for it to be included during compile time. 
+</pre>
+
 <h3>Partial classes</h3>
+<pre>
 Partial classes provide an ability to split class declaration (usually into separate files).
- A common problem that can
-be solved with partial classes is allowing users to modify auto-generated code without fearing that their changes
+ A common problem that can be solved with partial classes is allowing users to
+ modify auto-generated code without fearing that their changes
 will be overwritten if the code is regenerated.
  Also multiple developers can work on same class or methods.
+</pre>
 <pre><code>namespace PartialClassAndMethods
   {
     public partial class PartialClass
@@ -5906,7 +6336,10 @@ will be overwritten if the code is regenerated.
   }</code></pre>
 
 <h3>Partial classes inheriting from a base class</h3>
-When inheriting from any base class, only one partial class needs to have the base class specified.
+<pre>
+When inheriting from any base class, 
+only one partial class needs to have the base class specified.
+</pre>
 <pre><code>
   // PartialClass1.cs
   public partial class PartialClass : BaseClass {}
@@ -5926,8 +6359,10 @@ When inheriting from any base class, only one partial class needs to have the ba
 </code></pre>
 
 <h3>Partial methods</h3>
+<pre>
 Partial method consists of the definition in one partial class declaration 
 (as a common scenario - in the autogenerated one) and the implementation in another partial class declaration.
+</pre>
 <pre><code>namespace PartialClassAndMethods
   {
     public partial class PartialClass // Auto-generated
@@ -5957,8 +6392,10 @@ Partial method consists of the definition in one partial class declaration
 <div>
 
 <h3>Simple usage</h3>
+<pre>
 Object initializers are handy when you need to create an object and set a couple of properties right away,
  but the available constructors are not sufficient. Say you have a class
+</pre>
 <pre><code>
   public class Book
   {
@@ -5996,7 +6433,11 @@ You can combine object initializers with constructors to initialize types if nec
 </code></pre>
 
 <h3>Usage with anonymous types</h3>
-  Object initializers are the only way to initialize anonymous types, which are types generated by the compiler.
+<pre>
+  Object initializers are the only way to initialize anonymous types,
+  which are types generated by the compiler.
+</pre>
+
 <pre><code>
   var album = new { Band = "Beatles", Title = "Abbey Road" };
 </code></pre>
@@ -6031,8 +6472,10 @@ specify which parts of a queried object you are interested in.
   DateTime[] dates = CreateArray<DateTime>(8);</code></pre>
 
 <h3>Anonymous method</h3>
+<pre>
 Anonymous methods provide a technique to pass a code block as a delegate parameter.
  They are methods with a body, but no name.
+</pre>
 <pre><code>delegate int IntOp(int lhs, int rhs);
   class Program
   {
@@ -6058,22 +6501,32 @@ Anonymous methods provide a technique to pass a code block as a delegate paramet
   }</code></pre>
 
 <h3>Declaring a Method</h3>
+<pre>
 Every method has a unique signature consisting of a accessor (public, private, ...) ,optional modifier (abstract), a
 name and if needed method parameters. Note, that the return type is not part of the signature. A method
 prototype looks like the following:
+</pre>
+<pre><code>
 AccessModifier OptionalModifier ReturnType MethodName(InputParameters)
 {
 //Method body
 }
+</code></pre>
+<pre>
 AccessModifier can be public, protected, pirvate or by default internal.
 OptionalModifier can be static abstract virtual override new or sealed.
-ReturnType can be void for no return or can be any type from the basic ones, as int to complex classes.
-a Method may have some or no input parameters. to set parameters for a method, you should declare each one
-like normal variable declarations (like int a), and for more than one parameter you should use comma between
+ReturnType can be void for no return or can be any type from the basic ones, 
+as int to complex classes.
+a Method may have some or no input parameters. 
+to set parameters for a method, you should declare each one
+like normal variable declarations (like int a),
+ and for more than one parameter you should use comma between
 them (like int a, int b).
-Parameters may have default values. for this you should set a value for the parameter (like int a = 0). if a
+Parameters may have default values. 
+for this you should set a value for the parameter (like int a = 0). if a
 parameter has a default value, setting the input value is optional.
 The following method example returns the sum of two integers:
+</pre>
 <pre><code>private int Sum(int a, int b)
   {
   return a + b;
@@ -6086,12 +6539,15 @@ A method can declare any number of parameters (in this example, i, s and o are t
     Console.WriteLine(String.Format("i={0}, s={1}, o={2}", i, s, o));
   }
 </code></pre>
+<pre>
   Parameters can be used to pass values into a method, so that the method can work with them. 
   This can be every kind of work like printing the values, 
   or making modifications to the object referenced by a parameter, or storing the values.
   When you call the method, you need to pass an actual value for every parameter.
    At this point, the values that you actually pass to the method call are called Arguments:
   DoSomething(x, "hello", new object());
+</pre>
+
 <h3>Return Types</h3>
 A method can return either nothing (void), or a value of a specified type:
 <pre><code>// If you don't want to return a value, use void as return type.
@@ -6102,6 +6558,7 @@ A method can return either nothing (void), or a value of a specified type:
   static string ReturnsHelloWorld() {
     return "Hello World";
   }</code></pre>
+  <pre>
   If your method specifies a return value, the method must return a value. You do this using the return statement.
   Once a return statement has been reached, it returns the specified value and any code after it will not be run
   anymore (exceptions are finally blocks, which will still be executed before the method returns).
@@ -6115,7 +6572,7 @@ A method can return either nothing (void), or a value of a specified type:
   Throwing an exception can end method execution without returning a value. Also, there are iterator blocks, where
   return values are generated by using the yield keyword, but those are special cases that will not be explained at this
   point.
-
+</pre>
 <h3>Default Parameters</h3>
 You can use default parameters if you want to provide the option to leave out parameters:
 <pre><code>static void SaySomething(string what = "ehh")
@@ -6129,9 +6586,11 @@ You can use default parameters if you want to provide the option to leave out pa
     // prints "ehh"
     SaySomething(); // The compiler compiles this as if we had typed SaySomething("ehh")
   }</code></pre>
+  <pre>
   When you call such a method and omit a parameter for which a default value is provided, 
   the compiler inserts that default value for you.
   Keep in mind that parameters with default values need to be written after parameters without default values.
+</pre>
 <pre><code>static void SaySomething(string say, string what = "ehh")
   {
     //Correct
@@ -6142,13 +6601,19 @@ You can use default parameters if you want to provide the option to leave out pa
     //Incorrect
     Console.WriteLine(say + what);
   }</code></pre>
-  WARNING: Because it works that way, default values can be problematic in some cases. If you change the default
-  value of a method parameter and don't recompile all callers of that method, those callers will still use the default
-  value that was present when they were compiled, possibly causing inconsistencies
+  <pre>
+  WARNING: Because it works that way, default values can be problematic in some cases. 
+  If you change the default  value of a method parameter and don't recompile all callers of that method, 
+  those callers will still use the default value that was present when they were compiled, 
+  possibly causing inconsistencies
+</pre>
+
 <h3>Method overloading</h3>
-Definition : When multiple methods with the same name are declared with different parameters, it is referred to as
-method overloading. Method overloading typically represents functions that are identical in their purpose but are
-written to accept different data types as their parameters.
+<pre>
+When multiple methods with the same name are declared with different parameters,
+ it is referred to as method overloading. 
+ Method overloading typically represents functions that
+ are identical in their purpose but are written to accept different data types as their parameters.
 Factors affecting
   . Number of Arguments
   . Type of arguments
@@ -6156,7 +6621,8 @@ Factors affecting
 Consider a method named Area that will perform calculation functions, 
 which will accepts various arguments and return the result.
 
-Example
+Example:
+</pre>
 <pre><code>
   public string Area(int value1)
   {
@@ -6170,18 +6636,24 @@ Example
   {
     return value1 * value2;
   }
-  
-  Similarly if we pass two double values to this method the output will be the product of the two values and are of type double. 
+  </code></pre>
+  <pre>
+  Similarly if we pass two double values to this method the output 
+  will be the product of the two values and are of type double. 
   This can be used of multiplication as well as finding the Area of rectangles
+</pre>
+<pre><code>
   public double Area(double value1)
   {
     return 3.14 * Math.Pow(value1,2);
   }
 </code></pre>
-This can be used specially for finding the area of circle, which will accepts a double value(radius) and return
-another double value as its Area.
+<pre>
+This can be used specially for finding the area of circle,
+which will accepts a double value(radius) and return another double value as its Area.
 Each of these methods can be called normally without conflict - the compiler will examine the parameters of each
 method call to determine which version of Area needs to be used.
+</pre>
 <pre><code>string squareArea = Area(2);
   double rectangleArea = Area(32.0, 17.5);
   double circleArea = Area(5.0); // all of these are valid and will compile.
@@ -6225,28 +6697,42 @@ method call to determine which version of Area needs to be used.
 
 <h2>Extension Methods</h2>
 <div>
+  <pre>
 -<b>this</b> : The first parameter of an extension method should always be preceded by the this keyword, 
 followed by the identifier with which to refer to the "current" instance of the object you are extending
-<h3>Extension methods - overview</h3>
-Extension methods were introduced in C# 3.0. Extension methods extend and add behavior to existing types
-without creating a new derived type, recompiling, or otherwise modifying the original type. They are especially
-helpful when you cannot modify the source of a type you are looking to enhance. Extension methods may be created for
-system types, types defined by third parties, and types that you have defined yourself. The extension method can
-be invoked as though it were a member method of the original type. This allows for Method Chaining used to
-implement a Fluent Interface.
-An extension method is created by adding a static method to a static class which is distinct from the original type
-being extended. The static class holding the extension method is often created for the sole purpose of holding
-extension methods.
-Extension methods take a special first parameter that designates the original type being extended. This first
-parameter is decorated with the keyword this (which constitutes a special and distinct use of this in C#—it should
-be understood as different from the use of this which allows referring to members of the current object instance).
-In the following example, the original type being extended is the class string. String has been extended by a
-method Shorten(), which provides the additional functionality of shortening. The static class StringExtensions
-has been created to hold the extension method. The extension method Shorten() shows that it is an extension of
-string via the specially marked first parameter. To show that the Shorten() method extends string, the first
-parameter is marked with this. Therefore, the full signature of the first parameter is this string text, where
-string is the original type being extended and text is the chosen parameter name.
+</pre>
 
+<h3>Extension methods - overview</h3>
+<pre>
+Extension methods were introduced in C# 3.0. Extension methods extend 
+and add behavior to existing types without creating a new derived type, recompiling, or otherwise modifying the original type.
+They are especially helpful when you cannot modify the source of a type you are looking to enhance. Extension methods may be created for
+system types, types defined by third parties, and types that you have defined yourself. 
+The extension method can be invoked as though it were a member method of the original type. 
+This allows for Method Chaining used to implement a Fluent Interface.
+
+An extension method is created by adding a static method to a static class
+which is distinct from the original type being extended. 
+
+The static class holding the extension method is often created for the sole purpose of holding
+extension methods.
+
+Extension methods take a special first parameter that designates the original type being extended. 
+
+This first parameter is decorated with the keyword this 
+(which constitutes a special and distinct use of this in C#—it should
+be understood as different from the use of this which allows referring to members of the current object instance).
+In the following example, the original type being extended is the class string. 
+String has been extended by a method Shorten(), 
+which provides the additional functionality of shortening. The static class StringExtensions
+has been created to hold the extension method. 
+The extension method Shorten() shows that it is an extension of
+string via the specially marked first parameter. 
+To show that the Shorten() method extends string, the first
+parameter is marked with this. 
+Therefore, the full signature of the first parameter is this string text, where
+string is the original type being extended and text is the chosen parameter name.
+</pre>
 <pre><code>static class StringExtensions
   {
     public static string Shorten(this string text, int length)
@@ -6267,6 +6753,7 @@ string is the original type being extended and text is the chosen parameter name
       var newString2 = StringExtensions.Shorten(myString, 5);
     }
   }</code></pre>
+  <pre>
   The object passed as the first argument of an extension method (which is accompanied by the this keyword) is the
   instance the extension method is called upon.
   For example, when this code is executed:
@@ -6282,6 +6769,8 @@ string is the original type being extended and text is the chosen parameter name
   discovery issues.
   This results in no conflicts between the extension methods and the libraries being used, unless namespaces which
   might conflict are explicitly pulled in. For example LINQ Extensions:
+</pre>
+
 <pre><code>using System.Linq; // Allows use of extension methods from the System.Linq namespace
   class Program
   {
@@ -6292,11 +6781,15 @@ string is the original type being extended and text is the chosen parameter name
       var even = ints.Where(x => x % 2 == 0);
     }
   }</code></pre>
-  Since C# 6.0, it is also possible to put a using static directive to the class containing the extension methods. For
-  example, using static System.Linq.Enumerable;. This makes extension methods from that particular class
+  <pre>
+  Since C# 6.0, it is also possible to put a using static directive to the class containing the extension methods. 
+  For example, using static System.Linq.Enumerable;. 
+  This makes extension methods from that particular class
   available without bringing other types from the same namespace into scope.
-  When a class method with the same signature is available, the compiler prioritizes it over the extension method
-  call. For example:
+  When a class method with the same signature is available,
+  the compiler prioritizes it over the extension method call.
+   For example:
+  </pre>
  <pre><code>class Test
   {
     public void Hello()
@@ -6321,7 +6814,9 @@ string is the original type being extended and text is the chosen parameter name
     }
   }
 </code></pre> 
-Note that if there are two extension functions with the same signature, and one of them is in the same namespace,
+<pre>
+Note that if there are two extension functions with the same signature, 
+and one of them is in the same namespace,
 then that one will be prioritized. On the other hand, if both of them are accessed by using, then a compile time
 error will ensue with the message:
 The call is ambiguous between the following methods or properties
@@ -6329,16 +6824,20 @@ Note that the syntactic convenience of calling an extension method via originalT
 is an optional convenience. The method can also be called in the traditional manner, so that the special first
 parameter is used as a parameter to the method.
 I.e., both of the following work:
+</pre>
 <pre><code>//Calling as though method belongs to string--it seamlessly extends string
   String s = "Hello World";
   s.Shorten(5);
   //Calling as a traditional static method with two parameters
   StringExtensions.Shorten(s, 5);</code></pre>
+
 <h3>Null checking</h3>
+<pre>
 Extension methods are static methods which behave like instance methods. However, unlike what happens when
 calling an instance method on a null reference, when an extension method is called with a null reference, it does
 not throw a NullReferenceException. This can be quite useful in some scenarios.
 For example, consider the following static class:
+</pre>
 <pre><code>public static class StringExtensions
   {
     public static string EmptyIfNull(this string text)
@@ -6355,9 +6854,11 @@ For example, consider the following static class:
   string anotherNullString = emptyString.NullIfEmpty(); // will return null</code></pre>
 
 <h3>Explicitly using an extension method</h3>
+<pre>
 Extension methods can also be used like ordinary static class methods. 
 This way of calling an extension method is
 more verbose, but is necessary in some cases
+</pre>
 <pre><code>static class StringExtensions
   {
     public static string Shorten(this string text, int length)
@@ -6368,6 +6869,7 @@ more verbose, but is necessary in some cases
   Usage:
  
   <pre><code> var newString = StringExtensions.Shorten("Hello World", 5);</code></pre>
+  <pre>
   When to call extension methods as static methods
   There are still scenarios where you would need to use an extension method as a static method:
     . Resolving conflict with a member method. 
@@ -6390,6 +6892,7 @@ more verbose, but is necessary in some cases
     // Compile time error: extension methods can't be called as static without specifying class.
     Shorten("Hello World", 5);
     If you remove the this modifier from the first argument of the Shorten method, the last line will compile
+  </pre>    
 <h3>Generic Extension Methods</h3>
 Just like other methods, extension methods can use generics. For example:
 <pre><code>static class Extensions
@@ -6456,14 +6959,19 @@ Just like other methods, extension methods can use generics. For example:
       someInstance.DoMagic(); // compilation error
     }
   }</code></pre>
+  <pre>
   Extension methods are just a syntactic sugar, and are not actually members of the class they extend. This means
   that they cannot break encapsulation—they only have access to public (or when implemented in the same
   assembly, internal) fields, properties and methods.
-<h3>Extension methods for chaining</h3>
+</pre>
 
-When an extension method returns a value that has the same type as its this argument, it can be used to "chain"
-one or more method calls with a compatible signature. This can be useful for sealed and/or primitive types, and
-allows the creation of so-called "fluent" APIs if the method names read like natural human language.
+<h3>Extension methods for chaining</h3>
+<pre>
+When an extension method returns a value that has the same type as its this argument,
+ it can be used to "chain" one or more method calls with a compatible signature. 
+ This can be useful for sealed and/or primitive types, 
+ and allows the creation of so-called "fluent" APIs if the method names read like natural human language.
+</pre>
 <pre><code>void Main()
   {
     int result = 5.Increment().Decrement().Increment();
@@ -6504,8 +7012,11 @@ public static class IntArrayExtensions
 </code></pre>
 
 <h3>Extension methods with Enumeration</h3>
+<pre>
 Extension methods are useful for adding functionality to enumerations.
 One common use is to implement a conversion method
+</pre>
+
 <pre><code>public enum YesNo
   {
     Yes,
@@ -6561,7 +7072,8 @@ One common use is to implement a conversion method
 </code></pre>
 
 <h3>Extension methods dispatch based on static</h3>
-<pre><code>The static (compile-time) type is used rather than the dynamic(run - time type) to match parameters.
+The static (compile-time) type is used rather than the dynamic(run - time type) to match parameters.
+<pre><code>  
   public class Base
   {
     public virtual string GetName()
@@ -6618,8 +7130,10 @@ One common use is to implement a conversion method
 </code></pre>
 
 <h3>Extension methods on Interfaces</h3>
+<pre>
 One useful feature of extension methods is that you can create common methods for an interface.
  Normally an interface cannot have shared implementations, but with extension methods they can
+</pre>
 <pre><code>public interface IVehicle
   {
     int MilesDriven { get; set; }
@@ -6631,13 +7145,18 @@ One useful feature of extension methods is that you can create common methods fo
       return vehicle.MilesDriven * 5028;
     }
   }</code></pre>
+  <pre>
   In this example, the method FeetDriven can be used on any IVehicle. 
   This logic in this method would apply to all
   IVehicles, so it can be done this way so that there doesn't have to be a FeetDriven in the IVehicle definition
   which would be implemented the same way for all children.
+</pre>
+
  <h3>Extension methods in combination with interfaces</h3>
+ <pre>
  It is very convenient to use extension methods with interfaces as implementation can be stored outside of class and
  all it takes to add some functionality to class is to decorate class with interface.
+</pre>
 <pre><code>{
   string Do()
 }
@@ -6662,6 +7181,7 @@ var classy = new Classy();
 classy.Do(); // will call the extension
 classy.DoWith(); // Classy implements IInterface so it can also be called this way
 </code></pre> 
+
 <h3>Extension methods aren't supported by  dynamic code</h3>
 <pre><code>
   class Program
@@ -6689,16 +7209,22 @@ classy.DoWith(); // Classy implements IInterface so it can also be called this w
 </code></pre>
 
 <h3>Extensions and interfaces together enable DRY code and mixin-like functionality</h3>
-Extension methods enable you to simplify your interface definitions by only including core required functionality in
-the interface itself and allowing you to define convenience methods and overloads as extension methods.
-Interfaces with fewer methods are easier to implement in new classes. Keeping overloads as extensions rather than
-including them in the interface directly saves you from copying boilerplate code into every implementation, helping
-you keep your code DRY. This in fact is similar to the mixin pattern which C# does not support.
-System.Linq.Enumerable’s extensions to IEnumerable< T> is a great example of this. IEnumerable<T> only requires
-the implementing class to implement two methods: generic and non-generic GetEnumerator(). But
-System.Linq.Enumerable provides countless useful utilities as extensions enabling concise and clear consumption
-of IEnumerable< T>.
+<pre>
+Extension methods enable you to simplify your interface definitions 
+by only including core required functionality in the interface itself 
+and allowing you to define convenience methods and overloads as extension methods.
+
+Interfaces with fewer methods are easier to implement in new classes. 
+Keeping overloads as extensions rather than
+including them in the interface directly saves you from copying boilerplate code into every implementation,
+helping you keep your code DRY. 
+This in fact is similar to the mixin pattern which C# does not support.
+System.Linq.Enumerable’s extensions to IEnumerable< T> is a great example of this.
+IEnumerable<T> only requires the implementing class to implement two methods: 
+  generic and non-generic GetEnumerator(). 
+ But System.Linq.Enumerable provides countless useful utilities as extensions enabling concise and clear consumption of IEnumerable< T>.
 The following is a very simple interface with convenience overloads provided as extensions.
+</pre>
 <pre><code>public interface ITimeFormatter
   {
     string Format(TimeSpan span);
@@ -6732,12 +7258,14 @@ The following is a very simple interface with convenience overloads provided as 
   }</code></pre>
 
 <h3>IList<T> Extension Method Example: Comparing 2 Lists</h3>
+  <pre>
   You can use the following extension method for comparing the contents of two IList< T > instances of the same
   type.
-  By default the items are compared based on their order within the list and the items themselves, passing false to
-  the isOrdered parameter will compare only the items themselves regardless of their order.
+  By default the items are compared based on their order within the list and the items themselves, 
+  passing false to  the isOrdered parameter will compare only the items themselves regardless of their order.
   For this method to work, the generic type (T) must override both Equals and GetHashCode methods.
   Usage:
+</pre>
 <pre><code>
   List< string> list1 = new List< string> {"a1", "a2", null, "a3"};
   List< string> list2 = new List< string> {"a1", "a2", "a3", null};
@@ -6784,9 +7312,11 @@ Method:
 
 
 <h3>Extension methods as strongly typed wrappers</h3>
+<pre>
 Extension methods can be used for writing strongly typed wrappers for dictionary-like objects. 
 For example a cache,
 HttpContext.Items at cetera...
+</pre>
 <pre><code>
   public static class CacheExtensions
   {
@@ -6796,12 +7326,18 @@ HttpContext.Items at cetera...
        cache["UserInfo"] as UserInfo;
   }
 </code></pre>
+<pre>
 This approach removes the need of using string literals as keys all over the codebase as well as the need of casting
 to the required type during the read operation. 
 Overall it creates a more secure, strongly typed way of interacting
 with such loosely typed objects as Dictionaries.
+</pre>
+
 <h3>Using Extension methods to create beautiful mapper classes</h3>
-We can create a better mapper classes with extension methods, Suppose if i have some DTO classes like
+<pre>
+We can create a better mapper classes with extension methods, 
+Suppose if i have some DTO classes like
+</pre>
 <pre><code>class UserDTO
   {
     public AddressDTO Address { get; set; }
@@ -6853,14 +7389,18 @@ We can create a better mapper classes with extension methods, Suppose if i have 
     }
   };
   UserViewModel user = userDTOObj.ToViewModel(); // My DTO mapped to Viewmodel
-  The beauty here is all the mapping method have a common name(ToViewModel) and we can reuse it several ways
+  
 </code></pre>
+The beauty here is all the mapping method have a common name(ToViewModel) and we can reuse it several ways
 
 <h3>Using Extension methods to build new collection types (e.g. DictList)</h3>
+<pre>
+You can create extension methods to improve usability for nested collections like a Dictionary with a List < T >
+value.
+Consider the following extension methods:
+</pre>
 <pre><code>
-  You can create extension methods to improve usability for nested collections like a Dictionary with a List < T >
-  value.
-  Consider the following extension methods:
+
   public static class DictListExtensions
   {
     public static void Add< TKey, TValue, TCollection>(this Dictionary< TKey, TCollection> dict, TKey
@@ -6906,9 +7446,11 @@ We can create a better mapper classes with extension methods, Suppose if i have 
 </code></pre>
 
 <h3>Extension methods for handling special cases</h3>
+<pre>
 Extension methods can be used to "hide" processing of inelegant business rules that would otherwise require
 cluttering up a calling function with if/then statements. This is similar to and analogous to handling nulls with
 extension methods. For example,
+</pre>
 <pre><code>public static class CakeExtensions
   {
     public static Cake EnsureTrueCake(this Cake cake)
@@ -6922,8 +7464,12 @@ extension methods. For example,
   myMouth.Eat(myCake);//Eat the cake, confident that it is not a lie.</code></pre>
 
 <h3>Using Extension methods with Static methods and Callbacks</h3>
-Consider using Extension Methods as Functions which wrap other code, here's a great example that uses both a
-static method and and extension method to wrap the Try Catch construct. Make your code Bullet Proof...
+<pre>
+Consider using Extension Methods as Functions which wrap other code, 
+here's a great example that uses both a
+static method and and extension method to wrap the Try Catch construct. 
+Make your code Bullet Proof...
+</pre>
 <pre><code>
   namespace Samples
   {
@@ -7068,7 +7614,7 @@ Sample Method:
       // Some code
     }
   }
-  Before C# 3.0 it was:
+  // Before C# 3.0 it was:
   var result = SmsUtil.SendMessage("Mehran", "Maryam", "Hello there!", 12, null);
   you can make this method call even more clear with named arguments:
   var result = SmsUtil.SendMessage(
@@ -7103,14 +7649,17 @@ Sample Method:
   Console.WriteLine(area);
   Console.Read();
 </code></pre>
+<pre>
  Note that we did not get any error while compiling and it will give you an output as follows.
-  <cl>Area with optional arguent:
+ <cl>Area with optional arguent:
     6720
   </cl>
   Using Optional Attribute.
-  Another way of implementing the optional argument is by using the [Optional] keyword. If you do not pass the
-  value for the optional argument, the default value of that datatype is assigned to that argument. The Optional
-  keyword is present in “Runtime.InteropServices” namespace.
+  Another way of implementing the optional argument is by using the [Optional] keyword.
+   If you do not pass the
+  value for the optional argument, the default value of that datatype is assigned to that argument. 
+ The Optional keyword is present in “Runtime.InteropServices” namespace.
+</pre>
  <pre><code>private static double FindAreaWithOptional(int length, [Optional] int width)
   {
     try
@@ -7123,13 +7672,18 @@ Sample Method:
     }
   }
   area = FindAreaWithOptional(120); //area=0
-  And when we call the function, we get 0 because the second argument is not passed and the default value of int is 0
-  and so the product is 0.</code></pre> 
+</code></pre> 
+And when we call the function, we get 0 because the second argument is not passed and the default value of int is 0
+and so the product is 0.
+
 <h3>Named Arguments</h3>
-<pre><code>Consider following is our function call.
+<pre>
+  Consider following is our function call.
   FindArea(120, 56);
   In this our first argument is length(ie 120) and second argument is width(ie 56). And we are calculating the area by
-  that function.And following is the function definition.
+  that function.And following is the function definition.  
+</pre>
+<pre><code>
   private static double FindArea(int length, int width)
   {
     try
@@ -7141,43 +7695,51 @@ Sample Method:
       throw new NotImplementedException();
     }
   }
-  So in the first function call, we just passed the arguments by its position.Right ?
+  // So in the first function call, we just passed the arguments by its position.Right ?
+  
   double area;
   Console.WriteLine("Area with positioned argument is: ");
   area = FindArea(120, 56);
   Console.WriteLine(area);
   Console.Read();
-  If you run this, you will get an output as follows.
-  GoalKicker.com – C# Notes for Professionals 215
-  Now here it comes the features of a named arguments.Please see the preceding function call.
+  
+  // If you run this, you will get an output as follows.
+  // Now here it comes the features of a named arguments.Please see the preceding function call.
+  
   Console.WriteLine("Area with Named argument is: ");
   area = FindArea(length: 120, width: 56);
   Console.WriteLine(area);
   Console.Read();
-  Here we are giving the named arguments in the method call.
-  area = FindArea(length: 120, width: 56);
-  Now if you run this program, you will get the same result.We can give the names vice versa in the method call if we
-  are using the named arguments.
+  
+  //Here we are giving the named arguments in the method call.
+  //area = FindArea(length: 120, width: 56);
+  //Now if you run this program, you will get the same result.We can give the names vice versa in the method call if we
+  //are using the named arguments.
+
   Console.WriteLine("Area with Named argument vice versa is: ");
   area = FindArea(width: 120, length: 56);
   Console.WriteLine(area);
   Console.Read();
-  One of the important use of a named argument is, when you use this in your program it improves the readability of
-  your code.It simply says what your argument is meant to be, or what it is?.
-  You can give the positional arguments too.That means, a combination of both positional argument and named
-  argument.
+  
+  //One of the important use of a named argument is, when you use this in your program it improves the readability of
+  //your code.It simply says what your argument is meant to be, or what it is?.
+  //You can give the positional arguments too.
+  //That means, a combination of both positional argument and named argument.
   Console.WriteLine("Area with Named argument Positional Argument : ");
   area = FindArea(120, width: 56);
   Console.WriteLine(area);
   Console.Read();
-  In the above example we passed 120 as the length and 56 as a named argument for the parameter width.
+
+  </code></pre>
+  <pre>
+    In the above example we passed 120 as the length and 56 as a named argument for the parameter width.
   There are some limitations too.We will discuss the limitation of a named arguments now.
   Limitation of using a Named Argument
   Named argument specification must appear after all fixed arguments have been specified.
   
   If you use a named argument before a fixed argument you will get a compile time error as follows.
   Named argument specification must appear after all fixed arguments have been specified
-  </code></pre>
+  </pre>
 
 </div>
 
@@ -7185,13 +7747,16 @@ Sample Method:
 <div>
 
 <h3>Data Annotation Basics</h3>
-<pre><code>Data annotations are a way of adding more contextual information to classes or members of a class. There are
+<pre>
+  Data annotations are a way of adding more contextual information to classes or members of a class. There are
   three main categories of annotations:
   Validation Attributes: add validation criteria to data
   Display Attributes: specify how the data should be displayed to the user
   Modelling Attributes: add information on usage and relationship with other classes
   Usage
   Here is an example where two ValidationAttribute and one DisplayAttribute are used:
+</pre>
+<pre><code>
   class Kid
   {
     [Range(0, 18)] // The age cannot be over 18 and cannot be negative
@@ -7202,14 +7767,20 @@ Sample Method:
     [DataType(DataType.Date)] // The birthday will be displayed as a date only (without the time)
     public DateTime Birthday { get; set; }
   }
-  Data annotations are mostly used in frameworks such as ASP.NET.For example, in ASP.NET MVC, when a model is
-  received by a controller method, ModelState.IsValid() can be used to tell if the received model respects all its
-  ValidationAttribute.DisplayAttribute is also used in ASP.NET MVC to determine how to display values on a web
-  page.</code></pre>
-
+  </code></pre>
+<pre>
+  Data annotations are mostly used in frameworks such as ASP.NET.
+  For example, in ASP.NET MVC, when a model is  received by a controller method, 
+  ModelState.IsValid() can be used to tell if the received model respects all its
+  ValidationAttribute.
+  DisplayAttribute is also used in ASP.NET MVC to determine how to display values on a web  page.  
+</pre>
 <h3>Creating a custom validation attribute</h3>
-<pre><code>Custom validation attributes can be created by deriving from the ValidationAttribute base class, then overriding
-  virtual methods as needed.
+<pre>
+  Custom validation attributes can be created by deriving from the ValidationAttribute base class, 
+  then overriding virtual methods as needed.  
+</pre>
+<pre><code>
   [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
   public class NotABananaAttribute : ValidationAttribute
   {
@@ -7224,7 +7795,7 @@ Sample Method:
       return isValid;
     }
   }
-  This attribute can then be used like this:
+  // This attribute can then be used like this:
   public class Model
   {
     [NotABanana(ErrorMessage = "Bananas are not allowed.")]
@@ -7232,15 +7803,24 @@ Sample Method:
   }</code></pre>
 
 <h3>Manually Execute Validation Attributes</h3>
-<pre><code>Most of the times, validation attributes are use inside frameworks (such as ASP.NET). Those frameworks take care
-  of executing the validation attributes. But what if you want to execute validation attributes manually? Just use the
-  Validator class (no reflection needed).
-  Validation Context
-  Any validation needs a context to give some information about what is being validated. This can include various
-  information such as the object to be validated, some properties, the name to display in the error message, etc.
-  ValidationContext vc = new ValidationContext(objectToValidate); // The simplest form of validation
-  context. It contains only a reference to the object being validated.
-  Once the context is created, there are multiple ways of doing validation.
+<pre>
+  Most of the times, validation attributes are use inside frameworks (such as ASP.NET). 
+  Those frameworks take care of executing the validation attributes. 
+  But what if you want to execute validation attributes manually? Just use the Validator class (no reflection needed).
+</pre>
+<h3>Validation Context</h3>
+<pre>
+Any validation needs a context to give some information about what is being validated.
+This can include various information such as the object to be validated, 
+some properties, the name to display in the error message, etc.
+</pre>
+<cl>ValidationContext vc = new ValidationContext(objectToValidate); // The simplest form of validation</cl>
+<pre>
+context. It contains only a reference to the object being validated.
+Once the context is created, there are multiple ways of doing validation.
+  
+</pre>
+<pre><code>
   
   // Validate an Object and All of its Properties
   ICollection< ValidationResult> results = new List< ValidationResult>(); // Will contain the results
@@ -7259,11 +7839,13 @@ Sample Method:
   // The results variable contains the results of the validation</code></pre>
 
 <h3>Validation Attributes</h3>
+<pre>
 Validation attributes are used to enforce various validation rules in a declarative fashion on classes or class
 members. All validation attributes derive from the ValidationAttribute base class.
 Example: RequiredAttribute
 When validated through the ValidationAttribute.Validate method, this attribute will return an error if the Name
 property is null or contains only whitespace
+</pre>
 <pre><code>{
   [Required(ErrorMessage = "Please provide a name.")]
   public string Name { get; set; }
@@ -7307,7 +7889,9 @@ public static class MyCustomValidation
 }
 </code></pre>
 <h3>EditableAttribute (data modeling attribute)</h3>
-<pre><code>EditableAttribute sets whether users should be able to change the value of the class property.
+EditableAttribute sets whether users should be able to change the value of the class property.
+<pre><code>
+  
   public class Employee
   {
     [Editable(false)]
@@ -7379,21 +7963,33 @@ public static class MyCustomValidation
 <h2>Keywords</h2>
 <div>
 <h3>as</h3>
-The as keyword is an operator similar to a cast. If a cast is not possible, using as produces null rather than
-resulting in an InvalidCastException.
-expression as type is equivalent to expression is type ? (type)expression : (type)null with the caveat that
-as is only valid on reference conversions, nullable conversions, and boxing conversions. User-defined conversions
-are not supported; a regular cast must be used instead.
-For the expansion above, the compiler generates code such that expression will only be evaluated once and use
-single dynamic type check (unlike the two in the sample above).
-as can be useful when expecting an argument to facilitate several types. Specifically it grants the user multiple
-options - rather than checking every possibility with is before casting, or just casting and catching exceptions. It is
-best practice to use 'as' when casting/checking an object which will cause only one unboxing penalty. Using is to
-check, then casting will cause two unboxing penalties.
-If an argument is expected to be an instance of a specific type, a regular cast is preferred as its purpose is more
-clear to the reader.
-Because a call to as may produce null, always check the result to avoid a NullReferenceException.
-<pre><code>Example usage
+<pre>
+The as keyword is an operator similar to a cast. 
+If a cast is not possible, using as produces null rather than resulting in an InvalidCastException.
+expression as type is equivalent to expression is type ? (type)expression : (type)null 
+with the caveat that as is only valid on reference conversions, nullable conversions, and boxing conversions.
+
+User-defined conversions are not supported; a regular cast must be used instead.
+
+For the expansion above, the compiler generates code such that expression will only be evaluated once
+and usesingle dynamic type check (unlike the two in the sample above).
+
+as can be useful when expecting an argument to facilitate several types. 
+Specifically it grants the user multiple options - rather than checking every possibility with is before casting, or just casting and catching exceptions. 
+
+It is best practice to use 'as' when casting/checking an object which will cause only one unboxing penalty. 
+
+Using is to check, then casting will cause two unboxing penalties.
+
+If an argument is expected to be an instance of a specific type, 
+a regular cast is preferred as its purpose is more clear to the reader.
+
+Because a call to as may produce null, 
+always check the result to avoid a NullReferenceException.
+
+Example usage
+</pre>
+<pre><code>
   object something = "Hello";
   Console.WriteLine(something as string); //Hello
   Console.Writeline(something as Nullable<int>); //null
@@ -7401,10 +7997,11 @@ Because a call to as may produce null, always check the result to avoid a NullRe
                       //This does NOT compile:
                       //destination type must be a reference type (or a nullable value type)
   Console.WriteLine(something as int);
-  Live Demo on.NET Fiddle
-  Equivalent example without using as:
+  
+  // Equivalent example without using as:
   Console.WriteLine(something is string ? (string)something : (string)null);
-  This is useful when overriding the Equals function in custom classes.
+  
+  // This is useful when overriding the Equals function in custom classes.
   class MyCustomClass
   {
     public override bool Equals(object obj)
@@ -7422,7 +8019,8 @@ Because a call to as may produce null, always check the result to avoid a NullRe
   }</code></pre>
 
 <h3>goto</h3>
-<pre><code>goto can be used to jump to a specific line inside the code, specified by a label.
+goto can be used to jump to a specific line inside the code, specified by a label.
+<pre><code>
   goto as a:
   Label:
   void InfiniteHello()
@@ -7464,23 +8062,32 @@ Because a call to as may produce null, always check the result to avoid a NullRe
     }
     throw;
   }
-  Live Demo on.NET Fiddle
-  Similar to many languages, use of goto keyword is discouraged except the cases below.
-  Valid usages of goto which apply to C#:
-  Fall-through case in switch statement.
-  Multi - level break. LINQ can often be used instead, but it usually has worse performance.
-  Resource deallocation when working with unwrapped low - level objects.In C#, low-level objects should
-  usually be wrapped in separate classes.
-  Finite state machines, for example, parsers; used internally by compiler generated async/ await state
-  machines.</code></pre>
+  </code></pre>
+  <pre>
+Similar to many languages, use of goto keyword is discouraged except the cases below.
+Valid usages of goto which apply to C#:
+    Fall-through case in switch statement.
+    Multi - level break. LINQ can often be used instead, but it usually has worse performance.
+    Resource deallocation when working with unwrapped low - level objects.In C#, low-level objects should
+    usually be wrapped in separate classes.
+    Finite state machines, for example, parsers; used internally by compiler generated async/ await state
+    machines.    
+  </pre>
 
 <h3>volatile</h3>
+<pre>
 Adding the volatile keyword to a field indicates to the compiler that the field's value may be changed by multiple
-separate threads. The primary purpose of the volatile keyword is to prevent compiler optimizations that assume
-only single-threaded access. Using volatile ensures that the value of the field is the most recent value that is
-available, and the value is not subject to the caching that non-volatile values are.
+separate threads. 
+
+The primary purpose of the volatile keyword is to prevent compiler optimizations that assume
+only single-threaded access. 
+
+Using volatile ensures that the value of the field is the most recent value that is available, 
+and the value is not subject to the caching that non-volatile values are.
+
 It is good practice to mark every variable that may be used by multiple threads as volatile to prevent unexpected
 behavior due to behind-the-scenes optimizations. Consider the following code block:
+</pre>
 <pre><code>public class Example
   {
     public int x;
@@ -7493,10 +8100,14 @@ behavior due to behind-the-scenes optimizations. Consider the following code blo
       Debug.WriteLine("x = " + x + ", y = " + y);
     }
   }
+  </code></pre>
+  <pre>
   In the above code-block, the compiler reads the statements x = 5 and y = x + 10 and determines that the value of
   y will always end up as 15.Thus, it will optimize the last statement as y = 15.However, the variable x is in fact a
   public field and the value of x may be modified at runtime through a different thread acting on this field
   separately. Now consider this modified code-block. Do note that the field x is now declared as volatile.
+</pre>
+<pre><code>
   public class Example
   {
     public volatile int x;
@@ -7509,6 +8120,8 @@ behavior due to behind-the-scenes optimizations. Consider the following code blo
       Debug.WriteLine("x = " + x + ", y = " + y);
     }
   }
+</code></pre>
+<pre>
   Now, the compiler looks for read usages of the field x and ensures that the current value of the field is always
   retrieved. This ensures that even if multiple threads are reading and writing to this field, the current value of x is
   always retrieved.
@@ -7525,23 +8138,34 @@ behavior due to behind-the-scenes optimizations. Consider the following code blo
   The volatile keyword can be applied to fields of reference types
   The volatile keyword will not make operating on 64-bit primitives on a 32-bit platform atomic. Interlocked
   operations such as Interlocked.Read and Interlocked.Exchange must still be used for safe multi-threaded
-  access on these platforms.</code></pre>
+  access on these platforms.
+</pre>
 
 <h3>checked, unchecked</h3>
-The checked and unchecked keywords define how operations handle mathematical overflow. "Overflow" in the
-context of the checked and unchecked keywords is when an integer arithmetic operation results in a value which is
+<pre>
+The checked and unchecked keywords define how operations handle mathematical overflow. 
+
+"Overflow" in the context of the checked and unchecked keywords is when an integer arithmetic operation results in a value which is
 greater in magnitude than the target data type can represent.
-When overflow occurs within a checked block (or when the compiler is set to globally use checked arithmetic), an
-exception is thrown to warn of undesired behavior. Meanwhile, in an unchecked block, overflow is silent: no
-exceptions are thrown, and the value will simply wrap around to the opposite boundary. This can lead to subtle,
-hard to find bugs.
-Since most arithmetic operations are done on values that are not large or small enough to overflow, most of the
-time, there is no need to explicitly define a block as checked. Care needs to be taken when doing arithmetic on
-unbounded input that may cause overflow, for example when doing arithmetic in recursive functions or while
-taking user input.
+
+When overflow occurs within a checked block (or when the compiler is set to globally use checked arithmetic),
+an exception is thrown to warn of undesired behavior. 
+Meanwhile, in an unchecked block, overflow is silent: no exceptions are thrown, 
+and the value will simply wrap around to the opposite boundary. This can lead to subtle, hard to find bugs.
+
+Since most arithmetic operations are done on values that are not large or small enough to overflow,
+ most of the time, there is no need to explicitly define a block as checked. 
+ 
+Care needs to be taken when doing arithmetic on unbounded input that may cause overflow,
+for example when doing arithmetic in recursive functions or while taking user input.
+
 Neither checked nor unchecked affect floating point arithmetic operations.
-When a block or expression is declared as unchecked, any arithmetic operations inside it are allowed to overflow
-without causing an error. An example where this behavior is desired would be the calculation of a checksum, where the value is allowed to "wrap around" during calculation:
+
+When a block or expression is declared as unchecked, any arithmetic operations inside it are allowed to overflow without causing an error. 
+
+An example where this behavior is desired would be the calculation of a checksum, where the value is allowed to "wrap around" during calculation:
+</pre>
+
 <pre><code>byte Checksum(byte[] data)
   {
     byte result = 0;
@@ -7551,17 +8175,23 @@ without causing an error. An example where this behavior is desired would be the
     }
     return result;
   }
+</code></pre>
+<pre>
   One of the most common uses for unchecked is implementing a custom override for object.GetHashCode(), a type
   of checksum.You can see the keyword's use in the answers to this question: What is the best algorithm for an
   overridden System.Object.GetHashCode?.
   When a block or expression is declared as checked, any arithmetic operation that causes an overflow results in an
   OverflowException being thrown.
+</pre>
+<pre><code>
   int SafeSum(int x, int y) {
       checked
       { // checked block
         return x + y;
       }
     }
+  </code></pre>
+  <pre>
   Both checked and unchecked may be in block and expression form.
   Checked and unchecked blocks do not affect called methods, only operators called directly in the current method.
   For example, Enum.ToObject(), Convert.ToInt32(), and user-defined operators are not affected by custom
@@ -7569,13 +8199,17 @@ without causing an error. An example where this behavior is desired would be the
   Note: The default overflow default behavior(checked vs. unchecked) may be changed in the Project Properties or
   through the / checked[+| -] command line switch.It is common to default to checked operations for debug builds and
    unchecked for release builds. The checked and unchecked keywords would then be used only where a default approach
-   does not apply and you need an explicit behavior to ensure correctness.</code></pre>
+   does not apply and you need an explicit behavior to ensure correctness.
+  </pre>
 
 <h3>virtual, override, new</h3>
-<pre><code>
+<pre>
   virtual and override
   The virtual keyword allows a method, property, indexer or event to be overridden by derived classes and present
-  polymorphic behavior. (Members are non-virtual by default in C#)
+  polymorphic behavior. (Members are non-virtual by default in C#)  
+</pre>
+<pre><code>
+  
   public class BaseClass
   {
   public virtual void Foo()
@@ -7583,18 +8217,28 @@ without causing an error. An example where this behavior is desired would be the
   Console.WriteLine("Foo from BaseClass");
   }
   }
+  </code></pre>
+<pre>
   In order to override a member, the override keyword is used in the derived classes. (Note the signature of the
   members must be identical)
+</pre>
+<pre><code>
   public class DerivedClass: BaseClass
   {
   public override void Foo()
   {
   }
-  The polymorphic behavior of virtual members means that when invoked, the actual member being executed is
-  determined at runtime instead of at compile time. The overriding member in the most derived class the particular
-  object is an instance of will be the one executed.
-  In short, object can be declared of type BaseClass at compile time but if at runtime it is an instance of
-  DerivedClass then the overridden member will be executed:
+  </code></pre>
+  <pre>
+  The polymorphic behavior of virtual members means that when invoked, 
+  the actual member being executed is  determined at runtime instead of at compile time. 
+  
+  The overriding member in the most derived class the particular  object is an instance of will be the one executed.
+
+  In short, object can be declared of type BaseClass at compile time 
+  but if at runtime it is an instance of  DerivedClass then the overridden member will be executed:
+  </pre>
+  <pre><code>
   BaseClass obj1 = new BaseClass();
   obj1.Foo(); //Outputs "Foo from BaseClass"
   obj1 = new DerivedClass();
@@ -7602,10 +8246,10 @@ without causing an error. An example where this behavior is desired would be the
   Overriding a method is optional:
   public class SecondDerivedClass : DerivedClass { }
   var obj1 = new SecondDerivedClass();
-  obj1.Foo(); //Outputs "Foo from DerivedClass"
-  new
-  Since only members defined as virtual are overridable and polymorphic, a derived class redefining a non virtual
-  member might lead to unexpected results.
+  obj1.Foo(); //Outputs "Foo from DerivedClass" new
+
+//  Since only members defined as virtual are overridable and polymorphic, a derived class redefining a non virtual
+//  member might lead to unexpected results.
   public class BaseClass
   {
     public void Foo()
@@ -7624,6 +8268,8 @@ without causing an error. An example where this behavior is desired would be the
   obj1.Foo(); //Outputs "Foo from BaseClass"
   obj1 = new DerivedClass();
   obj1.Foo(); //Outputs "Foo from BaseClass" too!
+  </code></pre>
+  <pre>
   When this happens, the member executed is always determined at compile time based on the type of the object.
   If the object is declared of type BaseClass(even if at runtime is of a derived class) then the method of
   BaseClass is executed
@@ -7633,6 +8279,8 @@ without causing an error. An example where this behavior is desired would be the
   derived type) and a compiler warning CS0108 is generated in those scenarios.
   If it was intentional, then the new keyword is used to suppress the compiler warning(And inform other developers
   of your intentions!). the behavior remains the same, the new keyword just suppresses the compiler warning.
+</pre>
+<pre><code>
   public class BaseClass
   {
     public void Foo()
@@ -7665,11 +8313,11 @@ without causing an error. An example where this behavior is desired would be the
     {
     }
   }
-  The above example also causes warning CS0108, because B.Foo() is not automatically overriding A.Foo().Add
-  override when the intention is to override the base class and cause polymorphic behavior, add new when you want
-  non-polymorphic behavior and resolve the call using the static type.The latter should be used with caution, as it
-  may cause severe confusion.
-  The following code even results in an error:
+  //The above example also causes warning CS0108, because B.Foo() is not automatically overriding A.Foo().Add
+  //override when the intention is to override the base class and cause polymorphic behavior, add new when you want
+  //non-polymorphic behavior and resolve the call using the static type.The latter should be used with caution, as it
+  //may cause severe confusion.
+  //The following code even results in an error:
   public class A
   {
     public void Foo()
@@ -7677,14 +8325,13 @@ without causing an error. An example where this behavior is desired would be the
     }
   }
   public class B : A
-  GoalKicker.com – C# Notes for Professionals 229
   {
     public override void Foo() // Error: Nothing to override
     {
     }
   }
-  Derived classes can introduce polymorphism
-  The following code is perfectly valid (although rare):
+  // Derived classes can introduce polymorphism
+  // The following code is perfectly valid (although rare):
   public class A
   {
     public void Foo()
@@ -7699,18 +8346,21 @@ without causing an error. An example where this behavior is desired would be the
       Console.WriteLine("B");
     }
   }
-  Now all objects with a static reference of B (and its derivatives) use polymorphism to resolve Foo(), while
-  references of A use A.Foo().
+  //Now all objects with a static reference of B (and its derivatives) use polymorphism to resolve Foo(), while
+  //references of A use A.Foo().
   A a = new A();
   a.Foo(); // Prints "A";
   a = new B();
   a.Foo(); // Prints "A";
   B b = new B();
   b.Foo(); // Prints "B";
-  Virtual methods cannot be private
-  The C# compiler is strict in preventing senseless constructs. Methods marked as virtual cannot be private.
-  Because a private method cannot be seen from a derived type, it couldn't be overwritten either. This fails to
-  compile:
+
+  /*Virtual methods cannot be private
+  The C# compiler is strict in preventing senseless constructs. 
+  Methods marked as virtual cannot be private.
+  Because a private method cannot be seen from a derived type, 
+  it couldn't be overwritten either. 
+  This fails to compile:*/
   public class A
   {
     private virtual void Foo() // Error: virtual methods cannot be private
@@ -7719,8 +8369,11 @@ without causing an error. An example where this behavior is desired would be the
   }
   </code></pre>
 <h3>stackalloc</h3>
-The stackalloc keyword creates a region of memory on the stack and returns a pointer to the start of that
-memory. Stack allocated memory is automatically removed when the scope it was created in is exited.
+<pre>
+The stackalloc keyword creates a region of memory on the stack 
+and returns a pointer to the start of that memory. 
+Stack allocated memory is automatically removed when the scope it was created in is exited.
+</pre>
 <pre><code>
   //Allocate 1024 bytes. This returns a pointer to the first byte.
   byte* ptr = stackalloc byte[1024];
@@ -7729,18 +8382,24 @@ memory. Stack allocated memory is automatically removed when the scope it was cr
   ptr[1] = 13;
   ptr[2] = 232;
   ...
+  </code></pre>
+  <pre>
   Used in an unsafe context.
   As with all pointers in C# there is no bounds checking on reads and assignments. Reading beyond the bounds of
   the allocated memory will have unpredictable results - it may access some arbitrary location within memory or it
   may cause an access violation exception.
+</pre>
+<pre><code>
   //Allocate 1 byte
   byte* ptr = stackalloc byte[1]
   ;
   //Unpredictable results...
   ptr[10] = 1;
   ptr[-1] = 2;
-  Stack allocated memory is automatically removed when the scope it was created in is exited.This means that you
+
+  /*Stack allocated memory is automatically removed when the scope it was created in is exited.This means that you
   should never return the memory created with stackalloc or store it beyond the lifetime of the scope.
+  */
   unsafe IntPtr Leak()
   {
     //Allocate some memory on the stack
@@ -7755,10 +8414,15 @@ memory. Stack allocated memory is automatically removed when the scope it was cr
     //the bounds of the pointer.
     var ptr = Leak();
   }
-  stackalloc can only be used when declaring and initialising variables.The following is not valid:
+
+  //stackalloc can only be used when declaring and initialising variables.The following is not valid:
+  
   byte* ptr;
   ...
   ptr = stackalloc byte[1024];
+  
+</code></pre>
+<pre>
   Remarks:
   stackalloc should only be used for performance optimizations (either for computation or interop).This is due to
   the fact that:
@@ -7766,12 +8430,12 @@ memory. Stack allocated memory is automatically removed when the scope it was cr
   memory is released as soon as the variable goes out of scope
   It is faster to allocate memory on the stack rather than the heap
   Increase the chance of cache hits on the CPU due to the locality of data
-</code></pre>
-
+</pre>
 <h3>break</h3>
+<pre>
 In a loop (for, foreach, do, while) the break statement aborts the execution of the innermost loop and returns to the
 code after it. Also it can be used with yield in which it specifies that an iterator has come to an end.
-
+</pre>
 <pre><code>for (var i = 0; i < 10; i++)
   {
     if (i == 5)
@@ -7787,7 +8451,9 @@ code after it. Also it can be used with yield in which it specifies that an iter
     // If stuff.SomeStringProp for any "stuff" is null, the loop is aborted.
     Console.WriteLine(stuff.SomeStringProp);
   }
-  The break-statement is also used in switch-case constructs to break out of a case or default segment.
+
+// The break-statement is also used in switch-case constructs to break out of a case or default segment.
+
   switch (a)
     {
       case 5:
@@ -7797,11 +8463,15 @@ code after it. Also it can be used with yield in which it specifies that an iter
         Console.WriteLine("a was something else!");
         break;
     }
+  </code></pre>
+  <pre>
     In switch statements, the 'break' keyword is required at the end of each case statement.This is contrary to some
      languages that allow for 'falling through' to the next case statement in the series. Workarounds for this would
      include 'goto' statements or stacking the 'case' statements sequentially.
      Following code will give numbers 0, 1, 2, ..., 9 and the last line will not be executed.yield break signifies the
   end of the function(not just a loop).
+</pre>
+<pre><code>
   public static IEnumerable<int> GetNumbers()
   {
     int i = 0;
@@ -7818,9 +8488,9 @@ code after it. Also it can be used with yield in which it specifies that an iter
     }
     Console.WriteLine("This line will not be executed");
   }
-  Live Demo on.NET Fiddle
-  Note that unlike some other languages, there is no way to label a particular break in C#. This means that in the case
-  of nested loops, only the innermost loop will be stopped:
+  
+  // Note that unlike some other languages, there is no way to label a particular break in C#. This means that in the case
+  //of nested loops, only the innermost loop will be stopped:
   foreach (var outerItem in outerList)
   {
     foreach (var innerItem in innerList)
@@ -7831,12 +8501,16 @@ code after it. Also it can be used with yield in which it specifies that an iter
         break;
     }
   }
+</CODE></pre>
+<pre>
   If you want to break out of the outer loop here, you can use one of several different strategies, such as:
   A goto statement to jump out of the whole looping structure.
   A specific flag variable(shouldBreak in the following example) that can be checked at the end of each
   iteration of the outer loop.
   Refactoring the code to use a return statement in the innermost loop body, or avoid the whole nested loop
   structure altogether.
+</pre>
+<pre><code>
   bool shouldBreak = false;
   while (comeCondition)
   {
@@ -7856,19 +8530,25 @@ code after it. Also it can be used with yield in which it specifies that an iter
     }
   }
   endAllLooping: // label from where control flow will continue</code></pre>
-
+</code></pre>
 <h3>const</h3>
-<pre><code>const is used to represent values that will never change throughout the lifetime of the program. Its value is
+<pre>
+  const is used to represent values that will never change throughout the lifetime of the program. Its value is
   constant from compile-time, as opposed to the readonly keyword, whose value is constant from run-time.
   For example, since the speed of light will never change, we can store it in a constant.
+</pre>
+<pre><code>
   const double c = 299792458; // Speed of light
   double CalculateEnergy(double mass)
   {
   return mass * c * c;
   }
-  This is essentially the same as having return mass * 299792458 * 299792458, as the compiler will directly
-  substitute c with its constant value.
-  As a result, c cannot be changed once declared. The following will produce a compile-time error:
+  
+  //This is essentially the same as having return mass * 299792458 * 299792458, as the compiler will directly
+  //substitute c with its constant value.
+  //As a result, c cannot be changed once declared.
+  // The following will produce a compile-time error:
+
   const double c = 299792458; // Speed of light
   c = 500; //compile-time error
   A constant can be prefixed with the same access modifiers as methods:
@@ -7882,6 +8562,10 @@ code after it. Also it can be used with yield in which it specifies that an iter
   const c = 299792458;
   return mass * c * c;
   }
+
+  
+</code></pre>
+<pre>
   These can not be prefixed with a private or public keyword, since they are implicitly local to the method they are
   defined in.
   Not all types can be used in a const declaration. The value types that are allowed, are the pre-defined types sbyte,
@@ -7898,16 +8582,18 @@ code after it. Also it can be used with yield in which it specifies that an iter
   For that reason, if a value might change in future revisions of the program, and if the value needs to be publicly
   visible, do not declare that value const unless you know that all dependent assemblies will be re-compiled
   whenever something is changed. The alternative is using static readonly instead of const, which is resolved at
-  runtime.
-</code></pre>
+  runtime.  
+</pre>
 
 <h3>async, await</h3>
+<pre>
 The await keyword was added as part of C# 5.0 release which is supported from Visual Studio 2012 onwards. It
 leverages Task Parallel Library (TPL) which made the multi-threading relatively easier. The async and await
 keywords are used in pair in the same function as shown below. The await keyword is used to pause the current
 asynchronous method's execution until the awaited asynchronous task is completed and/or its results returned. In
 order to use the await keyword, the method that uses it must be marked with the async keyword.
 Using async with void is strongly discouraged. For more info you can look here.
+</pre>
 <pre><code>public async Task DoSomethingAsync()
   {
     Console.WriteLine("Starting a useless process...");
@@ -7948,6 +8634,7 @@ Using async with void is strongly discouraged. For more info you can look here.
 </code></pre>
 
 <h3>for</h3>
+<pre>
 Syntax: for (initializer; condition; iterator)
   .The for loop is commonly used when the number of iterations is known.
   .The statements in the initializer section run only once, before you enter the loop.
@@ -7955,6 +8642,7 @@ Syntax: for (initializer; condition; iterator)
   .iteration to determine whether the loop should exit or should run again.
   .The iterator section defines what happens after each iteration of the body of the loop.
 This example shows how for can be used to iterate over the characters of a string:
+</pre>
 <pre><code>string str = "Hello";
   for (int i = 0; i < str.Length; i++)
   {
@@ -7973,9 +8661,11 @@ This example shows how for can be used to iterate over the characters of a strin
     {
       // Your code here
     }
-  The initializer section can contain multiple variables, so long as they are of the same type.The condition
+  
+    /* The initializer section can contain multiple variables, so long as they are of the same type.The condition
   section can consist of any expression which can be evaluated to a bool.And the iterator section can perform
-  multiple actions separated by comma:
+  multiple actions separated by comma:*/
+
   string hello = "hello";
   for (int i = 0, j = 1, k = 9; i < 3 && k > 0; i++, hello += i)
   {
@@ -7987,11 +8677,13 @@ This example shows how for can be used to iterate over the characters of a strin
   hello12</code></pre>
 
 <h3>abstract</h3>
+<pre>
 A class marked with the keyword abstract cannot be instantiated.
 A class must be marked as abstract if it contains abstract members or if it inherits abstract members that it doesn't
 implement. A class may be marked as abstract even if no abstract members are involved.
 Abstract classes are usually used as base classes when some part of the implementation needs to be specified by
 another component.
+</pre>
 <pre><code>abstract class Animal
   {
     string Name { get; set; }
@@ -8033,10 +8725,12 @@ another component.
   }</code></pre>
 
 <h3>fixed</h3>
+<pre>
 The fixed statement fixes memory in one location. Objects in memory are usually moving arround, this makes
 garbage collection possible. But when we use unsafe pointers to memory addresses, that memory must not be
 moved.
-  . We use the fixed statement to ensure that the garbage collector does not relocate the string data.
+We use the fixed statement to ensure that the garbage collector does not relocate the string data.
+</pre>
 <pre><code>
   // Fixed Variables
   var myStr = "Hello world!";
@@ -8121,8 +8815,11 @@ For classes, interfaces, delegate, array, nullable (such as int?) and pointer ty
   }</code></pre>
 
 <h3>is</h3>
-<pre><code>Checks if an object is compatible with a given type, i.e. if an object is an instance of the BaseInterface type, or a
-  type that derives from BaseInterface:
+<pre>
+  Checks if an object is compatible with a given type, 
+  i.e. if an object is an instance of the BaseInterface type, or a type that derives from BaseInterface:
+</pre>
+<pre><code>
   interface BaseInterface {}
   class BaseClass : BaseInterface {}
   class DerivedClass : BaseClass {}
@@ -8160,9 +8857,13 @@ For classes, interfaces, delegate, array, nullable (such as int?) and pointer ty
     asD.Method();
   }
 </code></pre> 
+
 <h3>this</h3>
-<pre><code>The this keyword refers to the current instance of class(object).That way two variables with the same name, one at
+<pre>
+  The this keyword refers to the current instance of class(object).That way two variables with the same name, one at
   the class-level(a field) and one being a parameter(or local variable) of a method, can be distinguished.
+</pre>
+<pre><code>
   public MyClass
   {
     int a;
@@ -8173,36 +8874,42 @@ For classes, interfaces, delegate, array, nullable (such as int?) and pointer ty
       this.a = a;
     }
   }
-  Other usages of the keyword are chaining non-static constructor overloads:
+  // Other usages of the keyword are chaining non-static constructor overloads:
   public MyClass(int arg) : this(arg, null)
   {
   }
-  and writing indexers:
+  // and writing indexers:
   public string this[int idx1, string idx2]
   {
     get { /* ... */ }
     set { /* ... */ }
   }
-  and declaring extension methods:
+  // and declaring extension methods:
   public static int Count<TItem>(this IEnumerable<TItem> source)
   {
     // ...
-  }
+  }</code></pre>
+  <pre>
+    
   If there is no conflict with a local variable or parameter, it is a matter of style whether to use this or not, so
   this.MemberOfType and MemberOfType would be equivalent in that case. Also see base keyword.
   Note that if an extension method is to be called on the current instance, this is required.For example if your are
   inside a non-static method of a class which implements IEnumerable<> and you want to call the extension Count
   from before, you must use:
   this.Count() // works like StaticClassForExtensionMethod.Count(this)
-  and this cannot be omitted there.</code></pre>
+  and this cannot be omitted there.
+  </pre>
 
 <h3>readonly</h3>
-<pre><code>The readonly keyword is a field modifier.When a field declaration includes a readonly modifier, assignments to
-  that field can only occur as part of the declaration or in a constructor in the same class.
-  The readonly keyword is different from the const keyword.A const field can only be initialized at the declaration of
-  the field. A readonly field can be initialized either at the declaration or in a constructor. Therefore, readonly fields
-  can have different values depending on the constructor used.
-  The readonly keyword is often used when injecting dependencies.
+<pre>The readonly keyword is a field modifier.When a field declaration includes a readonly modifier, 
+  assignments to that field can only occur as part of the declaration or in a constructor in the same class.
+
+  The readonly keyword is different from the const keyword.
+  A const field can only be initialized at the declaration of
+  the field. A readonly field can be initialized either at the declaration or in a constructor. 
+  Therefore, readonly fields can have different values depending on the constructor used.
+  The readonly keyword is often used when injecting dependencies.</pre>
+<pre><code>
   class Person
   {
     readonly string _name;
@@ -8217,10 +8924,12 @@ For classes, interfaces, delegate, array, nullable (such as int?) and pointer ty
       _surname = "another surname"; // Compile error
     }
   }
+  /*
   Note: Declaring a field readonly does not imply immutability. If the field is a reference type then the
   content of the object can be changed. Readonly is typically used to prevent having the object being
   overwritten and assigned only during instantiation of that object.
   Note: Inside the constructor a readonly field can be reassigned
+  */
   public class Car
   {
     public double Speed { get; set; }
