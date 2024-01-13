@@ -10,7 +10,7 @@
  <button onclick="toggleAll(this);" >-</button>
 	
 	<h2>
-		<input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />Resources</h2>
+		Resources</h2>
 <p>
     <a href="https://www.google.com/search?q=design+pattern+real+life+examples&oq=design+pattern+real+life+examples">design pattern real life examples</a>
     <a href='https://www.tutorialspoint.com/design_pattern/design_pattern_overview.htm'>tutorialspoint`s design patterns</a>    
@@ -18,15 +18,16 @@
    <a href="https://www.dotnettricks.com/learn/designpatterns/">dotnettricks</a>
 </p>
 
-<h2>
-<input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />What are Design Patterns?</h2>
+<h2>What are Design Patterns?</h2>
 <p>
 Design patterns are optimized, reusable solutions to the common programming problems.
 </p>
+
 <h2 style="background-color:#9944bb">Classical gof 23 design patterns:</h2>
-<h2><input type="button" value="-" class="toggleButton" onclick="toggle(this)" /> Types</h2>
+
+<h2> Types</h2>
 <div>
-    <b>Structural patterns </b> deal with structure of classes and objects.they are 7:
+    <pre><b>Structural patterns </b> deal with structure of classes and objects.they are 7:
         Adapter ,    Bridge ,    Composite ,    Decorator ,    Facade ,    Flyweight ,  proxy 
 
     <b>Creational patterns </b>provide instantiation mechanisms instead of using constructors.They are 6:
@@ -35,18 +36,20 @@ Design patterns are optimized, reusable solutions to the common programming prob
     <b>Behavioral patterns</b> :
     Chain of Responsibility Pattern,Command ,Interpreter ,Iterator ,Mediator ,Memento ,Observer ,State ,Strategy ,Template 
     ,Visitor ,Null Object
+</pre>
 </div>
     
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Factory Method (Virtual Constructor)(Inversion of control)</h2>
+<h2>Factory Method (Virtual Constructor)(Inversion of control)</h2>
 <div>
-it says that just define an interface or abstract class for creating an object but let the subclasses decide which class to instantiate.
+<pre>it says that just define an interface or abstract class for creating an object 
+but let the subclasses decide which class to instantiate.
 
 It inverts control of creating the instance into subclass.
 
 <a href="https://www.javatpoint.com/factory-method-design-pattern">Example and more..</a>
 
 example 1:
+</pre>
 <pre><code>
     // The clients will be using the following lines in order to write to the log, 
     // even without knowing if the log will be written to the file or to the console:
@@ -54,10 +57,14 @@ example 1:
     Logger logger = LoggerFactory.getLogger();
     logger.log(“write some message to the log”);
 </code></pre>
+<pre>
 example2:
 The best time to use the factory method pattern is when you have multiple different variations of a single entity.
+
 Let's say you have a button class; this class has different variations, such as ImageButton, InputButton and FlashButton. 
-Depending on the place, you may need to create different buttons—this is where you can use a factory to create the buttons for you!
+
+Depending on the place, you may need to create different buttons—this is where you can use a factory to create the buttons for you
+</pre>
 <pre>
 <code>
 
@@ -99,24 +106,28 @@ Depending on the place, you may need to create different buttons—this is where
 </pre>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Abstract Factory</h2>
+<h2> Abstract Factory</h2>
 <p>
+<pre>
 says that just define an interface or abstract class for creating families of related (or dependent) objects 
 but without specifying their concrete sub-classes.
 
 Usage examples:
-Application may have the Abstract DeviceProviderFactory which will be able to detect if the device is local or remote (from Amazon Device Farm),
- and return the corresponding factory accordingly: LocalDeviceProviderFactory or RemoteDeviceProviderFactory . 
- Each such factory knows how to create device provider per OS type of device:
- AndroidDeviceProvider, iOSDeviceProvider, WindowsPhoneDeviceProvider
-<a href="https://www.javatpoint.com/abstract-factory-pattern">more</a>
+Application may have the Abstract DeviceProviderFactory
+which will be able to detect if the device is local or remote (from Amazon Device Farm),
+and return the corresponding factory accordingly: LocalDeviceProviderFactory or RemoteDeviceProviderFactory . 
 
+Each such factory knows how to create device provider per OS type of device:
+ AndroidDeviceProvider, iOSDeviceProvider, WindowsPhoneDeviceProvider
+
+<a href="https://www.javatpoint.com/abstract-factory-pattern">more</a>
+</pre>
 </p>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Singleton</h2>
+<h2>  
+    Singleton</h2>
 <div>
+<pre>
 says that just"define a class that has only one instance and provides a global point of access to it".
 There are two forms of singleton design pattern
 
@@ -126,6 +137,7 @@ Lazy Instantiation: creation of instance when required.
 <a href="https://www.javatpoint.com/singleton-design-pattern-in-java">More..</a>
 
 Lazy initializtion example:
+</pre>    
 <pre><code>
     public class Logger {
 
@@ -145,9 +157,10 @@ Lazy initializtion example:
 
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Prototype</h2>
+<h2>  
+    Prototype</h2>
 <p>
+<pre>
 cloning of an existing object instead of creating new one and can also be customized as per the requirement.
 
 Consider using this when
@@ -155,12 +168,12 @@ Creation of the object is very time consuming
 <b>Usage examples:</b>
 1. Cover letters — no need to create the Cover letter for each organization from scratch. Instead, 
 one cover letter will be created in most appealing format and for others only a copy will be created with personalized organization name.
-
+</pre>    
 <a href="https://www.javatpoint.com/prototype-design-pattern">More..</a>
 </p>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />(Gradual )Builder</h2>
+<h2>  
+    (Gradual )Builder</h2>
 <div>
 construct a complex object from simple objects using step-by-step approach(build it gradually).
 Example:
@@ -171,62 +184,90 @@ Example:
  Pizza.Builder(Size.medium).onion(true).olives(true).build();    
 </code></pre>
 
-
-Builder pattern may be very useful while writing Unit Tests. When in order to construct the object under the test,
- need to pass a lot of parameters to the constructor and some of these parameters are completely irrelevant for the specific test.
+<pre>
+Builder pattern may be very useful while writing Unit Tests.
+When in order to construct the object under the test,
+need to pass a lot of parameters to the constructor and some of these parameters are completely irrelevant for the specific test.
+</pre>
 <a href="https://www.javatpoint.com/builder-design-pattern">More..</a>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Object Pool</h2>
-<p>
+<h2>  
+    Object Pool</h2>
+<p><pre>
     to reuse the object that are expensive to create.
     Basically, an Object pool is a container which contains a specified amount of objects.
+
     When an object is taken from the pool, it is not available in the pool until it is put back.
     Objects in the pool have a lifecycle: creation, validation and destroy.
+    
 <a href="https://www.javatpoint.com/object-pool-pattern">More..</a>
+</pre>
 </p>
 
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Flyweight</h2>
+<h2>  
+    Flyweight</h2>
 <div>
-The Flyweight pattern defines a structure for sharing objects. Objects are shared for at least two reasons: efficiency and consistency.
-    Flyweight focuses on sharing for space efficiency. But objects can be shared only if they don’t define context-dependent state.
-Flyweight objects have no such state. Any additional information they need to perform their task is passed to them when needed. 
+<pre>
+The Flyweight pattern defines a structure for sharing objects. 
+Objects are shared for at least two reasons: efficiency and consistency.
+
+Flyweight focuses on sharing for space efficiency. 
+But objects can be shared only if they don’t define context-dependent state.
+Flyweight objects have no such state. 
+Any additional information they need to perform their task is passed to them when needed. 
 With no context-dependent state, Flyweight objects may be shared freely.
 
 Consider using this when
 The number of Objects to be created by application should be huge.
 The object creation is heavy on memory and it can be time consuming too.
 The object should be immutable
+
 Usage examples:
 May be used to represent the keyboard characters: one object for ‘a’, one for ‘b’ and so on.
-When drawing a lot of shapes with different colors: one object for red circle, one object for blue circle and so on.
- In case red circle was already created once, there is no need to create new such object, since the same object may be reused.   
+When drawing a lot of shapes with different colors:
+one object for red circle, one object for blue circle and so on.
+ In case red circle was already created once, 
+ there is no need to create new such object, since the same object may be reused.   
+</pre>    
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Proxy </h2>
+<h2>  
+    Proxy </h2>
 <div>
+<pre>
 A proxy can be used in many ways. It can act as a local representative for an object in a remote address space.
- It can represent a large object that should be loaded on demand and avoids duplication of the same object.
-  Without the concept of proxies, an application could be slow, and appear non-responsive. 
-  The proxy might protect access to a sensitive object.
+
+It can represent a large object that should be loaded on demand and avoids duplication of the same object.
+Without the concept of proxies,
+an application could be slow, and appear non-responsive. 
+The proxy might protect access to a sensitive object.
 
 Usage examples:
-Image viewer program that lists and displays high resolution photos. The program has to show a list of all photos
- however it does not need to display the actual photo until the user selects an image item from a list.
+Image viewer program that lists and displays high resolution photos. 
+
+The program has to show a list of all photos
+however it does not need to display the actual photo until the user selects an image item from a list.
+
 The same for document editor that can embed graphical objects in a document. 
-It isn’t necessary to load all pictures when the document is opened, because not all of these objects will be visible at the same time.
+
+It isn’t necessary to load all pictures when the document is opened, 
+because not all of these objects will be visible at the same time.
+
 The protective proxy acts as an authorization layer to verify if the actual user has access to appropriate content.
- An example can be thought about the proxy server which provides restrictive internet access in office. 
- Only the websites and contents which are valid will be allowed and the remaining ones will be blocked.
+
+An example can be thought about the proxy server which provides restrictive internet access in office. 
+
+Only the websites and contents which are valid will be allowed and the remaining ones will be blocked.
+
 Maybe used also for adding a thread-safe feature to an existing class without changing the existing class’s code.
+</pre>
 </div>
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Strategy Pattern</h2>
+<h2>  
+    Strategy Pattern</h2>
 <div>
+<pre>
     The strategy pattern allows grouping related algorithms under an abstraction, 
     which allows switching out one algorithm or policy for another without modifying the client.
      Instead of directly implementing a single algorithm,
@@ -262,7 +303,7 @@ It still needs the same inputs (name, address, mobile number, etc.), but, depend
  what if you need to use this class in a different place? In that case,
   you'll have to rewrite the same if-else statement all over again. 
 
-
+</pre>    
 <pre><code>
    class User {
         
@@ -278,44 +319,44 @@ It still needs the same inputs (name, address, mobile number, etc.), but, depend
     </code></pre>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Adapter</h2>
+<h2>  
+    Adapter</h2>
 <div>
-    This allows incompatible classes to work together by converting the interface of one class into another. 
-
-        Non-Adapter Approach
+<pre>
+This allows incompatible classes to work together by converting the interface of one class into another. 
+Non-Adapter Approach
+</pre>            
 <pre>
 <code>
+$user = new User();
+$user->CreateOrUpdate( //inputs );
 
-            $user = new User();
-            $user->CreateOrUpdate( //inputs );
-            
-            $profile = new Profile();
-            $profile->CreateOrUpdate( //inputs );
+$profile = new Profile();
+$profile->CreateOrUpdate( //inputs );
 
-        Adapter Approach
-            
-            $account_domain = new Account();
-            $account_domain->NewAccount( //inputs );
+//Adapter Approach
+    
+$account_domain = new Account();
+$account_domain->NewAccount( //inputs );
 
-            //In this situation, we have a wrapper class, which would be our Account domain class:
+//In this situation, we have a wrapper class, which would be our Account domain class:
 
 
-            
-            class Account()
-            {
-                public function NewAccount( //inputs )
-                {
-                    $user = new User();
-                    $user->CreateOrUpdate( //subset of inputs );
-                    
-                    $profile = new Profile();
-                    $profile->CreateOrUpdate( //subset of inputs );
-                }
-            }           
+
+class Account()
+{
+    public function NewAccount( //inputs )
+    {
+        $user = new User();
+        $user->CreateOrUpdate( //subset of inputs );
+        
+        $profile = new Profile();
+        $profile->CreateOrUpdate( //subset of inputs );
+    }
+}           
     </code>
 </pre>   
-
+<pre>
 Adapter pattern works as a bridge between two incompatible interfaces. 
 This type of design pattern comes under structural pattern as this pattern combines the capability of two independent interfaces.
 
@@ -335,12 +376,13 @@ These classes can play vlc and mp4 format files.
 
 We want to make AudioPlayer to play other formats as well. To attain this, we have created an adapter class MediaAdapter which 
 implements the MediaPlayer interface and uses AdvancedMediaPlayer objects to play the required format.
-
+</pre>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Decorator</h2>
+<h2>  
+    Decorator</h2>
 <div>
+<pre>
 Enables us to add new or additional behavior to an object during runtime, depending on the situation.
 The goal is to make it so that the extended functions can be applied to one specific instance, and, at the same time, still be able to create an original instance that doesn't have the new functions. 
 To implement the decorator pattern, we can follow these steps:
@@ -354,6 +396,7 @@ example 1:
 When need to add to some shape component a border or a shadow functionality.
 example 2:
 Let's say you have an HTML link element, a logout link, that you want to do slightly different things to based on the current page.
+</pre>    
 
 <pre>
 <code>
@@ -441,9 +484,10 @@ Let's say you have an HTML link element, a logout link, that you want to do slig
 </pre>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> Template Method</h2>
+<h2>  
+     Template Method</h2>
 <div>
+<pre>
     Template Method
     This pattern may be useful when we need to define an algorithm step by step. 
     The implementation of some of the steps may be different, but the general flow and the order of the steps in the flow must remain unchanged.
@@ -479,11 +523,13 @@ Let's say you have an HTML link element, a logout link, that you want to do slig
     Usage examples:
     When implementing some general Parser, which loads the data from different sources (like CSV file, SQL Server database, some 3rd party tool), parses the data (data from different sources will be parsed in different way and then it may be saved to some location. We will have template methods for load(), parse() and save() methods.
     When implementing credit cards validator. For different kind of credit cards (Visa, MasterCard and etc) the validation algorithm is the same: need to check expiration date, length of the credit card number, account status and etc. But the actual implementation for each credit card type may be different.   
+</pre>        
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Bridge</h2>
+<h2>  
+    Bridge</h2>
 <div>
+<pre>
 is used when we need to decouple an abstraction from its implementation so that the two can vary independently.
 
 The bridge pattern can be applied to scenarios where the class and what it does changes often. 
@@ -498,6 +544,7 @@ Refined Abstraction – Extends the abstraction takes the finer detail one level
 Implementer – It defines the interface for implementation classes. This interface does not need to correspond directly to the abstraction interface and can be very different. Abstraction imp provides an implementation in terms of operations provided by the Implementer interface.
 Concrete Implementation – Implements the above implementer by providing the concrete implementation.
 <a href="https://www.geeksforgeeks.org/bridge-design-pattern/">Example:</a>
+</pre>    
 <pre><code>
     // abstraction in bridge pattern
 abstract class Vehicle {
@@ -587,10 +634,11 @@ class BridgePattern {
 </code></pre>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Observer (also may be called Publish/Subscribe pattern)
+<h2>  
+    Observer (also may be called Publish/Subscribe pattern)
 </h2>
 <div>
+<pre>
      The Observer pattern defines and maintains a dependency between objects. 
      The classic example of Observer is Model/View/Controller, where all views are Observers of the model, which is called Observable. 
      All views are notified whenever the model’s state changes. 
@@ -603,16 +651,18 @@ class BridgePattern {
     The chess game: the players are observers and they get notified when there is any change on the board.
     Pub-Sub messaging. When messages were published on some channel — the clients that are listening on this channel
      will be notified that there is a new message.
+    </pre>         
 </div>
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />State</h2>
+<h2>  
+    State</h2>
 <div>
     allows an object to alter its behavior when its internal state changes.
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Command</h2>
+<h2>  
+    Command</h2>
 <div>
+<pre>
     is to decouple the requester of an action from the object that executes the action.
 
     an object is used to encapsulate all information needed to perform an action or trigger an event at a later time. 
@@ -628,6 +678,7 @@ class BridgePattern {
         The Invoker demands the command carry out its request.
         The Receiver knows how to execute the operations associated with the action of the request.
     <a href="https://www.dotnettricks.com/learn/designpatterns/command-design-pattern-dotnet">Sample:</a>
+</pre>        
     <pre><code>
         public class Client
         {
@@ -686,8 +737,9 @@ class BridgePattern {
 </div>
 
 <h2 style="background-color:#9944bb">Enterprise design patterns:</h2>
-<h2><input type="button" value="-" class="toggleButton" onclick="toggle(this)" />Dependency Injection (DI)</h2>
+<h2>Dependency Injection (DI)</h2>
 <div>
+<pre>
    is a design pattern used to implement IoC. 
    It allows the creation of dependent objects outside of a class and provides those objects to a class through different ways. 
    Using DI, we move the creation and binding of the dependent objects outside of the class that depends on them.
@@ -709,6 +761,7 @@ class BridgePattern {
         Method Injection: In this type of injection, the client class implements an interface which declares the method(s) to supply the dependency and the injector uses this interface to supply the dependency to the client class.
 
 <b>: Constructor Injection Example:</b>
+</pre>    
  <pre><code>
     public class CustomerBusinessLogic
 {
@@ -841,8 +894,9 @@ Interface Injection Example:
     So, the injector class CustomerService will now use this method to inject the dependent class (CustomerDataAccess) to the client class.
     */
 </code></pre>
-
+<pre>
 <b>IoC Container (a.k.a. DI Container)</b>
+
 s a framework for implementing automatic dependency injection.
  It manages object creation and it's life-time, and also injects dependencies to the class.
  <b>Ioc Container lifecycle</b>
@@ -864,6 +918,8 @@ Framework Services: Services which are a part of ASP.NET Core framework such as 
 Application Services: The services (custom types or classes) which you as a programmer create for your application.
 In order to let the IoC container automatically inject our application services, we first need to register them with IoC container.
 <b>1.Registering Application Service:</b>
+</pre>
+
 <pre><code>
 public interface ILog
 {
@@ -907,7 +963,10 @@ public class Startup
     }   
 </code></pre>
 <b>2-Constructor Injection</b>
-Once we register a service, the IoC container automatically performs constructor injection if a service type is included as a parameter in a constructor.
+<pre>
+Once we register a service, the IoC container automatically performs constructor injection
+ if a service type is included as a parameter in a constructor.
+</pre>
 <pre><code>
     public class HomeController : Controller
     {
@@ -964,24 +1023,47 @@ Once we register a service, the IoC container automatically performs constructor
 <a href="https://www.tutorialsteacher.com/core/internals-of-builtin-ioc-container-in-aspnet-core">More..</a>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> The Repository Pattern</h2>
+<h2> The Repository Pattern</h2>
 <div>
-A repository is nothing but a class defined for an entity, with all the operations possible on that specific entity. For example, a repository for an entity Customer, will have basic CRUD operations and any other possible operations related to it. A Repository Pattern can be implemented in Following ways:
-One repository per entity (non-generic) : This type of implementation involves the use of one repository class for each entity. For example, if you have two entities Order and Customer, each entity will have its own repository.
-Generic repository: A generic repository is the one that can be used for all the entities, in other words it can be either used for Order or Customer or any other entity.
+<pre>
+A repository is nothing but a class defined for an entity, 
+with all the operations possible on that specific entity.
+
+For example, a repository for an entity Customer, 
+will have basic CRUD operations and any other possible operations related to it.
+
+A Repository Pattern can be implemented in Following ways:
+One repository per entity (non-generic) :
+ This type of implementation involves the use of one repository class for each entity. 
+ 
+ For example, if you have two entities Order and Customer, each entity will have its own repository.
+Generic repository: A generic repository is the one that can be used for all the entities,
+ in other words it can be either used for Order or Customer or any other entity.
+</pre>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> 
+<h2>  
+     
 Unit of Work in the Repository Pattern</h2>
 <div>
-Unit of Work is referred to as a single transaction that involves multiple operations of insert/update/delete and so on kinds. To say it in simple words, it means that for a specific user action (say registration on a website), all the transactions like insert/update/delete and so on are done in one single transaction, rather then doing multiple database transactions. This means, one unit of work here involves insert/update/delete operations, all in one single transaction.As an example, while adding data for the Order and Customer entities, in a single transaction, both will use the same DbContext instance.
+<pre>
+Unit of Work is referred to as a single transaction 
+that involves multiple operations of insert/update/delete and so on kinds. 
+
+To say it in simple words, it means that for a specific user action (say registration on a website), 
+all the transactions like insert/update/delete and so on are done in one single transaction, 
+rather then doing multiple database transactions. 
+
+This means, one unit of work here involves insert/update/delete operations, all in one single transaction.
+
+As an example, while adding data for the Order and Customer entities, in a single transaction, both will use the same DbContext instance.
+
 https://www.c-sharpcorner.com/UploadFile/b1df45/unit-of-work-in-repository-pattern/
+</pre>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Object-Relational Structural Patterns: </h2>
+<h2>  
+    Object-Relational Structural Patterns: </h2>
 <div>
 
         <a href="https://martinfowler.com/eaaCatalog/identityField.html">Identity Field</a> (216), 
@@ -996,16 +1078,16 @@ https://www.c-sharpcorner.com/UploadFile/b1df45/unit-of-work-in-repository-patte
         <a href="https://martinfowler.com/eaaCatalog/inheritanceMappers.html">Inheritance Mappers</a>  (302).
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> Object-Relational Metadata Mapping Patterns: </h2>
+<h2>  
+     Object-Relational Metadata Mapping Patterns: </h2>
 <div>
     <a href="https://martinfowler.com/eaaCatalog/metadataMapping.html">Metadata Mapping</a> (306), 
     <a href="https://martinfowler.com/eaaCatalog/queryObject.html">Query Object</a> (316), 
     <a href="https://martinfowler.com/eaaCatalog/repository.html">Repository</a> (322).</p>
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" /> Web Presentation Patterns:</h2>
+<h2>  
+     Web Presentation Patterns:</h2>
 <div>
         <a href="https://martinfowler.com/eaaCatalog/modelViewController.html">Model View Controller</a> (330), 
         <a href="https://martinfowler.com/eaaCatalog/pageController.html">Page   Controller</a> (333), 
@@ -1016,16 +1098,16 @@ https://www.c-sharpcorner.com/UploadFile/b1df45/unit-of-work-in-repository-patte
         <a href="https://martinfowler.com/eaaCatalog/applicationController.html">Application Controller</a>(379).    
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Distribution Patterns:</h2>
+<h2>  
+    Distribution Patterns:</h2>
 <div>
         <a href="https://martinfowler.com/eaaCatalog/remoteFacade.html">Remote Facade</a> (388), 
         <a href="https://martinfowler.com/eaaCatalog/dataTransferObject.html">Data Transfer Object</a>
         (401)</p>    
 </div>
 
-<h2><input type="button" value="-" class="toggleButton"  
-    onclick="toggle(this)" />Concurrency Patterns:</h2>
+<h2>  
+    Concurrency Patterns:</h2>
 <div>
         <a href="https://martinfowler.com/eaaCatalog/optimisticOfflineLock.html">Optimistic Offline Lock</a> (416),
         <a href="https://martinfowler.com/eaaCatalog/pessimisticOfflineLock.html">Pessimistic Offline Lock</a>
