@@ -25,6 +25,7 @@
 </div>
 <h2>What is Docker?</h2>
 <div>
+	<pre>
 A platform for building, running and shipping applications in a consistent manner. If the application works on development machine
 it can run and function the same way on other machines.
 
@@ -63,39 +64,45 @@ As already discussed, the container is self-sustained, that is – the app kept 
 1. Docker Hub
 2. Azure Container Registry
 Docker Hub contains millions of docker images which you can pull to your local pc and use them to create great apps.
+</pre>
 </div>
 
 <h2>Container</h2>
 <div>
+	<pre>
 An isolated environment for running an application.
 Allow running multiple apps in isolation.
 Lightweight (They do not need a full OS)
 Use OS of the host (They share the host.)
 Starts quickly (OS is started on the host) 
 Needs less hardware resources	
+</pre>
 </div>
 
 
 <h2>Virtual Machine</h2>
 <div>
+<pre>
 An abstraction of a machine (physical hardware). We can run several VMs on a real physical machine
 
 A HYPERVISOR is software we use to create and manage virtual machines
 Some of the hypervisors: VirtualBox, VMWare (both are cross-platform) Hyper-V (windows only)	
+</pre>
 </div>
 
 <h2>Problems with VMs</h2>
 <div>
-
+<pre>
 Each VM needs a full-blown(tam gelismis?) OS.
 Slow to start (like starting the computer) 
 Resource intensive (VMs take an actual physical hardware resources like cpu memory etc.
  -> we have a limit in terms of the number of VMs we can run on a machine.)	
+</pre>
 </div>
 
 <h2> Docker Architecture</h2>
  <div>
-
+<pre>
  Docker uses client-server architecture. 
  Client component talks to the server component using a Restful API. (Server Component: Docker Engine)
  Server component (Docker Engine) takes care of building and running docker containers. 
@@ -108,10 +115,12 @@ Resource intensive (VMs take an actual physical hardware resources like cpu memo
  We can run linux containers on a linux machine. But we cannot run windows containers on a linux machine.
  However we can run windows containers and linux containers on a windows machine. Because Windows 10 has both 
  linux kernel and windows kernel. Windows containers share windows kernel, linux containers share linux kernel.
-
+</pre>
  </div>
+
 <h2> Installing WSL2 & Docker Desktop</h2>
 <div>
+<pre>
 Docker runs on linux
 
 Docker Linux platformda calisan bir container platformu [Cikarim: Bu nedenle WSL2 ile ubuntu kurduk] Docker Linux OS e gerek duyuyor.
@@ -121,10 +130,11 @@ Docker Desktop kucuk bir VM i ayaga kaldirip Dockeri buraya kuruyor. Docker o si
 WSL2 destegiyle beraber Windows 10 a linux kernel gomuldugu icin (bir nevi VM gomdugu icin) Docker kendi kurulumunu degistirdi ve WSL2 instance in icine kurulabilir hale geldi
 
 Windows/Mac e Docker kurmak istedigimizde kuracagimiz uygulama Docker Desktop. 	
+</pre>
 </div>
 <h2>Development Workflow</h2> 
 <div>
-We add Dockerfile to the application [We 'dockerize' the application] A dockerfile includes instructions that docker uses to package up
+<pre>We add Dockerfile to the application [We 'dockerize' the application] A dockerfile includes instructions that docker uses to package up
 this application into an image. Image contains everything the application needs to run.
 
 Docker uses this image to start a container. Application gets loaded inside a container and  this is how the application runs locally
@@ -136,28 +146,36 @@ have the same image with development environment. We just say to Docker 'create 
 
 Docker Hub is a storage for images that is created by us/someone.
 
-<b>docker run</b> -- every time when we run it, it creates a container, docker goes to docker hub and pulls down that image, ex: sql server image etc.
+<b>docker run</b> -- every time when we run it, it creates a container, docker goes to docker hub and pulls down that image,
+ ex: sql server image etc.
 <b>docker start [container_id]</b> -- starts an existing container 
 <b>docker stop [container_id]</b> -- stops a container
 <b>docker ps</b> -- shows running containers
 <b>docker push [docker_hub_id/image_name]</b> -- pushes the image to Docker Hub
 
-Images are built up in what called 'layers'. When we upload/pUsh our image to Docker Hub second time, it will be quicker than the first one. 
+Images are built up in what called 'layers'. When we upload/pUsh our image to Docker Hub second time, 
+it will be quicker than the first one. 
 Because Docker will upload changes/'effect to the layer'
+</pre>
 </div>
 <h2>What is Kubernetes?</h2> 
 <div>
+<pre>
 'Onion' --> Layers involved
 'Control Mechanism'	
+</pre>
 </div>
 <h2>Kubernetes: Container Orchestrator</h2>
 <div>
+<pre>
 We want to make sure that the containers continue to run, 
 if containers crash that they get restarted 
 or we want to scale them out	
+</pre>
 </div>
 <h2>What Kubernetes responsible for: </h2>
 <div>
+<pre>
 Is everything running in the right way?
 Scale out in the right way.
 
@@ -165,10 +183,12 @@ We are going to tell Kubernetes how we want Kubernetes to run things
 We give Kubernetes like an end state we want Kubernetes to get to.
 
 "DEFINE A DESIRED 'END STATE' LET KUBERNETES FIGURE OUT HOW TO GET THERE"	
+</pre>
 </div>
 
 <h2>Docker Compose</h2>
 <div>
+<pre>
  middle ground between Docker and Kubernetes. It allows run up multiple containers and network containers together. 
 
 Docker Compose: In Development
@@ -183,11 +203,13 @@ Single-node cluster: we just have one 'machine'
 [Cluster = Master node + Worker node(s)] master/slave architecture 
 
 Cluster
-Node	
+Node
+</pre>
 </div>
 
 <h2>Pod</h2> 
 <div>
+<pre>
 - a pod is used to host and run containers (one or more containers) [In our app one pod consists one container]
 [
     i) take platform service image, run it on kubernetes in a pod (we are going to do that using 'deployment')
@@ -195,6 +217,7 @@ Node
 Node port - (accessing containers that inside a pod) 'kubernetes service'. in test and development environment. 
 external traffic comes into it
 and it directs to internal port and through internal port we can access the container inside the pod. ['LOAD BALANCER'] 	
+</pre>
 </div>
 
 
