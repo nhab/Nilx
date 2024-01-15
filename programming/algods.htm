@@ -15,6 +15,7 @@
 </div>
 <h2>Time complexity</h2>
 <div>
+    <pre>
     - <b>Time complexity</b> : The number of times a statement is executed.  
     - <b>The “Big O notation”</b>: is the time complexity of an algorithm.
     -<b>O(n) </b> (Linear Time Complexity) :
@@ -27,10 +28,12 @@
     - <b>O(2^n) </b> :  Exponential Time Complexity:  brute force algo
     - <b>O(1)constant:</b> when only one operation is executed(for example printing "hello world!")
     - <b>O(n log n),O(2^{n}), etc</b>
+    </pre>
 </div>
 
 <h2>HashTable = HashMap = Dictionary</h2>
 <div>
+    <pre>
 <b>What is Hashing</b> 
 Is converting an object into an integer value. 
 The integer value helps in indexing and faster searches.
@@ -40,6 +43,7 @@ It store key-value items.
 So instead of storing just one value like the 
 stack, array list and queue, the hash table stores 2 values. 
 These 2 values form an element of the hash table:
+</pre>
 <pre><code>
 { "001" , ".Net" }
 { "002" , ".C#" }
@@ -63,9 +67,11 @@ static void Main(string[] args)
  }
 }
 </code></pre>
+
 </div>
 <h2>Stack</h2>
 <div>
+
 the principle of stack structure operation is LIFO (last in first out), the last element entered first out.
 <pre><code>
     Stack myStack = new Stack();
@@ -76,6 +82,7 @@ the principle of stack structure operation is LIFO (last in first out), the last
         Console.Write( "    {0}", obj );
     // !    World    Hello
 </code></pre>
+<pre>
 Stack applications:
 
     undo / redo functionality
@@ -83,12 +90,15 @@ Stack applications:
     stack back/forward on browsers
     backtracking algorithms
     bracket verification
+</pre>    
 </div>
 
 <h2>Queue</h2>
 <div>
+    <pre>
 the working principle of queue structures is FIFO (first in first out), 
 the first element entered first out.
+</pre>
 <pre><code>
 Queue myQ = new Queue();
 myQ.Enqueue("Hello");
@@ -104,8 +114,10 @@ foreach ( Object obj in myQ )
 <h2><input type="button" value="-"
     class="toggleButton"  onclick="toggle(this)" />linked list</h2>
 <div>
-    each node in the list has a reference to the next node, except the tail of the list,
+   <pre>
+each node in the list has a reference to the next node, except the tail of the list,
      which has no reference to the next node.
+    </pre>
 <pre><code>
     // Create a list of strings  
     var names = new LinkedList<string>();  
@@ -133,11 +145,12 @@ Irfan
 <h2><input type="button" value="-"
     class="toggleButton"  onclick="toggle(this)" />Binary Search</h2>
 <div>
+    <pre>
 we access the middle element
 and compare with the searched one
 if it is smaller, repeats the recursive process for the first half, 
 otherwise, it is searching in the second half, the binary.
-<pre>
+
 <b>Binary search tree traversal:</b>
 <strong>Preorder</strong>
 
@@ -155,13 +168,14 @@ otherwise, it is searching in the second half, the binary.
     Go through the left subtree
     Go through the right subtree
     Root through
-</pre>
-In the .NET Framework , the <b>SortedList</b> data structure uses internally a binary tree to keep the sorted elements.
 
+In the .NET Framework , the <b>SortedList</b> data structure uses internally a binary tree to keep the sorted elements.
+</pre>
 </div>
 <h2><input type="button" value="-"
     class="toggleButton"  onclick="toggle(this)" />Binary Search Tree</h2>
 <div>
+    <pre>
 -we assume array is sorted. 
 - it works by repeatedly dividing the search interval in half. 
 
@@ -172,6 +186,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
 5 If the target element is less than the element at the middle index, set the high index to the middle index – 1.
 6 If the target element is greater than the element at the middle index, set the low index to the middle index + 1.
 7 Repeat steps 3-6 until the element is found or it is clear that the element is not present in the array.
+</pre>
 <pre><code>
    // Iteration Method
 
@@ -211,6 +226,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
 </div>
 <h2><input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />Hashset < T ></T></h2>
 <div>
+    <pre>
 - Is an <b>unordered</b> collection of <b>unique</b> elements.
 - The HashSet class implements the 
  <b>ICollection, IEnumerable, IReadOnlyCollection, ISet, IEnumerable, 
@@ -221,6 +237,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
 - The capacity of a HashSet is the number of elements it can hold.
 - Is a <b>dynamic collection</b> means the size of the HashSet is automatically increased when the new elements are added.
 - In HashSet, you can only store the <b>same type</b> of elements.
+</pre>
 <pre><code>
     using System.Collections.Generic;
     .. 
@@ -242,6 +259,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
 </div>
 <h2><input type="button" value="-" class="toggleButton"  onclick="toggle(this)" />Dictionary< TKey, TValue></h2>
 <div>
+    <pre>
 - is a generic collection that stores <strong>key-value pairs</strong> in no particular order.
 - Comes under <strong>System.Collections.Generic </strong>namespace.
 - Implements <i>IDictionary< TKey, TValue></TKey></i> interface.
@@ -249,6 +267,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
 - Values can be null or duplicate.
 - Values can be accessed :<strong>myDictionary[key]</strong> 
 - Elements are stored as <strong>KeyValuePair< TKey, TValue> </strong>objects.
+</pre>
 <pre><code>
     IDictionary< int, string> numberNames = new Dictionary< int, string>();
     numberNames.Add(1,"One"); //adding a key/value using the Add() method
@@ -292,6 +311,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
 <h2><input type="button" value="-"
     class="toggleButton"  onclick="toggle(this)" />Graphs</h2>
 <div>
+    <pre>
 - The graphs are data structures characterized by <b>nodes</b>(or vertices) and <b>edges joining the nodes</b>
 - usually using the notation G = (V, E) 
   where, V represents the set of nodes (vertices, vertices),
@@ -302,6 +322,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
     and adjacent lists are also used for their representation.
 - In a directed graph, edges are unidirectional/bi-directional. 
   For example, you can reach vertex 1 from vertex 2, but you cannot reach vertex 2 from vertex 1 in our example here.
+</pre>
 <h3>Representation of Graphs</h3>
  for example:
 <pre>
@@ -313,7 +334,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
     [4,2],4,3],[4,5],[4,6],
     [5,4],
     [6.,4] 
-</pre>
+
 1- Adjacency Matrix 
     Indicies of row and column will represent the vertices and the values in each cell represent edges.
     We will mark a cell value to be 1 if there is an edge between two vertices, else it will be marked as 0.
@@ -321,6 +342,7 @@ In the .NET Framework , the <b>SortedList</b> data structure uses internally a b
 2- Adjacency List
     we will use an array structure to represent our graph,graphically. 
     all the edges of a vertex are stored as a list of vertices.
+    </pre>
     <cl>
       AdjacencyList = new Dictionary< T, HashSet< T>>();
 
@@ -359,6 +381,7 @@ namespace KoderDojo.Examples {
     }
 }
 </code></pre>
+<pre>
 Graph traversal :
 1- DFS(Depth First Search)
     we keep visiting the child node of each vertex 
@@ -370,6 +393,7 @@ Graph traversal :
 The code for breadth-first search is nearly identical to depth-first search
 except we will be using a Queue instead of a Stack to make sure we visit the closest neighbors first. 
 <b>BFS</b>
+</pre>
 <pre><code>
 using System.Collections.Generic;
 
@@ -431,10 +455,12 @@ Traverse Level 3: 7, 8
 Traverse Level 4: 9, 10
 */
 </code></pre>
+<pre>
 <b>Tracing the Path of Breadth-First Search</b>
 If you want a list of the vertices as they are visited by breadth-first search, 
 just add each vertex one-by-one to a list. Here is breadth-first search with an extra parameter, 
 preVisit, which allows one to pass a function that gets called each time a vertex is visited.
+</pre>
 <pre><code>
 public HashSet<T> BFS<T>(Graph< T> graph, T start, Action< T> preVisit = null) {
     var visited = new HashSet< T>();
@@ -464,9 +490,11 @@ public HashSet<T> BFS<T>(Graph< T> graph, T start, Action< T> preVisit = null) {
     return visited;
 }  
 </code></pre>
+<pre>
 Modify the client a bit to initiate a new list, called path, that gets updated each time a new vertex is visited.
  As you can see, the HashSet happens to be preserving the order that each vertex was inserted, but it is not guaranteed. 
 A list is guaranteed to maintain its order.
+</pre>
 <pre><code>
 using System;
 using System.Collections.Generic;
@@ -494,6 +522,7 @@ namespace KoderDojo.Examples {
     }
 }
 </code></pre>
+<pre>
 <b>Shortest Path Using BFS</b>
 Breadth-first search is unique with respect to depth-first search in that 
 you can use breadth-first search to find the shortest path between 2 vertices.
@@ -511,6 +540,7 @@ Breadth-first search is being used to traverse the graph from the starting verte
 To find the shortest path to a node, the code looks up the previous node of the destination node 
 and continues looking at all previous nodes until it arrives at the starting node.
  Since this will be the path in reverse, the code simply reverses the list and returns it.
+</pre>
  <pre><code>
     public Func<T, IEnumerable<T>> ShortestPathFunction<T>(Graph<T> graph, T start) {
         var previous = new Dictionary<T, T>();
@@ -656,6 +686,7 @@ and continues looking at all previous nodes until it arrives at the starting nod
 <h2>ً<input type="button" value="-"
     class="toggleButton"  onclick="toggle(this)" />Quick sort</h2>
 <div>
+    <pre>
 Choosing an element as a pivot and using it to partition the array.
 
 The left subarray contains all elements that are less than the pivot.
@@ -680,6 +711,7 @@ we use the median-of-three technique where we select the pivot
 based on the median of three values such as the first, middle, and last elements of the array. 
 
 Therefore, selecting the first, last, random, or median element of the array as the pivot is the best approach. 
+</pre>
 <pre><code>
     public int[] QuickSort(int[] array, int leftIndex, int rightIndex)
     {
@@ -957,10 +989,11 @@ namespace BruteForceAlgorithm
 <h2><input type="button" value="-"
     class="toggleButton"  onclick="toggle(this)" />Breadth First Search (BFS) using Queue</h2>
 <div>
+    <pre>
 Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. 
 It starts at the tree root (or some arbitrary node of a graph) and explores the neighbor nodes first, 
 before moving to the next level neighbors.
-
+</pre>
 
 <pre><code>
     using System;
@@ -1103,9 +1136,11 @@ before moving to the next level neighbors.
 <h2><input type="button" value="-"
     class="toggleButton"  onclick="toggle(this)" />Depth First Seach (DFS) using List</h2>
 <div>
+    <pre>
 Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at the root
 (selecting some arbitrary node as the root in the case of a graph) 
 and explores as far as possible along each branch before backtracking.
+</pre>
 <pre><code>
 using System;
 using System.Collections.Generic;
@@ -1216,11 +1251,13 @@ namespace DefthFirst
 <h2><input type="button" value="-"
     class="toggleButton"  onclick="toggle(this)" />Huffman coding using Dictionary</h2>
 <div>
+    <pre>
 Huffman coding is a lossless data compression algorithm. 
 The idea is to assign variable-legth codes to input characters, 
 lengths of the assigned codes are based on the frequencies of corresponding characters.
 The most frequent character gets the smallest code and the least frequent character gets the largest code.
 Node.cs :
+</pre>
 <pre><code>
 using System;
 using System.Collections.Generic;
