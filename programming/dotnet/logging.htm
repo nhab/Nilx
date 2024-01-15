@@ -13,12 +13,15 @@
 <h2>Fundamentals of Logging in .NET Core</h2>
 <div>
 <h3>.NET Extensions</h3>
+<pre>
 .NET Extensions are sets of APIs for commonly used programming patterns and utilities which are not provided in the core of .net,
 such as dependency injection, logging, and app configuration.
+
 All the extensions are included under the <cli>Microsoft.Extensions </cli> namespace.
 You can find all built-in and third party extensions at <cli>nuget.org/packages.</cli>
-
+</pre>
 <h3>The Logging API</h3>
+<pre>
 The Logging API is included in the <cli>Microsoft.Extensions.Logging</cli> package. 
 The Logging API does not work as standalone. 
 It works with one or more logging providers that store or display logs to a particular medium such as Console, Debug, TraceListeners etc.
@@ -36,13 +39,17 @@ The most important interfaces are:
 </cl>    
 The most important classs is :    
 <cl>LoggerFactory </cl>
+</pre>
 </div>
+
 <h2>various logging framework</h2>    
 <div>
     elmah.io,  NLog, Serilog, Loggr, Log4Net, and others
 </div>
+
 <h2>Console Logging Provider</h2>
 <div>
+<pre>
 - The <cli> Microsoft.Extensions.Logging.Console</cli> package includes logging classes which send log output to the console.
 - The <cli> ConsoleLogger </cli> implements ILogger
 - The <cli> ConsoleLoggingProvider</cli> implements ILoggingProvider
@@ -52,12 +59,15 @@ The most important classs is :
 PM> Install-Package Microsoft.Extensions.Logging
 PM> Install-Package Microsoft.Extensions.Logging.Console
 </cl>
+</pre>
+
 <h3>Example of Logging in .NET Core Console App</h3>
+<pre>
 <cl>
 static void Main(string[] args)
 {
     ILoggerFactory loggerFactory = new LoggerFactory().AddConsole(); // or ILoggerFactory loggerFactory = new LoggerFactory([]{ new ConsoleLoggerProvider((_, __) => true,true)});               
-    ILogger logger = loggerFactory.CreateLogger<Program>();
+    ILogger logger = loggerFactory.CreateLogger< Program>();
     logger.LogInformation("This is log message.");
 }
 // As you see at example,the LoggerFactory can contain one or more logging providers, 
@@ -66,18 +76,23 @@ static void Main(string[] args)
 // We don't want to filter any information so the lambda expression would always return true (_, __) => true    
 // To add a console logger provider to the LoggerFactory, just call the LoggerFactory.AddConsole() extension method with the same parameters
 </cl>
-</cl>
+
 Output:
 <cl>
     info: DotnetCoreConsoleApp.Program[0]
     This is log message.
 </cl>
+</pre>
 </div>
+
 <h2>Log Levels</h2>
 <div>
-    Log levels indicate the importance or severity of log messages. Built-in log providers include extension methods to indicate log levels.
+<pre>    
+    Log levels indicate the importance or severity of log messages. 
+    Built-in log providers include extension methods to indicate log levels.
 
     The following table lists log levels in .NET Core.
+</pre>
     <table style="border-size:1;">
 
         <tr>            <td>Log Level</td><td>Severity</td><td>Extension Method	</td><td>Description</td>	</tr>	
@@ -105,6 +120,7 @@ static void Main(string[] args)
 }  
 </cl>    
 </div>
+
 <h2>Using logging in .net</h2>
 <div>
 create your project and add logging functionality:
@@ -123,6 +139,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
     })
     .UseStartup<Startup>();
 </cl>
+
 <h3>Store Logs in a Text File</h3>
 Startup.cs example:
 <cl>
@@ -132,6 +149,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
     loggerFactory.AddFile("Logs/mylog-{Date}.txt");
 }    
 </cl>
+
 <h3>Create Logs in the Controller</h3>
 <cl>
 public class HomeController : Controller
