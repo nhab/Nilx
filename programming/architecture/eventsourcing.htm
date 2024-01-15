@@ -27,6 +27,7 @@
 </div>
 <h2>What is?</h2>
 <div>
+    <pre>
 An event source pattern is an approach to a sequence of events. 
 The system stores a history of the changes in data states and notifies a consumer to handle them. 
 In event sourcing, you store the entire chain of data transformations – not just the latest state (or final result) of the data.
@@ -35,9 +36,11 @@ The system stores a history of the changes in data states and notifies a consume
  In event sourcing, you store the entire chain of data transformations – not just the latest state (or final result) of the data. 
  CQRS – Command Query Responsibility Segregation – promotes separation of commands and queries – in practice, the read and write functions.  
 In this article we describe each approach, illustrate how CQRS facilitates event sourcing, and help you determine whether and how to proceed with this architecture. 
+</pre>
 </div>
  <h2>Event Sourcing – Explaining the Pattern</h2>
  <div>
+    <pre>
 Event sourcing stores the state of a database object as a sequence of events – essentially a new event for each time the object changed state, from the beginning of the object’s existence. 
  An event can be anything user-generated – a mouse click, a key press on a keyboard, and so on.
 
@@ -76,11 +79,13 @@ But there are challenges.
  For example, you need more processing power to recalculate the state of the entity each time. 
 And storing information about all transformations may require more memory than storing just the last state of entities.  
 You can, however, mitigate both issues with cheaper computing power and cloud storage. 
+</pre>
 </div>
 <h2><input type="button" value="-"
     style="font-size:20px;margin-right:5px;vertical-align: middle;"  
     onclick="toggle(this)" />CQRS Explained</h2>
 <div>
+    <pre>
 CQRS promotes separation of commands and queries.  In an application architecture using CQRS, you divide the application into two segments. 
 One is intended for the update and delete – the writing model. 
 With the other segment you do the read – the read model. 
@@ -99,11 +104,13 @@ The part of the application that updates data then appends the event sequence.
  it reads the events, transforms data accordingly, and writes the final state of the data into the “read” database.
  The “read” segment of the application (the part that accesses data) works directly with the “read” database. 
 It fetches the current state of entities regardless of how this state was computed, as its main task is to accelerate read queries. 
+</pre>
 </div>
 <h2><input type="button" value="-"
     style="font-size:20px;margin-right:5px;vertical-align: middle;"  
     onclick="toggle(this)" />Understanding the CQRS Architecture</h2>
 <div>
+    <pre>
 Let’s look at the schema that demonstrates how you can implement a CQRS architecture without event sourcing. 
 The first diagram illustrates an example of CQRS architecture without event sourcing: 
 
@@ -114,11 +121,13 @@ This part simultaneously uses data from the “write” database to calculate th
 The UI then interacts with the “read” database to fetch needed data. 
 
 Now let’s illustrate how the schema changes when we use both CQRS and event sourcing. 
+</pre>
 </div>
 <h2><input type="button" value="-"
     style="font-size:20px;margin-right:5px;vertical-align: middle;"  
     onclick="toggle(this)" />CQRS and event sourcing</h2>
 <div>
+    <pre>
 As shown, the “read” part remains unchanged. 
 But the “write” database is now represented by the queue of events (the event store).
  The “write” segment of the application publishes events (commands) in the queue (a Kafka topic, for example).
@@ -127,4 +136,5 @@ But the “write” database is now represented by the queue of events (the even
   You can extract the entire history of entity transformation using a sequence of the events stored in the “write” database.
 CQRS is implemented by a separation of responsibilities between commands and queries,
  and event sourcing is implemented by using the sequence of events to track changes in data.
+</pre>
 </div>
