@@ -15,8 +15,8 @@
 </div>
 <h2>Prerequisites</h2>
 <div>
-<b>What is an Event-Driven Architecture?</b>
- An event-driven architecture uses events to trigger and communicate between decoupled services 
+<pre><b>What is an Event-Driven Architecture?</b>
+An event-driven architecture uses events to trigger and communicate between decoupled services 
  and is common in modern applications built with microservices. 
 An event is a change in state, or an update, like an item being placed in a shopping cart on an e-commerce website.
 Examples of events include the taking of a measurement, the pressing of a button, or the swiping of a credit card.
@@ -34,24 +34,23 @@ An e-commerce application that uses this approach would work as follows:
 The Order Service creates an Order in a pending state and publishes an OrderCreated event.
 The Customer Service receives the event and attempts to reserve credit for that Order. It then publishes either a Credit Reserved event or a CreditLimitExceeded event.
 The Order Service receives the event from the Customer Service and changes the state of the order to either approved or cancelled
+</pre>
 </div>
-<h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" />what is kafka</h2>
+
+<h2>what is kafka</h2>
 <div>
-provides a framework for storing, reading and analysing distributed streaming data. (to process records as they occur)
+<pre>provides a framework for storing, reading and analysing distributed streaming data. (to process records as they occur)
 it is used to publish and subscribe to streams of records. 
 Kafka is a durable message broker that enables applications to process, persist, and re-process streamed data. 
 Kafka has a straightforward routing approach that uses a routing key to send messages to a topic.
 
 We can use Kafka as a Message Queue or a Messaging System
 but as a distributed streaming platform Kafka has several other usages for stream processing or storing data.
+</pre>
 </div>
-<h2><input type="button" value="-"
-    style="font-size:20px;margin-right:5px;vertical-align: middle;"  
-    onclick="toggle(this)" />key concepts</h2>
+<h2>Key concepts</h2>
 <div>
-Topic:
+    <pre>Topic:
 are the categories used to organize messages. 
 When a Producer sends messages or events into a specific Kafka Topic, the topics will append the messages one after another, thereby creating a Log File. 
 Furthermore, producers can Push Messages into the tail of these newly created logs while consumers Pull Messages off from a specific Kafka Topic. 
@@ -66,5 +65,6 @@ Broker:
   A Kafka server.
     
 Kafka Cluster:    
-    One or more Kafka Brokers.    
+    One or more Kafka Brokers.
+</pre>   
 </div>
