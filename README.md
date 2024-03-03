@@ -66,8 +66,14 @@ It states that the high-level module must not depend on the low-level module, bu
     
 ## HashTable = HashMap = Dictionary
     Is converting an object into an integer value.It stores key-values:
-    { "001" , ".Net" }
-    { "002" , ".C#" }
+     Hashtable ht = new Hashtable();
+     ht.Add("001",".Net");
+     ht.Add("002","C#");
+     ht.Add("003","ASP.Net");
+     ICollection keys = ht.Keys;
+     foreach (String k in keys)
+        Console.WriteLine(ht[k]);
+ 
   
 ## linked list
    each node in the list has a reference to the next node, except the tail of the list
